@@ -1,0 +1,21 @@
+{
+  "config": {
+    "cell_type": "K562",
+    "n_unconstrained": 200,
+    "n_constrained": 200,
+    "n_vae": 500,
+    "n_transfer": 100,
+    "n_iterations": 500
+  },
+  "results": {
+    "unconstrained_ism": {
+      "n_sequences": 3,
+      "green_rate": 0.3333333333333333,
+      "yellow_rate": 0.6666666666666666,
+      "red_rate": 0.0,
+      "mean_activity": 0.0,
+      "physics_pass_rate": 0.0
+    }
+  },
+  "timestamp": "20260115_025747"
+}

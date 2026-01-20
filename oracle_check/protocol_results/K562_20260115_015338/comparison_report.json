@@ -1,0 +1,61 @@
+{
+  "methods": [
+    "unconstrained_ism"
+  ],
+  "n_methods": 1,
+  "summaries": {
+    "unconstrained_ism": {
+      "n_sequences": 200,
+      "verdicts": {
+        "green": 89,
+        "yellow": 7,
+        "red": 104,
+        "green_rate": 0.445,
+        "yellow_rate": 0.035,
+        "red_rate": 0.52
+      },
+      "activity": {
+        "mean": 0.0,
+        "std": 0.0,
+        "top_10": 0.0
+      },
+      "pass_rates": {
+        "physics": 0.0,
+        "composition": 0.445,
+        "confidence": 1.0,
+        "rc_consistency": 1.0,
+        "motif": 1.0
+      },
+      "two_sample_results": null,
+      "generation_method": "unconstrained_ism",
+      "timestamp": "2026-01-15T22:47:01.666920"
+    }
+  },
+  "pairwise_comparisons": [],
+  "rankings": {
+    "green_rate": [
+      [
+        "unconstrained_ism",
+        0.445
+      ]
+    ],
+    "mean_activity": [
+      [
+        "unconstrained_ism",
+        0.0
+      ]
+    ],
+    "top_10_activity": [
+      [
+        "unconstrained_ism",
+        0.0
+      ]
+    ],
+    "physics_pass_rate": [
+      [
+        "unconstrained_ism",
+        0.0
+      ]
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "config": {
+    "cell_type": "K562",
+    "n_unconstrained": 100,
+    "n_constrained": 100,
+    "n_vae": 100,
+    "n_transfer": 100,
+    "n_iterations": 500
+  },
+  "results": {
+    "unconstrained_ism": {
+      "n_sequences": 100,
+      "green_rate": 0.36,
+      "yellow_rate": 0.08,
+      "red_rate": 0.56,
+      "mean_activity": 0.0,
+      "physics_pass_rate": 0.0
+    },
+    "physics_constrained_pincsd": {
+      "n_sequences": 100,
+      "green_rate": 0.3,
+      "yellow_rate": 0.47,
+      "red_rate": 0.23,
+      "mean_activity": 0.0,
+      "physics_pass_rate": 0.0
+    },
+    "physics_vae": {
+      "n_sequences": 100,
+      "green_rate": 0.5,
+      "yellow_rate": 0.17,
+      "red_rate": 0.33,
+      "mean_activity": 0.0,
+      "physics_pass_rate": 0.0
+    },
+    "transfer_guided": {
+      "n_sequences": 100,
+      "green_rate": 0.49,
+      "yellow_rate": 0.03,
+      "red_rate": 0.48,
+      "mean_activity": 0.0,
+      "physics_pass_rate": 0.0
+    }
+  },
+  "timestamp": "20260115_074434"
+}

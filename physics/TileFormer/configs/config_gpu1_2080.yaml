@@ -1,0 +1,220 @@
+# TileFormer Configuration - Optimized for RTX 2080 Ti GPU 1
+# Enhanced batch sizes and optimizations for 11GB VRAM
+
+# ═══════════════════════════════════════════════════════════════════════════
+# MODEL ARCHITECTURE (Updated for conv stem compatibility)
+# ═══════════════════════════════════════════════════════════════════════════
+model:
+  seq_len: 20                    # 20bp DNA tiles
+  d_model: 192                   # Model dimension (matches conv stem output)
+  n_heads: 4                     # Number of attention heads
+  n_layers: 2                    # Two transformer layers
+  d_ff: 512                      # Feed-forward dimension (increased for 192 d_model)
+  dropout: 0.1                   # Dropout rate
+  num_classes: 1                 # Regression task (electrostatic potential)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# TRAINING PARAMETERS - Optimized for 2080 Ti
+# ═══════════════════════════════════════════════════════════════════════════
+training:
+  # Enhanced batch size for 2080 Ti (11GB VRAM)
+  batch_size: 128               # Increased from 32 for better GPU utilization
+  max_epochs: 50                # Training epochs
+  learning_rate: 3e-4           # AdamW learning rate
+  weight_decay: 1e-5            # L2 regularization
+  
+  # Learning rate scheduling
+  use_scheduler: true
+  warmup_steps: 500
+  scheduler_type: "onecycle"     # OneCycleLR
+  
+  # Optimization settings
+  optimizer: "adamw"
+  gradient_clip_norm: 1.0        # Gradient clipping
+  
+  # Mixed precision for efficiency
+  mixed_precision: true
+  
+  # Early stopping
+  patience: 10                   # Early stopping patience
+  min_delta: 1e-5               # Minimum improvement
+  
+  # Validation
+  val_split: 0.1                # 10% validation
+  test_split: 0.1               # 10% test
+  
+  # Data augmentation
+  augment_data: true
+  augment_prob: 0.5             # Probability of augmentation
+  reverse_complement: true       # Reverse complement augmentation
+  random_shift: true            # Random shift augmentation (±2bp)
+  max_shift: 2                  # Maximum shift in bp
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DATA PATHS
+# ═══════════════════════════════════════════════════════════════════════════
+data:
+  # Input data
+  encode4_path: "data/encode4_train.tsv"
+  corpus_path: "TileFormer/data/corpus_50k.tsv"
+  corpus_with_potential_path: "TileFormer/data/corpus_50k_with_potential.tsv"
+  
+  # Output directories
+  output_dir: "TileFormer/outputs"
+  checkpoint_dir: "TileFormer/checkpoints"
+  logs_dir: "TileFormer/logs"
+  plots_dir: "TileFormer/plots"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# CORPUS GENERATION
+# ═══════════════════════════════════════════════════════════════════════════
+corpus:
+  total_sequences: 50000
+  random_seed: 42
+  
+  # Sequence categories and counts
+  extremity_sequences: 2000      # GC%, CpG, AT-tract, structural extremes
+  encode4_center_sequences: 10000  # Bases 106-125 from ENCODE4
+  encode4_offset_sequences: 20000  # Offset groups (10bp, 20bp, ..., 100bp)
+  random_sequences: 1000         # Pure random sequences
+  palindromic_sequences: 1000    # Synthetic palindromic sequences
+  dinucleotide_shuffles: 8000    # Dinucleotide shuffles of ENCODE4
+  gc_matched_sequences: 1000     # GC-matched random sequences
+  mutated_sequences: 9000        # Mutated ENCODE4 sequences
+  
+  # Confidence label distribution for offset sequences
+  uncertain_fraction: 0.8        # 80% uncertain
+  hard_negative_fraction: 0.1    # 10% hard negative
+  hard_positive_fraction: 0.1    # 10% hard positive
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ELECTROSTATICS (ABPS) - Enhanced for faster processing
+# ═══════════════════════════════════════════════════════════════════════════
+electrostatics:
+  # ABPS settings
+  ionic_strength: 0.15           # 0.15M salt
+  temperature: 298.15            # 298K
+  
+  # Grid parameters (optimized for speed)
+  grid_dims: [65, 65, 65]       # Coarse grid
+  grid_spacing: 1.0             # 1 Å spacing
+  
+  # Surface potential extraction
+  inner_radius: 2.0             # Inner shell radius (Å)
+  outer_radius: 6.0             # Outer shell radius (Å)
+  
+  # Processing - Enhanced for 2080 Ti
+  n_processes: 8                # More parallel processes
+  batch_size: 200               # Larger batch size for ABPS
+  cleanup_temp_files: true      # Clean up temporary files
+  
+  # Executables (assuming they're in PATH)
+  nab_executable: "nab"
+  pdb2pqr_executable: "pdb2pqr30"
+  apbs_executable: "apbs"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# EVALUATION METRICS
+# ═══════════════════════════════════════════════════════════════════════════
+evaluation:
+  # Point-estimate metrics
+  compute_mse: true
+  compute_rmse: true
+  compute_mae: true
+  compute_median_ae: true
+  compute_mape: true
+  
+  # Correlation metrics
+  compute_r2: true
+  compute_explained_variance: true
+  compute_pearson: true
+  compute_spearman: true
+  
+  # Residual analysis
+  compute_residual_stats: true
+  compute_jarque_bera: true
+  compute_breusch_pagan: true
+  
+  # Calibration (if uncertainty available)
+  compute_calibration: true
+  calibration_bins: 10
+  
+  # Distribution shift analysis
+  compute_subset_metrics: true
+  gc_content_bins: 10
+  cpg_density_bins: 5
+  
+  # Ranking metrics
+  compute_concordance: true
+  top_k_values: [100, 500, 1000]
+  
+  # Agreement metrics
+  compute_icc: true
+  compute_bland_altman: true
+  
+  # Diagnostic plots
+  create_diagnostic_plots: true
+  save_attention_maps: true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# HARDWARE & PERFORMANCE - Optimized for RTX 2080 Ti GPU 1
+# ═══════════════════════════════════════════════════════════════════════════
+hardware:
+  # GPU settings - Using GPU 1 (available 2080 Ti)
+  device: "cuda"                # Use GPU
+  gpu_id: 1                     # GPU 1 (available 2080 Ti)
+  
+  # Memory optimization for 2080 Ti (11GB VRAM)
+  memory_target_gb: 8.0         # Target 8GB usage (leaving 3GB buffer)
+  gradient_checkpointing: false # Disable for 2080 Ti (sufficient memory)
+  empty_cache_frequency: 50     # Less frequent cache clearing
+  
+  # Enhanced data loading for 2080 Ti
+  num_workers: 4                # More workers for better throughput
+  pin_memory: true              # Enable for faster GPU transfer
+  persistent_workers: true      # Keep workers alive
+  prefetch_factor: 4            # More prefetching
+
+# ═══════════════════════════════════════════════════════════════════════════
+# LOGGING & CHECKPOINTING
+# ═══════════════════════════════════════════════════════════════════════════
+logging:
+  # Logging levels
+  log_level: "INFO"
+  log_format: "%(asctime)s - %(levelname)s - %(message)s"
+  
+  # Progress reporting
+  log_every_n_batches: 25       # More frequent logging
+  validate_every_n_epochs: 1    # Validation frequency
+  
+  # Checkpointing
+  save_every_n_epochs: 5        # Checkpoint frequency
+  save_best_model: true         # Save best validation model
+  max_checkpoints: 3            # Keep only 3 latest checkpoints
+  
+  # Metrics logging
+  log_detailed_metrics: true
+  save_metrics_csv: true
+  plot_training_curves: true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# REPRODUCIBILITY
+# ═══════════════════════════════════════════════════════════════════════════
+reproducibility:
+  seed: 42                      # Random seed
+  deterministic: true           # Use deterministic algorithms
+  benchmark: true               # Enable cudnn benchmark for 2080 Ti performance
+  
+# ═══════════════════════════════════════════════════════════════════════════
+# EXPERIMENTAL - Optimized for 2080 Ti
+# ═══════════════════════════════════════════════════════════════════════════
+experimental:
+  # Advanced features
+  use_flash_attention: false    # Flash attention (if available)
+  use_torch_compile: false      # PyTorch 2.0 compile
+  use_channels_last: true       # Channels-last memory format
+  
+  # Debugging
+  debug_mode: false             # Enable debug mode
+  profile_memory: false         # Profile memory usage
+  save_intermediate_outputs: false

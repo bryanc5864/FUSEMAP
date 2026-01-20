@@ -1,0 +1,10 @@
+source leaprc.DNA.bsc1
+
+# Replace SEQ and OUTFILE by sed substitution
+mol = sequence { SEQ }
+
+# Optional: add terminal caps or neutral termini if needed
+# addions mol Na+ 0
+
+savePdb mol OUTFILE
+quit 

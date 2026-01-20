@@ -1,0 +1,26 @@
+{
+  "n_sequences": 100,
+  "verdicts": {
+    "green": 49,
+    "yellow": 3,
+    "red": 48,
+    "green_rate": 0.49,
+    "yellow_rate": 0.03,
+    "red_rate": 0.48
+  },
+  "activity": {
+    "mean": 0.0,
+    "std": 0.0,
+    "top_10": 0.0
+  },
+  "pass_rates": {
+    "physics": 0.0,
+    "composition": 0.49,
+    "confidence": 1.0,
+    "rc_consistency": 1.0,
+    "motif": 1.0
+  },
+  "two_sample_results": null,
+  "generation_method": "transfer_guided",
+  "timestamp": "2026-01-16T10:08:56.092231"
+}

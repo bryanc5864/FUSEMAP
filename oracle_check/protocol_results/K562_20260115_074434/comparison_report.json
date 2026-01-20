@@ -1,0 +1,629 @@
+{
+  "methods": [
+    "unconstrained_ism",
+    "physics_constrained_pincsd",
+    "physics_vae",
+    "transfer_guided"
+  ],
+  "n_methods": 4,
+  "summaries": {
+    "unconstrained_ism": {
+      "n_sequences": 100,
+      "verdicts": {
+        "green": 36,
+        "yellow": 8,
+        "red": 56,
+        "green_rate": 0.36,
+        "yellow_rate": 0.08,
+        "red_rate": 0.56
+      },
+      "activity": {
+        "mean": 0.0,
+        "std": 0.0,
+        "top_10": 0.0
+      },
+      "pass_rates": {
+        "physics": 0.0,
+        "composition": 0.36,
+        "confidence": 1.0,
+        "rc_consistency": 1.0,
+        "motif": 1.0
+      },
+      "two_sample_results": null,
+      "generation_method": "unconstrained_ism",
+      "timestamp": "2026-01-15T08:03:15.937394"
+    },
+    "physics_constrained_pincsd": {
+      "n_sequences": 100,
+      "verdicts": {
+        "green": 30,
+        "yellow": 47,
+        "red": 23,
+        "green_rate": 0.3,
+        "yellow_rate": 0.47,
+        "red_rate": 0.23
+      },
+      "activity": {
+        "mean": 0.0,
+        "std": 0.0,
+        "top_10": 0.0
+      },
+      "pass_rates": {
+        "physics": 0.0,
+        "composition": 0.3,
+        "confidence": 1.0,
+        "rc_consistency": 1.0,
+        "motif": 1.0
+      },
+      "two_sample_results": null,
+      "generation_method": "physics_constrained_pincsd",
+      "timestamp": "2026-01-16T10:06:41.506301"
+    },
+    "physics_vae": {
+      "n_sequences": 100,
+      "verdicts": {
+        "green": 50,
+        "yellow": 17,
+        "red": 33,
+        "green_rate": 0.5,
+        "yellow_rate": 0.17,
+        "red_rate": 0.33
+      },
+      "activity": {
+        "mean": 0.0,
+        "std": 0.0,
+        "top_10": 0.0
+      },
+      "pass_rates": {
+        "physics": 0.0,
+        "composition": 0.5,
+        "confidence": 1.0,
+        "rc_consistency": 1.0,
+        "motif": 1.0
+      },
+      "two_sample_results": null,
+      "generation_method": "physics_vae",
+      "timestamp": "2026-01-16T10:07:15.130214"
+    },
+    "transfer_guided": {
+      "n_sequences": 100,
+      "verdicts": {
+        "green": 49,
+        "yellow": 3,
+        "red": 48,
+        "green_rate": 0.49,
+        "yellow_rate": 0.03,
+        "red_rate": 0.48
+      },
+      "activity": {
+        "mean": 0.0,
+        "std": 0.0,
+        "top_10": 0.0
+      },
+      "pass_rates": {
+        "physics": 0.0,
+        "composition": 0.49,
+        "confidence": 1.0,
+        "rc_consistency": 1.0,
+        "motif": 1.0
+      },
+      "two_sample_results": null,
+      "generation_method": "transfer_guided",
+      "timestamp": "2026-01-16T10:08:56.092231"
+    }
+  },
+  "pairwise_comparisons": [
+    {
+      "method_a": "unconstrained_ism",
+      "method_b": "physics_constrained_pincsd",
+      "overall_winner": "unconstrained_ism",
+      "summary": {
+        "wins": {
+          "unconstrained_ism": 1,
+          "physics_constrained_pincsd": 0
+        },
+        "significant_comparisons": 1,
+        "total_comparisons": 7,
+        "green_rate_diff": 0.06,
+        "activity_diff": 0.0
+      },
+      "comparisons": [
+        {
+          "metric": "Verdict Distribution",
+          "value_a": 0.36,
+          "value_b": 0.3,
+          "pvalue": 7.640368741815879e-10,
+          "significant": "True",
+          "winner": "unconstrained_ism"
+        },
+        {
+          "metric": "Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": NaN,
+          "significant": "False",
+          "winner": "tie"
+        },
+        {
+          "metric": "Top 10% Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "physics_constrained_pincsd"
+        },
+        {
+          "metric": "Physics Pass Rate",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Composition Pass Rate",
+          "value_a": 0.36,
+          "value_b": 0.3,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "RC Consistency Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Motif Pass Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        }
+      ]
+    },
+    {
+      "method_a": "unconstrained_ism",
+      "method_b": "physics_vae",
+      "overall_winner": "physics_vae",
+      "summary": {
+        "wins": {
+          "unconstrained_ism": 0,
+          "physics_vae": 1
+        },
+        "significant_comparisons": 1,
+        "total_comparisons": 7,
+        "green_rate_diff": -0.14,
+        "activity_diff": 0.0
+      },
+      "comparisons": [
+        {
+          "metric": "Verdict Distribution",
+          "value_a": 0.36,
+          "value_b": 0.5,
+          "pvalue": 0.003242388608073587,
+          "significant": "True",
+          "winner": "physics_vae"
+        },
+        {
+          "metric": "Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": NaN,
+          "significant": "False",
+          "winner": "tie"
+        },
+        {
+          "metric": "Top 10% Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "physics_vae"
+        },
+        {
+          "metric": "Physics Pass Rate",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Composition Pass Rate",
+          "value_a": 0.36,
+          "value_b": 0.5,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "RC Consistency Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Motif Pass Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        }
+      ]
+    },
+    {
+      "method_a": "unconstrained_ism",
+      "method_b": "transfer_guided",
+      "overall_winner": "tie",
+      "summary": {
+        "wins": {
+          "unconstrained_ism": 0,
+          "transfer_guided": 0
+        },
+        "significant_comparisons": 0,
+        "total_comparisons": 7,
+        "green_rate_diff": -0.13,
+        "activity_diff": 0.0
+      },
+      "comparisons": [
+        {
+          "metric": "Verdict Distribution",
+          "value_a": 0.36,
+          "value_b": 0.49,
+          "pvalue": 0.08732018827833189,
+          "significant": "False",
+          "winner": "tie"
+        },
+        {
+          "metric": "Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": NaN,
+          "significant": "False",
+          "winner": "tie"
+        },
+        {
+          "metric": "Top 10% Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "transfer_guided"
+        },
+        {
+          "metric": "Physics Pass Rate",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Composition Pass Rate",
+          "value_a": 0.36,
+          "value_b": 0.49,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "RC Consistency Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Motif Pass Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        }
+      ]
+    },
+    {
+      "method_a": "physics_constrained_pincsd",
+      "method_b": "physics_vae",
+      "overall_winner": "physics_vae",
+      "summary": {
+        "wins": {
+          "physics_constrained_pincsd": 0,
+          "physics_vae": 1
+        },
+        "significant_comparisons": 1,
+        "total_comparisons": 7,
+        "green_rate_diff": -0.2,
+        "activity_diff": 0.0
+      },
+      "comparisons": [
+        {
+          "metric": "Verdict Distribution",
+          "value_a": 0.3,
+          "value_b": 0.5,
+          "pvalue": 2.9707615144267696e-05,
+          "significant": "True",
+          "winner": "physics_vae"
+        },
+        {
+          "metric": "Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": NaN,
+          "significant": "False",
+          "winner": "tie"
+        },
+        {
+          "metric": "Top 10% Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "physics_vae"
+        },
+        {
+          "metric": "Physics Pass Rate",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Composition Pass Rate",
+          "value_a": 0.3,
+          "value_b": 0.5,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "RC Consistency Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Motif Pass Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        }
+      ]
+    },
+    {
+      "method_a": "physics_constrained_pincsd",
+      "method_b": "transfer_guided",
+      "overall_winner": "transfer_guided",
+      "summary": {
+        "wins": {
+          "physics_constrained_pincsd": 0,
+          "transfer_guided": 1
+        },
+        "significant_comparisons": 1,
+        "total_comparisons": 7,
+        "green_rate_diff": -0.19,
+        "activity_diff": 0.0
+      },
+      "comparisons": [
+        {
+          "metric": "Verdict Distribution",
+          "value_a": 0.3,
+          "value_b": 0.49,
+          "pvalue": 4.878328002129213e-12,
+          "significant": "True",
+          "winner": "transfer_guided"
+        },
+        {
+          "metric": "Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": NaN,
+          "significant": "False",
+          "winner": "tie"
+        },
+        {
+          "metric": "Top 10% Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "transfer_guided"
+        },
+        {
+          "metric": "Physics Pass Rate",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Composition Pass Rate",
+          "value_a": 0.3,
+          "value_b": 0.49,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "RC Consistency Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Motif Pass Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        }
+      ]
+    },
+    {
+      "method_a": "physics_vae",
+      "method_b": "transfer_guided",
+      "overall_winner": "physics_vae",
+      "summary": {
+        "wins": {
+          "physics_vae": 1,
+          "transfer_guided": 0
+        },
+        "significant_comparisons": 1,
+        "total_comparisons": 7,
+        "green_rate_diff": 0.010000000000000009,
+        "activity_diff": 0.0
+      },
+      "comparisons": [
+        {
+          "metric": "Verdict Distribution",
+          "value_a": 0.5,
+          "value_b": 0.49,
+          "pvalue": 0.0018474676897291948,
+          "significant": "True",
+          "winner": "physics_vae"
+        },
+        {
+          "metric": "Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": NaN,
+          "significant": "False",
+          "winner": "tie"
+        },
+        {
+          "metric": "Top 10% Activity",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "transfer_guided"
+        },
+        {
+          "metric": "Physics Pass Rate",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Composition Pass Rate",
+          "value_a": 0.5,
+          "value_b": 0.49,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "RC Consistency Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        },
+        {
+          "metric": "Motif Pass Rate",
+          "value_a": 1.0,
+          "value_b": 1.0,
+          "pvalue": 1.0,
+          "significant": false,
+          "winner": "tie"
+        }
+      ]
+    }
+  ],
+  "rankings": {
+    "green_rate": [
+      [
+        "physics_vae",
+        0.5
+      ],
+      [
+        "transfer_guided",
+        0.49
+      ],
+      [
+        "unconstrained_ism",
+        0.36
+      ],
+      [
+        "physics_constrained_pincsd",
+        0.3
+      ]
+    ],
+    "mean_activity": [
+      [
+        "unconstrained_ism",
+        0.0
+      ],
+      [
+        "physics_constrained_pincsd",
+        0.0
+      ],
+      [
+        "physics_vae",
+        0.0
+      ],
+      [
+        "transfer_guided",
+        0.0
+      ]
+    ],
+    "top_10_activity": [
+      [
+        "unconstrained_ism",
+        0.0
+      ],
+      [
+        "physics_constrained_pincsd",
+        0.0
+      ],
+      [
+        "physics_vae",
+        0.0
+      ],
+      [
+        "transfer_guided",
+        0.0
+      ]
+    ],
+    "physics_pass_rate": [
+      [
+        "unconstrained_ism",
+        0.0
+      ],
+      [
+        "physics_constrained_pincsd",
+        0.0
+      ],
+      [
+        "physics_vae",
+        0.0
+      ],
+      [
+        "transfer_guided",
+        0.0
+      ]
+    ]
+  }
+}

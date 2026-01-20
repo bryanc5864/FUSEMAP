@@ -1,0 +1,26 @@
+{
+  "n_sequences": 3,
+  "verdicts": {
+    "green": 1,
+    "yellow": 2,
+    "red": 0,
+    "green_rate": 0.3333333333333333,
+    "yellow_rate": 0.6666666666666666,
+    "red_rate": 0.0
+  },
+  "activity": {
+    "mean": 0.0,
+    "std": 0.0,
+    "top_10": 0.0
+  },
+  "pass_rates": {
+    "physics": 0.0,
+    "composition": 0.3333333333333333,
+    "confidence": 1.0,
+    "rc_consistency": 1.0,
+    "motif": 1.0
+  },
+  "two_sample_results": null,
+  "generation_method": "unconstrained_ism",
+  "timestamp": "2026-01-15T02:58:35.775518"
+}

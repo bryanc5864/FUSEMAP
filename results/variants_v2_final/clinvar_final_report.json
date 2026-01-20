@@ -1,0 +1,244 @@
+{
+  "pipeline_version": "2.0",
+  "cell_type": "K562",
+  "total_variants": 1000,
+  "evaluation": {
+    "auroc": 0.0,
+    "auprc": 0.0,
+    "n_pathogenic": 1000,
+    "n_benign": 0
+  },
+  "effect_distribution": {
+    "strong": 0,
+    "moderate": 0,
+    "weak": 0,
+    "negligible": 1000
+  },
+  "direction_distribution": {
+    "activating": 0,
+    "repressing": 999,
+    "neutral": 1
+  },
+  "top_variants": [
+    {
+      "variant_id": "191291",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "4075378",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "1219242",
+      "clinical_significance": "Pathogenic/Likely_pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "42805",
+      "clinical_significance": "Pathogenic/Likely_pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "807375",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "1723872",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "947",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "2418846",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "3493",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "1075207",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "1994925",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "818113",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "662757",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "3226302",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "200977",
+      "clinical_significance": "Pathogenic/Likely_pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "42394",
+      "clinical_significance": "Pathogenic/Likely_pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "17488",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "1391730",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "4088019",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    },
+    {
+      "variant_id": "921859",
+      "clinical_significance": "Pathogenic",
+      "delta_activity": -0.04721343517303467,
+      "delta_zscore": -0.33384940173964267,
+      "effect": "negligible repressing",
+      "top_physics_change": [
+        "feature_433",
+        -0.8890037536621094
+      ]
+    }
+  ]
+}

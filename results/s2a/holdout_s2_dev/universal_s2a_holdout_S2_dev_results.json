@@ -1,0 +1,12 @@
+{
+  "holdout_dataset": "S2_dev",
+  "source_datasets": [
+    "K562",
+    "HepG2",
+    "WTC11",
+    "arabidopsis_leaf",
+    "sorghum_leaf",
+    "maize_leaf"
+  ],
+  "zeroshot_spearman": -0.085120520262065,
+  "zeroshot_pearson": 

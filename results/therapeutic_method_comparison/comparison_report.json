@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-01-18T09:35:12.953325",
+  "config": {
+    "n_sequences_per_method": 200,
+    "lambda1": 0.5,
+    "lambda2": 0.5
+  },
+  "methods": [
+    "ism_target"
+  ],
+  "cell_types": [
+    "K562",
+    "HepG2",
+    "WTC11"
+  ],
+  "summary": [
+    {
+      "method": "ism_target",
+      "target_cell": "K562",
+      "n_sequences": 200,
+      "mean_specificity": 1.9490697362925857,
+      "max_specificity": 4.523884177207947,
+      "std_specificity": 0.8638089107139176,
+      "mean_target_activity": 5.163621188402176,
+      "pass_rate": 0.835,
+      "n_green": 105,
+      "n_yellow": 62,
+      "n_red": 33
+    },
+    {
+      "method": "ism_target",
+      "target_cell": "HepG2",
+      "n_sequences": 200,
+      "mean_specificity": 4.391247962582856,
+      "max_specificity": 7.175676167011261,
+      "std_specificity": 1.4147079988114792,
+      "mean_target_activity": 5.224445576667786,
+      "pass_rate": 0.99,
+      "n_green": 193,
+      "n_yellow": 5,
+      "n_red": 2
+    },
+    {
+      "method": "ism_target",
+      "target_cell": "WTC11",
+      "n_sequences": 200,
+      "mean_specificity": 1.217976149469614,
+      "max_specificity": 5.241825610399246,
+      "std_specificity": 0.7713316877887066,
+      "mean_target_activity": 4.5741543924808505,
+      "pass_rate": 0.86,
+      "n_green": 106,
+      "n_yellow": 66,
+      "n_red": 28
+    }
+  ]
+}

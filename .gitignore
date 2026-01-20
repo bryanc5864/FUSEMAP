@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Data files (too large for git)
+*.h5
+*.hdf5
+*.tsv
+*.csv
+*.npy
+*.npz
+*.fasta
+*.fa
+*.bed
+*.bigwig
+*.bw
+
+# Model checkpoints (too large)
+*.pt
+*.pth
+*.pkl
+*.ckpt
+*.safetensors
+
+# Results and outputs
+results/
+outputs/
+logs/
+wandb/
+lightning_logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.venv/
+venv/
+ENV/
+
+# Embedded git repos
+FUSEMAP_results/
+comparison_models/human_legnet/
+comparison_models/random-promoter-dream-challenge-2022/
+
+# Large data directories
+data/
+models/

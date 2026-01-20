@@ -1,0 +1,79 @@
+{
+  "pipeline_info": {
+    "cell_type": "K562",
+    "flank_size": 115,
+    "n_variants_analyzed": 6
+  },
+  "summary_statistics": {
+    "n_activating": 3,
+    "n_repressing": 3,
+    "n_neutral": 0,
+    "n_strong": 1,
+    "n_moderate": 2,
+    "n_weak": 0,
+    "mean_delta_activity": 0.10995985463661868,
+    "std_delta_activity": 0.4618092641984629
+  },
+  "top_variants": [
+    {
+      "variant_id": "test_ins_1",
+      "activity_ref": -0.47124806115606654,
+      "activity_alt": 0.16729128263650855,
+      "delta_activity": 0.638539343792575,
+      "zscore": 3.005154466261273,
+      "direction": "activating",
+      "magnitude": "strong",
+      "physics_summary": {}
+    },
+    {
+      "variant_id": "test_del_1",
+      "activity_ref": -0.0766519780156491,
+      "activity_alt": 0.5566768161632797,
+      "delta_activity": 0.6333287941789287,
+      "zscore": 2.7653851440504247,
+      "direction": "activating",
+      "magnitude": "moderate",
+      "physics_summary": {}
+    },
+    {
+      "variant_id": "test_snp_2",
+      "activity_ref": 0.13184648766926496,
+      "activity_alt": -0.38825731273838515,
+      "delta_activity": -0.5201038004076501,
+      "zscore": -2.241621110080489,
+      "direction": "repressing",
+      "magnitude": "moderate",
+      "physics_summary": {}
+    },
+    {
+      "variant_id": "test_snp_1",
+      "activity_ref": -0.1291743921115766,
+      "activity_alt": -0.3341717326000298,
+      "delta_activity": -0.2049973404884532,
+      "zscore": -0.7489170846709235,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {}
+    },
+    {
+      "variant_id": "rs113993960",
+      "activity_ref": 0.057236646389910724,
+      "activity_alt": 0.18834055843314043,
+      "delta_activity": 0.13110391204322971,
+      "zscore": 0.6531716931567014,
+      "direction": "activating",
+      "magnitude": "negligible",
+      "physics_summary": {}
+    },
+    {
+      "variant_id": "rs80357906",
+      "activity_ref": 0.24763139502615258,
+      "activity_alt": 0.22951961372723456,
+      "delta_activity": -0.018111781298918023,
+      "zscore": -0.08377303505420841,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {}
+    }
+  ]
+}

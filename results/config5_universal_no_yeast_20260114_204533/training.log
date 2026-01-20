@@ -1,0 +1,370 @@
+2026-01-14 20:45:33,368 - config5_universal_no_yeast_20260114_204533 - INFO - Experiment: config5_universal_no_yeast_20260114_204533
+2026-01-14 20:45:33,368 - config5_universal_no_yeast_20260114_204533 - INFO - Output directory: results/config5_universal_no_yeast_20260114_204533
+2026-01-14 20:45:33,368 - config5_universal_no_yeast_20260114_204533 - INFO - Starting multi-phase training...
+2026-01-14 20:45:33,369 - config5_universal_no_yeast_20260114_204533 - INFO - Setting up datasets...
+2026-01-14 20:59:15,561 - config5_universal_no_yeast_20260114_204533 - INFO - Dataset sizes: {'encode4_k562': 158377, 'encode4_hepg2': 97925, 'encode4_wtc11': 39201, 'deepstarr': 352009, 'jores_arabidopsis': 12115, 'jores_maize': 22143, 'jores_sorghum': 17705}
+2026-01-14 20:59:15,613 - config5_universal_no_yeast_20260114_204533 - INFO - Using standard global index sampling...
+2026-01-14 20:59:53,540 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_k562: val set loaded
+2026-01-14 21:00:19,415 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_hepg2: val set loaded
+2026-01-14 21:00:28,717 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_wtc11: val set loaded
+2026-01-14 21:00:56,177 - config5_universal_no_yeast_20260114_204533 - INFO -   deepstarr: val set loaded
+2026-01-14 21:00:57,002 - config5_universal_no_yeast_20260114_204533 - INFO -   jores_arabidopsis: test set loaded
+2026-01-14 21:00:58,471 - config5_universal_no_yeast_20260114_204533 - INFO -   jores_maize: test set loaded
+2026-01-14 21:00:59,608 - config5_universal_no_yeast_20260114_204533 - INFO -   jores_sorghum: test set loaded
+2026-01-14 21:15:00,551 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_k562: test set loaded (22631 samples)
+2026-01-14 21:15:42,680 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_k562: calibration set loaded (22633 samples)
+2026-01-14 21:16:07,645 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_hepg2: test set loaded (13953 samples)
+2026-01-14 21:16:33,205 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_hepg2: calibration set loaded (14002 samples)
+2026-01-14 21:16:44,698 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_wtc11: test set loaded (5597 samples)
+2026-01-14 21:16:56,423 - config5_universal_no_yeast_20260114_204533 - INFO -   encode4_wtc11: calibration set loaded (5595 samples)
+2026-01-14 21:17:25,993 - config5_universal_no_yeast_20260114_204533 - INFO -   deepstarr: test set loaded (41186 samples)
+2026-01-14 21:17:26,935 - config5_universal_no_yeast_20260114_204533 - INFO -   jores_arabidopsis: test set loaded (1347 samples)
+2026-01-14 21:17:28,108 - config5_universal_no_yeast_20260114_204533 - INFO -   jores_maize: test set loaded (2461 samples)
+2026-01-14 21:17:29,548 - config5_universal_no_yeast_20260114_204533 - INFO -   jores_sorghum: test set loaded (1968 samples)
+2026-01-14 21:17:29,549 - config5_universal_no_yeast_20260114_204533 - INFO - Data setup complete
+2026-01-14 21:17:29,550 - config5_universal_no_yeast_20260114_204533 - INFO - Setting up model...
+2026-01-14 21:17:31,687 - config5_universal_no_yeast_20260114_204533 - INFO - Model parameters: 2,513,523 (2,513,523 trainable)
+2026-01-14 21:17:37,178 - config5_universal_no_yeast_20260114_204533 - INFO - Model setup complete
+2026-01-14 21:17:37,178 - config5_universal_no_yeast_20260114_204533 - INFO - 
+============================================================
+2026-01-14 21:17:37,179 - config5_universal_no_yeast_20260114_204533 - INFO - PHASE 1: phase1_pretrain
+2026-01-14 21:17:37,179 - config5_universal_no_yeast_20260114_204533 - INFO -   Epochs: 50
+2026-01-14 21:17:37,179 - config5_universal_no_yeast_20260114_204533 - INFO -   Freeze backbone: False
+2026-01-14 21:17:37,179 - config5_universal_no_yeast_20260114_204533 - INFO -   Learning rate: 0.001
+2026-01-14 21:17:37,179 - config5_universal_no_yeast_20260114_204533 - INFO - ============================================================
+
+2026-01-14 21:20:07,029 - config5_universal_no_yeast_20260114_204533 - INFO - Step 100: NLL=1.4223, MSE=0.9754, grad=5.57, lr=1.00e-03
+2026-01-14 21:23:42,728 - config5_universal_no_yeast_20260114_204533 - INFO - Step 200: NLL=1.1403, MSE=0.7409, grad=4.93, lr=1.00e-03
+2026-01-14 21:27:59,913 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 0: loss=1.6558, val_r=0.4339 (BEST)
+2026-01-14 21:28:00,712 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 623.5s
+2026-01-14 21:30:36,992 - config5_universal_no_yeast_20260114_204533 - INFO - Step 300: NLL=1.1666, MSE=0.7747, grad=3.49, lr=9.99e-04
+2026-01-14 21:33:15,366 - config5_universal_no_yeast_20260114_204533 - INFO - Step 400: NLL=1.1153, MSE=0.7695, grad=3.15, lr=9.99e-04
+2026-01-14 21:37:23,367 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 1: loss=1.3135, val_r=0.4570 (BEST)
+2026-01-14 21:37:24,086 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 563.4s
+2026-01-14 21:39:37,793 - config5_universal_no_yeast_20260114_204533 - INFO - Step 500: NLL=1.0954, MSE=0.7033, grad=2.96, lr=9.96e-04
+2026-01-14 21:42:45,595 - config5_universal_no_yeast_20260114_204533 - INFO - Step 600: NLL=1.9377, MSE=0.8405, grad=4.00, lr=9.96e-04
+2026-01-14 21:47:07,944 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 2: loss=1.1556, val_r=0.5622 (BEST)
+2026-01-14 21:47:08,657 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 584.6s
+2026-01-14 21:49:32,908 - config5_universal_no_yeast_20260114_204533 - INFO - Step 700: NLL=1.1279, MSE=0.7197, grad=2.86, lr=9.91e-04
+2026-01-14 21:52:26,037 - config5_universal_no_yeast_20260114_204533 - INFO - Step 800: NLL=1.0104, MSE=0.6967, grad=3.45, lr=9.91e-04
+2026-01-14 21:56:46,313 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 3: loss=1.1112, val_r=0.5480 
+2026-01-14 21:56:46,653 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 578.0s
+2026-01-14 21:59:05,613 - config5_universal_no_yeast_20260114_204533 - INFO - Step 900: NLL=1.4507, MSE=0.7917, grad=3.61, lr=9.84e-04
+2026-01-14 22:02:14,037 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1000: NLL=1.2137, MSE=0.7710, grad=3.50, lr=9.84e-04
+2026-01-14 22:06:43,738 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 4: loss=1.0920, val_r=0.5614 
+2026-01-14 22:06:44,103 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 597.4s
+2026-01-14 22:08:58,674 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1100: NLL=0.9151, MSE=0.6164, grad=3.32, lr=9.76e-04
+2026-01-14 22:11:46,808 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1200: NLL=1.0407, MSE=0.8338, grad=2.57, lr=9.76e-04
+2026-01-14 22:16:17,430 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 5: loss=1.0383, val_r=0.5979 (BEST)
+2026-01-14 22:16:18,286 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 574.2s
+2026-01-14 22:18:35,303 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1300: NLL=0.9720, MSE=0.6908, grad=2.38, lr=9.65e-04
+2026-01-14 22:21:36,450 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1400: NLL=0.7507, MSE=0.5501, grad=2.53, lr=9.65e-04
+2026-01-14 22:24:34,725 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 6: loss=1.0119, val_r=0.5830 
+2026-01-14 22:24:35,039 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 496.8s
+2026-01-14 22:26:11,977 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1500: NLL=0.7993, MSE=0.6311, grad=2.05, lr=9.52e-04
+2026-01-14 22:28:10,301 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1600: NLL=1.2503, MSE=0.7247, grad=3.14, lr=9.52e-04
+2026-01-14 22:31:14,705 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 7: loss=0.9932, val_r=0.5151 
+2026-01-14 22:31:15,030 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 400.0s
+2026-01-14 22:32:49,915 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1700: NLL=0.9253, MSE=0.6380, grad=2.03, lr=9.38e-04
+2026-01-14 22:34:49,974 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1800: NLL=1.0720, MSE=0.7763, grad=2.45, lr=9.38e-04
+2026-01-14 22:37:54,134 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 8: loss=0.9455, val_r=0.6110 (BEST)
+2026-01-14 22:37:54,903 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 399.9s
+2026-01-14 22:39:22,591 - config5_universal_no_yeast_20260114_204533 - INFO - Step 1900: NLL=0.9218, MSE=0.6497, grad=2.09, lr=9.22e-04
+2026-01-14 22:41:22,233 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2000: NLL=0.9840, MSE=0.6431, grad=2.06, lr=9.22e-04
+2026-01-14 22:44:30,122 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 9: loss=0.9121, val_r=0.5990 
+2026-01-14 22:44:30,481 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 395.6s
+2026-01-14 22:45:59,756 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2100: NLL=0.9421, MSE=0.7316, grad=3.55, lr=9.05e-04
+2026-01-14 22:48:07,495 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2200: NLL=0.8735, MSE=0.6839, grad=2.73, lr=9.05e-04
+2026-01-14 22:51:22,533 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 10: loss=0.9009, val_r=0.6159 (BEST)
+2026-01-14 22:51:23,263 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 412.8s
+2026-01-14 22:52:48,502 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2300: NLL=1.0117, MSE=0.7147, grad=3.24, lr=8.85e-04
+2026-01-14 22:54:54,064 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2400: NLL=0.9030, MSE=0.5903, grad=3.08, lr=8.85e-04
+2026-01-14 22:57:56,405 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 11: loss=0.8743, val_r=0.6394 (BEST)
+2026-01-14 22:57:57,175 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 393.9s
+2026-01-14 22:59:20,818 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2500: NLL=0.9725, MSE=0.7025, grad=2.35, lr=8.65e-04
+2026-01-14 23:01:21,171 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2600: NLL=0.8007, MSE=0.5833, grad=1.78, lr=8.65e-04
+2026-01-14 23:04:33,912 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 12: loss=0.8726, val_r=0.6145 
+2026-01-14 23:04:34,253 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 397.1s
+2026-01-14 23:05:45,435 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2700: NLL=0.8850, MSE=0.6263, grad=2.55, lr=8.42e-04
+2026-01-14 23:07:43,177 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2800: NLL=0.7000, MSE=0.5895, grad=1.87, lr=8.42e-04
+2026-01-14 23:11:01,166 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 13: loss=0.8420, val_r=0.6222 
+2026-01-14 23:11:01,555 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 387.3s
+2026-01-14 23:12:10,279 - config5_universal_no_yeast_20260114_204533 - INFO - Step 2900: NLL=0.8217, MSE=0.5853, grad=2.55, lr=8.19e-04
+2026-01-14 23:14:10,811 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3000: NLL=0.7312, MSE=0.5682, grad=1.76, lr=8.19e-04
+2026-01-14 23:17:33,256 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 14: loss=0.8422, val_r=0.6360 
+2026-01-14 23:17:33,596 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 392.0s
+2026-01-14 23:18:37,981 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3100: NLL=0.7840, MSE=0.6968, grad=2.19, lr=7.94e-04
+2026-01-14 23:20:31,724 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3200: NLL=0.7076, MSE=0.5922, grad=1.79, lr=7.94e-04
+2026-01-14 23:24:07,225 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 15: loss=0.8391, val_r=0.6342 
+2026-01-14 23:24:07,589 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 394.0s
+2026-01-14 23:25:07,956 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3300: NLL=0.7224, MSE=0.5646, grad=1.87, lr=7.68e-04
+2026-01-14 23:27:11,143 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3400: NLL=1.1200, MSE=0.6434, grad=3.80, lr=7.68e-04
+2026-01-14 23:30:44,200 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 16: loss=0.8265, val_r=0.6596 (BEST)
+2026-01-14 23:30:45,005 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 397.4s
+2026-01-14 23:31:43,941 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3500: NLL=0.7294, MSE=0.4977, grad=1.44, lr=7.41e-04
+2026-01-14 23:33:39,914 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3600: NLL=0.7115, MSE=0.5717, grad=1.70, lr=7.41e-04
+2026-01-14 23:37:14,145 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 17: loss=0.7956, val_r=0.6404 
+2026-01-14 23:37:14,489 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 389.5s
+2026-01-14 23:38:11,194 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3700: NLL=0.9480, MSE=0.6638, grad=2.62, lr=7.13e-04
+2026-01-14 23:40:04,203 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3800: NLL=0.8211, MSE=0.6739, grad=1.96, lr=7.13e-04
+2026-01-14 23:43:38,935 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 18: loss=0.7822, val_r=0.6405 
+2026-01-14 23:43:39,235 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 384.7s
+2026-01-14 23:44:30,932 - config5_universal_no_yeast_20260114_204533 - INFO - Step 3900: NLL=0.6031, MSE=0.4677, grad=1.63, lr=6.84e-04
+2026-01-14 23:46:30,493 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4000: NLL=0.9683, MSE=0.7579, grad=2.32, lr=6.84e-04
+2026-01-14 23:50:05,687 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 19: loss=0.7737, val_r=0.6395 
+2026-01-14 23:50:06,031 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 386.8s
+2026-01-14 23:50:53,035 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4100: NLL=0.8965, MSE=0.6556, grad=2.26, lr=6.55e-04
+2026-01-14 23:52:47,834 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4200: NLL=0.6803, MSE=0.5010, grad=1.95, lr=6.55e-04
+2026-01-14 23:56:29,255 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 20: loss=0.7609, val_r=0.6433 
+2026-01-14 23:56:29,650 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 383.6s
+2026-01-14 23:57:17,618 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4300: NLL=0.8821, MSE=0.5852, grad=2.00, lr=6.25e-04
+2026-01-14 23:59:20,244 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4400: NLL=0.9180, MSE=0.6001, grad=2.28, lr=6.25e-04
+2026-01-15 00:03:18,284 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 21: loss=0.7634, val_r=0.6668 (BEST)
+2026-01-15 00:03:18,661 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 409.0s
+2026-01-15 00:03:59,235 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4500: NLL=0.8496, MSE=0.5984, grad=2.31, lr=5.94e-04
+2026-01-15 00:06:06,119 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4600: NLL=0.6778, MSE=0.6168, grad=1.70, lr=5.94e-04
+2026-01-15 00:10:07,516 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 22: loss=0.7502, val_r=0.6602 
+2026-01-15 00:10:07,941 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 409.3s
+2026-01-15 00:10:46,807 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4700: NLL=0.6954, MSE=0.5663, grad=1.65, lr=5.63e-04
+2026-01-15 00:12:52,400 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4800: NLL=0.8125, MSE=0.6267, grad=1.63, lr=5.63e-04
+2026-01-15 00:16:41,861 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 23: loss=0.7396, val_r=0.6606 
+2026-01-15 00:16:42,239 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 394.3s
+2026-01-15 00:17:20,175 - config5_universal_no_yeast_20260114_204533 - INFO - Step 4900: NLL=0.7127, MSE=0.5707, grad=1.58, lr=5.32e-04
+2026-01-15 00:21:57,529 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5000: NLL=0.6588, MSE=0.5474, grad=1.60, lr=5.32e-04
+2026-01-15 00:25:57,702 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 24: loss=0.7292, val_r=0.6295 
+2026-01-15 00:25:58,021 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 555.8s
+2026-01-15 00:26:28,600 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5100: NLL=0.5292, MSE=0.4899, grad=1.42, lr=5.01e-04
+2026-01-15 00:28:29,097 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5200: NLL=0.6433, MSE=0.5113, grad=1.74, lr=5.01e-04
+2026-01-15 00:32:30,938 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 25: loss=0.7179, val_r=0.6609 
+2026-01-15 00:32:31,208 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 393.2s
+2026-01-15 00:32:57,868 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5300: NLL=0.6387, MSE=0.5399, grad=1.78, lr=4.69e-04
+2026-01-15 00:35:03,369 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5400: NLL=0.7116, MSE=0.5810, grad=1.41, lr=4.69e-04
+2026-01-15 00:38:56,659 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 26: loss=0.7117, val_r=0.6735 (BEST)
+2026-01-15 00:38:57,337 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 386.1s
+2026-01-15 00:39:21,365 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5500: NLL=0.6682, MSE=0.5224, grad=1.80, lr=4.38e-04
+2026-01-15 00:41:25,646 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5600: NLL=0.7666, MSE=0.5917, grad=1.97, lr=4.38e-04
+2026-01-15 00:45:30,961 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 27: loss=0.7011, val_r=0.6744 (BEST)
+2026-01-15 00:45:31,684 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 394.3s
+2026-01-15 00:45:51,183 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5700: NLL=0.9340, MSE=0.5829, grad=1.94, lr=4.07e-04
+2026-01-15 00:48:01,445 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5800: NLL=0.7364, MSE=0.5655, grad=1.84, lr=4.07e-04
+2026-01-15 00:52:35,904 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 28: loss=0.7046, val_r=0.6508 
+2026-01-15 00:52:36,252 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 424.6s
+2026-01-15 00:52:52,072 - config5_universal_no_yeast_20260114_204533 - INFO - Step 5900: NLL=0.8090, MSE=0.6144, grad=2.17, lr=3.76e-04
+2026-01-15 00:54:57,402 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6000: NLL=0.7889, MSE=0.6354, grad=1.52, lr=3.76e-04
+2026-01-15 00:59:41,043 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 29: loss=0.7060, val_r=0.6730 
+2026-01-15 00:59:41,319 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 425.1s
+2026-01-15 00:59:54,894 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6100: NLL=0.6150, MSE=0.4723, grad=2.18, lr=3.46e-04
+2026-01-15 01:02:20,976 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6200: NLL=0.6761, MSE=0.5199, grad=1.85, lr=3.46e-04
+2026-01-15 01:09:01,983 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 30: loss=0.6789, val_r=0.6477 
+2026-01-15 01:09:02,364 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 561.0s
+2026-01-15 01:09:16,179 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6300: NLL=0.6540, MSE=0.5419, grad=1.66, lr=3.17e-04
+2026-01-15 01:11:57,346 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6400: NLL=0.6376, MSE=0.5105, grad=2.27, lr=3.17e-04
+2026-01-15 01:19:01,258 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 31: loss=0.6698, val_r=0.6640 
+2026-01-15 01:19:01,596 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 599.2s
+2026-01-15 01:19:08,831 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6500: NLL=0.4865, MSE=0.4465, grad=1.48, lr=2.88e-04
+2026-01-15 01:21:50,703 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6600: NLL=0.6643, MSE=0.5674, grad=1.65, lr=2.88e-04
+2026-01-15 01:28:24,737 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 32: loss=0.6642, val_r=0.6627 
+2026-01-15 01:28:24,853 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 563.3s
+2026-01-15 01:28:25,641 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6700: NLL=0.5142, MSE=0.4744, grad=1.37, lr=2.60e-04
+2026-01-15 01:29:53,779 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6800: NLL=0.4826, MSE=0.4499, grad=1.71, lr=2.60e-04
+2026-01-15 01:30:54,675 - config5_universal_no_yeast_20260114_204533 - INFO - Step 6900: NLL=0.6353, MSE=0.5385, grad=1.55, lr=2.60e-04
+2026-01-15 01:32:29,918 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 33: loss=0.6595, val_r=0.6696 
+2026-01-15 01:32:30,013 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 245.2s
+2026-01-15 01:33:46,804 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7000: NLL=0.5577, MSE=0.5458, grad=1.68, lr=2.33e-04
+2026-01-15 01:35:06,010 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7100: NLL=0.6036, MSE=0.5193, grad=1.60, lr=2.33e-04
+2026-01-15 01:37:02,035 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 34: loss=0.6407, val_r=0.6610 
+2026-01-15 01:37:02,477 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 272.5s
+2026-01-15 01:38:21,238 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7200: NLL=0.6282, MSE=0.5121, grad=1.69, lr=2.07e-04
+2026-01-15 01:40:22,333 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7300: NLL=0.5573, MSE=0.4730, grad=1.45, lr=2.07e-04
+2026-01-15 01:44:26,121 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 35: loss=0.6550, val_r=0.6837 (BEST)
+2026-01-15 01:44:26,900 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 444.4s
+2026-01-15 01:46:47,024 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7400: NLL=0.6655, MSE=0.5426, grad=2.39, lr=1.82e-04
+2026-01-15 01:48:49,745 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7500: NLL=0.4980, MSE=0.4694, grad=1.48, lr=1.82e-04
+2026-01-15 01:53:32,425 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 36: loss=0.6448, val_r=0.6532 
+2026-01-15 01:53:32,816 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 545.9s
+2026-01-15 01:55:56,211 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7600: NLL=0.5684, MSE=0.5349, grad=1.36, lr=1.59e-04
+2026-01-15 01:58:38,236 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7700: NLL=0.5393, MSE=0.4824, grad=1.19, lr=1.59e-04
+2026-01-15 02:03:03,033 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 37: loss=0.6369, val_r=0.6665 
+2026-01-15 02:03:03,397 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 570.6s
+2026-01-15 02:05:25,086 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7800: NLL=0.7046, MSE=0.5870, grad=2.05, lr=1.36e-04
+2026-01-15 02:08:17,661 - config5_universal_no_yeast_20260114_204533 - INFO - Step 7900: NLL=0.6205, MSE=0.5606, grad=1.46, lr=1.36e-04
+2026-01-15 02:12:32,261 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 38: loss=0.6398, val_r=0.6710 
+2026-01-15 02:12:32,569 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 569.2s
+2026-01-15 02:14:48,179 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8000: NLL=0.6572, MSE=0.5328, grad=1.93, lr=1.16e-04
+2026-01-15 02:17:28,670 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8100: NLL=0.7019, MSE=0.5117, grad=3.63, lr=1.16e-04
+2026-01-15 02:22:09,238 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 39: loss=0.6265, val_r=0.6745 
+2026-01-15 02:22:09,534 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 577.0s
+2026-01-15 02:24:16,252 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8200: NLL=0.6178, MSE=0.4706, grad=2.54, lr=9.64e-05
+2026-01-15 02:27:03,194 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8300: NLL=0.5777, MSE=0.5089, grad=1.55, lr=9.64e-05
+2026-01-15 02:31:53,139 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 40: loss=0.6143, val_r=0.6707 
+2026-01-15 02:31:53,480 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 583.9s
+2026-01-15 02:34:00,783 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8400: NLL=0.6379, MSE=0.4878, grad=2.13, lr=7.88e-05
+2026-01-15 02:36:37,886 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8500: NLL=0.5367, MSE=0.4840, grad=1.74, lr=7.88e-05
+2026-01-15 02:41:54,846 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 41: loss=0.6216, val_r=0.6751 
+2026-01-15 02:41:55,184 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 601.7s
+2026-01-15 02:44:07,181 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8600: NLL=0.6860, MSE=0.5687, grad=1.46, lr=6.28e-05
+2026-01-15 02:47:51,661 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8700: NLL=0.8062, MSE=0.5666, grad=2.70, lr=6.28e-05
+2026-01-15 02:54:54,637 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 42: loss=0.6082, val_r=0.6758 
+2026-01-15 02:54:55,070 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 779.9s
+2026-01-15 02:58:28,338 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8800: NLL=0.6282, MSE=0.4946, grad=1.72, lr=4.85e-05
+2026-01-15 03:03:57,728 - config5_universal_no_yeast_20260114_204533 - INFO - Step 8900: NLL=0.6851, MSE=0.5513, grad=1.57, lr=4.85e-05
+2026-01-15 03:09:37,666 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 43: loss=0.6236, val_r=0.6732 
+2026-01-15 03:09:38,043 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 883.0s
+2026-01-15 03:11:35,135 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9000: NLL=0.6069, MSE=0.5341, grad=1.66, lr=3.61e-05
+2026-01-15 03:14:23,852 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9100: NLL=0.5944, MSE=0.5097, grad=1.46, lr=3.61e-05
+2026-01-15 03:19:20,841 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 44: loss=0.6263, val_r=0.6724 
+2026-01-15 03:19:21,188 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 583.1s
+2026-01-15 03:21:06,235 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9200: NLL=0.5136, MSE=0.4778, grad=2.22, lr=2.54e-05
+2026-01-15 03:23:36,915 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9300: NLL=0.5207, MSE=0.4445, grad=1.64, lr=2.54e-05
+2026-01-15 03:28:34,708 - config5_universal_no_yeast_20260114_204533 - INFO - [phase1_pretrain] Epoch 45: loss=0.6064, val_r=0.6779 
+2026-01-15 03:28:34,998 - config5_universal_no_yeast_20260114_204533 - INFO - Early stopping phase phase1_pretrain
+2026-01-15 03:28:35,001 - config5_universal_no_yeast_20260114_204533 - INFO - 
+============================================================
+2026-01-15 03:28:35,001 - config5_universal_no_yeast_20260114_204533 - INFO - PHASE 2: phase2_head_training
+2026-01-15 03:28:35,007 - config5_universal_no_yeast_20260114_204533 - INFO -   Epochs: 50
+2026-01-15 03:28:35,008 - config5_universal_no_yeast_20260114_204533 - INFO -   Freeze backbone: True
+2026-01-15 03:28:35,008 - config5_universal_no_yeast_20260114_204533 - INFO -   Learning rate: 0.001
+2026-01-15 03:28:35,008 - config5_universal_no_yeast_20260114_204533 - INFO - ============================================================
+
+2026-01-15 03:29:15,834 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9400: NLL=0.5242, MSE=0.4687, grad=0.84, lr=1.00e-03
+2026-01-15 03:30:21,240 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9500: NLL=0.6943, MSE=0.5643, grad=1.28, lr=1.00e-03
+2026-01-15 03:35:27,627 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 0: loss=0.6196, val_r=0.6775 
+2026-01-15 03:35:27,944 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 412.9s
+2026-01-15 03:36:25,022 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9600: NLL=0.5029, MSE=0.4337, grad=0.67, lr=9.99e-04
+2026-01-15 03:37:59,934 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9700: NLL=0.5685, MSE=0.4603, grad=1.16, lr=9.99e-04
+2026-01-15 03:42:32,366 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 1: loss=0.6230, val_r=0.6702 
+2026-01-15 03:42:32,690 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 424.7s
+2026-01-15 03:43:23,601 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9800: NLL=0.9319, MSE=0.6366, grad=0.82, lr=9.96e-04
+2026-01-15 03:44:53,480 - config5_universal_no_yeast_20260114_204533 - INFO - Step 9900: NLL=0.6836, MSE=0.5773, grad=0.93, lr=9.96e-04
+2026-01-15 03:49:30,549 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 2: loss=0.6284, val_r=0.6649 
+2026-01-15 03:49:30,897 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 418.2s
+2026-01-15 03:50:19,177 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10000: NLL=0.8539, MSE=0.6026, grad=1.60, lr=9.91e-04
+2026-01-15 03:51:50,907 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10100: NLL=0.5886, MSE=0.4890, grad=0.40, lr=9.91e-04
+2026-01-15 03:56:33,315 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 3: loss=0.6129, val_r=0.6699 
+2026-01-15 03:56:33,553 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 422.7s
+2026-01-15 03:57:20,634 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10200: NLL=0.5413, MSE=0.4863, grad=0.90, lr=9.84e-04
+2026-01-15 03:58:52,768 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10300: NLL=0.4712, MSE=0.4267, grad=0.57, lr=9.84e-04
+2026-01-15 04:03:30,884 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 4: loss=0.6215, val_r=0.6802 
+2026-01-15 04:03:31,255 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 417.7s
+2026-01-15 04:04:12,844 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10400: NLL=0.5648, MSE=0.4733, grad=0.70, lr=9.76e-04
+2026-01-15 04:05:47,255 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10500: NLL=0.6738, MSE=0.5562, grad=0.53, lr=9.76e-04
+2026-01-15 04:10:36,017 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 5: loss=0.6072, val_r=0.6795 
+2026-01-15 04:10:36,920 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 425.7s
+2026-01-15 04:11:19,453 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10600: NLL=0.7906, MSE=0.5178, grad=1.85, lr=9.65e-04
+2026-01-15 04:12:50,208 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10700: NLL=0.6268, MSE=0.5264, grad=0.69, lr=9.65e-04
+2026-01-15 04:17:25,874 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 6: loss=0.6195, val_r=0.6751 
+2026-01-15 04:17:26,206 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 409.3s
+2026-01-15 04:17:53,633 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10800: NLL=0.5986, MSE=0.4943, grad=1.14, lr=9.52e-04
+2026-01-15 04:19:01,831 - config5_universal_no_yeast_20260114_204533 - INFO - Step 10900: NLL=0.8557, MSE=0.6289, grad=1.00, lr=9.52e-04
+2026-01-15 04:24:41,876 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 7: loss=0.6142, val_r=0.6779 
+2026-01-15 04:24:42,190 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 436.0s
+2026-01-15 04:25:20,385 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11000: NLL=0.6259, MSE=0.4910, grad=1.39, lr=9.38e-04
+2026-01-15 04:26:56,852 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11100: NLL=0.5489, MSE=0.4857, grad=0.71, lr=9.38e-04
+2026-01-15 04:31:43,393 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 8: loss=0.6301, val_r=0.6768 
+2026-01-15 04:31:43,697 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 421.5s
+2026-01-15 04:32:16,393 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11200: NLL=0.5849, MSE=0.4574, grad=0.61, lr=9.22e-04
+2026-01-15 04:33:46,098 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11300: NLL=0.6100, MSE=0.5284, grad=1.09, lr=9.22e-04
+2026-01-15 04:38:35,186 - config5_universal_no_yeast_20260114_204533 - INFO - [phase2_head_training] Epoch 9: loss=0.6190, val_r=0.6738 
+2026-01-15 04:38:35,452 - config5_universal_no_yeast_20260114_204533 - INFO - Early stopping phase phase2_head_training
+2026-01-15 04:38:35,452 - config5_universal_no_yeast_20260114_204533 - INFO - 
+============================================================
+2026-01-15 04:38:35,452 - config5_universal_no_yeast_20260114_204533 - INFO - PHASE 3: phase3_finetune
+2026-01-15 04:38:35,452 - config5_universal_no_yeast_20260114_204533 - INFO -   Epochs: 50
+2026-01-15 04:38:35,452 - config5_universal_no_yeast_20260114_204533 - INFO -   Freeze backbone: False
+2026-01-15 04:38:35,452 - config5_universal_no_yeast_20260114_204533 - INFO -   Learning rate: 0.0001
+2026-01-15 04:38:35,452 - config5_universal_no_yeast_20260114_204533 - INFO - ============================================================
+
+2026-01-15 04:39:27,501 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11400: NLL=0.8578, MSE=0.5851, grad=3.00, lr=1.00e-03
+2026-01-15 04:42:01,253 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11500: NLL=0.6353, MSE=0.5504, grad=1.63, lr=1.00e-03
+2026-01-15 04:47:45,827 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 0: loss=0.6973, val_r=0.6559 
+2026-01-15 04:47:46,159 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 550.7s
+2026-01-15 04:48:28,720 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11600: NLL=0.8731, MSE=0.6047, grad=2.05, lr=9.99e-04
+2026-01-15 04:50:53,544 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11700: NLL=0.7617, MSE=0.5221, grad=1.80, lr=9.99e-04
+2026-01-15 04:56:28,444 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 1: loss=0.7051, val_r=0.6371 
+2026-01-15 04:56:28,763 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 522.6s
+2026-01-15 04:57:09,114 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11800: NLL=0.7836, MSE=0.5295, grad=1.95, lr=9.96e-04
+2026-01-15 04:59:36,498 - config5_universal_no_yeast_20260114_204533 - INFO - Step 11900: NLL=0.6256, MSE=0.5158, grad=2.09, lr=9.96e-04
+2026-01-15 05:05:04,480 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 2: loss=0.7208, val_r=0.6537 
+2026-01-15 05:05:04,814 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 516.0s
+2026-01-15 05:05:33,205 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12000: NLL=0.6600, MSE=0.5233, grad=1.48, lr=9.91e-04
+2026-01-15 05:08:31,267 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12100: NLL=0.6366, MSE=0.4919, grad=1.37, lr=9.91e-04
+2026-01-15 05:14:08,331 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 3: loss=0.7229, val_r=0.6471 
+2026-01-15 05:14:08,618 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 543.8s
+2026-01-15 05:14:37,571 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12200: NLL=0.6410, MSE=0.5056, grad=1.62, lr=9.84e-04
+2026-01-15 05:17:07,029 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12300: NLL=0.6029, MSE=0.4741, grad=1.47, lr=9.84e-04
+2026-01-15 05:22:58,378 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 4: loss=0.7047, val_r=0.6723 
+2026-01-15 05:22:58,676 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 530.1s
+2026-01-15 05:23:25,007 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12400: NLL=0.7112, MSE=0.5452, grad=1.95, lr=9.76e-04
+2026-01-15 05:25:48,716 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12500: NLL=0.7752, MSE=0.5856, grad=1.67, lr=9.76e-04
+2026-01-15 05:31:40,151 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 5: loss=0.6999, val_r=0.6671 
+2026-01-15 05:31:40,452 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 521.8s
+2026-01-15 05:32:01,366 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12600: NLL=0.7349, MSE=0.5618, grad=1.87, lr=9.65e-04
+2026-01-15 05:34:24,100 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12700: NLL=0.6491, MSE=0.4873, grad=1.53, lr=9.65e-04
+2026-01-15 05:40:21,439 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 6: loss=0.7061, val_r=0.6698 
+2026-01-15 05:40:21,755 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 521.3s
+2026-01-15 05:40:39,208 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12800: NLL=0.7144, MSE=0.5329, grad=1.79, lr=9.52e-04
+2026-01-15 05:43:04,909 - config5_universal_no_yeast_20260114_204533 - INFO - Step 12900: NLL=0.9614, MSE=0.6465, grad=3.59, lr=9.52e-04
+2026-01-15 05:49:08,325 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 7: loss=0.6900, val_r=0.6779 
+2026-01-15 05:49:08,608 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 526.9s
+2026-01-15 05:49:20,972 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13000: NLL=0.7697, MSE=0.5025, grad=2.17, lr=9.38e-04
+2026-01-15 05:51:49,531 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13100: NLL=0.6643, MSE=0.5296, grad=1.51, lr=9.38e-04
+2026-01-15 05:57:50,683 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 8: loss=0.6941, val_r=0.6622 
+2026-01-15 05:57:51,020 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 522.4s
+2026-01-15 05:57:59,062 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13200: NLL=0.6520, MSE=0.5486, grad=1.42, lr=9.22e-04
+2026-01-15 06:00:27,377 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13300: NLL=0.8417, MSE=0.6511, grad=1.52, lr=9.22e-04
+2026-01-15 06:06:35,380 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 9: loss=0.6864, val_r=0.6839 (BEST)
+2026-01-15 06:06:36,144 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 525.1s
+2026-01-15 06:06:40,361 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13400: NLL=0.7983, MSE=0.5396, grad=1.85, lr=9.05e-04
+2026-01-15 06:09:05,874 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13500: NLL=0.6673, MSE=0.5331, grad=1.68, lr=9.05e-04
+2026-01-15 06:11:34,281 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13600: NLL=0.6560, MSE=0.5137, grad=1.71, lr=9.05e-04
+2026-01-15 06:15:21,318 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 10: loss=0.6863, val_r=0.6806 
+2026-01-15 06:15:21,673 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 525.5s
+2026-01-15 06:17:47,516 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13700: NLL=0.7091, MSE=0.6205, grad=1.58, lr=8.85e-04
+2026-01-15 06:20:16,161 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13800: NLL=0.7248, MSE=0.5287, grad=1.73, lr=8.85e-04
+2026-01-15 06:24:20,957 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 11: loss=0.6671, val_r=0.6621 
+2026-01-15 06:24:21,253 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 539.6s
+2026-01-15 06:26:49,550 - config5_universal_no_yeast_20260114_204533 - INFO - Step 13900: NLL=0.6250, MSE=0.5038, grad=1.86, lr=8.65e-04
+2026-01-15 06:29:18,172 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14000: NLL=0.5335, MSE=0.4627, grad=1.14, lr=8.65e-04
+2026-01-15 06:33:13,403 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 12: loss=0.6791, val_r=0.6889 (BEST)
+2026-01-15 06:33:14,060 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 532.8s
+2026-01-15 06:35:33,673 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14100: NLL=0.6325, MSE=0.4670, grad=1.60, lr=8.42e-04
+2026-01-15 06:38:00,337 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14200: NLL=0.6758, MSE=0.5059, grad=1.33, lr=8.42e-04
+2026-01-15 06:41:12,571 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 13: loss=0.6556, val_r=0.6854 
+2026-01-15 06:41:12,854 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 478.8s
+2026-01-15 06:43:53,759 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14300: NLL=0.6915, MSE=0.5533, grad=1.41, lr=8.19e-04
+2026-01-15 06:46:25,229 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14400: NLL=0.6043, MSE=0.5139, grad=1.27, lr=8.19e-04
+2026-01-15 06:50:32,021 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 14: loss=0.6565, val_r=0.6824 
+2026-01-15 06:50:32,370 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 559.5s
+2026-01-15 06:52:41,658 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14500: NLL=0.5356, MSE=0.4703, grad=1.52, lr=7.94e-04
+2026-01-15 06:55:05,277 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14600: NLL=0.6404, MSE=0.4778, grad=1.70, lr=7.94e-04
+2026-01-15 06:59:10,564 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 15: loss=0.6491, val_r=0.6802 
+2026-01-15 06:59:10,870 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 518.5s
+2026-01-15 07:01:16,396 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14700: NLL=0.8084, MSE=0.5200, grad=2.32, lr=7.68e-04
+2026-01-15 07:03:44,934 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14800: NLL=0.6260, MSE=0.4742, grad=2.20, lr=7.68e-04
+2026-01-15 07:07:59,641 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 16: loss=0.6432, val_r=0.6527 
+2026-01-15 07:07:59,966 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 529.1s
+2026-01-15 07:09:58,327 - config5_universal_no_yeast_20260114_204533 - INFO - Step 14900: NLL=0.5021, MSE=0.4680, grad=1.13, lr=7.41e-04
+2026-01-15 07:12:24,265 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15000: NLL=0.6339, MSE=0.4743, grad=1.22, lr=7.41e-04
+2026-01-15 07:16:50,029 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 17: loss=0.6205, val_r=0.6837 
+2026-01-15 07:16:50,371 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 530.4s
+2026-01-15 07:18:46,133 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15100: NLL=0.6247, MSE=0.4864, grad=1.38, lr=7.13e-04
+2026-01-15 07:21:13,403 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15200: NLL=0.5380, MSE=0.4683, grad=1.35, lr=7.13e-04
+2026-01-15 07:25:38,510 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 18: loss=0.6362, val_r=0.6782 
+2026-01-15 07:25:38,816 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 528.4s
+2026-01-15 07:27:26,208 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15300: NLL=0.6429, MSE=0.4915, grad=1.98, lr=6.84e-04
+2026-01-15 07:28:44,949 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15400: NLL=0.8538, MSE=0.6146, grad=1.38, lr=6.84e-04
+2026-01-15 07:34:03,507 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 19: loss=0.6266, val_r=0.6735 
+2026-01-15 07:34:03,845 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 505.0s
+2026-01-15 07:36:00,231 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15500: NLL=0.6645, MSE=0.4771, grad=1.74, lr=6.55e-04
+2026-01-15 07:38:40,569 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15600: NLL=0.5585, MSE=0.4916, grad=1.17, lr=6.55e-04
+2026-01-15 07:43:19,823 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 20: loss=0.6305, val_r=0.6882 
+2026-01-15 07:43:20,142 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 556.3s
+2026-01-15 07:45:02,128 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15700: NLL=0.6011, MSE=0.5147, grad=1.49, lr=6.25e-04
+2026-01-15 07:47:39,866 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15800: NLL=0.6195, MSE=0.4741, grad=2.37, lr=6.25e-04
+2026-01-15 07:52:22,646 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 21: loss=0.6137, val_r=0.6882 
+2026-01-15 07:52:22,986 - config5_universal_no_yeast_20260114_204533 - INFO - Epoch completed in 542.8s
+2026-01-15 07:54:05,192 - config5_universal_no_yeast_20260114_204533 - INFO - Step 15900: NLL=0.8336, MSE=0.5685, grad=2.38, lr=5.94e-04
+2026-01-15 07:56:34,932 - config5_universal_no_yeast_20260114_204533 - INFO - Step 16000: NLL=0.7201, MSE=0.5096, grad=1.72, lr=5.94e-04
+2026-01-15 08:01:26,293 - config5_universal_no_yeast_20260114_204533 - INFO - [phase3_finetune] Epoch 22: loss=0.6026, val_r=0.6789 
+2026-01-15 08:01:26,627 - config5_universal_no_yeast_20260114_204533 - INFO - Early stopping phase phase3_finetune
+2026-01-15 08:01:26,627 - config5_universal_no_yeast_20260114_204533 - INFO - Multi-phase training complete. Running final evaluation...

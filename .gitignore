@@ -9,7 +9,7 @@ __pycache__/
 dist/
 build/
 
-# Data files (too large for git)
+# Large data files
 *.h5
 *.hdf5
 *.tsv
@@ -22,17 +22,14 @@ build/
 *.bigwig
 *.bw
 
-# Model checkpoints (too large)
+# Model checkpoints (large binary files)
 *.pt
 *.pth
 *.pkl
 *.ckpt
 *.safetensors
 
-# Results and outputs
-results/
-outputs/
-logs/
+# Logs
 wandb/
 lightning_logs/
 
@@ -55,11 +52,7 @@ Thumbs.db
 venv/
 ENV/
 
-# Embedded git repos
+# Embedded git repos (have their own repos)
 FUSEMAP_results/
 comparison_models/human_legnet/
 comparison_models/random-promoter-dream-challenge-2022/
-
-# Large data directories
-data/
-models/

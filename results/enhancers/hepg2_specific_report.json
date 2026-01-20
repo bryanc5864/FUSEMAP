@@ -1,0 +1,167 @@
+{
+  "pipeline_info": {
+    "cell_types": [
+      "K562",
+      "HepG2",
+      "WTC11"
+    ],
+    "n_sequences_analyzed": 100
+  },
+  "ranking_summary": {
+    "n_ranked": 100,
+    "mean_specificity": -0.09595537304878235,
+    "max_specificity": 0.9923653043806553,
+    "median_specificity": -0.12905177474021912
+  },
+  "diversity_summary": {
+    "n_selected": 20,
+    "mean_specificity": 0.5162154333665967
+  },
+  "qc_summary": {
+    "n_synthesis_ready": 18,
+    "mean_gc_content": 0.48150000000000004,
+    "mean_max_homopolymer": 4.25
+  },
+  "top_sequences": [
+    {
+      "rank": 1,
+      "sequence": "ACAACTTACAGGATTAAGTAGTCGTTGCGTAAGTATGATAGTAGAACCGC...",
+      "specificity_score": 0.9923653043806553,
+      "target_activity": 0.28430747985839844,
+      "max_background": 0.01427113264799118
+    },
+    {
+      "rank": 2,
+      "sequence": "TGCCAGAGCAAGTGTGCAGCGAGTATCCGTTATTAATGAATTATAGGAAC...",
+      "specificity_score": 0.8673276007175446,
+      "target_activity": 0.31468647718429565,
+      "max_background": -0.48506152629852295
+    },
+    {
+      "rank": 3,
+      "sequence": "GTTGGGACCTCAGTTCTGTGAAGCTCTAAATAAAACAACCTGAAATAGCT...",
+      "specificity_score": 0.7413908317685127,
+      "target_activity": 0.42265576124191284,
+      "max_background": 0.13124559819698334
+    },
+    {
+      "rank": 4,
+      "sequence": "GAATGCTGGCTGGGCTTTTAATCAGAGTACAAATCACTGACCTAGCAGCC...",
+      "specificity_score": 0.6676222234964371,
+      "target_activity": 0.5025524497032166,
+      "max_background": 0.08029720187187195
+    },
+    {
+      "rank": 5,
+      "sequence": "ATATCGCTGTGGGGTGGCAACCTTTCCGTTTAGTTTAACGCGATCTCAAA...",
+      "specificity_score": 0.6627373993396759,
+      "target_activity": 0.3527238965034485,
+      "max_background": 0.29213541746139526
+    },
+    {
+      "rank": 6,
+      "sequence": "CCTCATAGGCGAGACCAGCTCGTGATGTGTGATTTTATCACTGCTCTTTG...",
+      "specificity_score": 0.6056341230869293,
+      "target_activity": 0.22658897936344147,
+      "max_background": -0.2136266529560089
+    },
+    {
+      "rank": 7,
+      "sequence": "CCAACATCATAAACGATCCTAGATCGCTAGCCCAGAAATTTGAATAACAC...",
+      "specificity_score": 0.5776041746139526,
+      "target_activity": -0.17019689083099365,
+      "max_background": -0.49908995628356934
+    },
+    {
+      "rank": 8,
+      "sequence": "AAATCCGCCAATAAAATAGGGGAGATGCGGAGCAATTGTTTAAATATAAC...",
+      "specificity_score": 0.5560529083013535,
+      "target_activity": 0.5909128785133362,
+      "max_background": 0.4096870422363281
+    },
+    {
+      "rank": 9,
+      "sequence": "TTGATTCTTCGTCAGAACTCCCCGTAATATACATTTTTGGATATTGGCGC...",
+      "specificity_score": 0.5348281636834145,
+      "target_activity": -0.5724083781242371,
+      "max_background": 0.13229458034038544
+    },
+    {
+      "rank": 10,
+      "sequence": "CGAGCTGATGGTTTAAGGCAGTTATCGGGATCAGCGGAGCGTGACATGAA...",
+      "specificity_score": 0.5054830461740494,
+      "target_activity": 0.053912535309791565,
+      "max_background": 0.5398095846176147
+    },
+    {
+      "rank": 11,
+      "sequence": "CACAAAATCCAACTGGCAATGTGCGTTTCGGTGAAAGCCCCAATGGCACT...",
+      "specificity_score": 0.43209102749824524,
+      "target_activity": -0.5867766737937927,
+      "max_background": -0.7370085120201111
+    },
+    {
+      "rank": 12,
+      "sequence": "TGTAACAGTAAGTTCCTGGCAGAGTCAATGAGTCAGAGGGTCACGGCCAG...",
+      "specificity_score": 0.4090326428413391,
+      "target_activity": 1.4170653820037842,
+      "max_background": 1.4694308042526245
+    },
+    {
+      "rank": 13,
+      "sequence": "ACGTAAAGCCATAATAGAGACTCAAGAAACGCGCACCGGCGGGTGTTGCG...",
+      "specificity_score": 0.40442030131816864,
+      "target_activity": -0.21815061569213867,
+      "max_background": 0.14221933484077454
+    },
+    {
+      "rank": 14,
+      "sequence": "TAGAGGTTACTTCCTCAGGTTACTGAACTTAGTGATGAGTCGCTCACGGC...",
+      "specificity_score": 0.4016853868961334,
+      "target_activity": 0.405656099319458,
+      "max_background": 0.28320667147636414
+    },
+    {
+      "rank": 15,
+      "sequence": "TTTTAGCTCATGCTAGCCTGGGGAGCCACCGCAGTGAGGAGAATCCGGTT...",
+      "specificity_score": 0.38464537262916565,
+      "target_activity": -1.2193748950958252,
+      "max_background": -0.8531222939491272
+    },
+    {
+      "rank": 16,
+      "sequence": "AAGAAGTTAAGGTCACCGAAGCGTATGATTCATTCTTTCTTAACGACTTC...",
+      "specificity_score": 0.3769345134496689,
+      "target_activity": 0.6551861763000488,
+      "max_background": 0.9634840488433838
+    },
+    {
+      "rank": 17,
+      "sequence": "AGATTTGGACCTCTACCTACCCAACTTCACACAGTGTAGTCAACCTATCA...",
+      "specificity_score": 0.3206091523170471,
+      "target_activity": -0.20018306374549866,
+      "max_background": -0.12675786018371582
+    },
+    {
+      "rank": 18,
+      "sequence": "TACCTCAACTAAGTGCCGTACTTCCTAGCGTGATATATATATACGTACTT...",
+      "specificity_score": 0.30480411648750305,
+      "target_activity": -0.28181853890419006,
+      "max_background": -0.5112600326538086
+    },
+    {
+      "rank": 19,
+      "sequence": "GCCGGTGTCAAAACAGGAGTCAACGCCGCGGCTGCGTTAGGCGATTAGGA...",
+      "specificity_score": 0.29605576395988464,
+      "target_activity": 0.5254613757133484,
+      "max_background": 0.6046310067176819
+    },
+    {
+      "rank": 20,
+      "sequence": "TCAGTTTCGCGACCAGTATTAGTACCCACTCCTCTCTCTATCCGTATTAT...",
+      "specificity_score": 0.2829846143722534,
+      "target_activity": 0.6842302680015564,
+      "max_background": 1.227808952331543
+    }
+  ]
+}

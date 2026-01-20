@@ -1,0 +1,368 @@
+{
+  "encode4_k562": {
+    "activity": {
+      "pearson": {
+        "value": 0.6235544681549072,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "spearman": {
+        "value": 0.563771277790839,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "r2": {
+        "value": 0.166614830493927,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "mse": {
+        "value": 0.23295755684375763,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "rmse": {
+        "value": 0.4826567691887866,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "mae": {
+        "value": 0.3639369010925293,
+        "stderr": null,
+        "n_samples": 22613
+      }
+    }
+  },
+  "encode4_hepg2": {
+    "activity": {
+      "pearson": {
+        "value": 0.6340153813362122,
+        "stderr": null,
+        "n_samples": 13997
+      },
+      "spearman": {
+        "value": 0.6177740275754338,
+        "stderr": null,
+        "n_samples": 13997
+      },
+      "r2": {
+        "value": 0.30177557468414307,
+        "stderr": null,
+        "n_samples": 13997
+      },
+      "mse": {
+        "value": 0.432077556848526,
+        "stderr": null,
+        "n_samples": 13997
+      },
+      "rmse": {
+        "value": 0.6573260658520442,
+        "stderr": null,
+        "n_samples": 13997
+      },
+      "mae": {
+        "value": 0.5037482976913452,
+        "stderr": null,
+        "n_samples": 13997
+      }
+    }
+  },
+  "encode4_wtc11": {
+    "activity": {
+      "pearson": {
+        "value": 0.584965705871582,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "spearman": {
+        "value": 0.47579884593485366,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "r2": {
+        "value": 0.007501542568206787,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "mse": {
+        "value": 1.1085638999938965,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "rmse": {
+        "value": 1.0528836117985199,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "mae": {
+        "value": 0.8141318559646606,
+        "stderr": null,
+        "n_samples": 5596
+      }
+    }
+  },
+  "deepstarr": {
+    "Dev": {
+      "pearson": {
+        "value": 0.6372915506362915,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "spearman": {
+        "value": 0.5988652781125462,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "r2": {
+        "value": 0.26953667402267456,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "mse": {
+        "value": 1.698137640953064,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "rmse": {
+        "value": 1.303126103242915,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "mae": {
+        "value": 1.0154592990875244,
+        "stderr": null,
+        "n_samples": 40570
+      }
+    },
+    "Hk": {
+      "pearson": {
+        "value": 0.687035322189331,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "spearman": {
+        "value": 0.5129537157996177,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "r2": {
+        "value": 0.2504357099533081,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "mse": {
+        "value": 2.0439136028289795,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "rmse": {
+        "value": 1.429655064282633,
+        "stderr": null,
+        "n_samples": 40570
+      },
+      "mae": {
+        "value": 1.1221110820770264,
+        "stderr": null,
+        "n_samples": 40570
+      }
+    }
+  },
+  "jores_arabidopsis": {
+    "leaf": {
+      "pearson": {
+        "value": 0.6300206780433655,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "spearman": {
+        "value": 0.5905481526857977,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "r2": {
+        "value": 0.2975311279296875,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mse": {
+        "value": 1.0071640014648438,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "rmse": {
+        "value": 1.00357560824526,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mae": {
+        "value": 0.7888551354408264,
+        "stderr": null,
+        "n_samples": 1347
+      }
+    },
+    "proto": {
+      "pearson": {
+        "value": 0.578020453453064,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "spearman": {
+        "value": 0.5349727655772992,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "r2": {
+        "value": -0.629385232925415,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mse": {
+        "value": 2.172952175140381,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "rmse": {
+        "value": 1.474093679228149,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mae": {
+        "value": 1.2100517749786377,
+        "stderr": null,
+        "n_samples": 1347
+      }
+    }
+  },
+  "jores_maize": {
+    "leaf": {
+      "pearson": {
+        "value": 0.7784707546234131,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "spearman": {
+        "value": 0.7836169742336803,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "r2": {
+        "value": 0.5423594117164612,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "mse": {
+        "value": 1.51564359664917,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "rmse": {
+        "value": 1.2311147780159126,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "mae": {
+        "value": 0.9352907538414001,
+        "stderr": null,
+        "n_samples": 2461
+      }
+    },
+    "proto": {
+      "pearson": {
+        "value": 0.7863916158676147,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "spearman": {
+        "value": 0.7554578638724283,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "r2": {
+        "value": 0.5784649848937988,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "mse": {
+        "value": 0.599316418170929,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "rmse": {
+        "value": 0.7741552933171283,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "mae": {
+        "value": 0.5935989022254944,
+        "stderr": null,
+        "n_samples": 2461
+      }
+    }
+  },
+  "jores_sorghum": {
+    "leaf": {
+      "pearson": {
+        "value": 0.7833064794540405,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "spearman": {
+        "value": 0.7771200610141036,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "r2": {
+        "value": 0.5077016353607178,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "mse": {
+        "value": 1.3619730472564697,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "rmse": {
+        "value": 1.1670360094086514,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "mae": {
+        "value": 0.878268837928772,
+        "stderr": null,
+        "n_samples": 1968
+      }
+    },
+    "proto": {
+      "pearson": {
+        "value": 0.7445328235626221,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "spearman": {
+        "value": 0.6505985536429225,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "r2": {
+        "value": 0.392145574092865,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "mse": {
+        "value": 0.8019730448722839,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "rmse": {
+        "value": 0.8955294773888149,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "mae": {
+        "value": 0.6849657297134399,
+        "stderr": null,
+        "n_samples": 1968
+      }
+    }
+  }
+}

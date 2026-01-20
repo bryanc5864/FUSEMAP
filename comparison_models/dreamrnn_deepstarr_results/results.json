@@ -1,0 +1,17 @@
+{
+  "model": "DREAM-RNN",
+  "dataset": "DeepSTARR",
+  "best_epoch": 13,
+  "test_metrics": {
+    "Dev": {
+      "pearson": 0.7083766460418701,
+      "spearman": 0.6741014627654021
+    },
+    "Hk": {
+      "pearson": 0.7788074612617493,
+      "spearman": 0.6069959213081078
+    }
+  },
+  "val_metrics": {
+    "Dev": {
+      "pearson": 

@@ -1,0 +1,49 @@
+# PhysicsVAE config: 3 human cell types (K562, HepG2, WTC11)
+name: multi_human
+description: "PhysicsVAE trained on K562 + HepG2 + WTC11 (3 human cell types)"
+
+# Datasets to combine
+datasets:
+  - name: K562
+    data_dir: "../data/lentiMPRA_data/K562"
+    file_pattern: "{cell_type}_{split}_with_features.tsv"
+    cell_type: K562
+  - name: HepG2
+    data_dir: "../data/lentiMPRA_data/HepG2"
+    file_pattern: "{cell_type}_{split}_with_features.tsv"
+    cell_type: HepG2
+  - name: WTC11
+    data_dir: "../data/lentiMPRA_data/WTC11"
+    file_pattern: "{cell_type}_{split}_with_features.tsv"
+    cell_type: WTC11
+
+# Sequence handling
+sequence:
+  max_length: 230  # All human datasets are 230bp
+  pad_value: 4     # N nucleotide index
+
+# Physics features
+physics:
+  # Only use physics features (exclude PWM since they're species-specific)
+  include_prefixes:
+    - thermo
+    - stiff
+    - bend
+    - entropy
+    - advanced
+  exclude_prefixes:
+    - pwm
+    - tileformer  # Exclude if not available for all
+
+# Training
+training:
+  batch_size: 64
+  learning_rate: 0.0001
+  epochs: 100
+  latent_dim: 128
+  beta: 0.001
+  beta_annealing: false
+
+# Validation
+validation:
+  val_split: 0.1  # If no val file exists

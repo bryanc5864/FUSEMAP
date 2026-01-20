@@ -1,0 +1,58 @@
+# PhysicsVAE config: 4 animal cell types (K562, HepG2, WTC11, S2)
+name: multi_animal
+description: "PhysicsVAE trained on K562 + HepG2 + WTC11 + S2 (human + drosophila)"
+
+# Datasets to combine
+datasets:
+  - name: K562
+    data_dir: "../data/lentiMPRA_data/K562"
+    file_pattern: "{cell_type}_{split}_with_features.tsv"
+    cell_type: K562
+    seq_length: 230
+  - name: HepG2
+    data_dir: "../data/lentiMPRA_data/HepG2"
+    file_pattern: "{cell_type}_{split}_with_features.tsv"
+    cell_type: HepG2
+    seq_length: 230
+  - name: WTC11
+    data_dir: "../data/lentiMPRA_data/WTC11"
+    file_pattern: "{cell_type}_{split}_with_features.tsv"
+    cell_type: WTC11
+    seq_length: 230
+  - name: S2
+    data_dir: "../data/drosophila_data/S2"
+    file_pattern: "{cell_type}_{split}_with_features.tsv"
+    cell_type: S2
+    seq_length: 249
+
+# Sequence handling
+sequence:
+  max_length: 249  # Pad human to match S2
+  pad_value: 4     # N nucleotide index
+  # Human seqs (230bp) will be center-padded to 249bp
+
+# Physics features
+physics:
+  # Only use universal physics features (no PWM, no TileFormer)
+  include_prefixes:
+    - thermo
+    - stiff
+    - bend
+    - entropy
+    - advanced
+  exclude_prefixes:
+    - pwm          # Species-specific TF motifs
+    - tileformer   # May not be available for all
+
+# Training
+training:
+  batch_size: 64
+  learning_rate: 0.0001
+  epochs: 100
+  latent_dim: 128
+  beta: 0.001
+  beta_annealing: false
+
+# Validation
+validation:
+  val_split: 0.1

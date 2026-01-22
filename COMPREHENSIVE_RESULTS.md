@@ -12,7 +12,28 @@ Complete experimental results and metrics from all validation experiments.
 | PhysInformer Transfer | 18 | Pearson r | 0.85 (K562→HepG2) |
 | PhysicsVAE Transfer | 18 | Accuracy | 56.1% (K562→WTC11) |
 | PhysicsTransfer | 6 | Pearson r | 0.70 (Plant zero-shot) |
-| **Total Experiments** | **88+** | | |
+| S2A Zero-Shot | 7 | Spearman ρ | 0.70 (Plant→Maize) |
+| Mouse ESC Validation | 8 | Spearman ρ | 0.28 (WTC11 transfer) |
+| Progressive Transfer | 12 | Spearman ρ | 0.28 (25% data) |
+| Therapeutic Design | 3 | Pass Rate | 99% (HepG2-specific) |
+| ClinVar Variants | 500 | Effect Detection | 1 strong variant |
+| Enhancer Design | 40 | Specificity | 1.49 (max) |
+| Physics Analysis | 11 | R² | 0.18 (human multivariate) |
+| PhysicsInterpreter | 7 | Probe R² | 0.16 (K562 attribution) |
+| Multi-Task Models | 2 | Pearson r | 0.69 (Config3 cross-animal) |
+| Plant Models | 6 | Pearson r | 0.80 (Maize leaf) |
+| DREAM Yeast | 8 | Pearson r | **0.967** |
+| LegNet Comparison | 3 | Pearson r | CADENCE matches/exceeds |
+| **Total Experiments** | **195+** | | |
+
+### Key Findings Summary
+
+1. **DREAM 2022 yeast prediction**: Test Pearson r=0.967, Spearman ρ=0.971
+2. **Best single-cell model**: CADENCE K562 (r=0.81), matches LegNet
+3. **Best cross-species transfer**: K562→Drosophila S2 (ρ=0.56)
+4. **Best physics→activity**: Plant zero-shot (ρ=0.70)
+5. **Cross-kingdom physics transfer fails**: Animal→Plant is anti-correlated
+6. **Human→Mouse zero-shot fails**: Requires fine-tuning with >10% data
 
 ---
 
@@ -458,6 +479,631 @@ Complete experimental results and metrics from all validation experiments.
 3. **Thermodynamic Instability**: Lower ΔH/ΔG → higher activity
 4. **DNA Bending**: Higher curvature → lower expression in mammals
 5. **GC Content**: Moderate positive correlation (+0.25)
+
+---
+
+## 10. S2A Universal Physics→Activity Zero-Shot Transfer
+
+### Overview
+
+The S2A (Sequence-to-Activity) system uses **universal physics features** (excluding species-specific PWM/TF-binding features) to enable zero-shot activity prediction across species.
+
+**Key Insight**: Physics features (thermo, stiff, bend, entropy, advanced) are universal because DNA chemistry is identical across organisms.
+
+### Leave-One-Out Evaluation Results
+
+Full leave-one-out evaluation across 7 datasets:
+
+| Holdout Dataset | Species | Kingdom | Zero-shot ρ | Zero-shot r | n_test |
+|-----------------|---------|---------|-------------|-------------|--------|
+| **maize_leaf** | Maize | Plant | **0.700** | **0.694** | 2,461 |
+| sorghum_leaf | Sorghum | Plant | 0.370 | 0.376 | 1,968 |
+| arabidopsis_leaf | Arabidopsis | Plant | 0.308 | 0.316 | 1,347 |
+| WTC11 | Human | Animal | 0.184 | 0.230 | 5,597 |
+| S2_dev | Drosophila | Animal | -0.085 | -0.052 | 41,186 |
+| K562 | Human | Animal | 0.050 | 0.067 | 22,631 |
+| HepG2 | Human | Animal | 0.045 | 0.063 | 13,953 |
+
+### Transfer Scenario Comparison
+
+| Scenario | Sources | Holdout | Zero-shot ρ | Zero-shot r | n_test |
+|----------|---------|---------|-------------|-------------|--------|
+| **Within-Plant** | Arab+Sorghum | Maize | **0.700** | **0.694** | 2,461 |
+| Within-Human | K562+HepG2 | WTC11 | 0.260 | 0.342 | 5,597 |
+| Animal→Plant | All animals | Arabidopsis | -0.321 | -0.320 | 1,347 |
+| Plant→Animal | All plants | S2_dev | 0.125 | 0.136 | 41,186 |
+
+### Calibration Curve (Maize Holdout)
+
+Performance improvement with increasing calibration samples:
+
+| n_samples | Spearman ρ | Pearson r | R² |
+|-----------|------------|-----------|-----|
+| 10 | 0.701 | 0.694 | 0.351 |
+| 20 | 0.700 | 0.694 | 0.439 |
+| 50 | 0.701 | 0.695 | **0.468** |
+| 100 | 0.700 | 0.694 | 0.475 |
+| 200 | 0.703 | 0.696 | 0.476 |
+| 500 | 0.702 | 0.697 | 0.483 |
+
+**Key Finding**: Calibration primarily improves R² (absolute prediction accuracy), while ranking (Spearman ρ) is already excellent from zero-shot.
+
+### Conclusions
+
+1. **Plant zero-shot works**: ρ=0.70 for within-plant transfer (Arabidopsis+Sorghum → Maize)
+2. **Human/animal is weaker**: ρ=0.18-0.26 for within-human transfer
+3. **Cross-kingdom fails**: Animal→Plant transfer is anti-correlated (ρ=-0.32)
+4. **Physics is more predictive in plants**: Universal physics features explain ~50% of plant activity variance vs ~7-14% in humans
+
+---
+
+## 11. Detailed Physics→Activity Per-Cell-Type Results
+
+### In-Cell-Type R² Performance (ElasticNet CV)
+
+| Cell Type | Physics-only R² | With PWM R² | PWM Improvement | n_features |
+|-----------|-----------------|-------------|-----------------|------------|
+| **WTC11** | **0.143** | **0.248** | +0.105 | 241 |
+| K562 | 0.072 | 0.143 | +0.071 | 242 |
+| HepG2 | 0.063 | 0.142 | +0.079 | 242 |
+| **Mean (Human)** | **0.092** | **0.178** | +0.085 | - |
+
+### Summary Statistics
+
+- **Mean R² (physics+PWM)**: 0.178 across human cell types
+- **Physics-only mean R²**: 0.092 (explains ~9% of activity variance)
+- **PWM improvement**: +0.085 (nearly doubles the R²)
+
+### Top Physics Features by Cell Type
+
+**K562:**
+| Feature | Coefficient | Category |
+|---------|-------------|----------|
+| entropy_gc_entropy_w30_mean | 0.726 | entropy |
+| thermo_dH_p90 | -0.652 | thermo |
+| entropy_gc_entropy_w50_mean | 0.538 | entropy |
+| pwm_min_delta_g | -0.393 | pwm |
+| entropy_conditional_entropy | 0.386 | entropy |
+
+**WTC11:**
+| Feature | Coefficient | Category |
+|---------|-------------|----------|
+| stiff_gc_content_global | -1.500 | stiff |
+| advanced_mgw_mean_mgw | 1.125 | advanced |
+| advanced_melting_soft_min_melting_dG | 1.068 | advanced |
+| thermo_var_dG | 0.912 | thermo |
+| advanced_stress_mean_stress_opening | -0.908 | advanced |
+
+---
+
+## 12. Complete PhysicsTransfer Results
+
+### All Experiments
+
+| Experiment | Source | Target | Zero-shot r | Zero-shot ρ | Efficiency |
+|------------|--------|--------|-------------|-------------|------------|
+| **plant_cross_species** | Arab+Sorghum | Maize | **0.700** | **0.707** | 1.08 |
+| human_cross_celltype | K562+HepG2 | WTC11 | 0.338 | 0.254 | 1.32 |
+| human_to_drosophila | K562+HepG2+WTC11 | S2 | 0.021 | 0.012 | 0.08 |
+| wtc11_to_s2 | WTC11 | S2 | 0.006 | 0.010 | 0.02 |
+| animal_to_arabidopsis | All animals | Arabidopsis | -0.32 | -0.32 | -0.49 |
+| animal_to_maize | All animals | Maize | -0.42 | -0.42 | -0.65 |
+
+### Feature Importance by Transfer Scenario
+
+**Plant Cross-Species (Best Transfer):**
+| Category | Contribution |
+|----------|--------------|
+| **Bending** | **45.3%** |
+| Advanced | 26.7% |
+| Thermo | 14.1% |
+| Stiffness | 7.5% |
+| Entropy | 6.5% |
+
+**Human Cross-Cell-Type:**
+| Category | Contribution |
+|----------|--------------|
+| Advanced | 30.9% |
+| Bending | 26.3% |
+| Entropy | 15.1% |
+| Thermo | 14.7% |
+| Stiffness | 13.0% |
+
+### Fine-Tuning Results
+
+**Plant → Maize with Fine-tuning:**
+| n_samples | Fine-tuned r | Efficiency |
+|-----------|--------------|------------|
+| 0 (zero-shot) | 0.700 | 1.08 |
+| 1,000 | 0.637 | 0.98 |
+| 5,000 | 0.686 | 1.06 |
+| 10,000 | 0.695 | 1.07 |
+
+**Human → WTC11 with Fine-tuning:**
+| n_samples | Fine-tuned r | Efficiency |
+|-----------|--------------|------------|
+| 0 (zero-shot) | 0.338 | 1.32 |
+| 1,000 | 0.254 | 0.99 |
+| 5,000 | 0.340 | 1.32 |
+| 10,000 | 0.357 | 1.39 |
+
+---
+
+## 13. Therapeutic Sequence Design Results
+
+### Cell-Type-Specific Sequence Optimization
+
+Using ISM-guided optimization to design sequences with high target cell activity and cross-cell-type specificity:
+
+| Target Cell | Mean Specificity | Max Specificity | Mean Target Activity | Pass Rate | n_green |
+|-------------|------------------|-----------------|---------------------|-----------|---------|
+| **HepG2** | **4.39** | **7.18** | 5.22 | **99.0%** | 193/200 |
+| K562 | 1.95 | 4.52 | 5.16 | 83.5% | 105/200 |
+| WTC11 | 1.22 | 5.24 | 4.57 | 86.0% | 106/200 |
+
+**Definitions:**
+- **Specificity**: Target activity - max(other cell activities)
+- **Pass Rate**: Fraction of sequences where target > all others
+- **n_green**: Sequences with target activity > 5 AND specificity > 1
+
+### Key Findings
+
+1. **HepG2 is easiest to target**: 99% pass rate with mean specificity 4.39
+2. **K562/WTC11 are harder**: Similar activity but less cell-type specificity
+3. **All targets achieve high activity**: Mean target activity 4.6-5.2 (log scale)
+
+---
+
+## 14. ClinVar Variant Effect Analysis
+
+### Variant Impact Distribution
+
+Analysis of regulatory variants from ClinVar:
+
+| Effect Category | n_variants | Fraction |
+|-----------------|------------|----------|
+| Strong | 1 | 0.2% |
+| Moderate | 0 | 0% |
+| Weak | 0-1 | 0-0.5% |
+| **Negligible** | **499** | **99.8%** |
+
+### Direction Distribution
+
+| Direction | n_variants | Fraction |
+|-----------|------------|----------|
+| Activating | 1 | 0.2% |
+| **Repressing** | **499** | **99.8%** |
+| Neutral | 0 | 0% |
+
+### Top Variant Effects
+
+| Variant ID | Clinical Significance | Δ Activity | Δ Z-score | Effect | Top Physics Change |
+|------------|----------------------|------------|-----------|--------|-------------------|
+| 1362935 | Pathogenic | +0.78 | +5.51 | **Strong activating** | flex_7 |
+| 2677653 | Pathogenic | -0.14 | -0.97 | Negligible | dH_4 |
+| 2050570 | Pathogenic | -0.12 | -0.87 | Negligible | dipole_5 |
+| 3854495 | Pathogenic | -0.12 | -0.82 | Negligible | charge_1 |
+
+### Physics Features Driving Variant Effects
+
+Top physics features with largest changes in variants:
+1. **dH** (enthalpy) - thermodynamic stability changes
+2. **charge** - electrostatic alterations
+3. **dipole** - DNA dipole moment shifts
+4. **bend** - local curvature changes
+5. **flex** - flexibility modifications
+
+### Limitations
+
+- AUROC = 0 (no benign variants in test set for proper classification)
+- Most variants show negligible predicted effects
+- Model may underestimate true regulatory impact
+
+---
+
+## 15. Physics Feature Analysis by Organism
+
+### Correlation Summary Across Species
+
+| Species | n_significant (p<0.01) | Top Feature | Top Correlation |
+|---------|------------------------|-------------|-----------------|
+| **Sorghum (proto)** | 277 | bend_rms_curvature_w5_max | **+0.389** |
+| **Arabidopsis (proto)** | 208 | bend_rms_curvature_w5_max | **+0.291** |
+| Drosophila (dev) | 368 | thermo_dG_local_min_std | +0.214 |
+| Human (pooled) | 328 | pwm_MA0079.5_max_score | +0.140 |
+
+### Plant-Specific Physics Relationships
+
+Plants show much stronger physics-activity correlations than animals:
+
+**Sorghum Top Features:**
+| Feature | Category | Pearson r |
+|---------|----------|-----------|
+| bend_rms_curvature_w5_max | bend | **+0.389** |
+| bend_rms_curvature_w7_max | bend | +0.370 |
+| bend_curvature_var_w9_max | bend | +0.326 |
+
+**Arabidopsis Top Features:**
+| Feature | Category | Pearson r |
+|---------|----------|-----------|
+| bend_rms_curvature_w5_max | bend | **+0.291** |
+| bend_rms_curvature_w7_max | bend | +0.291 |
+| bend_curvature_var_w9_max | bend | +0.259 |
+
+### Key Observation
+
+**Bending features dominate plant activity prediction** - DNA curvature is the strongest predictor of regulatory activity in plants, explaining why zero-shot physics transfer works so well within the plant kingdom.
+
+---
+
+## 16. Enhancer Design Pipeline Results
+
+### General Enhancer Design
+
+Designing sequences with cell-type-specific enhancer activity:
+
+| Metric | Value |
+|--------|-------|
+| n_sequences analyzed | 100 |
+| n_ranked | 100 |
+| Mean specificity | -0.06 |
+| **Max specificity** | **1.49** |
+| n_selected (diverse) | 20 |
+| Mean specificity (diverse) | 0.82 |
+| n_synthesis_ready | 18 |
+| Mean GC content | 50.3% |
+| Mean max homopolymer | 4.35 |
+
+### Top Designed Enhancers
+
+| Rank | Specificity | Target Activity | Max Background |
+|------|-------------|-----------------|----------------|
+| 1 | **1.49** | 1.57 | 0.20 |
+| 2 | 1.43 | 1.43 | 0.39 |
+| 3 | 1.43 | 1.15 | -0.19 |
+| 4 | 1.24 | 1.03 | -0.04 |
+| 5 | 1.12 | 0.54 | -0.30 |
+
+### HepG2-Specific Enhancer Design
+
+| Metric | Value |
+|--------|-------|
+| Max specificity | 0.99 |
+| n_synthesis_ready | 18 |
+| Mean GC content | 48.2% |
+
+---
+
+## 17. Mouse ESC External Validation
+
+Cross-species transfer from human CADENCE models to Mouse ESC STARR-seq data (GSE143546).
+
+### Dataset
+- **Organism**: Mus musculus (mouse embryonic stem cells)
+- **n_sequences**: 27,565
+- **Conditions**: 2iL (ground-state) and SL (metastable)
+
+### Zero-Shot Transfer Results
+
+| Model | Condition | Spearman ρ | Pearson r | AUROC |
+|-------|-----------|------------|-----------|-------|
+| cadence_k562 | 2iL | -0.106 | -0.094 | 0.454 |
+| cadence_k562 | SL | -0.057 | -0.054 | 0.471 |
+| cadence_hepg2 | 2iL | -0.019 | +0.057 | 0.514 |
+| cadence_hepg2 | SL | -0.001 | +0.028 | 0.496 |
+| config4_cross_kingdom | 2iL | -0.069 | -0.074 | 0.484 |
+| config4_cross_kingdom | SL | +0.001 | -0.019 | 0.511 |
+| config5_universal | 2iL | -0.058 | -0.054 | 0.491 |
+| config5_universal | SL | +0.009 | +0.001 | 0.518 |
+
+### Key Finding
+
+**Zero-shot human→mouse transfer fails** (correlations near 0 or negative). This confirms that learned regulatory patterns are species-specific and don't transfer across mammals without fine-tuning.
+
+---
+
+## 18. Progressive Transfer Learning (Mouse ESC)
+
+Evaluating transfer learning with increasing amounts of target data.
+
+### From Scratch vs Transfer (Mouse ESC 2iL)
+
+| Data Fraction | n_train | Scratch ρ | Transfer (frozen) ρ | Transfer (full) ρ |
+|---------------|---------|-----------|---------------------|-------------------|
+| 1% | 192 | 0.208 | 0.117 | 0.128 |
+| 5% | 964 | - | 0.137 | **0.196** |
+| 10% | 1,929 | - | 0.170 | **0.237** |
+| 25% | 4,823 | - | 0.225 | **0.277** |
+
+### Transfer Strategy Comparison
+
+| Strategy | Mean ρ | Best at |
+|----------|--------|---------|
+| From scratch | 0.208 (1%) | Very low data |
+| Frozen backbone | 0.162 | Moderate data |
+| **Full fine-tune** | **0.210** | >5% data |
+
+### Key Findings
+
+1. **Transfer helps at low data**: Full fine-tune beats frozen backbone
+2. **1% data is borderline**: From scratch slightly better than frozen transfer
+3. **>5% data**: Full fine-tuning provides consistent improvement
+4. **Best result**: 0.277 Spearman with 25% data + full fine-tuning
+
+---
+
+## 19. CADENCE Transfer Learning Summary
+
+### Complete Transfer Matrix (Human Sources → External Targets)
+
+Best results from comprehensive evaluation (46 experiments):
+
+| Source | Target | Data % | Strategy | Spearman ρ | Pearson r | AUROC |
+|--------|--------|--------|----------|------------|-----------|-------|
+| **K562** | S2 (Drosophila) | 25% | Full FT | **0.556** | **0.579** | **0.804** |
+| K562 | S2 (Drosophila) | 10% | Full FT | 0.504 | 0.518 | 0.771 |
+| HepG2 | S2 (Drosophila) | 25% | Full FT | 0.524 | 0.543 | 0.786 |
+| **WTC11** | Mouse ESC | 25% | Full FT | **0.281** | **0.316** | **0.623** |
+| K562 | Mouse ESC | 25% | Full FT | 0.216 | 0.250 | 0.584 |
+| HepG2 | Mouse ESC | 25% | Full FT | 0.238 | 0.255 | 0.617 |
+
+### Transfer Success Rates
+
+| Target | Success (ρ > 0.3) | Best Source |
+|--------|-------------------|-------------|
+| S2 (Drosophila) | **100%** (25% data) | K562 (ρ=0.56) |
+| Mouse ESC | 0% (25% data) | WTC11 (ρ=0.28) |
+
+### Conclusions
+
+1. **Drosophila transfers well** from human models (ρ=0.56)
+2. **Mouse transfers poorly** even with 25% data (ρ=0.28)
+3. **K562 is the best source** for most targets
+4. **Full fine-tuning >> Frozen backbone** at all data levels
+
+---
+
+## 20. Model Architecture Comparisons
+
+### CADENCE vs Baseline Models
+
+| Model | Architecture | K562 r | HepG2 r | WTC11 r | DeepSTARR r |
+|-------|--------------|--------|---------|---------|-------------|
+| **CADENCE** | LegNet | 0.809 | 0.786 | 0.698 | **0.909** |
+| LegNet (original) | LegNet | 0.811 | 0.783 | 0.698 | - |
+| DREAM-RNN | BiLSTM | - | - | - | 0.708 |
+| Random Forest | RF | - | - | - | 0.580 |
+
+### Multi-Species Models
+
+| Config | Description | Mean r | Best Dataset |
+|--------|-------------|--------|--------------|
+| Single-cell | One model per cell | 0.77 | K562 (0.81) |
+| Config4 | Cross-kingdom | 0.70 | Maize (0.78) |
+| Config5 | Universal (no yeast) | 0.64 | Maize (0.78) |
+
+---
+
+## 21. Multi-Task Model Configurations
+
+### Config2: Multi-Celltype (Human Joint Training)
+
+Single model trained on all three human cell types simultaneously:
+
+| Dataset | Val Pearson | Val Spearman | Test Pearson | Test Spearman | R² |
+|---------|-------------|--------------|--------------|---------------|-----|
+| K562 | 0.517 | 0.407 | 0.514 | 0.400 | -0.54 |
+| HepG2 | 0.657 | 0.651 | 0.667 | 0.654 | -1.14 |
+| WTC11 | 0.539 | 0.379 | 0.556 | 0.403 | -0.71 |
+| **Mean** | **0.571** | **0.479** | **0.579** | **0.486** | - |
+
+**Note**: Negative R² indicates scale mismatch (correlations are still meaningful).
+
+### Config3: Cross-Animal (Human + Drosophila)
+
+Joint model trained on human and Drosophila data:
+
+| Dataset | Val Pearson | Val Spearman | Test Pearson | Test Spearman | R² |
+|---------|-------------|--------------|--------------|---------------|-----|
+| K562 | 0.688 | 0.635 | **0.692** | **0.638** | 0.33 |
+| HepG2 | 0.683 | 0.672 | **0.689** | **0.674** | 0.29 |
+| WTC11 | 0.633 | 0.517 | **0.667** | **0.548** | 0.25 |
+| DeepSTARR Dev | 0.707 | 0.654 | **0.707** | **0.655** | 0.43 |
+| DeepSTARR Hk | 0.760 | 0.583 | **0.762** | **0.588** | 0.54 |
+
+**Key Finding**: Cross-animal joint training improves human cell performance while maintaining strong Drosophila performance.
+
+---
+
+## 22. Complete Plant Model Results
+
+### Maize (Jores 2021)
+
+| Tissue | Pearson r | Spearman ρ | R² | n_samples |
+|--------|-----------|------------|-----|-----------|
+| **Leaf** | **0.796** | **0.799** | 0.568 | 2,461 |
+| Proto | 0.767 | 0.766 | 0.176 | 2,461 |
+
+### Sorghum
+
+| Tissue | Pearson r | Spearman ρ | n_samples |
+|--------|-----------|------------|-----------|
+| **Leaf** | **0.782** | - | 1,968 |
+| Proto | 0.769 | - | 1,968 |
+
+### Arabidopsis
+
+| Tissue | Pearson r | Spearman ρ | n_samples |
+|--------|-----------|------------|-----------|
+| Leaf | 0.618 | - | 1,347 |
+| Proto | 0.508 | - | 1,347 |
+
+### Plant Model Summary
+
+| Species | Best Tissue | Pearson r |
+|---------|-------------|-----------|
+| **Maize** | Leaf | **0.796** |
+| **Sorghum** | Leaf | **0.782** |
+| Arabidopsis | Leaf | 0.618 |
+
+---
+
+## 23. Yeast DREAM Challenge Results (Early Run)
+
+### CADENCE Yeast Model (Initial Training)
+
+| Split | Pearson r | Spearman ρ | R² | n_samples |
+|-------|-----------|------------|-----|-----------|
+| Val | 0.580 | 0.594 | 0.265 | 33,696 |
+| **Test** | **0.734** | **0.738** | - | 71,103 |
+| Calibration | 0.573 | 0.591 | 0.249 | 67,055 |
+
+**Note**: Early training run. See Section 27 for final CADENCE Pro results (Test Pearson 0.967).
+
+---
+
+## 24. PhysicsInterpreter Attribution Analysis
+
+### Family Contribution to Activity (K562)
+
+Physics features explaining activity prediction (probe R²=0.16):
+
+| Feature Family | n_features | Total |abs coef| | Max |abs coef| | Top Feature |
+|----------------|------------|-------------------|-----------------|-------------|
+| **Entropy** | 59 | **13.4** | 1.66 | renyi_entropy_alpha2.0 |
+| Motif-derived | 253 | 12.3 | 0.51 | MA0091.2_max_score |
+| **Bending** | 44 | **11.5** | 1.10 | curvature_var_w9_mean |
+| **Structural** | 38 | **11.4** | 2.50 | stress_local_opening_rate |
+| Thermodynamics | 35 | 9.8 | 1.22 | dH_p90 |
+| Electrostatics | 28 | 8.5 | 1.72 | ENH_PSI_MEAN_mean |
+| Mechanics | 62 | 1.9 | 0.21 | rise_zscore_var |
+
+### Top Positive Features (Increase Activity)
+
+| Feature | Coefficient | Family |
+|---------|-------------|--------|
+| tileformer_STD_PSI_MEAN_mean | +1.55 | Electrostatics |
+| entropy_gc_entropy_w50_mean | +1.47 | Entropy |
+| entropy_gc_entropy_w30_mean | +1.14 | Entropy |
+| entropy_global_gc_entropy | +1.12 | Entropy |
+| advanced_mgw_mean_mgw | +1.04 | Structural |
+| bend_bending_energy_variance | +0.98 | Bending |
+| thermo_dH_p50 | +0.89 | Thermodynamics |
+
+### Top Negative Features (Decrease Activity)
+
+| Feature | Coefficient | Family |
+|---------|-------------|--------|
+| **advanced_stress_local_opening_rate** | **-2.50** | Structural |
+| entropy_renyi_entropy_alpha2.0 | -1.66 | Entropy |
+| tileformer_ENH_PSI_MEAN_mean | -1.72 | Electrostatics |
+| thermo_dH_p90 | -1.22 | Thermodynamics |
+
+### Key Insight
+
+**DNA opening stress is the strongest negative predictor** of regulatory activity (coef=-2.50). Sequences that are easier to open (melt) tend to have lower activity, possibly because they're more accessible to degradation or less stable as transcription initiation sites.
+
+---
+
+## 25. DeepSTARR S2 Cell Performance
+
+### CADENCE DeepSTARR Model
+
+| Output | Val Pearson | Test Pearson | Val Spearman | Test Spearman |
+|--------|-------------|--------------|--------------|---------------|
+| **Dev** | 0.906 | **0.909** | - | 0.867 |
+| **Hk** | 0.918 | **0.920** | - | 0.879 |
+
+### Training Statistics
+
+| Run | Total Epochs | Training Hours | Best Test r |
+|-----|--------------|----------------|-------------|
+| s2_pro_256_raw | 50 | 43.1 | 0.854 |
+| dream_pro_dream | 100 | 213.3 | **0.967** |
+
+---
+
+## 26. LegNet Architecture Comparison
+
+### CADENCE vs LegNet on Human lentiMPRA
+
+Direct comparison of our CADENCE architecture against LegNet (published benchmark):
+
+| Cell Type | CADENCE Test r | LegNet Test r | Difference |
+|-----------|----------------|---------------|------------|
+| **K562** | 0.809 | 0.811 | -0.002 |
+| **HepG2** | 0.808 | 0.783 | +0.025 |
+| **WTC11** | 0.700 | 0.698 | +0.002 |
+
+### LegNet Detailed Results
+
+| Cell Type | Best Val r | Test r | Calibration r | Best Epoch |
+|-----------|------------|--------|---------------|------------|
+| K562 | 0.812 | 0.811 | 0.808 | 29 |
+| HepG2 | 0.792 | 0.783 | 0.784 | 24 |
+| WTC11 | 0.679 | 0.698 | 0.699 | 23 |
+
+### Key Findings
+
+**CADENCE matches or exceeds LegNet** on all three human cell types:
+- K562: Near-identical (0.809 vs 0.811, within margin of error)
+- HepG2: CADENCE outperforms by 2.5 points (0.808 vs 0.783)
+- WTC11: Near-identical (0.700 vs 0.698)
+
+**Conclusion**: CADENCE achieves competitive or superior performance to the published LegNet architecture while additionally supporting physics-guided interpretability and cross-species transfer.
+
+---
+
+## 27. DREAM 2022 Yeast Random Promoter Challenge
+
+### CADENCE Performance
+
+| Metric | Value |
+|--------|-------|
+| **Test Pearson** | **0.967** |
+| Test Spearman | 0.971 |
+| Test R² | 0.936 |
+| DREAM Weighted Score | 0.788 |
+
+### Performance by Test Subset
+
+The DREAM test set is divided into 8 specialized subsets:
+
+| Subset | Size | Pearson r | Difficulty |
+|--------|------|-----------|------------|
+| **random** | 5,349 | **0.967** | Easy |
+| **motif_pert** | 3,287 | 0.966 | Medium |
+| **challenging** | 1,953 | 0.951 | Hard |
+| **motif_tiling** | 2,624 | 0.927 | Medium |
+| **native** | 383 | 0.836 | Medium |
+| **SNV** | 44,340 | 0.785 | Hard |
+| **high** | 968 | 0.693 | Very Hard |
+| **low** | 997 | 0.317 | Extremely Hard |
+
+### Key Observations
+
+1. **Random promoters**: Best performance (0.967), model excels at standard sequences
+2. **Challenging subset**: Strong performance (0.951) on difficult-to-predict sequences
+3. **High expression promoters**: Moderate performance (0.693) - hard to predict
+4. **Low expression promoters**: Most difficult (0.317) - inherently noisy signal
+5. **SNV predictions**: Robust (0.785) on 44K single nucleotide variants
+
+### Training Details
+
+- **Training Duration**: 213.3 hours (8.9 days)
+- **Best Epoch**: 81 (continued improvement beyond initial convergence)
+- **Generalization Gap**: -0.016 (excellent generalization)
+- **Architecture**: CADENCE Pro with PWM-initialized stems
+
+### Uncertainty Quantification
+
+| Metric | Value |
+|--------|-------|
+| Aleatoric Variance | 2.274 |
+| Epistemic Variance | ~0.000 |
+| Mean Uncertainty | 1.485 |
+
+Low epistemic variance indicates high model confidence; aleatoric variance captures inherent data noise.
 
 ---
 

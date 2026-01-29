@@ -23,13 +23,13 @@ Complete experimental results and metrics from all validation experiments.
 | PhysicsInterpreter | 7 | Probe R² | 0.16 (K562 attribution) |
 | Multi-Task Models | **4** | Pearson r | 0.69 (Config3 cross-animal) |
 | Plant Models | 6 | Pearson r | 0.80 (Maize leaf) |
-| DREAM Yeast | 8 | Pearson r | **0.967** |
+| DREAM Yeast | 8 | Pearson r | **0.958** |
 | LegNet Comparison | 3 | Pearson r | CADENCE matches/exceeds |
 | **Total Experiments** | **340+** | | |
 
 ### Key Findings Summary
 
-1. **DREAM 2022 yeast prediction**: Test Pearson r=0.967, Spearman ρ=0.971
+1. **DREAM 2022 yeast prediction**: Test Pearson r=0.958, Spearman ρ=0.961
 2. **Best single-cell model**: CADENCE K562 (r=0.81), matches LegNet
 3. **Best cross-species transfer**: K562→Drosophila S2 (ρ=0.56)
 4. **Best physics→activity**: Plant zero-shot (ρ=0.70)
@@ -959,7 +959,7 @@ Joint model trained on human and Drosophila data:
 | **Test** | **0.734** | **0.738** | - | 71,103 |
 | Calibration | 0.573 | 0.591 | 0.249 | 67,055 |
 
-**Note**: Early training run. See Section 27 for final CADENCE Pro results (Test Pearson 0.967).
+**Note**: Early training run. See Section 27 for final CADENCE Pro results (Test Pearson 0.958).
 
 ---
 
@@ -1020,7 +1020,7 @@ Physics features explaining activity prediction (probe R²=0.16):
 | Run | Total Epochs | Training Hours | Best Test r |
 |-----|--------------|----------------|-------------|
 | s2_pro_256_raw | 50 | 43.1 | 0.854 |
-| dream_pro_dream | 100 | 213.3 | **0.967** |
+| dream_pro_dream | 100 | 213.3 | **0.958** |
 
 ---
 
@@ -1061,9 +1061,9 @@ Direct comparison of our CADENCE architecture against LegNet (published benchmar
 
 | Metric | Value |
 |--------|-------|
-| **Test Pearson** | **0.967** |
-| Test Spearman | 0.971 |
-| Test R² | 0.936 |
+| **Test Pearson** | **0.958** |
+| Test Spearman | 0.961 |
+| Test R² | 0.918 |
 | DREAM Weighted Score | 0.788 |
 
 ### Performance by Test Subset
@@ -1072,7 +1072,7 @@ The DREAM test set is divided into 8 specialized subsets:
 
 | Subset | Size | Pearson r | Difficulty |
 |--------|------|-----------|------------|
-| **random** | 5,349 | **0.967** | Easy |
+| **random** | 5,349 | **0.958** | Easy |
 | **motif_pert** | 3,287 | 0.966 | Medium |
 | **challenging** | 1,953 | 0.951 | Hard |
 | **motif_tiling** | 2,624 | 0.927 | Medium |
@@ -1083,7 +1083,7 @@ The DREAM test set is divided into 8 specialized subsets:
 
 ### Key Observations
 
-1. **Random promoters**: Best performance (0.967), model excels at standard sequences
+1. **Random promoters**: Best performance (0.958), model excels at standard sequences
 2. **Challenging subset**: Strong performance (0.951) on difficult-to-predict sequences
 3. **High expression promoters**: Moderate performance (0.693) - hard to predict
 4. **Low expression promoters**: Most difficult (0.317) - inherently noisy signal
@@ -1100,11 +1100,11 @@ The DREAM test set is divided into 8 specialized subsets:
 
 | Metric | Value |
 |--------|-------|
-| Aleatoric Variance | 2.274 |
-| Epistemic Variance | ~0.000 |
-| Mean Uncertainty | 1.485 |
+| Aleatoric Variance | 2.223 |
+| Epistemic Variance | 0.368 |
+| Mean Uncertainty | 1.585 |
 
-Low epistemic variance indicates high model confidence; aleatoric variance captures inherent data noise.
+Aleatoric variance dominates (2.22 vs 0.37), indicating inherent data noise is the primary uncertainty source. Epistemic variance (0.37) reflects model uncertainty.
 
 ---
 

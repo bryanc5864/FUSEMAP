@@ -375,13 +375,13 @@ All models with uncertainty quantification in `cadence_place/`:
 | WTC11 | `physics/PhysicsVAE/runs/WTC11_20260113_052743/best_model.pt` | 52.0% |
 | S2 | `physics/PhysicsVAE/runs/S2_*/best_model.pt` | 51.0% |
 
-### LegatoV2 Models
+### CADENCE Pro Models
 
 | Model | Path | Pearson r | R² |
 |-------|------|-----------|-----|
-| S2 Advanced | `models/legatoV2/runs/s2_advanced_256_2/` | 0.857 | 0.710 |
-| S2 Pro | `models/legatoV2/runs/s2_pro_256_raw/` | 0.854 | 0.709 |
-| DREAM Pro | `models/legatoV2/outputs/dream_pro_dream_*/` | 0.958 | - |
+| S2 Advanced | `models/cadence_pro/runs/s2_advanced_256_2/` | 0.857 | 0.710 |
+| S2 Pro | `models/cadence_pro/runs/s2_pro_256_raw/` | 0.854 | 0.709 |
+| DREAM Pro | `models/cadence_pro/outputs/dream_pro_dream_*/` | 0.967 | 0.936 |
 
 ---
 
@@ -574,7 +574,7 @@ FUSEMAP/
 │   ├── CADENCE/              # Main sequence→activity model
 │   │   ├── cadence.py        # Architecture (330K params)
 │   │   └── place_uncertainty.py
-│   └── legatoV2/             # Alternative architecture
+│   └── cadence_pro/          # CADENCE Pro (large-scale transformer)
 │
 ├── physics/
 │   ├── PhysInformer/         # Sequence→physics transformer

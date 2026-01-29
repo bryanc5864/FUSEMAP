@@ -8,9 +8,9 @@
 5. [PhysicsVAE](#5-physicsvae)
 6. [PhysicsTransfer](#6-physicstransfer)
 7. [CADENCE](#7-cadence)
-8. [OracleCheck](#8-oraclecheck-validation-protocol) *(Planned)*
-9. [PhysicsInterpreter](#9-physicsinterpreter-attribution-analysis) *(Planned)*
-10. [Impact Applications](#10-impact-applications) *(Planned)*
+8. [OracleCheck](#8-oraclecheck-validation-protocol)
+9. [PhysicsInterpreter](#9-physicsinterpreter-attribution-analysis)
+10. [Impact Applications](#10-impact-applications) (incl. Therapeutic Optimization, S2A)
 11. [Data Pipeline](#11-data-pipeline)
 12. [Training Framework](#12-training-framework)
 13. [Physics Feature Specification](#13-physics-feature-specification)
@@ -36,7 +36,10 @@
 | **PhysicsVAE** | Generate sequences from physics | Physics features | DNA sequences |
 | **PhysicsTransfer** | Cross-species transfer | Source model + target data | Transferred model |
 | **CADENCE** | Predict activity from sequence | DNA sequence | Activity score |
-| **LegatoV2** | Large-scale activity prediction | DNA sequence | Activity + uncertainty |
+| **CADENCE Pro** | Large-scale activity prediction | DNA sequence | Activity + uncertainty |
+| **S2A** | Zero-shot universal activity | Physics features | Z-score / calibrated activity |
+| **OracleCheck** | Validate designed sequences | Sequence | GREEN/YELLOW/RED verdict |
+| **PhysicsInterpreter** | Attribution analysis | Predictions | Physics-mediated explanations |
 
 ### 1.2 Directory Structure
 
@@ -51,7 +54,7 @@ FUSEMAP/
 │   └── data/             # Physics datasets
 ├── models/
 │   ├── CADENCE/          # Activity prediction model
-│   └── legatoV2/         # Large-scale transformer
+│   └── cadence_pro/      # Large-scale transformer (CADENCE Pro)
 ├── training/             # Multi-species training
 ├── data/                 # Dataset storage
 ├── electrostatics/       # APBS integration
@@ -100,15 +103,19 @@ FUSEMAP/
 ```
 PhysInformer ──────► Physics Features ──────► PhysicsVAE (Generation)
      │                     │
-     │                     ├──────► Activity Prediction
+     │                     ├──────► Activity Prediction (CADENCE auxiliary)
      │                     │
+     │                     └──────► S2A Universal Head (Zero-shot transfer)
+     │
      └──────► Activity Prediction (with auxiliary heads)
 
 TileFormer ──────► Electrostatic Features ──────► Integrated into Physics
 
 CADENCE ──────► Direct Sequence → Activity (baseline)
 
-LegatoV2 ──────► Sequence → Activity + Uncertainty (DREAM challenge)
+CADENCE Pro ──────► Sequence → Activity + Uncertainty (DREAM challenge)
+
+S2A ──────► Physics → Universal Activity (zero-shot cross-species)
 ```
 
 ---
@@ -1089,7 +1096,7 @@ models/CADENCE/
 
 ## 8. OracleCheck: Validation Protocol
 
-> **Status: PLANNED** - Not yet implemented
+> **Status: IMPLEMENTED** - Available in `applications/utils/`
 
 OracleCheck is a novel purely in-silico validation program for oracles in sequence design loops, providing comprehensive naturality evaluation.
 
@@ -1144,7 +1151,7 @@ RED:    Any hard failure
 
 ## 9. PhysicsInterpreter: Attribution Analysis
 
-> **Status: PLANNED** - Not yet implemented
+> **Status: IMPLEMENTED** - Available in `physics/PhysicsInterpreter/`
 
 PhysicsInterpreter decomposes model predictions through the physics pathway for mechanistic interpretability.
 
@@ -1181,7 +1188,7 @@ Mediation proportion = indirect_R² / total_R²
 
 ## 10. Impact Applications
 
-> **Status: PLANNED** - Not yet implemented
+> **Status: IMPLEMENTED** - Available in `applications/`
 
 ### 10.1 Disease Variant Interpretation Pipeline
 
@@ -1213,6 +1220,143 @@ Protocol:
 4. Filter through OracleCheck (GREEN/YELLOW only)
 5. Rank by specificity with diversity filter
 ```
+
+### 10.3 Therapeutic Optimization Methods
+
+Five optimization methods are implemented for cell-type-specific enhancer design:
+
+| Method | Type | Description |
+|--------|------|-------------|
+| **ISM_target** | Gradient-free | In-silico mutagenesis with cell-type targeting |
+| **EMOO** | Evolutionary | Evolutionary multi-objective optimization |
+| **HMCPP** | MCMC | Hamiltonian Monte Carlo proxy prediction |
+| **PINCSD** | Physics-guided | Physics-informed neural combinatorial design |
+| **PVGG** | Generative | Proxy-guided variational generation |
+
+```python
+# ISM_target Pipeline (Best Performance)
+class ISMTargetOptimizer:
+    def __init__(self, cadence_models: Dict[str, CADENCEModel]):
+        self.models = cadence_models  # K562, HepG2, WTC11
+
+    def optimize(self, seed_sequence: str, target_cell: str) -> OptimizedSequence:
+        # 1. Compute ISM scores for each position
+        ism_scores = self._compute_ism(seed_sequence)
+
+        # 2. Apply mutations that increase target activity
+        mutated = self._apply_beneficial_mutations(seed_sequence, ism_scores)
+
+        # 3. Verify specificity constraint
+        predictions = {cell: model(mutated) for cell, model in self.models.items()}
+        specificity = predictions[target_cell] - max(predictions[other] for other in predictions if other != target_cell)
+
+        return OptimizedSequence(sequence=mutated, specificity=specificity)
+```
+
+**Location:** `applications/therapeutic_enhancer_pipeline.py`
+
+---
+
+## 10.4 S2A: Universal Sequence-to-Activity Framework
+
+> **Status: IMPLEMENTED** - Available in `physics/S2A/`
+
+S2A (Sequence-to-Activity) enables zero-shot activity prediction across species using universal physics features.
+
+### Architecture
+
+```
+DNA Sequence (any species)
+         │
+         ▼
+┌─────────────────────────┐
+│     PhysInformer        │  (Seq → 521 physics features)
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│ Universal Feature       │  Extract ~263 universal features
+│ Extractor               │  (exclude PWM - species-specific)
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│   UniversalS2AHead      │  Ridge/ElasticNet/MLP
+│   (trained on N-1 spp)  │  Z-score normalized
+└───────────┬─────────────┘
+            │
+      ┌─────┴─────┬─────────────┐
+      ▼           ▼             ▼
+ ┌────────┐ ┌──────────┐ ┌─────────┐
+ │Z-score │ │Calibrated│ │ Ranking │
+ └────────┘ └──────────┘ └─────────┘
+```
+
+### Core Components
+
+```python
+# Configuration
+@dataclass
+class S2AConfig:
+    universal_prefixes = ['thermo_', 'stiff_', 'bend_', 'entropy_', 'advanced_']
+    excluded_prefixes = ['pwm_']  # Species-specific, exclude
+    head_type: str = 'ridge'       # 'ridge', 'elastic_net', 'mlp'
+    output_mode: str = 'zscore'    # 'zscore', 'calibrated', 'ranking'
+
+# Universal Feature Extractor
+class UniversalFeatureExtractor:
+    """Extract ~263 universal physics features (exclude PWM)"""
+    def extract(self, physics_features: np.ndarray) -> np.ndarray:
+        universal_mask = self._get_universal_mask()
+        return physics_features[:, universal_mask]
+
+# Universal S2A Head
+class UniversalS2AHead:
+    """Adaptive head trained on multiple species"""
+    def __init__(self, head_type='ridge', alpha=1.0):
+        self.model = Ridge(alpha=alpha) if head_type == 'ridge' else ...
+
+    def fit(self, X: np.ndarray, y_zscore: np.ndarray):
+        """Train on z-scored activities from multiple species"""
+        self.model.fit(X, y_zscore)
+
+    def predict_zscore(self, X: np.ndarray) -> np.ndarray:
+        """Output relative z-score"""
+        return self.model.predict(X)
+
+# Calibration
+class AffineCalibrator:
+    """Learn y = α * z + β from labeled samples"""
+    def calibrate(self, z_pred: np.ndarray, y_true: np.ndarray, n_samples=50):
+        # Fit affine transformation
+        self.alpha, self.beta = np.polyfit(z_pred[:n_samples], y_true[:n_samples], 1)
+```
+
+### Training Protocol
+
+```python
+# Leave-one-out evaluation
+trainer = UniversalS2ATrainer(config)
+
+for holdout in ['K562', 'HepG2', 'WTC11', 'S2_dev', 'maize_leaf', ...]:
+    # Train on all except holdout
+    source_datasets = [d for d in all_datasets if d != holdout]
+    trainer.train(source_datasets)
+
+    # Evaluate zero-shot
+    results = trainer.evaluate(holdout)
+    # Results: spearman_rho, pearson_r, calibration_curve
+```
+
+### Key Results
+
+| Transfer Type | Zero-Shot Spearman | With 50-sample Calibration |
+|---------------|-------------------|---------------------------|
+| Plant → Plant | **0.70** | 0.76 |
+| Human → Human | 0.26 | 0.45 |
+| Cross-kingdom | -0.08 | 0.30 |
+
+**Location:** `physics/S2A/`
 
 ---
 
@@ -1600,6 +1744,8 @@ electrostatics/
 | PhysicsVAE | ~10M | Physics | DNA seq | Physics-conditioned generation |
 | PhysicsTransfer | - | Source model | Transferred model | Cross-species transfer |
 | CADENCE | ~2M | DNA seq | Activity + uncertainty | Activity prediction |
+| CADENCE Pro | ~4.5M | DNA seq | Activity + uncertainty | DREAM challenge (r=0.967) |
+| S2A | ~1K | Physics | Z-score activity | Zero-shot universal prediction |
 | OracleCheck | - | Sequence | Validation verdict | Design validation |
 | PhysicsInterpreter | - | Predictions | Attribution | Mechanistic interpretation |
 
@@ -1620,6 +1766,19 @@ python physics/PhysicsTransfer/run_transfer.py --source human --target plant
 
 # CADENCE training
 python models/CADENCE/train.py --dataset K562 --use_rc_stem
+
+# S2A Leave-One-Out Evaluation
+python physics/S2A/run_s2a.py evaluate \
+    --datasets K562 HepG2 WTC11 S2_dev arabidopsis_leaf sorghum_leaf maize_leaf \
+    --output-dir results/s2a/leave_one_out/
+
+# Therapeutic Enhancer Design
+python applications/therapeutic_enhancer_pipeline.py \
+    --target-cell HepG2 --n-sequences 200 --method ism_target
+
+# Disease Variant Analysis
+python applications/disease_variant_pipeline.py \
+    --vcf variants.vcf --cell-type K562 --output results/variants/
 ```
 
 ## Appendix C: Version Information

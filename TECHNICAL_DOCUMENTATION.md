@@ -301,15 +301,17 @@ class AuxiliaryHeadA(nn.Module):
 
     Own sequence encoder (separate from main model):
         Embedding(5, 64)
-        → Conv1d(64, 128, k=11) → MaxPool(2)
-        → Conv1d(128, 256, k=7) → MaxPool(2)
-        → Conv1d(256, hidden_dim, k=5) → GlobalAvgPool
+        → Conv1d(64, 128, k=11, padding=5) → ReLU → MaxPool1d(2)
+        → Conv1d(128, 256, k=7, padding=3) → ReLU → MaxPool1d(2)
+        → Conv1d(256, hidden_dim, k=5, padding=2) → ReLU → AdaptiveAvgPool1d(1)
 
     Feature fusion:
         seq_proj: Linear(hidden_dim → hidden_dim//2)
         feat_proj: Linear(feature_dim → hidden_dim//2)
         gate: Sigmoid(feat_proj) * seq_proj
         fusion: MLP([hidden_dim] → n_activities)
+
+    Default: feature_dim=536, hidden_dim=256
 
 class AuxiliaryHeadB(nn.Module):
     """Activity prediction from Real Features Only"""
@@ -1744,7 +1746,7 @@ electrostatics/
 | PhysicsVAE | ~10M | Physics | DNA seq | Physics-conditioned generation |
 | PhysicsTransfer | - | Source model | Transferred model | Cross-species transfer |
 | CADENCE | ~2M | DNA seq | Activity + uncertainty | Activity prediction |
-| CADENCE Pro | ~4.5M | DNA seq | Activity + uncertainty | DREAM challenge (r=0.967) |
+| CADENCE Pro | ~4.5M | DNA seq | Activity + uncertainty | DREAM challenge (r=0.958) |
 | S2A | ~1K | Physics | Z-score activity | Zero-shot universal prediction |
 | OracleCheck | - | Sequence | Validation verdict | Design validation |
 | PhysicsInterpreter | - | Predictions | Attribution | Mechanistic interpretation |

@@ -161,18 +161,20 @@ Transfer learning using physics features as universal representation.
 
 ### Summary Table
 
-| Dataset | Organism | Cell Type | Sequences | Length | Source |
-|---------|----------|-----------|-----------|--------|--------|
-| ENCODE4 K562 | Human | Erythroid | 226,258 | 230bp | ENCODE |
-| ENCODE4 HepG2 | Human | Liver | 139,881 | 230bp | ENCODE |
-| ENCODE4 WTC11 | Human | iPSC | 55,993 | 230bp | ENCODE |
+| Dataset | Organism | Cell Type | Sequences (filtered) | Length | Source |
+|---------|----------|-----------|----------------------|--------|--------|
+| ENCODE4 K562 | Human | Erythroid | 203,621 | 230bp | ENCODE |
+| ENCODE4 HepG2 | Human | Liver | 125,875 | 230bp | ENCODE |
+| ENCODE4 WTC11 | Human | iPSC | 50,394 | 230bp | ENCODE |
 | DeepSTARR | Drosophila | S2 | 484,056 | 249bp | Stark Lab |
 | Jores Tobacco | Plants (3 spp) | Leaf | 72,158 | 170bp | Jores 2021 |
 | Jores Maize | Plants (3 spp) | Protoplast | 75,808 | 170bp | Jores 2021 |
 | Yeast | S. cerevisiae | - | 6,810,364 | 110bp | GSE163045 |
 | Mouse ESC | Mouse | ESC | 27,566 | 230bp | GSE143546 |
 
-**Total: ~8.6M sequences**
+**Total: ~7.9M sequences (filtered for training)**
+
+*Note: Sequence counts reflect quality-filtered data used for model training. Raw ENCODE4 files contain additional sequences that were excluded due to QC filtering (ambiguous bases, extreme GC content, insufficient replicate agreement).*
 
 ### Human Cell Lines (lentiMPRA)
 
@@ -381,7 +383,7 @@ All models with uncertainty quantification in `cadence_place/`:
 |-------|------|-----------|-----|
 | S2 Advanced | `models/cadence_pro/runs/s2_advanced_256_2/` | 0.857 | 0.710 |
 | S2 Pro | `models/cadence_pro/runs/s2_pro_256_raw/` | 0.854 | 0.709 |
-| DREAM Pro | `models/cadence_pro/outputs/dream_pro_dream_*/` | 0.967 | 0.936 |
+| DREAM Pro | `models/cadence_pro/outputs/dream_pro_dream_*/` | 0.958 | 0.918 |
 
 ---
 

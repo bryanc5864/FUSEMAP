@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_k562_all_v2",
+  "description": "K562 all modules (r=0.81 test)",
+  "calibration_source": "encode4_k562_calibration",
+  "calibration_date": "2026-01-16T06:15:36.405760",
+  "place_stats": {
+    "n_samples": 22633,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.354373961687088,
+    "residual_mean": -0.036709804087877274,
+    "residual_std": 0.5952931642532349
+  }
+}

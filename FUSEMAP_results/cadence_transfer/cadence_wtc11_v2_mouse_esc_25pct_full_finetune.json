@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_wtc11_v2_full_mouse_esc_25pct",
+  "n_train": 4823,
+  "n_trainable_params": 1322465,
+  "best_epoch": 4,
+  "val_metrics": {
+    "spearman_r": 0.28549729988530326
+  },
+  "test_metrics": {
+    "spearman_r": 0.28147346913569155,
+    "pearson_r": 0.31564394169527477,
+    "auroc": 0.6232620247497402,
+    "mse": 2.6462815955626646,
+    "mae": 1.3469085245135617,
+    "loss": 2.655944874792388
+  },
+  "source_model": "cadence_wtc11_v2",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.25,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-19T00:49:42.197920"
+}

@@ -1,0 +1,43 @@
+================================================================================
+PHYSICS × TF INTERACTION MAPPING REPORT
+================================================================================
+
+H-statistic measures non-additive interaction strength between features.
+Values > 0.1 indicate strong interactions; > 0.05 moderate interactions.
+
+========================================
+Cell Type: arabidopsis
+========================================
+
+Mean H-statistic: 0.0312
+Max H-statistic: 0.3024
+Strong interactions (H > 0.1): 16
+
+--- Top 15 Interactions ---
+   1. advanced_g4_mean_g4_score      × pwm_MA0096.1_mean_score  : H = 0.3024
+   2. advanced_stacking_stacking_transition_variance × pwm_MA0005.3_var_score   : H = 0.2664
+   3. advanced_g4_mean_g4_score      × pwm_MA0082.2_top_k_mean  : H = 0.2350
+   4. stiff_shift_zscore_mean        × pwm_MA0054.1_var_score   : H = 0.2250
+   5. advanced_stacking_stacking_transition_variance × pwm_MA0034.2_var_score   : H = 0.2066
+   6. advanced_g4_max_g4_score       × pwm_MA0054.1_mean_score  : H = 0.1640
+   7. advanced_g4_mean_g4_score      × pwm_MA0008.4_var_score   : H = 0.1547
+   8. bend_rms_curvature_w7_max      × pwm_MA0096.1_mean_score  : H = 0.1498
+   9. bend_spectral_f0p100_max_power × pwm_MA0082.2_top_k_mean  : H = 0.1431
+  10. entropy_mi_d1                  × pwm_MA0008.4_var_score   : H = 0.1359
+  11. bend_curvature_var_w5_max      × pwm_MA0121.2_var_score   : H = 0.1334
+  12. advanced_g4_mean_g4_score      × pwm_MA0005.3_var_score   : H = 0.1319
+  13. advanced_stacking_stacking_transition_variance × pwm_MA0121.2_var_score   : H = 0.1236
+  14. advanced_g4_mean_g4_score      × pwm_MA0034.2_var_score   : H = 0.1064
+  15. entropy_mi_d3                  × pwm_MA0034.2_var_score   : H = 0.1029
+
+--- Physics Features Most Interactive ---
+  advanced_g4_mean_g4_score               : mean H = 0.0718
+  advanced_stacking_stacking_transition_variance: mean H = 0.0666
+  stiff_shift_zscore_mean                 : mean H = 0.0406
+  advanced_g4_max_g4_score                : mean H = 0.0379
+  bend_spectral_f0p100_max_power          : mean H = 0.0375
+  bend_curvature_var_w5_max               : mean H = 0.0351
+  stiff_gc_skew                           : mean H = 0.0339
+  entropy_mi_d3                           : mean H = 0.0322
+  bend_rms_curvature_w7_max               : mean H = 0.0246
+  bend_rms_curvature_w5_max               : mean H = 0.0239

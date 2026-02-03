@@ -1,0 +1,55 @@
+================================================================================
+UNIVARIATE STABILITY ANALYSIS REPORT
+================================================================================
+
+
+========================================
+Cell Type: arabidopsis
+========================================
+
+Total features analyzed: 364
+Significant (p < 0.05): 238
+Highly significant (p < 0.01): 208
+
+--- Top 15 Positive Correlations ---
+                                feature category  pearson_r  partial_r_gc  sign_consistency
+              bend_rms_curvature_w5_max     bend   0.291443      0.307189               1.0
+              bend_rms_curvature_w7_max     bend   0.291071      0.314620               1.0
+              bend_curvature_var_w9_max     bend   0.258975      0.276993               1.0
+              bend_curvature_var_w7_max     bend   0.254537      0.268142               1.0
+              bend_rms_curvature_w9_max     bend   0.247424      0.270730               1.0
+             bend_curvature_var_w11_max     bend   0.238971      0.256592               1.0
+          thermo_dG_max_high_energy_run   thermo   0.233192      0.235753               1.0
+             bend_rms_curvature_w11_max     bend   0.216705      0.239707               1.0
+              bend_curvature_var_w5_max     bend   0.213141      0.219982               1.0
+advanced_stacking_stacking_at_rich_mean advanced   0.202790      0.203304               1.0
+           bend_bending_energy_variance     bend   0.173441      0.214944               1.0
+           bend_curvature_gradient_mean     bend   0.173041      0.208661               1.0
+                     bend_hotspot_count     bend   0.153993      0.199481               1.0
+                   bend_hotspot_density     bend   0.153993      0.199481               1.0
+            bend_curvature_var_w11_mean     bend   0.148715      0.183133               1.0
+
+--- Top 15 Negative Correlations ---
+                                       feature category  pearson_r  partial_r_gc  sign_consistency
+      advanced_stacking_stacking_concentration advanced  -0.179231     -0.219825               1.0
+                                 stiff_gc_skew    stiff  -0.158556     -0.158336               1.0
+                       pwm_MA0096.1_mean_score      pwm  -0.128276     -0.156669               1.0
+                                 entropy_mi_d1  entropy  -0.126940     -0.126691               1.0
+                       pwm_MA0097.1_mean_score      pwm  -0.124184     -0.124139               1.0
+        advanced_stacking_skew_stacking_energy advanced  -0.104428     -0.135240               1.0
+     advanced_stacking_stacking_abrupt_changes advanced  -0.101931     -0.154146               1.0
+                        pwm_MA0053.1_var_score      pwm  -0.097231     -0.097213               1.0
+                     advanced_g4_mean_g4_score advanced  -0.094955     -0.094900               1.0
+advanced_stacking_stacking_transition_variance advanced  -0.088938     -0.127712               1.0
+                          pwm_MA0001.3_delta_g      pwm  -0.078824     -0.078550               1.0
+                        pwm_MA0121.2_var_score      pwm  -0.077887     -0.078652               1.0
+                          advanced_mgw_std_mgw advanced  -0.072722     -0.073723               1.0
+                 stiff_purine_pyrimidine_ratio    stiff  -0.068915     -0.068840               1.0
+                       entropy_shannon_w10_var  entropy  -0.068061     -0.074487               1.0
+
+--- By Category Summary ---
+  thermo    : n= 45, mean|r|=0.047, max|r|=0.233
+  stiff     : n= 62, mean|r|=0.033, max|r|=0.159
+  bend      : n= 43, mean|r|=0.134, max|r|=0.291
+  entropy   : n= 61, mean|r|=0.027, max|r|=0.127
+  advanced  : n= 52, mean|r|=0.053, max|r|=0.203

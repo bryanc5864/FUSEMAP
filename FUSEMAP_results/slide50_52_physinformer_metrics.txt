@@ -1,0 +1,12 @@
+PHYSINFORMER PHYSICS FEATURE PREDICTION - FULL METRICS
+======================================================================
+
+Final Validation Pearson r (overall, across all 500+ features):
+  K562: 0.9180 (epoch 50)
+  HepG2: 0.9149 (epoch 50)
+  WTC11: 0.9049 (epoch 50)
+  S2: 0.9171 (epoch 45)
+
+Architecture: PWMConvStem -> SSM -> DualPathFeaturePyramid -> PhysicsRouters -> PropertyHeads
+Parameters: ~25-26M
+Training: 50 epochs (K562, HepG2, WTC11), 45 epochs (S2)

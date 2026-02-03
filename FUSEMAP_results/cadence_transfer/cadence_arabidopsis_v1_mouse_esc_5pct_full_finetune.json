@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_arabidopsis_v1_full_mouse_esc_5pct",
+  "n_train": 964,
+  "n_trainable_params": 1322465,
+  "best_epoch": 6,
+  "val_metrics": {
+    "spearman_r": 0.21277912681396943
+  },
+  "test_metrics": {
+    "spearman_r": 0.22264994228546722,
+    "pearson_r": 0.22528693874634326,
+    "auroc": 0.5915133058225366,
+    "mse": 4.857994770030043,
+    "mae": 1.9350611395634914,
+    "loss": 4.858861923217773
+  },
+  "source_model": "cadence_arabidopsis_v1",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.05,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-19T14:28:48.087401"
+}

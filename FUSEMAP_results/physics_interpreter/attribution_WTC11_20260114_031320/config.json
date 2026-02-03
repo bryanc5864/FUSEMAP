@@ -1,0 +1,7 @@
+{
+  "cell_type": "WTC11",
+  "probe_type": "ridge",
+  "alpha": 1.0,
+  "n_samples": 39201,
+  "n_features": 515
+}

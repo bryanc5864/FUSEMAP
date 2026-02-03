@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_arabidopsis_all_v1",
+  "description": "Arabidopsis all modules",
+  "calibration_source": "jores_arabidopsis_test",
+  "calibration_date": "2026-01-16T06:25:33.801493",
+  "place_stats": {
+    "n_samples": 2694,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.8735430240631104,
+    "residual_mean": -1.6942862272262573,
+    "residual_std": 0.9346352219581604
+  }
+}

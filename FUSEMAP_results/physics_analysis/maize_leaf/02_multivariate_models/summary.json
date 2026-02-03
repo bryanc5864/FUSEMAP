@@ -1,0 +1,8 @@
+{
+  "cell_types": [
+    "maize"
+  ],
+  "mean_r2_cv": NaN,
+  "physics_only_mean_r2": NaN,
+  "pwm_improvement_mean": NaN
+}

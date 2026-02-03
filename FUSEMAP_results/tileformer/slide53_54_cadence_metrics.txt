@@ -1,0 +1,18 @@
+CADENCE ACTIVITY PREDICTION - FULL METRICS
+======================================================================
+
+Test Pearson r:
+  K562:         0.809
+  HepG2:        0.808
+  WTC11:        0.700
+  S2 Dev:       0.909
+  S2 Hk:        0.920
+  DREAM Yeast:  0.958 (best epoch 81)
+
+LegNet Comparison:
+  K562:  CADENCE 0.809 vs LegNet 0.811 (-0.002)
+  HepG2: CADENCE 0.808 vs LegNet 0.783 (+0.025)
+  WTC11: CADENCE 0.700 vs LegNet 0.698 (+0.002)
+
+Architecture: LegNet-based CNN (SELayer, EffBlock, ResidualConcat)
+Parameters: ~1.45M

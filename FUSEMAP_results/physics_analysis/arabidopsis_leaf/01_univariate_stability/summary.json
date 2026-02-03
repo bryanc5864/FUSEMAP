@@ -1,0 +1,45 @@
+{
+  "cell_types": [
+    "arabidopsis"
+  ],
+  "n_features": 364,
+  "n_significant_p05": 301,
+  "n_significant_p01": 293,
+  "top_features_by_category": {
+    "thermo": [
+      "thermo_total_dH",
+      "thermo_mean_dH",
+      "thermo_total_dG",
+      "thermo_mean_dG",
+      "thermo_estimated_Tm_C"
+    ],
+    "stiff": [
+      "stiff_gc_content_global",
+      "stiff_gc_skew",
+      "stiff_total_relative_energy",
+      "stiff_mean_relative_energy",
+      "stiff_pc1_variance"
+    ],
+    "bend": [
+      "bend_rms_curvature_w7_max",
+      "bend_rms_curvature_w5_max",
+      "bend_rms_curvature_w9_max",
+      "bend_curvature_var_w9_max",
+      "bend_rms_curvature_w11_max"
+    ],
+    "entropy": [
+      "entropy_gc_entropy_w10_mean",
+      "entropy_global_gc_entropy",
+      "entropy_gc_entropy_w10_min",
+      "entropy_gc_entropy_w30_mean",
+      "entropy_gc_entropy_w50_mean"
+    ],
+    "advanced": [
+      "advanced_melting_unstable_fraction",
+      "advanced_melting_mean_melting_dG",
+      "advanced_stacking_stacking_transition_variance",
+      "advanced_stacking_stacking_abrupt_changes",
+      "advanced_stress_local_opening_rate"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "experiment_name": "config5_universal_no_yeast_frozen_s2_drosophila_10pct",
+  "n_train": 24640,
+  "n_trainable_params": 66561,
+  "best_epoch": 35,
+  "val_metrics": {
+    "spearman_r": 0.19062797731100897
+  },
+  "test_metrics": {
+    "spearman_r": 0.1904367814329134,
+    "pearson_r": 0.20042084912663263,
+    "auroc": 0.581468249288519,
+    "mse": 2.21504848554393,
+    "mae": 1.1537713673502117,
+    "loss": 2.2147183833918906
+  },
+  "source_model": "config5_universal_no_yeast",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.1,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-21T15:57:32.232335"
+}

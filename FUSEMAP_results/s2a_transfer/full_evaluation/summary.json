@@ -1,0 +1,16 @@
+{
+  "datasets_evaluated": [
+    "K562",
+    "HepG2",
+    "WTC11",
+    "S2_dev",
+    "arabidopsis_leaf",
+    "sorghum_leaf",
+    "maize_leaf"
+  ],
+  "summary_statistics": {
+    "zeroshot": {
+      "spearman_mean": 0.16385174397733124,
+      "spearman_std": 0.1535849213433089,
+      "spearman_median": 0.1844901828430486,
+      "pearson_mean": 

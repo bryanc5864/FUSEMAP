@@ -1,0 +1,43 @@
+================================================================================
+PHYSICS × TF INTERACTION MAPPING REPORT
+================================================================================
+
+H-statistic measures non-additive interaction strength between features.
+Values > 0.1 indicate strong interactions; > 0.05 moderate interactions.
+
+========================================
+Cell Type: arabidopsis
+========================================
+
+Mean H-statistic: 0.0261
+Max H-statistic: 0.5984
+Strong interactions (H > 0.1): 11
+
+--- Top 15 Interactions ---
+   1. bend_spectral_f0p143_max_power × pwm_MA0053.1_var_score   : H = 0.5984
+   2. bend_curvature_var_w7_max      × pwm_MA0096.1_var_score   : H = 0.3563
+   3. bend_rms_curvature_w7_max      × pwm_MA0005.3_mean_score  : H = 0.2402
+   4. entropy_gc_entropy_w10_var     × pwm_MA0005.3_var_score   : H = 0.2269
+   5. bend_curvature_var_w5_max      × pwm_MA0096.1_var_score   : H = 0.1921
+   6. advanced_mgw_std_mgw           × pwm_MA0096.1_mean_score  : H = 0.1582
+   7. bend_spectral_f0p143_max_power × pwm_MA0001.3_max_score   : H = 0.1438
+   8. entropy_gc_entropy_w30_mean    × pwm_MA0001.3_entropy     : H = 0.1308
+   9. bend_spectral_f0p143_max_power × pwm_MA0005.3_var_score   : H = 0.1216
+  10. stiff_gc_skew                  × pwm_MA0005.3_mean_score  : H = 0.1131
+  11. bend_curvature_var_w5_max      × pwm_MA0005.3_mean_score  : H = 0.1079
+  12. bend_spectral_f0p143_max_power × pwm_MA0096.1_var_score   : H = 0.0993
+  13. thermo_dG_mean_low_energy_run  × pwm_MA0096.1_mean_score  : H = 0.0949
+  14. bend_rms_curvature_w5_max      × pwm_MA0005.3_mean_score  : H = 0.0861
+  15. thermo_dG_mean_low_energy_run  × pwm_MA0005.3_mean_score  : H = 0.0843
+
+--- Physics Features Most Interactive ---
+  bend_spectral_f0p143_max_power          : mean H = 0.0823
+  bend_curvature_var_w5_max               : mean H = 0.0560
+  bend_curvature_var_w7_max               : mean H = 0.0350
+  bend_rms_curvature_w7_max               : mean H = 0.0317
+  advanced_mgw_std_mgw                    : mean H = 0.0264
+  advanced_stacking_skew_stacking_energy  : mean H = 0.0264
+  entropy_gc_entropy_w10_var              : mean H = 0.0240
+  bend_rms_curvature_w5_max               : mean H = 0.0226
+  stiff_gc_skew                           : mean H = 0.0190
+  thermo_dG_mean_low_energy_run           : mean H = 0.0168

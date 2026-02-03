@@ -1,0 +1,244 @@
+{
+  "experiment": "animal_to_arabidopsis",
+  "description": "Animal \u2192 Arabidopsis: Cross-kingdom transfer",
+  "protocols": {
+    "zero_shot": {
+      "protocol": "zero_shot",
+      "source_datasets": [
+        "K562",
+        "HepG2",
+        "WTC11",
+        "S2_dev"
+      ],
+      "target_dataset": "arabidopsis_leaf",
+      "source_pearson": 0.395785664059317,
+      "source_spearman": 0.3634771125856023,
+      "target_pearson": -0.3053496953910328,
+      "target_spearman": -0.30676930268894254,
+      "fine_tuned_pearson": null,
+      "fine_tuned_spearman": null,
+      "fine_tune_n_samples": null,
+      "transfer_efficiency": -0.7715026670224963,
+      "n_common_features": 242,
+      "feature_contributions": {
+        "thermo": 39.17591754213891,
+        "stiff": 2.50370530616072,
+        "bend": 20.742148211722235,
+        "entropy": 7.345906599952403,
+        "advanced": 30.232322340025732
+      }
+    },
+    "fine_tuning": [
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2",
+          "WTC11",
+          "S2_dev"
+        ],
+        "target_dataset": "arabidopsis_leaf",
+        "source_pearson": 0.395785664059317,
+        "source_spearman": 0.3634771125856023,
+        "target_pearson": -0.3053496953910328,
+        "target_spearman": -0.30676930268894254,
+        "fine_tuned_pearson": 0.4397332850568009,
+        "fine_tuned_spearman": 0.4204359305914063,
+        "fine_tune_n_samples": 1000,
+        "transfer_efficiency": 1.1110389409933188,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 6.973425797768856,
+          "stiff": 16.826991012878416,
+          "bend": 32.92022308080419,
+          "entropy": 26.005741711060598,
+          "advanced": 17.273618397487937
+        }
+      },
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2",
+          "WTC11",
+          "S2_dev"
+        ],
+        "target_dataset": "arabidopsis_leaf",
+        "source_pearson": 0.395785664059317,
+        "source_spearman": 0.3634771125856023,
+        "target_pearson": -0.3053496953910328,
+        "target_spearman": -0.30676930268894254,
+        "fine_tuned_pearson": 0.491176878934388,
+        "fine_tuned_spearman": 0.4730350262193566,
+        "fine_tune_n_samples": 5000,
+        "transfer_efficiency": 1.2410173574674361,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 13.968459471525119,
+          "stiff": 11.266951036458414,
+          "bend": 39.27474703800808,
+          "entropy": 15.408058458615942,
+          "advanced": 20.081783995392428
+        }
+      },
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2",
+          "WTC11",
+          "S2_dev"
+        ],
+        "target_dataset": "arabidopsis_leaf",
+        "source_pearson": 0.395785664059317,
+        "source_spearman": 0.3634771125856023,
+        "target_pearson": -0.3053496953910328,
+        "target_spearman": -0.30676930268894254,
+        "fine_tuned_pearson": 0.49295808779454275,
+        "fine_tuned_spearman": 0.4741479541007294,
+        "fine_tune_n_samples": 10000,
+        "transfer_efficiency": 1.2455177955123267,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 13.377074073725767,
+          "stiff": 8.06552154380086,
+          "bend": 46.49503293987239,
+          "entropy": 10.018614756824016,
+          "advanced": 22.043756685776973
+        }
+      }
+    ],
+    "joint_training": {
+      "WTC11": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "WTC11",
+          "HepG2",
+          "K562",
+          "S2_dev"
+        ],
+        "target_dataset": "WTC11",
+        "source_pearson": 0.39577834790171157,
+        "source_spearman": 0.3634828098092991,
+        "target_pearson": 0.27656930899826315,
+        "target_spearman": 0.21558185555892517,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.6987984826975602,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 39.17591751876518,
+          "stiff": 2.5037052921569427,
+          "bend": 20.742148216328406,
+          "entropy": 7.345906612452975,
+          "advanced": 30.232322360296486
+        }
+      },
+      "HepG2": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "WTC11",
+          "HepG2",
+          "K562",
+          "S2_dev"
+        ],
+        "target_dataset": "HepG2",
+        "source_pearson": 0.39577834790171157,
+        "source_spearman": 0.3634828098092991,
+        "target_pearson": 0.1271091796332509,
+        "target_spearman": 0.1053825289102271,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.32116254036417746,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 39.17591751876518,
+          "stiff": 2.5037052921569427,
+          "bend": 20.742148216328406,
+          "entropy": 7.345906612452975,
+          "advanced": 30.232322360296486
+        }
+      },
+      "arabidopsis_leaf": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "WTC11",
+          "HepG2",
+          "K562",
+          "S2_dev"
+        ],
+        "target_dataset": "arabidopsis_leaf",
+        "source_pearson": 0.39577834790171157,
+        "source_spearman": 0.3634828098092991,
+        "target_pearson": -0.3053496953667533,
+        "target_spearman": -0.30676930268894254,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": -0.7715169285677662,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 39.17591751876518,
+          "stiff": 2.5037052921569427,
+          "bend": 20.742148216328406,
+          "entropy": 7.345906612452975,
+          "advanced": 30.232322360296486
+        }
+      },
+      "K562": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "WTC11",
+          "HepG2",
+          "K562",
+          "S2_dev"
+        ],
+        "target_dataset": "K562",
+        "source_pearson": 0.39577834790171157,
+        "source_spearman": 0.3634828098092991,
+        "target_pearson": 0.16394353471060158,
+        "target_spearman": 0.14273646590646646,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.41423068133913094,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 39.17591751876518,
+          "stiff": 2.5037052921569427,
+          "bend": 20.742148216328406,
+          "entropy": 7.345906612452975,
+          "advanced": 30.232322360296486
+        }
+      },
+      "S2_dev": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "WTC11",
+          "HepG2",
+          "K562",
+          "S2_dev"
+        ],
+        "target_dataset": "S2_dev",
+        "source_pearson": 0.39577834790171157,
+        "source_spearman": 0.3634828098092991,
+        "target_pearson": 0.36357508725748644,
+        "target_spearman": 0.3614380677997481,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.9186330914387905,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 39.17591751876518,
+          "stiff": 2.5037052921569427,
+          "bend": 20.742148216328406,
+          "entropy": 7.345906612452975,
+          "advanced": 30.232322360296486
+        }
+      }
+    }
+  }
+}

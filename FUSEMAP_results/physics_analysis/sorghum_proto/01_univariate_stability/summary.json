@@ -1,0 +1,45 @@
+{
+  "cell_types": [
+    "sorghum"
+  ],
+  "n_features": 365,
+  "n_significant_p05": 297,
+  "n_significant_p01": 277,
+  "top_features_by_category": {
+    "thermo": [
+      "thermo_var_dG",
+      "thermo_dG_max_high_energy_run",
+      "thermo_dG_num_high_energy_runs",
+      "thermo_var_dH",
+      "thermo_dG_local_range_mean"
+    ],
+    "stiff": [
+      "stiff_gc_skew",
+      "stiff_purine_pyrimidine_ratio",
+      "stiff_high_energy_count_t5.0",
+      "stiff_high_energy_fraction_t5.0",
+      "stiff_total_relative_energy"
+    ],
+    "bend": [
+      "bend_rms_curvature_w5_max",
+      "bend_rms_curvature_w7_max",
+      "bend_curvature_var_w9_max",
+      "bend_rms_curvature_w9_max",
+      "bend_curvature_var_w7_max"
+    ],
+    "entropy": [
+      "entropy_gc_entropy_w50_mean",
+      "entropy_gc_entropy_w30_mean",
+      "entropy_gc_entropy_w50_min",
+      "entropy_global_gc_entropy",
+      "entropy_gc_entropy_w30_min"
+    ],
+    "advanced": [
+      "advanced_stacking_stacking_at_rich_mean",
+      "advanced_melting_std_melting_dG",
+      "advanced_stacking_stacking_entropy",
+      "advanced_stacking_stacking_concentration",
+      "advanced_g4_mean_g4_score"
+    ]
+  }
+}

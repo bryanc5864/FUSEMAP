@@ -1,0 +1,54 @@
+================================================================================
+INCREMENTAL CONTROL ANALYSIS REPORT
+================================================================================
+
+This analysis tests whether TF binding mediates physics effects on activity.
+If physics coefficients attenuate when adding PWM features, it suggests mediation.
+
+========================================
+Cell Type: S2
+========================================
+
+--- Incremental Model Performance ---
+Step 1 (Physics only):       R² = 0.1164 +/- 0.0036
+Step 2 (+ PWM aggregates):   R² = 0.1343 +/- 0.0038  (Delta = +0.0179)
+Step 3 (+ all PWM):          R² = 0.2085 +/- 0.0040  (Delta = +0.0921)
+
+--- Coefficient Attenuation Summary ---
+Mean attenuation: -1.63%
+Median attenuation: 20.68%
+Fully attenuated (>90%): 52 features
+Sign changes: 16 features
+
+--- Most Attenuated Features (likely mediated by TF binding) ---
+  bend_curvature_var_w7_mean              : 100.00%
+  bend_curvature_var_w9_mean              : 100.00%
+  bend_max_bend_w9_mean                   : 100.00%
+  bend_max_bend_w9_global_max             : 100.00%
+  bend_max_bend_w11_fraction_at_global_max: 100.00%
+  bend_hotspot_count                      : 100.00%
+  bend_hotspot_density                    : 100.00%
+  stiff_tilt_total_energy                 : 100.00%
+  stiff_tilt_mean_energy                  : 100.00%
+  stiff_roll_mean_energy                  : 100.00%
+
+--- Least Attenuated Features (independent of TF binding) ---
+  advanced_fractal_fractal_exponent       : -2256.74%
+  stiff_purine_pyrimidine_ratio           : -1373.66%
+  entropy_gc_entropy_w50_min              : -1088.82%
+  advanced_stress_stress_p75              : -742.06%
+  entropy_mi_d7                           : -577.04%
+  advanced_stacking_stacking_entropy      : -503.28%
+  bend_spectral_f0p100_max_power          : -493.59%
+  stiff_at_skew                           : -318.63%
+  thermo_dG_p10                           : -301.45%
+  thermo_dS_p10                           : -280.97%
+
+========================================
+INTERPRETATION
+========================================
+
+Mean coefficient attenuation: -1.6%
+Mean R² improvement from PWM: +0.0921
+
+>>> Low attenuation suggests physics effects are INDEPENDENT of TF binding

@@ -1,0 +1,7 @@
+{
+  "cell_type": "sorghum",
+  "probe_type": "ridge",
+  "alpha": 1.0,
+  "n_samples": 17705,
+  "n_features": 457
+}

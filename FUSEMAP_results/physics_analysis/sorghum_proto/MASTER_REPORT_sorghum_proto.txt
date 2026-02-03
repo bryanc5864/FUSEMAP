@@ -1,0 +1,198 @@
+================================================================================
+PHYSICS ANALYSIS MASTER REPORT - SORGHUM_PROTO
+Generated: 2026-01-21 14:13:46
+================================================================================
+
+
+################################################################################
+# 01. UNIVARIATE STABILITY
+################################################################################
+
+================================================================================
+UNIVARIATE STABILITY ANALYSIS REPORT
+================================================================================
+
+
+========================================
+Cell Type: sorghum
+========================================
+
+Total features analyzed: 365
+Significant (p < 0.05): 297
+Highly significant (p < 0.01): 277
+
+--- Top 15 Positive Correlations ---
+                                feature category  pearson_r  partial_r_gc  sign_consistency
+              bend_rms_curvature_w5_max     bend   0.389486      0.462990               1.0
+              bend_rms_curvature_w7_max     bend   0.369999      0.457134               1.0
+              bend_curvature_var_w9_max     bend   0.325989      0.405228               1.0
+              bend_rms_curvature_w9_max     bend   0.323539      0.418580               1.0
+              bend_curvature_var_w7_max     bend   0.320608      0.393112               1.0
+             bend_curvature_var_w11_max     bend   0.305612      0.389661               1.0
+              bend_curvature_var_w5_max     bend   0.289882      0.351336               1.0
+advanced_stacking_stacking_at_rich_mean advanced   0.288097      0.289774               1.0
+             bend_rms_curvature_w11_max     bend   0.283975      0.384444               1.0
+                          thermo_var_dG   thermo   0.236990      0.232022               1.0
+        advanced_melting_std_melting_dG advanced   0.235591      0.230625               1.0
+     advanced_stacking_stacking_entropy advanced   0.224420      0.241296               1.0
+          thermo_dG_max_high_energy_run   thermo   0.193052      0.187887               1.0
+            entropy_gc_entropy_w50_mean  entropy   0.176799      0.170656               1.0
+            entropy_gc_entropy_w30_mean  entropy   0.161417      0.154515               1.0
+
+--- Top 15 Negative Correlations ---
+                                 feature category  pearson_r  partial_r_gc  sign_consistency
+advanced_stacking_stacking_concentration advanced  -0.195838     -0.212853               1.0
+                           stiff_gc_skew    stiff  -0.190787     -0.184304               1.0
+          thermo_dG_num_high_energy_runs   thermo  -0.165120     -0.157752               1.0
+                 pwm_MA0097.1_mean_score      pwm  -0.152166     -0.147539               1.0
+               advanced_g4_mean_g4_score advanced  -0.130678     -0.129358               1.0
+                  pwm_MA0053.1_var_score      pwm  -0.126791     -0.117609               1.0
+                    pwm_MA0001.3_entropy      pwm  -0.112851     -0.103039               1.0
+                    pwm_MA0082.2_delta_g      pwm  -0.110417     -0.153663               1.0
+                 pwm_MA0096.1_mean_score      pwm  -0.109730     -0.179694               1.0
+              entropy_gc_entropy_w30_var  entropy  -0.103942     -0.094379               1.0
+                  pwm_MA0020.2_var_score      pwm  -0.103447     -0.090729               1.0
+              entropy_gc_entropy_w50_var  entropy  -0.103040     -0.093254               1.0
+                  pwm_MA0121.2_var_score      pwm  -0.100896     -0.106157               1.0
+           stiff_purine_pyrimidine_ratio    stiff  -0.100775     -0.093930               1.0
+          pwm_MA0054.1_num_high_affinity      pwm  -0.099783     -0.087359               1.0
+
+--- By Category Summary ---
+  thermo    : n= 45, mean|r|=0.061, max|r|=0.237
+  stiff     : n= 62, mean|r|=0.044, max|r|=0.191
+  bend      : n= 43, mean|r|=0.119, max|r|=0.389
+  entropy   : n= 61, mean|r|=0.062, max|r|=0.177
+  advanced  : n= 53, mean|r|=0.059, max|r|=0.288
+
+################################################################################
+# 02. MULTIVARIATE MODELS
+################################################################################
+
+================================================================================
+MULTIVARIATE MODEL ANALYSIS REPORT
+================================================================================
+
+========================================
+SUMMARY ACROSS CELL TYPES
+========================================
+
+Mean R² (CV): nan
+Mean physics-only R²: nan
+Mean PWM improvement: +nan
+
+################################################################################
+# 03. INCREMENTAL CONTROL
+################################################################################
+
+================================================================================
+INCREMENTAL CONTROL ANALYSIS REPORT
+================================================================================
+
+This analysis tests whether TF binding mediates physics effects on activity.
+If physics coefficients attenuate when adding PWM features, it suggests mediation.
+
+========================================
+Cell Type: sorghum
+========================================
+
+--- Incremental Model Performance ---
+Step 1 (Physics only):       R² = 0.3499 +/- 0.0026
+Step 2 (+ PWM aggregates):   R² = 0.3502 +/- 0.0025  (Delta = +0.0003)
+Step 3 (+ all PWM):          R² = 0.3694 +/- 0.0037  (Delta = +0.0195)
+
+--- Coefficient Attenuation Summary ---
+Mean attenuation: -215.64%
+Median attenuation: 2.76%
+Fully attenuated (>90%): 20 features
+Sign changes: 15 features
+
+--- Most Attenuated Features (likely mediated by TF binding) ---
+  bend_rms_curvature_w9_mean              : 100.00%
+  bend_curvature_var_w7_mean              : 100.00%
+  stiff_roll_total_energy                 : 100.00%
+  stiff_roll_mean_energy                  : 100.00%
+  stiff_tilt_zscore_var                   : 100.00%
+  stiff_roll_zscore_mean                  : 100.00%
+  stiff_energy_distribution_entropy_raw   : 100.00%
+  stiff_gc_content_global                 : 100.00%
+  thermo_mean_dH                          : 100.00%
+  thermo_dG_local_min_mean                : 100.00%
+
+--- Least Attenuated Features (independent of TF binding) ---
+  thermo_dH_p5                            : -47731.33%
+  thermo_mean_dS                          : -2723.52%
+  advanced_g4_max_g4_score                : -2612.95%
+  stiff_cross_terms_max                   : -1880.50%
+  advanced_stacking_stacking_at_rich_mean : -713.05%
+  stiff_avg_pc2                           : -632.62%
+  stiff_purine_pyrimidine_ratio           : -551.93%
+  entropy_gc_entropy_w10_min              : -542.08%
+  advanced_melting_unstable_fraction      : -379.44%
+  stiff_tilt_zscore_mean                  : -312.80%
+
+========================================
+INTERPRETATION
+========================================
+
+Mean coefficient attenuation: -215.6%
+Mean R² improvement from PWM: +0.0195
+
+>>> Low attenuation suggests physics effects are INDEPENDENT of TF binding
+
+################################################################################
+# 04. INTERACTION MAPPING
+################################################################################
+
+================================================================================
+PHYSICS × TF INTERACTION MAPPING REPORT
+================================================================================
+
+H-statistic measures non-additive interaction strength between features.
+Values > 0.1 indicate strong interactions; > 0.05 moderate interactions.
+
+========================================
+Cell Type: sorghum
+========================================
+
+Mean H-statistic: 0.0285
+Max H-statistic: 0.2982
+Strong interactions (H > 0.1): 17
+
+--- Top 15 Interactions ---
+   1. bend_curvature_var_w7_max      × pwm_MA0121.2_var_score   : H = 0.2982
+   2. bend_curvature_var_w7_max      × pwm_MA0034.2_mean_score  : H = 0.2793
+   3. bend_curvature_var_w7_max      × pwm_MA0053.1_var_score   : H = 0.2338
+   4. advanced_mgw_mean_mgw          × pwm_MA0054.1_top_k_mean  : H = 0.2308
+   5. bend_rms_curvature_w5_max      × pwm_MA0005.3_mean_score  : H = 0.2185
+   6. advanced_stacking_std_stacking_energy × pwm_MA0121.2_var_score   : H = 0.1936
+   7. entropy_gc_entropy_w30_mean    × pwm_MA0001.3_var_score   : H = 0.1898
+   8. advanced_stacking_std_stacking_energy × pwm_MA0034.2_mean_score  : H = 0.1821
+   9. stiff_gc_skew                  × pwm_MA0082.2_top_k_mean  : H = 0.1687
+  10. bend_curvature_var_w7_max      × pwm_MA0001.3_mean_score  : H = 0.1561
+  11. thermo_dG_local_min_mean       × pwm_MA0082.2_delta_g     : H = 0.1364
+  12. bend_curvature_var_w5_max      × pwm_MA0034.2_mean_score  : H = 0.1289
+  13. thermo_dG_local_min_mean       × pwm_MA0008.4_top_k_mean  : H = 0.1146
+  14. entropy_gc_entropy_w30_mean    × pwm_MA0001.3_mean_score  : H = 0.1133
+  15. bend_curvature_var_w5_max      × pwm_MA0001.3_mean_score  : H = 0.1102
+
+--- Physics Features Most Interactive ---
+  bend_curvature_var_w7_max               : mean H = 0.0735
+  entropy_gc_entropy_w30_mean             : mean H = 0.0360
+  bend_curvature_var_w5_max               : mean H = 0.0335
+  thermo_dG_local_min_mean                : mean H = 0.0330
+  stiff_gc_skew                           : mean H = 0.0329
+  advanced_stacking_stacking_at_rich_mean : mean H = 0.0305
+  bend_rms_curvature_w5_max               : mean H = 0.0295
+  advanced_stacking_std_stacking_energy   : mean H = 0.0293
+  thermo_dG_max_high_energy_run           : mean H = 0.0229
+  thermo_dG_local_min_std                 : mean H = 0.0208
+
+################################################################################
+# 05. REGIME DISCOVERY
+################################################################################
+
+================================================================================
+REGIME DISCOVERY ANALYSIS REPORT
+================================================================================
+
+This analysis identifies distinct physics 'regimes' with different activity profiles.

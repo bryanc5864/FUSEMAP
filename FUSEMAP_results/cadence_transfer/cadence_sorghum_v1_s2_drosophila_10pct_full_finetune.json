@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_sorghum_v1_full_s2_drosophila_10pct",
+  "n_train": 24640,
+  "n_trainable_params": 1322465,
+  "best_epoch": 3,
+  "val_metrics": {
+    "spearman_r": 0.3665540865876818
+  },
+  "test_metrics": {
+    "spearman_r": 0.3652898080650992,
+    "pearson_r": 0.3697594478203872,
+    "auroc": 0.6868589341362921,
+    "mse": 1.9993622496444077,
+    "mae": 1.0936100267255606,
+    "loss": 1.9992896988085915
+  },
+  "source_model": "cadence_sorghum_v1",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.1,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-20T16:17:58.535807"
+}

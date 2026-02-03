@@ -1,0 +1,548 @@
+{
+  "top_physics_features": [
+    "thermo_var_dH",
+    "entropy_shannon_w10_var",
+    "advanced_mgw_std_mgw",
+    "entropy_shannon_w10_min",
+    "bend_curvature_var_w5_max",
+    "entropy_mi_d1",
+    "entropy_gc_entropy_w50_var",
+    "thermo_var_dG",
+    "advanced_melting_std_melting_dG",
+    "entropy_gc_entropy_w30_var",
+    "advanced_stacking_skew_stacking_energy",
+    "entropy_gc_entropy_w30_mean",
+    "advanced_fractal_mean_rho",
+    "entropy_gc_entropy_w50_mean",
+    "advanced_stacking_std_stacking_energy"
+  ],
+  "top_pwm_features": [
+    "pwm_MA0028.3_top_k_mean",
+    "pwm_MA0093.4_var_score",
+    "pwm_MA0079.5_total_weight",
+    "pwm_MA0039.5_delta_g",
+    "pwm_MA0527.2_var_score",
+    "pwm_MA0028.3_total_weight",
+    "pwm_MA0039.5_total_weight",
+    "pwm_MA0108.3_var_score",
+    "pwm_MA0506.3_total_weight",
+    "pwm_MA0079.5_delta_g",
+    "pwm_MA0079.5_max_score",
+    "pwm_MA0506.3_max_score",
+    "pwm_MA0506.3_delta_g",
+    "pwm_MA0060.4_total_weight",
+    "pwm_MA0060.4_delta_g"
+  ],
+  "h_matrix": [
+    [
+      0.04357419680025183,
+      0.11767160251912318,
+      0.1707271026691692,
+      0.05756509011176794,
+      0.14120389377177894,
+      0.03398004458134371,
+      0.016916354194519312,
+      4.589808716882561e-16,
+      0.18980569517477855,
+      0.07490192818469861,
+      0.03159997252546259,
+      0.08318454217118398,
+      0.06154820074276488,
+      0.02903876375500397,
+      0.07332918565797615
+    ],
+    [
+      0.0017690415227496154,
+      0.15269848175324532,
+      1.1182924234396134e-15,
+      0.05690242541148757,
+      0.024496171497196392,
+      0.003642022095199986,
+      0.05048006092492661,
+      0.00230963985823047,
+      9.179403292482736e-16,
+      9.03265544391929e-16,
+      1.23887508885851e-15,
+      0.018831724340813077,
+      0.01101529581018354,
+      0.07667608218113864,
+      0.061637957994489664
+    ],
+    [
+      0.07256738808265717,
+      0.018537026173076312,
+      0.016162421563263845,
+      0.10083804505706563,
+      0.024686729752937682,
+      0.10363170966784423,
+      0.01732825772818323,
+      7.50858555913353e-16,
+      1.0932369105411536e-15,
+      0.09431448073859747,
+      1.4872331269578626e-15,
+      0.12763980423781798,
+      0.03917599935115969,
+      0.05755272892229359,
+      0.06442595776463284
+    ],
+    [
+      0.015720889566642995,
+      0.28973793149628213,
+      3.0367392374643343e-15,
+      2.1012204554953315e-15,
+      0.02204500824045169,
+      0.029246317032069407,
+      0.01400021402465831,
+      5.0820720282833596e-15,
+      0.05169792970050957,
+      1.3950640562727857e-15,
+      3.4039394438221147e-15,
+      0.01708608609179761,
+      0.018845094690715377,
+      0.0599997690034055,
+      0.027670316408166223
+    ],
+    [
+      0.0032552199649259353,
+      0.08769987839644369,
+      2.8460224975992947e-15,
+      2.407677511709461e-15,
+      3.927770644327842e-15,
+      3.2374170626637046e-15,
+      0.004810525395090284,
+      9.531545519075096e-15,
+      1.9232319769147503e-15,
+      1.0875775461286652e-15,
+      0.019211415639377814,
+      0.002256151501236882,
+      0.015557827842813048,
+      1.1312418393577192e-15,
+      0.009643828452018782
+    ],
+    [
+      0.037154955940717535,
+      0.049351453166008405,
+      1.5819854701652412e-15,
+      1.3438994364924261e-15,
+      0.006214208647107807,
+      0.07394226547190934,
+      0.014030634617972894,
+      2.279887052432288e-15,
+      0.0649845452434021,
+      1.3357006128769306e-15,
+      0.04815699548110331,
+      0.012603139740131993,
+      0.027863784758373273,
+      9.139572756535536e-16,
+      1.179940475855172e-15
+    ],
+    [
+      0.0074944522869748904,
+      0.029922191640866798,
+      0.04606270357438067,
+      9.710363356157158e-16,
+      0.08706559000564068,
+      0.010061724003136596,
+      0.04998552511618399,
+      0.017521932339350687,
+      0.015473321054632415,
+      0.01047976306741072,
+      0.032878820002507136,
+      6.820452590759156e-16,
+      0.012441614689369869,
+      7.099594955351535e-16,
+      0.011368770765099265
+    ],
+    [
+      0.011718759833524415,
+      0.04357525874803198,
+      2.185838587117077e-15,
+      0.08551513296837726,
+      0.05219242424444591,
+      0.005429638221713132,
+      0.023785908334007906,
+      0.005159049697096183,
+      0.02357817439873709,
+      0.11292420718774018,
+      0.28169814056954645,
+      0.03498128716556724,
+      0.01906019945460787,
+      0.0023731913078613213,
+      0.11147389357945481
+    ],
+    [
+      0.029453421038420274,
+      0.08007970790645698,
+      0.06519339711526953,
+      0.06646814532603272,
+      0.029614667992527027,
+      0.019314035381943515,
+      0.09151047168041228,
+      1.859824701815909e-15,
+      0.01990144422010426,
+      0.08614885164211807,
+      0.0035599077587479674,
+      0.05392139987728479,
+      0.03207710118502271,
+      1.4302735004094796e-15,
+      0.059219246999412764
+    ],
+    [
+      8.676256185556819e-16,
+      0.006702542768382455,
+      3.0179371363012793e-15,
+      3.2244119038132352e-15,
+      2.996900574881737e-15,
+      2.1588266503922e-15,
+      3.0094869284158526e-15,
+      5.981773105914712e-15,
+      0.050505155791212876,
+      1.8834023199881657e-15,
+      2.668710360001287e-15,
+      1.0067718643450516e-15,
+      0.013350434866669076,
+      2.7157317550727576e-15,
+      1.021318283844973e-15
+    ],
+    [
+      1.0452838878938792e-15,
+      1.2301814502506565e-15,
+      0.013402533325939839,
+      2.5210406786446564e-15,
+      0.2742495799345546,
+      3.2023421903140442e-15,
+      0.030712852609094756,
+      1.1462243732424071e-14,
+      0.01647785524773559,
+      1.934630999864334e-15,
+      2.9900069571187632e-15,
+      1.1109368382875909e-15,
+      1.0065526724584882e-15,
+      1.2897796632078949e-15,
+      1.9854316155924248e-15
+    ],
+    [
+      0.0017463081556488677,
+      0.028111650359588323,
+      1.8638247230899653e-15,
+      1.7872061502108724e-15,
+      1.9555088172849497e-15,
+      1.852975765049069e-15,
+      1.73178672825836e-15,
+      2.9075162433073777e-15,
+      2.2003055755110813e-15,
+      1.1263994013367592e-15,
+      1.5227857758679048e-15,
+      0.01799467827501563,
+      1.701572658928293e-15,
+      0.024754441801191567,
+      1.0315473221766316e-15
+    ],
+    [
+      0.045366999381071894,
+      0.13881445765829262,
+      5.419223718847402e-15,
+      1.3118237471757076e-15,
+      1.5230584976611045e-15,
+      1.4175546510112849e-15,
+      1.693527495845e-15,
+      1.2530859862302447e-15,
+      9.18104892865157e-16,
+      0.03859950648299094,
+      1.6639983489073219e-15,
+      7.376422871088118e-16,
+      1.3839227026538846e-15,
+      0.006071010393870202,
+      1.0359040574730572e-15
+    ],
+    [
+      6.189131071902378e-16,
+      8.176791448284418e-16,
+      7.130264100542213e-15,
+      2.1085858799492914e-15,
+      2.7050313657573134e-15,
+      0.016441839569599385,
+      4.812385282570577e-15,
+      1.2434094910226376e-14,
+      3.0778171931775744e-15,
+      1.5993424771266501e-15,
+      3.3375933585601948e-15,
+      8.815873997304322e-16,
+      2.338674922435146e-15,
+      1.3354139603913397e-15,
+      1.0673676638200507e-15
+    ],
+    [
+      0.0014553272178952604,
+      0.0025665068240668496,
+      2.7727081353373792e-15,
+      1.7498364116730303e-15,
+      0.12909087356893503,
+      0.013240155675642431,
+      3.22411267460475e-15,
+      3.766603846053593e-15,
+      1.9497151199322607e-15,
+      0.00024556488481840716,
+      2.794398380910688e-15,
+      0.051011727954977285,
+      1.495063631121341e-15,
+      0.000957747132879575,
+      0.003499630240237473
+    ]
+  ],
+  "top_interactions": [
+    {
+      "physics_feature": "entropy_shannon_w10_min",
+      "pwm_feature": "pwm_MA0093.4_var_score",
+      "h_statistic": 0.28973793149628213
+    },
+    {
+      "physics_feature": "thermo_var_dG",
+      "pwm_feature": "pwm_MA0079.5_max_score",
+      "h_statistic": 0.28169814056954645
+    },
+    {
+      "physics_feature": "advanced_stacking_skew_stacking_energy",
+      "pwm_feature": "pwm_MA0527.2_var_score",
+      "h_statistic": 0.2742495799345546
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0506.3_total_weight",
+      "h_statistic": 0.18980569517477855
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0079.5_total_weight",
+      "h_statistic": 0.1707271026691692
+    },
+    {
+      "physics_feature": "entropy_shannon_w10_var",
+      "pwm_feature": "pwm_MA0093.4_var_score",
+      "h_statistic": 0.15269848175324532
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0527.2_var_score",
+      "h_statistic": 0.14120389377177894
+    },
+    {
+      "physics_feature": "advanced_fractal_mean_rho",
+      "pwm_feature": "pwm_MA0093.4_var_score",
+      "h_statistic": 0.13881445765829262
+    },
+    {
+      "physics_feature": "advanced_stacking_std_stacking_energy",
+      "pwm_feature": "pwm_MA0527.2_var_score",
+      "h_statistic": 0.12909087356893503
+    },
+    {
+      "physics_feature": "advanced_mgw_std_mgw",
+      "pwm_feature": "pwm_MA0506.3_max_score",
+      "h_statistic": 0.12763980423781798
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0093.4_var_score",
+      "h_statistic": 0.11767160251912318
+    },
+    {
+      "physics_feature": "thermo_var_dG",
+      "pwm_feature": "pwm_MA0079.5_delta_g",
+      "h_statistic": 0.11292420718774018
+    },
+    {
+      "physics_feature": "thermo_var_dG",
+      "pwm_feature": "pwm_MA0060.4_delta_g",
+      "h_statistic": 0.11147389357945481
+    },
+    {
+      "physics_feature": "advanced_mgw_std_mgw",
+      "pwm_feature": "pwm_MA0028.3_total_weight",
+      "h_statistic": 0.10363170966784423
+    },
+    {
+      "physics_feature": "advanced_mgw_std_mgw",
+      "pwm_feature": "pwm_MA0039.5_delta_g",
+      "h_statistic": 0.10083804505706563
+    },
+    {
+      "physics_feature": "advanced_mgw_std_mgw",
+      "pwm_feature": "pwm_MA0079.5_delta_g",
+      "h_statistic": 0.09431448073859747
+    },
+    {
+      "physics_feature": "advanced_melting_std_melting_dG",
+      "pwm_feature": "pwm_MA0039.5_total_weight",
+      "h_statistic": 0.09151047168041228
+    },
+    {
+      "physics_feature": "bend_curvature_var_w5_max",
+      "pwm_feature": "pwm_MA0093.4_var_score",
+      "h_statistic": 0.08769987839644369
+    },
+    {
+      "physics_feature": "entropy_gc_entropy_w50_var",
+      "pwm_feature": "pwm_MA0527.2_var_score",
+      "h_statistic": 0.08706559000564068
+    },
+    {
+      "physics_feature": "advanced_melting_std_melting_dG",
+      "pwm_feature": "pwm_MA0079.5_delta_g",
+      "h_statistic": 0.08614885164211807
+    },
+    {
+      "physics_feature": "thermo_var_dG",
+      "pwm_feature": "pwm_MA0039.5_delta_g",
+      "h_statistic": 0.08551513296837726
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0506.3_max_score",
+      "h_statistic": 0.08318454217118398
+    },
+    {
+      "physics_feature": "advanced_melting_std_melting_dG",
+      "pwm_feature": "pwm_MA0093.4_var_score",
+      "h_statistic": 0.08007970790645698
+    },
+    {
+      "physics_feature": "entropy_shannon_w10_var",
+      "pwm_feature": "pwm_MA0060.4_total_weight",
+      "h_statistic": 0.07667608218113864
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0079.5_delta_g",
+      "h_statistic": 0.07490192818469861
+    },
+    {
+      "physics_feature": "entropy_mi_d1",
+      "pwm_feature": "pwm_MA0028.3_total_weight",
+      "h_statistic": 0.07394226547190934
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0060.4_delta_g",
+      "h_statistic": 0.07332918565797615
+    },
+    {
+      "physics_feature": "advanced_mgw_std_mgw",
+      "pwm_feature": "pwm_MA0028.3_top_k_mean",
+      "h_statistic": 0.07256738808265717
+    },
+    {
+      "physics_feature": "advanced_melting_std_melting_dG",
+      "pwm_feature": "pwm_MA0039.5_delta_g",
+      "h_statistic": 0.06646814532603272
+    },
+    {
+      "physics_feature": "advanced_melting_std_melting_dG",
+      "pwm_feature": "pwm_MA0079.5_total_weight",
+      "h_statistic": 0.06519339711526953
+    },
+    {
+      "physics_feature": "entropy_mi_d1",
+      "pwm_feature": "pwm_MA0506.3_total_weight",
+      "h_statistic": 0.0649845452434021
+    },
+    {
+      "physics_feature": "advanced_mgw_std_mgw",
+      "pwm_feature": "pwm_MA0060.4_delta_g",
+      "h_statistic": 0.06442595776463284
+    },
+    {
+      "physics_feature": "entropy_shannon_w10_var",
+      "pwm_feature": "pwm_MA0060.4_delta_g",
+      "h_statistic": 0.061637957994489664
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0506.3_delta_g",
+      "h_statistic": 0.06154820074276488
+    },
+    {
+      "physics_feature": "entropy_shannon_w10_min",
+      "pwm_feature": "pwm_MA0060.4_total_weight",
+      "h_statistic": 0.0599997690034055
+    },
+    {
+      "physics_feature": "advanced_melting_std_melting_dG",
+      "pwm_feature": "pwm_MA0060.4_delta_g",
+      "h_statistic": 0.059219246999412764
+    },
+    {
+      "physics_feature": "thermo_var_dH",
+      "pwm_feature": "pwm_MA0039.5_delta_g",
+      "h_statistic": 0.05756509011176794
+    },
+    {
+      "physics_feature": "advanced_mgw_std_mgw",
+      "pwm_feature": "pwm_MA0060.4_total_weight",
+      "h_statistic": 0.05755272892229359
+    },
+    {
+      "physics_feature": "entropy_shannon_w10_var",
+      "pwm_feature": "pwm_MA0039.5_delta_g",
+      "h_statistic": 0.05690242541148757
+    },
+    {
+      "physics_feature": "advanced_melting_std_melting_dG",
+      "pwm_feature": "pwm_MA0506.3_max_score",
+      "h_statistic": 0.05392139987728479
+    },
+    {
+      "physics_feature": "thermo_var_dG",
+      "pwm_feature": "pwm_MA0527.2_var_score",
+      "h_statistic": 0.05219242424444591
+    },
+    {
+      "physics_feature": "entropy_shannon_w10_min",
+      "pwm_feature": "pwm_MA0506.3_total_weight",
+      "h_statistic": 0.05169792970050957
+    },
+    {
+      "physics_feature": "advanced_stacking_std_stacking_energy",
+      "pwm_feature": "pwm_MA0506.3_max_score",
+      "h_statistic": 0.051011727954977285
+    },
+    {
+      "physics_feature": "entropy_gc_entropy_w30_var",
+      "pwm_feature": "pwm_MA0506.3_total_weight",
+      "h_statistic": 0.050505155791212876
+    },
+    {
+      "physics_feature": "entropy_shannon_w10_var",
+      "pwm_feature": "pwm_MA0039.5_total_weight",
+      "h_statistic": 0.05048006092492661
+    },
+    {
+      "physics_feature": "entropy_gc_entropy_w50_var",
+      "pwm_feature": "pwm_MA0039.5_total_weight",
+      "h_statistic": 0.04998552511618399
+    },
+    {
+      "physics_feature": "entropy_mi_d1",
+      "pwm_feature": "pwm_MA0093.4_var_score",
+      "h_statistic": 0.049351453166008405
+    },
+    {
+      "physics_feature": "entropy_mi_d1",
+      "pwm_feature": "pwm_MA0079.5_max_score",
+      "h_statistic": 0.04815699548110331
+    },
+    {
+      "physics_feature": "entropy_gc_entropy_w50_var",
+      "pwm_feature": "pwm_MA0079.5_total_weight",
+      "h_statistic": 0.04606270357438067
+    },
+    {
+      "physics_feature": "advanced_fractal_mean_rho",
+      "pwm_feature": "pwm_MA0028.3_top_k_mean",
+      "h_statistic": 0.045366999381071894
+    }
+  ],
+  "mean_h_statistic": 0.026894245619124003,
+  "max_h_statistic": 0.28973793149628213,
+  "n_strong_interactions": 15
+}

@@ -1,0 +1,60 @@
+{
+  "encode4_k562": {
+    "activity": {
+      "pearson": {
+        "value": 0.8075922727584839,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "spearman": {
+        "value": 0.7561193734174909,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "r2": {
+        "value": 0.6496623158454895,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "mse": {
+        "value": 0.09793048352003098,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "rmse": {
+        "value": 0.31293846602811703,
+        "stderr": null,
+        "n_samples": 22613
+      },
+      "mae": {
+        "value": 0.23498624563217163,
+        "stderr": null,
+        "n_samples": 22613
+      }
+    }
+  },
+  "test": {
+    "encode4_k562": {
+      "activity": {
+        "pearson": 0.8075921535491943,
+        "spearman": 0.7573263550924808,
+        "r2": 0.6495894193649292,
+        "rmse": 0.5911226272583008,
+        "mae": 0.44440048933029175,
+        "n_samples": 22631
+      }
+    }
+  },
+  "calibration": {
+    "encode4_k562": {
+      "activity": {
+        "pearson": 0.804638147354126,
+        "spearman": 0.7454810217597663,
+        "r2": 0.6437488198280334,
+        "rmse": 0.5857361555099487,
+        "mae": 0.44162681698799133,
+        "n_samples": 22633
+      }
+    }
+  }
+}

@@ -1,0 +1,331 @@
+2026-01-13 06:29:18,350 - cadence_sorghum_all_v1 - INFO - Experiment: cadence_sorghum_all_v1
+2026-01-13 06:29:18,350 - cadence_sorghum_all_v1 - INFO - Output directory: results/cadence_sorghum_all_v1
+2026-01-13 06:29:18,350 - cadence_sorghum_all_v1 - INFO - Starting training...
+2026-01-13 06:29:18,350 - cadence_sorghum_all_v1 - INFO - Config: config1_single_celltype
+2026-01-13 06:29:18,350 - cadence_sorghum_all_v1 - INFO - Setting up datasets...
+2026-01-13 06:29:36,515 - cadence_sorghum_all_v1 - INFO - Dataset sizes: {'jores_sorghum': 17705}
+2026-01-13 06:29:36,516 - cadence_sorghum_all_v1 - INFO - Using balanced activity sampling with 10 bins...
+2026-01-13 06:29:38,804 - cadence_sorghum_all_v1 - INFO -   jores_sorghum: test set loaded
+2026-01-13 06:29:54,507 - cadence_sorghum_all_v1 - INFO - Data setup complete
+2026-01-13 06:29:54,507 - cadence_sorghum_all_v1 - INFO - Setting up model...
+2026-01-13 06:29:57,212 - cadence_sorghum_all_v1 - INFO - Model parameters: 2,811,141 (2,811,141 trainable)
+2026-01-13 06:30:05,013 - cadence_sorghum_all_v1 - INFO - OneCycleLR: 13850 total steps, initial_lr=0.000400, max_lr=0.01
+2026-01-13 06:30:05,013 - cadence_sorghum_all_v1 - INFO - Model setup complete
+2026-01-13 06:30:28,159 - cadence_sorghum_all_v1 - INFO - Step 100: NLL=0.7066, MSE=0.6268, grad=13.26, lr=4.14e-04
+2026-01-13 06:30:45,238 - cadence_sorghum_all_v1 - INFO - Step 200: NLL=0.4706, MSE=0.4326, grad=4.11, lr=4.55e-04
+2026-01-13 06:31:13,224 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:31:13,224 - cadence_sorghum_all_v1 - INFO - EPOCH 0 SUMMARY (BEST)
+2026-01-13 06:31:13,224 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:31:13,225 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.5174 | MSE: 0.5174 | r: 0.7255 | rho: 0.6979 | R2: 0.2900 | RMSE: 1.1750
+2026-01-13 06:31:13,225 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4971 | MSE: 0.4971 | r: 0.7247 | rho: 0.6921 | R2: 0.3078 | RMSE: 1.1543
+2026-01-13 06:31:13,225 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:31:13,225 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:31:13,225 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7519 | rho=0.7455 | R2=0.3931 | RMSE=1.2958 | MAE=1.0092
+2026-01-13 06:31:13,226 - cadence_sorghum_all_v1 - INFO -     proto: r=0.6976 | rho=0.6387 | R2=0.2225 | RMSE=1.0128 | MAE=0.7860
+2026-01-13 06:31:13,226 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:31:14,379 - cadence_sorghum_all_v1 - INFO - Epoch 0 completed in 69.4s
+2026-01-13 06:31:19,687 - cadence_sorghum_all_v1 - INFO - Step 300: NLL=0.3406, MSE=0.3384, grad=2.96, lr=5.23e-04
+2026-01-13 06:31:39,318 - cadence_sorghum_all_v1 - INFO - Step 400: NLL=0.4594, MSE=0.4642, grad=4.05, lr=6.18e-04
+2026-01-13 06:31:58,859 - cadence_sorghum_all_v1 - INFO - Step 500: NLL=0.3298, MSE=0.3375, grad=2.20, lr=7.39e-04
+2026-01-13 06:32:20,947 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:32:20,948 - cadence_sorghum_all_v1 - INFO - EPOCH 1 SUMMARY 
+2026-01-13 06:32:20,948 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:32:20,948 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4721 | MSE: 0.4721 | r: 0.7461 | rho: 0.7249 | R2: 0.3205 | RMSE: 1.1306
+2026-01-13 06:32:20,949 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4766 | MSE: 0.4766 | r: 0.7230 | rho: 0.6982 | R2: 0.2980 | RMSE: 1.1376
+2026-01-13 06:32:20,949 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:32:20,949 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:32:20,949 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7643 | rho=0.7591 | R2=0.4877 | RMSE=1.1905 | MAE=0.9090
+2026-01-13 06:32:20,950 - cadence_sorghum_all_v1 - INFO -     proto: r=0.6817 | rho=0.6374 | R2=0.1082 | RMSE=1.0847 | MAE=0.8509
+2026-01-13 06:32:20,950 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:32:21,482 - cadence_sorghum_all_v1 - INFO - Epoch 1 completed in 67.1s
+2026-01-13 06:32:30,931 - cadence_sorghum_all_v1 - INFO - Step 600: NLL=0.4478, MSE=0.4055, grad=3.33, lr=8.86e-04
+2026-01-13 06:32:52,683 - cadence_sorghum_all_v1 - INFO - Step 700: NLL=0.3492, MSE=0.3232, grad=2.11, lr=1.06e-03
+2026-01-13 06:33:12,814 - cadence_sorghum_all_v1 - INFO - Step 800: NLL=0.4227, MSE=0.4768, grad=2.91, lr=1.25e-03
+2026-01-13 06:33:28,881 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:33:28,882 - cadence_sorghum_all_v1 - INFO - EPOCH 2 SUMMARY (BEST)
+2026-01-13 06:33:28,882 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:33:28,882 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.3904 | MSE: 0.3904 | r: 0.7697 | rho: 0.7355 | R2: 0.4774 | RMSE: 1.0149
+2026-01-13 06:33:28,882 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.3993 | MSE: 0.3993 | r: 0.7549 | rho: 0.7137 | R2: 0.4596 | RMSE: 1.0291
+2026-01-13 06:33:28,883 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:33:28,883 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:33:28,883 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7864 | rho=0.7812 | R2=0.4838 | RMSE=1.1950 | MAE=0.9231
+2026-01-13 06:33:28,883 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7234 | rho=0.6461 | R2=0.4353 | RMSE=0.8631 | MAE=0.6595
+2026-01-13 06:33:28,883 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:33:30,436 - cadence_sorghum_all_v1 - INFO - Epoch 2 completed in 69.0s
+2026-01-13 06:33:46,409 - cadence_sorghum_all_v1 - INFO - Step 900: NLL=0.2483, MSE=0.2880, grad=1.11, lr=1.47e-03
+2026-01-13 06:34:05,122 - cadence_sorghum_all_v1 - INFO - Step 1000: NLL=0.4133, MSE=0.4117, grad=1.22, lr=1.71e-03
+2026-01-13 06:34:24,342 - cadence_sorghum_all_v1 - INFO - Step 1100: NLL=0.3681, MSE=0.4453, grad=2.17, lr=1.97e-03
+2026-01-13 06:34:35,911 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:34:35,911 - cadence_sorghum_all_v1 - INFO - EPOCH 3 SUMMARY 
+2026-01-13 06:34:35,912 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:34:35,912 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.5418 | MSE: 0.5418 | r: 0.7290 | rho: 0.6914 | R2: 0.2679 | RMSE: 1.1983
+2026-01-13 06:34:35,912 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.5218 | MSE: 0.5218 | r: 0.7092 | rho: 0.6741 | R2: 0.2815 | RMSE: 1.1804
+2026-01-13 06:34:35,912 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:34:35,913 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:34:35,913 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7689 | rho=0.7646 | R2=0.3480 | RMSE=1.3431 | MAE=1.0341
+2026-01-13 06:34:35,913 - cadence_sorghum_all_v1 - INFO -     proto: r=0.6494 | rho=0.5836 | R2=0.2150 | RMSE=1.0177 | MAE=0.7755
+2026-01-13 06:34:35,913 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:34:36,464 - cadence_sorghum_all_v1 - INFO - Epoch 3 completed in 66.0s
+2026-01-13 06:34:56,211 - cadence_sorghum_all_v1 - INFO - Step 1200: NLL=0.2896, MSE=0.2832, grad=1.77, lr=2.24e-03
+2026-01-13 06:35:17,043 - cadence_sorghum_all_v1 - INFO - Step 1300: NLL=0.4768, MSE=0.4550, grad=1.22, lr=2.54e-03
+2026-01-13 06:35:46,390 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:35:46,390 - cadence_sorghum_all_v1 - INFO - EPOCH 4 SUMMARY (BEST)
+2026-01-13 06:35:46,390 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:35:46,391 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4618 | MSE: 0.4618 | r: 0.7569 | rho: 0.7240 | R2: 0.3884 | RMSE: 1.1007
+2026-01-13 06:35:46,391 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4577 | MSE: 0.4577 | r: 0.7628 | rho: 0.7180 | R2: 0.3940 | RMSE: 1.0962
+2026-01-13 06:35:46,391 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:35:46,391 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:35:46,391 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7895 | rho=0.7933 | R2=0.3837 | RMSE=1.3058 | MAE=1.0245
+2026-01-13 06:35:46,391 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7362 | rho=0.6428 | R2=0.4043 | RMSE=0.8865 | MAE=0.6819
+2026-01-13 06:35:46,392 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:35:47,713 - cadence_sorghum_all_v1 - INFO - Epoch 4 completed in 71.2s
+2026-01-13 06:35:51,631 - cadence_sorghum_all_v1 - INFO - Step 1400: NLL=0.3342, MSE=0.3852, grad=0.94, lr=2.85e-03
+2026-01-13 06:36:11,780 - cadence_sorghum_all_v1 - INFO - Step 1500: NLL=0.4721, MSE=0.4862, grad=2.07, lr=3.17e-03
+2026-01-13 06:36:32,902 - cadence_sorghum_all_v1 - INFO - Step 1600: NLL=0.4050, MSE=0.3684, grad=0.66, lr=3.51e-03
+2026-01-13 06:36:54,442 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:36:54,442 - cadence_sorghum_all_v1 - INFO - EPOCH 5 SUMMARY 
+2026-01-13 06:36:54,442 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:36:54,442 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4756 | MSE: 0.4756 | r: 0.7687 | rho: 0.7412 | R2: 0.3140 | RMSE: 1.1350
+2026-01-13 06:36:54,443 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4961 | MSE: 0.4961 | r: 0.7625 | rho: 0.7383 | R2: 0.2800 | RMSE: 1.1593
+2026-01-13 06:36:54,443 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:36:54,443 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:36:54,443 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7739 | rho=0.7799 | R2=0.4472 | RMSE=1.2367 | MAE=0.9716
+2026-01-13 06:36:54,443 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7512 | rho=0.6967 | R2=0.1129 | RMSE=1.0818 | MAE=0.8729
+2026-01-13 06:36:54,443 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:36:55,037 - cadence_sorghum_all_v1 - INFO - Epoch 5 completed in 67.3s
+2026-01-13 06:37:02,945 - cadence_sorghum_all_v1 - INFO - Step 1700: NLL=0.4152, MSE=0.4711, grad=0.60, lr=3.85e-03
+2026-01-13 06:37:19,008 - cadence_sorghum_all_v1 - INFO - Step 1800: NLL=0.2488, MSE=0.2808, grad=0.63, lr=4.20e-03
+2026-01-13 06:37:39,622 - cadence_sorghum_all_v1 - INFO - Step 1900: NLL=0.4217, MSE=0.3917, grad=0.54, lr=4.56e-03
+2026-01-13 06:37:56,492 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:37:56,492 - cadence_sorghum_all_v1 - INFO - EPOCH 6 SUMMARY 
+2026-01-13 06:37:56,493 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:37:56,493 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.3102 | MSE: 0.3102 | r: 0.7735 | rho: 0.7477 | R2: 0.5688 | RMSE: 0.9121
+2026-01-13 06:37:56,493 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.3348 | MSE: 0.3348 | r: 0.7518 | rho: 0.7255 | R2: 0.5355 | RMSE: 0.9468
+2026-01-13 06:37:56,494 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:37:56,494 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:37:56,494 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7779 | rho=0.7786 | R2=0.5878 | RMSE=1.0679 | MAE=0.8272
+2026-01-13 06:37:56,495 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7257 | rho=0.6724 | R2=0.4833 | RMSE=0.8257 | MAE=0.6299
+2026-01-13 06:37:56,495 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:37:57,086 - cadence_sorghum_all_v1 - INFO - Epoch 6 completed in 62.0s
+2026-01-13 06:38:08,810 - cadence_sorghum_all_v1 - INFO - Step 2000: NLL=0.3655, MSE=0.3865, grad=0.41, lr=4.92e-03
+2026-01-13 06:38:25,695 - cadence_sorghum_all_v1 - INFO - Step 2100: NLL=0.3715, MSE=0.3301, grad=0.84, lr=5.28e-03
+2026-01-13 06:38:44,104 - cadence_sorghum_all_v1 - INFO - Step 2200: NLL=0.2444, MSE=0.2653, grad=0.44, lr=5.65e-03
+2026-01-13 06:38:55,171 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:38:55,172 - cadence_sorghum_all_v1 - INFO - EPOCH 7 SUMMARY 
+2026-01-13 06:38:55,172 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:38:55,172 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.3373 | MSE: 0.3373 | r: 0.7542 | rho: 0.7234 | R2: 0.5396 | RMSE: 0.9477
+2026-01-13 06:38:55,172 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.3531 | MSE: 0.3531 | r: 0.7387 | rho: 0.6964 | R2: 0.5094 | RMSE: 0.9725
+2026-01-13 06:38:55,172 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:38:55,172 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:38:55,173 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7800 | rho=0.7792 | R2=0.5667 | RMSE=1.0949 | MAE=0.8442
+2026-01-13 06:38:55,173 - cadence_sorghum_all_v1 - INFO -     proto: r=0.6974 | rho=0.6136 | R2=0.4522 | RMSE=0.8502 | MAE=0.6436
+2026-01-13 06:38:55,173 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:38:55,565 - cadence_sorghum_all_v1 - INFO - Epoch 7 completed in 58.5s
+2026-01-13 06:39:14,198 - cadence_sorghum_all_v1 - INFO - Step 2300: NLL=0.3192, MSE=0.3296, grad=0.57, lr=6.01e-03
+2026-01-13 06:39:37,204 - cadence_sorghum_all_v1 - INFO - Step 2400: NLL=0.3256, MSE=0.3239, grad=0.56, lr=6.36e-03
+2026-01-13 06:40:06,233 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:40:06,233 - cadence_sorghum_all_v1 - INFO - EPOCH 8 SUMMARY 
+2026-01-13 06:40:06,233 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:40:06,233 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4709 | MSE: 0.4709 | r: 0.7619 | rho: 0.7235 | R2: 0.3157 | RMSE: 1.1302
+2026-01-13 06:40:06,233 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4448 | MSE: 0.4448 | r: 0.7585 | rho: 0.7056 | R2: 0.3370 | RMSE: 1.0996
+2026-01-13 06:40:06,233 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:40:06,234 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:40:06,234 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7935 | rho=0.7888 | R2=0.5362 | RMSE=1.1328 | MAE=0.8674
+2026-01-13 06:40:06,234 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7235 | rho=0.6224 | R2=0.1379 | RMSE=1.0665 | MAE=0.8506
+2026-01-13 06:40:06,234 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:40:06,788 - cadence_sorghum_all_v1 - INFO - Epoch 8 completed in 71.2s
+2026-01-13 06:40:08,626 - cadence_sorghum_all_v1 - INFO - Step 2500: NLL=0.3681, MSE=0.3266, grad=0.55, lr=6.71e-03
+2026-01-13 06:40:26,145 - cadence_sorghum_all_v1 - INFO - Step 2600: NLL=0.1949, MSE=0.2063, grad=0.37, lr=7.05e-03
+2026-01-13 06:40:45,581 - cadence_sorghum_all_v1 - INFO - Step 2700: NLL=0.4044, MSE=0.3776, grad=0.46, lr=7.38e-03
+2026-01-13 06:41:09,782 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:41:09,783 - cadence_sorghum_all_v1 - INFO - EPOCH 9 SUMMARY 
+2026-01-13 06:41:09,783 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:41:09,783 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.3359 | MSE: 0.3359 | r: 0.7707 | rho: 0.7439 | R2: 0.5524 | RMSE: 0.9403
+2026-01-13 06:41:09,783 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.3482 | MSE: 0.3482 | r: 0.7617 | rho: 0.7344 | R2: 0.5327 | RMSE: 0.9592
+2026-01-13 06:41:09,783 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:41:09,783 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:41:09,783 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7849 | rho=0.7814 | R2=0.5427 | RMSE=1.1248 | MAE=0.8741
+2026-01-13 06:41:09,784 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7385 | rho=0.6874 | R2=0.5227 | RMSE=0.7936 | MAE=0.6170
+2026-01-13 06:41:09,784 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:41:10,493 - cadence_sorghum_all_v1 - INFO - Epoch 9 completed in 63.7s
+2026-01-13 06:41:17,546 - cadence_sorghum_all_v1 - INFO - Step 2800: NLL=0.3604, MSE=0.3795, grad=0.40, lr=7.70e-03
+2026-01-13 06:41:37,331 - cadence_sorghum_all_v1 - INFO - Step 2900: NLL=0.3284, MSE=0.2898, grad=0.47, lr=8.00e-03
+2026-01-13 06:41:58,250 - cadence_sorghum_all_v1 - INFO - Step 3000: NLL=0.2870, MSE=0.3282, grad=0.40, lr=8.29e-03
+2026-01-13 06:42:16,729 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:42:16,730 - cadence_sorghum_all_v1 - INFO - EPOCH 10 SUMMARY (BEST)
+2026-01-13 06:42:16,730 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:42:16,730 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.3169 | MSE: 0.3169 | r: 0.7858 | rho: 0.7478 | R2: 0.5582 | RMSE: 0.9222
+2026-01-13 06:42:16,730 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.3383 | MSE: 0.3383 | r: 0.7685 | rho: 0.7268 | R2: 0.5224 | RMSE: 0.9543
+2026-01-13 06:42:16,731 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:42:16,731 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:42:16,731 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7929 | rho=0.7893 | R2=0.5987 | RMSE=1.0537 | MAE=0.8110
+2026-01-13 06:42:16,731 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7441 | rho=0.6644 | R2=0.4462 | RMSE=0.8548 | MAE=0.6631
+2026-01-13 06:42:16,732 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:42:17,768 - cadence_sorghum_all_v1 - INFO - Epoch 10 completed in 67.3s
+2026-01-13 06:42:28,124 - cadence_sorghum_all_v1 - INFO - Step 3100: NLL=0.3455, MSE=0.3629, grad=0.39, lr=8.55e-03
+2026-01-13 06:42:48,312 - cadence_sorghum_all_v1 - INFO - Step 3200: NLL=0.2767, MSE=0.2711, grad=0.29, lr=8.80e-03
+2026-01-13 06:43:08,150 - cadence_sorghum_all_v1 - INFO - Step 3300: NLL=0.4129, MSE=0.4346, grad=0.37, lr=9.03e-03
+2026-01-13 06:43:22,664 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:43:22,664 - cadence_sorghum_all_v1 - INFO - EPOCH 11 SUMMARY 
+2026-01-13 06:43:22,664 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:43:22,664 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.9731 | MSE: 0.9731 | r: 0.7309 | rho: 0.7027 | R2: -0.2143 | RMSE: 1.5650
+2026-01-13 06:43:22,664 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.9907 | MSE: 0.9907 | r: 0.7079 | rho: 0.6791 | R2: -0.2455 | RMSE: 1.5877
+2026-01-13 06:43:22,664 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:43:22,664 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:43:22,665 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7274 | rho=0.7242 | R2=-0.4541 | RMSE=2.0057 | MAE=1.6532
+2026-01-13 06:43:22,665 - cadence_sorghum_all_v1 - INFO -     proto: r=0.6883 | rho=0.6339 | R2=-0.0369 | RMSE=1.1697 | MAE=0.9364
+2026-01-13 06:43:22,665 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:43:23,309 - cadence_sorghum_all_v1 - INFO - Epoch 11 completed in 65.5s
+2026-01-13 06:43:39,655 - cadence_sorghum_all_v1 - INFO - Step 3400: NLL=0.3921, MSE=0.3130, grad=0.55, lr=9.24e-03
+2026-01-13 06:43:58,450 - cadence_sorghum_all_v1 - INFO - Step 3500: NLL=0.3130, MSE=0.3540, grad=0.26, lr=9.42e-03
+2026-01-13 06:44:16,976 - cadence_sorghum_all_v1 - INFO - Step 3600: NLL=0.3299, MSE=0.3332, grad=0.30, lr=9.58e-03
+2026-01-13 06:44:26,487 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:44:26,487 - cadence_sorghum_all_v1 - INFO - EPOCH 12 SUMMARY (BEST)
+2026-01-13 06:44:26,488 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:44:26,488 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4534 | MSE: 0.4534 | r: 0.7913 | rho: 0.7545 | R2: 0.3000 | RMSE: 1.1100
+2026-01-13 06:44:26,488 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4890 | MSE: 0.4890 | r: 0.7811 | rho: 0.7419 | R2: 0.2268 | RMSE: 1.1517
+2026-01-13 06:44:26,488 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:44:26,489 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:44:26,489 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.8014 | rho=0.7966 | R2=0.5712 | RMSE=1.0891 | MAE=0.8399
+2026-01-13 06:44:26,489 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7609 | rho=0.6871 | R2=-0.1177 | RMSE=1.2144 | MAE=1.0043
+2026-01-13 06:44:26,489 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:44:27,719 - cadence_sorghum_all_v1 - INFO - Epoch 12 completed in 64.4s
+2026-01-13 06:44:47,583 - cadence_sorghum_all_v1 - INFO - Step 3700: NLL=0.3560, MSE=0.3779, grad=0.50, lr=9.72e-03
+2026-01-13 06:45:05,819 - cadence_sorghum_all_v1 - INFO - Step 3800: NLL=0.4076, MSE=0.3712, grad=0.54, lr=9.83e-03
+2026-01-13 06:45:30,872 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:45:30,872 - cadence_sorghum_all_v1 - INFO - EPOCH 13 SUMMARY 
+2026-01-13 06:45:30,873 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:45:30,873 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4272 | MSE: 0.4272 | r: 0.7315 | rho: 0.6740 | R2: 0.4064 | RMSE: 1.0702
+2026-01-13 06:45:30,873 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4203 | MSE: 0.4203 | r: 0.7400 | rho: 0.6737 | R2: 0.4269 | RMSE: 1.0574
+2026-01-13 06:45:30,873 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:45:30,874 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:45:30,874 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7860 | rho=0.7819 | R2=0.4645 | RMSE=1.2171 | MAE=0.9571
+2026-01-13 06:45:30,874 - cadence_sorghum_all_v1 - INFO -     proto: r=0.6940 | rho=0.5656 | R2=0.3892 | RMSE=0.8977 | MAE=0.6931
+2026-01-13 06:45:30,874 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:45:31,507 - cadence_sorghum_all_v1 - INFO - Epoch 13 completed in 63.8s
+2026-01-13 06:45:37,361 - cadence_sorghum_all_v1 - INFO - Step 3900: NLL=0.3694, MSE=0.3743, grad=0.31, lr=9.91e-03
+2026-01-13 06:45:55,147 - cadence_sorghum_all_v1 - INFO - Step 4000: NLL=0.3370, MSE=0.3158, grad=0.48, lr=9.97e-03
+2026-01-13 06:46:14,868 - cadence_sorghum_all_v1 - INFO - Step 4100: NLL=0.3629, MSE=0.3573, grad=0.65, lr=1.00e-02
+2026-01-13 06:46:36,082 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:46:36,083 - cadence_sorghum_all_v1 - INFO - EPOCH 14 SUMMARY 
+2026-01-13 06:46:36,084 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:46:36,084 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.5418 | MSE: 0.5418 | r: 0.7669 | rho: 0.7450 | R2: 0.2222 | RMSE: 1.2109
+2026-01-13 06:46:36,084 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.6025 | MSE: 0.6025 | r: 0.7486 | rho: 0.7251 | R2: 0.1332 | RMSE: 1.2764
+2026-01-13 06:46:36,084 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:46:36,085 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:46:36,085 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7460 | rho=0.7662 | R2=0.3149 | RMSE=1.3767 | MAE=1.1076
+2026-01-13 06:46:36,085 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7513 | rho=0.6840 | R2=-0.0484 | RMSE=1.1761 | MAE=0.9848
+2026-01-13 06:46:36,085 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:46:36,643 - cadence_sorghum_all_v1 - INFO - Epoch 14 completed in 65.1s
+2026-01-13 06:46:44,571 - cadence_sorghum_all_v1 - INFO - Step 4200: NLL=0.3518, MSE=0.3676, grad=0.55, lr=1.00e-02
+2026-01-13 06:47:03,566 - cadence_sorghum_all_v1 - INFO - Step 4300: NLL=0.3002, MSE=0.2927, grad=0.44, lr=9.99e-03
+2026-01-13 06:47:22,096 - cadence_sorghum_all_v1 - INFO - Step 4400: NLL=0.4268, MSE=0.3768, grad=0.47, lr=9.98e-03
+2026-01-13 06:47:36,392 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:47:36,392 - cadence_sorghum_all_v1 - INFO - EPOCH 15 SUMMARY 
+2026-01-13 06:47:36,392 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:47:36,392 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.2990 | MSE: 0.2990 | r: 0.7816 | rho: 0.7438 | R2: 0.5836 | RMSE: 0.8957
+2026-01-13 06:47:36,393 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.3205 | MSE: 0.3205 | r: 0.7625 | rho: 0.7254 | R2: 0.5493 | RMSE: 0.9283
+2026-01-13 06:47:36,393 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:47:36,393 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:47:36,393 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7974 | rho=0.7929 | R2=0.6166 | RMSE=1.0299 | MAE=0.8160
+2026-01-13 06:47:36,393 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7277 | rho=0.6580 | R2=0.4821 | RMSE=0.8266 | MAE=0.6391
+2026-01-13 06:47:36,394 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:47:36,991 - cadence_sorghum_all_v1 - INFO - Epoch 15 completed in 60.3s
+2026-01-13 06:47:50,763 - cadence_sorghum_all_v1 - INFO - Step 4500: NLL=0.3330, MSE=0.3592, grad=0.32, lr=9.97e-03
+2026-01-13 06:48:10,736 - cadence_sorghum_all_v1 - INFO - Step 4600: NLL=0.2361, MSE=0.2912, grad=0.23, lr=9.95e-03
+2026-01-13 06:48:28,635 - cadence_sorghum_all_v1 - INFO - Step 4700: NLL=0.2411, MSE=0.2608, grad=0.36, lr=9.92e-03
+2026-01-13 06:48:38,605 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:48:38,605 - cadence_sorghum_all_v1 - INFO - EPOCH 16 SUMMARY 
+2026-01-13 06:48:38,606 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:48:38,606 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4017 | MSE: 0.4017 | r: 0.7784 | rho: 0.7461 | R2: 0.4541 | RMSE: 1.0332
+2026-01-13 06:48:38,606 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.3948 | MSE: 0.3948 | r: 0.7721 | rho: 0.7428 | R2: 0.4596 | RMSE: 1.0256
+2026-01-13 06:48:38,606 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:48:38,606 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:48:38,606 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7917 | rho=0.7913 | R2=0.5006 | RMSE=1.1754 | MAE=0.9283
+2026-01-13 06:48:38,606 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7525 | rho=0.6944 | R2=0.4185 | RMSE=0.8759 | MAE=0.6979
+2026-01-13 06:48:38,607 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:48:39,190 - cadence_sorghum_all_v1 - INFO - Epoch 16 completed in 62.2s
+2026-01-13 06:48:57,410 - cadence_sorghum_all_v1 - INFO - Step 4800: NLL=0.2839, MSE=0.3050, grad=0.43, lr=9.89e-03
+2026-01-13 06:49:14,574 - cadence_sorghum_all_v1 - INFO - Step 4900: NLL=0.2546, MSE=0.2568, grad=0.38, lr=9.85e-03
+2026-01-13 06:49:41,387 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:49:41,388 - cadence_sorghum_all_v1 - INFO - EPOCH 17 SUMMARY 
+2026-01-13 06:49:41,388 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:49:41,388 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.3482 | MSE: 0.3482 | r: 0.7841 | rho: 0.7511 | R2: 0.5222 | RMSE: 0.9639
+2026-01-13 06:49:41,388 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4063 | MSE: 0.4063 | r: 0.7492 | rho: 0.7136 | R2: 0.4483 | RMSE: 1.0388
+2026-01-13 06:49:41,389 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:49:41,389 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:49:41,389 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7567 | rho=0.7496 | R2=0.4781 | RMSE=1.2016 | MAE=0.9361
+2026-01-13 06:49:41,389 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7417 | rho=0.6775 | R2=0.4184 | RMSE=0.8760 | MAE=0.6809
+2026-01-13 06:49:41,389 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:49:42,212 - cadence_sorghum_all_v1 - INFO - Epoch 17 completed in 63.0s
+2026-01-13 06:49:45,916 - cadence_sorghum_all_v1 - INFO - Step 5000: NLL=0.2313, MSE=0.2872, grad=0.22, lr=9.81e-03
+2026-01-13 06:50:05,671 - cadence_sorghum_all_v1 - INFO - Step 5100: NLL=0.3770, MSE=0.4518, grad=0.60, lr=9.77e-03
+2026-01-13 06:50:25,266 - cadence_sorghum_all_v1 - INFO - Step 5200: NLL=0.1929, MSE=0.1960, grad=0.23, lr=9.72e-03
+2026-01-13 06:50:47,157 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:50:47,158 - cadence_sorghum_all_v1 - INFO - EPOCH 18 SUMMARY 
+2026-01-13 06:50:47,158 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:50:47,159 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4816 | MSE: 0.4816 | r: 0.7505 | rho: 0.7302 | R2: 0.3756 | RMSE: 1.1168
+2026-01-13 06:50:47,159 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.4373 | MSE: 0.4373 | r: 0.7609 | rho: 0.7336 | R2: 0.4209 | RMSE: 1.0715
+2026-01-13 06:50:47,159 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:50:47,159 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:50:47,159 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7776 | rho=0.7779 | R2=0.4114 | RMSE=1.2760 | MAE=0.9938
+2026-01-13 06:50:47,159 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7442 | rho=0.6894 | R2=0.4304 | RMSE=0.8669 | MAE=0.6703
+2026-01-13 06:50:47,159 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:50:47,680 - cadence_sorghum_all_v1 - INFO - Epoch 18 completed in 65.5s
+2026-01-13 06:50:55,436 - cadence_sorghum_all_v1 - INFO - Step 5300: NLL=0.3074, MSE=0.3061, grad=0.45, lr=9.66e-03
+2026-01-13 06:51:15,349 - cadence_sorghum_all_v1 - INFO - Step 5400: NLL=0.2118, MSE=0.2604, grad=0.29, lr=9.60e-03
+2026-01-13 06:51:35,738 - cadence_sorghum_all_v1 - INFO - Step 5500: NLL=0.2875, MSE=0.3184, grad=0.40, lr=9.53e-03
+2026-01-13 06:51:50,950 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:51:50,951 - cadence_sorghum_all_v1 - INFO - EPOCH 19 SUMMARY 
+2026-01-13 06:51:50,951 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:51:50,952 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.2953 | MSE: 0.2953 | r: 0.7892 | rho: 0.7588 | R2: 0.5963 | RMSE: 0.8869
+2026-01-13 06:51:50,952 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.3122 | MSE: 0.3122 | r: 0.7794 | rho: 0.7459 | R2: 0.5709 | RMSE: 0.9127
+2026-01-13 06:51:50,952 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:51:50,952 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:51:50,953 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7971 | rho=0.7948 | R2=0.6085 | RMSE=1.0407 | MAE=0.8053
+2026-01-13 06:51:50,953 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7617 | rho=0.6970 | R2=0.5333 | RMSE=0.7847 | MAE=0.6018
+2026-01-13 06:51:50,953 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:51:51,513 - cadence_sorghum_all_v1 - INFO - Epoch 19 completed in 63.8s
+2026-01-13 06:52:02,005 - cadence_sorghum_all_v1 - INFO - Step 5600: NLL=0.3983, MSE=0.3839, grad=0.42, lr=9.46e-03
+2026-01-13 06:52:20,449 - cadence_sorghum_all_v1 - INFO - Step 5700: NLL=0.2960, MSE=0.3479, grad=0.37, lr=9.39e-03
+2026-01-13 06:52:37,499 - cadence_sorghum_all_v1 - INFO - Step 5800: NLL=0.2115, MSE=0.2127, grad=0.33, lr=9.31e-03
+2026-01-13 06:52:48,895 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:52:48,903 - cadence_sorghum_all_v1 - INFO - EPOCH 20 SUMMARY 
+2026-01-13 06:52:48,903 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:52:48,903 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.6047 | MSE: 0.6047 | r: 0.7811 | rho: 0.7478 | R2: 0.1782 | RMSE: 1.2676
+2026-01-13 06:52:48,904 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.6255 | MSE: 0.6255 | r: 0.7588 | rho: 0.7218 | R2: 0.1547 | RMSE: 1.2876
+2026-01-13 06:52:48,904 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:52:48,904 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:52:48,904 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7827 | rho=0.7811 | R2=0.1893 | RMSE=1.4976 | MAE=1.1818
+2026-01-13 06:52:48,904 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7350 | rho=0.6625 | R2=0.1200 | RMSE=1.0775 | MAE=0.8720
+2026-01-13 06:52:48,904 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:52:49,552 - cadence_sorghum_all_v1 - INFO - Epoch 20 completed in 58.0s
+2026-01-13 06:53:07,020 - cadence_sorghum_all_v1 - INFO - Step 5900: NLL=0.2962, MSE=0.2785, grad=0.50, lr=9.22e-03
+2026-01-13 06:53:23,549 - cadence_sorghum_all_v1 - INFO - Step 6000: NLL=0.2622, MSE=0.2655, grad=0.42, lr=9.13e-03
+2026-01-13 06:53:50,377 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:53:50,378 - cadence_sorghum_all_v1 - INFO - EPOCH 21 SUMMARY 
+2026-01-13 06:53:50,378 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:53:50,378 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 0.4534 | MSE: 0.4534 | r: 0.7576 | rho: 0.7248 | R2: 0.4270 | RMSE: 1.0738
+2026-01-13 06:53:50,378 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 0.5354 | MSE: 0.5354 | r: 0.7253 | rho: 0.6851 | R2: 0.3379 | RMSE: 1.1601
+2026-01-13 06:53:50,379 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:53:50,379 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:53:50,379 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7343 | rho=0.7298 | R2=0.1939 | RMSE=1.4934 | MAE=1.1435
+2026-01-13 06:53:50,379 - cadence_sorghum_all_v1 - INFO -     proto: r=0.7164 | rho=0.6404 | R2=0.4819 | RMSE=0.8268 | MAE=0.6405
+2026-01-13 06:53:50,379 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:53:51,012 - cadence_sorghum_all_v1 - INFO - Epoch 21 completed in 61.4s
+2026-01-13 06:53:52,525 - cadence_sorghum_all_v1 - INFO - Step 6100: NLL=0.2846, MSE=0.2858, grad=0.40, lr=9.04e-03
+2026-01-13 06:54:07,676 - cadence_sorghum_all_v1 - INFO - Step 6200: NLL=0.3251, MSE=0.3637, grad=0.43, lr=8.94e-03
+2026-01-13 06:54:23,379 - cadence_sorghum_all_v1 - INFO - Step 6300: NLL=0.2894, MSE=0.3078, grad=0.26, lr=8.84e-03
+2026-01-13 06:54:41,525 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:54:41,526 - cadence_sorghum_all_v1 - INFO - EPOCH 22 SUMMARY 
+2026-01-13 06:54:41,526 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:54:41,526 - cadence_sorghum_all_v1 - INFO - [TRAIN] NLL: 1.2513 | MSE: 1.2513 | r: 0.7135 | rho: 0.6684 | R2: -0.6913 | RMSE: 1.8212
+2026-01-13 06:54:41,527 - cadence_sorghum_all_v1 - INFO - [VAL]   NLL: 1.3056 | MSE: 1.3056 | r: 0.6976 | rho: 0.6574 | R2: -0.7642 | RMSE: 1.8601
+2026-01-13 06:54:41,527 - cadence_sorghum_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:54:41,527 - cadence_sorghum_all_v1 - INFO -   [VAL] jores_sorghum:
+2026-01-13 06:54:41,527 - cadence_sorghum_all_v1 - INFO -     leaf: r=0.7562 | rho=0.7569 | R2=-0.6927 | RMSE=2.1640 | MAE=1.8126
+2026-01-13 06:54:41,527 - cadence_sorghum_all_v1 - INFO -     proto: r=0.6389 | rho=0.5579 | R2=-0.8356 | RMSE=1.5562 | MAE=1.2701
+2026-01-13 06:54:41,527 - cadence_sorghum_all_v1 - INFO - ================================================================================
+2026-01-13 06:54:41,954 - cadence_sorghum_all_v1 - INFO - Early stopping triggered after 22 epochs (patience=10)
+2026-01-13 06:54:41,975 - cadence_sorghum_all_v1 - INFO - Training complete. Running final evaluation...
+2026-01-13 06:54:44,830 - cadence_sorghum_all_v1 - INFO - Results saved to results/cadence_sorghum_all_v1/final_results.json

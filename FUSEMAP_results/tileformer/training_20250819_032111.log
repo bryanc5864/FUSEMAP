@@ -1,0 +1,7 @@
+2025-08-19 03:21:11,898 - INFO - Using device: cpu
+2025-08-19 03:21:11,898 - INFO - Loading pre-split datasets from /home/bcheng/TileFormer/data/splits
+2025-08-19 03:21:12,424 - INFO - Loaded datasets - Train: 41582, Val: 5197, Test: 5199
+2025-08-19 03:21:12,804 - INFO - Model parameters: 5,021,196
+2025-08-19 03:21:14,354 - INFO - Starting training for 25 epochs
+2025-08-19 03:21:14,355 - INFO - 
+Epoch 1/25

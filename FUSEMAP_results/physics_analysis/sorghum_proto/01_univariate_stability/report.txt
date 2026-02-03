@@ -1,0 +1,55 @@
+================================================================================
+UNIVARIATE STABILITY ANALYSIS REPORT
+================================================================================
+
+
+========================================
+Cell Type: sorghum
+========================================
+
+Total features analyzed: 365
+Significant (p < 0.05): 297
+Highly significant (p < 0.01): 277
+
+--- Top 15 Positive Correlations ---
+                                feature category  pearson_r  partial_r_gc  sign_consistency
+              bend_rms_curvature_w5_max     bend   0.389486      0.462990               1.0
+              bend_rms_curvature_w7_max     bend   0.369999      0.457134               1.0
+              bend_curvature_var_w9_max     bend   0.325989      0.405228               1.0
+              bend_rms_curvature_w9_max     bend   0.323539      0.418580               1.0
+              bend_curvature_var_w7_max     bend   0.320608      0.393112               1.0
+             bend_curvature_var_w11_max     bend   0.305612      0.389661               1.0
+              bend_curvature_var_w5_max     bend   0.289882      0.351336               1.0
+advanced_stacking_stacking_at_rich_mean advanced   0.288097      0.289774               1.0
+             bend_rms_curvature_w11_max     bend   0.283975      0.384444               1.0
+                          thermo_var_dG   thermo   0.236990      0.232022               1.0
+        advanced_melting_std_melting_dG advanced   0.235591      0.230625               1.0
+     advanced_stacking_stacking_entropy advanced   0.224420      0.241296               1.0
+          thermo_dG_max_high_energy_run   thermo   0.193052      0.187887               1.0
+            entropy_gc_entropy_w50_mean  entropy   0.176799      0.170656               1.0
+            entropy_gc_entropy_w30_mean  entropy   0.161417      0.154515               1.0
+
+--- Top 15 Negative Correlations ---
+                                 feature category  pearson_r  partial_r_gc  sign_consistency
+advanced_stacking_stacking_concentration advanced  -0.195838     -0.212853               1.0
+                           stiff_gc_skew    stiff  -0.190787     -0.184304               1.0
+          thermo_dG_num_high_energy_runs   thermo  -0.165120     -0.157752               1.0
+                 pwm_MA0097.1_mean_score      pwm  -0.152166     -0.147539               1.0
+               advanced_g4_mean_g4_score advanced  -0.130678     -0.129358               1.0
+                  pwm_MA0053.1_var_score      pwm  -0.126791     -0.117609               1.0
+                    pwm_MA0001.3_entropy      pwm  -0.112851     -0.103039               1.0
+                    pwm_MA0082.2_delta_g      pwm  -0.110417     -0.153663               1.0
+                 pwm_MA0096.1_mean_score      pwm  -0.109730     -0.179694               1.0
+              entropy_gc_entropy_w30_var  entropy  -0.103942     -0.094379               1.0
+                  pwm_MA0020.2_var_score      pwm  -0.103447     -0.090729               1.0
+              entropy_gc_entropy_w50_var  entropy  -0.103040     -0.093254               1.0
+                  pwm_MA0121.2_var_score      pwm  -0.100896     -0.106157               1.0
+           stiff_purine_pyrimidine_ratio    stiff  -0.100775     -0.093930               1.0
+          pwm_MA0054.1_num_high_affinity      pwm  -0.099783     -0.087359               1.0
+
+--- By Category Summary ---
+  thermo    : n= 45, mean|r|=0.061, max|r|=0.237
+  stiff     : n= 62, mean|r|=0.044, max|r|=0.191
+  bend      : n= 43, mean|r|=0.119, max|r|=0.389
+  entropy   : n= 61, mean|r|=0.062, max|r|=0.177
+  advanced  : n= 53, mean|r|=0.059, max|r|=0.288

@@ -1,0 +1,54 @@
+[
+  {
+    "run_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/PhysicsVAE/runs/HepG2_20260113_052418",
+    "cell_type": "HepG2",
+    "epoch": 35,
+    "n_physics_features": 539,
+    "latent_dim": 128,
+    "model_loaded": true,
+    "n_params": 10773892,
+    "final_epoch": 96.0,
+    "total_batches": 93275,
+    "final_recon_loss": 185.1514473369231,
+    "final_accuracy": 0.6450299923076923
+  },
+  {
+    "run_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/PhysicsVAE/runs/K562_20260113_051653",
+    "cell_type": "K562",
+    "epoch": 44,
+    "n_physics_features": 515,
+    "latent_dim": 128,
+    "model_loaded": true,
+    "n_params": 10767748,
+    "final_epoch": 67.0,
+    "total_batches": 95938,
+    "final_recon_loss": 183.6595568214838,
+    "final_accuracy": 0.6408156870170015
+  },
+  {
+    "run_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/PhysicsVAE/runs/S2_20260113_061042",
+    "cell_type": "S2",
+    "epoch": 15,
+    "n_physics_features": 390,
+    "latent_dim": 128,
+    "model_loaded": true,
+    "n_params": 11439812,
+    "final_epoch": 16.0,
+    "total_batches": 83821,
+    "final_recon_loss": 265.29564784708555,
+    "final_accuracy": 0.4889719856169568
+  },
+  {
+    "run_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/PhysicsVAE/runs/WTC11_20260113_052743",
+    "cell_type": "WTC11",
+    "epoch": 24,
+    "n_physics_features": 539,
+    "latent_dim": 128,
+    "model_loaded": true,
+    "n_params": 10773892,
+    "final_epoch": 100.0,
+    "total_batches": 69900,
+    "final_recon_loss": 171.0642475665236,
+    "final_accuracy": 0.6799098741058655
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "model_name": "config3_cross_animal_v1",
+  "description": "Cross-animal (K562 r=0.69, DeepSTARR r=0.71/0.76)",
+  "calibration_source": "encode4_calibration",
+  "calibration_date": "2026-01-14T05:32:57.732626",
+  "place_stats": {
+    "n_samples": 42230,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 4.052448272705078,
+    "residual_mean": 0.5264471173286438,
+    "residual_std": 2.0130693912506104
+  }
+}

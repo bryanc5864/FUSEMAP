@@ -1,0 +1,72 @@
+{
+  "timestamp": "20260113_040502",
+  "datasets": [
+    "drosophila_dev",
+    "drosophila_hk"
+  ],
+  "n_jobs": 32,
+  "results": {
+    "drosophila_dev": {
+      "01": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_dev/01_univariate_stability"
+      },
+      "02": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_dev/02_multivariate_models"
+      },
+      "03": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_dev/03_incremental_control"
+      },
+      "04": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_dev/04_interaction_mapping"
+      },
+      "05": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_dev/05_regime_discovery"
+      },
+      "06": {
+        "status": "skipped",
+        "reason": "requires 2+ cell types"
+      }
+    },
+    "drosophila_hk": {
+      "01": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_hk/01_univariate_stability"
+      },
+      "02": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_hk/02_multivariate_models"
+      },
+      "03": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_hk/03_incremental_control"
+      },
+      "04": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_hk/04_interaction_mapping"
+      },
+      "05": {
+        "status": "failed",
+        "returncode": 1,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/drosophila_hk/05_regime_discovery"
+      },
+      "06": {
+        "status": "skipped",
+        "reason": "requires 2+ cell types"
+      }
+    }
+  }
+}

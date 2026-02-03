@@ -1,0 +1,566 @@
+2026-01-13 06:36:03,151 - config2_multi_celltype_v1 - INFO - Experiment: config2_multi_celltype_v1
+2026-01-13 06:36:03,151 - config2_multi_celltype_v1 - INFO - Output directory: results/config2_multi_celltype_v1
+2026-01-13 06:36:03,157 - config2_multi_celltype_v1 - INFO - Starting training...
+2026-01-13 06:36:03,157 - config2_multi_celltype_v1 - INFO - Config: config2_multi_celltype_human
+2026-01-13 06:36:03,157 - config2_multi_celltype_v1 - INFO - Setting up datasets...
+2026-01-13 06:48:41,072 - config2_multi_celltype_v1 - INFO - Dataset sizes: {'encode4_k562': 158377, 'encode4_hepg2': 97925, 'encode4_wtc11': 39201}
+2026-01-13 06:48:41,074 - config2_multi_celltype_v1 - INFO - Using balanced activity sampling with 10 bins...
+2026-01-13 06:49:31,990 - config2_multi_celltype_v1 - INFO -   encode4_k562: val set loaded
+2026-01-13 06:50:03,504 - config2_multi_celltype_v1 - INFO -   encode4_hepg2: val set loaded
+2026-01-13 06:50:16,742 - config2_multi_celltype_v1 - INFO -   encode4_wtc11: val set loaded
+2026-01-13 07:03:08,333 - config2_multi_celltype_v1 - INFO -   encode4_k562: test set loaded (22631 samples)
+2026-01-13 07:03:59,676 - config2_multi_celltype_v1 - INFO -   encode4_k562: calibration set loaded (22633 samples)
+2026-01-13 07:04:32,280 - config2_multi_celltype_v1 - INFO -   encode4_hepg2: test set loaded (13953 samples)
+2026-01-13 07:05:05,189 - config2_multi_celltype_v1 - INFO -   encode4_hepg2: calibration set loaded (14002 samples)
+2026-01-13 07:05:19,176 - config2_multi_celltype_v1 - INFO -   encode4_wtc11: test set loaded (5597 samples)
+2026-01-13 07:05:32,095 - config2_multi_celltype_v1 - INFO -   encode4_wtc11: calibration set loaded (5595 samples)
+2026-01-13 07:05:32,120 - config2_multi_celltype_v1 - INFO - Data setup complete
+2026-01-13 07:05:32,126 - config2_multi_celltype_v1 - INFO - Setting up model...
+2026-01-13 07:05:34,329 - config2_multi_celltype_v1 - INFO - Model parameters: 1,536,051 (1,536,051 trainable)
+2026-01-13 07:05:41,061 - config2_multi_celltype_v1 - INFO - OneCycleLR: 28900 total steps, initial_lr=0.000400, max_lr=0.01
+2026-01-13 07:05:41,082 - config2_multi_celltype_v1 - INFO - Model setup complete
+2026-01-13 07:06:23,730 - config2_multi_celltype_v1 - INFO - Step 100: NLL=2.5659, MSE=1.6707, grad=12.50, lr=4.03e-04
+2026-01-13 07:07:02,335 - config2_multi_celltype_v1 - INFO - Step 200: NLL=1.7153, MSE=1.3321, grad=9.50, lr=4.13e-04
+2026-01-13 07:08:21,048 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO - EPOCH 0 SUMMARY (BEST)
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.2435 | MSE: 1.2435 | r: 0.4877 | rho: 0.4169 | R2: -0.2596 | RMSE: 0.9139
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.2555 | MSE: 1.2555 | r: 0.4312 | rho: 0.3739 | R2: -0.3875 | RMSE: 0.9497
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO -     activity: r=0.4777 | rho=0.4130 | R2=-0.0747 | RMSE=0.5481 | MAE=0.4190
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO -     activity: r=0.3961 | rho=0.3901 | R2=-0.4374 | RMSE=0.9431 | MAE=0.7158
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO -     activity: r=0.4198 | rho=0.3188 | R2=-0.6505 | RMSE=1.3578 | MAE=1.0737
+2026-01-13 07:08:21,049 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:08:21,381 - config2_multi_celltype_v1 - INFO - Epoch 0 completed in 160.3s
+2026-01-13 07:08:26,655 - config2_multi_celltype_v1 - INFO - Step 300: NLL=1.3268, MSE=1.1905, grad=8.44, lr=4.28e-04
+2026-01-13 07:08:56,853 - config2_multi_celltype_v1 - INFO - Step 400: NLL=1.3422, MSE=1.1311, grad=10.12, lr=4.50e-04
+2026-01-13 07:09:33,209 - config2_multi_celltype_v1 - INFO - Step 500: NLL=1.1512, MSE=1.0588, grad=8.27, lr=4.79e-04
+2026-01-13 07:10:49,283 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:10:49,283 - config2_multi_celltype_v1 - INFO - EPOCH 1 SUMMARY (BEST)
+2026-01-13 07:10:49,283 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:10:49,283 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.9480 | MSE: 0.9480 | r: 0.5878 | rho: 0.5115 | R2: 0.0457 | RMSE: 0.7880
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.0372 | MSE: 1.0372 | r: 0.5186 | rho: 0.4608 | R2: -0.0978 | RMSE: 0.8379
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO -     activity: r=0.5642 | rho=0.5006 | R2=0.0181 | RMSE=0.5239 | MAE=0.3981
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO -     activity: r=0.5069 | rho=0.4935 | R2=-0.0844 | RMSE=0.8192 | MAE=0.6287
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO -     activity: r=0.4849 | rho=0.3883 | R2=-0.2270 | RMSE=1.1707 | MAE=0.9143
+2026-01-13 07:10:49,284 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:10:49,953 - config2_multi_celltype_v1 - INFO - Epoch 1 completed in 148.6s
+2026-01-13 07:10:59,509 - config2_multi_celltype_v1 - INFO - Step 600: NLL=1.1344, MSE=0.9732, grad=7.67, lr=5.13e-04
+2026-01-13 07:11:35,285 - config2_multi_celltype_v1 - INFO - Step 700: NLL=0.9211, MSE=0.8713, grad=5.71, lr=5.54e-04
+2026-01-13 07:12:10,327 - config2_multi_celltype_v1 - INFO - Step 800: NLL=0.8659, MSE=0.8916, grad=5.67, lr=6.00e-04
+2026-01-13 07:13:21,080 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:13:21,081 - config2_multi_celltype_v1 - INFO - EPOCH 2 SUMMARY 
+2026-01-13 07:13:21,081 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:13:21,081 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.7887 | MSE: 1.7887 | r: 0.5922 | rho: 0.5292 | R2: -0.7234 | RMSE: 0.9856
+2026-01-13 07:13:21,081 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 2.0567 | MSE: 2.0567 | r: 0.5186 | rho: 0.4733 | R2: -0.8647 | RMSE: 1.0287
+2026-01-13 07:13:21,081 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:13:21,082 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:13:21,082 - config2_multi_celltype_v1 - INFO -     activity: r=0.5594 | rho=0.5109 | R2=-1.1054 | RMSE=0.7672 | MAE=0.6005
+2026-01-13 07:13:21,082 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:13:21,082 - config2_multi_celltype_v1 - INFO -     activity: r=0.4853 | rho=0.4838 | R2=-1.4094 | RMSE=1.2211 | MAE=0.9468
+2026-01-13 07:13:21,082 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:13:21,082 - config2_multi_celltype_v1 - INFO -     activity: r=0.5111 | rho=0.4251 | R2=-0.0793 | RMSE=1.0980 | MAE=0.8501
+2026-01-13 07:13:21,082 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:13:21,340 - config2_multi_celltype_v1 - INFO - Epoch 2 completed in 151.4s
+2026-01-13 07:13:35,320 - config2_multi_celltype_v1 - INFO - Step 900: NLL=0.9050, MSE=0.8893, grad=4.96, lr=6.53e-04
+2026-01-13 07:14:12,857 - config2_multi_celltype_v1 - INFO - Step 1000: NLL=0.8402, MSE=0.8119, grad=5.30, lr=7.12e-04
+2026-01-13 07:14:50,640 - config2_multi_celltype_v1 - INFO - Step 1100: NLL=0.7388, MSE=0.7821, grad=4.82, lr=7.76e-04
+2026-01-13 07:15:57,748 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO - EPOCH 3 SUMMARY (BEST)
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.1455 | MSE: 1.1455 | r: 0.6461 | rho: 0.5634 | R2: -0.1648 | RMSE: 0.8838
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.1452 | MSE: 1.1452 | r: 0.5667 | rho: 0.5063 | R2: -0.2864 | RMSE: 0.9158
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO -     activity: r=0.6262 | rho=0.5603 | R2=0.1168 | RMSE=0.4969 | MAE=0.3775
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO -     activity: r=0.5439 | rho=0.5397 | R2=-0.4722 | RMSE=0.9545 | MAE=0.7349
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO -     activity: r=0.5301 | rho=0.4189 | R2=-0.5036 | RMSE=1.2959 | MAE=1.0342
+2026-01-13 07:15:57,749 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:15:58,318 - config2_multi_celltype_v1 - INFO - Epoch 3 completed in 157.0s
+2026-01-13 07:16:17,896 - config2_multi_celltype_v1 - INFO - Step 1200: NLL=0.8023, MSE=0.7893, grad=5.77, lr=8.47e-04
+2026-01-13 07:16:54,684 - config2_multi_celltype_v1 - INFO - Step 1300: NLL=0.7958, MSE=0.8072, grad=5.13, lr=9.23e-04
+2026-01-13 07:17:31,214 - config2_multi_celltype_v1 - INFO - Step 1400: NLL=0.7760, MSE=0.7638, grad=3.90, lr=1.00e-03
+2026-01-13 07:18:32,350 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:18:32,350 - config2_multi_celltype_v1 - INFO - EPOCH 4 SUMMARY (BEST)
+2026-01-13 07:18:32,350 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:18:32,350 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.9162 | MSE: 0.9162 | r: 0.6834 | rho: 0.5938 | R2: 0.0655 | RMSE: 0.7850
+2026-01-13 07:18:32,350 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.0275 | MSE: 1.0275 | r: 0.6029 | rho: 0.5318 | R2: -0.1666 | RMSE: 0.8734
+2026-01-13 07:18:32,350 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:18:32,351 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:18:32,351 - config2_multi_celltype_v1 - INFO -     activity: r=0.6506 | rho=0.5740 | R2=0.0673 | RMSE=0.5106 | MAE=0.3937
+2026-01-13 07:18:32,351 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:18:32,351 - config2_multi_celltype_v1 - INFO -     activity: r=0.5949 | rho=0.5778 | R2=-0.0082 | RMSE=0.7899 | MAE=0.6104
+2026-01-13 07:18:32,351 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:18:32,352 - config2_multi_celltype_v1 - INFO -     activity: r=0.5632 | rho=0.4437 | R2=-0.5591 | RMSE=1.3196 | MAE=1.0563
+2026-01-13 07:18:32,352 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:18:32,849 - config2_multi_celltype_v1 - INFO - Epoch 4 completed in 154.5s
+2026-01-13 07:18:54,959 - config2_multi_celltype_v1 - INFO - Step 1500: NLL=0.6631, MSE=0.6693, grad=3.21, lr=1.09e-03
+2026-01-13 07:19:31,885 - config2_multi_celltype_v1 - INFO - Step 1600: NLL=0.7747, MSE=0.8196, grad=3.40, lr=1.18e-03
+2026-01-13 07:20:08,397 - config2_multi_celltype_v1 - INFO - Step 1700: NLL=0.7566, MSE=0.7603, grad=3.62, lr=1.28e-03
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO - EPOCH 5 SUMMARY (BEST)
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.6344 | MSE: 0.6344 | r: 0.6953 | rho: 0.6132 | R2: 0.3626 | RMSE: 0.6418
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.7233 | MSE: 0.7233 | r: 0.6135 | rho: 0.5540 | R2: 0.2268 | RMSE: 0.7046
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO -     activity: r=0.6559 | rho=0.5929 | R2=0.3124 | RMSE=0.4384 | MAE=0.3297
+2026-01-13 07:21:04,499 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:21:04,500 - config2_multi_celltype_v1 - INFO -     activity: r=0.6175 | rho=0.5970 | R2=0.2641 | RMSE=0.6748 | MAE=0.5020
+2026-01-13 07:21:04,500 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:21:04,500 - config2_multi_celltype_v1 - INFO -     activity: r=0.5673 | rho=0.4720 | R2=0.1039 | RMSE=1.0004 | MAE=0.7543
+2026-01-13 07:21:04,500 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:21:05,119 - config2_multi_celltype_v1 - INFO - Epoch 5 completed in 152.3s
+2026-01-13 07:21:30,146 - config2_multi_celltype_v1 - INFO - Step 1800: NLL=0.7151, MSE=0.7029, grad=3.09, lr=1.39e-03
+2026-01-13 07:22:06,398 - config2_multi_celltype_v1 - INFO - Step 1900: NLL=0.6696, MSE=0.7292, grad=2.57, lr=1.49e-03
+2026-01-13 07:22:43,657 - config2_multi_celltype_v1 - INFO - Step 2000: NLL=0.7075, MSE=0.7366, grad=3.36, lr=1.61e-03
+2026-01-13 07:23:39,932 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:23:39,933 - config2_multi_celltype_v1 - INFO - EPOCH 6 SUMMARY (BEST)
+2026-01-13 07:23:39,933 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:23:39,933 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.7405 | MSE: 0.7405 | r: 0.6883 | rho: 0.6112 | R2: 0.2565 | RMSE: 0.6866
+2026-01-13 07:23:39,933 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.8638 | MSE: 0.8638 | r: 0.6188 | rho: 0.5631 | R2: 0.1240 | RMSE: 0.7403
+2026-01-13 07:23:39,933 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:23:39,933 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:23:39,933 - config2_multi_celltype_v1 - INFO -     activity: r=0.6483 | rho=0.6020 | R2=0.0732 | RMSE=0.5090 | MAE=0.3876
+2026-01-13 07:23:39,934 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:23:39,934 - config2_multi_celltype_v1 - INFO -     activity: r=0.6251 | rho=0.6067 | R2=0.2498 | RMSE=0.6813 | MAE=0.5140
+2026-01-13 07:23:39,934 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:23:39,934 - config2_multi_celltype_v1 - INFO -     activity: r=0.5832 | rho=0.4807 | R2=0.0490 | RMSE=1.0306 | MAE=0.7855
+2026-01-13 07:23:39,934 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:23:40,441 - config2_multi_celltype_v1 - INFO - Epoch 6 completed in 155.3s
+2026-01-13 07:24:10,492 - config2_multi_celltype_v1 - INFO - Step 2100: NLL=0.6725, MSE=0.7038, grad=2.63, lr=1.72e-03
+2026-01-13 07:24:48,662 - config2_multi_celltype_v1 - INFO - Step 2200: NLL=0.7278, MSE=0.7137, grad=3.18, lr=1.85e-03
+2026-01-13 07:25:21,123 - config2_multi_celltype_v1 - INFO - Step 2300: NLL=0.6494, MSE=0.6770, grad=2.47, lr=1.97e-03
+2026-01-13 07:26:08,585 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:26:08,585 - config2_multi_celltype_v1 - INFO - EPOCH 7 SUMMARY 
+2026-01-13 07:26:08,585 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:26:08,585 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.6267 | MSE: 0.6267 | r: 0.6776 | rho: 0.5992 | R2: 0.3603 | RMSE: 0.6516
+2026-01-13 07:26:08,585 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.6936 | MSE: 0.6936 | r: 0.6095 | rho: 0.5529 | R2: 0.2248 | RMSE: 0.7104
+2026-01-13 07:26:08,586 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:26:08,586 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:26:08,586 - config2_multi_celltype_v1 - INFO -     activity: r=0.6515 | rho=0.5946 | R2=0.3573 | RMSE=0.4239 | MAE=0.3165
+2026-01-13 07:26:08,586 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:26:08,586 - config2_multi_celltype_v1 - INFO -     activity: r=0.6115 | rho=0.5992 | R2=0.3232 | RMSE=0.6471 | MAE=0.4767
+2026-01-13 07:26:08,586 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:26:08,586 - config2_multi_celltype_v1 - INFO -     activity: r=0.5656 | rho=0.4650 | R2=-0.0060 | RMSE=1.0600 | MAE=0.8104
+2026-01-13 07:26:08,586 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:26:08,861 - config2_multi_celltype_v1 - INFO - Epoch 7 completed in 148.4s
+2026-01-13 07:26:43,300 - config2_multi_celltype_v1 - INFO - Step 2400: NLL=0.7769, MSE=0.7318, grad=3.05, lr=2.10e-03
+2026-01-13 07:27:19,723 - config2_multi_celltype_v1 - INFO - Step 2500: NLL=0.6798, MSE=0.6904, grad=2.35, lr=2.24e-03
+2026-01-13 07:28:00,138 - config2_multi_celltype_v1 - INFO - Step 2600: NLL=0.6579, MSE=0.6796, grad=2.09, lr=2.38e-03
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO - EPOCH 8 SUMMARY (BEST)
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.7656 | MSE: 0.7656 | r: 0.7051 | rho: 0.6261 | R2: 0.2291 | RMSE: 0.7089
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.8445 | MSE: 0.8445 | r: 0.6412 | rho: 0.5820 | R2: 0.0992 | RMSE: 0.7602
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO -     activity: r=0.6914 | rho=0.6259 | R2=0.2234 | RMSE=0.4659 | MAE=0.3437
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:28:54,057 - config2_multi_celltype_v1 - INFO -     activity: r=0.6327 | rho=0.6288 | R2=0.0833 | RMSE=0.7532 | MAE=0.5598
+2026-01-13 07:28:54,058 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:28:54,058 - config2_multi_celltype_v1 - INFO -     activity: r=0.5996 | rho=0.4912 | R2=-0.0090 | RMSE=1.0616 | MAE=0.8079
+2026-01-13 07:28:54,058 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:28:54,795 - config2_multi_celltype_v1 - INFO - Epoch 8 completed in 165.9s
+2026-01-13 07:29:35,124 - config2_multi_celltype_v1 - INFO - Step 2700: NLL=0.5736, MSE=0.6129, grad=1.84, lr=2.52e-03
+2026-01-13 07:30:16,676 - config2_multi_celltype_v1 - INFO - Step 2800: NLL=0.6592, MSE=0.6351, grad=2.19, lr=2.67e-03
+2026-01-13 07:31:39,598 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:31:39,598 - config2_multi_celltype_v1 - INFO - EPOCH 9 SUMMARY (BEST)
+2026-01-13 07:31:39,599 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:31:39,599 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.7768 | MSE: 0.7768 | r: 0.7145 | rho: 0.6410 | R2: 0.2201 | RMSE: 0.7040
+2026-01-13 07:31:39,599 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.9433 | MSE: 0.9433 | r: 0.6510 | rho: 0.6008 | R2: 0.0335 | RMSE: 0.7795
+2026-01-13 07:31:39,599 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:31:39,599 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:31:39,599 - config2_multi_celltype_v1 - INFO -     activity: r=0.6820 | rho=0.6275 | R2=-0.0018 | RMSE=0.5292 | MAE=0.3957
+2026-01-13 07:31:39,599 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:31:39,599 - config2_multi_celltype_v1 - INFO -     activity: r=0.6607 | rho=0.6422 | R2=0.1783 | RMSE=0.7131 | MAE=0.5427
+2026-01-13 07:31:39,600 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:31:39,600 - config2_multi_celltype_v1 - INFO -     activity: r=0.6104 | rho=0.5326 | R2=-0.0762 | RMSE=1.0964 | MAE=0.8240
+2026-01-13 07:31:39,600 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:31:40,239 - config2_multi_celltype_v1 - INFO - Epoch 9 completed in 165.4s
+2026-01-13 07:31:45,920 - config2_multi_celltype_v1 - INFO - Step 2900: NLL=0.6193, MSE=0.6642, grad=1.63, lr=2.82e-03
+2026-01-13 07:32:23,810 - config2_multi_celltype_v1 - INFO - Step 3000: NLL=0.6102, MSE=0.6535, grad=1.54, lr=2.97e-03
+2026-01-13 07:33:06,234 - config2_multi_celltype_v1 - INFO - Step 3100: NLL=0.5779, MSE=0.6390, grad=1.32, lr=3.12e-03
+2026-01-13 07:34:30,003 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:34:30,003 - config2_multi_celltype_v1 - INFO - EPOCH 10 SUMMARY 
+2026-01-13 07:34:30,003 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:34:30,004 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.7927 | MSE: 0.7927 | r: 0.6903 | rho: 0.6326 | R2: 0.2190 | RMSE: 0.6900
+2026-01-13 07:34:30,004 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.9533 | MSE: 0.9533 | r: 0.6369 | rho: 0.5975 | R2: 0.0772 | RMSE: 0.7495
+2026-01-13 07:34:30,004 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:34:30,004 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:34:30,004 - config2_multi_celltype_v1 - INFO -     activity: r=0.6516 | rho=0.6237 | R2=0.0220 | RMSE=0.5229 | MAE=0.3836
+2026-01-13 07:34:30,004 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:34:30,004 - config2_multi_celltype_v1 - INFO -     activity: r=0.6338 | rho=0.6331 | R2=-0.0027 | RMSE=0.7877 | MAE=0.5782
+2026-01-13 07:34:30,004 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:34:30,005 - config2_multi_celltype_v1 - INFO -     activity: r=0.6254 | rho=0.5356 | R2=0.2122 | RMSE=0.9380 | MAE=0.7112
+2026-01-13 07:34:30,005 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:34:30,162 - config2_multi_celltype_v1 - INFO - Epoch 10 completed in 169.9s
+2026-01-13 07:34:40,101 - config2_multi_celltype_v1 - INFO - Step 3200: NLL=0.6468, MSE=0.6920, grad=1.29, lr=3.28e-03
+2026-01-13 07:35:25,376 - config2_multi_celltype_v1 - INFO - Step 3300: NLL=0.6322, MSE=0.6393, grad=1.64, lr=3.44e-03
+2026-01-13 07:36:04,882 - config2_multi_celltype_v1 - INFO - Step 3400: NLL=0.6241, MSE=0.6308, grad=2.04, lr=3.61e-03
+2026-01-13 07:37:15,684 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:37:15,685 - config2_multi_celltype_v1 - INFO - EPOCH 11 SUMMARY 
+2026-01-13 07:37:15,685 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:37:15,685 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.8380 | MSE: 0.8380 | r: 0.7054 | rho: 0.6424 | R2: 0.1673 | RMSE: 0.7192
+2026-01-13 07:37:15,685 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.9480 | MSE: 0.9480 | r: 0.6476 | rho: 0.6018 | R2: 0.0488 | RMSE: 0.7700
+2026-01-13 07:37:15,685 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:37:15,686 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:37:15,686 - config2_multi_celltype_v1 - INFO -     activity: r=0.6668 | rho=0.6278 | R2=0.0102 | RMSE=0.5260 | MAE=0.3924
+2026-01-13 07:37:15,686 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:37:15,686 - config2_multi_celltype_v1 - INFO -     activity: r=0.6632 | rho=0.6552 | R2=0.1012 | RMSE=0.7458 | MAE=0.5593
+2026-01-13 07:37:15,686 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:37:15,686 - config2_multi_celltype_v1 - INFO -     activity: r=0.6128 | rho=0.5226 | R2=0.0350 | RMSE=1.0382 | MAE=0.7928
+2026-01-13 07:37:15,687 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:37:15,808 - config2_multi_celltype_v1 - INFO - Epoch 11 completed in 165.6s
+2026-01-13 07:37:25,105 - config2_multi_celltype_v1 - INFO - Step 3500: NLL=0.6175, MSE=0.6256, grad=1.78, lr=3.77e-03
+2026-01-13 07:37:56,882 - config2_multi_celltype_v1 - INFO - Step 3600: NLL=0.6265, MSE=0.6645, grad=1.05, lr=3.94e-03
+2026-01-13 07:38:18,119 - config2_multi_celltype_v1 - INFO - Step 3700: NLL=0.6378, MSE=0.6461, grad=1.20, lr=4.11e-03
+2026-01-13 07:39:18,399 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:39:18,399 - config2_multi_celltype_v1 - INFO - EPOCH 12 SUMMARY 
+2026-01-13 07:39:18,400 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:39:18,400 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.7108 | MSE: 0.7108 | r: 0.7087 | rho: 0.6453 | R2: 0.2914 | RMSE: 0.6723
+2026-01-13 07:39:18,400 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.7947 | MSE: 0.7947 | r: 0.6451 | rho: 0.6012 | R2: 0.1706 | RMSE: 0.7259
+2026-01-13 07:39:18,400 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:39:18,400 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:39:18,401 - config2_multi_celltype_v1 - INFO -     activity: r=0.6863 | rho=0.6449 | R2=0.2621 | RMSE=0.4542 | MAE=0.3460
+2026-01-13 07:39:18,401 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:39:18,401 - config2_multi_celltype_v1 - INFO -     activity: r=0.6346 | rho=0.6292 | R2=0.1176 | RMSE=0.7390 | MAE=0.5648
+2026-01-13 07:39:18,401 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:39:18,401 - config2_multi_celltype_v1 - INFO -     activity: r=0.6144 | rho=0.5295 | R2=0.1321 | RMSE=0.9846 | MAE=0.7504
+2026-01-13 07:39:18,401 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:39:18,720 - config2_multi_celltype_v1 - INFO - Epoch 12 completed in 122.9s
+2026-01-13 07:39:30,087 - config2_multi_celltype_v1 - INFO - Step 3800: NLL=0.6079, MSE=0.6140, grad=1.07, lr=4.28e-03
+2026-01-13 07:39:48,210 - config2_multi_celltype_v1 - INFO - Step 3900: NLL=0.6290, MSE=0.6514, grad=1.21, lr=4.45e-03
+2026-01-13 07:40:07,094 - config2_multi_celltype_v1 - INFO - Step 4000: NLL=0.4867, MSE=0.5128, grad=0.83, lr=4.62e-03
+2026-01-13 07:41:07,639 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:41:07,639 - config2_multi_celltype_v1 - INFO - EPOCH 13 SUMMARY 
+2026-01-13 07:41:07,639 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:41:07,639 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.9013 | MSE: 0.9013 | r: 0.6987 | rho: 0.6420 | R2: 0.1065 | RMSE: 0.7387
+2026-01-13 07:41:07,640 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.1107 | MSE: 1.1107 | r: 0.6397 | rho: 0.6013 | R2: -0.0900 | RMSE: 0.8189
+2026-01-13 07:41:07,640 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:41:07,640 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:41:07,640 - config2_multi_celltype_v1 - INFO -     activity: r=0.6590 | rho=0.6202 | R2=-0.2138 | RMSE=0.5825 | MAE=0.4405
+2026-01-13 07:41:07,640 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:41:07,640 - config2_multi_celltype_v1 - INFO -     activity: r=0.6578 | rho=0.6546 | R2=0.0127 | RMSE=0.7816 | MAE=0.5892
+2026-01-13 07:41:07,640 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:41:07,641 - config2_multi_celltype_v1 - INFO -     activity: r=0.6023 | rho=0.5293 | R2=-0.0688 | RMSE=1.0926 | MAE=0.8288
+2026-01-13 07:41:07,641 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:41:07,754 - config2_multi_celltype_v1 - INFO - Epoch 13 completed in 109.0s
+2026-01-13 07:41:19,405 - config2_multi_celltype_v1 - INFO - Step 4100: NLL=0.5378, MSE=0.5988, grad=0.94, lr=4.79e-03
+2026-01-13 07:41:40,777 - config2_multi_celltype_v1 - INFO - Step 4200: NLL=0.5416, MSE=0.5565, grad=0.92, lr=4.97e-03
+2026-01-13 07:41:57,628 - config2_multi_celltype_v1 - INFO - Step 4300: NLL=0.5565, MSE=0.6014, grad=0.94, lr=5.14e-03
+2026-01-13 07:42:43,120 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:42:43,121 - config2_multi_celltype_v1 - INFO - EPOCH 14 SUMMARY (BEST)
+2026-01-13 07:42:43,121 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:42:43,121 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.6745 | MSE: 0.6745 | r: 0.7318 | rho: 0.6605 | R2: 0.3251 | RMSE: 0.6589
+2026-01-13 07:42:43,121 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.7230 | MSE: 0.7230 | r: 0.6768 | rho: 0.6181 | R2: 0.2402 | RMSE: 0.6956
+2026-01-13 07:42:43,122 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:42:43,122 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:42:43,122 - config2_multi_celltype_v1 - INFO -     activity: r=0.7172 | rho=0.6553 | R2=0.3456 | RMSE=0.4277 | MAE=0.3203
+2026-01-13 07:42:43,122 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:42:43,122 - config2_multi_celltype_v1 - INFO -     activity: r=0.6766 | rho=0.6696 | R2=0.1720 | RMSE=0.7158 | MAE=0.5384
+2026-01-13 07:42:43,123 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:42:43,123 - config2_multi_celltype_v1 - INFO -     activity: r=0.6367 | rho=0.5293 | R2=0.2032 | RMSE=0.9434 | MAE=0.7165
+2026-01-13 07:42:43,123 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:42:43,509 - config2_multi_celltype_v1 - INFO - Epoch 14 completed in 95.8s
+2026-01-13 07:42:57,674 - config2_multi_celltype_v1 - INFO - Step 4400: NLL=0.4965, MSE=0.5395, grad=0.83, lr=5.31e-03
+2026-01-13 07:43:29,129 - config2_multi_celltype_v1 - INFO - Step 4500: NLL=0.4580, MSE=0.4987, grad=0.64, lr=5.49e-03
+2026-01-13 07:44:05,020 - config2_multi_celltype_v1 - INFO - Step 4600: NLL=0.5075, MSE=0.5674, grad=0.61, lr=5.66e-03
+2026-01-13 07:44:56,822 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO - EPOCH 15 SUMMARY (BEST)
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.5096 | MSE: 0.5096 | r: 0.7502 | rho: 0.6757 | R2: 0.4867 | RMSE: 0.5786
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.5946 | MSE: 0.5946 | r: 0.6848 | rho: 0.6299 | R2: 0.3620 | RMSE: 0.6406
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO -     activity: r=0.7200 | rho=0.6561 | R2=0.4593 | RMSE=0.3888 | MAE=0.2887
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO -     activity: r=0.6967 | rho=0.6860 | R2=0.3489 | RMSE=0.6347 | MAE=0.4755
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO -     activity: r=0.6378 | rho=0.5477 | R2=0.2777 | RMSE=0.8982 | MAE=0.6804
+2026-01-13 07:44:56,823 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:44:57,394 - config2_multi_celltype_v1 - INFO - Epoch 15 completed in 133.9s
+2026-01-13 07:45:25,652 - config2_multi_celltype_v1 - INFO - Step 4700: NLL=0.5383, MSE=0.5672, grad=0.79, lr=5.83e-03
+2026-01-13 07:46:00,477 - config2_multi_celltype_v1 - INFO - Step 4800: NLL=0.4372, MSE=0.4897, grad=0.52, lr=6.01e-03
+2026-01-13 07:46:35,082 - config2_multi_celltype_v1 - INFO - Step 4900: NLL=0.5101, MSE=0.5364, grad=0.75, lr=6.18e-03
+2026-01-13 07:47:23,750 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:47:23,750 - config2_multi_celltype_v1 - INFO - EPOCH 16 SUMMARY 
+2026-01-13 07:47:23,751 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:47:23,751 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.5803 | MSE: 0.5803 | r: 0.7384 | rho: 0.6702 | R2: 0.4104 | RMSE: 0.6220
+2026-01-13 07:47:23,751 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.6179 | MSE: 0.6179 | r: 0.6770 | rho: 0.6266 | R2: 0.3327 | RMSE: 0.6553
+2026-01-13 07:47:23,751 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:47:23,751 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:47:23,751 - config2_multi_celltype_v1 - INFO -     activity: r=0.7037 | rho=0.6516 | R2=0.3985 | RMSE=0.4101 | MAE=0.3113
+2026-01-13 07:47:23,752 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:47:23,752 - config2_multi_celltype_v1 - INFO -     activity: r=0.6934 | rho=0.6815 | R2=0.4129 | RMSE=0.6027 | MAE=0.4514
+2026-01-13 07:47:23,752 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:47:23,752 - config2_multi_celltype_v1 - INFO -     activity: r=0.6339 | rho=0.5468 | R2=0.1867 | RMSE=0.9531 | MAE=0.7224
+2026-01-13 07:47:23,752 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:47:24,006 - config2_multi_celltype_v1 - INFO - Epoch 16 completed in 146.6s
+2026-01-13 07:47:55,535 - config2_multi_celltype_v1 - INFO - Step 5000: NLL=0.5644, MSE=0.5767, grad=0.66, lr=6.35e-03
+2026-01-13 07:48:29,601 - config2_multi_celltype_v1 - INFO - Step 5100: NLL=0.4970, MSE=0.5114, grad=0.61, lr=6.51e-03
+2026-01-13 07:49:07,196 - config2_multi_celltype_v1 - INFO - Step 5200: NLL=0.5514, MSE=0.5883, grad=0.70, lr=6.68e-03
+2026-01-13 07:49:55,804 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:49:55,804 - config2_multi_celltype_v1 - INFO - EPOCH 17 SUMMARY 
+2026-01-13 07:49:55,804 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:49:55,804 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.7359 | MSE: 0.7359 | r: 0.6827 | rho: 0.6266 | R2: 0.2377 | RMSE: 0.7141
+2026-01-13 07:49:55,806 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.7856 | MSE: 0.7856 | r: 0.6211 | rho: 0.5853 | R2: 0.0959 | RMSE: 0.7676
+2026-01-13 07:49:55,807 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:49:55,807 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:49:55,807 - config2_multi_celltype_v1 - INFO -     activity: r=0.6647 | rho=0.6261 | R2=0.2478 | RMSE=0.4586 | MAE=0.3358
+2026-01-13 07:49:55,807 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:49:55,807 - config2_multi_celltype_v1 - INFO -     activity: r=0.6751 | rho=0.6650 | R2=0.3323 | RMSE=0.6428 | MAE=0.4838
+2026-01-13 07:49:55,807 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:49:55,807 - config2_multi_celltype_v1 - INFO -     activity: r=0.5236 | rho=0.4646 | R2=-0.2922 | RMSE=1.2014 | MAE=0.8831
+2026-01-13 07:49:55,807 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:49:56,059 - config2_multi_celltype_v1 - INFO - Epoch 17 completed in 152.1s
+2026-01-13 07:50:37,240 - config2_multi_celltype_v1 - INFO - Step 5300: NLL=0.5777, MSE=0.5825, grad=0.85, lr=6.85e-03
+2026-01-13 07:51:15,029 - config2_multi_celltype_v1 - INFO - Step 5400: NLL=0.5264, MSE=0.5292, grad=0.57, lr=7.01e-03
+2026-01-13 07:52:39,472 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO - EPOCH 18 SUMMARY 
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.7603 | MSE: 0.7603 | r: 0.7287 | rho: 0.6546 | R2: 0.2366 | RMSE: 0.7039
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.8696 | MSE: 0.8696 | r: 0.6707 | rho: 0.6108 | R2: 0.0771 | RMSE: 0.7687
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO -     activity: r=0.6886 | rho=0.6393 | R2=0.1840 | RMSE=0.4776 | MAE=0.3603
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO -     activity: r=0.7038 | rho=0.6850 | R2=0.0807 | RMSE=0.7542 | MAE=0.5985
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO -     activity: r=0.6196 | rho=0.5082 | R2=-0.0335 | RMSE=1.0744 | MAE=0.8336
+2026-01-13 07:52:39,473 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:52:39,768 - config2_multi_celltype_v1 - INFO - Epoch 18 completed in 163.7s
+2026-01-13 07:52:44,762 - config2_multi_celltype_v1 - INFO - Step 5500: NLL=0.6359, MSE=0.6558, grad=0.73, lr=7.17e-03
+2026-01-13 07:53:24,643 - config2_multi_celltype_v1 - INFO - Step 5600: NLL=0.5667, MSE=0.6159, grad=0.69, lr=7.32e-03
+2026-01-13 07:54:04,036 - config2_multi_celltype_v1 - INFO - Step 5700: NLL=0.5188, MSE=0.5680, grad=0.65, lr=7.48e-03
+2026-01-13 07:55:21,949 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:55:21,949 - config2_multi_celltype_v1 - INFO - EPOCH 19 SUMMARY 
+2026-01-13 07:55:21,950 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:55:21,950 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.0295 | MSE: 1.0295 | r: 0.6843 | rho: 0.6283 | R2: -0.0268 | RMSE: 0.8025
+2026-01-13 07:55:21,950 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.2598 | MSE: 1.2598 | r: 0.6287 | rho: 0.5849 | R2: -0.2373 | RMSE: 0.8729
+2026-01-13 07:55:21,950 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:55:21,950 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:55:21,950 - config2_multi_celltype_v1 - INFO -     activity: r=0.6467 | rho=0.6192 | R2=-0.3521 | RMSE=0.6148 | MAE=0.4671
+2026-01-13 07:55:21,951 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:55:21,951 - config2_multi_celltype_v1 - INFO -     activity: r=0.6456 | rho=0.6443 | R2=-0.1687 | RMSE=0.8504 | MAE=0.6432
+2026-01-13 07:55:21,951 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:55:21,951 - config2_multi_celltype_v1 - INFO -     activity: r=0.5939 | rho=0.4912 | R2=-0.1910 | RMSE=1.1534 | MAE=0.8996
+2026-01-13 07:55:21,951 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:55:22,259 - config2_multi_celltype_v1 - INFO - Epoch 19 completed in 162.5s
+2026-01-13 07:55:32,238 - config2_multi_celltype_v1 - INFO - Step 5800: NLL=0.4761, MSE=0.4947, grad=0.57, lr=7.63e-03
+2026-01-13 07:56:12,489 - config2_multi_celltype_v1 - INFO - Step 5900: NLL=0.5114, MSE=0.5440, grad=0.54, lr=7.78e-03
+2026-01-13 07:56:51,580 - config2_multi_celltype_v1 - INFO - Step 6000: NLL=0.4891, MSE=0.5560, grad=0.64, lr=7.92e-03
+2026-01-13 07:58:06,970 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:58:06,970 - config2_multi_celltype_v1 - INFO - EPOCH 20 SUMMARY 
+2026-01-13 07:58:06,970 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:58:06,971 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.1190 | MSE: 1.1190 | r: 0.6870 | rho: 0.6356 | R2: -0.1337 | RMSE: 0.8684
+2026-01-13 07:58:06,971 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.1470 | MSE: 1.1470 | r: 0.6241 | rho: 0.5922 | R2: -0.2829 | RMSE: 0.9143
+2026-01-13 07:58:06,971 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 07:58:06,971 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 07:58:06,971 - config2_multi_celltype_v1 - INFO -     activity: r=0.7063 | rho=0.6621 | R2=0.0880 | RMSE=0.5049 | MAE=0.3980
+2026-01-13 07:58:06,971 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 07:58:06,971 - config2_multi_celltype_v1 - INFO -     activity: r=0.6159 | rho=0.6258 | R2=-0.4285 | RMSE=0.9402 | MAE=0.7070
+2026-01-13 07:58:06,972 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 07:58:06,972 - config2_multi_celltype_v1 - INFO -     activity: r=0.5501 | rho=0.4887 | R2=-0.5080 | RMSE=1.2978 | MAE=1.0368
+2026-01-13 07:58:06,972 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 07:58:07,283 - config2_multi_celltype_v1 - INFO - Epoch 20 completed in 165.0s
+2026-01-13 07:58:21,378 - config2_multi_celltype_v1 - INFO - Step 6100: NLL=0.5244, MSE=0.5510, grad=0.62, lr=8.07e-03
+2026-01-13 07:59:01,652 - config2_multi_celltype_v1 - INFO - Step 6200: NLL=0.5732, MSE=0.6032, grad=0.60, lr=8.20e-03
+2026-01-13 07:59:39,030 - config2_multi_celltype_v1 - INFO - Step 6300: NLL=0.4953, MSE=0.4932, grad=0.59, lr=8.34e-03
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO - EPOCH 21 SUMMARY 
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.0604 | MSE: 1.0604 | r: 0.7079 | rho: 0.6538 | R2: -0.0364 | RMSE: 0.7959
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.1829 | MSE: 1.1829 | r: 0.6517 | rho: 0.6152 | R2: -0.1853 | RMSE: 0.8516
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO -     activity: r=0.6946 | rho=0.6526 | R2=0.0005 | RMSE=0.5286 | MAE=0.4019
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO -     activity: r=0.6609 | rho=0.6597 | R2=-0.6099 | RMSE=0.9981 | MAE=0.7999
+2026-01-13 08:00:48,439 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:00:48,440 - config2_multi_celltype_v1 - INFO -     activity: r=0.5997 | rho=0.5331 | R2=0.0537 | RMSE=1.0281 | MAE=0.7826
+2026-01-13 08:00:48,440 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:00:48,745 - config2_multi_celltype_v1 - INFO - Epoch 21 completed in 161.5s
+2026-01-13 08:01:07,706 - config2_multi_celltype_v1 - INFO - Step 6400: NLL=0.5536, MSE=0.6015, grad=0.67, lr=8.47e-03
+2026-01-13 08:01:46,363 - config2_multi_celltype_v1 - INFO - Step 6500: NLL=0.5945, MSE=0.5627, grad=0.65, lr=8.59e-03
+2026-01-13 08:02:23,826 - config2_multi_celltype_v1 - INFO - Step 6600: NLL=0.6292, MSE=0.6462, grad=0.75, lr=8.71e-03
+2026-01-13 08:03:29,666 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:03:29,666 - config2_multi_celltype_v1 - INFO - EPOCH 22 SUMMARY 
+2026-01-13 08:03:29,666 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:03:29,666 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.0005 | MSE: 1.0005 | r: 0.6851 | rho: 0.6206 | R2: -0.0147 | RMSE: 0.8153
+2026-01-13 08:03:29,666 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.0910 | MSE: 1.0910 | r: 0.6349 | rho: 0.5863 | R2: -0.1667 | RMSE: 0.8652
+2026-01-13 08:03:29,667 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:03:29,667 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:03:29,667 - config2_multi_celltype_v1 - INFO -     activity: r=0.6627 | rho=0.6152 | R2=-0.0624 | RMSE=0.5449 | MAE=0.4145
+2026-01-13 08:03:29,667 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:03:29,668 - config2_multi_celltype_v1 - INFO -     activity: r=0.6644 | rho=0.6598 | R2=-0.0574 | RMSE=0.8089 | MAE=0.6174
+2026-01-13 08:03:29,668 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:03:29,668 - config2_multi_celltype_v1 - INFO -     activity: r=0.5778 | rho=0.4839 | R2=-0.3802 | RMSE=1.2416 | MAE=0.9765
+2026-01-13 08:03:29,668 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:03:29,956 - config2_multi_celltype_v1 - INFO - Epoch 22 completed in 161.2s
+2026-01-13 08:03:54,026 - config2_multi_celltype_v1 - INFO - Step 6700: NLL=0.5884, MSE=0.6521, grad=0.71, lr=8.83e-03
+2026-01-13 08:04:32,708 - config2_multi_celltype_v1 - INFO - Step 6800: NLL=0.4819, MSE=0.4947, grad=0.59, lr=8.94e-03
+2026-01-13 08:05:10,878 - config2_multi_celltype_v1 - INFO - Step 6900: NLL=0.6178, MSE=0.5988, grad=0.70, lr=9.05e-03
+2026-01-13 08:06:10,969 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:06:10,969 - config2_multi_celltype_v1 - INFO - EPOCH 23 SUMMARY 
+2026-01-13 08:06:10,970 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:06:10,970 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.7220 | MSE: 0.7220 | r: 0.6957 | rho: 0.6218 | R2: 0.2893 | RMSE: 0.6416
+2026-01-13 08:06:10,970 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.9239 | MSE: 0.9239 | r: 0.6449 | rho: 0.5869 | R2: 0.1647 | RMSE: 0.6952
+2026-01-13 08:06:10,970 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:06:10,971 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:06:10,971 - config2_multi_celltype_v1 - INFO -     activity: r=0.6522 | rho=0.6106 | R2=-0.1632 | RMSE=0.5702 | MAE=0.4536
+2026-01-13 08:06:10,971 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:06:10,971 - config2_multi_celltype_v1 - INFO -     activity: r=0.6742 | rho=0.6594 | R2=0.3614 | RMSE=0.6286 | MAE=0.4797
+2026-01-13 08:06:10,971 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:06:10,972 - config2_multi_celltype_v1 - INFO -     activity: r=0.6082 | rho=0.4906 | R2=0.2958 | RMSE=0.8869 | MAE=0.6797
+2026-01-13 08:06:10,972 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:06:11,227 - config2_multi_celltype_v1 - INFO - Epoch 23 completed in 161.3s
+2026-01-13 08:06:36,938 - config2_multi_celltype_v1 - INFO - Step 7000: NLL=0.6033, MSE=0.6121, grad=0.66, lr=9.15e-03
+2026-01-13 08:07:17,127 - config2_multi_celltype_v1 - INFO - Step 7100: NLL=0.5700, MSE=0.5281, grad=0.85, lr=9.24e-03
+2026-01-13 08:07:56,963 - config2_multi_celltype_v1 - INFO - Step 7200: NLL=0.5731, MSE=0.6313, grad=0.58, lr=9.34e-03
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO - EPOCH 24 SUMMARY 
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 2.2250 | MSE: 2.2250 | r: 0.6049 | rho: 0.5674 | R2: -1.1728 | RMSE: 1.1532
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 2.2966 | MSE: 2.2966 | r: 0.5691 | rho: 0.5374 | R2: -1.3649 | RMSE: 1.1848
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO -     activity: r=0.6171 | rho=0.6077 | R2=-0.4225 | RMSE=0.6306 | MAE=0.5003
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO -     activity: r=0.5484 | rho=0.5477 | R2=-3.0739 | RMSE=1.5878 | MAE=1.3419
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:09:00,284 - config2_multi_celltype_v1 - INFO -     activity: r=0.5418 | rho=0.4567 | R2=-0.5982 | RMSE=1.3361 | MAE=1.0801
+2026-01-13 08:09:00,285 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:09:00,543 - config2_multi_celltype_v1 - INFO - Epoch 24 completed in 169.3s
+2026-01-13 08:09:30,118 - config2_multi_celltype_v1 - INFO - Step 7300: NLL=0.5885, MSE=0.5983, grad=0.63, lr=9.42e-03
+2026-01-13 08:10:05,165 - config2_multi_celltype_v1 - INFO - Step 7400: NLL=0.5324, MSE=0.5534, grad=0.73, lr=9.50e-03
+2026-01-13 08:10:42,647 - config2_multi_celltype_v1 - INFO - Step 7500: NLL=0.5970, MSE=0.5822, grad=0.82, lr=9.58e-03
+2026-01-13 08:11:35,386 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:11:35,386 - config2_multi_celltype_v1 - INFO - EPOCH 25 SUMMARY 
+2026-01-13 08:11:35,386 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:11:35,386 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.0834 | MSE: 1.0834 | r: 0.6379 | rho: 0.5995 | R2: -0.1114 | RMSE: 0.8573
+2026-01-13 08:11:35,386 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.2498 | MSE: 1.2498 | r: 0.5595 | rho: 0.5335 | R2: -0.5088 | RMSE: 0.9949
+2026-01-13 08:11:35,387 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:11:35,387 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:11:35,387 - config2_multi_celltype_v1 - INFO -     activity: r=0.6276 | rho=0.6014 | R2=-0.1466 | RMSE=0.5661 | MAE=0.4259
+2026-01-13 08:11:35,387 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:11:35,387 - config2_multi_celltype_v1 - INFO -     activity: r=0.6495 | rho=0.6504 | R2=-0.0331 | RMSE=0.7996 | MAE=0.6166
+2026-01-13 08:11:35,387 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:11:35,388 - config2_multi_celltype_v1 - INFO -     activity: r=0.4013 | rho=0.3487 | R2=-1.3469 | RMSE=1.6190 | MAE=1.2735
+2026-01-13 08:11:35,388 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:11:35,658 - config2_multi_celltype_v1 - INFO - Epoch 25 completed in 155.1s
+2026-01-13 08:12:07,882 - config2_multi_celltype_v1 - INFO - Step 7600: NLL=0.5508, MSE=0.5813, grad=0.69, lr=9.64e-03
+2026-01-13 08:12:44,135 - config2_multi_celltype_v1 - INFO - Step 7700: NLL=0.5303, MSE=0.5767, grad=0.60, lr=9.71e-03
+2026-01-13 08:13:20,630 - config2_multi_celltype_v1 - INFO - Step 7800: NLL=0.5504, MSE=0.5400, grad=0.55, lr=9.76e-03
+2026-01-13 08:14:05,757 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:14:05,758 - config2_multi_celltype_v1 - INFO - EPOCH 26 SUMMARY 
+2026-01-13 08:14:05,758 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:14:05,758 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.9140 | MSE: 0.9140 | r: 0.6944 | rho: 0.6371 | R2: 0.0886 | RMSE: 0.7460
+2026-01-13 08:14:05,759 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.1528 | MSE: 1.1528 | r: 0.6349 | rho: 0.5954 | R2: -0.0909 | RMSE: 0.8083
+2026-01-13 08:14:05,759 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:14:05,759 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:14:05,759 - config2_multi_celltype_v1 - INFO -     activity: r=0.6520 | rho=0.6206 | R2=-0.3832 | RMSE=0.6218 | MAE=0.4780
+2026-01-13 08:14:05,759 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:14:05,760 - config2_multi_celltype_v1 - INFO -     activity: r=0.6839 | rho=0.6794 | R2=0.1541 | RMSE=0.7235 | MAE=0.5443
+2026-01-13 08:14:05,760 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:14:05,760 - config2_multi_celltype_v1 - INFO -     activity: r=0.5688 | rho=0.4862 | R2=-0.0436 | RMSE=1.0796 | MAE=0.8243
+2026-01-13 08:14:05,760 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:14:06,114 - config2_multi_celltype_v1 - INFO - Epoch 26 completed in 150.5s
+2026-01-13 08:14:43,080 - config2_multi_celltype_v1 - INFO - Step 7900: NLL=0.5345, MSE=0.5563, grad=0.64, lr=9.81e-03
+2026-01-13 08:15:19,053 - config2_multi_celltype_v1 - INFO - Step 8000: NLL=0.5652, MSE=0.6019, grad=0.67, lr=9.86e-03
+2026-01-13 08:16:43,639 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:16:43,639 - config2_multi_celltype_v1 - INFO - EPOCH 27 SUMMARY 
+2026-01-13 08:16:43,639 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:16:43,639 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 0.9150 | MSE: 0.9150 | r: 0.6707 | rho: 0.5555 | R2: 0.0670 | RMSE: 0.7792
+2026-01-13 08:16:43,640 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.9799 | MSE: 0.9799 | r: 0.6136 | rho: 0.5136 | R2: -0.0258 | RMSE: 0.8060
+2026-01-13 08:16:43,640 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:16:43,640 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:16:43,640 - config2_multi_celltype_v1 - INFO -     activity: r=0.5731 | rho=0.4602 | R2=-0.0390 | RMSE=0.5389 | MAE=0.4008
+2026-01-13 08:16:43,640 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:16:43,640 - config2_multi_celltype_v1 - INFO -     activity: r=0.6796 | rho=0.6539 | R2=0.1840 | RMSE=0.7106 | MAE=0.5313
+2026-01-13 08:16:43,640 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:16:43,641 - config2_multi_celltype_v1 - INFO -     activity: r=0.5881 | rho=0.4267 | R2=-0.2224 | RMSE=1.1685 | MAE=0.9208
+2026-01-13 08:16:43,641 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:16:43,922 - config2_multi_celltype_v1 - INFO - Epoch 27 completed in 157.8s
+2026-01-13 08:16:49,007 - config2_multi_celltype_v1 - INFO - Step 8100: NLL=0.5777, MSE=0.6025, grad=0.60, lr=9.90e-03
+2026-01-13 08:17:27,491 - config2_multi_celltype_v1 - INFO - Step 8200: NLL=0.4765, MSE=0.5207, grad=0.40, lr=9.93e-03
+2026-01-13 08:18:06,435 - config2_multi_celltype_v1 - INFO - Step 8300: NLL=0.5813, MSE=0.6340, grad=0.63, lr=9.96e-03
+2026-01-13 08:19:24,123 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:19:24,124 - config2_multi_celltype_v1 - INFO - EPOCH 28 SUMMARY 
+2026-01-13 08:19:24,124 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:19:24,124 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.0268 | MSE: 1.0268 | r: 0.6849 | rho: 0.6029 | R2: -0.0585 | RMSE: 0.8503
+2026-01-13 08:19:24,124 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 0.9968 | MSE: 0.9968 | r: 0.6264 | rho: 0.5594 | R2: -0.2050 | RMSE: 0.8950
+2026-01-13 08:19:24,124 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:19:24,125 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:19:24,125 - config2_multi_celltype_v1 - INFO -     activity: r=0.6649 | rho=0.6017 | R2=0.2888 | RMSE=0.4459 | MAE=0.3376
+2026-01-13 08:19:24,125 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:19:24,125 - config2_multi_celltype_v1 - INFO -     activity: r=0.6872 | rho=0.6678 | R2=-0.2402 | RMSE=0.8760 | MAE=0.7077
+2026-01-13 08:19:24,125 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:19:24,125 - config2_multi_celltype_v1 - INFO -     activity: r=0.5271 | rho=0.4087 | R2=-0.6636 | RMSE=1.3631 | MAE=1.0701
+2026-01-13 08:19:24,126 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:19:24,365 - config2_multi_celltype_v1 - INFO - Epoch 28 completed in 160.4s
+2026-01-13 08:19:32,962 - config2_multi_celltype_v1 - INFO - Step 8400: NLL=0.5163, MSE=0.5739, grad=0.47, lr=9.98e-03
+2026-01-13 08:20:09,236 - config2_multi_celltype_v1 - INFO - Step 8500: NLL=0.5528, MSE=0.5643, grad=0.57, lr=9.99e-03
+2026-01-13 08:20:45,788 - config2_multi_celltype_v1 - INFO - Step 8600: NLL=0.5635, MSE=0.5436, grad=0.65, lr=1.00e-02
+2026-01-13 08:21:54,478 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:21:54,478 - config2_multi_celltype_v1 - INFO - EPOCH 29 SUMMARY 
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.2580 | MSE: 1.2580 | r: 0.6633 | rho: 0.5901 | R2: -0.2623 | RMSE: 0.9054
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.3951 | MSE: 1.3951 | r: 0.6041 | rho: 0.5440 | R2: -0.5059 | RMSE: 0.9844
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO -     activity: r=0.6639 | rho=0.5976 | R2=-0.1812 | RMSE=0.5746 | MAE=0.4509
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO -     activity: r=0.5817 | rho=0.5756 | R2=-0.6912 | RMSE=1.0230 | MAE=0.7808
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO -     activity: r=0.5668 | rho=0.4588 | R2=-0.6451 | RMSE=1.3555 | MAE=1.0857
+2026-01-13 08:21:54,479 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:21:54,733 - config2_multi_celltype_v1 - INFO - Epoch 29 completed in 150.4s
+2026-01-13 08:22:07,199 - config2_multi_celltype_v1 - INFO - Step 8700: NLL=0.5109, MSE=0.5543, grad=0.64, lr=1.00e-02
+2026-01-13 08:22:45,474 - config2_multi_celltype_v1 - INFO - Step 8800: NLL=0.5315, MSE=0.5743, grad=0.50, lr=1.00e-02
+2026-01-13 08:23:22,585 - config2_multi_celltype_v1 - INFO - Step 8900: NLL=0.4999, MSE=0.5144, grad=0.46, lr=1.00e-02
+2026-01-13 08:24:27,035 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO - EPOCH 30 SUMMARY 
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO - [TRAIN] NLL: 1.5542 | MSE: 1.5542 | r: 0.6299 | rho: 0.5217 | R2: -0.5575 | RMSE: 1.0067
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO - [VAL]   NLL: 1.7335 | MSE: 1.7335 | r: 0.5709 | rho: 0.4791 | R2: -0.8047 | RMSE: 1.0686
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO -     activity: r=0.5171 | rho=0.4069 | R2=-0.5274 | RMSE=0.6534 | MAE=0.4998
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO -     activity: r=0.6569 | rho=0.6510 | R2=-1.1032 | RMSE=1.1408 | MAE=0.9821
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO -     activity: r=0.5388 | rho=0.3792 | R2=-0.7836 | RMSE=1.4115 | MAE=1.1570
+2026-01-13 08:24:27,036 - config2_multi_celltype_v1 - INFO - ================================================================================
+2026-01-13 08:24:27,277 - config2_multi_celltype_v1 - INFO - Early stopping triggered after 30 epochs (patience=15)
+2026-01-13 08:24:27,277 - config2_multi_celltype_v1 - INFO - Training complete. Running final evaluation...
+2026-01-13 08:24:36,432 - config2_multi_celltype_v1 - INFO - 
+============================================================
+2026-01-13 08:24:36,432 - config2_multi_celltype_v1 - INFO - Evaluating on TEST sets...
+2026-01-13 08:24:36,433 - config2_multi_celltype_v1 - INFO - ============================================================
+2026-01-13 08:24:36,433 - config2_multi_celltype_v1 - INFO -   Evaluating encode4_k562 (test)...
+2026-01-13 08:24:40,277 - config2_multi_celltype_v1 - INFO -     activity: r=0.5142, rho=0.3995, R2=-0.5377, RMSE=1.2383 (n=22631)
+2026-01-13 08:24:40,277 - config2_multi_celltype_v1 - INFO -   Evaluating encode4_hepg2 (test)...
+2026-01-13 08:24:43,135 - config2_multi_celltype_v1 - INFO -     activity: r=0.6665, rho=0.6544, R2=-1.1444, RMSE=1.4462 (n=13953)
+2026-01-13 08:24:43,135 - config2_multi_celltype_v1 - INFO -   Evaluating encode4_wtc11 (test)...
+2026-01-13 08:24:44,982 - config2_multi_celltype_v1 - INFO -     activity: r=0.5556, rho=0.4032, R2=-0.7067, RMSE=1.3127 (n=5597)
+2026-01-13 08:24:44,983 - config2_multi_celltype_v1 - INFO - 
+============================================================
+2026-01-13 08:24:44,983 - config2_multi_celltype_v1 - INFO - Evaluating on CALIBRATION sets...
+2026-01-13 08:24:44,984 - config2_multi_celltype_v1 - INFO - ============================================================
+2026-01-13 08:24:44,984 - config2_multi_celltype_v1 - INFO -   Evaluating encode4_k562 (calibration)...
+2026-01-13 08:24:48,729 - config2_multi_celltype_v1 - INFO -     activity: r=0.5243, rho=0.4106, R2=-0.5149, RMSE=1.2079 (n=22633)
+2026-01-13 08:24:48,730 - config2_multi_celltype_v1 - INFO -   Evaluating encode4_hepg2 (calibration)...
+2026-01-13 08:24:51,337 - config2_multi_celltype_v1 - INFO -     activity: r=0.6635, rho=0.6459, R2=-1.0778, RMSE=1.4556 (n=14002)
+2026-01-13 08:24:51,337 - config2_multi_celltype_v1 - INFO -   Evaluating encode4_wtc11 (calibration)...
+2026-01-13 08:24:53,005 - config2_multi_celltype_v1 - INFO -     activity: r=0.5353, rho=0.3973, R2=-0.7418, RMSE=1.2997 (n=5595)
+2026-01-13 08:24:53,006 - config2_multi_celltype_v1 - INFO - Results saved to results/config2_multi_celltype_v1/final_results.json

@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_hepg2_v2_full_mouse_esc_10pct",
+  "n_train": 1929,
+  "n_trainable_params": 1322465,
+  "best_epoch": 9,
+  "val_metrics": {
+    "spearman_r": 0.20029766655303702
+  },
+  "test_metrics": {
+    "spearman_r": 0.18375334766979565,
+    "pearson_r": 0.21404237121556846,
+    "auroc": 0.591048453172409,
+    "mse": 3.79100082549462,
+    "mae": 1.6514170291609305,
+    "loss": 3.7947179982156465
+  },
+  "source_model": "cadence_hepg2_v2",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.1,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-18T17:18:47.149404"
+}

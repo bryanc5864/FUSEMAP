@@ -1,0 +1,54 @@
+================================================================================
+INCREMENTAL CONTROL ANALYSIS REPORT
+================================================================================
+
+This analysis tests whether TF binding mediates physics effects on activity.
+If physics coefficients attenuate when adding PWM features, it suggests mediation.
+
+========================================
+Cell Type: S2
+========================================
+
+--- Incremental Model Performance ---
+Step 1 (Physics only):       R² = 0.1436 +/- 0.0015
+Step 2 (+ PWM aggregates):   R² = 0.1844 +/- 0.0019  (Delta = +0.0409)
+Step 3 (+ all PWM):          R² = 0.2156 +/- 0.0023  (Delta = +0.0720)
+
+--- Coefficient Attenuation Summary ---
+Mean attenuation: -208.55%
+Median attenuation: 9.20%
+Fully attenuated (>90%): 16 features
+Sign changes: 40 features
+
+--- Most Attenuated Features (likely mediated by TF binding) ---
+  bend_max_bend_w9_global_max             : 100.00%
+  stiff_roll_zscore_max                   : 100.00%
+  stiff_energy_distribution_entropy_raw   : 100.00%
+  thermo_dG_p75                           : 100.00%
+  entropy_global_shannon_entropy          : 100.00%
+  entropy_normalized_shannon_entropy      : 100.00%
+  advanced_melting_melting_dG_p95         : 100.00%
+  advanced_melting_melting_dG_p90         : 99.60%
+  thermo_dG_iqr                           : 99.22%
+  bend_max_bend_w11_global_max            : 98.99%
+
+--- Least Attenuated Features (independent of TF binding) ---
+  entropy_complexity_index                : -18607.98%
+  advanced_melting_max_melting_dG         : -8790.40%
+  stiff_tilt_zscore_mean                  : -7493.95%
+  stiff_roll_zscore_mean                  : -5304.28%
+  bend_max_bend_w7_fraction_at_global_max : -2431.50%
+  advanced_stress_mean_stress_opening     : -1946.70%
+  advanced_stress_max_stress_opening      : -1532.02%
+  thermo_dG_local_max_std                 : -1530.72%
+  entropy_kmer3_entropy_w50_mean          : -1389.89%
+  stiff_shift_zscore_var                  : -1346.00%
+
+========================================
+INTERPRETATION
+========================================
+
+Mean coefficient attenuation: -208.6%
+Mean R² improvement from PWM: +0.0720
+
+>>> Low attenuation suggests physics effects are INDEPENDENT of TF binding

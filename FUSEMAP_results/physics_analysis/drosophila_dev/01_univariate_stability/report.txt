@@ -1,0 +1,55 @@
+================================================================================
+UNIVARIATE STABILITY ANALYSIS REPORT
+================================================================================
+
+
+========================================
+Cell Type: S2
+========================================
+
+Total features analyzed: 390
+Significant (p < 0.05): 374
+Highly significant (p < 0.01): 368
+
+--- Top 15 Positive Correlations ---
+                               feature category  pearson_r  partial_r_gc  sign_consistency
+               thermo_dG_local_min_std   thermo   0.213959      0.175236               1.0
+            advanced_stress_stress_p25 advanced   0.167494      0.101732               1.0
+                         thermo_dG_p25   thermo   0.166393      0.099823               1.0
+       advanced_melting_melting_dG_p25 advanced   0.166393      0.099823               1.0
+                  pwm_max_of_max_score      pwm   0.157009      0.174054               1.0
+advanced_stacking_skew_stacking_energy advanced   0.148725      0.070668               1.0
+                   pwm_GATAe_max_score      pwm   0.144452      0.122676               1.0
+                pwm_Trl_GAGA_var_score      pwm   0.142542      0.159605               1.0
+                  pwm_GATAe_top_k_mean      pwm   0.142182      0.104547               1.0
+           pwm_GATAe_num_high_affinity      pwm   0.141322      0.124605               1.0
+            advanced_stress_stress_p75 advanced   0.138935      0.057938               1.0
+                 pwm_Kay_Fos_max_score      pwm   0.138262      0.123574               1.0
+               entropy_shannon_w10_var  entropy   0.136837      0.094470               1.0
+                pwm_GATAe_total_weight      pwm   0.134892      0.129402               1.0
+         pwm_Jra_Jun_num_high_affinity      pwm   0.133341      0.129939               1.0
+
+--- Top 15 Negative Correlations ---
+                                feature category  pearson_r  partial_r_gc  sign_consistency
+                          thermo_dS_p90   thermo  -0.194682     -0.138788               1.0
+                   pwm_sum_top5_delta_g      pwm  -0.165211     -0.206319               1.0
+advanced_stacking_stacking_gc_rich_mean advanced  -0.157929     -0.162244               1.0
+                        pwm_min_delta_g      pwm  -0.154133     -0.175467               1.0
+                    pwm_ZIPIC_var_score      pwm  -0.150747     -0.079535               1.0
+                     pwm_suHw_var_score      pwm  -0.146271     -0.102745               1.0
+                      pwm_GATAe_delta_g      pwm  -0.146077     -0.123486               1.0
+ advanced_stacking_mean_stacking_energy advanced  -0.144922     -0.073954               1.0
+                    pwm_Kay_Fos_delta_g      pwm  -0.141105     -0.125294               1.0
+         advanced_stacking_stacking_p50 advanced  -0.141050     -0.075497               1.0
+                stiff_gc_content_global    stiff  -0.138390     -0.048793               1.0
+         pwm_Daughterless_da_mean_score      pwm  -0.138153     -0.002955               1.0
+              pwm_Achaete_ac_mean_score      pwm  -0.138055     -0.000326               1.0
+         entropy_kmer2_entropy_w30_mean  entropy  -0.137522     -0.086397               1.0
+         entropy_kmer3_entropy_w30_mean  entropy  -0.136840     -0.099376               1.0
+
+--- By Category Summary ---
+  thermo    : n= 45, mean|r|=0.072, max|r|=0.214
+  stiff     : n= 62, mean|r|=0.021, max|r|=0.138
+  bend      : n= 43, mean|r|=0.065, max|r|=0.107
+  entropy   : n= 62, mean|r|=0.068, max|r|=0.138
+  advanced  : n= 53, mean|r|=0.076, max|r|=0.167

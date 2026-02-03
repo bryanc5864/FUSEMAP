@@ -1,0 +1,18 @@
+{
+  "source_model": "PhysicsVAE_K562",
+  "target_dataset": "S2",
+  "source_cell_type": "K562",
+  "n_samples": 5000,
+  "n_matched_features": 267,
+  "n_source_features": 515,
+  "source_seq_length": 230,
+  "metrics": {
+    "reconstruction_accuracy": 0.29036869565217394,
+    "reconstruction_loss": 2.92742440700531,
+    "perplexity": 18.67161277972093,
+    "mean_position_accuracy": 0.290368695652174,
+    "latent_mean": 0.031464237719774246,
+    "latent_std": 0.21780428290367126
+  },
+  "timestamp": "2026-01-19T00:30:57.052840"
+}

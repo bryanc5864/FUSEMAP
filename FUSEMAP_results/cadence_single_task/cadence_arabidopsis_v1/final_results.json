@@ -1,0 +1,68 @@
+{
+  "jores_arabidopsis": {
+    "leaf": {
+      "pearson": {
+        "value": 0.6178156137466431,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "spearman": {
+        "value": 0.6000387337618636,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "r2": {
+        "value": 0.2047562599182129,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mse": {
+        "value": 1.1401798725128174,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "rmse": {
+        "value": 1.0677920549024595,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mae": {
+        "value": 0.8458159565925598,
+        "stderr": null,
+        "n_samples": 1347
+      }
+    },
+    "proto": {
+      "pearson": {
+        "value": 0.5081297159194946,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "spearman": {
+        "value": 0.4996753805050932,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "r2": {
+        "value": 0.06062197685241699,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mse": {
+        "value": 1.2527568340301514,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "rmse": {
+        "value": 1.1192662033806575,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mae": {
+        "value": 0.865947425365448,
+        "stderr": null,
+        "n_samples": 1347
+      }
+    }
+  }
+}

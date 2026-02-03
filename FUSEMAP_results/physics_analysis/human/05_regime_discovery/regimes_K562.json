@@ -1,0 +1,346 @@
+{
+  "n_clusters": 2,
+  "noise_fraction": 7.576857750809776e-05,
+  "cluster_profiles": {
+    "-1": {
+      "n_samples": 12,
+      "fraction": 7.576857750809776e-05,
+      "activity_mean": -0.29430528212364265,
+      "activity_std": 0.44152529505159993,
+      "activity_median": -0.36814849184099013,
+      "activity_q25": -0.6238411976870932,
+      "activity_q75": -0.10722805413839495,
+      "top_positive_features": [
+        {
+          "feature": "entropy_mi_d4",
+          "z_score": 17.313022870283586
+        },
+        {
+          "feature": "entropy_mi_d8",
+          "z_score": 15.593075926881456
+        },
+        {
+          "feature": "entropy_mi_d6",
+          "z_score": 15.503633795454455
+        },
+        {
+          "feature": "entropy_mi_d3",
+          "z_score": 14.950100613252992
+        },
+        {
+          "feature": "entropy_mi_d9",
+          "z_score": 14.456346760893267
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "stiff_shift_zscore_mean",
+          "z_score": -1.543581049324913
+        },
+        {
+          "feature": "stiff_twist_zscore_mean",
+          "z_score": -1.1626434222551392
+        },
+        {
+          "feature": "stiff_tilt_zscore_mean",
+          "z_score": -1.0953365772264543
+        },
+        {
+          "feature": "thermo_dG_p90",
+          "z_score": -1.0849249793354936
+        },
+        {
+          "feature": "advanced_melting_melting_dG_p90",
+          "z_score": -1.0849249793354936
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "entropy_mi_d4",
+          "z_score": 17.313022870283586
+        },
+        {
+          "feature": "entropy_mi_d8",
+          "z_score": 15.593075926881456
+        },
+        {
+          "feature": "entropy_mi_d6",
+          "z_score": 15.503633795454455
+        },
+        {
+          "feature": "entropy_mi_d3",
+          "z_score": 14.950100613252992
+        },
+        {
+          "feature": "entropy_mi_d9",
+          "z_score": 14.456346760893267
+        },
+        {
+          "feature": "entropy_mi_d2",
+          "z_score": 14.243701354396782
+        },
+        {
+          "feature": "entropy_mi_d10",
+          "z_score": 13.68471722339632
+        },
+        {
+          "feature": "entropy_mi_d7",
+          "z_score": 13.277350682415928
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w50_var",
+          "z_score": 12.879970513620961
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w50_var",
+          "z_score": 12.539354489808698
+        }
+      ]
+    },
+    "0": {
+      "n_samples": 79363,
+      "fraction": 0.5011018013979303,
+      "activity_mean": -0.15058427566750116,
+      "activity_std": 0.5275967250558108,
+      "activity_median": -0.2555592026288396,
+      "activity_q25": -0.5152463117638093,
+      "activity_q75": 0.11668490471522144,
+      "top_positive_features": [
+        {
+          "feature": "entropy_gc_entropy_w30_max",
+          "z_score": 0.997626445658205
+        },
+        {
+          "feature": "entropy_shannon_w30_max",
+          "z_score": 0.9976163332438541
+        },
+        {
+          "feature": "advanced_stress_stress_p95",
+          "z_score": 0.9975964378409616
+        },
+        {
+          "feature": "entropy_shannon_w50_max",
+          "z_score": 0.9975649109444288
+        },
+        {
+          "feature": "entropy_global_kmer6_entropy",
+          "z_score": 0.9975506190314359
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "advanced_stacking_stacking_p5",
+          "z_score": -0.9976475530782927
+        },
+        {
+          "feature": "thermo_dS_p50",
+          "z_score": -0.9976466750299505
+        },
+        {
+          "feature": "advanced_stacking_stacking_p90",
+          "z_score": -0.9976435717098737
+        },
+        {
+          "feature": "advanced_stacking_stacking_p10",
+          "z_score": -0.9976404173689628
+        },
+        {
+          "feature": "thermo_dH_p50",
+          "z_score": -0.9976381043418426
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "advanced_stacking_stacking_p5",
+          "z_score": -0.9976475530782927
+        },
+        {
+          "feature": "thermo_dS_p50",
+          "z_score": -0.9976466750299505
+        },
+        {
+          "feature": "advanced_stacking_stacking_p90",
+          "z_score": -0.9976435717098737
+        },
+        {
+          "feature": "advanced_stacking_stacking_p10",
+          "z_score": -0.9976404173689628
+        },
+        {
+          "feature": "thermo_dH_p50",
+          "z_score": -0.9976381043418426
+        },
+        {
+          "feature": "thermo_total_dS",
+          "z_score": -0.9976300170690283
+        },
+        {
+          "feature": "thermo_mean_dS",
+          "z_score": -0.9976300170670147
+        },
+        {
+          "feature": "entropy_gc_entropy_w30_max",
+          "z_score": 0.997626445658205
+        },
+        {
+          "feature": "thermo_dS_p95",
+          "z_score": -0.997621539320659
+        },
+        {
+          "feature": "entropy_shannon_w30_max",
+          "z_score": 0.9976163332438541
+        }
+      ]
+    },
+    "1": {
+      "n_samples": 79002,
+      "fraction": 0.49882243002456167,
+      "activity_mean": -0.15017382489165249,
+      "activity_std": 0.5264414394271497,
+      "activity_median": -0.25766329875589444,
+      "activity_q25": -0.5173941767628206,
+      "activity_q75": 0.12145341862307976,
+      "top_positive_features": [
+        {
+          "feature": "advanced_stacking_stacking_p5",
+          "z_score": 1.0023578462044358
+        },
+        {
+          "feature": "thermo_dS_p50",
+          "z_score": 1.0023576383112103
+        },
+        {
+          "feature": "advanced_stacking_stacking_p90",
+          "z_score": 1.0023576330802013
+        },
+        {
+          "feature": "thermo_dH_p50",
+          "z_score": 1.002350245531086
+        },
+        {
+          "feature": "advanced_stacking_stacking_p10",
+          "z_score": 1.002348637607173
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "entropy_gc_entropy_w30_max",
+          "z_score": -1.002336130257776
+        },
+        {
+          "feature": "entropy_shannon_w30_max",
+          "z_score": -1.0023242958559435
+        },
+        {
+          "feature": "advanced_stress_stress_p95",
+          "z_score": -1.0023065394585688
+        },
+        {
+          "feature": "entropy_shannon_w50_max",
+          "z_score": -1.002268858637957
+        },
+        {
+          "feature": "advanced_stress_stress_p75",
+          "z_score": -1.0022492352581829
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "advanced_stacking_stacking_p5",
+          "z_score": 1.0023578462044358
+        },
+        {
+          "feature": "thermo_dS_p50",
+          "z_score": 1.0023576383112103
+        },
+        {
+          "feature": "advanced_stacking_stacking_p90",
+          "z_score": 1.0023576330802013
+        },
+        {
+          "feature": "thermo_dH_p50",
+          "z_score": 1.002350245531086
+        },
+        {
+          "feature": "advanced_stacking_stacking_p10",
+          "z_score": 1.002348637607173
+        },
+        {
+          "feature": "thermo_mean_dS",
+          "z_score": 1.002341348523466
+        },
+        {
+          "feature": "thermo_total_dS",
+          "z_score": 1.0023413485234487
+        },
+        {
+          "feature": "thermo_dS_p95",
+          "z_score": 1.002340525941691
+        },
+        {
+          "feature": "entropy_gc_entropy_w30_max",
+          "z_score": -1.002336130257776
+        },
+        {
+          "feature": "entropy_shannon_w30_max",
+          "z_score": -1.0023242958559435
+        }
+      ]
+    }
+  },
+  "regime_models": {
+    "0": {
+      "n_samples": 79363,
+      "r2": 0.15196182758041665,
+      "n_nonzero_features": 137,
+      "top_features": [
+        {
+          "feature": "thermo_dH_p90",
+          "coefficient": -1.2975840641554712
+        },
+        {
+          "feature": "entropy_gc_entropy_w50_mean",
+          "coefficient": 1.2361390393473886
+        },
+        {
+          "feature": "entropy_global_kmer6_entropy",
+          "coefficient": -1.1428068142493601
+        },
+        {
+          "feature": "entropy_gc_entropy_w30_mean",
+          "coefficient": 1.0971966753618443
+        },
+        {
+          "feature": "advanced_mgw_mean_mgw",
+          "coefficient": 0.862782817367579
+        },
+        {
+          "feature": "bend_rms_curvature_w9_mean",
+          "coefficient": -0.7966158681375113
+        },
+        {
+          "feature": "bend_rms_curvature_w11_mean",
+          "coefficient": -0.7532502991354919
+        },
+        {
+          "feature": "advanced_melting_std_melting_dG",
+          "coefficient": -0.7129585697630141
+        },
+        {
+          "feature": "thermo_var_dH",
+          "coefficient": 0.5364559623965375
+        },
+        {
+          "feature": "bend_rms_curvature_w7_mean",
+          "coefficient": -0.5176642333887097
+        }
+      ]
+    },
+    "1": {
+      "n_samples": 79002,
+      "r2": 0.0,
+      "n_nonzero_features": 0,
+      "top_features": []
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "holdout_dataset": "WTC11",
+  "source_datasets": [
+    "K562",
+    "HepG2"
+  ],
+  "zeroshot_spearman": 0.2601303103690687,
+  "zeroshot_pearson": 0.341866672039032,
+  "zeroshot_r2": -0.3182060718536377,
+  "zeroshot_mse": 1.570451021194458,
+  "n_test_samples": 5597
+}

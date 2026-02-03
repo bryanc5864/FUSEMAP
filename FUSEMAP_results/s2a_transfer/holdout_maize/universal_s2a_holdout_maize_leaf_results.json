@@ -1,0 +1,12 @@
+{
+  "holdout_dataset": "maize_leaf",
+  "source_datasets": [
+    "arabidopsis_leaf",
+    "sorghum_leaf"
+  ],
+  "zeroshot_spearman": 0.700375119509206,
+  "zeroshot_pearson": 0.6942795515060425,
+  "zeroshot_r2": 0.2880059480667114,
+  "zeroshot_mse": 2.358027696609497,
+  "n_test_samples": 2461
+}

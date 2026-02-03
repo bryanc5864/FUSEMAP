@@ -1,0 +1,1313 @@
+2026-01-13 06:36:34,725 - config3_cross_animal_v1 - INFO - Experiment: config3_cross_animal_v1
+2026-01-13 06:36:34,725 - config3_cross_animal_v1 - INFO - Output directory: results/config3_cross_animal_v1
+2026-01-13 06:36:34,726 - config3_cross_animal_v1 - INFO - Starting training...
+2026-01-13 06:36:34,726 - config3_cross_animal_v1 - INFO - Config: config3_cross_animal
+2026-01-13 06:36:34,726 - config3_cross_animal_v1 - INFO - Setting up datasets...
+2026-01-13 06:54:24,916 - config3_cross_animal_v1 - INFO - Dataset sizes: {'encode4_k562': 158377, 'encode4_hepg2': 97925, 'encode4_wtc11': 39201, 'deepstarr': 352009}
+2026-01-13 07:03:46,628 - config3_cross_animal_v1 - INFO - Experiment: config3_cross_animal_v1
+2026-01-13 07:03:46,634 - config3_cross_animal_v1 - INFO - Output directory: results/config3_cross_animal_v1
+2026-01-13 07:03:46,651 - config3_cross_animal_v1 - INFO - Starting training...
+2026-01-13 07:03:46,651 - config3_cross_animal_v1 - INFO - Config: config3_cross_animal
+2026-01-13 07:03:46,651 - config3_cross_animal_v1 - INFO - Setting up datasets...
+2026-01-13 07:21:49,657 - config3_cross_animal_v1 - INFO - Dataset sizes: {'encode4_k562': 158377, 'encode4_hepg2': 97925, 'encode4_wtc11': 39201, 'deepstarr': 352009}
+2026-01-13 07:21:49,706 - config3_cross_animal_v1 - INFO - Using standard global index sampling...
+2026-01-13 07:22:52,322 - config3_cross_animal_v1 - INFO -   encode4_k562: val set loaded
+2026-01-13 07:23:30,684 - config3_cross_animal_v1 - INFO -   encode4_hepg2: val set loaded
+2026-01-13 07:23:44,630 - config3_cross_animal_v1 - INFO -   encode4_wtc11: val set loaded
+2026-01-13 07:24:24,357 - config3_cross_animal_v1 - INFO -   deepstarr: val set loaded
+2026-01-13 07:45:02,505 - config3_cross_animal_v1 - INFO -   encode4_k562: test set loaded (22631 samples)
+2026-01-13 07:45:54,900 - config3_cross_animal_v1 - INFO -   encode4_k562: calibration set loaded (22633 samples)
+2026-01-13 07:46:28,442 - config3_cross_animal_v1 - INFO -   encode4_hepg2: test set loaded (13953 samples)
+2026-01-13 07:47:07,643 - config3_cross_animal_v1 - INFO -   encode4_hepg2: calibration set loaded (14002 samples)
+2026-01-13 07:47:21,181 - config3_cross_animal_v1 - INFO -   encode4_wtc11: test set loaded (5597 samples)
+2026-01-13 07:47:36,683 - config3_cross_animal_v1 - INFO -   encode4_wtc11: calibration set loaded (5595 samples)
+2026-01-13 07:48:14,952 - config3_cross_animal_v1 - INFO -   deepstarr: test set loaded (41186 samples)
+2026-01-13 07:48:14,966 - config3_cross_animal_v1 - INFO - Data setup complete
+2026-01-13 07:48:14,966 - config3_cross_animal_v1 - INFO - Setting up model...
+2026-01-13 07:48:17,238 - config3_cross_animal_v1 - INFO - Model parameters: 1,775,157 (1,775,157 trainable)
+2026-01-13 07:48:24,397 - config3_cross_animal_v1 - INFO - Model setup complete
+2026-01-13 07:51:21,865 - config3_cross_animal_v1 - INFO - Step 100: NLL=1.9479, MSE=1.2086, grad=7.97, lr=1.00e-03
+2026-01-13 07:54:17,781 - config3_cross_animal_v1 - INFO - Step 200: NLL=1.4325, MSE=0.8815, grad=5.29, lr=1.00e-03
+2026-01-13 07:57:18,870 - config3_cross_animal_v1 - INFO - Step 300: NLL=1.6560, MSE=0.8929, grad=6.50, lr=1.00e-03
+2026-01-13 08:00:13,784 - config3_cross_animal_v1 - INFO - Step 400: NLL=1.4268, MSE=0.8072, grad=6.31, lr=1.00e-03
+2026-01-13 08:08:52,612 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:08:52,635 - config3_cross_animal_v1 - INFO - EPOCH 0 SUMMARY (BEST)
+2026-01-13 08:08:52,635 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:08:52,635 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 1.3677 | MSE: 1.3677 | r: 0.4076 | rho: 0.3244 | R2: -0.2356 | RMSE: 1.1898
+2026-01-13 08:08:52,635 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 1.1806 | MSE: 1.1806 | r: 0.3810 | rho: 0.3035 | R2: -0.2924 | RMSE: 1.1932
+2026-01-13 08:08:52,636 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:08:52,636 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:08:52,636 - config3_cross_animal_v1 - INFO -     activity: r=0.3974 | rho=0.3187 | R2=-0.0063 | RMSE=0.5304 | MAE=0.4353
+2026-01-13 08:08:52,636 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:08:52,636 - config3_cross_animal_v1 - INFO -     activity: r=0.2454 | rho=0.2233 | R2=-1.0386 | RMSE=1.1232 | MAE=0.9213
+2026-01-13 08:08:52,636 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:08:52,636 - config3_cross_animal_v1 - INFO -     activity: r=0.3716 | rho=0.2789 | R2=-0.7103 | RMSE=1.3821 | MAE=1.0349
+2026-01-13 08:08:52,637 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 08:08:52,637 - config3_cross_animal_v1 - INFO -     Dev: r=0.4033 | rho=0.3976 | R2=0.1043 | RMSE=1.4430 | MAE=1.1316
+2026-01-13 08:08:52,637 - config3_cross_animal_v1 - INFO -     Hk: r=0.4875 | rho=0.2988 | R2=0.1889 | RMSE=1.4872 | MAE=1.0985
+2026-01-13 08:08:52,637 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:08:53,373 - config3_cross_animal_v1 - INFO - Epoch 0 completed in 1229.0s
+2026-01-13 08:09:41,292 - config3_cross_animal_v1 - INFO - Step 500: NLL=1.4501, MSE=0.8344, grad=4.50, lr=1.00e-03
+2026-01-13 08:12:36,504 - config3_cross_animal_v1 - INFO - Step 600: NLL=1.6446, MSE=0.9342, grad=5.05, lr=1.00e-03
+2026-01-13 08:15:28,497 - config3_cross_animal_v1 - INFO - Step 700: NLL=1.1725, MSE=0.8520, grad=2.99, lr=1.00e-03
+2026-01-13 08:18:30,470 - config3_cross_animal_v1 - INFO - Step 800: NLL=1.3744, MSE=0.9248, grad=5.73, lr=1.00e-03
+2026-01-13 08:21:21,853 - config3_cross_animal_v1 - INFO - Step 900: NLL=1.6194, MSE=0.9356, grad=5.52, lr=1.00e-03
+2026-01-13 08:28:59,188 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:28:59,189 - config3_cross_animal_v1 - INFO - EPOCH 1 SUMMARY (BEST)
+2026-01-13 08:28:59,189 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:28:59,189 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 1.5488 | MSE: 1.5488 | r: 0.5014 | rho: 0.4215 | R2: -0.7073 | RMSE: 1.4813
+2026-01-13 08:28:59,189 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 1.9659 | MSE: 1.9659 | r: 0.4898 | rho: 0.4143 | R2: -0.7816 | RMSE: 1.4911
+2026-01-13 08:28:59,190 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:28:59,190 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:28:59,190 - config3_cross_animal_v1 - INFO -     activity: r=0.5221 | rho=0.4590 | R2=-0.4396 | RMSE=0.6344 | MAE=0.4862
+2026-01-13 08:28:59,190 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:28:59,191 - config3_cross_animal_v1 - INFO -     activity: r=0.4896 | rho=0.4789 | R2=0.0549 | RMSE=0.7647 | MAE=0.5963
+2026-01-13 08:28:59,191 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:28:59,191 - config3_cross_animal_v1 - INFO -     activity: r=0.4369 | rho=0.3405 | R2=-0.3388 | RMSE=1.2229 | MAE=0.9451
+2026-01-13 08:28:59,191 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 08:28:59,191 - config3_cross_animal_v1 - INFO -     Dev: r=0.4540 | rho=0.4400 | R2=-3.0341 | RMSE=3.0624 | MAE=2.4932
+2026-01-13 08:28:59,192 - config3_cross_animal_v1 - INFO -     Hk: r=0.5464 | rho=0.3529 | R2=-0.1505 | RMSE=1.7712 | MAE=1.3554
+2026-01-13 08:28:59,192 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:28:59,845 - config3_cross_animal_v1 - INFO - Epoch 1 completed in 1206.5s
+2026-01-13 08:30:29,588 - config3_cross_animal_v1 - INFO - Step 1000: NLL=1.0591, MSE=0.7811, grad=3.55, lr=9.99e-04
+2026-01-13 08:33:15,968 - config3_cross_animal_v1 - INFO - Step 1100: NLL=1.3649, MSE=0.8708, grad=3.48, lr=9.99e-04
+2026-01-13 08:35:58,941 - config3_cross_animal_v1 - INFO - Step 1200: NLL=0.9654, MSE=0.7058, grad=3.34, lr=9.99e-04
+2026-01-13 08:38:47,582 - config3_cross_animal_v1 - INFO - Step 1300: NLL=1.1043, MSE=0.8476, grad=2.94, lr=9.99e-04
+2026-01-13 08:41:35,198 - config3_cross_animal_v1 - INFO - Step 1400: NLL=1.0396, MSE=0.7306, grad=3.26, lr=9.99e-04
+2026-01-13 08:48:09,145 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO - EPOCH 2 SUMMARY (BEST)
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 1.3587 | MSE: 1.3587 | r: 0.5166 | rho: 0.4464 | R2: -0.2893 | RMSE: 1.2498
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 1.2762 | MSE: 1.2762 | r: 0.5024 | rho: 0.4324 | R2: -0.3357 | RMSE: 1.2491
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -     activity: r=0.5064 | rho=0.4588 | R2=-0.4163 | RMSE=0.6292 | MAE=0.4807
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -     activity: r=0.5204 | rho=0.5084 | R2=0.0737 | RMSE=0.7571 | MAE=0.5764
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -     activity: r=0.4379 | rho=0.3510 | R2=-1.0333 | RMSE=1.5070 | MAE=1.1569
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -     Dev: r=0.4624 | rho=0.4508 | R2=-0.4821 | RMSE=1.8562 | MAE=1.4854
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO -     Hk: r=0.5852 | rho=0.3931 | R2=0.1795 | RMSE=1.4958 | MAE=1.1544
+2026-01-13 08:48:09,146 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 08:48:09,318 - config3_cross_animal_v1 - INFO - Epoch 2 completed in 1149.5s
+2026-01-13 08:50:19,055 - config3_cross_animal_v1 - INFO - Step 1500: NLL=1.7510, MSE=0.9560, grad=4.22, lr=9.98e-04
+2026-01-13 08:53:10,794 - config3_cross_animal_v1 - INFO - Step 1600: NLL=1.0907, MSE=0.7519, grad=3.22, lr=9.98e-04
+2026-01-13 08:55:53,027 - config3_cross_animal_v1 - INFO - Step 1700: NLL=1.0723, MSE=0.7697, grad=3.94, lr=9.98e-04
+2026-01-13 08:58:28,956 - config3_cross_animal_v1 - INFO - Step 1800: NLL=1.2357, MSE=0.7378, grad=4.24, lr=9.98e-04
+2026-01-13 09:07:07,811 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:07:07,832 - config3_cross_animal_v1 - INFO - EPOCH 3 SUMMARY (BEST)
+2026-01-13 09:07:07,832 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:07:07,832 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.8526 | MSE: 0.8526 | r: 0.5796 | rho: 0.5047 | R2: 0.1861 | RMSE: 1.0085
+2026-01-13 09:07:07,832 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.8276 | MSE: 0.8276 | r: 0.5615 | rho: 0.4924 | R2: 0.1503 | RMSE: 1.0148
+2026-01-13 09:07:07,833 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 09:07:07,833 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 09:07:07,833 - config3_cross_animal_v1 - INFO -     activity: r=0.5960 | rho=0.5338 | R2=0.2198 | RMSE=0.4670 | MAE=0.3558
+2026-01-13 09:07:07,833 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 09:07:07,834 - config3_cross_animal_v1 - INFO -     activity: r=0.5537 | rho=0.5396 | R2=0.2251 | RMSE=0.6925 | MAE=0.5258
+2026-01-13 09:07:07,834 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 09:07:07,834 - config3_cross_animal_v1 - INFO -     activity: r=0.4823 | rho=0.4216 | R2=-0.1463 | RMSE=1.1315 | MAE=0.8822
+2026-01-13 09:07:07,834 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 09:07:07,834 - config3_cross_animal_v1 - INFO -     Dev: r=0.5346 | rho=0.5119 | R2=0.1427 | RMSE=1.4117 | MAE=1.1059
+2026-01-13 09:07:07,835 - config3_cross_animal_v1 - INFO -     Hk: r=0.6411 | rho=0.4549 | R2=0.3102 | RMSE=1.3715 | MAE=1.0391
+2026-01-13 09:07:07,835 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:07:08,409 - config3_cross_animal_v1 - INFO - Epoch 3 completed in 1139.1s
+2026-01-13 09:07:25,012 - config3_cross_animal_v1 - INFO - Step 1900: NLL=0.7711, MSE=0.6272, grad=2.21, lr=9.96e-04
+2026-01-13 09:10:04,172 - config3_cross_animal_v1 - INFO - Step 2000: NLL=1.1328, MSE=0.8112, grad=2.88, lr=9.96e-04
+2026-01-13 09:12:41,611 - config3_cross_animal_v1 - INFO - Step 2100: NLL=0.8488, MSE=0.6883, grad=2.74, lr=9.96e-04
+2026-01-13 09:15:19,137 - config3_cross_animal_v1 - INFO - Step 2200: NLL=1.1921, MSE=0.8178, grad=4.55, lr=9.96e-04
+2026-01-13 09:17:50,092 - config3_cross_animal_v1 - INFO - Step 2300: NLL=1.0912, MSE=0.7458, grad=4.53, lr=9.96e-04
+2026-01-13 09:25:27,166 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:25:27,196 - config3_cross_animal_v1 - INFO - EPOCH 4 SUMMARY (BEST)
+2026-01-13 09:25:27,196 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:25:27,196 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.9198 | MSE: 0.9198 | r: 0.5778 | rho: 0.5023 | R2: 0.1331 | RMSE: 1.0288
+2026-01-13 09:25:27,196 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.9339 | MSE: 0.9339 | r: 0.5616 | rho: 0.4915 | R2: 0.0624 | RMSE: 1.0511
+2026-01-13 09:25:27,196 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 09:25:27,196 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 09:25:27,197 - config3_cross_animal_v1 - INFO -     activity: r=0.5822 | rho=0.5368 | R2=0.0717 | RMSE=0.5094 | MAE=0.3882
+2026-01-13 09:25:27,197 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 09:25:27,197 - config3_cross_animal_v1 - INFO -     activity: r=0.5136 | rho=0.5135 | R2=-0.1198 | RMSE=0.8324 | MAE=0.6474
+2026-01-13 09:25:27,197 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 09:25:27,197 - config3_cross_animal_v1 - INFO -     activity: r=0.5327 | rho=0.4357 | R2=-0.0530 | RMSE=1.0845 | MAE=0.8328
+2026-01-13 09:25:27,197 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 09:25:27,197 - config3_cross_animal_v1 - INFO -     Dev: r=0.5453 | rho=0.5230 | R2=0.2059 | RMSE=1.3587 | MAE=1.0644
+2026-01-13 09:25:27,198 - config3_cross_animal_v1 - INFO -     Hk: r=0.6344 | rho=0.4487 | R2=0.2071 | RMSE=1.4704 | MAE=1.1132
+2026-01-13 09:25:27,198 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:25:27,935 - config3_cross_animal_v1 - INFO - Epoch 4 completed in 1099.5s
+2026-01-13 09:26:26,048 - config3_cross_animal_v1 - INFO - Step 2400: NLL=1.1464, MSE=0.7322, grad=3.11, lr=9.94e-04
+2026-01-13 09:29:11,690 - config3_cross_animal_v1 - INFO - Step 2500: NLL=0.7997, MSE=0.6885, grad=1.92, lr=9.94e-04
+2026-01-13 09:31:52,819 - config3_cross_animal_v1 - INFO - Step 2600: NLL=0.9996, MSE=0.6853, grad=3.77, lr=9.94e-04
+2026-01-13 09:34:34,943 - config3_cross_animal_v1 - INFO - Step 2700: NLL=1.1170, MSE=0.7397, grad=3.20, lr=9.94e-04
+2026-01-13 09:37:16,222 - config3_cross_animal_v1 - INFO - Step 2800: NLL=0.8825, MSE=0.6964, grad=2.31, lr=9.94e-04
+2026-01-13 09:44:23,726 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:44:23,746 - config3_cross_animal_v1 - INFO - EPOCH 5 SUMMARY 
+2026-01-13 09:44:23,747 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:44:23,747 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 1.0928 | MSE: 1.0928 | r: 0.5721 | rho: 0.4961 | R2: -0.0035 | RMSE: 1.0577
+2026-01-13 09:44:23,747 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 1.0637 | MSE: 1.0637 | r: 0.5566 | rho: 0.4844 | R2: -0.0566 | RMSE: 1.0644
+2026-01-13 09:44:23,747 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 09:44:23,747 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 09:44:23,747 - config3_cross_animal_v1 - INFO -     activity: r=0.6128 | rho=0.5504 | R2=-0.0903 | RMSE=0.5521 | MAE=0.4280
+2026-01-13 09:44:23,748 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 09:44:23,748 - config3_cross_animal_v1 - INFO -     activity: r=0.4488 | rho=0.4521 | R2=-0.8637 | RMSE=1.0739 | MAE=0.8269
+2026-01-13 09:44:23,748 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 09:44:23,748 - config3_cross_animal_v1 - INFO -     activity: r=0.5539 | rho=0.4256 | R2=0.1999 | RMSE=0.9454 | MAE=0.7107
+2026-01-13 09:44:23,748 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 09:44:23,748 - config3_cross_animal_v1 - INFO -     Dev: r=0.5315 | rho=0.5096 | R2=0.0784 | RMSE=1.4637 | MAE=1.1477
+2026-01-13 09:44:23,748 - config3_cross_animal_v1 - INFO -     Hk: r=0.6358 | rho=0.4843 | R2=0.3928 | RMSE=1.2867 | MAE=0.9780
+2026-01-13 09:44:23,749 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 09:44:24,023 - config3_cross_animal_v1 - INFO - Epoch 5 completed in 1136.1s
+2026-01-13 09:46:01,454 - config3_cross_animal_v1 - INFO - Step 2900: NLL=0.9412, MSE=0.7440, grad=2.69, lr=9.91e-04
+2026-01-13 09:48:41,897 - config3_cross_animal_v1 - INFO - Step 3000: NLL=0.7868, MSE=0.6504, grad=2.18, lr=9.91e-04
+2026-01-13 09:51:15,354 - config3_cross_animal_v1 - INFO - Step 3100: NLL=0.9993, MSE=0.8444, grad=2.59, lr=9.91e-04
+2026-01-13 09:53:58,145 - config3_cross_animal_v1 - INFO - Step 3200: NLL=1.5717, MSE=0.8877, grad=3.11, lr=9.91e-04
+2026-01-13 09:56:39,562 - config3_cross_animal_v1 - INFO - Step 3300: NLL=0.8025, MSE=0.6450, grad=2.42, lr=9.91e-04
+2026-01-13 10:02:59,461 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:02:59,462 - config3_cross_animal_v1 - INFO - EPOCH 6 SUMMARY (BEST)
+2026-01-13 10:02:59,462 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:02:59,462 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.9130 | MSE: 0.9130 | r: 0.5997 | rho: 0.5280 | R2: 0.1405 | RMSE: 1.0175
+2026-01-13 10:02:59,471 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.9389 | MSE: 0.9389 | r: 0.5801 | rho: 0.5132 | R2: 0.0655 | RMSE: 1.0378
+2026-01-13 10:02:59,472 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 10:02:59,472 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 10:02:59,472 - config3_cross_animal_v1 - INFO -     activity: r=0.6209 | rho=0.5729 | R2=0.1257 | RMSE=0.4944 | MAE=0.3811
+2026-01-13 10:02:59,476 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 10:02:59,477 - config3_cross_animal_v1 - INFO -     activity: r=0.5179 | rho=0.5218 | R2=-0.3943 | RMSE=0.9289 | MAE=0.6989
+2026-01-13 10:02:59,477 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 10:02:59,477 - config3_cross_animal_v1 - INFO -     activity: r=0.5506 | rho=0.4431 | R2=0.1405 | RMSE=0.9798 | MAE=0.7422
+2026-01-13 10:02:59,477 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 10:02:59,477 - config3_cross_animal_v1 - INFO -     Dev: r=0.5590 | rho=0.5343 | R2=0.1802 | RMSE=1.3805 | MAE=1.0794
+2026-01-13 10:02:59,477 - config3_cross_animal_v1 - INFO -     Hk: r=0.6523 | rho=0.4936 | R2=0.2755 | RMSE=1.4055 | MAE=1.0890
+2026-01-13 10:02:59,477 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:03:00,142 - config3_cross_animal_v1 - INFO - Epoch 6 completed in 1116.1s
+2026-01-13 10:05:23,806 - config3_cross_animal_v1 - INFO - Step 3400: NLL=1.0667, MSE=0.8103, grad=3.38, lr=9.88e-04
+2026-01-13 10:08:04,573 - config3_cross_animal_v1 - INFO - Step 3500: NLL=1.2239, MSE=0.7605, grad=2.70, lr=9.88e-04
+2026-01-13 10:10:44,377 - config3_cross_animal_v1 - INFO - Step 3600: NLL=0.9125, MSE=0.7126, grad=2.45, lr=9.88e-04
+2026-01-13 10:13:28,389 - config3_cross_animal_v1 - INFO - Step 3700: NLL=0.7290, MSE=0.5955, grad=2.00, lr=9.88e-04
+2026-01-13 10:21:39,085 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:21:39,092 - config3_cross_animal_v1 - INFO - EPOCH 7 SUMMARY (BEST)
+2026-01-13 10:21:39,092 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:21:39,092 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.9240 | MSE: 0.9240 | r: 0.6085 | rho: 0.5327 | R2: 0.1355 | RMSE: 1.0116
+2026-01-13 10:21:39,099 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.9080 | MSE: 0.9080 | r: 0.5929 | rho: 0.5228 | R2: 0.0943 | RMSE: 1.0199
+2026-01-13 10:21:39,100 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 10:21:39,100 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 10:21:39,100 - config3_cross_animal_v1 - INFO -     activity: r=0.5957 | rho=0.5436 | R2=0.0399 | RMSE=0.5180 | MAE=0.3964
+2026-01-13 10:21:39,106 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 10:21:39,107 - config3_cross_animal_v1 - INFO -     activity: r=0.5713 | rho=0.5772 | R2=-0.1599 | RMSE=0.8472 | MAE=0.6648
+2026-01-13 10:21:39,107 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 10:21:39,107 - config3_cross_animal_v1 - INFO -     activity: r=0.5380 | rho=0.4437 | R2=0.0719 | RMSE=1.0181 | MAE=0.7773
+2026-01-13 10:21:39,107 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 10:21:39,107 - config3_cross_animal_v1 - INFO -     Dev: r=0.5776 | rho=0.5560 | R2=0.1462 | RMSE=1.4089 | MAE=1.1034
+2026-01-13 10:21:39,108 - config3_cross_animal_v1 - INFO -     Hk: r=0.6821 | rho=0.4934 | R2=0.3733 | RMSE=1.3073 | MAE=1.0161
+2026-01-13 10:21:39,108 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:21:39,721 - config3_cross_animal_v1 - INFO - Epoch 7 completed in 1119.6s
+2026-01-13 10:22:03,197 - config3_cross_animal_v1 - INFO - Step 3800: NLL=1.0988, MSE=0.8602, grad=3.35, lr=9.84e-04
+2026-01-13 10:24:35,624 - config3_cross_animal_v1 - INFO - Step 3900: NLL=1.0897, MSE=0.6953, grad=2.94, lr=9.84e-04
+2026-01-13 10:27:16,362 - config3_cross_animal_v1 - INFO - Step 4000: NLL=1.2353, MSE=0.7774, grad=4.59, lr=9.84e-04
+2026-01-13 10:29:56,415 - config3_cross_animal_v1 - INFO - Step 4100: NLL=1.0147, MSE=0.6700, grad=2.75, lr=9.84e-04
+2026-01-13 10:32:33,789 - config3_cross_animal_v1 - INFO - Step 4200: NLL=0.8941, MSE=0.7216, grad=2.13, lr=9.84e-04
+2026-01-13 10:40:06,490 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:40:06,500 - config3_cross_animal_v1 - INFO - EPOCH 8 SUMMARY (BEST)
+2026-01-13 10:40:06,501 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:40:06,501 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.8460 | MSE: 0.8460 | r: 0.6151 | rho: 0.5434 | R2: 0.1660 | RMSE: 1.0316
+2026-01-13 10:40:06,501 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.8991 | MSE: 0.8991 | r: 0.5954 | rho: 0.5318 | R2: 0.0975 | RMSE: 1.0556
+2026-01-13 10:40:06,501 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 10:40:06,501 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 10:40:06,501 - config3_cross_animal_v1 - INFO -     activity: r=0.6260 | rho=0.5750 | R2=0.3023 | RMSE=0.4416 | MAE=0.3354
+2026-01-13 10:40:06,502 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 10:40:06,502 - config3_cross_animal_v1 - INFO -     activity: r=0.5576 | rho=0.5633 | R2=0.0420 | RMSE=0.7699 | MAE=0.5953
+2026-01-13 10:40:06,502 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 10:40:06,505 - config3_cross_animal_v1 - INFO -     activity: r=0.5497 | rho=0.4649 | R2=-0.0122 | RMSE=1.0633 | MAE=0.8229
+2026-01-13 10:40:06,506 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 10:40:06,506 - config3_cross_animal_v1 - INFO -     Dev: r=0.5843 | rho=0.5665 | R2=-0.1770 | RMSE=1.6541 | MAE=1.3079
+2026-01-13 10:40:06,509 - config3_cross_animal_v1 - INFO -     Hk: r=0.6595 | rho=0.4895 | R2=0.3325 | RMSE=1.3491 | MAE=1.0301
+2026-01-13 10:40:06,509 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:40:07,093 - config3_cross_animal_v1 - INFO - Epoch 8 completed in 1107.4s
+2026-01-13 10:41:18,765 - config3_cross_animal_v1 - INFO - Step 4300: NLL=1.1149, MSE=0.7708, grad=2.99, lr=9.80e-04
+2026-01-13 10:44:02,283 - config3_cross_animal_v1 - INFO - Step 4400: NLL=0.7177, MSE=0.6077, grad=2.01, lr=9.80e-04
+2026-01-13 10:46:40,506 - config3_cross_animal_v1 - INFO - Step 4500: NLL=0.7784, MSE=0.6550, grad=1.48, lr=9.80e-04
+2026-01-13 10:49:14,542 - config3_cross_animal_v1 - INFO - Step 4600: NLL=0.9036, MSE=0.7039, grad=1.87, lr=9.80e-04
+2026-01-13 10:51:47,923 - config3_cross_animal_v1 - INFO - Step 4700: NLL=0.9223, MSE=0.7127, grad=2.64, lr=9.80e-04
+2026-01-13 10:58:36,048 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:58:36,054 - config3_cross_animal_v1 - INFO - EPOCH 9 SUMMARY (BEST)
+2026-01-13 10:58:36,054 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:58:36,059 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.9787 | MSE: 0.9787 | r: 0.6186 | rho: 0.5541 | R2: 0.1011 | RMSE: 1.0253
+2026-01-13 10:58:36,060 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.9208 | MSE: 0.9208 | r: 0.5978 | rho: 0.5387 | R2: 0.0499 | RMSE: 1.0392
+2026-01-13 10:58:36,060 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 10:58:36,065 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 10:58:36,066 - config3_cross_animal_v1 - INFO -     activity: r=0.6107 | rho=0.5640 | R2=-0.0248 | RMSE=0.5352 | MAE=0.4153
+2026-01-13 10:58:36,066 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 10:58:36,066 - config3_cross_animal_v1 - INFO -     activity: r=0.5953 | rho=0.5925 | R2=-0.0925 | RMSE=0.8222 | MAE=0.6476
+2026-01-13 10:58:36,066 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 10:58:36,066 - config3_cross_animal_v1 - INFO -     activity: r=0.5129 | rho=0.4476 | R2=-0.2175 | RMSE=1.1661 | MAE=0.8987
+2026-01-13 10:58:36,066 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 10:58:36,066 - config3_cross_animal_v1 - INFO -     Dev: r=0.6079 | rho=0.5794 | R2=0.2963 | RMSE=1.2791 | MAE=1.0005
+2026-01-13 10:58:36,067 - config3_cross_animal_v1 - INFO -     Hk: r=0.6619 | rho=0.5101 | R2=0.2879 | RMSE=1.3934 | MAE=1.0635
+2026-01-13 10:58:36,067 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 10:58:36,681 - config3_cross_animal_v1 - INFO - Epoch 9 completed in 1109.6s
+2026-01-13 11:00:31,842 - config3_cross_animal_v1 - INFO - Step 4800: NLL=1.1480, MSE=0.8061, grad=2.12, lr=9.76e-04
+2026-01-13 11:03:15,160 - config3_cross_animal_v1 - INFO - Step 4900: NLL=0.9223, MSE=0.7909, grad=2.38, lr=9.76e-04
+2026-01-13 11:05:53,029 - config3_cross_animal_v1 - INFO - Step 5000: NLL=0.7327, MSE=0.6047, grad=2.00, lr=9.76e-04
+2026-01-13 11:08:33,349 - config3_cross_animal_v1 - INFO - Step 5100: NLL=0.9321, MSE=0.6940, grad=2.23, lr=9.76e-04
+2026-01-13 11:11:12,641 - config3_cross_animal_v1 - INFO - Step 5200: NLL=1.0360, MSE=0.6306, grad=2.16, lr=9.76e-04
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO - EPOCH 10 SUMMARY (BEST)
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.8686 | MSE: 0.8686 | r: 0.6409 | rho: 0.5624 | R2: 0.1949 | RMSE: 0.9729
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.8340 | MSE: 0.8340 | r: 0.6230 | rho: 0.5528 | R2: 0.1640 | RMSE: 0.9806
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -     activity: r=0.6429 | rho=0.5950 | R2=0.0530 | RMSE=0.5145 | MAE=0.3947
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -     activity: r=0.5965 | rho=0.6021 | R2=0.0614 | RMSE=0.7621 | MAE=0.5947
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -     activity: r=0.5762 | rho=0.4675 | R2=0.0394 | RMSE=1.0358 | MAE=0.7826
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -     Dev: r=0.6141 | rho=0.5823 | R2=0.3032 | RMSE=1.2728 | MAE=0.9942
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO -     Hk: r=0.6853 | rho=0.5170 | R2=0.3630 | RMSE=1.3180 | MAE=0.9961
+2026-01-13 11:17:17,070 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:17:17,718 - config3_cross_animal_v1 - INFO - Epoch 10 completed in 1121.0s
+2026-01-13 11:19:46,162 - config3_cross_animal_v1 - INFO - Step 5300: NLL=0.9902, MSE=0.7245, grad=2.82, lr=9.70e-04
+2026-01-13 11:22:26,434 - config3_cross_animal_v1 - INFO - Step 5400: NLL=0.8201, MSE=0.5215, grad=2.36, lr=9.70e-04
+2026-01-13 11:25:03,330 - config3_cross_animal_v1 - INFO - Step 5500: NLL=0.9512, MSE=0.6924, grad=2.43, lr=9.70e-04
+2026-01-13 11:27:38,107 - config3_cross_animal_v1 - INFO - Step 5600: NLL=1.0397, MSE=0.6385, grad=2.91, lr=9.70e-04
+2026-01-13 11:35:45,051 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:35:45,074 - config3_cross_animal_v1 - INFO - EPOCH 11 SUMMARY (BEST)
+2026-01-13 11:35:45,074 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:35:45,074 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.7212 | MSE: 0.7212 | r: 0.6586 | rho: 0.5752 | R2: 0.3193 | RMSE: 0.9096
+2026-01-13 11:35:45,074 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7315 | MSE: 0.7315 | r: 0.6372 | rho: 0.5622 | R2: 0.2664 | RMSE: 0.9276
+2026-01-13 11:35:45,074 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 11:35:45,074 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 11:35:45,074 - config3_cross_animal_v1 - INFO -     activity: r=0.6566 | rho=0.5947 | R2=0.2153 | RMSE=0.4684 | MAE=0.3578
+2026-01-13 11:35:45,075 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 11:35:45,075 - config3_cross_animal_v1 - INFO -     activity: r=0.6167 | rho=0.6121 | R2=0.2093 | RMSE=0.6995 | MAE=0.5341
+2026-01-13 11:35:45,075 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 11:35:45,075 - config3_cross_animal_v1 - INFO -     activity: r=0.5924 | rho=0.4904 | R2=0.1443 | RMSE=0.9776 | MAE=0.7408
+2026-01-13 11:35:45,075 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 11:35:45,075 - config3_cross_animal_v1 - INFO -     Dev: r=0.6314 | rho=0.6014 | R2=0.3387 | RMSE=1.2399 | MAE=0.9669
+2026-01-13 11:35:45,076 - config3_cross_animal_v1 - INFO -     Hk: r=0.6887 | rho=0.5126 | R2=0.4246 | RMSE=1.2526 | MAE=0.9480
+2026-01-13 11:35:45,076 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:35:45,702 - config3_cross_animal_v1 - INFO - Epoch 11 completed in 1108.0s
+2026-01-13 11:36:26,590 - config3_cross_animal_v1 - INFO - Step 5700: NLL=0.8942, MSE=0.6861, grad=2.87, lr=9.65e-04
+2026-01-13 11:39:06,540 - config3_cross_animal_v1 - INFO - Step 5800: NLL=0.8038, MSE=0.5967, grad=2.40, lr=9.65e-04
+2026-01-13 11:41:49,637 - config3_cross_animal_v1 - INFO - Step 5900: NLL=0.7088, MSE=0.5908, grad=1.50, lr=9.65e-04
+2026-01-13 11:44:32,468 - config3_cross_animal_v1 - INFO - Step 6000: NLL=0.8254, MSE=0.6666, grad=1.75, lr=9.65e-04
+2026-01-13 11:47:10,595 - config3_cross_animal_v1 - INFO - Step 6100: NLL=1.4079, MSE=0.7233, grad=4.13, lr=9.65e-04
+2026-01-13 11:54:27,430 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:54:27,433 - config3_cross_animal_v1 - INFO - EPOCH 12 SUMMARY 
+2026-01-13 11:54:27,434 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:54:27,434 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.8741 | MSE: 0.8741 | r: 0.6274 | rho: 0.5577 | R2: 0.1476 | RMSE: 1.0497
+2026-01-13 11:54:27,434 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.9462 | MSE: 0.9462 | r: 0.6056 | rho: 0.5475 | R2: 0.0741 | RMSE: 1.0737
+2026-01-13 11:54:27,435 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 11:54:27,435 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 11:54:27,435 - config3_cross_animal_v1 - INFO -     activity: r=0.6343 | rho=0.6003 | R2=0.1743 | RMSE=0.4804 | MAE=0.3695
+2026-01-13 11:54:27,447 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 11:54:27,448 - config3_cross_animal_v1 - INFO -     activity: r=0.6034 | rho=0.6137 | R2=0.0877 | RMSE=0.7514 | MAE=0.5869
+2026-01-13 11:54:27,448 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 11:54:27,448 - config3_cross_animal_v1 - INFO -     activity: r=0.5302 | rho=0.4518 | R2=-0.0363 | RMSE=1.0759 | MAE=0.8185
+2026-01-13 11:54:27,448 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 11:54:27,448 - config3_cross_animal_v1 - INFO -     Dev: r=0.6209 | rho=0.5914 | R2=0.1727 | RMSE=1.3868 | MAE=1.0848
+2026-01-13 11:54:27,448 - config3_cross_animal_v1 - INFO -     Hk: r=0.6390 | rho=0.4802 | R2=-0.0278 | RMSE=1.6741 | MAE=1.2316
+2026-01-13 11:54:27,449 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 11:54:27,729 - config3_cross_animal_v1 - INFO - Epoch 12 completed in 1122.0s
+2026-01-13 11:55:48,744 - config3_cross_animal_v1 - INFO - Step 6200: NLL=0.8001, MSE=0.5698, grad=1.90, lr=9.59e-04
+2026-01-13 11:58:22,897 - config3_cross_animal_v1 - INFO - Step 6300: NLL=0.7698, MSE=0.6366, grad=2.16, lr=9.59e-04
+2026-01-13 12:00:54,352 - config3_cross_animal_v1 - INFO - Step 6400: NLL=0.7113, MSE=0.5764, grad=1.59, lr=9.59e-04
+2026-01-13 12:03:31,178 - config3_cross_animal_v1 - INFO - Step 6500: NLL=0.7377, MSE=0.6140, grad=1.40, lr=9.59e-04
+2026-01-13 12:06:10,037 - config3_cross_animal_v1 - INFO - Step 6600: NLL=0.8689, MSE=0.6733, grad=2.12, lr=9.59e-04
+2026-01-13 12:12:41,014 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:12:41,032 - config3_cross_animal_v1 - INFO - EPOCH 13 SUMMARY 
+2026-01-13 12:12:41,032 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:12:41,032 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.7961 | MSE: 0.7961 | r: 0.6490 | rho: 0.5723 | R2: 0.2338 | RMSE: 0.9743
+2026-01-13 12:12:41,032 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.8395 | MSE: 0.8395 | r: 0.6256 | rho: 0.5582 | R2: 0.1739 | RMSE: 0.9972
+2026-01-13 12:12:41,032 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 12:12:41,033 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 12:12:41,036 - config3_cross_animal_v1 - INFO -     activity: r=0.6801 | rho=0.6302 | R2=0.3925 | RMSE=0.4121 | MAE=0.3148
+2026-01-13 12:12:41,041 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 12:12:41,042 - config3_cross_animal_v1 - INFO -     activity: r=0.5437 | rho=0.5455 | R2=-0.2475 | RMSE=0.8786 | MAE=0.6597
+2026-01-13 12:12:41,042 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 12:12:41,042 - config3_cross_animal_v1 - INFO -     activity: r=0.6100 | rho=0.5075 | R2=0.3088 | RMSE=0.8786 | MAE=0.6568
+2026-01-13 12:12:41,042 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 12:12:41,043 - config3_cross_animal_v1 - INFO -     Dev: r=0.6143 | rho=0.5827 | R2=0.1224 | RMSE=1.4283 | MAE=1.1074
+2026-01-13 12:12:41,043 - config3_cross_animal_v1 - INFO -     Hk: r=0.6797 | rho=0.5250 | R2=0.2930 | RMSE=1.3885 | MAE=1.0513
+2026-01-13 12:12:41,043 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:12:41,414 - config3_cross_animal_v1 - INFO - Epoch 13 completed in 1093.7s
+2026-01-13 12:14:46,410 - config3_cross_animal_v1 - INFO - Step 6700: NLL=1.0172, MSE=0.6026, grad=2.31, lr=9.52e-04
+2026-01-13 12:17:21,852 - config3_cross_animal_v1 - INFO - Step 6800: NLL=0.8555, MSE=0.5933, grad=1.95, lr=9.52e-04
+2026-01-13 12:19:55,653 - config3_cross_animal_v1 - INFO - Step 6900: NLL=0.7949, MSE=0.6743, grad=1.63, lr=9.52e-04
+2026-01-13 12:22:34,312 - config3_cross_animal_v1 - INFO - Step 7000: NLL=0.9557, MSE=0.6432, grad=2.78, lr=9.52e-04
+2026-01-13 12:30:49,278 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:30:49,278 - config3_cross_animal_v1 - INFO - EPOCH 14 SUMMARY (BEST)
+2026-01-13 12:30:49,278 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:30:49,278 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6744 | MSE: 0.6744 | r: 0.6655 | rho: 0.5832 | R2: 0.3444 | RMSE: 0.9123
+2026-01-13 12:30:49,278 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7153 | MSE: 0.7153 | r: 0.6430 | rho: 0.5712 | R2: 0.2969 | RMSE: 0.9296
+2026-01-13 12:30:49,278 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -     activity: r=0.6754 | rho=0.6136 | R2=0.4084 | RMSE=0.4067 | MAE=0.3075
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -     activity: r=0.6094 | rho=0.6079 | R2=0.1737 | RMSE=0.7151 | MAE=0.5517
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -     activity: r=0.6092 | rho=0.5171 | R2=0.3005 | RMSE=0.8839 | MAE=0.6534
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -     Dev: r=0.6234 | rho=0.5940 | R2=0.2086 | RMSE=1.3564 | MAE=1.0590
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO -     Hk: r=0.6975 | rho=0.5234 | R2=0.3935 | RMSE=1.2860 | MAE=0.9854
+2026-01-13 12:30:49,279 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:30:49,516 - config3_cross_animal_v1 - INFO - Epoch 14 completed in 1088.1s
+2026-01-13 12:30:57,262 - config3_cross_animal_v1 - INFO - Step 7100: NLL=0.8895, MSE=0.6614, grad=1.67, lr=9.46e-04
+2026-01-13 12:33:36,776 - config3_cross_animal_v1 - INFO - Step 7200: NLL=0.7851, MSE=0.5820, grad=2.51, lr=9.46e-04
+2026-01-13 12:36:16,586 - config3_cross_animal_v1 - INFO - Step 7300: NLL=0.7243, MSE=0.5785, grad=1.73, lr=9.46e-04
+2026-01-13 12:38:53,979 - config3_cross_animal_v1 - INFO - Step 7400: NLL=1.1742, MSE=0.7393, grad=2.54, lr=9.46e-04
+2026-01-13 12:41:32,071 - config3_cross_animal_v1 - INFO - Step 7500: NLL=0.6954, MSE=0.5719, grad=1.78, lr=9.46e-04
+2026-01-13 12:49:27,024 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:49:27,030 - config3_cross_animal_v1 - INFO - EPOCH 15 SUMMARY (BEST)
+2026-01-13 12:49:27,030 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:49:27,031 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.7308 | MSE: 0.7308 | r: 0.6687 | rho: 0.5853 | R2: 0.3129 | RMSE: 0.9075
+2026-01-13 12:49:27,031 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7512 | MSE: 0.7512 | r: 0.6442 | rho: 0.5696 | R2: 0.2523 | RMSE: 0.9283
+2026-01-13 12:49:27,031 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 12:49:27,031 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 12:49:27,031 - config3_cross_animal_v1 - INFO -     activity: r=0.6411 | rho=0.5792 | R2=0.1631 | RMSE=0.4837 | MAE=0.3661
+2026-01-13 12:49:27,031 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 12:49:27,031 - config3_cross_animal_v1 - INFO -     activity: r=0.6267 | rho=0.6233 | R2=0.1326 | RMSE=0.7326 | MAE=0.5686
+2026-01-13 12:49:27,036 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 12:49:27,036 - config3_cross_animal_v1 - INFO -     activity: r=0.5930 | rho=0.4916 | R2=0.1932 | RMSE=0.9493 | MAE=0.7154
+2026-01-13 12:49:27,037 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 12:49:27,037 - config3_cross_animal_v1 - INFO -     Dev: r=0.6438 | rho=0.6109 | R2=0.3046 | RMSE=1.2715 | MAE=0.9995
+2026-01-13 12:49:27,037 - config3_cross_animal_v1 - INFO -     Hk: r=0.7165 | rho=0.5430 | R2=0.4681 | RMSE=1.2043 | MAE=0.9177
+2026-01-13 12:49:27,037 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 12:49:27,656 - config3_cross_animal_v1 - INFO - Epoch 15 completed in 1118.1s
+2026-01-13 12:50:21,344 - config3_cross_animal_v1 - INFO - Step 7600: NLL=0.6621, MSE=0.6075, grad=1.32, lr=9.38e-04
+2026-01-13 12:53:02,115 - config3_cross_animal_v1 - INFO - Step 7700: NLL=0.7319, MSE=0.6351, grad=1.69, lr=9.38e-04
+2026-01-13 12:55:38,967 - config3_cross_animal_v1 - INFO - Step 7800: NLL=0.7798, MSE=0.6519, grad=1.84, lr=9.38e-04
+2026-01-13 12:58:16,728 - config3_cross_animal_v1 - INFO - Step 7900: NLL=1.1920, MSE=0.7502, grad=2.70, lr=9.38e-04
+2026-01-13 13:00:55,406 - config3_cross_animal_v1 - INFO - Step 8000: NLL=1.1323, MSE=0.6990, grad=2.95, lr=9.38e-04
+2026-01-13 13:07:49,734 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:07:49,744 - config3_cross_animal_v1 - INFO - EPOCH 16 SUMMARY (BEST)
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.7118 | MSE: 0.7118 | r: 0.6769 | rho: 0.5923 | R2: 0.3312 | RMSE: 0.8946
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7064 | MSE: 0.7064 | r: 0.6573 | rho: 0.5821 | R2: 0.2987 | RMSE: 0.9041
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -     activity: r=0.6736 | rho=0.6097 | R2=0.2399 | RMSE=0.4609 | MAE=0.3523
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -     activity: r=0.6226 | rho=0.6259 | R2=0.1970 | RMSE=0.7049 | MAE=0.5422
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -     activity: r=0.6342 | rho=0.5364 | R2=0.2497 | RMSE=0.9154 | MAE=0.6805
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -     Dev: r=0.6329 | rho=0.6004 | R2=0.3152 | RMSE=1.2617 | MAE=0.9900
+2026-01-13 13:07:49,745 - config3_cross_animal_v1 - INFO -     Hk: r=0.7231 | rho=0.5380 | R2=0.4916 | RMSE=1.1774 | MAE=0.9021
+2026-01-13 13:07:49,746 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:07:50,424 - config3_cross_animal_v1 - INFO - Epoch 16 completed in 1102.8s
+2026-01-13 13:09:24,977 - config3_cross_animal_v1 - INFO - Step 8100: NLL=0.6019, MSE=0.5497, grad=1.24, lr=9.30e-04
+2026-01-13 13:12:05,163 - config3_cross_animal_v1 - INFO - Step 8200: NLL=0.8942, MSE=0.6030, grad=2.41, lr=9.30e-04
+2026-01-13 13:14:46,423 - config3_cross_animal_v1 - INFO - Step 8300: NLL=0.7585, MSE=0.6302, grad=1.58, lr=9.30e-04
+2026-01-13 13:17:23,776 - config3_cross_animal_v1 - INFO - Step 8400: NLL=0.8215, MSE=0.6971, grad=1.98, lr=9.30e-04
+2026-01-13 13:20:02,905 - config3_cross_animal_v1 - INFO - Step 8500: NLL=0.6141, MSE=0.5336, grad=1.40, lr=9.30e-04
+2026-01-13 13:26:20,523 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:26:20,539 - config3_cross_animal_v1 - INFO - EPOCH 17 SUMMARY 
+2026-01-13 13:26:20,540 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:26:20,540 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6793 | MSE: 0.6793 | r: 0.6799 | rho: 0.5985 | R2: 0.3412 | RMSE: 0.9089
+2026-01-13 13:26:20,545 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7310 | MSE: 0.7310 | r: 0.6555 | rho: 0.5837 | R2: 0.2891 | RMSE: 0.9292
+2026-01-13 13:26:20,545 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -     activity: r=0.6741 | rho=0.6101 | R2=0.3250 | RMSE=0.4344 | MAE=0.3321
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -     activity: r=0.6215 | rho=0.6269 | R2=0.1888 | RMSE=0.7085 | MAE=0.5494
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -     activity: r=0.6236 | rho=0.5273 | R2=0.3160 | RMSE=0.8741 | MAE=0.6477
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -     Dev: r=0.6464 | rho=0.6114 | R2=0.2147 | RMSE=1.3511 | MAE=1.0649
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO -     Hk: r=0.7120 | rho=0.5428 | R2=0.4012 | RMSE=1.2778 | MAE=0.9818
+2026-01-13 13:26:20,546 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:26:20,859 - config3_cross_animal_v1 - INFO - Epoch 17 completed in 1110.4s
+2026-01-13 13:28:06,916 - config3_cross_animal_v1 - INFO - Step 8600: NLL=0.8827, MSE=0.6603, grad=1.81, lr=9.22e-04
+2026-01-13 13:30:01,772 - config3_cross_animal_v1 - INFO - Step 8700: NLL=0.8611, MSE=0.6837, grad=2.13, lr=9.22e-04
+2026-01-13 13:31:57,501 - config3_cross_animal_v1 - INFO - Step 8800: NLL=0.6334, MSE=0.5619, grad=1.31, lr=9.22e-04
+2026-01-13 13:33:59,781 - config3_cross_animal_v1 - INFO - Step 8900: NLL=0.8134, MSE=0.6418, grad=1.91, lr=9.22e-04
+2026-01-13 13:40:12,615 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:40:12,616 - config3_cross_animal_v1 - INFO - EPOCH 18 SUMMARY (BEST)
+2026-01-13 13:40:12,616 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:40:12,616 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6759 | MSE: 0.6759 | r: 0.6857 | rho: 0.6033 | R2: 0.3595 | RMSE: 0.8848
+2026-01-13 13:40:12,616 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7010 | MSE: 0.7010 | r: 0.6597 | rho: 0.5868 | R2: 0.2956 | RMSE: 0.9100
+2026-01-13 13:40:12,616 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 13:40:12,616 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 13:40:12,616 - config3_cross_animal_v1 - INFO -     activity: r=0.6794 | rho=0.6196 | R2=0.3511 | RMSE=0.4259 | MAE=0.3240
+2026-01-13 13:40:12,617 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 13:40:12,617 - config3_cross_animal_v1 - INFO -     activity: r=0.6335 | rho=0.6320 | R2=0.0677 | RMSE=0.7596 | MAE=0.5874
+2026-01-13 13:40:12,617 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 13:40:12,617 - config3_cross_animal_v1 - INFO -     activity: r=0.6149 | rho=0.5131 | R2=0.2657 | RMSE=0.9057 | MAE=0.6729
+2026-01-13 13:40:12,617 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 13:40:12,617 - config3_cross_animal_v1 - INFO -     Dev: r=0.6547 | rho=0.6212 | R2=0.3363 | RMSE=1.2422 | MAE=0.9752
+2026-01-13 13:40:12,617 - config3_cross_animal_v1 - INFO -     Hk: r=0.7161 | rho=0.5479 | R2=0.4573 | RMSE=1.2165 | MAE=0.9347
+2026-01-13 13:40:12,617 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:40:13,226 - config3_cross_animal_v1 - INFO - Epoch 18 completed in 832.4s
+2026-01-13 13:40:31,613 - config3_cross_animal_v1 - INFO - Step 9000: NLL=0.8713, MSE=0.5996, grad=1.94, lr=9.14e-04
+2026-01-13 13:42:33,566 - config3_cross_animal_v1 - INFO - Step 9100: NLL=0.6207, MSE=0.5399, grad=1.40, lr=9.14e-04
+2026-01-13 13:45:10,394 - config3_cross_animal_v1 - INFO - Step 9200: NLL=0.9021, MSE=0.6666, grad=1.83, lr=9.14e-04
+2026-01-13 13:47:51,752 - config3_cross_animal_v1 - INFO - Step 9300: NLL=0.6716, MSE=0.5379, grad=1.91, lr=9.14e-04
+2026-01-13 13:50:37,409 - config3_cross_animal_v1 - INFO - Step 9400: NLL=0.7973, MSE=0.6459, grad=1.74, lr=9.14e-04
+2026-01-13 13:58:26,266 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO - EPOCH 19 SUMMARY 
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.7503 | MSE: 0.7503 | r: 0.6754 | rho: 0.5977 | R2: 0.2894 | RMSE: 0.9274
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7875 | MSE: 0.7875 | r: 0.6460 | rho: 0.5790 | R2: 0.2074 | RMSE: 0.9612
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO -     activity: r=0.6557 | rho=0.6148 | R2=0.1516 | RMSE=0.4870 | MAE=0.3756
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO -     activity: r=0.6396 | rho=0.6448 | R2=0.1418 | RMSE=0.7288 | MAE=0.5743
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO -     activity: r=0.5856 | rho=0.4977 | R2=0.0782 | RMSE=1.0147 | MAE=0.7697
+2026-01-13 13:58:26,267 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 13:58:26,268 - config3_cross_animal_v1 - INFO -     Dev: r=0.6458 | rho=0.6142 | R2=0.2170 | RMSE=1.3492 | MAE=1.0535
+2026-01-13 13:58:26,268 - config3_cross_animal_v1 - INFO -     Hk: r=0.7032 | rho=0.5237 | R2=0.4485 | RMSE=1.2263 | MAE=0.9450
+2026-01-13 13:58:26,268 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 13:58:26,493 - config3_cross_animal_v1 - INFO - Epoch 19 completed in 1093.3s
+2026-01-13 13:59:32,133 - config3_cross_animal_v1 - INFO - Step 9500: NLL=0.6195, MSE=0.5423, grad=2.04, lr=9.05e-04
+2026-01-13 14:02:16,346 - config3_cross_animal_v1 - INFO - Step 9600: NLL=0.6874, MSE=0.5490, grad=1.50, lr=9.05e-04
+2026-01-13 14:04:50,456 - config3_cross_animal_v1 - INFO - Step 9700: NLL=0.7049, MSE=0.5972, grad=1.32, lr=9.05e-04
+2026-01-13 14:07:33,311 - config3_cross_animal_v1 - INFO - Step 9800: NLL=0.8299, MSE=0.6734, grad=2.19, lr=9.05e-04
+2026-01-13 14:10:24,122 - config3_cross_animal_v1 - INFO - Step 9900: NLL=0.9330, MSE=0.6778, grad=2.24, lr=9.05e-04
+2026-01-13 14:17:37,922 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:17:37,942 - config3_cross_animal_v1 - INFO - EPOCH 20 SUMMARY 
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.8715 | MSE: 0.8715 | r: 0.6726 | rho: 0.5982 | R2: 0.1954 | RMSE: 0.9715
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.8495 | MSE: 0.8495 | r: 0.6439 | rho: 0.5800 | R2: 0.0802 | RMSE: 1.0138
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -     activity: r=0.6454 | rho=0.6091 | R2=0.0656 | RMSE=0.5111 | MAE=0.3905
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -     activity: r=0.6414 | rho=0.6475 | R2=0.0328 | RMSE=0.7736 | MAE=0.6093
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -     activity: r=0.5590 | rho=0.4893 | R2=-0.3973 | RMSE=1.2493 | MAE=0.9574
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -     Dev: r=0.6550 | rho=0.6212 | R2=0.2121 | RMSE=1.3534 | MAE=1.0571
+2026-01-13 14:17:37,943 - config3_cross_animal_v1 - INFO -     Hk: r=0.7185 | rho=0.5331 | R2=0.4880 | RMSE=1.1815 | MAE=0.9074
+2026-01-13 14:17:37,944 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:17:38,207 - config3_cross_animal_v1 - INFO - Epoch 20 completed in 1151.7s
+2026-01-13 14:19:28,521 - config3_cross_animal_v1 - INFO - Step 10000: NLL=0.6062, MSE=0.4935, grad=1.27, lr=8.95e-04
+2026-01-13 14:22:18,021 - config3_cross_animal_v1 - INFO - Step 10100: NLL=0.6546, MSE=0.5043, grad=2.29, lr=8.95e-04
+2026-01-13 14:25:01,766 - config3_cross_animal_v1 - INFO - Step 10200: NLL=1.6875, MSE=0.8219, grad=3.94, lr=8.95e-04
+2026-01-13 14:27:40,723 - config3_cross_animal_v1 - INFO - Step 10300: NLL=0.7129, MSE=0.6005, grad=1.57, lr=8.95e-04
+2026-01-13 14:30:18,993 - config3_cross_animal_v1 - INFO - Step 10400: NLL=0.7567, MSE=0.6080, grad=1.66, lr=8.95e-04
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO - EPOCH 21 SUMMARY 
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.7545 | MSE: 0.7545 | r: 0.6874 | rho: 0.6076 | R2: 0.2915 | RMSE: 0.9202
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7720 | MSE: 0.7720 | r: 0.6587 | rho: 0.5900 | R2: 0.2249 | RMSE: 0.9461
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO -     activity: r=0.6737 | rho=0.6263 | R2=0.3450 | RMSE=0.4279 | MAE=0.3266
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO -     activity: r=0.6160 | rho=0.6212 | R2=-0.2210 | RMSE=0.8692 | MAE=0.6609
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO -     activity: r=0.6223 | rho=0.5294 | R2=0.2950 | RMSE=0.8874 | MAE=0.6709
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 14:36:35,200 - config3_cross_animal_v1 - INFO -     Dev: r=0.6590 | rho=0.6212 | R2=0.2814 | RMSE=1.2925 | MAE=1.0116
+2026-01-13 14:36:35,201 - config3_cross_animal_v1 - INFO -     Hk: r=0.7224 | rho=0.5518 | R2=0.4240 | RMSE=1.2533 | MAE=0.9644
+2026-01-13 14:36:35,201 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:36:35,463 - config3_cross_animal_v1 - INFO - Epoch 21 completed in 1137.2s
+2026-01-13 14:39:08,042 - config3_cross_animal_v1 - INFO - Step 10500: NLL=0.7217, MSE=0.6006, grad=1.38, lr=8.85e-04
+2026-01-13 14:41:57,332 - config3_cross_animal_v1 - INFO - Step 10600: NLL=0.9586, MSE=0.7623, grad=1.57, lr=8.85e-04
+2026-01-13 14:44:46,442 - config3_cross_animal_v1 - INFO - Step 10700: NLL=0.6855, MSE=0.5869, grad=1.44, lr=8.85e-04
+2026-01-13 14:47:35,101 - config3_cross_animal_v1 - INFO - Step 10800: NLL=0.7559, MSE=0.6439, grad=1.73, lr=8.85e-04
+2026-01-13 14:55:59,727 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:55:59,743 - config3_cross_animal_v1 - INFO - EPOCH 22 SUMMARY 
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.7367 | MSE: 0.7367 | r: 0.6760 | rho: 0.6097 | R2: 0.2959 | RMSE: 0.9297
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.8007 | MSE: 0.8007 | r: 0.6429 | rho: 0.5876 | R2: 0.2021 | RMSE: 0.9678
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -     activity: r=0.6637 | rho=0.6372 | R2=0.1206 | RMSE=0.4958 | MAE=0.3830
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -     activity: r=0.6235 | rho=0.6304 | R2=0.1910 | RMSE=0.7075 | MAE=0.5471
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -     activity: r=0.5789 | rho=0.5118 | R2=0.0821 | RMSE=1.0126 | MAE=0.7782
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -     Dev: r=0.6452 | rho=0.6087 | R2=0.1932 | RMSE=1.3695 | MAE=1.0726
+2026-01-13 14:55:59,744 - config3_cross_animal_v1 - INFO -     Hk: r=0.7033 | rho=0.5499 | R2=0.4235 | RMSE=1.2538 | MAE=0.9669
+2026-01-13 14:55:59,745 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 14:56:00,587 - config3_cross_animal_v1 - INFO - Epoch 22 completed in 1165.1s
+2026-01-13 14:56:35,004 - config3_cross_animal_v1 - INFO - Step 10900: NLL=0.7088, MSE=0.5508, grad=1.69, lr=8.75e-04
+2026-01-13 14:59:18,596 - config3_cross_animal_v1 - INFO - Step 11000: NLL=0.6834, MSE=0.5639, grad=1.29, lr=8.75e-04
+2026-01-13 15:02:00,915 - config3_cross_animal_v1 - INFO - Step 11100: NLL=0.6127, MSE=0.5832, grad=1.73, lr=8.75e-04
+2026-01-13 15:04:40,238 - config3_cross_animal_v1 - INFO - Step 11200: NLL=0.5896, MSE=0.4867, grad=1.29, lr=8.75e-04
+2026-01-13 15:07:18,550 - config3_cross_animal_v1 - INFO - Step 11300: NLL=0.9395, MSE=0.6395, grad=2.51, lr=8.75e-04
+2026-01-13 15:14:46,987 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:14:46,997 - config3_cross_animal_v1 - INFO - EPOCH 23 SUMMARY (BEST)
+2026-01-13 15:14:47,007 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:14:47,007 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6752 | MSE: 0.6752 | r: 0.7081 | rho: 0.6243 | R2: 0.3652 | RMSE: 0.8737
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7426 | MSE: 0.7426 | r: 0.6719 | rho: 0.5985 | R2: 0.2554 | RMSE: 0.9204
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -     activity: r=0.6948 | rho=0.6442 | R2=0.2654 | RMSE=0.4532 | MAE=0.3449
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -     activity: r=0.6383 | rho=0.6367 | R2=-0.0910 | RMSE=0.8217 | MAE=0.6309
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -     activity: r=0.6389 | rho=0.5335 | R2=0.2779 | RMSE=0.8981 | MAE=0.6687
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -     Dev: r=0.6637 | rho=0.6244 | R2=0.3667 | RMSE=1.2133 | MAE=0.9471
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO -     Hk: r=0.7238 | rho=0.5535 | R2=0.4578 | RMSE=1.2159 | MAE=0.9371
+2026-01-13 15:14:47,008 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:14:47,580 - config3_cross_animal_v1 - INFO - Epoch 23 completed in 1127.0s
+2026-01-13 15:16:03,344 - config3_cross_animal_v1 - INFO - Step 11400: NLL=0.6949, MSE=0.6051, grad=1.89, lr=8.65e-04
+2026-01-13 15:18:43,659 - config3_cross_animal_v1 - INFO - Step 11500: NLL=0.6310, MSE=0.5270, grad=1.12, lr=8.65e-04
+2026-01-13 15:21:24,263 - config3_cross_animal_v1 - INFO - Step 11600: NLL=0.5423, MSE=0.4947, grad=1.18, lr=8.65e-04
+2026-01-13 15:24:04,537 - config3_cross_animal_v1 - INFO - Step 11700: NLL=0.5591, MSE=0.4728, grad=1.29, lr=8.65e-04
+2026-01-13 15:26:39,840 - config3_cross_animal_v1 - INFO - Step 11800: NLL=0.7107, MSE=0.6165, grad=1.94, lr=8.65e-04
+2026-01-13 15:33:25,852 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:33:25,858 - config3_cross_animal_v1 - INFO - EPOCH 24 SUMMARY (BEST)
+2026-01-13 15:33:25,858 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5936 | MSE: 0.5936 | r: 0.7074 | rho: 0.6237 | R2: 0.4220 | RMSE: 0.8534
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6585 | MSE: 0.6585 | r: 0.6739 | rho: 0.6012 | R2: 0.3524 | RMSE: 0.8874
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -     activity: r=0.6958 | rho=0.6556 | R2=0.4010 | RMSE=0.4092 | MAE=0.3140
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -     activity: r=0.6575 | rho=0.6501 | R2=0.2817 | RMSE=0.6667 | MAE=0.5113
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -     activity: r=0.6416 | rho=0.5414 | R2=0.3346 | RMSE=0.8621 | MAE=0.6425
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -     Dev: r=0.6468 | rho=0.6056 | R2=0.2658 | RMSE=1.3064 | MAE=1.0209
+2026-01-13 15:33:25,859 - config3_cross_animal_v1 - INFO -     Hk: r=0.7277 | rho=0.5530 | R2=0.4785 | RMSE=1.1924 | MAE=0.9107
+2026-01-13 15:33:25,860 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:33:26,467 - config3_cross_animal_v1 - INFO - Epoch 24 completed in 1118.9s
+2026-01-13 15:35:30,615 - config3_cross_animal_v1 - INFO - Step 11900: NLL=0.9267, MSE=0.6863, grad=2.26, lr=8.54e-04
+2026-01-13 15:38:09,698 - config3_cross_animal_v1 - INFO - Step 12000: NLL=0.5663, MSE=0.5174, grad=1.41, lr=8.54e-04
+2026-01-13 15:40:43,495 - config3_cross_animal_v1 - INFO - Step 12100: NLL=0.6139, MSE=0.5262, grad=1.19, lr=8.54e-04
+2026-01-13 15:43:16,682 - config3_cross_animal_v1 - INFO - Step 12200: NLL=0.6681, MSE=0.6062, grad=1.36, lr=8.54e-04
+2026-01-13 15:52:07,367 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:52:07,389 - config3_cross_animal_v1 - INFO - EPOCH 25 SUMMARY (BEST)
+2026-01-13 15:52:07,389 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:52:07,389 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6021 | MSE: 0.6021 | r: 0.7117 | rho: 0.6217 | R2: 0.4133 | RMSE: 0.8623
+2026-01-13 15:52:07,394 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6672 | MSE: 0.6672 | r: 0.6778 | rho: 0.5985 | R2: 0.3469 | RMSE: 0.8944
+2026-01-13 15:52:07,394 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -     activity: r=0.6859 | rho=0.6239 | R2=0.3726 | RMSE=0.4188 | MAE=0.3163
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -     activity: r=0.6716 | rho=0.6630 | R2=0.3401 | RMSE=0.6390 | MAE=0.4892
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -     activity: r=0.6449 | rho=0.5378 | R2=0.3055 | RMSE=0.8808 | MAE=0.6510
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -     Dev: r=0.6607 | rho=0.6213 | R2=0.2786 | RMSE=1.2950 | MAE=1.0166
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO -     Hk: r=0.7261 | rho=0.5465 | R2=0.4375 | RMSE=1.2384 | MAE=0.9492
+2026-01-13 15:52:07,395 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 15:52:07,966 - config3_cross_animal_v1 - INFO - Epoch 25 completed in 1121.5s
+2026-01-13 15:52:12,616 - config3_cross_animal_v1 - INFO - Step 12300: NLL=0.6748, MSE=0.6382, grad=1.32, lr=8.42e-04
+2026-01-13 15:54:47,539 - config3_cross_animal_v1 - INFO - Step 12400: NLL=0.5322, MSE=0.4689, grad=1.21, lr=8.42e-04
+2026-01-13 15:57:26,967 - config3_cross_animal_v1 - INFO - Step 12500: NLL=0.7607, MSE=0.5746, grad=1.42, lr=8.42e-04
+2026-01-13 16:00:06,266 - config3_cross_animal_v1 - INFO - Step 12600: NLL=0.7866, MSE=0.6236, grad=1.82, lr=8.42e-04
+2026-01-13 16:02:43,826 - config3_cross_animal_v1 - INFO - Step 12700: NLL=0.6551, MSE=0.5577, grad=1.65, lr=8.42e-04
+2026-01-13 16:10:30,469 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:10:30,469 - config3_cross_animal_v1 - INFO - EPOCH 26 SUMMARY (BEST)
+2026-01-13 16:10:30,469 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:10:30,469 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5990 | MSE: 0.5990 | r: 0.7153 | rho: 0.6298 | R2: 0.4226 | RMSE: 0.8519
+2026-01-13 16:10:30,469 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6532 | MSE: 0.6532 | r: 0.6787 | rho: 0.6050 | R2: 0.3513 | RMSE: 0.8854
+2026-01-13 16:10:30,469 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 16:10:30,470 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 16:10:30,470 - config3_cross_animal_v1 - INFO -     activity: r=0.7005 | rho=0.6482 | R2=0.3688 | RMSE=0.4200 | MAE=0.3155
+2026-01-13 16:10:30,470 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 16:10:30,470 - config3_cross_animal_v1 - INFO -     activity: r=0.6726 | rho=0.6627 | R2=0.3141 | RMSE=0.6515 | MAE=0.4967
+2026-01-13 16:10:30,470 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 16:10:30,471 - config3_cross_animal_v1 - INFO -     activity: r=0.6270 | rho=0.5354 | R2=0.2702 | RMSE=0.9028 | MAE=0.6746
+2026-01-13 16:10:30,471 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 16:10:30,471 - config3_cross_animal_v1 - INFO -     Dev: r=0.6702 | rho=0.6285 | R2=0.3641 | RMSE=1.2159 | MAE=0.9572
+2026-01-13 16:10:30,471 - config3_cross_animal_v1 - INFO -     Hk: r=0.7234 | rho=0.5502 | R2=0.4393 | RMSE=1.2365 | MAE=0.9517
+2026-01-13 16:10:30,471 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:10:31,067 - config3_cross_animal_v1 - INFO - Epoch 26 completed in 1103.1s
+2026-01-13 16:11:18,551 - config3_cross_animal_v1 - INFO - Step 12800: NLL=0.5380, MSE=0.5179, grad=1.13, lr=8.31e-04
+2026-01-13 16:13:58,532 - config3_cross_animal_v1 - INFO - Step 12900: NLL=0.8445, MSE=0.6383, grad=2.19, lr=8.31e-04
+2026-01-13 16:16:35,611 - config3_cross_animal_v1 - INFO - Step 13000: NLL=0.7404, MSE=0.6118, grad=1.87, lr=8.31e-04
+2026-01-13 16:19:19,378 - config3_cross_animal_v1 - INFO - Step 13100: NLL=0.5669, MSE=0.5206, grad=1.40, lr=8.31e-04
+2026-01-13 16:22:00,513 - config3_cross_animal_v1 - INFO - Step 13200: NLL=0.6552, MSE=0.5427, grad=1.30, lr=8.31e-04
+2026-01-13 16:29:10,900 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO - EPOCH 27 SUMMARY 
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6084 | MSE: 0.6084 | r: 0.7140 | rho: 0.6204 | R2: 0.4114 | RMSE: 0.8575
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6831 | MSE: 0.6831 | r: 0.6737 | rho: 0.5943 | R2: 0.3371 | RMSE: 0.8947
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO -     activity: r=0.6870 | rho=0.6117 | R2=0.3249 | RMSE=0.4344 | MAE=0.3331
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO -     activity: r=0.6475 | rho=0.6391 | R2=0.2764 | RMSE=0.6691 | MAE=0.5082
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO -     activity: r=0.6395 | rho=0.5374 | R2=0.3443 | RMSE=0.8558 | MAE=0.6448
+2026-01-13 16:29:10,901 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 16:29:10,916 - config3_cross_animal_v1 - INFO -     Dev: r=0.6749 | rho=0.6280 | R2=0.3154 | RMSE=1.2616 | MAE=0.9904
+2026-01-13 16:29:10,916 - config3_cross_animal_v1 - INFO -     Hk: r=0.7198 | rho=0.5555 | R2=0.4247 | RMSE=1.2524 | MAE=0.9684
+2026-01-13 16:29:10,917 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:29:11,195 - config3_cross_animal_v1 - INFO - Epoch 27 completed in 1120.1s
+2026-01-13 16:30:39,995 - config3_cross_animal_v1 - INFO - Step 13300: NLL=1.2492, MSE=0.6472, grad=4.25, lr=8.19e-04
+2026-01-13 16:33:19,938 - config3_cross_animal_v1 - INFO - Step 13400: NLL=0.9458, MSE=0.6281, grad=1.62, lr=8.19e-04
+2026-01-13 16:35:57,853 - config3_cross_animal_v1 - INFO - Step 13500: NLL=0.6434, MSE=0.5527, grad=1.32, lr=8.19e-04
+2026-01-13 16:38:40,287 - config3_cross_animal_v1 - INFO - Step 13600: NLL=0.6377, MSE=0.5368, grad=1.25, lr=8.19e-04
+2026-01-13 16:41:12,908 - config3_cross_animal_v1 - INFO - Step 13700: NLL=0.6045, MSE=0.4928, grad=1.73, lr=8.19e-04
+2026-01-13 16:47:52,388 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:47:52,399 - config3_cross_animal_v1 - INFO - EPOCH 28 SUMMARY 
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5964 | MSE: 0.5964 | r: 0.7160 | rho: 0.6341 | R2: 0.4247 | RMSE: 0.8501
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6544 | MSE: 0.6544 | r: 0.6773 | rho: 0.6059 | R2: 0.3490 | RMSE: 0.8869
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -     activity: r=0.7062 | rho=0.6525 | R2=0.4539 | RMSE=0.3907 | MAE=0.2994
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -     activity: r=0.6391 | rho=0.6411 | R2=0.1607 | RMSE=0.7207 | MAE=0.5395
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -     activity: r=0.6419 | rho=0.5431 | R2=0.3439 | RMSE=0.8561 | MAE=0.6328
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -     Dev: r=0.6708 | rho=0.6313 | R2=0.3392 | RMSE=1.2394 | MAE=0.9769
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO -     Hk: r=0.7284 | rho=0.5615 | R2=0.4474 | RMSE=1.2276 | MAE=0.9509
+2026-01-13 16:47:52,400 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 16:47:52,636 - config3_cross_animal_v1 - INFO - Epoch 28 completed in 1121.4s
+2026-01-13 16:50:05,506 - config3_cross_animal_v1 - INFO - Step 13800: NLL=0.5377, MSE=0.4905, grad=1.07, lr=8.07e-04
+2026-01-13 16:52:43,949 - config3_cross_animal_v1 - INFO - Step 13900: NLL=0.9482, MSE=0.7574, grad=2.12, lr=8.07e-04
+2026-01-13 16:55:21,950 - config3_cross_animal_v1 - INFO - Step 14000: NLL=0.7614, MSE=0.5795, grad=1.70, lr=8.07e-04
+2026-01-13 16:57:54,331 - config3_cross_animal_v1 - INFO - Step 14100: NLL=0.5860, MSE=0.5735, grad=1.18, lr=8.07e-04
+2026-01-13 17:06:22,561 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:06:22,572 - config3_cross_animal_v1 - INFO - EPOCH 29 SUMMARY (BEST)
+2026-01-13 17:06:22,572 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5812 | MSE: 0.5812 | r: 0.7213 | rho: 0.6296 | R2: 0.4424 | RMSE: 0.8322
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6404 | MSE: 0.6404 | r: 0.6817 | rho: 0.6034 | R2: 0.3646 | RMSE: 0.8718
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -     activity: r=0.7114 | rho=0.6506 | R2=0.3869 | RMSE=0.4140 | MAE=0.3134
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -     activity: r=0.6529 | rho=0.6482 | R2=0.2598 | RMSE=0.6768 | MAE=0.5139
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -     activity: r=0.6451 | rho=0.5483 | R2=0.3269 | RMSE=0.8671 | MAE=0.6479
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -     Dev: r=0.6679 | rho=0.6244 | R2=0.3676 | RMSE=1.2125 | MAE=0.9441
+2026-01-13 17:06:22,573 - config3_cross_animal_v1 - INFO -     Hk: r=0.7312 | rho=0.5457 | R2=0.4821 | RMSE=1.1884 | MAE=0.9081
+2026-01-13 17:06:22,578 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:06:23,252 - config3_cross_animal_v1 - INFO - Epoch 29 completed in 1110.6s
+2026-01-13 17:06:40,367 - config3_cross_animal_v1 - INFO - Step 14200: NLL=0.7424, MSE=0.4779, grad=1.60, lr=7.94e-04
+2026-01-13 17:09:20,198 - config3_cross_animal_v1 - INFO - Step 14300: NLL=0.6298, MSE=0.5359, grad=1.30, lr=7.94e-04
+2026-01-13 17:12:00,470 - config3_cross_animal_v1 - INFO - Step 14400: NLL=0.6884, MSE=0.5811, grad=1.42, lr=7.94e-04
+2026-01-13 17:14:37,086 - config3_cross_animal_v1 - INFO - Step 14500: NLL=0.6293, MSE=0.6451, grad=1.32, lr=7.94e-04
+2026-01-13 17:17:15,205 - config3_cross_animal_v1 - INFO - Step 14600: NLL=0.5734, MSE=0.4939, grad=0.96, lr=7.94e-04
+2026-01-13 17:25:07,700 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:25:07,733 - config3_cross_animal_v1 - INFO - EPOCH 30 SUMMARY 
+2026-01-13 17:25:07,733 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6389 | MSE: 0.6389 | r: 0.7108 | rho: 0.6192 | R2: 0.3967 | RMSE: 0.8523
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.7069 | MSE: 0.7069 | r: 0.6687 | rho: 0.5911 | R2: 0.3070 | RMSE: 0.8940
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -     activity: r=0.6413 | rho=0.5973 | R2=0.1557 | RMSE=0.4858 | MAE=0.3669
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -     activity: r=0.6707 | rho=0.6641 | R2=0.2668 | RMSE=0.6736 | MAE=0.5142
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -     activity: r=0.6140 | rho=0.5036 | R2=0.2562 | RMSE=0.9115 | MAE=0.6835
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -     Dev: r=0.6799 | rho=0.6355 | R2=0.4025 | RMSE=1.1786 | MAE=0.9236
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO -     Hk: r=0.7376 | rho=0.5551 | R2=0.4538 | RMSE=1.2204 | MAE=0.9507
+2026-01-13 17:25:07,734 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:25:08,063 - config3_cross_animal_v1 - INFO - Epoch 30 completed in 1124.8s
+2026-01-13 17:26:11,879 - config3_cross_animal_v1 - INFO - Step 14700: NLL=0.6053, MSE=0.4561, grad=1.82, lr=7.81e-04
+2026-01-13 17:28:46,911 - config3_cross_animal_v1 - INFO - Step 14800: NLL=0.5556, MSE=0.4973, grad=1.23, lr=7.81e-04
+2026-01-13 17:31:28,151 - config3_cross_animal_v1 - INFO - Step 14900: NLL=0.6889, MSE=0.5457, grad=1.91, lr=7.81e-04
+2026-01-13 17:34:03,634 - config3_cross_animal_v1 - INFO - Step 15000: NLL=0.5513, MSE=0.4484, grad=1.45, lr=7.81e-04
+2026-01-13 17:36:37,717 - config3_cross_animal_v1 - INFO - Step 15100: NLL=0.4932, MSE=0.4984, grad=1.33, lr=7.81e-04
+2026-01-13 17:43:41,596 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:43:41,618 - config3_cross_animal_v1 - INFO - EPOCH 31 SUMMARY (BEST)
+2026-01-13 17:43:41,618 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5875 | MSE: 0.5875 | r: 0.7227 | rho: 0.6318 | R2: 0.4363 | RMSE: 0.8359
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6586 | MSE: 0.6586 | r: 0.6823 | rho: 0.6039 | R2: 0.3494 | RMSE: 0.8794
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -     activity: r=0.6793 | rho=0.6185 | R2=0.3063 | RMSE=0.4404 | MAE=0.3300
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -     activity: r=0.6724 | rho=0.6671 | R2=0.3214 | RMSE=0.6480 | MAE=0.4958
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -     activity: r=0.6344 | rho=0.5199 | R2=0.2840 | RMSE=0.8943 | MAE=0.6711
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -     Dev: r=0.6854 | rho=0.6421 | R2=0.3528 | RMSE=1.2266 | MAE=0.9646
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO -     Hk: r=0.7399 | rho=0.5720 | R2=0.4827 | RMSE=1.1877 | MAE=0.9188
+2026-01-13 17:43:41,619 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 17:43:42,142 - config3_cross_animal_v1 - INFO - Epoch 31 completed in 1114.1s
+2026-01-13 17:45:24,536 - config3_cross_animal_v1 - INFO - Step 15200: NLL=0.7475, MSE=0.6289, grad=1.42, lr=7.68e-04
+2026-01-13 17:48:03,535 - config3_cross_animal_v1 - INFO - Step 15300: NLL=0.5732, MSE=0.4944, grad=1.49, lr=7.68e-04
+2026-01-13 17:50:44,028 - config3_cross_animal_v1 - INFO - Step 15400: NLL=0.7340, MSE=0.6067, grad=1.83, lr=7.68e-04
+2026-01-13 17:53:21,684 - config3_cross_animal_v1 - INFO - Step 15500: NLL=0.7350, MSE=0.5916, grad=1.96, lr=7.68e-04
+2026-01-13 17:56:00,973 - config3_cross_animal_v1 - INFO - Step 15600: NLL=0.6679, MSE=0.5620, grad=1.28, lr=7.68e-04
+2026-01-13 18:02:23,359 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO - EPOCH 32 SUMMARY 
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6379 | MSE: 0.6379 | r: 0.7176 | rho: 0.6329 | R2: 0.4023 | RMSE: 0.8502
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6512 | MSE: 0.6512 | r: 0.6793 | rho: 0.6053 | R2: 0.3175 | RMSE: 0.8893
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -     activity: r=0.6846 | rho=0.6342 | R2=0.3368 | RMSE=0.4306 | MAE=0.3286
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -     activity: r=0.6709 | rho=0.6693 | R2=0.2519 | RMSE=0.6804 | MAE=0.5234
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -     activity: r=0.6072 | rho=0.5113 | R2=0.0739 | RMSE=1.0170 | MAE=0.7831
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -     Dev: r=0.6846 | rho=0.6412 | R2=0.3958 | RMSE=1.1852 | MAE=0.9296
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO -     Hk: r=0.7494 | rho=0.5704 | R2=0.5291 | RMSE=1.1332 | MAE=0.8729
+2026-01-13 18:02:23,360 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:02:23,698 - config3_cross_animal_v1 - INFO - Epoch 32 completed in 1121.6s
+2026-01-13 18:04:45,263 - config3_cross_animal_v1 - INFO - Step 15700: NLL=0.5360, MSE=0.4748, grad=1.32, lr=7.55e-04
+2026-01-13 18:07:27,049 - config3_cross_animal_v1 - INFO - Step 15800: NLL=0.5889, MSE=0.4637, grad=1.69, lr=7.55e-04
+2026-01-13 18:10:01,954 - config3_cross_animal_v1 - INFO - Step 15900: NLL=1.1588, MSE=0.6699, grad=3.07, lr=7.55e-04
+2026-01-13 18:12:46,638 - config3_cross_animal_v1 - INFO - Step 16000: NLL=0.9269, MSE=0.5546, grad=3.31, lr=7.55e-04
+2026-01-13 18:21:01,239 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:21:01,249 - config3_cross_animal_v1 - INFO - EPOCH 33 SUMMARY 
+2026-01-13 18:21:01,249 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.6420 | MSE: 0.6420 | r: 0.7192 | rho: 0.6283 | R2: 0.3969 | RMSE: 0.8513
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6865 | MSE: 0.6865 | r: 0.6771 | rho: 0.5972 | R2: 0.3045 | RMSE: 0.8973
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -     activity: r=0.6685 | rho=0.5971 | R2=0.2606 | RMSE=0.4546 | MAE=0.3462
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -     activity: r=0.6622 | rho=0.6513 | R2=0.2061 | RMSE=0.7009 | MAE=0.5365
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -     activity: r=0.6223 | rho=0.5324 | R2=0.1786 | RMSE=0.9578 | MAE=0.7141
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -     Dev: r=0.6833 | rho=0.6379 | R2=0.3895 | RMSE=1.1913 | MAE=0.9391
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO -     Hk: r=0.7494 | rho=0.5673 | R2=0.4880 | RMSE=1.1816 | MAE=0.9176
+2026-01-13 18:21:01,250 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:21:01,559 - config3_cross_animal_v1 - INFO - Epoch 33 completed in 1117.9s
+2026-01-13 18:21:31,856 - config3_cross_animal_v1 - INFO - Step 16100: NLL=0.6188, MSE=0.5199, grad=1.37, lr=7.41e-04
+2026-01-13 18:24:05,554 - config3_cross_animal_v1 - INFO - Step 16200: NLL=0.5684, MSE=0.4956, grad=1.09, lr=7.41e-04
+2026-01-13 18:26:43,353 - config3_cross_animal_v1 - INFO - Step 16300: NLL=0.6951, MSE=0.5631, grad=1.34, lr=7.41e-04
+2026-01-13 18:29:24,333 - config3_cross_animal_v1 - INFO - Step 16400: NLL=0.8531, MSE=0.5855, grad=2.54, lr=7.41e-04
+2026-01-13 18:32:08,449 - config3_cross_animal_v1 - INFO - Step 16500: NLL=0.5504, MSE=0.4870, grad=1.38, lr=7.41e-04
+2026-01-13 18:39:46,706 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:39:46,741 - config3_cross_animal_v1 - INFO - EPOCH 34 SUMMARY (BEST)
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5567 | MSE: 0.5567 | r: 0.7341 | rho: 0.6518 | R2: 0.4480 | RMSE: 0.8454
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6415 | MSE: 0.6415 | r: 0.6905 | rho: 0.6182 | R2: 0.3616 | RMSE: 0.8915
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO -     activity: r=0.7161 | rho=0.6616 | R2=0.4683 | RMSE=0.3855 | MAE=0.2911
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO -     activity: r=0.6855 | rho=0.6792 | R2=0.3803 | RMSE=0.6192 | MAE=0.4701
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 18:39:46,742 - config3_cross_animal_v1 - INFO -     activity: r=0.6411 | rho=0.5364 | R2=0.2683 | RMSE=0.9040 | MAE=0.6846
+2026-01-13 18:39:46,746 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 18:39:46,747 - config3_cross_animal_v1 - INFO -     Dev: r=0.6771 | rho=0.6394 | R2=0.2254 | RMSE=1.3419 | MAE=1.0515
+2026-01-13 18:39:46,747 - config3_cross_animal_v1 - INFO -     Hk: r=0.7325 | rho=0.5744 | R2=0.4657 | RMSE=1.2070 | MAE=0.9333
+2026-01-13 18:39:46,747 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:39:47,445 - config3_cross_animal_v1 - INFO - Epoch 34 completed in 1125.9s
+2026-01-13 18:41:02,191 - config3_cross_animal_v1 - INFO - Step 16600: NLL=0.6062, MSE=0.4980, grad=1.66, lr=7.27e-04
+2026-01-13 18:43:40,494 - config3_cross_animal_v1 - INFO - Step 16700: NLL=0.6296, MSE=0.5592, grad=1.30, lr=7.27e-04
+2026-01-13 18:46:28,371 - config3_cross_animal_v1 - INFO - Step 16800: NLL=0.6533, MSE=0.5349, grad=1.71, lr=7.27e-04
+2026-01-13 18:49:16,451 - config3_cross_animal_v1 - INFO - Step 16900: NLL=0.5719, MSE=0.4734, grad=1.14, lr=7.27e-04
+2026-01-13 18:51:57,470 - config3_cross_animal_v1 - INFO - Step 17000: NLL=0.8047, MSE=0.5768, grad=2.15, lr=7.27e-04
+2026-01-13 18:58:50,860 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:58:50,878 - config3_cross_animal_v1 - INFO - EPOCH 35 SUMMARY 
+2026-01-13 18:58:50,879 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:58:50,879 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5802 | MSE: 0.5802 | r: 0.7240 | rho: 0.6365 | R2: 0.4460 | RMSE: 0.8266
+2026-01-13 18:58:50,879 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6371 | MSE: 0.6371 | r: 0.6813 | rho: 0.6062 | R2: 0.3608 | RMSE: 0.8714
+2026-01-13 18:58:50,879 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 18:58:50,879 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 18:58:50,879 - config3_cross_animal_v1 - INFO -     activity: r=0.6892 | rho=0.6424 | R2=0.3441 | RMSE=0.4282 | MAE=0.3228
+2026-01-13 18:58:50,879 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 18:58:50,879 - config3_cross_animal_v1 - INFO -     activity: r=0.6843 | rho=0.6788 | R2=0.3346 | RMSE=0.6417 | MAE=0.4905
+2026-01-13 18:58:50,883 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 18:58:50,883 - config3_cross_animal_v1 - INFO -     activity: r=0.6298 | rho=0.5319 | R2=0.2469 | RMSE=0.9172 | MAE=0.6989
+2026-01-13 18:58:50,884 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 18:58:50,884 - config3_cross_animal_v1 - INFO -     Dev: r=0.6634 | rho=0.6171 | R2=0.3774 | RMSE=1.2031 | MAE=0.9434
+2026-01-13 18:58:50,884 - config3_cross_animal_v1 - INFO -     Hk: r=0.7399 | rho=0.5610 | R2=0.5007 | RMSE=1.1668 | MAE=0.9038
+2026-01-13 18:58:50,884 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 18:58:51,161 - config3_cross_animal_v1 - INFO - Epoch 35 completed in 1143.7s
+2026-01-13 19:00:47,685 - config3_cross_animal_v1 - INFO - Step 17100: NLL=0.6050, MSE=0.4854, grad=1.44, lr=7.13e-04
+2026-01-13 19:03:28,283 - config3_cross_animal_v1 - INFO - Step 17200: NLL=0.5997, MSE=0.5492, grad=1.61, lr=7.13e-04
+2026-01-13 19:06:09,538 - config3_cross_animal_v1 - INFO - Step 17300: NLL=0.5883, MSE=0.5264, grad=1.14, lr=7.13e-04
+2026-01-13 19:08:53,881 - config3_cross_animal_v1 - INFO - Step 17400: NLL=0.6349, MSE=0.5181, grad=1.37, lr=7.13e-04
+2026-01-13 19:11:40,971 - config3_cross_animal_v1 - INFO - Step 17500: NLL=0.5985, MSE=0.4677, grad=1.33, lr=7.13e-04
+2026-01-13 19:17:54,839 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:17:54,849 - config3_cross_animal_v1 - INFO - EPOCH 36 SUMMARY 
+2026-01-13 19:17:54,849 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:17:54,850 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5490 | MSE: 0.5490 | r: 0.7321 | rho: 0.6462 | R2: 0.4752 | RMSE: 0.8063
+2026-01-13 19:17:54,850 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6135 | MSE: 0.6135 | r: 0.6864 | rho: 0.6125 | R2: 0.3857 | RMSE: 0.8543
+2026-01-13 19:17:54,855 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 19:17:54,855 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 19:17:54,856 - config3_cross_animal_v1 - INFO -     activity: r=0.6889 | rho=0.6391 | R2=0.4000 | RMSE=0.4095 | MAE=0.3105
+2026-01-13 19:17:54,856 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 19:17:54,856 - config3_cross_animal_v1 - INFO -     activity: r=0.6789 | rho=0.6741 | R2=0.2913 | RMSE=0.6622 | MAE=0.5071
+2026-01-13 19:17:54,856 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 19:17:54,856 - config3_cross_animal_v1 - INFO -     activity: r=0.6497 | rho=0.5513 | R2=0.3167 | RMSE=0.8736 | MAE=0.6521
+2026-01-13 19:17:54,861 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 19:17:54,861 - config3_cross_animal_v1 - INFO -     Dev: r=0.6782 | rho=0.6293 | R2=0.4086 | RMSE=1.1725 | MAE=0.9192
+2026-01-13 19:17:54,862 - config3_cross_animal_v1 - INFO -     Hk: r=0.7361 | rho=0.5688 | R2=0.5119 | RMSE=1.1537 | MAE=0.8947
+2026-01-13 19:17:54,862 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:17:55,157 - config3_cross_animal_v1 - INFO - Epoch 36 completed in 1144.0s
+2026-01-13 19:20:36,025 - config3_cross_animal_v1 - INFO - Step 17600: NLL=0.6974, MSE=0.5462, grad=1.48, lr=6.99e-04
+2026-01-13 19:23:13,889 - config3_cross_animal_v1 - INFO - Step 17700: NLL=0.5523, MSE=0.4729, grad=1.32, lr=6.99e-04
+2026-01-13 19:25:50,861 - config3_cross_animal_v1 - INFO - Step 17800: NLL=0.8532, MSE=0.5801, grad=1.86, lr=6.99e-04
+2026-01-13 19:28:02,318 - config3_cross_animal_v1 - INFO - Step 17900: NLL=0.6501, MSE=0.5259, grad=1.88, lr=6.99e-04
+2026-01-13 19:30:52,210 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:30:52,210 - config3_cross_animal_v1 - INFO - EPOCH 37 SUMMARY (BEST)
+2026-01-13 19:30:52,210 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:30:52,210 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5342 | MSE: 0.5342 | r: 0.7392 | rho: 0.6499 | R2: 0.4806 | RMSE: 0.8089
+2026-01-13 19:30:52,210 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6215 | MSE: 0.6215 | r: 0.6933 | rho: 0.6174 | R2: 0.3907 | RMSE: 0.8604
+2026-01-13 19:30:52,210 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -     activity: r=0.7007 | rho=0.6467 | R2=0.3883 | RMSE=0.4135 | MAE=0.3140
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -     activity: r=0.6862 | rho=0.6791 | R2=0.3888 | RMSE=0.6150 | MAE=0.4646
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -     activity: r=0.6509 | rho=0.5478 | R2=0.3413 | RMSE=0.8577 | MAE=0.6445
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -     Dev: r=0.6887 | rho=0.6469 | R2=0.3576 | RMSE=1.2221 | MAE=0.9615
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO -     Hk: r=0.7401 | rho=0.5663 | R2=0.4774 | RMSE=1.1937 | MAE=0.9175
+2026-01-13 19:30:52,211 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:30:52,344 - config3_cross_animal_v1 - INFO - Epoch 37 completed in 777.2s
+2026-01-13 19:31:07,331 - config3_cross_animal_v1 - INFO - Step 18000: NLL=0.4621, MSE=0.4519, grad=1.39, lr=6.84e-04
+2026-01-13 19:32:07,418 - config3_cross_animal_v1 - INFO - Step 18100: NLL=0.6825, MSE=0.4974, grad=1.60, lr=6.84e-04
+2026-01-13 19:33:01,907 - config3_cross_animal_v1 - INFO - Step 18200: NLL=0.5386, MSE=0.4542, grad=1.09, lr=6.84e-04
+2026-01-13 19:33:56,959 - config3_cross_animal_v1 - INFO - Step 18300: NLL=0.4734, MSE=0.4679, grad=1.04, lr=6.84e-04
+2026-01-13 19:34:45,309 - config3_cross_animal_v1 - INFO - Step 18400: NLL=0.5976, MSE=0.4627, grad=1.74, lr=6.84e-04
+2026-01-13 19:36:48,902 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:36:48,914 - config3_cross_animal_v1 - INFO - EPOCH 38 SUMMARY 
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5716 | MSE: 0.5716 | r: 0.7325 | rho: 0.6379 | R2: 0.4516 | RMSE: 0.8269
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6375 | MSE: 0.6375 | r: 0.6848 | rho: 0.6025 | R2: 0.3584 | RMSE: 0.8775
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO -     activity: r=0.6946 | rho=0.6294 | R2=0.3802 | RMSE=0.4163 | MAE=0.3151
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO -     activity: r=0.6834 | rho=0.6687 | R2=0.3265 | RMSE=0.6456 | MAE=0.4884
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO -     activity: r=0.6253 | rho=0.5092 | R2=0.2380 | RMSE=0.9226 | MAE=0.6895
+2026-01-13 19:36:48,915 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 19:36:48,916 - config3_cross_animal_v1 - INFO -     Dev: r=0.6868 | rho=0.6416 | R2=0.3653 | RMSE=1.2147 | MAE=0.9580
+2026-01-13 19:36:48,916 - config3_cross_animal_v1 - INFO -     Hk: r=0.7337 | rho=0.5638 | R2=0.4820 | RMSE=1.1884 | MAE=0.9165
+2026-01-13 19:36:48,916 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:36:49,049 - config3_cross_animal_v1 - INFO - Epoch 38 completed in 356.7s
+2026-01-13 19:37:11,305 - config3_cross_animal_v1 - INFO - Step 18500: NLL=0.7519, MSE=0.5327, grad=2.08, lr=6.70e-04
+2026-01-13 19:37:59,091 - config3_cross_animal_v1 - INFO - Step 18600: NLL=0.6617, MSE=0.6510, grad=1.58, lr=6.70e-04
+2026-01-13 19:38:50,191 - config3_cross_animal_v1 - INFO - Step 18700: NLL=0.5248, MSE=0.4473, grad=1.27, lr=6.70e-04
+2026-01-13 19:39:46,678 - config3_cross_animal_v1 - INFO - Step 18800: NLL=0.6242, MSE=0.4298, grad=1.84, lr=6.70e-04
+2026-01-13 19:41:33,142 - config3_cross_animal_v1 - INFO - Step 18900: NLL=0.6287, MSE=0.5015, grad=1.60, lr=6.70e-04
+2026-01-13 19:48:05,094 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:48:05,094 - config3_cross_animal_v1 - INFO - EPOCH 39 SUMMARY 
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5426 | MSE: 0.5426 | r: 0.7352 | rho: 0.6435 | R2: 0.4770 | RMSE: 0.8084
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6212 | MSE: 0.6212 | r: 0.6846 | rho: 0.6057 | R2: 0.3819 | RMSE: 0.8619
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -     activity: r=0.6853 | rho=0.6195 | R2=0.3776 | RMSE=0.4171 | MAE=0.3142
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -     activity: r=0.6775 | rho=0.6615 | R2=0.3695 | RMSE=0.6246 | MAE=0.4691
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -     activity: r=0.6369 | rho=0.5323 | R2=0.2915 | RMSE=0.8896 | MAE=0.6765
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -     Dev: r=0.6837 | rho=0.6419 | R2=0.3751 | RMSE=1.2053 | MAE=0.9470
+2026-01-13 19:48:05,095 - config3_cross_animal_v1 - INFO -     Hk: r=0.7399 | rho=0.5732 | R2=0.4957 | RMSE=1.1726 | MAE=0.9063
+2026-01-13 19:48:05,096 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 19:48:05,358 - config3_cross_animal_v1 - INFO - Epoch 39 completed in 676.3s
+2026-01-13 19:50:13,659 - config3_cross_animal_v1 - INFO - Step 19000: NLL=0.6472, MSE=0.5320, grad=1.29, lr=6.55e-04
+2026-01-13 19:52:49,048 - config3_cross_animal_v1 - INFO - Step 19100: NLL=0.6138, MSE=0.5477, grad=1.74, lr=6.55e-04
+2026-01-13 19:55:21,986 - config3_cross_animal_v1 - INFO - Step 19200: NLL=0.9043, MSE=0.5781, grad=1.62, lr=6.55e-04
+2026-01-13 19:57:59,578 - config3_cross_animal_v1 - INFO - Step 19300: NLL=0.5085, MSE=0.4753, grad=1.19, lr=6.55e-04
+2026-01-13 20:06:26,740 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO - EPOCH 40 SUMMARY 
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5551 | MSE: 0.5551 | r: 0.7404 | rho: 0.6471 | R2: 0.4669 | RMSE: 0.8143
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6341 | MSE: 0.6341 | r: 0.6881 | rho: 0.6082 | R2: 0.3678 | RMSE: 0.8689
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -     activity: r=0.6857 | rho=0.6163 | R2=0.3881 | RMSE=0.4136 | MAE=0.3080
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -     activity: r=0.6716 | rho=0.6629 | R2=0.2737 | RMSE=0.6704 | MAE=0.5088
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -     activity: r=0.6520 | rho=0.5480 | R2=0.3095 | RMSE=0.8782 | MAE=0.6539
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -     Dev: r=0.6892 | rho=0.6423 | R2=0.3791 | RMSE=1.2014 | MAE=0.9480
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO -     Hk: r=0.7421 | rho=0.5716 | R2=0.4888 | RMSE=1.1806 | MAE=0.9112
+2026-01-13 20:06:26,741 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:06:27,047 - config3_cross_animal_v1 - INFO - Epoch 40 completed in 1101.7s
+2026-01-13 20:06:39,871 - config3_cross_animal_v1 - INFO - Step 19400: NLL=0.4482, MSE=0.3886, grad=1.10, lr=6.40e-04
+2026-01-13 20:09:21,076 - config3_cross_animal_v1 - INFO - Step 19500: NLL=0.4819, MSE=0.4589, grad=0.95, lr=6.40e-04
+2026-01-13 20:12:02,976 - config3_cross_animal_v1 - INFO - Step 19600: NLL=0.9251, MSE=0.5075, grad=1.67, lr=6.40e-04
+2026-01-13 20:14:42,571 - config3_cross_animal_v1 - INFO - Step 19700: NLL=0.8276, MSE=0.5377, grad=2.27, lr=6.40e-04
+2026-01-13 20:17:26,611 - config3_cross_animal_v1 - INFO - Step 19800: NLL=0.6135, MSE=0.4931, grad=1.28, lr=6.40e-04
+2026-01-13 20:25:19,171 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:25:19,172 - config3_cross_animal_v1 - INFO - EPOCH 41 SUMMARY (BEST)
+2026-01-13 20:25:19,172 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:25:19,172 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5437 | MSE: 0.5437 | r: 0.7449 | rho: 0.6539 | R2: 0.4772 | RMSE: 0.8095
+2026-01-13 20:25:19,172 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6184 | MSE: 0.6184 | r: 0.6954 | rho: 0.6191 | R2: 0.3767 | RMSE: 0.8647
+2026-01-13 20:25:19,177 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 20:25:19,182 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO -     activity: r=0.7127 | rho=0.6625 | R2=0.4173 | RMSE=0.4036 | MAE=0.3036
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO -     activity: r=0.6792 | rho=0.6679 | R2=0.3088 | RMSE=0.6540 | MAE=0.5012
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO -     activity: r=0.6514 | rho=0.5522 | R2=0.2751 | RMSE=0.8998 | MAE=0.6706
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO -     Dev: r=0.6934 | rho=0.6464 | R2=0.3843 | RMSE=1.1964 | MAE=0.9358
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO -     Hk: r=0.7402 | rho=0.5667 | R2=0.4983 | RMSE=1.1696 | MAE=0.8999
+2026-01-13 20:25:19,183 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:25:19,762 - config3_cross_animal_v1 - INFO - Epoch 41 completed in 1132.7s
+2026-01-13 20:26:15,285 - config3_cross_animal_v1 - INFO - Step 19900: NLL=0.6359, MSE=0.5537, grad=1.53, lr=6.25e-04
+2026-01-13 20:28:58,204 - config3_cross_animal_v1 - INFO - Step 20000: NLL=0.7046, MSE=0.5705, grad=1.44, lr=6.25e-04
+2026-01-13 20:31:47,182 - config3_cross_animal_v1 - INFO - Step 20100: NLL=0.4579, MSE=0.4282, grad=1.40, lr=6.25e-04
+2026-01-13 20:34:32,129 - config3_cross_animal_v1 - INFO - Step 20200: NLL=0.4183, MSE=0.4188, grad=0.97, lr=6.25e-04
+2026-01-13 20:37:10,466 - config3_cross_animal_v1 - INFO - Step 20300: NLL=0.6196, MSE=0.4884, grad=1.38, lr=6.25e-04
+2026-01-13 20:44:20,862 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:44:20,871 - config3_cross_animal_v1 - INFO - EPOCH 42 SUMMARY (BEST)
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5015 | MSE: 0.5015 | r: 0.7566 | rho: 0.6636 | R2: 0.5130 | RMSE: 0.7871
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.5883 | MSE: 0.5883 | r: 0.7046 | rho: 0.6261 | R2: 0.4105 | RMSE: 0.8462
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -     activity: r=0.7228 | rho=0.6613 | R2=0.4671 | RMSE=0.3860 | MAE=0.2921
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -     activity: r=0.6952 | rho=0.6852 | R2=0.3570 | RMSE=0.6308 | MAE=0.4781
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -     activity: r=0.6613 | rho=0.5624 | R2=0.3230 | RMSE=0.8696 | MAE=0.6485
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -     Dev: r=0.6958 | rho=0.6483 | R2=0.4124 | RMSE=1.1688 | MAE=0.9167
+2026-01-13 20:44:20,872 - config3_cross_animal_v1 - INFO -     Hk: r=0.7479 | rho=0.5732 | R2=0.4930 | RMSE=1.1758 | MAE=0.9102
+2026-01-13 20:44:20,873 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 20:44:21,464 - config3_cross_animal_v1 - INFO - Epoch 42 completed in 1141.7s
+2026-01-13 20:45:57,296 - config3_cross_animal_v1 - INFO - Step 20400: NLL=0.5970, MSE=0.5211, grad=1.61, lr=6.09e-04
+2026-01-13 20:48:37,257 - config3_cross_animal_v1 - INFO - Step 20500: NLL=0.6046, MSE=0.5494, grad=1.46, lr=6.09e-04
+2026-01-13 20:51:21,001 - config3_cross_animal_v1 - INFO - Step 20600: NLL=0.5546, MSE=0.5425, grad=1.22, lr=6.09e-04
+2026-01-13 20:53:55,836 - config3_cross_animal_v1 - INFO - Step 20700: NLL=0.5333, MSE=0.4936, grad=1.09, lr=6.09e-04
+2026-01-13 20:56:33,643 - config3_cross_animal_v1 - INFO - Step 20800: NLL=0.4745, MSE=0.4910, grad=1.02, lr=6.09e-04
+2026-01-13 21:03:02,488 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:03:02,488 - config3_cross_animal_v1 - INFO - EPOCH 43 SUMMARY 
+2026-01-13 21:03:02,508 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5224 | MSE: 0.5224 | r: 0.7464 | rho: 0.6545 | R2: 0.4905 | RMSE: 0.8014
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6252 | MSE: 0.6252 | r: 0.6925 | rho: 0.6148 | R2: 0.3862 | RMSE: 0.8622
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -     activity: r=0.6972 | rho=0.6369 | R2=0.4160 | RMSE=0.4040 | MAE=0.3022
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -     activity: r=0.6790 | rho=0.6701 | R2=0.3180 | RMSE=0.6497 | MAE=0.4946
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -     activity: r=0.6502 | rho=0.5421 | R2=0.3726 | RMSE=0.8371 | MAE=0.6317
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -     Dev: r=0.6877 | rho=0.6445 | R2=0.3224 | RMSE=1.2551 | MAE=0.9833
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO -     Hk: r=0.7484 | rho=0.5802 | R2=0.5022 | RMSE=1.1650 | MAE=0.8976
+2026-01-13 21:03:02,509 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:03:02,784 - config3_cross_animal_v1 - INFO - Epoch 43 completed in 1121.3s
+2026-01-13 21:05:32,568 - config3_cross_animal_v1 - INFO - Step 20900: NLL=0.5427, MSE=0.4918, grad=1.43, lr=5.94e-04
+2026-01-13 21:08:14,330 - config3_cross_animal_v1 - INFO - Step 21000: NLL=0.5931, MSE=0.5043, grad=1.29, lr=5.94e-04
+2026-01-13 21:10:54,441 - config3_cross_animal_v1 - INFO - Step 21100: NLL=0.6616, MSE=0.4945, grad=1.73, lr=5.94e-04
+2026-01-13 21:13:31,321 - config3_cross_animal_v1 - INFO - Step 21200: NLL=0.5538, MSE=0.5069, grad=1.49, lr=5.94e-04
+2026-01-13 21:21:52,758 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:21:52,778 - config3_cross_animal_v1 - INFO - EPOCH 44 SUMMARY 
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5798 | MSE: 0.5798 | r: 0.7338 | rho: 0.6432 | R2: 0.4475 | RMSE: 0.8272
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6512 | MSE: 0.6512 | r: 0.6792 | rho: 0.6041 | R2: 0.3310 | RMSE: 0.8886
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -     activity: r=0.6704 | rho=0.6151 | R2=0.3197 | RMSE=0.4361 | MAE=0.3234
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -     activity: r=0.6752 | rho=0.6654 | R2=0.3508 | RMSE=0.6338 | MAE=0.4821
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -     activity: r=0.6198 | rho=0.5222 | R2=0.1094 | RMSE=0.9973 | MAE=0.7408
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -     Dev: r=0.6913 | rho=0.6475 | R2=0.3878 | RMSE=1.1930 | MAE=0.9381
+2026-01-13 21:21:52,779 - config3_cross_animal_v1 - INFO -     Hk: r=0.7394 | rho=0.5704 | R2=0.4871 | RMSE=1.1826 | MAE=0.9154
+2026-01-13 21:21:52,780 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:21:53,067 - config3_cross_animal_v1 - INFO - Epoch 44 completed in 1130.3s
+2026-01-13 21:22:17,544 - config3_cross_animal_v1 - INFO - Step 21300: NLL=0.4988, MSE=0.4313, grad=1.50, lr=5.79e-04
+2026-01-13 21:24:54,840 - config3_cross_animal_v1 - INFO - Step 21400: NLL=0.5416, MSE=0.4987, grad=1.11, lr=5.79e-04
+2026-01-13 21:27:34,396 - config3_cross_animal_v1 - INFO - Step 21500: NLL=0.5525, MSE=0.4661, grad=1.38, lr=5.79e-04
+2026-01-13 21:30:16,658 - config3_cross_animal_v1 - INFO - Step 21600: NLL=0.5922, MSE=0.4952, grad=1.36, lr=5.79e-04
+2026-01-13 21:32:54,058 - config3_cross_animal_v1 - INFO - Step 21700: NLL=0.5013, MSE=0.4801, grad=1.09, lr=5.79e-04
+2026-01-13 21:40:21,145 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:40:21,154 - config3_cross_animal_v1 - INFO - EPOCH 45 SUMMARY 
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5203 | MSE: 0.5203 | r: 0.7530 | rho: 0.6578 | R2: 0.4993 | RMSE: 0.7904
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6009 | MSE: 0.6009 | r: 0.7005 | rho: 0.6193 | R2: 0.3959 | RMSE: 0.8495
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -     activity: r=0.7056 | rho=0.6487 | R2=0.4122 | RMSE=0.4053 | MAE=0.3028
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -     activity: r=0.6880 | rho=0.6758 | R2=0.3463 | RMSE=0.6360 | MAE=0.4841
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -     activity: r=0.6599 | rho=0.5565 | R2=0.2976 | RMSE=0.8857 | MAE=0.6598
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -     Dev: r=0.6979 | rho=0.6491 | R2=0.3955 | RMSE=1.1855 | MAE=0.9330
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO -     Hk: r=0.7511 | rho=0.5666 | R2=0.5278 | RMSE=1.1348 | MAE=0.8747
+2026-01-13 21:40:21,155 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:40:21,367 - config3_cross_animal_v1 - INFO - Epoch 45 completed in 1108.3s
+2026-01-13 21:41:28,490 - config3_cross_animal_v1 - INFO - Step 21800: NLL=0.5013, MSE=0.4464, grad=1.09, lr=5.63e-04
+2026-01-13 21:44:08,784 - config3_cross_animal_v1 - INFO - Step 21900: NLL=0.5052, MSE=0.4495, grad=1.15, lr=5.63e-04
+2026-01-13 21:46:50,239 - config3_cross_animal_v1 - INFO - Step 22000: NLL=0.4894, MSE=0.4610, grad=1.02, lr=5.63e-04
+2026-01-13 21:49:28,650 - config3_cross_animal_v1 - INFO - Step 22100: NLL=0.7267, MSE=0.5389, grad=2.21, lr=5.63e-04
+2026-01-13 21:52:10,722 - config3_cross_animal_v1 - INFO - Step 22200: NLL=0.5202, MSE=0.5174, grad=1.19, lr=5.63e-04
+2026-01-13 21:59:01,900 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:59:01,900 - config3_cross_animal_v1 - INFO - EPOCH 46 SUMMARY 
+2026-01-13 21:59:01,905 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:59:01,905 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5495 | MSE: 0.5495 | r: 0.7463 | rho: 0.6523 | R2: 0.4763 | RMSE: 0.8033
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6384 | MSE: 0.6384 | r: 0.6891 | rho: 0.6093 | R2: 0.3534 | RMSE: 0.8723
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -     activity: r=0.6835 | rho=0.6237 | R2=0.3173 | RMSE=0.4368 | MAE=0.3290
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -     activity: r=0.6822 | rho=0.6723 | R2=0.3449 | RMSE=0.6367 | MAE=0.4847
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -     activity: r=0.6349 | rho=0.5331 | R2=0.1942 | RMSE=0.9487 | MAE=0.7045
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -     Dev: r=0.6965 | rho=0.6467 | R2=0.4165 | RMSE=1.1646 | MAE=0.9168
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO -     Hk: r=0.7486 | rho=0.5707 | R2=0.4939 | RMSE=1.1747 | MAE=0.9123
+2026-01-13 21:59:01,906 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 21:59:02,270 - config3_cross_animal_v1 - INFO - Epoch 46 completed in 1120.9s
+2026-01-13 22:00:53,688 - config3_cross_animal_v1 - INFO - Step 22300: NLL=0.5034, MSE=0.4286, grad=1.25, lr=5.48e-04
+2026-01-13 22:03:31,323 - config3_cross_animal_v1 - INFO - Step 22400: NLL=0.5321, MSE=0.3915, grad=1.72, lr=5.48e-04
+2026-01-13 22:06:05,923 - config3_cross_animal_v1 - INFO - Step 22500: NLL=0.6299, MSE=0.5404, grad=1.50, lr=5.48e-04
+2026-01-13 22:08:53,402 - config3_cross_animal_v1 - INFO - Step 22600: NLL=0.5680, MSE=0.5529, grad=1.19, lr=5.48e-04
+2026-01-13 22:11:32,219 - config3_cross_animal_v1 - INFO - Step 22700: NLL=0.5149, MSE=0.5179, grad=1.16, lr=5.48e-04
+2026-01-13 22:17:45,323 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:17:45,323 - config3_cross_animal_v1 - INFO - EPOCH 47 SUMMARY 
+2026-01-13 22:17:45,323 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5393 | MSE: 0.5393 | r: 0.7530 | rho: 0.6546 | R2: 0.4845 | RMSE: 0.7961
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6411 | MSE: 0.6411 | r: 0.6932 | rho: 0.6097 | R2: 0.3648 | RMSE: 0.8656
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -     activity: r=0.6990 | rho=0.6338 | R2=0.3225 | RMSE=0.4352 | MAE=0.3288
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -     activity: r=0.6892 | rho=0.6803 | R2=0.2974 | RMSE=0.6594 | MAE=0.4990
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -     activity: r=0.6434 | rho=0.5266 | R2=0.3060 | RMSE=0.8804 | MAE=0.6693
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -     Dev: r=0.6962 | rho=0.6437 | R2=0.4131 | RMSE=1.1680 | MAE=0.9209
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO -     Hk: r=0.7383 | rho=0.5639 | R2=0.4851 | RMSE=1.1849 | MAE=0.9104
+2026-01-13 22:17:45,324 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:17:45,619 - config3_cross_animal_v1 - INFO - Epoch 47 completed in 1123.3s
+2026-01-13 22:20:16,609 - config3_cross_animal_v1 - INFO - Step 22800: NLL=0.6193, MSE=0.4447, grad=1.12, lr=5.32e-04
+2026-01-13 22:22:59,208 - config3_cross_animal_v1 - INFO - Step 22900: NLL=0.4991, MSE=0.5402, grad=0.90, lr=5.32e-04
+2026-01-13 22:25:37,425 - config3_cross_animal_v1 - INFO - Step 23000: NLL=0.7251, MSE=0.5471, grad=2.10, lr=5.32e-04
+2026-01-13 22:28:17,840 - config3_cross_animal_v1 - INFO - Step 23100: NLL=0.5703, MSE=0.4803, grad=1.19, lr=5.32e-04
+2026-01-13 22:36:23,033 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO - EPOCH 48 SUMMARY 
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5070 | MSE: 0.5070 | r: 0.7552 | rho: 0.6595 | R2: 0.5117 | RMSE: 0.7798
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6066 | MSE: 0.6066 | r: 0.6987 | rho: 0.6188 | R2: 0.4037 | RMSE: 0.8451
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -     activity: r=0.7021 | rho=0.6410 | R2=0.3680 | RMSE=0.4203 | MAE=0.3131
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -     activity: r=0.6895 | rho=0.6753 | R2=0.3896 | RMSE=0.6146 | MAE=0.4656
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -     activity: r=0.6617 | rho=0.5659 | R2=0.3461 | RMSE=0.8546 | MAE=0.6400
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -     Dev: r=0.6986 | rho=0.6451 | R2=0.4291 | RMSE=1.1520 | MAE=0.9076
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO -     Hk: r=0.7416 | rho=0.5669 | R2=0.4858 | RMSE=1.1841 | MAE=0.9182
+2026-01-13 22:36:23,034 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:36:23,300 - config3_cross_animal_v1 - INFO - Epoch 48 completed in 1117.7s
+2026-01-13 22:37:00,565 - config3_cross_animal_v1 - INFO - Step 23200: NLL=0.5738, MSE=0.5196, grad=1.32, lr=5.16e-04
+2026-01-13 22:39:40,278 - config3_cross_animal_v1 - INFO - Step 23300: NLL=0.7600, MSE=0.5280, grad=1.96, lr=5.16e-04
+2026-01-13 22:42:17,464 - config3_cross_animal_v1 - INFO - Step 23400: NLL=0.5954, MSE=0.4857, grad=1.85, lr=5.16e-04
+2026-01-13 22:44:59,748 - config3_cross_animal_v1 - INFO - Step 23500: NLL=0.5021, MSE=0.4584, grad=1.22, lr=5.16e-04
+2026-01-13 22:47:39,010 - config3_cross_animal_v1 - INFO - Step 23600: NLL=0.5115, MSE=0.4805, grad=1.03, lr=5.16e-04
+2026-01-13 22:55:06,569 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:55:06,574 - config3_cross_animal_v1 - INFO - EPOCH 49 SUMMARY 
+2026-01-13 22:55:06,574 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5234 | MSE: 0.5234 | r: 0.7570 | rho: 0.6622 | R2: 0.4951 | RMSE: 0.7958
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6191 | MSE: 0.6191 | r: 0.6980 | rho: 0.6187 | R2: 0.3804 | RMSE: 0.8615
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -     activity: r=0.7013 | rho=0.6448 | R2=0.3906 | RMSE=0.4127 | MAE=0.3075
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -     activity: r=0.6840 | rho=0.6740 | R2=0.3407 | RMSE=0.6387 | MAE=0.4829
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -     activity: r=0.6532 | rho=0.5467 | R2=0.2869 | RMSE=0.8925 | MAE=0.6659
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -     Dev: r=0.7013 | rho=0.6536 | R2=0.3793 | RMSE=1.2012 | MAE=0.9435
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO -     Hk: r=0.7501 | rho=0.5743 | R2=0.5046 | RMSE=1.1623 | MAE=0.9000
+2026-01-13 22:55:06,575 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 22:55:06,816 - config3_cross_animal_v1 - INFO - Epoch 49 completed in 1123.5s
+2026-01-13 22:56:26,759 - config3_cross_animal_v1 - INFO - Step 23700: NLL=0.5242, MSE=0.4782, grad=1.22, lr=5.01e-04
+2026-01-13 22:59:07,664 - config3_cross_animal_v1 - INFO - Step 23800: NLL=0.5036, MSE=0.4786, grad=1.19, lr=5.01e-04
+2026-01-13 23:01:51,358 - config3_cross_animal_v1 - INFO - Step 23900: NLL=0.6609, MSE=0.5479, grad=1.31, lr=5.01e-04
+2026-01-13 23:04:29,214 - config3_cross_animal_v1 - INFO - Step 24000: NLL=0.4621, MSE=0.4219, grad=1.30, lr=5.01e-04
+2026-01-13 23:06:45,025 - config3_cross_animal_v1 - INFO - Step 24100: NLL=0.4893, MSE=0.4292, grad=1.21, lr=5.01e-04
+2026-01-13 23:11:41,085 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:11:41,101 - config3_cross_animal_v1 - INFO - EPOCH 50 SUMMARY 
+2026-01-13 23:11:41,101 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5175 | MSE: 0.5175 | r: 0.7586 | rho: 0.6683 | R2: 0.5034 | RMSE: 0.7857
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6259 | MSE: 0.6259 | r: 0.6999 | rho: 0.6248 | R2: 0.3795 | RMSE: 0.8574
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -     activity: r=0.7031 | rho=0.6543 | R2=0.3545 | RMSE=0.4248 | MAE=0.3201
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -     activity: r=0.6895 | rho=0.6863 | R2=0.3062 | RMSE=0.6553 | MAE=0.5006
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -     activity: r=0.6527 | rho=0.5520 | R2=0.3212 | RMSE=0.8707 | MAE=0.6510
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -     Dev: r=0.7034 | rho=0.6534 | R2=0.4364 | RMSE=1.1446 | MAE=0.9016
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO -     Hk: r=0.7508 | rho=0.5781 | R2=0.4791 | RMSE=1.1918 | MAE=0.9201
+2026-01-13 23:11:41,102 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:11:41,381 - config3_cross_animal_v1 - INFO - Epoch 50 completed in 994.6s
+2026-01-13 23:13:17,650 - config3_cross_animal_v1 - INFO - Step 24200: NLL=0.4846, MSE=0.4397, grad=1.15, lr=4.85e-04
+2026-01-13 23:15:32,819 - config3_cross_animal_v1 - INFO - Step 24300: NLL=0.4589, MSE=0.3967, grad=1.23, lr=4.85e-04
+2026-01-13 23:17:45,963 - config3_cross_animal_v1 - INFO - Step 24400: NLL=0.4450, MSE=0.4193, grad=1.02, lr=4.85e-04
+2026-01-13 23:19:55,768 - config3_cross_animal_v1 - INFO - Step 24500: NLL=0.5517, MSE=0.4931, grad=1.24, lr=4.85e-04
+2026-01-13 23:26:32,443 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:26:32,443 - config3_cross_animal_v1 - INFO - EPOCH 51 SUMMARY 
+2026-01-13 23:26:32,443 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:26:32,443 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5638 | MSE: 0.5638 | r: 0.7476 | rho: 0.6500 | R2: 0.4582 | RMSE: 0.8226
+2026-01-13 23:26:32,443 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6742 | MSE: 0.6742 | r: 0.6861 | rho: 0.6040 | R2: 0.3222 | RMSE: 0.8985
+2026-01-13 23:26:32,443 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 23:26:32,443 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO -     activity: r=0.6771 | rho=0.6174 | R2=0.2997 | RMSE=0.4425 | MAE=0.3323
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO -     activity: r=0.6776 | rho=0.6671 | R2=0.3242 | RMSE=0.6467 | MAE=0.4914
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO -     activity: r=0.6369 | rho=0.5315 | R2=0.1733 | RMSE=0.9609 | MAE=0.7110
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO -     Dev: r=0.6982 | rho=0.6470 | R2=0.3750 | RMSE=1.2054 | MAE=0.9516
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO -     Hk: r=0.7408 | rho=0.5571 | R2=0.4390 | RMSE=1.2368 | MAE=0.9609
+2026-01-13 23:26:32,444 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:26:32,713 - config3_cross_animal_v1 - INFO - Epoch 51 completed in 891.3s
+2026-01-13 23:26:39,757 - config3_cross_animal_v1 - INFO - Step 24600: NLL=0.4738, MSE=0.4521, grad=0.88, lr=4.69e-04
+2026-01-13 23:28:55,566 - config3_cross_animal_v1 - INFO - Step 24700: NLL=0.5123, MSE=0.4523, grad=1.41, lr=4.69e-04
+2026-01-13 23:31:09,357 - config3_cross_animal_v1 - INFO - Step 24800: NLL=0.5713, MSE=0.4441, grad=1.50, lr=4.69e-04
+2026-01-13 23:33:28,700 - config3_cross_animal_v1 - INFO - Step 24900: NLL=0.4591, MSE=0.4294, grad=1.44, lr=4.69e-04
+2026-01-13 23:35:41,789 - config3_cross_animal_v1 - INFO - Step 25000: NLL=0.4636, MSE=0.4096, grad=1.55, lr=4.69e-04
+2026-01-13 23:41:39,361 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:41:39,361 - config3_cross_animal_v1 - INFO - EPOCH 52 SUMMARY 
+2026-01-13 23:41:39,361 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:41:39,361 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5242 | MSE: 0.5242 | r: 0.7554 | rho: 0.6592 | R2: 0.4992 | RMSE: 0.7847
+2026-01-13 23:41:39,361 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6214 | MSE: 0.6214 | r: 0.6937 | rho: 0.6129 | R2: 0.3802 | RMSE: 0.8556
+2026-01-13 23:41:39,361 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -     activity: r=0.6834 | rho=0.6217 | R2=0.3489 | RMSE=0.4266 | MAE=0.3221
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -     activity: r=0.6786 | rho=0.6708 | R2=0.3263 | RMSE=0.6457 | MAE=0.4889
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -     activity: r=0.6495 | rho=0.5476 | R2=0.2972 | RMSE=0.8860 | MAE=0.6634
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -     Dev: r=0.7017 | rho=0.6475 | R2=0.4256 | RMSE=1.1555 | MAE=0.9125
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO -     Hk: r=0.7551 | rho=0.5767 | R2=0.5030 | RMSE=1.1641 | MAE=0.9054
+2026-01-13 23:41:39,362 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:41:39,557 - config3_cross_animal_v1 - INFO - Epoch 52 completed in 906.8s
+2026-01-13 23:42:22,182 - config3_cross_animal_v1 - INFO - Step 25100: NLL=0.5260, MSE=0.4718, grad=1.33, lr=4.53e-04
+2026-01-13 23:44:34,509 - config3_cross_animal_v1 - INFO - Step 25200: NLL=0.4528, MSE=0.4004, grad=1.10, lr=4.53e-04
+2026-01-13 23:46:41,061 - config3_cross_animal_v1 - INFO - Step 25300: NLL=0.5156, MSE=0.4335, grad=1.15, lr=4.53e-04
+2026-01-13 23:48:54,624 - config3_cross_animal_v1 - INFO - Step 25400: NLL=0.4470, MSE=0.4703, grad=1.10, lr=4.53e-04
+2026-01-13 23:51:08,411 - config3_cross_animal_v1 - INFO - Step 25500: NLL=0.5496, MSE=0.5085, grad=1.24, lr=4.53e-04
+2026-01-13 23:56:35,267 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:56:35,267 - config3_cross_animal_v1 - INFO - EPOCH 53 SUMMARY 
+2026-01-13 23:56:35,267 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:56:35,267 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5257 | MSE: 0.5257 | r: 0.7589 | rho: 0.6620 | R2: 0.4974 | RMSE: 0.7864
+2026-01-13 23:56:35,267 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6287 | MSE: 0.6287 | r: 0.6966 | rho: 0.6161 | R2: 0.3698 | RMSE: 0.8614
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -     activity: r=0.6974 | rho=0.6346 | R2=0.3432 | RMSE=0.4285 | MAE=0.3229
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -     activity: r=0.6798 | rho=0.6674 | R2=0.3081 | RMSE=0.6543 | MAE=0.4942
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -     activity: r=0.6479 | rho=0.5442 | R2=0.2768 | RMSE=0.8988 | MAE=0.6670
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -     Dev: r=0.7042 | rho=0.6532 | R2=0.4068 | RMSE=1.1743 | MAE=0.9260
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO -     Hk: r=0.7538 | rho=0.5810 | R2=0.5142 | RMSE=1.1509 | MAE=0.8886
+2026-01-13 23:56:35,268 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-13 23:56:35,514 - config3_cross_animal_v1 - INFO - Epoch 53 completed in 896.0s
+2026-01-13 23:57:55,522 - config3_cross_animal_v1 - INFO - Step 25600: NLL=0.6351, MSE=0.5351, grad=1.56, lr=4.38e-04
+2026-01-14 00:00:08,562 - config3_cross_animal_v1 - INFO - Step 25700: NLL=0.5427, MSE=0.5194, grad=1.15, lr=4.38e-04
+2026-01-14 00:02:28,205 - config3_cross_animal_v1 - INFO - Step 25800: NLL=0.4604, MSE=0.4285, grad=1.09, lr=4.38e-04
+2026-01-14 00:04:46,396 - config3_cross_animal_v1 - INFO - Step 25900: NLL=0.7031, MSE=0.5546, grad=1.82, lr=4.38e-04
+2026-01-14 00:07:07,360 - config3_cross_animal_v1 - INFO - Step 26000: NLL=0.5249, MSE=0.4413, grad=1.36, lr=4.38e-04
+2026-01-14 00:12:02,191 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:12:02,191 - config3_cross_animal_v1 - INFO - EPOCH 54 SUMMARY 
+2026-01-14 00:12:02,191 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:12:02,191 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5680 | MSE: 0.5680 | r: 0.7457 | rho: 0.6477 | R2: 0.4659 | RMSE: 0.8005
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6494 | MSE: 0.6494 | r: 0.6849 | rho: 0.6033 | R2: 0.3473 | RMSE: 0.8680
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -     activity: r=0.6746 | rho=0.6102 | R2=0.2830 | RMSE=0.4477 | MAE=0.3361
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -     activity: r=0.6564 | rho=0.6454 | R2=0.2553 | RMSE=0.6788 | MAE=0.5116
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -     activity: r=0.6356 | rho=0.5340 | R2=0.2539 | RMSE=0.9129 | MAE=0.6877
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -     Dev: r=0.7051 | rho=0.6511 | R2=0.4213 | RMSE=1.1599 | MAE=0.9119
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO -     Hk: r=0.7527 | rho=0.5759 | R2=0.5227 | RMSE=1.1408 | MAE=0.8851
+2026-01-14 00:12:02,192 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:12:02,470 - config3_cross_animal_v1 - INFO - Epoch 54 completed in 926.9s
+2026-01-14 00:13:59,261 - config3_cross_animal_v1 - INFO - Step 26100: NLL=0.5877, MSE=0.5078, grad=1.52, lr=4.22e-04
+2026-01-14 00:16:12,477 - config3_cross_animal_v1 - INFO - Step 26200: NLL=0.5592, MSE=0.4808, grad=1.23, lr=4.22e-04
+2026-01-14 00:18:30,480 - config3_cross_animal_v1 - INFO - Step 26300: NLL=0.5325, MSE=0.4474, grad=1.42, lr=4.22e-04
+2026-01-14 00:20:41,138 - config3_cross_animal_v1 - INFO - Step 26400: NLL=0.4375, MSE=0.4045, grad=0.97, lr=4.22e-04
+2026-01-14 00:27:05,835 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:27:05,842 - config3_cross_animal_v1 - INFO - EPOCH 55 SUMMARY 
+2026-01-14 00:27:05,847 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5472 | MSE: 0.5472 | r: 0.7567 | rho: 0.6587 | R2: 0.4800 | RMSE: 0.7986
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6376 | MSE: 0.6376 | r: 0.6927 | rho: 0.6102 | R2: 0.3583 | RMSE: 0.8706
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -     activity: r=0.6963 | rho=0.6303 | R2=0.3580 | RMSE=0.4236 | MAE=0.3167
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -     activity: r=0.6662 | rho=0.6533 | R2=0.2710 | RMSE=0.6717 | MAE=0.5030
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -     activity: r=0.6442 | rho=0.5368 | R2=0.2601 | RMSE=0.9091 | MAE=0.6811
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -     Dev: r=0.7004 | rho=0.6485 | R2=0.4158 | RMSE=1.1654 | MAE=0.9155
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO -     Hk: r=0.7563 | rho=0.5823 | R2=0.4867 | RMSE=1.1831 | MAE=0.9180
+2026-01-14 00:27:05,848 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:27:06,119 - config3_cross_animal_v1 - INFO - Epoch 55 completed in 903.6s
+2026-01-14 00:27:24,141 - config3_cross_animal_v1 - INFO - Step 26500: NLL=0.5324, MSE=0.4941, grad=1.15, lr=4.07e-04
+2026-01-14 00:29:44,978 - config3_cross_animal_v1 - INFO - Step 26600: NLL=0.6542, MSE=0.4887, grad=1.84, lr=4.07e-04
+2026-01-14 00:31:58,168 - config3_cross_animal_v1 - INFO - Step 26700: NLL=0.5146, MSE=0.4816, grad=1.50, lr=4.07e-04
+2026-01-14 00:34:14,198 - config3_cross_animal_v1 - INFO - Step 26800: NLL=0.6017, MSE=0.4771, grad=1.36, lr=4.07e-04
+2026-01-14 00:36:30,393 - config3_cross_animal_v1 - INFO - Step 26900: NLL=0.4401, MSE=0.4571, grad=1.11, lr=4.07e-04
+2026-01-14 00:42:20,372 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:42:20,382 - config3_cross_animal_v1 - INFO - EPOCH 56 SUMMARY 
+2026-01-14 00:42:20,383 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:42:20,383 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5343 | MSE: 0.5343 | r: 0.7621 | rho: 0.6660 | R2: 0.4913 | RMSE: 0.7914
+2026-01-14 00:42:20,383 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6314 | MSE: 0.6314 | r: 0.6967 | rho: 0.6171 | R2: 0.3554 | RMSE: 0.8690
+2026-01-14 00:42:20,383 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-14 00:42:20,383 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-14 00:42:20,383 - config3_cross_animal_v1 - INFO -     activity: r=0.6962 | rho=0.6499 | R2=0.3127 | RMSE=0.4383 | MAE=0.3265
+2026-01-14 00:42:20,383 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-14 00:42:20,383 - config3_cross_animal_v1 - INFO -     activity: r=0.6911 | rho=0.6796 | R2=0.3698 | RMSE=0.6245 | MAE=0.4756
+2026-01-14 00:42:20,384 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-14 00:42:20,384 - config3_cross_animal_v1 - INFO -     activity: r=0.6291 | rho=0.5238 | R2=0.1599 | RMSE=0.9687 | MAE=0.7168
+2026-01-14 00:42:20,384 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-14 00:42:20,384 - config3_cross_animal_v1 - INFO -     Dev: r=0.7097 | rho=0.6553 | R2=0.4314 | RMSE=1.1497 | MAE=0.9086
+2026-01-14 00:42:20,384 - config3_cross_animal_v1 - INFO -     Hk: r=0.7572 | rho=0.5769 | R2=0.5031 | RMSE=1.1640 | MAE=0.9049
+2026-01-14 00:42:20,384 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:42:20,679 - config3_cross_animal_v1 - INFO - Epoch 56 completed in 914.5s
+2026-01-14 00:43:16,317 - config3_cross_animal_v1 - INFO - Step 27000: NLL=0.4949, MSE=0.4362, grad=1.28, lr=3.92e-04
+2026-01-14 00:45:27,780 - config3_cross_animal_v1 - INFO - Step 27100: NLL=0.5511, MSE=0.5030, grad=1.27, lr=3.92e-04
+2026-01-14 00:47:44,657 - config3_cross_animal_v1 - INFO - Step 27200: NLL=0.4789, MSE=0.4285, grad=1.18, lr=3.92e-04
+2026-01-14 00:49:53,019 - config3_cross_animal_v1 - INFO - Step 27300: NLL=0.4552, MSE=0.4879, grad=1.09, lr=3.92e-04
+2026-01-14 00:52:05,743 - config3_cross_animal_v1 - INFO - Step 27400: NLL=0.6298, MSE=0.5380, grad=1.08, lr=3.92e-04
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO - EPOCH 57 SUMMARY 
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO - [TRAIN] NLL: 0.5524 | MSE: 0.5524 | r: 0.7588 | rho: 0.6602 | R2: 0.4803 | RMSE: 0.7928
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO - [VAL]   NLL: 0.6358 | MSE: 0.6358 | r: 0.6942 | rho: 0.6121 | R2: 0.3456 | RMSE: 0.8697
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -   [VAL] encode4_k562:
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -     activity: r=0.6877 | rho=0.6345 | R2=0.3163 | RMSE=0.4372 | MAE=0.3290
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -   [VAL] encode4_hepg2:
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -     activity: r=0.6832 | rho=0.6718 | R2=0.2862 | RMSE=0.6646 | MAE=0.5052
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -   [VAL] encode4_wtc11:
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -     activity: r=0.6330 | rho=0.5172 | R2=0.1623 | RMSE=0.9673 | MAE=0.7176
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -   [VAL] deepstarr:
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -     Dev: r=0.7075 | rho=0.6538 | R2=0.4315 | RMSE=1.1496 | MAE=0.9035
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO -     Hk: r=0.7597 | rho=0.5833 | R2=0.5319 | RMSE=1.1298 | MAE=0.8712
+2026-01-14 00:57:23,302 - config3_cross_animal_v1 - INFO - ================================================================================
+2026-01-14 00:57:23,575 - config3_cross_animal_v1 - INFO - Early stopping triggered after 57 epochs (patience=15)
+2026-01-14 00:57:23,600 - config3_cross_animal_v1 - INFO - Training complete. Running final evaluation...
+2026-01-14 01:00:05,197 - config3_cross_animal_v1 - INFO - 
+============================================================
+2026-01-14 01:00:05,210 - config3_cross_animal_v1 - INFO - Evaluating on TEST sets...
+2026-01-14 01:00:05,211 - config3_cross_animal_v1 - INFO - ============================================================
+2026-01-14 01:00:05,215 - config3_cross_animal_v1 - INFO -   Evaluating encode4_k562 (test)...
+2026-01-14 01:00:46,818 - config3_cross_animal_v1 - INFO -     activity: r=0.6924, rho=0.6380, R2=0.3318, RMSE=0.8163 (n=22631)
+2026-01-14 01:00:46,818 - config3_cross_animal_v1 - INFO -   Evaluating encode4_hepg2 (test)...
+2026-01-14 01:01:13,387 - config3_cross_animal_v1 - INFO -     activity: r=0.6887, rho=0.6744, R2=0.2900, RMSE=0.8322 (n=13953)
+2026-01-14 01:01:13,387 - config3_cross_animal_v1 - INFO -   Evaluating encode4_wtc11 (test)...
+2026-01-14 01:01:25,239 - config3_cross_animal_v1 - INFO -     activity: r=0.6669, rho=0.5477, R2=0.2490, RMSE=0.8708 (n=5597)
+2026-01-14 01:01:25,239 - config3_cross_animal_v1 - INFO -   Evaluating deepstarr (test)...
+2026-01-14 01:02:40,573 - config3_cross_animal_v1 - INFO -     Dev: r=0.7072, rho=0.6551, R2=0.4313, RMSE=0.7570 (n=41186)
+2026-01-14 01:02:40,602 - config3_cross_animal_v1 - INFO -     Hk: r=0.7624, rho=0.5877, R2=0.5388, RMSE=0.7460 (n=41186)
+2026-01-14 01:02:40,602 - config3_cross_animal_v1 - INFO - 
+============================================================
+2026-01-14 01:02:40,602 - config3_cross_animal_v1 - INFO - Evaluating on CALIBRATION sets...
+2026-01-14 01:02:40,602 - config3_cross_animal_v1 - INFO - ============================================================
+2026-01-14 01:02:40,603 - config3_cross_animal_v1 - INFO -   Evaluating encode4_k562 (calibration)...
+2026-01-14 01:03:21,990 - config3_cross_animal_v1 - INFO -     activity: r=0.6838, rho=0.6233, R2=0.2974, RMSE=0.8226 (n=22633)
+2026-01-14 01:03:21,990 - config3_cross_animal_v1 - INFO -   Evaluating encode4_hepg2 (calibration)...
+2026-01-14 01:03:48,903 - config3_cross_animal_v1 - INFO -     activity: r=0.6832, rho=0.6649, R2=0.2942, RMSE=0.8484 (n=14002)
+2026-01-14 01:03:48,903 - config3_cross_animal_v1 - INFO -   Evaluating encode4_wtc11 (calibration)...
+2026-01-14 01:04:00,480 - config3_cross_animal_v1 - INFO -     activity: r=0.6628, rho=0.5449, R2=0.2169, RMSE=0.8714 (n=5595)
+2026-01-14 01:04:00,481 - config3_cross_animal_v1 - INFO - Results saved to results/config3_cross_animal_v1/final_results.json

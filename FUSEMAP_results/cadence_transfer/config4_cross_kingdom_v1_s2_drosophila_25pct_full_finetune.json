@@ -1,0 +1,23 @@
+{
+  "experiment_name": "config4_cross_kingdom_v1_full_s2_drosophila_25pct",
+  "n_train": 61601,
+  "n_trainable_params": 1322465,
+  "best_epoch": 4,
+  "val_metrics": {
+    "spearman_r": 0.444818636370939
+  },
+  "test_metrics": {
+    "spearman_r": 0.44610343707234174,
+    "pearson_r": 0.4571280762271676,
+    "auroc": 0.7419049082301734,
+    "mse": 1.8498769620265825,
+    "mae": 1.0483884266669983,
+    "loss": 1.8500605680174746
+  },
+  "source_model": "config4_cross_kingdom_v1",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.25,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-21T12:36:42.889694"
+}

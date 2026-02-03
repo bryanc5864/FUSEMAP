@@ -1,0 +1,111 @@
+{
+  "experiment": "cross_species_mouse_esc",
+  "timestamp": "2026-01-18T02:09:29.854712",
+  "dataset": {
+    "name": "Mouse ESC STARR-seq (GSE143546)",
+    "organism": "Mus musculus",
+    "n_sequences": 27565,
+    "conditions": [
+      "2iL (ground-state)",
+      "SL (metastable)"
+    ]
+  },
+  "results": {
+    "config4_cross_kingdom": {
+      "2iL_condition": {
+        "spearman_r": -0.0036321395979568914,
+        "kendall_tau": -0.0024402311928965843,
+        "pearson_r": -0.0022997230113032978,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.014,
+        "precision_at_1000": 0.022,
+        "auroc": 0.4990247989736206,
+        "enrichment_q4_vs_q1": 0.9960360910201249
+      },
+      "SL_condition": {
+        "spearman_r": 0.0012280002421853683,
+        "kendall_tau": 0.00084469192431848,
+        "pearson_r": -0.0007336479425578296,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.004,
+        "precision_at_1000": 0.027,
+        "auroc": 0.5029708239954211,
+        "enrichment_q4_vs_q1": 0.9967991514770954
+      },
+      "model_path": "/home/bcheng/sequence_optimization/FUSEMAP/results/config4_cross_kingdom_v1/best_model.pt",
+      "n_samples": 27565
+    },
+    "config5_universal": {
+      "2iL_condition": {
+        "spearman_r": -0.0036321395979568914,
+        "kendall_tau": -0.0024402311928965843,
+        "pearson_r": -0.0022997230113032978,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.014,
+        "precision_at_1000": 0.022,
+        "auroc": 0.4990247989736206,
+        "enrichment_q4_vs_q1": 0.9960360910201249
+      },
+      "SL_condition": {
+        "spearman_r": 0.0012280002421853683,
+        "kendall_tau": 0.00084469192431848,
+        "pearson_r": -0.0007336479425578296,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.004,
+        "precision_at_1000": 0.027,
+        "auroc": 0.5029708239954211,
+        "enrichment_q4_vs_q1": 0.9967991514770954
+      },
+      "model_path": "/home/bcheng/sequence_optimization/FUSEMAP/results/config5_universal_no_yeast_20260114_204533/best_model.pt",
+      "n_samples": 27565
+    },
+    "cadence_k562": {
+      "2iL_condition": {
+        "spearman_r": -0.0036321395979568914,
+        "kendall_tau": -0.0024402311928965843,
+        "pearson_r": -0.0022997230113032978,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.014,
+        "precision_at_1000": 0.022,
+        "auroc": 0.4990247989736206,
+        "enrichment_q4_vs_q1": 0.9960360910201249
+      },
+      "SL_condition": {
+        "spearman_r": 0.0012280002421853683,
+        "kendall_tau": 0.00084469192431848,
+        "pearson_r": -0.0007336479425578296,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.004,
+        "precision_at_1000": 0.027,
+        "auroc": 0.5029708239954211,
+        "enrichment_q4_vs_q1": 0.9967991514770954
+      },
+      "model_path": "/home/bcheng/sequence_optimization/FUSEMAP/results/cadence_k562_v2/best_model.pt",
+      "n_samples": 27565
+    },
+    "cadence_hepg2": {
+      "2iL_condition": {
+        "spearman_r": -0.0036321395979568914,
+        "kendall_tau": -0.0024402311928965843,
+        "pearson_r": -0.0022997230113032978,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.014,
+        "precision_at_1000": 0.022,
+        "auroc": 0.4990247989736206,
+        "enrichment_q4_vs_q1": 0.9960360910201249
+      },
+      "SL_condition": {
+        "spearman_r": 0.0012280002421853683,
+        "kendall_tau": 0.00084469192431848,
+        "pearson_r": -0.0007336479425578296,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.004,
+        "precision_at_1000": 0.027,
+        "auroc": 0.5029708239954211,
+        "enrichment_q4_vs_q1": 0.9967991514770954
+      },
+      "model_path": "/home/bcheng/sequence_optimization/FUSEMAP/results/cadence_hepg2_v2/best_model.pt",
+      "n_samples": 27565
+    }
+  }
+}

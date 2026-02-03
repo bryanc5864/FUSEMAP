@@ -1,0 +1,210 @@
+{
+  "experiment": "human_to_drosophila",
+  "description": "Human \u2192 Drosophila: Test transfer across 600M years of evolution",
+  "protocols": {
+    "zero_shot": {
+      "protocol": "zero_shot",
+      "source_datasets": [
+        "K562",
+        "HepG2",
+        "WTC11"
+      ],
+      "target_dataset": "S2_dev",
+      "source_pearson": 0.2642528194324691,
+      "source_spearman": 0.2110806467548769,
+      "target_pearson": 0.020749552387396,
+      "target_spearman": -0.0041586225554313405,
+      "fine_tuned_pearson": null,
+      "fine_tuned_spearman": null,
+      "fine_tune_n_samples": null,
+      "transfer_efficiency": 0.07852159319230513,
+      "n_common_features": 242,
+      "feature_contributions": {
+        "thermo": 12.231901803226505,
+        "stiff": 4.069829689750339,
+        "bend": 29.392304615394295,
+        "entropy": 23.491056037758284,
+        "advanced": 30.814907853870587
+      }
+    },
+    "fine_tuning": [
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2",
+          "WTC11"
+        ],
+        "target_dataset": "S2_dev",
+        "source_pearson": 0.2642528194324691,
+        "source_spearman": 0.2110806467548769,
+        "target_pearson": 0.020716597209471194,
+        "target_spearman": -0.003193513934715912,
+        "fine_tuned_pearson": 0.24767868663418488,
+        "fine_tuned_spearman": 0.24521133409943155,
+        "fine_tune_n_samples": 1000,
+        "transfer_efficiency": 0.9372792584242614,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 9.944768570423669,
+          "stiff": 18.776768394557504,
+          "bend": 30.427027374616934,
+          "entropy": 22.853889778355704,
+          "advanced": 17.997545882046186
+        }
+      },
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2",
+          "WTC11"
+        ],
+        "target_dataset": "S2_dev",
+        "source_pearson": 0.2642528194324691,
+        "source_spearman": 0.2110806467548769,
+        "target_pearson": 0.020716597209471194,
+        "target_spearman": -0.003193513934715912,
+        "fine_tuned_pearson": 0.33195430147910837,
+        "fine_tuned_spearman": 0.32851678293458725,
+        "fine_tune_n_samples": 5000,
+        "transfer_efficiency": 1.2561996583122197,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 13.185428673481034,
+          "stiff": 17.457703539853885,
+          "bend": 23.870839636448263,
+          "entropy": 16.369716245026332,
+          "advanced": 29.116311905190496
+        }
+      },
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2",
+          "WTC11"
+        ],
+        "target_dataset": "S2_dev",
+        "source_pearson": 0.2642528194324691,
+        "source_spearman": 0.2110806467548769,
+        "target_pearson": 0.020716597209471194,
+        "target_spearman": -0.003193513934715912,
+        "fine_tuned_pearson": 0.34894367714013363,
+        "fine_tuned_spearman": 0.3476945823801419,
+        "fine_tune_n_samples": 10000,
+        "transfer_efficiency": 1.3204917846839006,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 12.021272904173939,
+          "stiff": 19.051050246668556,
+          "bend": 25.60234389779052,
+          "entropy": 20.683591897972413,
+          "advanced": 22.64174105339456
+        }
+      }
+    ],
+    "joint_training": {
+      "HepG2": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "HepG2",
+          "WTC11",
+          "K562"
+        ],
+        "target_dataset": "HepG2",
+        "source_pearson": 0.2641326622520465,
+        "source_spearman": 0.21156009619992747,
+        "target_pearson": 0.2170240681747287,
+        "target_spearman": 0.16473043052800238,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.821647979179626,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 12.23190182527601,
+          "stiff": 4.069829682714983,
+          "bend": 29.392304616134524,
+          "entropy": 23.491056029360255,
+          "advanced": 30.814907846514238
+        }
+      },
+      "WTC11": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "HepG2",
+          "WTC11",
+          "K562"
+        ],
+        "target_dataset": "WTC11",
+        "source_pearson": 0.2641326622520465,
+        "source_spearman": 0.21156009619992747,
+        "target_pearson": 0.3538621328855961,
+        "target_spearman": 0.2691878687069876,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 1.3397136494536444,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 12.23190182527601,
+          "stiff": 4.069829682714983,
+          "bend": 29.392304616134524,
+          "entropy": 23.491056029360255,
+          "advanced": 30.814907846514238
+        }
+      },
+      "S2_dev": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "HepG2",
+          "WTC11",
+          "K562"
+        ],
+        "target_dataset": "S2_dev",
+        "source_pearson": 0.2641326622520465,
+        "source_spearman": 0.21156009619992747,
+        "target_pearson": 0.020716597163476316,
+        "target_spearman": -0.0031935106150243493,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.0784325459291652,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 12.23190182527601,
+          "stiff": 4.069829682714983,
+          "bend": 29.392304616134524,
+          "entropy": 23.491056029360255,
+          "advanced": 30.814907846514238
+        }
+      },
+      "K562": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "HepG2",
+          "WTC11",
+          "K562"
+        ],
+        "target_dataset": "K562",
+        "source_pearson": 0.2641326622520465,
+        "source_spearman": 0.21156009619992747,
+        "target_pearson": 0.24257524904524586,
+        "target_spearman": 0.18435557270891212,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.918384144456055,
+        "n_common_features": 242,
+        "feature_contributions": {
+          "thermo": 12.23190182527601,
+          "stiff": 4.069829682714983,
+          "bend": 29.392304616134524,
+          "entropy": 23.491056029360255,
+          "advanced": 30.814907846514238
+        }
+      }
+    }
+  }
+}

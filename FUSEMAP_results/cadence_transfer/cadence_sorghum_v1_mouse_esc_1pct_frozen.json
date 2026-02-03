@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_sorghum_v1_frozen_mouse_esc_1pct",
+  "n_train": 192,
+  "n_trainable_params": 66561,
+  "best_epoch": 29,
+  "val_metrics": {
+    "spearman_r": 0.12217291856914546
+  },
+  "test_metrics": {
+    "spearman_r": 0.12490779458993495,
+    "pearson_r": 0.09058589161887065,
+    "auroc": 0.5363177434661858,
+    "mse": 4.879964795439829,
+    "mae": 1.940004847760547,
+    "loss": 4.8774636008522725
+  },
+  "source_model": "cadence_sorghum_v1",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.01,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-20T10:19:34.048000"
+}

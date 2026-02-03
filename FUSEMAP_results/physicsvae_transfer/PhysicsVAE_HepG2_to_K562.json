@@ -1,0 +1,18 @@
+{
+  "source_model": "PhysicsVAE_HepG2",
+  "target_dataset": "K562",
+  "source_cell_type": "HepG2",
+  "n_samples": 500,
+  "n_matched_features": 411,
+  "n_source_features": 539,
+  "source_seq_length": 230,
+  "metrics": {
+    "reconstruction_accuracy": 0.5112608695652174,
+    "reconstruction_loss": 0.9971966445446014,
+    "perplexity": 2.7108692296443153,
+    "mean_position_accuracy": 0.5112608695652173,
+    "latent_mean": -0.0008134417585097253,
+    "latent_std": 0.33922550082206726
+  },
+  "timestamp": "2026-01-19T00:28:40.168048"
+}

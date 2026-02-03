@@ -1,0 +1,80 @@
+[
+  {
+    "cell_type": "HepG2",
+    "best_epoch": 35,
+    "test": {
+      "loss": 231.9879689765471,
+      "recon_loss": 231.49416661219084,
+      "kl_loss": 493.80236435631366,
+      "accuracy": 0.5044163264851499
+    },
+    "val": {
+      "loss": 231.84604043554484,
+      "recon_loss": 231.3527627369714,
+      "kl_loss": 493.27769857342594,
+      "accuracy": 0.5042899070510857
+    },
+    "generation_test": "PASSED"
+  },
+  {
+    "cell_type": "K562",
+    "best_epoch": 44,
+    "test": {
+      "loss": 212.3063184690987,
+      "recon_loss": 211.73000105315563,
+      "kl_loss": 576.317415943021,
+      "accuracy": 0.5534646561492199
+    },
+    "val": {
+      "loss": 212.3462529460034,
+      "recon_loss": 211.76949215059963,
+      "kl_loss": 576.7607954037735,
+      "accuracy": 0.5537985212919558
+    },
+    "generation_test": "PASSED"
+  },
+  {
+    "cell_type": "S2",
+    "best_epoch": 57,
+    "generation_test": "PASSED"
+  },
+  {
+    "cell_type": "WTC11",
+    "best_epoch": 24,
+    "test": {
+      "loss": 227.38488101546434,
+      "recon_loss": 226.90877974278067,
+      "kl_loss": 476.10127268368893,
+      "accuracy": 0.5195562872252033
+    },
+    "val": {
+      "loss": 227.5181409059228,
+      "recon_loss": 227.04019093443569,
+      "kl_loss": 477.9499714870956,
+      "accuracy": 0.5190872593708504
+    },
+    "generation_test": "PASSED"
+  },
+  {
+    "cell_type": "arabidopsis",
+    "best_epoch": 18,
+    "test": {
+      "loss": 212.0144938839999,
+      "recon_loss": 211.74151426373103,
+      "kl_loss": 272.9796202688506,
+      "accuracy": 0.4167911262500546
+    },
+    "generation_test": "PASSED"
+  },
+  {
+    "cell_type": "sorghum",
+    "best_epoch": 18,
+    "test": {
+      "loss": 213.50588001341458,
+      "recon_loss": 213.20219372164817,
+      "kl_loss": 303.6862917664231,
+      "accuracy": 0.3983052367288379
+    },
+    "generation_test": "PASSED"
+  }
+]

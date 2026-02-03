@@ -1,0 +1,5 @@
+================================================================================
+REGIME DISCOVERY ANALYSIS REPORT
+================================================================================
+
+This analysis identifies distinct physics 'regimes' with different activity profiles.

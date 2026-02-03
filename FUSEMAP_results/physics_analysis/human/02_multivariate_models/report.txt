@@ -1,0 +1,137 @@
+================================================================================
+MULTIVARIATE MODEL ANALYSIS REPORT
+================================================================================
+
+========================================
+Cell Type: K562
+========================================
+
+--- Elastic Net ---
+R² (CV): 0.1428 +/- 0.0029
+R² (Train): 0.1464
+RMSE (Train): 0.4869
+Features: 448/495 non-zero
+Best alpha: 1.0000e-04, L1 ratio: 0.10
+
+--- Ridge ---
+R² (CV): 0.1491 +/- 0.0035
+R² (Train): 0.1535
+
+--- Physics vs Physics+PWM ---
+Physics-only R²: 0.0719
+With PWM R²: 0.1428
+Improvement from PWM: +0.0709
+
+--- Top 20 Features (Elastic Net) ---
+   1. entropy_gc_entropy_w30_mean             : +0.7258
+   2. thermo_dH_p90                           : -0.6517
+   3. entropy_gc_entropy_w50_mean             : +0.5381
+   4. entropy_global_kmer5_entropy            : -0.4228
+   5. pwm_MA0090.4_var_score                  : +0.3927
+   6. pwm_min_delta_g                         : -0.3926
+   7. entropy_conditional_entropy             : +0.3859
+   8. pwm_MA0493.3_mean_score                 : -0.3793
+   9. entropy_global_kmer4_entropy            : -0.3790
+  10. entropy_entropy_rate_estimate           : -0.3723
+  11. thermo_dS_p5                            : +0.3269
+  12. pwm_max_of_max_score                    : -0.3239
+  13. entropy_gc_entropy_w30_max              : -0.2931
+  14. entropy_global_gc_entropy               : +0.2931
+  15. pwm_MA0809.3_mean_score                 : +0.2774
+  16. advanced_stacking_std_stacking_energy   : -0.2750
+  17. bend_bending_energy_variance            : +0.2650
+  18. pwm_MA0079.5_mean_score                 : -0.2516
+  19. pwm_MA0809.3_var_score                  : -0.2492
+  20. entropy_complexity_index                : -0.2470
+
+========================================
+Cell Type: HepG2
+========================================
+
+--- Elastic Net ---
+R² (CV): 0.1424 +/- 0.0061
+R² (Train): 0.1504
+RMSE (Train): 0.7311
+Features: 488/519 non-zero
+Best alpha: 1.0000e-04, L1 ratio: 0.10
+
+--- Ridge ---
+R² (CV): 0.1464 +/- 0.0073
+R² (Train): 0.1559
+
+--- Physics vs Physics+PWM ---
+Physics-only R²: 0.0628
+With PWM R²: 0.1424
+Improvement from PWM: +0.0796
+
+--- Top 20 Features (Elastic Net) ---
+   1. bend_curvature_var_w5_mean              : -0.8410
+   2. advanced_mgw_narrow_groove_fraction     : +0.6403
+   3. pwm_MA1683.2_var_score                  : +0.5803
+   4. entropy_shannon_w10_mean                : +0.5741
+   5. pwm_MA0148.5_var_score                  : -0.5505
+   6. entropy_entropy_rate_estimate           : -0.5411
+   7. entropy_kmer2_entropy_w30_mean          : +0.5317
+   8. entropy_global_kmer4_entropy            : -0.4930
+   9. pwm_MA0114.5_mean_score                 : +0.4790
+  10. thermo_var_dG                           : +0.4769
+  11. advanced_stress_local_opening_rate      : -0.4397
+  12. thermo_dH_p90                           : -0.4364
+  13. pwm_MA0024.3_var_score                  : -0.4358
+  14. pwm_MA0058.4_var_score                  : -0.4277
+  15. bend_max_bend_w5_mean                   : +0.4044
+  16. bend_bending_energy_variance            : +0.4033
+  17. pwm_min_delta_g                         : -0.3969
+  18. bend_curvature_var_w11_mean             : +0.3862
+  19. pwm_MA0836.3_var_score                  : -0.3755
+  20. pwm_sum_top5_delta_g                    : -0.3447
+
+========================================
+Cell Type: WTC11
+========================================
+
+--- Elastic Net ---
+R² (CV): 0.2480 +/- 0.0044
+R² (Train): 0.2651
+RMSE (Train): 0.9312
+Features: 451/518 non-zero
+Best alpha: 1.0000e-04, L1 ratio: 0.50
+
+--- Ridge ---
+R² (CV): 0.1484 +/- 0.1960
+R² (Train): 0.2641
+
+--- Physics vs Physics+PWM ---
+Physics-only R²: 0.1426
+With PWM R²: 0.2480
+Improvement from PWM: +0.1054
+
+--- Top 20 Features (Elastic Net) ---
+   1. stiff_gc_content_global                 : -1.4998
+   2. advanced_mgw_mean_mgw                   : +1.1251
+   3. advanced_melting_soft_min_melting_dG    : +1.0676
+   4. thermo_var_dG                           : +0.9119
+   5. advanced_stress_mean_stress_opening     : -0.9076
+   6. bend_bending_energy_variance            : +0.7861
+   7. advanced_melting_std_melting_dG         : -0.6450
+   8. bend_curvature_var_w9_mean              : -0.5468
+   9. bend_max_bend_w11_mean                  : +0.4777
+  10. thermo_total_dH                         : -0.4610
+  11. thermo_total_dG                         : -0.4402
+  12. bend_total_bending_energy               : -0.4089
+  13. entropy_renyi_entropy_alpha2.0          : -0.3819
+  14. pwm_min_delta_g                         : -0.3761
+  15. bend_max_bend_w11_fraction_at_global_max: -0.3182
+  16. pwm_MA0142.1_mean_score                 : +0.3120
+  17. pwm_max_of_max_score                    : -0.3036
+  18. advanced_stress_sum_stress_opening      : -0.2964
+  19. pwm_MA0787.1_mean_score                 : +0.2886
+  20. pwm_MA0506.3_max_score                  : +0.2660
+
+========================================
+SUMMARY ACROSS CELL TYPES
+========================================
+
+Mean R² (CV): 0.1777
+Mean physics-only R²: 0.0924
+Mean PWM improvement: +0.0853

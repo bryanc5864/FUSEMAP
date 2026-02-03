@@ -1,0 +1,14 @@
+{
+  "model_name": "config4_cross_kingdom_v1",
+  "description": "Cross-kingdom (animal + plant)",
+  "calibration_source": "cross_kingdom_calibration",
+  "calibration_date": "2026-01-16T06:29:20.203548",
+  "place_stats": {
+    "n_samples": 49846,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 1.3335851430892944,
+    "residual_mean": -0.1602998822927475,
+    "residual_std": 1.154809594154358
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "cell_types": [
+    "K562",
+    "HepG2",
+    "WTC11"
+  ],
+  "n_features": 753,
+  "n_significant_p05": 1140,
+  "n_significant_p01": 1055,
+  "top_features_by_category": {
+    "thermo": [
+      "thermo_var_dH",
+      "thermo_var_dG",
+      "thermo_var_dS",
+      "thermo_total_dH",
+      "thermo_mean_dH"
+    ],
+    "stiff": [
+      "stiff_gc_content_global",
+      "stiff_roll_zscore_mean",
+      "stiff_roll_mean_energy",
+      "stiff_roll_total_energy",
+      "stiff_roll_zscore_var"
+    ],
+    "bend": [
+      "bend_curvature_gradient_mean",
+      "bend_hotspot_count",
+      "bend_hotspot_density",
+      "bend_attention_bias_mean",
+      "bend_total_bending_energy"
+    ],
+    "entropy": [
+      "entropy_gc_entropy_w10_var",
+      "entropy_shannon_w10_var",
+      "entropy_gc_entropy_w10_mean",
+      "entropy_shannon_w10_mean",
+      "entropy_gc_entropy_w10_min"
+    ],
+    "advanced": [
+      "advanced_mgw_std_mgw",
+      "advanced_melting_std_melting_dG",
+      "advanced_melting_soft_min_melting_dG",
+      "advanced_stress_mean_stress_opening",
+      "advanced_stress_sum_stress_opening"
+    ]
+  }
+}

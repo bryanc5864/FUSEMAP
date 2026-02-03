@@ -1,0 +1,43 @@
+================================================================================
+PHYSICS × TF INTERACTION MAPPING REPORT
+================================================================================
+
+H-statistic measures non-additive interaction strength between features.
+Values > 0.1 indicate strong interactions; > 0.05 moderate interactions.
+
+========================================
+Cell Type: S2
+========================================
+
+Mean H-statistic: 0.0279
+Max H-statistic: 0.1714
+Strong interactions (H > 0.1): 11
+
+--- Top 15 Interactions ---
+   1. bend_attention_bias_mean       × pwm_Stat92E_var_score    : H = 0.1714
+   2. thermo_dS_p90                  × pwm_Kay_Fos_total_weight : H = 0.1710
+   3. thermo_total_dS                × pwm_Jra_Jun_total_weight : H = 0.1696
+   4. thermo_dG_local_min_std        × pwm_suHw_var_score       : H = 0.1282
+   5. entropy_mi_d2                  × pwm_Jra_Jun_delta_g      : H = 0.1273
+   6. bend_attention_bias_mean       × pwm_USF_bHLH_var_score   : H = 0.1161
+   7. thermo_dS_p90                  × pwm_SREBP_HLH106_top_k_mean: H = 0.1137
+   8. entropy_shannon_w10_var        × pwm_GATAe_delta_g        : H = 0.1068
+   9. entropy_kmer2_entropy_w30_mean × pwm_GATAe_total_weight   : H = 0.1031
+  10. advanced_stacking_stacking_transition_variance × pwm_Jra_Jun_total_weight : H = 0.1020
+  11. bend_attention_bias_mean       × pwm_Achaete_ac_mean_score: H = 0.1008
+  12. thermo_dG_local_min_std        × pwm_Jra_Jun_max_score    : H = 0.0960
+  13. thermo_dS_p90                  × pwm_Jra_Jun_delta_g      : H = 0.0929
+  14. entropy_kmer2_entropy_w30_mean × pwm_USF_bHLH_var_score   : H = 0.0893
+  15. thermo_dG_local_min_std        × pwm_GATAe_total_weight   : H = 0.0867
+
+--- Physics Features Most Interactive ---
+  thermo_dS_p90                           : mean H = 0.0464
+  thermo_dG_local_min_std                 : mean H = 0.0459
+  bend_attention_bias_mean                : mean H = 0.0404
+  thermo_total_dS                         : mean H = 0.0324
+  entropy_mi_d2                           : mean H = 0.0310
+  entropy_kmer2_entropy_w30_mean          : mean H = 0.0298
+  thermo_mean_dS                          : mean H = 0.0293
+  advanced_stacking_stacking_gc_rich_mean : mean H = 0.0284
+  advanced_stacking_std_stacking_energy   : mean H = 0.0256
+  entropy_shannon_w10_var                 : mean H = 0.0242

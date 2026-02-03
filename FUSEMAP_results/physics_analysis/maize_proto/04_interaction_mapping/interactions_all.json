@@ -1,0 +1,550 @@
+{
+  "maize": {
+    "top_physics_features": [
+      "bend_rms_curvature_w5_max",
+      "thermo_dG_local_min_mean",
+      "stiff_gc_skew",
+      "thermo_dG_max_high_energy_run",
+      "bend_rms_curvature_w7_max",
+      "entropy_gc_entropy_w50_mean",
+      "thermo_dG_local_min_std",
+      "advanced_mgw_min_mgw",
+      "bend_curvature_var_w5_max",
+      "bend_curvature_var_w7_max",
+      "entropy_gc_entropy_w30_mean",
+      "advanced_stacking_skew_stacking_energy",
+      "entropy_gc_entropy_w50_var",
+      "bend_rms_curvature_w9_max",
+      "bend_curvature_var_w9_max"
+    ],
+    "top_pwm_features": [
+      "pwm_MA1822.2_var_score",
+      "pwm_MA0123.1_var_score",
+      "pwm_MA2391.1_mean_score",
+      "pwm_MA0082.2_top_k_mean",
+      "pwm_MA0001.3_max_score",
+      "pwm_MA1835.2_var_score",
+      "pwm_MA2392.1_mean_score",
+      "pwm_MA2415.1_var_score",
+      "pwm_MA1829.2_mean_score",
+      "pwm_MA2106.1_var_score",
+      "pwm_MA0001.3_total_weight",
+      "pwm_MA0001.3_delta_g",
+      "pwm_MA1416.1_var_score",
+      "pwm_MA0082.2_var_score",
+      "pwm_MA0082.2_max_score"
+    ],
+    "h_matrix": [
+      [
+        0.010503190565670173,
+        1.2941821908176193e-16,
+        0.07933002367009431,
+        0.02200882674476674,
+        0.021346223729528865,
+        0.01745577029143931,
+        0.0032219111195628237,
+        0.02638953545524539,
+        1.4154963158542912e-16,
+        0.006605720655287086,
+        0.011635664654586594,
+        0.010703043635414208,
+        1.8016466394412782e-16,
+        0.0020988000802245354,
+        0.010038584472668977
+      ],
+      [
+        8.889833946275527e-17,
+        5.579554567487131e-16,
+        5.974559012719099e-17,
+        1.3592659107094713e-16,
+        3.268193622761242e-16,
+        0.00819372626221046,
+        2.6010780906659503e-16,
+        5.674249821122684e-16,
+        8.499028589291265e-16,
+        2.184310848814735e-16,
+        1.240798821334344e-16,
+        2.1819315993809942e-16,
+        3.234833488918491e-16,
+        1.1390073483047145e-15,
+        1.326183855840072e-16
+      ],
+      [
+        3.661578884187507e-16,
+        2.9936949503937975e-16,
+        0.07538155514358746,
+        4.2260760457786137e-16,
+        0.02187948839907047,
+        4.3813864709828003e-16,
+        0.010998431498404118,
+        2.9861046305940957e-16,
+        3.310274319187511e-16,
+        3.6256703247018563e-16,
+        0.016839626563885025,
+        2.1068144823834308e-16,
+        0.007697961020501336,
+        0.04440565398111817,
+        0.05383090604600128
+      ],
+      [
+        0.04266109686617299,
+        4.153804740478898e-16,
+        0.12105643096090388,
+        0.050155551724638585,
+        0.03261794703614951,
+        0.037834307963361104,
+        2.2121036986473282e-16,
+        0.015487666579373414,
+        2.3906249884359487e-16,
+        3.8588089632573726e-16,
+        0.023990706187926012,
+        2.644686266384288e-16,
+        2.4791988579273817e-16,
+        0.011474545882121252,
+        0.06714891660885358
+      ],
+      [
+        0.021419767888861786,
+        1.5968556693753248e-16,
+        0.14260058022289487,
+        0.016925138305153915,
+        0.025900192556761303,
+        0.02873701244416432,
+        1.6208021224954024e-16,
+        0.04803826123890601,
+        1.821856874982426e-16,
+        0.00749901101769958,
+        0.0073756877802513615,
+        0.01335255020907712,
+        0.009936135002123463,
+        0.041524415531142465,
+        0.04148151546778055
+      ],
+      [
+        0.012180284524147891,
+        1.791669386767428e-16,
+        0.07692248088787725,
+        0.028013305757331124,
+        0.02158314518338714,
+        0.032640139461640266,
+        1.2234195986721684e-16,
+        0.08336392122964412,
+        1.7557147668268455e-16,
+        0.010463861709876888,
+        0.01381666291120337,
+        0.011378354835305663,
+        0.03097664759526458,
+        0.022107033382029125,
+        0.006653962074087821
+      ],
+      [
+        0.04229023936153576,
+        8.198905373539646e-16,
+        0.02099259296624277,
+        0.012016263538130751,
+        0.02029152124350191,
+        0.05609698882884526,
+        4.866413097338175e-16,
+        7.293813106599005e-16,
+        5.072198139127536e-16,
+        6.4398308342944e-16,
+        0.05986202471318414,
+        0.07830593995789797,
+        4.195167025074838e-16,
+        7.394836197842284e-16,
+        0.05001910913981188
+      ],
+      [
+        0.016634869534953037,
+        3.607219256972829e-16,
+        0.04778542842601642,
+        3.4004529211051017e-16,
+        0.01332186472911864,
+        2.2880224867651133e-16,
+        1.6726393261306557e-16,
+        0.011859550984427425,
+        2.046229549749206e-16,
+        7.633111661043878e-16,
+        0.01287871905864325,
+        3.95402301731424e-16,
+        4.2585512988917137e-16,
+        2.8674066710478086e-16,
+        0.06407830265496722
+      ],
+      [
+        0.03377647819520433,
+        2.4174198925802095e-16,
+        0.13870347947672,
+        3.010099495228252e-16,
+        0.08138921252545472,
+        0.01885661863879687,
+        2.301309475581993e-16,
+        0.02791128587109476,
+        2.743682142376811e-16,
+        3.1284999170516623e-16,
+        0.046108196109641744,
+        0.045471092896896506,
+        1.8947206937021282e-16,
+        0.016282913938987845,
+        0.01832204324433287
+      ],
+      [
+        0.07575818314367365,
+        3.4127316158579855e-15,
+        0.027441583231240668,
+        1.0177755675042302e-15,
+        0.04549534720057139,
+        0.08583075427886172,
+        2.1237389850687436e-15,
+        7.646340858128808e-16,
+        3.114635208930302e-15,
+        1.5662907331105217e-15,
+        5.968055587298105e-16,
+        0.023715011034835566,
+        8.536929476347495e-16,
+        1.0531542111891932e-15,
+        3.9038326288850837e-16
+      ],
+      [
+        0.01748272186848773,
+        0.02470551809398479,
+        0.030759785573717512,
+        0.007526986061295136,
+        0.02722828393526296,
+        0.027957448685072814,
+        3.0448112383834953e-16,
+        0.0384493957897688,
+        1.8246585529503912e-16,
+        3.601556883657561e-16,
+        3.2480434366067346e-16,
+        0.022379807847020535,
+        0.0037940465163636993,
+        4.205576790237953e-16,
+        0.03358814818129993
+      ],
+      [
+        0.06530142926072223,
+        3.352693448783098e-16,
+        0.02191279543777619,
+        0.109759387705934,
+        0.045972599216463364,
+        0.11627649397589891,
+        0.054790106462181846,
+        0.03891320619116612,
+        2.3450792705432506e-16,
+        0.0012515506274758332,
+        0.05762432030690944,
+        2.2850890514602544e-16,
+        4.672772642718457e-16,
+        0.04291655353989422,
+        0.017762862590114167
+      ],
+      [
+        4.836891505677066e-16,
+        6.804317282919617e-16,
+        0.023972394820664787,
+        5.64294533982198e-16,
+        0.014376122530376628,
+        6.84794863777355e-16,
+        1.8190283359828026e-15,
+        0.026056376964156334,
+        6.378227834597456e-16,
+        0.03292358409313472,
+        6.077264941941086e-16,
+        1.0392978598142628e-15,
+        5.55115070800114e-16,
+        0.07453686281001443,
+        5.404822484706269e-16
+      ],
+      [
+        0.025216978963614127,
+        3.744017732488191e-15,
+        0.028208127989958122,
+        0.11919327604190458,
+        2.601837226471869e-16,
+        0.01682514148148831,
+        4.185976837030176e-15,
+        0.03222484528674938,
+        1.1895226276868693e-15,
+        1.6710027525062401e-15,
+        0.0782867153673741,
+        7.330093537251411e-16,
+        1.1971332264706862e-15,
+        0.11370512815934791,
+        6.480321521506068e-16
+      ],
+      [
+        0.0011221106477684259,
+        4.198126392417169e-15,
+        0.0118320070533431,
+        0.0812978745752213,
+        0.011754407432605802,
+        0.010766679732705706,
+        2.396591768877527e-15,
+        9.412614415915584e-16,
+        3.667641348125397e-15,
+        1.3740020373772204e-15,
+        5.847267056370698e-16,
+        1.2155072809198465e-15,
+        3.1473548893361047e-16,
+        0.031197186444872974,
+        1.084493160633428e-15
+      ]
+    ],
+    "top_interactions": [
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA2391.1_mean_score",
+        "h_statistic": 0.14260058022289487
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA2391.1_mean_score",
+        "h_statistic": 0.13870347947672
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA2391.1_mean_score",
+        "h_statistic": 0.12105643096090388
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w9_max",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.11919327604190458
+      },
+      {
+        "physics_feature": "advanced_stacking_skew_stacking_energy",
+        "pwm_feature": "pwm_MA1835.2_var_score",
+        "h_statistic": 0.11627649397589891
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w9_max",
+        "pwm_feature": "pwm_MA0082.2_var_score",
+        "h_statistic": 0.11370512815934791
+      },
+      {
+        "physics_feature": "advanced_stacking_skew_stacking_energy",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.109759387705934
+      },
+      {
+        "physics_feature": "bend_curvature_var_w7_max",
+        "pwm_feature": "pwm_MA1835.2_var_score",
+        "h_statistic": 0.08583075427886172
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w50_mean",
+        "pwm_feature": "pwm_MA2415.1_var_score",
+        "h_statistic": 0.08336392122964412
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA0001.3_max_score",
+        "h_statistic": 0.08138921252545472
+      },
+      {
+        "physics_feature": "bend_curvature_var_w9_max",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.0812978745752213
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w5_max",
+        "pwm_feature": "pwm_MA2391.1_mean_score",
+        "h_statistic": 0.07933002367009431
+      },
+      {
+        "physics_feature": "thermo_dG_local_min_std",
+        "pwm_feature": "pwm_MA0001.3_delta_g",
+        "h_statistic": 0.07830593995789797
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w9_max",
+        "pwm_feature": "pwm_MA0001.3_total_weight",
+        "h_statistic": 0.0782867153673741
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w50_mean",
+        "pwm_feature": "pwm_MA2391.1_mean_score",
+        "h_statistic": 0.07692248088787725
+      },
+      {
+        "physics_feature": "bend_curvature_var_w7_max",
+        "pwm_feature": "pwm_MA1822.2_var_score",
+        "h_statistic": 0.07575818314367365
+      },
+      {
+        "physics_feature": "stiff_gc_skew",
+        "pwm_feature": "pwm_MA2391.1_mean_score",
+        "h_statistic": 0.07538155514358746
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w50_var",
+        "pwm_feature": "pwm_MA0082.2_var_score",
+        "h_statistic": 0.07453686281001443
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.06714891660885358
+      },
+      {
+        "physics_feature": "advanced_stacking_skew_stacking_energy",
+        "pwm_feature": "pwm_MA1822.2_var_score",
+        "h_statistic": 0.06530142926072223
+      },
+      {
+        "physics_feature": "advanced_mgw_min_mgw",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.06407830265496722
+      },
+      {
+        "physics_feature": "thermo_dG_local_min_std",
+        "pwm_feature": "pwm_MA0001.3_total_weight",
+        "h_statistic": 0.05986202471318414
+      },
+      {
+        "physics_feature": "advanced_stacking_skew_stacking_energy",
+        "pwm_feature": "pwm_MA0001.3_total_weight",
+        "h_statistic": 0.05762432030690944
+      },
+      {
+        "physics_feature": "thermo_dG_local_min_std",
+        "pwm_feature": "pwm_MA1835.2_var_score",
+        "h_statistic": 0.05609698882884526
+      },
+      {
+        "physics_feature": "advanced_stacking_skew_stacking_energy",
+        "pwm_feature": "pwm_MA2392.1_mean_score",
+        "h_statistic": 0.054790106462181846
+      },
+      {
+        "physics_feature": "stiff_gc_skew",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.05383090604600128
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.050155551724638585
+      },
+      {
+        "physics_feature": "thermo_dG_local_min_std",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.05001910913981188
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA2415.1_var_score",
+        "h_statistic": 0.04803826123890601
+      },
+      {
+        "physics_feature": "advanced_mgw_min_mgw",
+        "pwm_feature": "pwm_MA2391.1_mean_score",
+        "h_statistic": 0.04778542842601642
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA0001.3_total_weight",
+        "h_statistic": 0.046108196109641744
+      },
+      {
+        "physics_feature": "advanced_stacking_skew_stacking_energy",
+        "pwm_feature": "pwm_MA0001.3_max_score",
+        "h_statistic": 0.045972599216463364
+      },
+      {
+        "physics_feature": "bend_curvature_var_w7_max",
+        "pwm_feature": "pwm_MA0001.3_max_score",
+        "h_statistic": 0.04549534720057139
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA0001.3_delta_g",
+        "h_statistic": 0.045471092896896506
+      },
+      {
+        "physics_feature": "stiff_gc_skew",
+        "pwm_feature": "pwm_MA0082.2_var_score",
+        "h_statistic": 0.04440565398111817
+      },
+      {
+        "physics_feature": "advanced_stacking_skew_stacking_energy",
+        "pwm_feature": "pwm_MA0082.2_var_score",
+        "h_statistic": 0.04291655353989422
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA1822.2_var_score",
+        "h_statistic": 0.04266109686617299
+      },
+      {
+        "physics_feature": "thermo_dG_local_min_std",
+        "pwm_feature": "pwm_MA1822.2_var_score",
+        "h_statistic": 0.04229023936153576
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA0082.2_var_score",
+        "h_statistic": 0.041524415531142465
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.04148151546778055
+      },
+      {
+        "physics_feature": "advanced_stacking_skew_stacking_energy",
+        "pwm_feature": "pwm_MA2415.1_var_score",
+        "h_statistic": 0.03891320619116612
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w30_mean",
+        "pwm_feature": "pwm_MA2415.1_var_score",
+        "h_statistic": 0.0384493957897688
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA1835.2_var_score",
+        "h_statistic": 0.037834307963361104
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA1822.2_var_score",
+        "h_statistic": 0.03377647819520433
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w30_mean",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.03358814818129993
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w50_var",
+        "pwm_feature": "pwm_MA2106.1_var_score",
+        "h_statistic": 0.03292358409313472
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w50_mean",
+        "pwm_feature": "pwm_MA1835.2_var_score",
+        "h_statistic": 0.032640139461640266
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA0001.3_max_score",
+        "h_statistic": 0.03261794703614951
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w9_max",
+        "pwm_feature": "pwm_MA2415.1_var_score",
+        "h_statistic": 0.03222484528674938
+      },
+      {
+        "physics_feature": "bend_curvature_var_w9_max",
+        "pwm_feature": "pwm_MA0082.2_var_score",
+        "h_statistic": 0.031197186444872974
+      }
+    ],
+    "mean_h_statistic": 0.019329896729782907,
+    "max_h_statistic": 0.14260058022289487,
+    "n_strong_interactions": 7
+  }
+}

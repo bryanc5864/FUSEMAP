@@ -1,0 +1,746 @@
+{
+  "physics_transfer": {
+    "K562": {
+      "train_on": "K562",
+      "test_results": {
+        "K562": {
+          "r2": 0.07153188812900979,
+          "rmse": 0.5078173529236142,
+          "is_same_celltype": true
+        },
+        "HepG2": {
+          "r2": 0.036761536966377406,
+          "rmse": 0.7784453741624482,
+          "is_same_celltype": false
+        },
+        "WTC11": {
+          "r2": -0.1605474182932385,
+          "rmse": 1.170240601903824,
+          "is_same_celltype": false
+        }
+      }
+    },
+    "HepG2": {
+      "train_on": "HepG2",
+      "test_results": {
+        "K562": {
+          "r2": 0.006723744269415133,
+          "rmse": 0.5252415423442393,
+          "is_same_celltype": false
+        },
+        "HepG2": {
+          "r2": 0.06383922277499043,
+          "rmse": 0.7674259047259209,
+          "is_same_celltype": true
+        },
+        "WTC11": {
+          "r2": -0.13804176064439289,
+          "rmse": 1.1588382365383143,
+          "is_same_celltype": false
+        }
+      }
+    },
+    "WTC11": {
+      "train_on": "WTC11",
+      "test_results": {
+        "K562": {
+          "r2": -1032.3744010011885,
+          "rmse": 16.94154019441085,
+          "is_same_celltype": false
+        },
+        "HepG2": {
+          "r2": -443.1206000297848,
+          "rmse": 16.715204456626548,
+          "is_same_celltype": false
+        },
+        "WTC11": {
+          "r2": 0.15094599849393386,
+          "rmse": 1.0009476716763706,
+          "is_same_celltype": true
+        }
+      }
+    }
+  },
+  "pwm_transfer": {
+    "K562": {
+      "train_on": "K562",
+      "test_results": {
+        "K562": {
+          "r2": 0.11228502154427755,
+          "rmse": 0.4965475174902734,
+          "is_same_celltype": true
+        },
+        "HepG2": {
+          "r2": 0.07630447760808845,
+          "rmse": 0.7622995324497394,
+          "is_same_celltype": false
+        },
+        "WTC11": {
+          "r2": -0.08914795564085298,
+          "rmse": 1.133671313741069,
+          "is_same_celltype": false
+        }
+      }
+    },
+    "HepG2": {
+      "train_on": "HepG2",
+      "test_results": {
+        "K562": {
+          "r2": -0.016186826106046492,
+          "rmse": 0.5312645301778748,
+          "is_same_celltype": false
+        },
+        "HepG2": {
+          "r2": 0.12244031367164687,
+          "rmse": 0.7430183959371396,
+          "is_same_celltype": true
+        },
+        "WTC11": {
+          "r2": -0.06740528534341417,
+          "rmse": 1.1222985235861425,
+          "is_same_celltype": false
+        }
+      }
+    },
+    "WTC11": {
+      "train_on": "WTC11",
+      "test_results": {
+        "K562": {
+          "r2": -245.443548947464,
+          "rmse": 8.273376115184593,
+          "is_same_celltype": false
+        },
+        "HepG2": {
+          "r2": -103.45827700104043,
+          "rmse": 8.106486489395273,
+          "is_same_celltype": false
+        },
+        "WTC11": {
+          "r2": 0.20054756193033962,
+          "rmse": 0.9712701298730143,
+          "is_same_celltype": true
+        }
+      }
+    }
+  },
+  "all_transfer": {
+    "K562": {
+      "train_on": "K562",
+      "test_results": {
+        "K562": {
+          "r2": 0.1341112136841177,
+          "rmse": 0.4904052363186739,
+          "is_same_celltype": true
+        },
+        "HepG2": {
+          "r2": 0.07849923030625927,
+          "rmse": 0.7613933604925587,
+          "is_same_celltype": false
+        },
+        "WTC11": {
+          "r2": -0.07377168166599923,
+          "rmse": 1.1256404477360735,
+          "is_same_celltype": false
+        }
+      }
+    },
+    "HepG2": {
+      "train_on": "HepG2",
+      "test_results": {
+        "K562": {
+          "r2": -0.024165428119803822,
+          "rmse": 0.5333460670077579,
+          "is_same_celltype": false
+        },
+        "HepG2": {
+          "r2": 0.1368892189655193,
+          "rmse": 0.7368761579311642,
+          "is_same_celltype": true
+        },
+        "WTC11": {
+          "r2": -0.04233946546056333,
+          "rmse": 1.1090428030404638,
+          "is_same_celltype": false
+        }
+      }
+    },
+    "WTC11": {
+      "train_on": "WTC11",
+      "test_results": {
+        "K562": {
+          "r2": -5261.2792296884445,
+          "rmse": 38.23058869850694,
+          "is_same_celltype": false
+        },
+        "HepG2": {
+          "r2": -2251.4672901144527,
+          "rmse": 37.64354198820541,
+          "is_same_celltype": false
+        },
+        "WTC11": {
+          "r2": 0.2502678219080131,
+          "rmse": 0.9405822799010253,
+          "is_same_celltype": true
+        }
+      }
+    }
+  },
+  "feature_transfer": {
+    "most_consistent": [
+      {
+        "feature": "entropy_mi_d5",
+        "mean_coefficient": 0.02491314728569396,
+        "std_coefficient": 0.00411962678096389,
+        "sign_consistent": true,
+        "cv": 0.16535954826267696,
+        "coefficients": {
+          "K562": 0.02071567631327171,
+          "HepG2": 0.03051087052529989,
+          "WTC11": 0.023512895018510286
+        }
+      },
+      {
+        "feature": "advanced_g4_max_g4_score",
+        "mean_coefficient": 0.021698447804025304,
+        "std_coefficient": 0.0037334290881203473,
+        "sign_consistent": true,
+        "cv": 0.1720597308083832,
+        "coefficients": {
+          "K562": 0.018222432826650852,
+          "HepG2": 0.026878217783332135,
+          "WTC11": 0.019994692802092928
+        }
+      },
+      {
+        "feature": "entropy_kmer3_entropy_w30_var",
+        "mean_coefficient": -0.07473105556607117,
+        "std_coefficient": 0.014463544975563472,
+        "sign_consistent": true,
+        "cv": 0.1935412910470129,
+        "coefficients": {
+          "K562": -0.07555464166971448,
+          "HepG2": -0.056619474963613886,
+          "WTC11": -0.0920190500648851
+        }
+      },
+      {
+        "feature": "bend_hotspot_count",
+        "mean_coefficient": 0.043805511412214754,
+        "std_coefficient": 0.009389250004642514,
+        "sign_consistent": true,
+        "cv": 0.21433946784203986,
+        "coefficients": {
+          "K562": 0.04727016178738429,
+          "HepG2": 0.05317427499140856,
+          "WTC11": 0.030972097457851417
+        }
+      },
+      {
+        "feature": "entropy_mi_d7",
+        "mean_coefficient": 0.013127477448996639,
+        "std_coefficient": 0.002889266569014815,
+        "sign_consistent": true,
+        "cv": 0.2200930514061289,
+        "coefficients": {
+          "K562": 0.009044356484027197,
+          "HepG2": 0.015302770310919606,
+          "WTC11": 0.015035305552043115
+        }
+      },
+      {
+        "feature": "stiff_purine_stiffness_correlation",
+        "mean_coefficient": 0.0043488194105901195,
+        "std_coefficient": 0.00101678858276439,
+        "sign_consistent": true,
+        "cv": 0.2338079572327919,
+        "coefficients": {
+          "K562": 0.004558401736656731,
+          "HepG2": 0.00547603675788067,
+          "WTC11": 0.003012019737232958
+        }
+      },
+      {
+        "feature": "entropy_shannon_w10_min",
+        "mean_coefficient": -0.05728565273954459,
+        "std_coefficient": 0.016172805554431218,
+        "sign_consistent": true,
+        "cv": 0.2823186047641392,
+        "coefficients": {
+          "K562": -0.04224181105407453,
+          "HepG2": -0.049887735119379065,
+          "WTC11": -0.07972741204518018
+        }
+      },
+      {
+        "feature": "entropy_global_kmer4_entropy",
+        "mean_coefficient": -0.06807529907285013,
+        "std_coefficient": 0.01942230278268896,
+        "sign_consistent": true,
+        "cv": 0.28530616901006,
+        "coefficients": {
+          "K562": -0.08743511881650272,
+          "HepG2": -0.041521243216896805,
+          "WTC11": -0.0752695351851509
+        }
+      },
+      {
+        "feature": "entropy_kmer2_entropy_w30_var",
+        "mean_coefficient": 0.0447519505404771,
+        "std_coefficient": 0.013536778427933547,
+        "sign_consistent": true,
+        "cv": 0.30248465741599007,
+        "coefficients": {
+          "K562": 0.06389575859910669,
+          "HepG2": 0.035129896025501074,
+          "WTC11": 0.03523019699682353
+        }
+      },
+      {
+        "feature": "advanced_melting_std_melting_dG",
+        "mean_coefficient": -0.40476702848265905,
+        "std_coefficient": 0.12407975273191497,
+        "sign_consistent": true,
+        "cv": 0.3065460968919576,
+        "coefficients": {
+          "K562": -0.5229240090914268,
+          "HepG2": -0.23333697607483042,
+          "WTC11": -0.45804010028172
+        }
+      },
+      {
+        "feature": "stiff_shift_zscore_var",
+        "mean_coefficient": 0.012558873024371165,
+        "std_coefficient": 0.004006911172206205,
+        "sign_consistent": true,
+        "cv": 0.31905021767722147,
+        "coefficients": {
+          "K562": 0.00953830895878343,
+          "HepG2": 0.009917029064714124,
+          "WTC11": 0.01822128104961594
+        }
+      },
+      {
+        "feature": "bend_bending_energy_variance",
+        "mean_coefficient": 0.5377558981306457,
+        "std_coefficient": 0.1871730926121288,
+        "sign_consistent": true,
+        "cv": 0.3480633002125731,
+        "coefficients": {
+          "K562": 0.3137275239540136,
+          "HepG2": 0.7718729744960546,
+          "WTC11": 0.527667195941869
+        }
+      },
+      {
+        "feature": "advanced_g4_mean_g4_score",
+        "mean_coefficient": 0.1291328264046057,
+        "std_coefficient": 0.045678026433050654,
+        "sign_consistent": true,
+        "cv": 0.353729006828441,
+        "coefficients": {
+          "K562": 0.1268540239503382,
+          "HepG2": 0.0743631188679742,
+          "WTC11": 0.18618133639550466
+        }
+      },
+      {
+        "feature": "advanced_mgw_narrow_groove_fraction",
+        "mean_coefficient": 0.49531611301268175,
+        "std_coefficient": 0.18296316353921444,
+        "sign_consistent": true,
+        "cv": 0.36938665779792623,
+        "coefficients": {
+          "K562": 0.3422496657105961,
+          "HepG2": 0.7525183042568183,
+          "WTC11": 0.3911803690706307
+        }
+      },
+      {
+        "feature": "bend_spectral_f0p100_mean_power",
+        "mean_coefficient": -0.07567200118369845,
+        "std_coefficient": 0.028386309657502884,
+        "sign_consistent": true,
+        "cv": 0.37512302058185787,
+        "coefficients": {
+          "K562": -0.055472561985075025,
+          "HepG2": -0.11581603565293686,
+          "WTC11": -0.05572740591308344
+        }
+      },
+      {
+        "feature": "advanced_stress_mean_stress_opening",
+        "mean_coefficient": -0.1123644627626509,
+        "std_coefficient": 0.04265052961876106,
+        "sign_consistent": true,
+        "cv": 0.3795731192063135,
+        "coefficients": {
+          "K562": -0.05218122496244498,
+          "HepG2": -0.1459324204054716,
+          "WTC11": -0.13897974292003612
+        }
+      },
+      {
+        "feature": "entropy_shannon_w10_var",
+        "mean_coefficient": 0.10246089525818226,
+        "std_coefficient": 0.04044070516722965,
+        "sign_consistent": true,
+        "cv": 0.39469404464334074,
+        "coefficients": {
+          "K562": 0.09490112847569272,
+          "HepG2": 0.057145835974239334,
+          "WTC11": 0.15533572132461476
+        }
+      },
+      {
+        "feature": "stiff_gc_skew",
+        "mean_coefficient": -0.08495539463139844,
+        "std_coefficient": 0.03377640497205758,
+        "sign_consistent": true,
+        "cv": 0.39757810694194873,
+        "coefficients": {
+          "K562": -0.06552652204619365,
+          "HepG2": -0.056878860020813334,
+          "WTC11": -0.1324608018271883
+        }
+      },
+      {
+        "feature": "entropy_renyi_entropy_alpha2.0",
+        "mean_coefficient": -0.1663123011321867,
+        "std_coefficient": 0.06892497145095995,
+        "sign_consistent": true,
+        "cv": 0.41443098905941833,
+        "coefficients": {
+          "K562": -0.113168321484928,
+          "HepG2": -0.12211872302400135,
+          "WTC11": -0.26364985888763076
+        }
+      },
+      {
+        "feature": "entropy_gc_entropy_w30_mean",
+        "mean_coefficient": 0.4262545259250327,
+        "std_coefficient": 0.17863003822427184,
+        "sign_consistent": true,
+        "cv": 0.419068953782061,
+        "coefficients": {
+          "K562": 0.6760208674935949,
+          "HepG2": 0.3341679525038846,
+          "WTC11": 0.2685747577776185
+        }
+      }
+    ],
+    "least_consistent": [
+      {
+        "feature": "entropy_kmer3_entropy_w50_max",
+        "mean_coefficient": -0.012700138762710228,
+        "std_coefficient": 0.018837485958989236,
+        "sign_consistent": false,
+        "cv": 1.4832504046569401,
+        "coefficients": {
+          "K562": -0.00680030314476629,
+          "HepG2": -0.038148284738442464,
+          "WTC11": 0.006848171595078071
+        }
+      },
+      {
+        "feature": "stiff_min_relative_energy",
+        "mean_coefficient": -0.0026491911407726418,
+        "std_coefficient": 0.01335024218353141,
+        "sign_consistent": false,
+        "cv": 5.039365404052267,
+        "coefficients": {
+          "K562": 0.003998749403383001,
+          "HepG2": -0.021276661484057734,
+          "WTC11": 0.009330338658356809
+        }
+      },
+      {
+        "feature": "entropy_gc_entropy_w10_var",
+        "mean_coefficient": -0.043867685870352724,
+        "std_coefficient": 0.04760429424310022,
+        "sign_consistent": false,
+        "cv": 1.085179062870805,
+        "coefficients": {
+          "K562": -0.026589594517191346,
+          "HepG2": 0.00384354720099608,
+          "WTC11": -0.1088570102948629
+        }
+      },
+      {
+        "feature": "stiff_slide_zscore_var",
+        "mean_coefficient": -0.01057580675117111,
+        "std_coefficient": 0.023906231928697872,
+        "sign_consistent": false,
+        "cv": 2.260464141522879,
+        "coefficients": {
+          "K562": -0.04367335092297072,
+          "HepG2": -0.0,
+          "WTC11": 0.011945930669457391
+        }
+      },
+      {
+        "feature": "advanced_stress_stress_p95",
+        "mean_coefficient": 0.007355821293420256,
+        "std_coefficient": 0.010826111864799577,
+        "sign_consistent": false,
+        "cv": 1.4717747254794618,
+        "coefficients": {
+          "K562": -0.0,
+          "HepG2": -0.0005949381036957838,
+          "WTC11": 0.022662401983956554
+        }
+      },
+      {
+        "feature": "entropy_complexity_index",
+        "mean_coefficient": 0.005572400945806481,
+        "std_coefficient": 0.008553168142926731,
+        "sign_consistent": false,
+        "cv": 1.5349161386822734,
+        "coefficients": {
+          "K562": -0.0009390482141892486,
+          "HepG2": -0.0,
+          "WTC11": 0.01765625105160869
+        }
+      },
+      {
+        "feature": "bend_spectral_f0p200_max_power",
+        "mean_coefficient": 0.0005736435310001141,
+        "std_coefficient": 0.0027091126714564027,
+        "sign_consistent": false,
+        "cv": 4.722641370561998,
+        "coefficients": {
+          "K562": -0.000136709586973984,
+          "HepG2": 0.004189262703468779,
+          "WTC11": -0.002331622523494453
+        }
+      },
+      {
+        "feature": "stiff_high_energy_count_t5.0",
+        "mean_coefficient": -0.0016572919527913699,
+        "std_coefficient": 0.0025359118501006137,
+        "sign_consistent": false,
+        "cv": 1.5301539634156722,
+        "coefficients": {
+          "K562": 0.0,
+          "HepG2": 0.00026838792383593226,
+          "WTC11": -0.005240263782210042
+        }
+      },
+      {
+        "feature": "entropy_mi_d3",
+        "mean_coefficient": -0.01462755601531056,
+        "std_coefficient": 0.02384418909177586,
+        "sign_consistent": false,
+        "cv": 1.6300870129513307,
+        "coefficients": {
+          "K562": -0.0076019567644703455,
+          "HepG2": 0.010421835216090684,
+          "WTC11": -0.04670254649755202
+        }
+      },
+      {
+        "feature": "stiff_gc_stiffness_correlation",
+        "mean_coefficient": -0.0021892815453992244,
+        "std_coefficient": 0.003978436600802183,
+        "sign_consistent": false,
+        "cv": 1.8172338816644522,
+        "coefficients": {
+          "K562": 0.0023080149796207124,
+          "HepG2": -0.0015100159337598275,
+          "WTC11": -0.0073658436820585585
+        }
+      },
+      {
+        "feature": "stiff_slide_max_energy",
+        "mean_coefficient": 0.002039723577038254,
+        "std_coefficient": 0.0071726413174010035,
+        "sign_consistent": false,
+        "cv": 3.5164771335417493,
+        "coefficients": {
+          "K562": 0.0003804955933903476,
+          "HepG2": 0.011535674573378117,
+          "WTC11": -0.005796999435653701
+        }
+      },
+      {
+        "feature": "thermo_estimated_Tm_K",
+        "mean_coefficient": 0.0,
+        "std_coefficient": 0.0,
+        "sign_consistent": true,
+        "cv": Infinity,
+        "coefficients": {
+          "K562": 0.0,
+          "HepG2": 0.0,
+          "WTC11": -0.0
+        }
+      },
+      {
+        "feature": "entropy_mi_d10",
+        "mean_coefficient": -0.0037458656656558687,
+        "std_coefficient": 0.004924559837567862,
+        "sign_consistent": false,
+        "cv": 1.3146653609922272,
+        "coefficients": {
+          "K562": -0.0005611731353709543,
+          "HepG2": 2.5577262145428238e-05,
+          "WTC11": -0.01070200112374208
+        }
+      },
+      {
+        "feature": "stiff_high_energy_fraction_t2.0",
+        "mean_coefficient": 0.0008542774244915518,
+        "std_coefficient": 0.0024705027235535724,
+        "sign_consistent": false,
+        "cv": 2.8919208827553464,
+        "coefficients": {
+          "K562": 0.0018199076933069175,
+          "HepG2": 0.0032793385251717894,
+          "WTC11": -0.002536413945004052
+        }
+      },
+      {
+        "feature": "advanced_fractal_std_rho",
+        "mean_coefficient": 0.005241991498336364,
+        "std_coefficient": 0.010277295018336432,
+        "sign_consistent": false,
+        "cv": 1.9605707146984324,
+        "coefficients": {
+          "K562": 0.01960289070491897,
+          "HepG2": -0.0038769162099098796,
+          "WTC11": 0.0
+        }
+      },
+      {
+        "feature": "thermo_total_dS",
+        "mean_coefficient": -0.0355639754648012,
+        "std_coefficient": 0.05750309931278953,
+        "sign_consistent": false,
+        "cv": 1.6168917721164828,
+        "coefficients": {
+          "K562": -0.116680885496981,
+          "HepG2": -0.0,
+          "WTC11": 0.009988959102577386
+        }
+      },
+      {
+        "feature": "entropy_global_shannon_entropy",
+        "mean_coefficient": 0.0,
+        "std_coefficient": 0.0,
+        "sign_consistent": true,
+        "cv": Infinity,
+        "coefficients": {
+          "K562": 0.0,
+          "HepG2": 0.0,
+          "WTC11": 0.0
+        }
+      },
+      {
+        "feature": "stiff_tilt_total_energy",
+        "mean_coefficient": 0.0,
+        "std_coefficient": 0.0,
+        "sign_consistent": true,
+        "cv": Infinity,
+        "coefficients": {
+          "K562": 0.0,
+          "HepG2": -0.0,
+          "WTC11": -0.0
+        }
+      },
+      {
+        "feature": "stiff_at_skew",
+        "mean_coefficient": -0.0041065667895580134,
+        "std_coefficient": 0.011124908896467176,
+        "sign_consistent": false,
+        "cv": 2.709053442100364,
+        "coefficients": {
+          "K562": -0.011838927048714325,
+          "HepG2": -0.012106445422222983,
+          "WTC11": 0.011625672102263269
+        }
+      },
+      {
+        "feature": "stiff_pc2_variance",
+        "mean_coefficient": 0.0,
+        "std_coefficient": 0.0,
+        "sign_consistent": true,
+        "cv": Infinity,
+        "coefficients": {
+          "K562": 0.0,
+          "HepG2": 0.0,
+          "WTC11": -0.0
+        }
+      }
+    ],
+    "n_sign_consistent": 169
+  },
+  "summary": {
+    "cell_types": [
+      "K562",
+      "HepG2",
+      "WTC11"
+    ],
+    "n_physics_features": 245,
+    "n_pwm_features": 149,
+    "physics_same_celltype_r2": 0.09543903646597802,
+    "physics_cross_celltype_r2": -245.95835082144586,
+    "physics_transfer_gap": 246.05378985791185,
+    "pwm_same_celltype_r2": 0.14509096571542135,
+    "pwm_cross_celltype_r2": -58.16637692299778,
+    "pwm_transfer_gap": 58.311467888713196,
+    "all_same_celltype_r2": 0.17375608485255004,
+    "all_cross_celltype_r2": -1252.1347161913063,
+    "all_transfer_gap": 1252.308472276159
+  },
+  "transfer_matrices": {
+    "physics": [
+      [
+        0.07153188812900979,
+        0.036761536966377406,
+        -0.1605474182932385
+      ],
+      [
+        0.006723744269415133,
+        0.06383922277499043,
+        -0.13804176064439289
+      ],
+      [
+        -1032.3744010011885,
+        -443.1206000297848,
+        0.15094599849393386
+      ]
+    ],
+    "pwm": [
+      [
+        0.11228502154427755,
+        0.07630447760808845,
+        -0.08914795564085298
+      ],
+      [
+        -0.016186826106046492,
+        0.12244031367164687,
+        -0.06740528534341417
+      ],
+      [
+        -245.443548947464,
+        -103.45827700104043,
+        0.20054756193033962
+      ]
+    ],
+    "all": [
+      [
+        0.1341112136841177,
+        0.07849923030625927,
+        -0.07377168166599923
+      ],
+      [
+        -0.024165428119803822,
+        0.1368892189655193,
+        -0.04233946546056333
+      ],
+      [
+        -5261.2792296884445,
+        -2251.4672901144527,
+        0.2502678219080131
+      ]
+    ]
+  }
+}

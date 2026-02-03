@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_maize_v1_full_s2_drosophila_1pct",
+  "n_train": 2464,
+  "n_trainable_params": 1322465,
+  "best_epoch": 24,
+  "val_metrics": {
+    "spearman_r": 0.28041648210503495
+  },
+  "test_metrics": {
+    "spearman_r": 0.27904777389609314,
+    "pearson_r": 0.27554538600377176,
+    "auroc": 0.6309421977528565,
+    "mse": 2.2170309026040473,
+    "mae": 1.1488654229000226,
+    "loss": 2.217262732203301
+  },
+  "source_model": "cadence_maize_v1",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.01,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-20T01:27:36.432477"
+}

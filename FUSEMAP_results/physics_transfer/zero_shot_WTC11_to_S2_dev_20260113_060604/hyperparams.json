@@ -1,0 +1,13 @@
+{
+  "protocol": "zero_shot",
+  "source_datasets": [
+    "WTC11"
+  ],
+  "target_dataset": "S2_dev",
+  "source_split": "train",
+  "target_split": "test",
+  "probe_type": "ridge",
+  "probe_alpha": 1.0,
+  "n_folds": 5,
+  "random_seed": 42
+}

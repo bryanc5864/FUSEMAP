@@ -1,0 +1,117 @@
+================================================================================
+PHYSICS × TF INTERACTION MAPPING REPORT
+================================================================================
+
+H-statistic measures non-additive interaction strength between features.
+Values > 0.1 indicate strong interactions; > 0.05 moderate interactions.
+
+========================================
+Cell Type: K562
+========================================
+
+Mean H-statistic: 0.0237
+Max H-statistic: 0.8507
+Strong interactions (H > 0.1): 14
+
+--- Top 15 Interactions ---
+   1. advanced_melting_std_melting_dG × pwm_MA0506.3_max_score   : H = 0.8507
+   2. entropy_gc_entropy_w30_mean    × pwm_MA0028.3_total_weight: H = 0.3666
+   3. advanced_mgw_std_mgw           × pwm_MA0506.3_max_score   : H = 0.3002
+   4. entropy_mi_d1                  × pwm_MA0506.3_delta_g     : H = 0.2376
+   5. thermo_var_dH                  × pwm_MA0506.3_max_score   : H = 0.2072
+   6. entropy_gc_entropy_w50_mean    × pwm_MA0506.3_mean_score  : H = 0.1800
+   7. thermo_var_dH                  × pwm_MA0060.4_max_score   : H = 0.1532
+   8. entropy_global_kmer6_entropy   × pwm_MA0028.3_top_k_mean  : H = 0.1527
+   9. thermo_var_dH                  × pwm_MA0506.3_mean_score  : H = 0.1422
+  10. advanced_mgw_std_mgw           × pwm_MA0028.3_mean_score  : H = 0.1228
+  11. entropy_shannon_w10_var        × pwm_MA0493.3_top_k_mean  : H = 0.1097
+  12. thermo_var_dH                  × pwm_MA0493.3_total_weight: H = 0.1025
+  13. advanced_melting_std_melting_dG × pwm_MA0028.3_delta_g     : H = 0.1022
+  14. advanced_mgw_mean_mgw          × pwm_MA0028.3_total_weight: H = 0.1004
+  15. thermo_var_dH                  × pwm_MA0028.3_mean_score  : H = 0.0967
+
+--- Physics Features Most Interactive ---
+  thermo_var_dH                           : mean H = 0.0721
+  advanced_melting_std_melting_dG         : mean H = 0.0690
+  entropy_gc_entropy_w50_mean             : mean H = 0.0335
+  advanced_mgw_std_mgw                    : mean H = 0.0332
+  entropy_mi_d1                           : mean H = 0.0324
+  entropy_gc_entropy_w30_mean             : mean H = 0.0277
+  entropy_global_kmer6_entropy            : mean H = 0.0258
+  entropy_shannon_w10_var                 : mean H = 0.0194
+  entropy_gc_entropy_w50_var              : mean H = 0.0169
+  thermo_var_dG                           : mean H = 0.0131
+
+========================================
+Cell Type: HepG2
+========================================
+
+Mean H-statistic: 0.0229
+Max H-statistic: 0.6959
+Strong interactions (H > 0.1): 11
+
+--- Top 15 Interactions ---
+   1. advanced_melting_std_melting_dG × pwm_MA0527.2_var_score   : H = 0.6959
+   2. thermo_var_dG                  × pwm_MA0527.2_var_score   : H = 0.6879
+   3. advanced_mgw_std_mgw           × pwm_MA0079.5_top_k_mean  : H = 0.3171
+   4. bend_spectral_f0p200_mean_power × pwm_MA0028.3_delta_g     : H = 0.3156
+   5. thermo_var_dH                  × pwm_MA0046.3_max_score   : H = 0.2744
+   6. entropy_gc_entropy_w10_mean    × pwm_MA0108.3_num_high_affinity: H = 0.1591
+   7. advanced_melting_soft_min_melting_dG × pwm_MA0028.3_delta_g     : H = 0.1563
+   8. advanced_stacking_skew_stacking_energy × pwm_MA0506.3_max_score   : H = 0.1450
+   9. bend_bending_energy_variance   × pwm_MA0099.4_total_weight: H = 0.1347
+  10. advanced_melting_soft_min_melting_dG × pwm_MA0028.3_top_k_mean  : H = 0.1298
+  11. entropy_gc_entropy_w10_mean    × pwm_MA0153.2_max_score   : H = 0.1019
+  12. advanced_melting_soft_min_melting_dG × pwm_MA0060.4_total_weight: H = 0.0938
+  13. thermo_var_dH                  × pwm_MA0153.2_max_score   : H = 0.0926
+  14. entropy_gc_entropy_w50_var     × pwm_MA0028.3_delta_g     : H = 0.0894
+  15. entropy_gc_entropy_w50_var     × pwm_MA0079.5_top_k_mean  : H = 0.0764
+
+--- Physics Features Most Interactive ---
+  advanced_melting_std_melting_dG         : mean H = 0.0584
+  thermo_var_dG                           : mean H = 0.0491
+  thermo_var_dH                           : mean H = 0.0491
+  advanced_melting_soft_min_melting_dG    : mean H = 0.0453
+  bend_bending_energy_variance            : mean H = 0.0288
+  advanced_mgw_std_mgw                    : mean H = 0.0275
+  bend_spectral_f0p200_mean_power         : mean H = 0.0270
+  entropy_gc_entropy_w10_mean             : mean H = 0.0215
+  entropy_gc_entropy_w50_var              : mean H = 0.0150
+  advanced_stacking_skew_stacking_energy  : mean H = 0.0113
+
+========================================
+Cell Type: WTC11
+========================================
+
+Mean H-statistic: 0.0269
+Max H-statistic: 0.2897
+Strong interactions (H > 0.1): 15
+
+--- Top 15 Interactions ---
+   1. entropy_shannon_w10_min        × pwm_MA0093.4_var_score   : H = 0.2897
+   2. thermo_var_dG                  × pwm_MA0079.5_max_score   : H = 0.2817
+   3. advanced_stacking_skew_stacking_energy × pwm_MA0527.2_var_score   : H = 0.2742
+   4. thermo_var_dH                  × pwm_MA0506.3_total_weight: H = 0.1898
+   5. thermo_var_dH                  × pwm_MA0079.5_total_weight: H = 0.1707
+   6. entropy_shannon_w10_var        × pwm_MA0093.4_var_score   : H = 0.1527
+   7. thermo_var_dH                  × pwm_MA0527.2_var_score   : H = 0.1412
+   8. advanced_fractal_mean_rho      × pwm_MA0093.4_var_score   : H = 0.1388
+   9. advanced_stacking_std_stacking_energy × pwm_MA0527.2_var_score   : H = 0.1291
+  10. advanced_mgw_std_mgw           × pwm_MA0506.3_max_score   : H = 0.1276
+  11. thermo_var_dH                  × pwm_MA0093.4_var_score   : H = 0.1177
+  12. thermo_var_dG                  × pwm_MA0079.5_delta_g     : H = 0.1129
+  13. thermo_var_dG                  × pwm_MA0060.4_delta_g     : H = 0.1115
+  14. advanced_mgw_std_mgw           × pwm_MA0028.3_total_weight: H = 0.1036
+  15. advanced_mgw_std_mgw           × pwm_MA0039.5_delta_g     : H = 0.1008
+
+--- Physics Features Most Interactive ---
+  thermo_var_dH                           : mean H = 0.0750
+  thermo_var_dG                           : mean H = 0.0542
+  advanced_mgw_std_mgw                    : mean H = 0.0491
+  advanced_melting_std_melting_dG         : mean H = 0.0424
+  entropy_shannon_w10_min                 : mean H = 0.0364
+  entropy_shannon_w10_var                 : mean H = 0.0307
+  advanced_stacking_skew_stacking_energy  : mean H = 0.0223
+  entropy_mi_d1                           : mean H = 0.0223
+  entropy_gc_entropy_w50_var              : mean H = 0.0221
+  advanced_fractal_mean_rho               : mean H = 0.0153

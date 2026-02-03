@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_yeast_v1_frozen_s2_drosophila_25pct",
+  "n_train": 61601,
+  "n_trainable_params": 66561,
+  "best_epoch": 41,
+  "val_metrics": {
+    "spearman_r": 0.18338074893447082
+  },
+  "test_metrics": {
+    "spearman_r": 0.18394815804932083,
+    "pearson_r": 0.1906714844553125,
+    "auroc": 0.577826513859553,
+    "mse": 2.223442571839455,
+    "mae": 1.157627931596655,
+    "loss": 2.223048256326819
+  },
+  "source_model": "cadence_yeast_v1",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.25,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-21T04:23:26.327217"
+}

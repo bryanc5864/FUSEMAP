@@ -1,0 +1,23 @@
+{
+  "experiment_name": "config5_universal_no_yeast_frozen_mouse_esc_25pct",
+  "n_train": 4823,
+  "n_trainable_params": 66561,
+  "best_epoch": 3,
+  "val_metrics": {
+    "spearman_r": 0.16190076229191394
+  },
+  "test_metrics": {
+    "spearman_r": 0.18999990998744468,
+    "pearson_r": 0.20031433860758152,
+    "auroc": 0.5691168236128934,
+    "mse": 3.0663663793571065,
+    "mae": 1.481667335263167,
+    "loss": 3.0689918055678858
+  },
+  "source_model": "config5_universal_no_yeast",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.25,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-21T12:55:23.661194"
+}

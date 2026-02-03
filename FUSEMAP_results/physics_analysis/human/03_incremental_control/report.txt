@@ -1,0 +1,132 @@
+================================================================================
+INCREMENTAL CONTROL ANALYSIS REPORT
+================================================================================
+
+This analysis tests whether TF binding mediates physics effects on activity.
+If physics coefficients attenuate when adding PWM features, it suggests mediation.
+
+========================================
+Cell Type: K562
+========================================
+
+--- Incremental Model Performance ---
+Step 1 (Physics only):       R² = 0.0699 +/- 0.0019
+Step 2 (+ PWM aggregates):   R² = 0.0962 +/- 0.0023  (Delta = +0.0263)
+Step 3 (+ all PWM):          R² = 0.1420 +/- 0.0028  (Delta = +0.0721)
+
+--- Coefficient Attenuation Summary ---
+Mean attenuation: -5339.03%
+Median attenuation: 30.86%
+Fully attenuated (>90%): 31 features
+Sign changes: 26 features
+
+--- Most Attenuated Features (likely mediated by TF binding) ---
+  thermo_mean_dS                          : 100.00%
+  thermo_dS_p95                           : 100.00%
+  thermo_dG_p5                            : 100.00%
+  entropy_shannon_w50_mean                : 100.00%
+  entropy_kmer3_entropy_w30_mean          : 100.00%
+  entropy_kmer3_entropy_w30_max           : 100.00%
+  advanced_melting_mean_melting_dG        : 100.00%
+  advanced_stacking_stacking_p10          : 100.00%
+  advanced_stress_stress_p25              : 100.00%
+  advanced_stress_stress_p95              : 100.00%
+
+--- Least Attenuated Features (independent of TF binding) ---
+  bend_curvature_var_w11_max              : -1139762.21%
+  stiff_twist_zscore_mean                 : -132963.18%
+  stiff_slide_zscore_max                  : -6132.60%
+  thermo_dS_p75                           : -5520.66%
+  thermo_var_dG                           : -3865.96%
+  stiff_twist_mean_energy                 : -2737.05%
+  stiff_cross_terms_mean                  : -1424.43%
+  stiff_twist_total_energy                : -770.20%
+  stiff_rise_max_energy                   : -676.27%
+  advanced_melting_melting_dG_p50         : -568.23%
+
+========================================
+Cell Type: HepG2
+========================================
+
+--- Incremental Model Performance ---
+Step 1 (Physics only):       R² = 0.0614 +/- 0.0021
+Step 2 (+ PWM aggregates):   R² = 0.0886 +/- 0.0028  (Delta = +0.0272)
+Step 3 (+ all PWM):          R² = 0.1418 +/- 0.0063  (Delta = +0.0804)
+
+--- Coefficient Attenuation Summary ---
+Mean attenuation: -32.12%
+Median attenuation: 42.71%
+Fully attenuated (>90%): 33 features
+Sign changes: 32 features
+
+--- Most Attenuated Features (likely mediated by TF binding) ---
+  thermo_dH_p50                           : 100.00%
+  thermo_estimated_Tm_K                   : 100.00%
+  entropy_global_kmer2_entropy            : 100.00%
+  advanced_melting_soft_min_melting_dG    : 100.00%
+  advanced_stacking_stacking_p5           : 100.00%
+  advanced_stacking_stacking_p10          : 100.00%
+  bend_max_bend_w9_mean                   : 100.00%
+  bend_spectral_f0p200_mean_power         : 100.00%
+  stiff_tilt_total_energy                 : 100.00%
+  stiff_tilt_mean_energy                  : 100.00%
+
+--- Least Attenuated Features (independent of TF binding) ---
+  stiff_tilt_zscore_var                   : -5360.55%
+  stiff_high_energy_fraction_t2.0         : -1929.98%
+  entropy_shannon_w30_min                 : -1514.27%
+  entropy_kmer3_entropy_w50_mean          : -1119.97%
+  entropy_gc_entropy_w10_var              : -1091.20%
+  entropy_mi_d10                          : -1042.76%
+  entropy_kmer2_entropy_w50_mean          : -975.79%
+  stiff_pc1_variance                      : -638.11%
+  stiff_high_energy_count_t2.0            : -584.55%
+  stiff_high_energy_fraction_t5.0         : -453.03%
+
+========================================
+Cell Type: WTC11
+========================================
+
+--- Incremental Model Performance ---
+Step 1 (Physics only):       R² = 0.1421 +/- 0.0065
+Step 2 (+ PWM aggregates):   R² = 0.1900 +/- 0.0045  (Delta = +0.0479)
+Step 3 (+ all PWM):          R² = 0.2477 +/- 0.0045  (Delta = +0.1056)
+
+--- Coefficient Attenuation Summary ---
+Mean attenuation: 5.92%
+Median attenuation: 34.70%
+Fully attenuated (>90%): 34 features
+Sign changes: 17 features
+
+--- Most Attenuated Features (likely mediated by TF binding) ---
+  thermo_mean_dH                          : 100.00%
+  thermo_dH_p5                            : 100.00%
+  thermo_dH_p10                           : 100.00%
+  thermo_dS_p5                            : 100.00%
+  thermo_dS_p10                           : 100.00%
+  thermo_dS_p25                           : 100.00%
+  thermo_estimated_Tm_C                   : 100.00%
+  thermo_estimated_Tm_K                   : 100.00%
+  entropy_shannon_w30_mean                : 100.00%
+  advanced_fractal_std_rho                : 100.00%
+
+--- Least Attenuated Features (independent of TF binding) ---
+  entropy_kmer2_entropy_w30_max           : -1065.84%
+  stiff_at_skew                           : -781.21%
+  entropy_mi_d2                           : -704.16%
+  stiff_roll_zscore_mean                  : -645.91%
+  stiff_roll_zscore_var                   : -645.36%
+  entropy_global_shannon_entropy          : -627.67%
+  bend_spectral_f0p143_max_power          : -482.21%
+  stiff_twist_zscore_max                  : -409.26%
+  bend_rms_curvature_w5_mean              : -367.78%
+  thermo_dH_iqr                           : -275.89%
+
+========================================
+INTERPRETATION
+========================================
+
+Mean coefficient attenuation: -1788.4%
+Mean R² improvement from PWM: +0.0860
+
+>>> Low attenuation suggests physics effects are INDEPENDENT of TF binding

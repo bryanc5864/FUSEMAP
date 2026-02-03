@@ -1,0 +1,178 @@
+{
+  "experiment": "plant_cross_species",
+  "description": "Arabidopsis+Sorghum \u2192 Maize: Within-kingdom cross-species",
+  "protocols": {
+    "zero_shot": {
+      "protocol": "zero_shot",
+      "source_datasets": [
+        "arabidopsis_leaf",
+        "sorghum_leaf"
+      ],
+      "target_dataset": "maize_leaf",
+      "source_pearson": 0.6478496985093241,
+      "source_spearman": 0.622395364300551,
+      "target_pearson": 0.6999626994011255,
+      "target_spearman": 0.7074899658462949,
+      "fine_tuned_pearson": null,
+      "fine_tuned_spearman": null,
+      "fine_tune_n_samples": null,
+      "transfer_efficiency": 1.0804399554583592,
+      "n_common_features": 268,
+      "feature_contributions": {
+        "thermo": 14.086451647822523,
+        "stiff": 7.464517204155656,
+        "bend": 45.27807523804866,
+        "entropy": 6.455718463773584,
+        "advanced": 26.715237446199584
+      }
+    },
+    "fine_tuning": [
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "arabidopsis_leaf",
+          "sorghum_leaf"
+        ],
+        "target_dataset": "maize_leaf",
+        "source_pearson": 0.6478496985093241,
+        "source_spearman": 0.622395364300551,
+        "target_pearson": 0.6999626994011255,
+        "target_spearman": 0.7074899658462949,
+        "fine_tuned_pearson": 0.6365554390897044,
+        "fine_tuned_spearman": 0.6469771222082903,
+        "fine_tune_n_samples": 1000,
+        "transfer_efficiency": 0.9825665436819568,
+        "n_common_features": 268,
+        "feature_contributions": {
+          "thermo": 14.234152430345077,
+          "stiff": 21.205831663922588,
+          "bend": 23.012094484191834,
+          "entropy": 17.780600053661306,
+          "advanced": 23.767321367879184
+        }
+      },
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "arabidopsis_leaf",
+          "sorghum_leaf"
+        ],
+        "target_dataset": "maize_leaf",
+        "source_pearson": 0.6478496985093241,
+        "source_spearman": 0.622395364300551,
+        "target_pearson": 0.6999626994011255,
+        "target_spearman": 0.7074899658462949,
+        "fine_tuned_pearson": 0.6857582260506649,
+        "fine_tuned_spearman": 0.6942617373525791,
+        "fine_tune_n_samples": 5000,
+        "transfer_efficiency": 1.0585143863284445,
+        "n_common_features": 268,
+        "feature_contributions": {
+          "thermo": 10.846860159682494,
+          "stiff": 13.13400351432449,
+          "bend": 43.39925232443667,
+          "entropy": 12.029271325281215,
+          "advanced": 20.590612676275153
+        }
+      },
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "arabidopsis_leaf",
+          "sorghum_leaf"
+        ],
+        "target_dataset": "maize_leaf",
+        "source_pearson": 0.6478496985093241,
+        "source_spearman": 0.622395364300551,
+        "target_pearson": 0.6999626994011255,
+        "target_spearman": 0.7074899658462949,
+        "fine_tuned_pearson": 0.6946252190296711,
+        "fine_tuned_spearman": 0.701607485619789,
+        "fine_tune_n_samples": 10000,
+        "transfer_efficiency": 1.0722011920789276,
+        "n_common_features": 268,
+        "feature_contributions": {
+          "thermo": 10.270777737923407,
+          "stiff": 8.344566461004506,
+          "bend": 50.923489927724994,
+          "entropy": 10.634091838289395,
+          "advanced": 19.827074035057706
+        }
+      }
+    ],
+    "joint_training": {
+      "maize_leaf": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "arabidopsis_leaf",
+          "sorghum_leaf"
+        ],
+        "target_dataset": "maize_leaf",
+        "source_pearson": 0.6478496985093241,
+        "source_spearman": 0.622395364300551,
+        "target_pearson": 0.6999626994011255,
+        "target_spearman": 0.7074899658462949,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 1.0804399554583592,
+        "n_common_features": 268,
+        "feature_contributions": {
+          "thermo": 14.086451647822523,
+          "stiff": 7.464517204155656,
+          "bend": 45.27807523804866,
+          "entropy": 6.455718463773584,
+          "advanced": 26.715237446199584
+        }
+      },
+      "arabidopsis_leaf": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "arabidopsis_leaf",
+          "sorghum_leaf"
+        ],
+        "target_dataset": "arabidopsis_leaf",
+        "source_pearson": 0.6478496985093241,
+        "source_spearman": 0.622395364300551,
+        "target_pearson": 0.5005384587325149,
+        "target_spearman": 0.48852714857960716,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.7726150986629053,
+        "n_common_features": 268,
+        "feature_contributions": {
+          "thermo": 14.086451647822523,
+          "stiff": 7.464517204155656,
+          "bend": 45.27807523804866,
+          "entropy": 6.455718463773584,
+          "advanced": 26.715237446199584
+        }
+      },
+      "sorghum_leaf": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "arabidopsis_leaf",
+          "sorghum_leaf"
+        ],
+        "target_dataset": "sorghum_leaf",
+        "source_pearson": 0.6478496985093241,
+        "source_spearman": 0.622395364300551,
+        "target_pearson": 0.7073463502566323,
+        "target_spearman": 0.699301843959353,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 1.0918371219191854,
+        "n_common_features": 268,
+        "feature_contributions": {
+          "thermo": 14.086451647822523,
+          "stiff": 7.464517204155656,
+          "bend": 45.27807523804866,
+          "entropy": 6.455718463773584,
+          "advanced": 26.715237446199584
+        }
+      }
+    }
+  }
+}

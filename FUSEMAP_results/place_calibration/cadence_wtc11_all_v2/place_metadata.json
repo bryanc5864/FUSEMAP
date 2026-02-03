@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_wtc11_all_v2",
+  "description": "WTC11 all modules",
+  "calibration_source": "encode4_wtc11_calibration",
+  "calibration_date": "2026-01-16T06:16:03.798929",
+  "place_stats": {
+    "n_samples": 5595,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.5284577012062073,
+    "residual_mean": -0.009851365350186825,
+    "residual_std": 0.7269509434700012
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_yeast_all_v1",
+  "description": "Yeast with all modules (r=0.725 test)",
+  "calibration_source": "dream_yeast_calibration",
+  "calibration_date": "2026-01-14T05:27:57.494120",
+  "place_stats": {
+    "n_samples": 67055,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.7571040391921997,
+    "residual_mean": 0.06328471750020981,
+    "residual_std": 0.8701172471046448
+  }
+}

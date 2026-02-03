@@ -1,0 +1,45 @@
+{
+  "cell_types": [
+    "sorghum"
+  ],
+  "n_features": 365,
+  "n_significant_p05": 326,
+  "n_significant_p01": 318,
+  "top_features_by_category": {
+    "thermo": [
+      "thermo_dG_p90",
+      "thermo_mean_dH",
+      "thermo_total_dH",
+      "thermo_total_dG",
+      "thermo_mean_dG"
+    ],
+    "stiff": [
+      "stiff_gc_content_global",
+      "stiff_twist_total_energy",
+      "stiff_twist_mean_energy",
+      "stiff_gc_stiffness_correlation",
+      "stiff_twist_zscore_var"
+    ],
+    "bend": [
+      "bend_rms_curvature_w7_max",
+      "bend_rms_curvature_w5_max",
+      "bend_rms_curvature_w9_max",
+      "bend_rms_curvature_w11_max",
+      "bend_curvature_var_w9_max"
+    ],
+    "entropy": [
+      "entropy_gc_entropy_w10_min",
+      "entropy_conditional_entropy",
+      "entropy_global_kmer3_entropy",
+      "entropy_entropy_rate_estimate",
+      "entropy_global_kmer2_entropy"
+    ],
+    "advanced": [
+      "advanced_melting_unstable_fraction",
+      "advanced_stress_stress_p90",
+      "advanced_melting_melting_dG_p90",
+      "advanced_melting_mean_melting_dG",
+      "advanced_stress_local_opening_rate"
+    ]
+  }
+}

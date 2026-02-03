@@ -1,0 +1,43 @@
+================================================================================
+PHYSICS × TF INTERACTION MAPPING REPORT
+================================================================================
+
+H-statistic measures non-additive interaction strength between features.
+Values > 0.1 indicate strong interactions; > 0.05 moderate interactions.
+
+========================================
+Cell Type: sorghum
+========================================
+
+Mean H-statistic: 0.0294
+Max H-statistic: 0.3619
+Strong interactions (H > 0.1): 14
+
+--- Top 15 Interactions ---
+   1. bend_rms_curvature_w9_max      × pwm_MA0110.4_mean_score  : H = 0.3619
+   2. entropy_gc_entropy_w50_mean    × pwm_MA0110.4_mean_score  : H = 0.2393
+   3. entropy_gc_entropy_w50_mean    × pwm_MA0082.2_delta_g     : H = 0.1855
+   4. stiff_gc_skew                  × pwm_MA0121.2_var_score   : H = 0.1603
+   5. bend_curvature_var_w7_max      × pwm_MA0001.3_delta_g     : H = 0.1522
+   6. bend_rms_curvature_w5_max      × pwm_MA0054.1_mean_score  : H = 0.1455
+   7. advanced_stacking_std_stacking_energy × pwm_MA0096.1_mean_score  : H = 0.1441
+   8. entropy_gc_entropy_w50_mean    × pwm_MA0001.3_total_weight: H = 0.1404
+   9. advanced_mgw_std_mgw           × pwm_MA0054.1_mean_score  : H = 0.1324
+  10. advanced_stacking_std_stacking_energy × pwm_MA0110.4_mean_score  : H = 0.1290
+  11. bend_curvature_var_w7_max      × pwm_MA0001.3_max_score   : H = 0.1135
+  12. bend_rms_curvature_w9_max      × pwm_MA0034.2_mean_score  : H = 0.1128
+  13. advanced_mgw_mean_mgw          × pwm_MA0082.2_max_score   : H = 0.1123
+  14. bend_curvature_var_w5_max      × pwm_MA0082.2_top_k_mean  : H = 0.1100
+  15. advanced_mgw_mean_mgw          × pwm_MA0082.2_delta_g     : H = 0.0962
+
+--- Physics Features Most Interactive ---
+  entropy_gc_entropy_w50_mean             : mean H = 0.0499
+  bend_rms_curvature_w9_max               : mean H = 0.0497
+  bend_curvature_var_w5_max               : mean H = 0.0402
+  advanced_stacking_std_stacking_energy   : mean H = 0.0381
+  advanced_mgw_mean_mgw                   : mean H = 0.0342
+  bend_rms_curvature_w7_max               : mean H = 0.0309
+  stiff_gc_skew                           : mean H = 0.0291
+  advanced_stacking_stacking_abrupt_changes: mean H = 0.0283
+  bend_rms_curvature_w5_max               : mean H = 0.0280
+  advanced_stacking_stacking_transition_variance: mean H = 0.0277

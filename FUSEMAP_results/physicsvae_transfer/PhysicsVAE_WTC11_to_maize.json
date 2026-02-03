@@ -1,0 +1,18 @@
+{
+  "source_model": "PhysicsVAE_WTC11",
+  "target_dataset": "maize",
+  "source_cell_type": "WTC11",
+  "n_samples": 2461,
+  "n_matched_features": 267,
+  "n_source_features": 539,
+  "source_seq_length": 230,
+  "metrics": {
+    "reconstruction_accuracy": 0.2612448311303392,
+    "reconstruction_loss": 1.751811921596527,
+    "perplexity": 5.767054718737014,
+    "mean_position_accuracy": 0.1930940056180768,
+    "latent_mean": 0.10158823430538177,
+    "latent_std": 3.2236738204956055
+  },
+  "timestamp": "2026-01-19T00:36:46.988620"
+}

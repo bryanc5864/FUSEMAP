@@ -1,0 +1,55 @@
+================================================================================
+UNIVARIATE STABILITY ANALYSIS REPORT
+================================================================================
+
+
+========================================
+Cell Type: maize
+========================================
+
+Total features analyzed: 797
+Significant (p < 0.05): 700
+Highly significant (p < 0.01): 680
+
+--- Top 15 Positive Correlations ---
+                           feature category  pearson_r  partial_r_gc  sign_consistency
+         bend_rms_curvature_w7_max     bend   0.565942      0.472558               1.0
+         bend_rms_curvature_w5_max     bend   0.554489      0.469274               1.0
+         bend_rms_curvature_w9_max     bend   0.545529      0.436632               1.0
+        bend_rms_curvature_w11_max     bend   0.533993      0.414975               1.0
+        bend_curvature_var_w11_max     bend   0.514872      0.405849               1.0
+         bend_curvature_var_w9_max     bend   0.514142      0.410498               1.0
+         bend_curvature_var_w7_max     bend   0.500611      0.399959               1.0
+      bend_bending_energy_variance     bend   0.474460      0.284473               1.0
+         bend_curvature_var_w5_max     bend   0.460121      0.358134               1.0
+                bend_hotspot_count     bend   0.456367      0.250808               1.0
+              bend_hotspot_density     bend   0.456367      0.250808               1.0
+       bend_curvature_var_w11_mean     bend   0.448171      0.238485               1.0
+advanced_melting_unstable_fraction advanced   0.446174      0.219079               1.0
+        bend_curvature_var_w9_mean     bend   0.445176      0.232835               1.0
+        bend_curvature_var_w7_mean     bend   0.441441      0.225975               1.0
+
+--- Top 15 Negative Correlations ---
+                                       feature category  pearson_r  partial_r_gc  sign_consistency
+                       pwm_MA1821.2_mean_score      pwm  -0.437094     -0.192504               1.0
+advanced_stacking_stacking_transition_variance advanced  -0.416874     -0.173936               1.0
+                         thermo_estimated_Tm_C   thermo  -0.416703     -0.190424               1.0
+                         thermo_estimated_Tm_K   thermo  -0.416703     -0.190424               1.0
+                       pwm_MA1828.2_mean_score      pwm  -0.415914     -0.131463               1.0
+                       pwm_MA2413.1_mean_score      pwm  -0.413609     -0.132276               1.0
+     advanced_stacking_stacking_abrupt_changes advanced  -0.413179     -0.144368               1.0
+         advanced_stacking_std_stacking_energy advanced  -0.408103     -0.112225               1.0
+                       stiff_gc_content_global    stiff  -0.401020      0.014209               1.0
+                         advanced_mgw_mean_mgw advanced  -0.399208      0.001250               1.0
+                       pwm_MA1687.1_mean_score      pwm  -0.395812     -0.039719               1.0
+                       pwm_MA0123.1_mean_score      pwm  -0.387189      0.109045               1.0
+                       pwm_MA1835.2_mean_score      pwm  -0.382820      0.121026               1.0
+                       pwm_MA1819.2_mean_score      pwm  -0.378225      0.140807               1.0
+                       pwm_MA1831.2_mean_score      pwm  -0.370345      0.033029               1.0
+
+--- By Category Summary ---
+  thermo    : n= 45, mean|r|=0.234, max|r|=0.440
+  stiff     : n= 62, mean|r|=0.061, max|r|=0.401
+  bend      : n= 43, mean|r|=0.376, max|r|=0.566
+  entropy   : n= 61, mean|r|=0.064, max|r|=0.172
+  advanced  : n= 53, mean|r|=0.243, max|r|=0.446

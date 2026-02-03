@@ -1,0 +1,18 @@
+{
+  "source_model": "PhysicsVAE_K562",
+  "target_dataset": "arabidopsis",
+  "source_cell_type": "K562",
+  "n_samples": 1347,
+  "n_matched_features": 267,
+  "n_source_features": 515,
+  "source_seq_length": 230,
+  "metrics": {
+    "reconstruction_accuracy": 0.25308092056421677,
+    "reconstruction_loss": 1.7582973440488179,
+    "perplexity": 5.815034895395569,
+    "mean_position_accuracy": 0.18705981085181242,
+    "latent_mean": -0.2164863646030426,
+    "latent_std": 2.571408748626709
+  },
+  "timestamp": "2026-01-19T00:31:26.921392"
+}

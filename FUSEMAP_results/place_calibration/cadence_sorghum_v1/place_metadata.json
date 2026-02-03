@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_sorghum_v1",
+  "description": "Sorghum baseline (leaf r=0.78, proto r=0.77)",
+  "calibration_source": "jores_sorghum_test",
+  "calibration_date": "2026-01-14T05:33:15.485149",
+  "place_stats": {
+    "n_samples": 3936,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.9054709076881409,
+    "residual_mean": -0.8755057454109192,
+    "residual_std": 0.9515623450279236
+  }
+}

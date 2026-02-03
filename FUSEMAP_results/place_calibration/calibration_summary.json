@@ -1,0 +1,38 @@
+{
+  "cadence_arabidopsis_v1": {
+    "status": "success",
+    "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/cadence_place/cadence_arabidopsis_v1",
+    "n_calibration_samples": 2694,
+    "noise_var": 0.8429679274559021
+  },
+  "cadence_arabidopsis_all_v1": {
+    "status": "success",
+    "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/cadence_place/cadence_arabidopsis_all_v1",
+    "n_calibration_samples": 2694,
+    "noise_var": 0.8735430240631104
+  },
+  "cadence_maize_all_v1": {
+    "status": "success",
+    "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/cadence_place/cadence_maize_all_v1",
+    "n_calibration_samples": 4922,
+    "noise_var": 1.0260655879974365
+  },
+  "cadence_sorghum_all_v1": {
+    "status": "success",
+    "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/cadence_place/cadence_sorghum_all_v1",
+    "n_calibration_samples": 3936,
+    "noise_var": 0.8242108225822449
+  },
+  "config4_cross_kingdom_v1": {
+    "status": "success",
+    "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/cadence_place/config4_cross_kingdom_v1",
+    "n_calibration_samples": 49846,
+    "noise_var": 1.3335851430892944
+  },
+  "config5_universal_no_yeast": {
+    "status": "success",
+    "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/cadence_place/config5_universal_no_yeast",
+    "n_calibration_samples": 49846,
+    "noise_var": 1.1823335886001587
+  }
+}

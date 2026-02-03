@@ -1,0 +1,18 @@
+{
+  "source_model": "PhysicsVAE_K562",
+  "target_dataset": "sorghum",
+  "source_cell_type": "K562",
+  "n_samples": 1968,
+  "n_matched_features": 267,
+  "n_source_features": 515,
+  "source_seq_length": 230,
+  "metrics": {
+    "reconstruction_accuracy": 0.2544506217120995,
+    "reconstruction_loss": 1.7461597174406052,
+    "perplexity": 5.731468604785203,
+    "mean_position_accuracy": 0.1880721986567692,
+    "latent_mean": -0.21072432398796082,
+    "latent_std": 2.5678117275238037
+  },
+  "timestamp": "2026-01-19T00:31:57.289997"
+}

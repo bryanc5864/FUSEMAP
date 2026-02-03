@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_k562_v2_full_s2_drosophila_1pct",
+  "n_train": 2464,
+  "n_trainable_params": 1322465,
+  "best_epoch": 11,
+  "val_metrics": {
+    "spearman_r": 0.33885088742134406
+  },
+  "test_metrics": {
+    "spearman_r": 0.3345266164092238,
+    "pearson_r": 0.32726400123810623,
+    "auroc": 0.6769091264271075,
+    "mse": 2.457340227449503,
+    "mae": 1.1948699440210704,
+    "loss": 2.457879592950927
+  },
+  "source_model": "cadence_k562_v2",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.01,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-18T11:30:28.396534"
+}

@@ -1,0 +1,54 @@
+================================================================================
+CROSS-CELL-TYPE PHYSICS GENERALIZATION REPORT
+================================================================================
+
+This analysis tests how well physics features transfer across cell types.
+
+--- Summary ---
+Physics features: same-cell R² = 0.0954
+Physics features: cross-cell R² = -245.9584
+Physics transfer gap: 246.0538
+
+PWM features: same-cell R² = 0.1451
+PWM features: cross-cell R² = -58.1664
+PWM transfer gap: 58.3115
+
+>>> PWM features transfer better than physics features
+
+--- PHYSICS Transfer Matrix ---
+             K562     HepG2     WTC11
+    K562   0.0715    0.0368   -0.1605
+   HepG2   0.0067    0.0638   -0.1380
+   WTC11 -1032.3744  -443.1206    0.1509
+
+--- PWM Transfer Matrix ---
+             K562     HepG2     WTC11
+    K562   0.1123    0.0763   -0.0891
+   HepG2  -0.0162    0.1224   -0.0674
+   WTC11 -245.4435  -103.4583    0.2005
+
+--- ALL Transfer Matrix ---
+             K562     HepG2     WTC11
+    K562   0.1341    0.0785   -0.0738
+   HepG2  -0.0242    0.1369   -0.0423
+   WTC11 -5261.2792  -2251.4673    0.2503
+
+--- Feature Transfer Analysis ---
+Sign-consistent features: 169
+
+Most consistent features:
+  entropy_mi_d5                           : CV=0.165, sign=Y
+  advanced_g4_max_g4_score                : CV=0.172, sign=Y
+  entropy_kmer3_entropy_w30_var           : CV=0.194, sign=Y
+  bend_hotspot_count                      : CV=0.214, sign=Y
+  entropy_mi_d7                           : CV=0.220, sign=Y
+  stiff_purine_stiffness_correlation      : CV=0.234, sign=Y
+  entropy_shannon_w10_min                 : CV=0.282, sign=Y
+  entropy_global_kmer4_entropy            : CV=0.285, sign=Y
+  entropy_kmer2_entropy_w30_var           : CV=0.302, sign=Y
+  advanced_melting_std_melting_dG         : CV=0.307, sign=Y
+  stiff_shift_zscore_var                  : CV=0.319, sign=Y
+  bend_bending_energy_variance            : CV=0.348, sign=Y
+  advanced_g4_mean_g4_score               : CV=0.354, sign=Y
+  advanced_mgw_narrow_groove_fraction     : CV=0.369, sign=Y
+  bend_spectral_f0p100_mean_power         : CV=0.375, sign=Y

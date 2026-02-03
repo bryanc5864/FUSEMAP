@@ -1,0 +1,23 @@
+{
+  "experiment_name": "scratch_mouse_esc_10pct",
+  "n_train": 1929,
+  "n_trainable_params": 1322465,
+  "best_epoch": 14,
+  "val_metrics": {
+    "spearman_r": 0.3048955792007048
+  },
+  "test_metrics": {
+    "spearman_r": 0.31819129400675755,
+    "pearson_r": 0.36084109441794265,
+    "auroc": 0.6531706629653048,
+    "mse": 2.0235738731927735,
+    "mae": 1.1167756354078702,
+    "loss": 2.02513680674813
+  },
+  "source_model": "scratch",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.1,
+  "strategy": "scratch",
+  "seed": 42,
+  "timestamp": "2026-01-21T18:16:10.239061"
+}

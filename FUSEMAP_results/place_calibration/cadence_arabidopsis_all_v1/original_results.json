@@ -1,0 +1,68 @@
+{
+  "jores_arabidopsis": {
+    "leaf": {
+      "pearson": {
+        "value": 0.6147375106811523,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "spearman": {
+        "value": 0.5791143837231567,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "r2": {
+        "value": 0.2965383529663086,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mse": {
+        "value": 1.00858736038208,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "rmse": {
+        "value": 1.0042845017135733,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mae": {
+        "value": 0.7904881834983826,
+        "stderr": null,
+        "n_samples": 1347
+      }
+    },
+    "proto": {
+      "pearson": {
+        "value": 0.5806753039360046,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "spearman": {
+        "value": 0.5325153460112392,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "r2": {
+        "value": 0.2928276062011719,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mse": {
+        "value": 0.9430868625640869,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "rmse": {
+        "value": 0.971126594509741,
+        "stderr": null,
+        "n_samples": 1347
+      },
+      "mae": {
+        "value": 0.7542430758476257,
+        "stderr": null,
+        "n_samples": 1347
+      }
+    }
+  }
+}

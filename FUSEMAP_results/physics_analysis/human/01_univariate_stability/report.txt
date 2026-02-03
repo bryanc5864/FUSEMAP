@@ -1,0 +1,186 @@
+================================================================================
+UNIVARIATE STABILITY ANALYSIS REPORT
+================================================================================
+
+
+========================================
+Cell Type: K562
+========================================
+
+Total features analyzed: 497
+Significant (p < 0.05): 352
+Highly significant (p < 0.01): 328
+
+--- Top 15 Positive Correlations ---
+                       feature category  pearson_r  partial_r_gc  sign_consistency
+        pwm_MA0079.5_max_score      pwm   0.140025      0.054139               1.0
+       pwm_MA0506.3_top_k_mean      pwm   0.138557      0.023628               1.0
+        pwm_MA0493.3_max_score      pwm   0.134214      0.057018               1.0
+       pwm_MA0028.3_top_k_mean      pwm   0.133146      0.087725               1.0
+        pwm_MA0506.3_max_score      pwm   0.130273      0.032299               1.0
+     pwm_MA0493.3_total_weight      pwm   0.129688      0.083609               1.0
+       pwm_MA0079.5_top_k_mean      pwm   0.127017      0.038610               1.0
+       pwm_MA0493.3_top_k_mean      pwm   0.125227      0.041488               1.0
+pwm_MA0079.5_num_high_affinity      pwm   0.122699      0.047519               1.0
+        pwm_MA1516.2_max_score      pwm   0.117616      0.036119               1.0
+       pwm_MA1516.2_top_k_mean      pwm   0.114848      0.023875               1.0
+pwm_MA0493.3_num_high_affinity      pwm   0.112600      0.041419               1.0
+     pwm_MA0060.4_total_weight      pwm   0.108754      0.110226               1.0
+     pwm_MA0079.5_total_weight      pwm   0.107548      0.067837               1.0
+pwm_MA1516.2_num_high_affinity      pwm   0.106002      0.036929               1.0
+
+--- Top 15 Negative Correlations ---
+                                feature category  pearson_r  partial_r_gc  sign_consistency
+                   pwm_MA0079.5_delta_g      pwm  -0.142690     -0.054480               1.0
+                   pwm_MA0493.3_delta_g      pwm  -0.136244     -0.056761               1.0
+                   pwm_MA0506.3_delta_g      pwm  -0.134199     -0.032356               1.0
+                   pwm_MA1516.2_delta_g      pwm  -0.120755     -0.035959               1.0
+                pwm_MA0108.3_top_k_mean      pwm  -0.117006      0.009302               1.0
+         pwm_MA0108.3_num_high_affinity      pwm  -0.116327     -0.029033               1.0
+                   pwm_MA0024.3_delta_g      pwm  -0.106777     -0.020743               1.0
+                   pwm_MA0527.2_delta_g      pwm  -0.097238     -0.035739               1.0
+                   pwm_MA0028.3_delta_g      pwm  -0.095918     -0.078722               1.0
+                 pwm_MA0108.3_max_score      pwm  -0.089526      0.007166               1.0
+                     bend_hotspot_count     bend  -0.088374     -0.007265               1.0
+                   bend_hotspot_density     bend  -0.088374     -0.007265               1.0
+                pwm_MA0095.4_top_k_mean      pwm  -0.084654     -0.034146               1.0
+     advanced_melting_unstable_fraction advanced  -0.083976     -0.006123               1.0
+bend_max_bend_w5_fraction_at_global_max     bend  -0.082711     -0.020815               1.0
+
+--- By Category Summary ---
+  thermo    : n= 35, mean|r|=0.013, max|r|=0.068
+  stiff     : n= 62, mean|r|=0.008, max|r|=0.049
+  bend      : n= 43, mean|r|=0.031, max|r|=0.088
+  entropy   : n= 59, mean|r|=0.009, max|r|=0.038
+  advanced  : n= 45, mean|r|=0.016, max|r|=0.084
+
+========================================
+Cell Type: HepG2
+========================================
+
+Total features analyzed: 521
+Significant (p < 0.05): 346
+Highly significant (p < 0.01): 306
+
+--- Top 15 Positive Correlations ---
+                       feature category  pearson_r  partial_r_gc  sign_consistency
+       pwm_MA0506.3_top_k_mean      pwm   0.145245      0.033375               1.0
+        pwm_MA0506.3_max_score      pwm   0.140370      0.040259               1.0
+       pwm_MA0028.3_top_k_mean      pwm   0.137256      0.090886               1.0
+pwm_MA0506.3_num_high_affinity      pwm   0.122179      0.031625               1.0
+        pwm_MA0079.5_max_score      pwm   0.119907      0.029434               1.0
+pwm_MA0079.5_num_high_affinity      pwm   0.117719      0.036850               1.0
+       pwm_MA0079.5_top_k_mean      pwm   0.110727      0.022924               1.0
+        pwm_MA0028.3_max_score      pwm   0.106234      0.081284               1.0
+pwm_MA0527.2_num_high_affinity      pwm   0.105864      0.047864               1.0
+          pwm_MA0108.3_delta_g      pwm   0.102204      0.015941               1.0
+        pwm_MA0527.2_max_score      pwm   0.099528      0.042848               1.0
+     pwm_MA0079.5_total_weight      pwm   0.088009      0.047626               1.0
+pwm_MA0024.3_num_high_affinity      pwm   0.085379      0.014729               1.0
+     pwm_MA0060.4_total_weight      pwm   0.084933      0.080540               1.0
+                 thermo_var_dS   thermo   0.080390      0.002095               1.0
+
+--- Top 15 Negative Correlations ---
+                                feature category  pearson_r  partial_r_gc  sign_consistency
+                   pwm_MA0506.3_delta_g      pwm  -0.144461     -0.039254               1.0
+                pwm_MA0108.3_top_k_mean      pwm  -0.134910     -0.017426               1.0
+                   pwm_MA0079.5_delta_g      pwm  -0.123322     -0.029871               1.0
+         pwm_MA0108.3_num_high_affinity      pwm  -0.116152     -0.034865               1.0
+                   pwm_MA0028.3_delta_g      pwm  -0.107207     -0.079833               1.0
+                   pwm_MA0527.2_delta_g      pwm  -0.104144     -0.044448               1.0
+                 pwm_MA0108.3_max_score      pwm  -0.104062     -0.016919               1.0
+                     bend_hotspot_count     bend  -0.092364     -0.018906               1.0
+                   bend_hotspot_density     bend  -0.092364     -0.018906               1.0
+                pwm_MA0679.3_top_k_mean      pwm  -0.085842      0.027560               1.0
+     advanced_melting_unstable_fraction advanced  -0.080931     -0.011359               1.0
+bend_max_bend_w5_fraction_at_global_max     bend  -0.078456     -0.020131               1.0
+                pwm_MA0095.4_top_k_mean      pwm  -0.078028     -0.033076               1.0
+bend_max_bend_w7_fraction_at_global_max     bend  -0.077280     -0.019005               1.0
+bend_max_bend_w9_fraction_at_global_max     bend  -0.076162     -0.018221               1.0
+
+--- By Category Summary ---
+  thermo    : n= 35, mean|r|=0.018, max|r|=0.080
+  stiff     : n= 62, mean|r|=0.008, max|r|=0.043
+  bend      : n= 43, mean|r|=0.031, max|r|=0.092
+  entropy   : n= 59, mean|r|=0.008, max|r|=0.051
+  advanced  : n= 45, mean|r|=0.019, max|r|=0.081
+
+========================================
+Cell Type: WTC11
+========================================
+
+Total features analyzed: 521
+Significant (p < 0.05): 442
+Highly significant (p < 0.01): 421
+
+--- Top 15 Positive Correlations ---
+                        feature category  pearson_r  partial_r_gc  sign_consistency
+           pwm_max_of_max_score      pwm   0.237652      0.228711               1.0
+                  thermo_var_dH   thermo   0.219843      0.179936               1.0
+           advanced_mgw_std_mgw advanced   0.207961      0.204276               1.0
+                  thermo_var_dG   thermo   0.205082      0.196858               1.0
+     entropy_gc_entropy_w10_var  entropy   0.202734      0.154177               1.0
+advanced_melting_std_melting_dG advanced   0.201859      0.194012               1.0
+         pwm_MA0028.3_max_score      pwm   0.196219      0.180154               1.0
+        entropy_shannon_w10_var  entropy   0.192969      0.163662               1.0
+                  thermo_var_dS   thermo   0.183899      0.207660               1.0
+      pwm_MA0079.5_total_weight      pwm   0.179734      0.154701               1.0
+ advanced_stacking_stacking_p10 advanced   0.162961      0.125306               1.0
+ pwm_MA0079.5_num_high_affinity      pwm   0.158793      0.110728               1.0
+         pwm_MA0079.5_max_score      pwm   0.158346      0.110818               1.0
+        pwm_MA0028.3_top_k_mean      pwm   0.157397      0.124223               1.0
+         pwm_MA0108.3_var_score      pwm   0.156559      0.143016               1.0
+
+--- Top 15 Negative Correlations ---
+                             feature category  pearson_r  partial_r_gc  sign_consistency
+                pwm_sum_top5_delta_g      pwm  -0.248172     -0.254373               1.0
+                     pwm_min_delta_g      pwm  -0.245963     -0.234875               1.0
+                pwm_MA0028.3_delta_g      pwm  -0.200199     -0.181393               1.0
+         entropy_gc_entropy_w10_mean  entropy  -0.191141     -0.139336               1.0
+            entropy_shannon_w10_mean  entropy  -0.188847     -0.139698               1.0
+              pwm_MA0093.4_var_score      pwm  -0.181387     -0.143880               1.0
+          entropy_gc_entropy_w10_min  entropy  -0.179077     -0.133723               1.0
+             entropy_shannon_w10_min  entropy  -0.177604     -0.157159               1.0
+advanced_melting_soft_min_melting_dG advanced  -0.177332     -0.178425               1.0
+ advanced_stress_mean_stress_opening advanced  -0.175630     -0.183677               1.0
+  advanced_stress_sum_stress_opening advanced  -0.175630     -0.183677               1.0
+  advanced_stress_local_opening_rate advanced  -0.172476     -0.182988               1.0
+          entropy_gc_entropy_w30_min  entropy  -0.163162     -0.099720               1.0
+                     thermo_total_dH   thermo  -0.160903     -0.095938               1.0
+                      thermo_mean_dH   thermo  -0.160903     -0.095938               1.0
+
+--- By Category Summary ---
+  thermo    : n= 35, mean|r|=0.096, max|r|=0.220
+  stiff     : n= 62, mean|r|=0.023, max|r|=0.133
+  bend      : n= 43, mean|r|=0.050, max|r|=0.108
+  entropy   : n= 59, mean|r|=0.096, max|r|=0.203
+  advanced  : n= 45, mean|r|=0.086, max|r|=0.208
+
+========================================
+CROSS-CELL-TYPE CONSISTENCY
+========================================
+
+Features with consistent sign across all cell types: 253/393
+
+--- Top 20 Universal Features ---
+                       feature    mean_r    std_r    K562_r   HepG2_r   WTC11_r
+       pwm_MA0028.3_top_k_mean  0.142600 0.010597  0.133146  0.137256  0.157397
+          pwm_MA0506.3_delta_g -0.142564 0.006203 -0.134199 -0.144461 -0.149033
+          pwm_MA0079.5_delta_g -0.142089 0.015083 -0.142690 -0.123322 -0.160253
+       pwm_MA0506.3_top_k_mean  0.142034 0.002737  0.138557  0.145245  0.142299
+        pwm_MA0079.5_max_score  0.139426 0.015698  0.140025  0.119907  0.158346
+        pwm_MA0506.3_max_score  0.137195 0.004900  0.130273  0.140370  0.140942
+          pwm_MA0028.3_delta_g -0.134441 0.046725 -0.095918 -0.107207 -0.200199
+pwm_MA0079.5_num_high_affinity  0.133070 0.018302  0.122699  0.117719  0.158793
+        pwm_MA0028.3_max_score  0.132311 0.045444  0.094481  0.106234  0.196219
+       pwm_MA0079.5_top_k_mean  0.131381 0.018900  0.127017  0.110727  0.156401
+     pwm_MA0079.5_total_weight  0.125097 0.039449  0.107548  0.088009  0.179734
+               pwm_min_delta_g -0.113153 0.094035 -0.052678 -0.040819 -0.245963
+pwm_MA0506.3_num_high_affinity  0.111767 0.009657  0.098907  0.122179  0.114214
+                 thermo_var_dS  0.110766 0.051959  0.068009  0.080390  0.183899
+          pwm_max_of_max_score  0.110659 0.089930  0.053131  0.041194  0.237652
+          pwm_sum_top5_delta_g -0.110066 0.097773 -0.046885 -0.035142 -0.248172
+       pwm_MA0024.3_top_k_mean  0.109320 0.030830  0.103289  0.074940  0.149731
+                 thermo_var_dH  0.104493 0.081656  0.042097  0.051538  0.219843
+pwm_MA0028.3_num_high_affinity  0.100563 0.039157  0.069085  0.076845  0.155758
+       pwm_MA0108.3_top_k_mean -0.100528 0.036698 -0.117006 -0.134910 -0.049668

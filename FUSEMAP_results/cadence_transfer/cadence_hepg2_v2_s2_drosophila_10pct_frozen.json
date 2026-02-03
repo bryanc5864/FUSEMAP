@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_hepg2_v2_frozen_s2_drosophila_10pct",
+  "n_train": 24640,
+  "n_trainable_params": 66561,
+  "best_epoch": 49,
+  "val_metrics": {
+    "spearman_r": 0.23490128994821388
+  },
+  "test_metrics": {
+    "spearman_r": 0.22218413886127542,
+    "pearson_r": 0.23523041274710368,
+    "auroc": 0.6060523799362308,
+    "mse": 2.181564897174604,
+    "mae": 1.1455585199453524,
+    "loss": 2.1813919143007108
+  },
+  "source_model": "cadence_hepg2_v2",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.1,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-18T21:11:10.491430"
+}

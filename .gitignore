@@ -53,6 +53,5 @@ venv/
 ENV/
 
 # Embedded git repos (have their own repos)
-FUSEMAP_results/
 comparison_models/human_legnet/
 comparison_models/random-promoter-dream-challenge-2022/

@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_wtc11_v2_frozen_s2_drosophila_1pct",
+  "n_train": 2464,
+  "n_trainable_params": 66561,
+  "best_epoch": 37,
+  "val_metrics": {
+    "spearman_r": 0.18169857361366767
+  },
+  "test_metrics": {
+    "spearman_r": 0.18456533647610643,
+    "pearson_r": 0.19517296416609425,
+    "auroc": 0.5745464527958251,
+    "mse": 2.2378918001681516,
+    "mae": 1.151528890750562,
+    "loss": 2.237675462738942
+  },
+  "source_model": "cadence_wtc11_v2",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.01,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-19T01:53:25.755342"
+}

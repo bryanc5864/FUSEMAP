@@ -1,0 +1,97 @@
+{
+  "pipeline_info": {
+    "cell_types": [
+      "K562",
+      "HepG2",
+      "WTC11"
+    ],
+    "n_sequences_analyzed": 100
+  },
+  "ranking_summary": {
+    "n_ranked": 100,
+    "mean_specificity": -0.09595537304878235,
+    "max_specificity": 0.9923653043806553,
+    "median_specificity": -0.12905177474021912
+  },
+  "diversity_summary": {
+    "n_selected": 10,
+    "mean_specificity": 0.6711045775562525
+  },
+  "qc_summary": {
+    "n_synthesis_ready": 9,
+    "mean_gc_content": 0.48699999999999993,
+    "mean_max_homopolymer": 4.3
+  },
+  "top_sequences": [
+    {
+      "rank": 1,
+      "sequence": "ACAACTTACAGGATTAAGTAGTCGTTGCGTAAGTATGATAGTAGAACCGC...",
+      "specificity_score": 0.9923653043806553,
+      "target_activity": 0.28430747985839844,
+      "max_background": 0.01427113264799118
+    },
+    {
+      "rank": 2,
+      "sequence": "TGCCAGAGCAAGTGTGCAGCGAGTATCCGTTATTAATGAATTATAGGAAC...",
+      "specificity_score": 0.8673276007175446,
+      "target_activity": 0.31468647718429565,
+      "max_background": -0.48506152629852295
+    },
+    {
+      "rank": 3,
+      "sequence": "GTTGGGACCTCAGTTCTGTGAAGCTCTAAATAAAACAACCTGAAATAGCT...",
+      "specificity_score": 0.7413908317685127,
+      "target_activity": 0.42265576124191284,
+      "max_background": 0.13124559819698334
+    },
+    {
+      "rank": 4,
+      "sequence": "GAATGCTGGCTGGGCTTTTAATCAGAGTACAAATCACTGACCTAGCAGCC...",
+      "specificity_score": 0.6676222234964371,
+      "target_activity": 0.5025524497032166,
+      "max_background": 0.08029720187187195
+    },
+    {
+      "rank": 5,
+      "sequence": "ATATCGCTGTGGGGTGGCAACCTTTCCGTTTAGTTTAACGCGATCTCAAA...",
+      "specificity_score": 0.6627373993396759,
+      "target_activity": 0.3527238965034485,
+      "max_background": 0.29213541746139526
+    },
+    {
+      "rank": 6,
+      "sequence": "CCTCATAGGCGAGACCAGCTCGTGATGTGTGATTTTATCACTGCTCTTTG...",
+      "specificity_score": 0.6056341230869293,
+      "target_activity": 0.22658897936344147,
+      "max_background": -0.2136266529560089
+    },
+    {
+      "rank": 7,
+      "sequence": "CCAACATCATAAACGATCCTAGATCGCTAGCCCAGAAATTTGAATAACAC...",
+      "specificity_score": 0.5776041746139526,
+      "target_activity": -0.17019689083099365,
+      "max_background": -0.49908995628356934
+    },
+    {
+      "rank": 8,
+      "sequence": "AAATCCGCCAATAAAATAGGGGAGATGCGGAGCAATTGTTTAAATATAAC...",
+      "specificity_score": 0.5560529083013535,
+      "target_activity": 0.5909128785133362,
+      "max_background": 0.4096870422363281
+    },
+    {
+      "rank": 9,
+      "sequence": "TTGATTCTTCGTCAGAACTCCCCGTAATATACATTTTTGGATATTGGCGC...",
+      "specificity_score": 0.5348281636834145,
+      "target_activity": -0.5724083781242371,
+      "max_background": 0.13229458034038544
+    },
+    {
+      "rank": 10,
+      "sequence": "CGAGCTGATGGTTTAAGGCAGTTATCGGGATCAGCGGAGCGTGACATGAA...",
+      "specificity_score": 0.5054830461740494,
+      "target_activity": 0.053912535309791565,
+      "max_background": 0.5398095846176147
+    }
+  ]
+}

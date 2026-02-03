@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_deepstarr_all_v2",
+  "description": "DeepSTARR all modules v2",
+  "calibration_source": "deepstarr_calibration",
+  "calibration_date": "2026-01-16T06:22:09.890543",
+  "place_stats": {
+    "n_samples": 81140,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.5693731307983398,
+    "residual_mean": -0.14768275618553162,
+    "residual_std": 0.7545681595802307
+  }
+}

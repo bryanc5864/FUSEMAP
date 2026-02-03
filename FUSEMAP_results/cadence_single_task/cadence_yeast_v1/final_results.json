@@ -1,0 +1,60 @@
+{
+  "dream_yeast": {
+    "expression": {
+      "pearson": {
+        "value": 0.5803632140159607,
+        "stderr": null,
+        "n_samples": 33696
+      },
+      "spearman": {
+        "value": 0.5942533480537092,
+        "stderr": null,
+        "n_samples": 33696
+      },
+      "r2": {
+        "value": 0.26513350009918213,
+        "stderr": null,
+        "n_samples": 33696
+      },
+      "mse": {
+        "value": 4.2368059158325195,
+        "stderr": null,
+        "n_samples": 33696
+      },
+      "rmse": {
+        "value": 2.0583502898759773,
+        "stderr": null,
+        "n_samples": 33696
+      },
+      "mae": {
+        "value": 1.5768402814865112,
+        "stderr": null,
+        "n_samples": 33696
+      }
+    }
+  },
+  "test": {
+    "dream_yeast": {
+      "expression": {
+        "pearson": 0.7339632511138916,
+        "spearman": 0.7381359989710474,
+        "r2": -233.6894989013672,
+        "rmse": 4.882444858551025,
+        "mae": 4.812438011169434,
+        "n_samples": 71103
+      }
+    }
+  },
+  "calibration": {
+    "dream_yeast": {
+      "expression": {
+        "pearson": 0.5732914805412292,
+        "spearman": 0.590884640988693,
+        "r2": 0.2485414743423462,
+        "rmse": 0.8697867393493652,
+        "mae": 0.6685384511947632,
+        "n_samples": 67055
+      }
+    }
+  }
+}

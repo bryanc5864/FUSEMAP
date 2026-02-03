@@ -1,0 +1,1569 @@
+{
+  "pipeline_info": {
+    "cell_type": "K562",
+    "flank_size": 115,
+    "n_variants_analyzed": 100
+  },
+  "summary_statistics": {
+    "n_activating": 0,
+    "n_repressing": 100,
+    "n_neutral": 0,
+    "n_strong": 0,
+    "n_moderate": 0,
+    "n_weak": 0,
+    "mean_delta_activity": -0.038162548840045926,
+    "std_delta_activity": 0.013082616444783209
+  },
+  "top_variants": [
+    {
+      "variant_id": "654968",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.25312086939811707,
+      "delta_activity": -0.09358066320419312,
+      "zscore": -0.6617152153961937,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2410376214981078,
+          "max_change": 3.4819674491882324
+        },
+        "stiff": {
+          "mean_change": 1.2303143760561943,
+          "max_change": 4.435582637786865
+        },
+        "bend": {
+          "mean_change": 0.9864330351352691,
+          "max_change": 3.913762092590332
+        },
+        "entropy": {
+          "mean_change": 1.172566815018654,
+          "max_change": 3.755483627319336
+        },
+        "pwm": {
+          "mean_change": 1.1053520676400512,
+          "max_change": 4.31606388092041
+        }
+      }
+    },
+    {
+      "variant_id": "1177400",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.2354765236377716,
+      "delta_activity": -0.07593631744384766,
+      "zscore": -0.5369508500287898,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1093111960589885,
+          "max_change": 2.9911468029022217
+        },
+        "stiff": {
+          "mean_change": 1.0256131083704532,
+          "max_change": 3.222447395324707
+        },
+        "bend": {
+          "mean_change": 1.09592245683074,
+          "max_change": 3.294218063354492
+        },
+        "entropy": {
+          "mean_change": 0.915935440659523,
+          "max_change": 4.010512351989746
+        },
+        "pwm": {
+          "mean_change": 1.2436368633061647,
+          "max_change": 3.7303295135498047
+        }
+      }
+    },
+    {
+      "variant_id": "666960",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.2247484028339386,
+      "delta_activity": -0.06520819664001465,
+      "zscore": -0.46109158033100195,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.155630279481411,
+          "max_change": 3.6152234077453613
+        },
+        "stiff": {
+          "mean_change": 1.1228551077842712,
+          "max_change": 2.6627185344696045
+        },
+        "bend": {
+          "mean_change": 1.0722546458244324,
+          "max_change": 3.416717052459717
+        },
+        "entropy": {
+          "mean_change": 1.00619563549757,
+          "max_change": 2.806896924972534
+        },
+        "pwm": {
+          "mean_change": 1.0013982301950455,
+          "max_change": 3.1866936683654785
+        }
+      }
+    },
+    {
+      "variant_id": "161455",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20973163843154907,
+      "delta_activity": -0.05019143223762512,
+      "zscore": -0.3549070209268981,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1641730242967605,
+          "max_change": 3.929443359375
+        },
+        "stiff": {
+          "mean_change": 0.9564979936182499,
+          "max_change": 2.9571352005004883
+        },
+        "bend": {
+          "mean_change": 1.4635872960835696,
+          "max_change": 4.114449501037598
+        },
+        "entropy": {
+          "mean_change": 1.150203299820423,
+          "max_change": 4.202775478363037
+        },
+        "pwm": {
+          "mean_change": 1.159620636254549,
+          "max_change": 4.0856781005859375
+        }
+      }
+    },
+    {
+      "variant_id": "4282008",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20973163843154907,
+      "delta_activity": -0.05019143223762512,
+      "zscore": -0.3549070209268981,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1552669222652912,
+          "max_change": 3.240190029144287
+        },
+        "stiff": {
+          "mean_change": 0.9681390395760536,
+          "max_change": 3.8318190574645996
+        },
+        "bend": {
+          "mean_change": 1.0499927508831024,
+          "max_change": 3.0760061740875244
+        },
+        "entropy": {
+          "mean_change": 1.0897700554132461,
+          "max_change": 3.382697582244873
+        },
+        "pwm": {
+          "mean_change": 1.2654480943083763,
+          "max_change": 4.0020294189453125
+        }
+      }
+    },
+    {
+      "variant_id": "427130",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20973163843154907,
+      "delta_activity": -0.05019143223762512,
+      "zscore": -0.3549070209268981,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 0.9385032991319895,
+          "max_change": 2.9070539474487305
+        },
+        "stiff": {
+          "mean_change": 1.3536736458539962,
+          "max_change": 3.4021990299224854
+        },
+        "bend": {
+          "mean_change": 1.0834639811515807,
+          "max_change": 3.0074291229248047
+        },
+        "entropy": {
+          "mean_change": 1.1240338829159737,
+          "max_change": 3.511180877685547
+        },
+        "pwm": {
+          "mean_change": 0.8979524625092745,
+          "max_change": 3.7922935485839844
+        }
+      }
+    },
+    {
+      "variant_id": "1944125",
+      "activity_ref": -0.1679624617099762,
+      "activity_alt": -0.21596142649650574,
+      "delta_activity": -0.04799896478652954,
+      "zscore": -0.3394039349048934,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2287432783842087,
+          "max_change": 4.147351264953613
+        },
+        "stiff": {
+          "mean_change": 1.2916855168342591,
+          "max_change": 3.9655017852783203
+        },
+        "bend": {
+          "mean_change": 1.0471693959832191,
+          "max_change": 3.0975143909454346
+        },
+        "entropy": {
+          "mean_change": 1.05692982301116,
+          "max_change": 3.906134843826294
+        },
+        "pwm": {
+          "mean_change": 1.19474766805768,
+          "max_change": 2.968966245651245
+        }
+      }
+    },
+    {
+      "variant_id": "3338062",
+      "activity_ref": -0.1679624617099762,
+      "activity_alt": -0.21596142649650574,
+      "delta_activity": -0.04799896478652954,
+      "zscore": -0.3394039349048934,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.4722318369150162,
+          "max_change": 4.397345066070557
+        },
+        "stiff": {
+          "mean_change": 0.8854085963964462,
+          "max_change": 2.4753992557525635
+        },
+        "bend": {
+          "mean_change": 1.0092155358195305,
+          "max_change": 3.969782590866089
+        },
+        "entropy": {
+          "mean_change": 1.0555456651002169,
+          "max_change": 3.3592467308044434
+        },
+        "pwm": {
+          "mean_change": 1.145321057587862,
+          "max_change": 3.9781317710876465
+        }
+      }
+    },
+    {
+      "variant_id": "421834",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20699641108512878,
+      "delta_activity": -0.047456204891204834,
+      "zscore": -0.3355660428794914,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.0584766075015068,
+          "max_change": 4.1085991859436035
+        },
+        "stiff": {
+          "mean_change": 0.9830141711235046,
+          "max_change": 2.8932204246520996
+        },
+        "bend": {
+          "mean_change": 1.099144838899374,
+          "max_change": 3.6297450065612793
+        },
+        "entropy": {
+          "mean_change": 1.1631201714277268,
+          "max_change": 3.441598653793335
+        },
+        "pwm": {
+          "mean_change": 1.0275482652336358,
+          "max_change": 3.613776206970215
+        }
+      }
+    },
+    {
+      "variant_id": "950448",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2397737212479114,
+          "max_change": 4.236983299255371
+        },
+        "stiff": {
+          "mean_change": 1.2308908219635486,
+          "max_change": 5.362114906311035
+        },
+        "bend": {
+          "mean_change": 1.200043216943741,
+          "max_change": 3.4683001041412354
+        },
+        "entropy": {
+          "mean_change": 0.9812019412219525,
+          "max_change": 2.82562255859375
+        },
+        "pwm": {
+          "mean_change": 0.9629169557988644,
+          "max_change": 4.531206130981445
+        }
+      }
+    },
+    {
+      "variant_id": "183381",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1650563158094882,
+          "max_change": 3.3424222469329834
+        },
+        "stiff": {
+          "mean_change": 1.1480639123916625,
+          "max_change": 3.2261552810668945
+        },
+        "bend": {
+          "mean_change": 1.0842924655973911,
+          "max_change": 4.829450607299805
+        },
+        "entropy": {
+          "mean_change": 1.0195393638312817,
+          "max_change": 3.1745948791503906
+        },
+        "pwm": {
+          "mean_change": 1.0685562118142844,
+          "max_change": 3.9528591632843018
+        }
+      }
+    },
+    {
+      "variant_id": "161454",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.3057256984710692,
+          "max_change": 2.788487434387207
+        },
+        "stiff": {
+          "mean_change": 1.4000011144578457,
+          "max_change": 3.6941065788269043
+        },
+        "bend": {
+          "mean_change": 1.1384096763655542,
+          "max_change": 2.654244899749756
+        },
+        "entropy": {
+          "mean_change": 1.0100629803538324,
+          "max_change": 3.2558794021606445
+        },
+        "pwm": {
+          "mean_change": 1.043577031046152,
+          "max_change": 5.069093227386475
+        }
+      }
+    },
+    {
+      "variant_id": "126556",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2077047461271286,
+          "max_change": 3.4774374961853027
+        },
+        "stiff": {
+          "mean_change": 1.1408372375369071,
+          "max_change": 3.796008586883545
+        },
+        "bend": {
+          "mean_change": 1.1171320223808288,
+          "max_change": 3.9783477783203125
+        },
+        "entropy": {
+          "mean_change": 1.1639551880955696,
+          "max_change": 3.665308713912964
+        },
+        "pwm": {
+          "mean_change": 1.300542794764042,
+          "max_change": 3.4101710319519043
+        }
+      }
+    },
+    {
+      "variant_id": "2063004",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.0997760319709777,
+          "max_change": 3.2687292098999023
+        },
+        "stiff": {
+          "mean_change": 1.0771570742130279,
+          "max_change": 3.217015266418457
+        },
+        "bend": {
+          "mean_change": 0.9421851328015327,
+          "max_change": 3.0548081398010254
+        },
+        "entropy": {
+          "mean_change": 1.2725654175877572,
+          "max_change": 4.101665019989014
+        },
+        "pwm": {
+          "mean_change": 1.0711725309491158,
+          "max_change": 3.1757729053497314
+        }
+      }
+    },
+    {
+      "variant_id": "1076092",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2034930789470673,
+          "max_change": 3.7282204627990723
+        },
+        "stiff": {
+          "mean_change": 1.0956443563103675,
+          "max_change": 3.369586944580078
+        },
+        "bend": {
+          "mean_change": 1.1247856318950653,
+          "max_change": 3.1110997200012207
+        },
+        "entropy": {
+          "mean_change": 1.4508015197515487,
+          "max_change": 3.5226619243621826
+        },
+        "pwm": {
+          "mean_change": 1.0988525746017694,
+          "max_change": 3.9069981575012207
+        }
+      }
+    },
+    {
+      "variant_id": "2161460",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 0.9541935592889785,
+          "max_change": 3.902448892593384
+        },
+        "stiff": {
+          "mean_change": 1.1842100276052951,
+          "max_change": 3.3896713256835938
+        },
+        "bend": {
+          "mean_change": 0.9440020863711834,
+          "max_change": 2.851097345352173
+        },
+        "entropy": {
+          "mean_change": 1.1382378047704698,
+          "max_change": 3.424335241317749
+        },
+        "pwm": {
+          "mean_change": 1.2401553323864938,
+          "max_change": 3.9773318767547607
+        }
+      }
+    },
+    {
+      "variant_id": "950399",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1538478377461434,
+          "max_change": 4.065590858459473
+        },
+        "stiff": {
+          "mean_change": 1.137605028152466,
+          "max_change": 3.6212821006774902
+        },
+        "bend": {
+          "mean_change": 1.1035296782851218,
+          "max_change": 3.313638210296631
+        },
+        "entropy": {
+          "mean_change": 1.2185158881545066,
+          "max_change": 3.3352386951446533
+        },
+        "pwm": {
+          "mean_change": 1.082419061847031,
+          "max_change": 2.978426456451416
+        }
+      }
+    },
+    {
+      "variant_id": "1070058",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.278352467417717,
+          "max_change": 4.846657752990723
+        },
+        "stiff": {
+          "mean_change": 1.0653106981515885,
+          "max_change": 3.867331027984619
+        },
+        "bend": {
+          "mean_change": 0.9635891994833946,
+          "max_change": 3.540241241455078
+        },
+        "entropy": {
+          "mean_change": 0.9868442329764366,
+          "max_change": 2.749748945236206
+        },
+        "pwm": {
+          "mean_change": 0.9487801818549633,
+          "max_change": 3.4009311199188232
+        }
+      }
+    },
+    {
+      "variant_id": "489335",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.059460951089859,
+          "max_change": 2.492157459259033
+        },
+        "stiff": {
+          "mean_change": 1.0065929248929024,
+          "max_change": 3.2852749824523926
+        },
+        "bend": {
+          "mean_change": 1.1047996459901332,
+          "max_change": 3.1943159103393555
+        },
+        "entropy": {
+          "mean_change": 1.1997725373506547,
+          "max_change": 3.5368332862854004
+        },
+        "pwm": {
+          "mean_change": 1.2577119394391776,
+          "max_change": 4.244529724121094
+        }
+      }
+    },
+    {
+      "variant_id": "2584416",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.201135212481022,
+          "max_change": 2.823288917541504
+        },
+        "stiff": {
+          "mean_change": 1.2856704472005367,
+          "max_change": 3.4458327293395996
+        },
+        "bend": {
+          "mean_change": 1.1569742376729846,
+          "max_change": 3.3971800804138184
+        },
+        "entropy": {
+          "mean_change": 1.0457025802135467,
+          "max_change": 3.0477821826934814
+        },
+        "pwm": {
+          "mean_change": 1.0770529817044734,
+          "max_change": 3.6949567794799805
+        }
+      }
+    },
+    {
+      "variant_id": "126555",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1971000261232256,
+          "max_change": 4.140298843383789
+        },
+        "stiff": {
+          "mean_change": 1.4289792066812514,
+          "max_change": 3.790523052215576
+        },
+        "bend": {
+          "mean_change": 1.1944078063964845,
+          "max_change": 3.610842227935791
+        },
+        "entropy": {
+          "mean_change": 1.1107087531685829,
+          "max_change": 3.194056987762451
+        },
+        "pwm": {
+          "mean_change": 1.070729751586914,
+          "max_change": 3.2389397621154785
+        }
+      }
+    },
+    {
+      "variant_id": "60489",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2247834753990174,
+          "max_change": 3.3142077922821045
+        },
+        "stiff": {
+          "mean_change": 0.996155286282301,
+          "max_change": 4.030628204345703
+        },
+        "bend": {
+          "mean_change": 1.0702441084384917,
+          "max_change": 3.451193332672119
+        },
+        "entropy": {
+          "mean_change": 1.1041617575287819,
+          "max_change": 3.084278106689453
+        },
+        "pwm": {
+          "mean_change": 1.0479571156576275,
+          "max_change": 3.498140811920166
+        }
+      }
+    },
+    {
+      "variant_id": "1035382",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1462599909305573,
+          "max_change": 3.569545269012451
+        },
+        "stiff": {
+          "mean_change": 1.0542651775479317,
+          "max_change": 3.2690415382385254
+        },
+        "bend": {
+          "mean_change": 1.2866522935032845,
+          "max_change": 4.49192476272583
+        },
+        "entropy": {
+          "mean_change": 1.1370288974046707,
+          "max_change": 3.4543943405151367
+        },
+        "pwm": {
+          "mean_change": 1.212695850878954,
+          "max_change": 3.710304021835327
+        }
+      }
+    },
+    {
+      "variant_id": "1063834",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.048727856874466,
+          "max_change": 2.775477170944214
+        },
+        "stiff": {
+          "mean_change": 1.1978495651483536,
+          "max_change": 4.1487202644348145
+        },
+        "bend": {
+          "mean_change": 1.1420812511444092,
+          "max_change": 3.709040641784668
+        },
+        "entropy": {
+          "mean_change": 1.2953886625170707,
+          "max_change": 3.5210742950439453
+        },
+        "pwm": {
+          "mean_change": 1.0722448997199536,
+          "max_change": 3.4242563247680664
+        }
+      }
+    },
+    {
+      "variant_id": "60485",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20675364136695862,
+      "delta_activity": -0.04721343517303467,
+      "zscore": -0.33384940173964267,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.3609215167164803,
+          "max_change": 3.4084582328796387
+        },
+        "stiff": {
+          "mean_change": 1.0774023275077342,
+          "max_change": 3.457017421722412
+        },
+        "bend": {
+          "mean_change": 0.987688581943512,
+          "max_change": 4.599210262298584
+        },
+        "entropy": {
+          "mean_change": 1.2417297786474228,
+          "max_change": 4.230976104736328
+        },
+        "pwm": {
+          "mean_change": 1.0907625659182667,
+          "max_change": 3.7854535579681396
+        }
+      }
+    },
+    {
+      "variant_id": "1498946",
+      "activity_ref": -0.16724306344985962,
+      "activity_alt": -0.21434003114700317,
+      "delta_activity": -0.047096967697143555,
+      "zscore": -0.3330258523197398,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 0.9066821743547916,
+          "max_change": 2.485180616378784
+        },
+        "stiff": {
+          "mean_change": 1.1426331414282322,
+          "max_change": 3.005796432495117
+        },
+        "bend": {
+          "mean_change": 1.2510504952073098,
+          "max_change": 3.111544132232666
+        },
+        "entropy": {
+          "mean_change": 1.1774368140101432,
+          "max_change": 3.2920315265655518
+        },
+        "pwm": {
+          "mean_change": 1.0750459548830986,
+          "max_change": 4.021832466125488
+        }
+      }
+    },
+    {
+      "variant_id": "916564",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1418981954455376,
+          "max_change": 4.744306564331055
+        },
+        "stiff": {
+          "mean_change": 1.0076702868938445,
+          "max_change": 3.750265121459961
+        },
+        "bend": {
+          "mean_change": 1.1503240221738815,
+          "max_change": 2.878413438796997
+        },
+        "entropy": {
+          "mean_change": 1.3905490504205227,
+          "max_change": 3.4274368286132812
+        },
+        "pwm": {
+          "mean_change": 1.231636017858982,
+          "max_change": 4.602010726928711
+        }
+      }
+    },
+    {
+      "variant_id": "1028857",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2059354972839356,
+          "max_change": 4.095272064208984
+        },
+        "stiff": {
+          "mean_change": 1.0529224492609501,
+          "max_change": 2.8218955993652344
+        },
+        "bend": {
+          "mean_change": 1.1958700233697892,
+          "max_change": 3.3988962173461914
+        },
+        "entropy": {
+          "mean_change": 1.2695978555083274,
+          "max_change": 4.397848129272461
+        },
+        "pwm": {
+          "mean_change": 1.1434431132674217,
+          "max_change": 4.316394329071045
+        }
+      }
+    },
+    {
+      "variant_id": "1354468",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.143137341439724,
+          "max_change": 3.450861930847168
+        },
+        "stiff": {
+          "mean_change": 1.1621821682155131,
+          "max_change": 3.7035927772521973
+        },
+        "bend": {
+          "mean_change": 1.3910049600154162,
+          "max_change": 3.5743885040283203
+        },
+        "entropy": {
+          "mean_change": 1.1599051296710967,
+          "max_change": 4.042480945587158
+        },
+        "pwm": {
+          "mean_change": 1.1193948944285512,
+          "max_change": 3.982706308364868
+        }
+      }
+    },
+    {
+      "variant_id": "243036",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.082536996304989,
+          "max_change": 3.8030476570129395
+        },
+        "stiff": {
+          "mean_change": 0.9539434248954057,
+          "max_change": 2.6381664276123047
+        },
+        "bend": {
+          "mean_change": 0.9497237798571586,
+          "max_change": 3.2082250118255615
+        },
+        "entropy": {
+          "mean_change": 1.1770584158226847,
+          "max_change": 4.169267654418945
+        },
+        "pwm": {
+          "mean_change": 1.2754280821233988,
+          "max_change": 4.51070499420166
+        }
+      }
+    },
+    {
+      "variant_id": "3255595",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1721964049339295,
+          "max_change": 3.4147696495056152
+        },
+        "stiff": {
+          "mean_change": 1.108819160759449,
+          "max_change": 5.108670234680176
+        },
+        "bend": {
+          "mean_change": 1.2429647207260133,
+          "max_change": 3.2392547130584717
+        },
+        "entropy": {
+          "mean_change": 1.0527799502015114,
+          "max_change": 3.802703380584717
+        },
+        "pwm": {
+          "mean_change": 1.0373966735601425,
+          "max_change": 3.23126482963562
+        }
+      }
+    },
+    {
+      "variant_id": "2749616",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.0885534557700156,
+          "max_change": 4.08722448348999
+        },
+        "stiff": {
+          "mean_change": 1.0138976185023785,
+          "max_change": 3.5501012802124023
+        },
+        "bend": {
+          "mean_change": 1.2953756855428218,
+          "max_change": 3.732922077178955
+        },
+        "entropy": {
+          "mean_change": 1.0739155192673207,
+          "max_change": 3.344943046569824
+        },
+        "pwm": {
+          "mean_change": 1.2330733904242515,
+          "max_change": 4.092830657958984
+        }
+      }
+    },
+    {
+      "variant_id": "1180647",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.0544249507784844,
+          "max_change": 3.837677478790283
+        },
+        "stiff": {
+          "mean_change": 1.4445919126272202,
+          "max_change": 3.777052640914917
+        },
+        "bend": {
+          "mean_change": 0.9847832994163036,
+          "max_change": 4.184948444366455
+        },
+        "entropy": {
+          "mean_change": 1.3060059234499932,
+          "max_change": 3.8003029823303223
+        },
+        "pwm": {
+          "mean_change": 1.178828244023025,
+          "max_change": 4.200250148773193
+        }
+      }
+    },
+    {
+      "variant_id": "2705050",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.210216075181961,
+          "max_change": 3.2564167976379395
+        },
+        "stiff": {
+          "mean_change": 1.3640128016471862,
+          "max_change": 3.9099903106689453
+        },
+        "bend": {
+          "mean_change": 1.0311741808056831,
+          "max_change": 3.022679328918457
+        },
+        "entropy": {
+          "mean_change": 1.027822981774807,
+          "max_change": 3.2442173957824707
+        },
+        "pwm": {
+          "mean_change": 1.106031304076314,
+          "max_change": 4.041987419128418
+        }
+      }
+    },
+    {
+      "variant_id": "2020643",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.0701356875896453,
+          "max_change": 3.948667526245117
+        },
+        "stiff": {
+          "mean_change": 1.1939367815852164,
+          "max_change": 3.683046817779541
+        },
+        "bend": {
+          "mean_change": 1.0140730795264243,
+          "max_change": 3.1380038261413574
+        },
+        "entropy": {
+          "mean_change": 1.2798105427622795,
+          "max_change": 4.449638366699219
+        },
+        "pwm": {
+          "mean_change": 1.0325915209203957,
+          "max_change": 3.23771071434021
+        }
+      }
+    },
+    {
+      "variant_id": "1525296",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.113928556293249,
+          "max_change": 3.8072714805603027
+        },
+        "stiff": {
+          "mean_change": 1.379093219935894,
+          "max_change": 2.9999399185180664
+        },
+        "bend": {
+          "mean_change": 1.3222439954429865,
+          "max_change": 3.7015833854675293
+        },
+        "entropy": {
+          "mean_change": 1.0121178233623505,
+          "max_change": 4.1507134437561035
+        },
+        "pwm": {
+          "mean_change": 1.0261340321134775,
+          "max_change": 3.561710834503174
+        }
+      }
+    },
+    {
+      "variant_id": "1925037",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.0753256797790527,
+          "max_change": 3.1758720874786377
+        },
+        "stiff": {
+          "mean_change": 1.230534224510193,
+          "max_change": 3.740540027618408
+        },
+        "bend": {
+          "mean_change": 1.1364129287004472,
+          "max_change": 4.199902534484863
+        },
+        "entropy": {
+          "mean_change": 1.1385209634900093,
+          "max_change": 3.6532444953918457
+        },
+        "pwm": {
+          "mean_change": 0.9778805144131184,
+          "max_change": 3.16705060005188
+        }
+      }
+    },
+    {
+      "variant_id": "1429166",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1030758595466614,
+          "max_change": 3.642289638519287
+        },
+        "stiff": {
+          "mean_change": 1.2087617298960687,
+          "max_change": 3.01362943649292
+        },
+        "bend": {
+          "mean_change": 1.1861221316456794,
+          "max_change": 2.5036253929138184
+        },
+        "entropy": {
+          "mean_change": 1.1866315065324307,
+          "max_change": 3.6962084770202637
+        },
+        "pwm": {
+          "mean_change": 1.0726422147452832,
+          "max_change": 3.236922025680542
+        }
+      }
+    },
+    {
+      "variant_id": "1356678",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2015078330039979,
+          "max_change": 4.109898567199707
+        },
+        "stiff": {
+          "mean_change": 1.1892068803310394,
+          "max_change": 3.6570260524749756
+        },
+        "bend": {
+          "mean_change": 1.150560201704502,
+          "max_change": 3.1407833099365234
+        },
+        "entropy": {
+          "mean_change": 1.144001518189907,
+          "max_change": 3.712228775024414
+        },
+        "pwm": {
+          "mean_change": 1.1837638260424137,
+          "max_change": 3.7973222732543945
+        }
+      }
+    },
+    {
+      "variant_id": "243039",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.3117769649624824,
+          "max_change": 4.387158393859863
+        },
+        "stiff": {
+          "mean_change": 1.0464727623760701,
+          "max_change": 3.5419414043426514
+        },
+        "bend": {
+          "mean_change": 1.2613188169896603,
+          "max_change": 3.9189658164978027
+        },
+        "entropy": {
+          "mean_change": 1.3614802911877633,
+          "max_change": 5.619052886962891
+        },
+        "pwm": {
+          "mean_change": 1.0928105358034372,
+          "max_change": 3.151972532272339
+        }
+      }
+    },
+    {
+      "variant_id": "3256787",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1150557240843773,
+          "max_change": 2.9382309913635254
+        },
+        "stiff": {
+          "mean_change": 1.0080293318629265,
+          "max_change": 3.2628769874572754
+        },
+        "bend": {
+          "mean_change": 1.0681516283750534,
+          "max_change": 3.446676254272461
+        },
+        "entropy": {
+          "mean_change": 1.1255918706953525,
+          "max_change": 2.8911526203155518
+        },
+        "pwm": {
+          "mean_change": 1.1316510547325016,
+          "max_change": 3.8486270904541016
+        }
+      }
+    },
+    {
+      "variant_id": "2748133",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1078064382076263,
+          "max_change": 5.280660629272461
+        },
+        "stiff": {
+          "mean_change": 1.159081900715828,
+          "max_change": 4.640929222106934
+        },
+        "bend": {
+          "mean_change": 0.9845716238021851,
+          "max_change": 3.3095273971557617
+        },
+        "entropy": {
+          "mean_change": 1.2351549883186816,
+          "max_change": 3.859175205230713
+        },
+        "pwm": {
+          "mean_change": 1.2274029041826724,
+          "max_change": 3.7189979553222656
+        }
+      }
+    },
+    {
+      "variant_id": "1067539",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2708051025867462,
+          "max_change": 6.007535934448242
+        },
+        "stiff": {
+          "mean_change": 1.0240201669931412,
+          "max_change": 3.09889554977417
+        },
+        "bend": {
+          "mean_change": 1.1466719743609428,
+          "max_change": 3.6627562046051025
+        },
+        "entropy": {
+          "mean_change": 1.0068924087285995,
+          "max_change": 3.9228670597076416
+        },
+        "pwm": {
+          "mean_change": 1.2033833359740675,
+          "max_change": 3.5146210193634033
+        }
+      }
+    },
+    {
+      "variant_id": "2151860",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 0.9944440495967865,
+          "max_change": 3.8818135261535645
+        },
+        "stiff": {
+          "mean_change": 1.3342588198184968,
+          "max_change": 4.594620704650879
+        },
+        "bend": {
+          "mean_change": 1.0668598338961601,
+          "max_change": 3.396984100341797
+        },
+        "entropy": {
+          "mean_change": 1.1797822248935699,
+          "max_change": 3.4920339584350586
+        },
+        "pwm": {
+          "mean_change": 1.0473865514993668,
+          "max_change": 4.114779472351074
+        }
+      }
+    },
+    {
+      "variant_id": "452846",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.1763136166334152,
+          "max_change": 3.5806493759155273
+        },
+        "stiff": {
+          "mean_change": 0.9913131332397461,
+          "max_change": 2.571775436401367
+        },
+        "bend": {
+          "mean_change": 1.0849255427718163,
+          "max_change": 3.6790060997009277
+        },
+        "entropy": {
+          "mean_change": 1.0193763795495032,
+          "max_change": 3.710442066192627
+        },
+        "pwm": {
+          "mean_change": 1.2315602339804173,
+          "max_change": 3.520606517791748
+        }
+      }
+    },
+    {
+      "variant_id": "3361286",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 0.9763639634847641,
+          "max_change": 3.8154077529907227
+        },
+        "stiff": {
+          "mean_change": 1.1105919581651689,
+          "max_change": 3.969086170196533
+        },
+        "bend": {
+          "mean_change": 1.3149619203805925,
+          "max_change": 3.6407630443573
+        },
+        "entropy": {
+          "mean_change": 1.1476736503839493,
+          "max_change": 4.261740207672119
+        },
+        "pwm": {
+          "mean_change": 1.1359063559398055,
+          "max_change": 4.592744827270508
+        }
+      }
+    },
+    {
+      "variant_id": "60486",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.317318202853203,
+          "max_change": 3.143141746520996
+        },
+        "stiff": {
+          "mean_change": 1.2037529960274695,
+          "max_change": 3.9711294174194336
+        },
+        "bend": {
+          "mean_change": 1.067250930815935,
+          "max_change": 2.666461944580078
+        },
+        "entropy": {
+          "mean_change": 1.2192095898091793,
+          "max_change": 3.2090964317321777
+        },
+        "pwm": {
+          "mean_change": 1.0726225128024816,
+          "max_change": 3.6003613471984863
+        }
+      }
+    },
+    {
+      "variant_id": "869983",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.0674259957671166,
+          "max_change": 3.758168935775757
+        },
+        "stiff": {
+          "mean_change": 1.09803870677948,
+          "max_change": 3.737135410308838
+        },
+        "bend": {
+          "mean_change": 0.982368885576725,
+          "max_change": 3.453549861907959
+        },
+        "entropy": {
+          "mean_change": 1.076053147315979,
+          "max_change": 3.8309578895568848
+        },
+        "pwm": {
+          "mean_change": 1.1274436597526074,
+          "max_change": 3.713869094848633
+        }
+      }
+    },
+    {
+      "variant_id": "60496",
+      "activity_ref": -0.15954020619392395,
+      "activity_alt": -0.20521727204322815,
+      "delta_activity": -0.0456770658493042,
+      "zscore": -0.3229856300674746,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2560650292038917,
+          "max_change": 3.648714542388916
+        },
+        "stiff": {
+          "mean_change": 1.2205226102471352,
+          "max_change": 3.287642002105713
+        },
+        "bend": {
+          "mean_change": 1.2255986081063748,
+          "max_change": 3.114480495452881
+        },
+        "entropy": {
+          "mean_change": 1.1863282200694085,
+          "max_change": 3.6501541137695312
+        },
+        "pwm": {
+          "mean_change": 1.2058758669346572,
+          "max_change": 4.0912089347839355
+        }
+      }
+    },
+    {
+      "variant_id": "2912340",
+      "activity_ref": -0.16733193397521973,
+      "activity_alt": -0.21286511421203613,
+      "delta_activity": -0.045533180236816406,
+      "zscore": -0.32196820514442165,
+      "direction": "repressing",
+      "magnitude": "negligible",
+      "physics_summary": {
+        "thermo": {
+          "mean_change": 1.2563344465196133,
+          "max_change": 3.3271541595458984
+        },
+        "stiff": {
+          "mean_change": 1.2136592090129852,
+          "max_change": 4.7818803787231445
+        },
+        "bend": {
+          "mean_change": 1.0798984000086784,
+          "max_change": 4.7629852294921875
+        },
+        "entropy": {
+          "mean_change": 1.3091815358400345,
+          "max_change": 3.3274683952331543
+        },
+        "pwm": {
+          "mean_change": 1.170389420092106,
+          "max_change": 3.509774684906006
+        }
+      }
+    }
+  ]
+}

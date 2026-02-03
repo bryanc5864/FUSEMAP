@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_hepg2_v2",
+  "description": "HepG2 single-celltype",
+  "calibration_source": "encode4_hepg2_calibration",
+  "calibration_date": "2026-01-16T06:19:15.048144",
+  "place_stats": {
+    "n_samples": 14002,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.384558767080307,
+    "residual_mean": -0.03444885462522507,
+    "residual_std": 0.6201280355453491
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "cell_type": "maize",
+  "probe_type": "ridge",
+  "alpha": 1.0,
+  "n_samples": 22143,
+  "n_features": 889
+}

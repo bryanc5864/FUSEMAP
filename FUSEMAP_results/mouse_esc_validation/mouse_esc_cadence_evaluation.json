@@ -1,0 +1,157 @@
+{
+  "experiment": "cross_species_mouse_esc",
+  "timestamp": "2026-01-18T07:08:21.736085",
+  "dataset": {
+    "name": "Mouse ESC STARR-seq (GSE143546)",
+    "organism": "Mus musculus",
+    "n_sequences": 27565,
+    "sequence_length": 230,
+    "conditions": [
+      "2iL (ground-state)",
+      "SL (metastable)"
+    ],
+    "classes": {
+      "C1": 18543,
+      "C2": 7072,
+      "C3": 1950
+    }
+  },
+  "results": {
+    "cadence_k562": {
+      "2iL_condition": {
+        "spearman_r": -0.10578304552718915,
+        "kendall_tau": -0.07093368869553542,
+        "pearson_r": -0.0941449261112093,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.004,
+        "precision_at_1000": 0.016,
+        "auroc": 0.45448014349074706,
+        "enrichment_q4_vs_q1": 0.7901412999436482,
+        "q1_mean": 1.9676074949122997,
+        "q4_mean": 1.5546887339501696
+      },
+      "SL_condition": {
+        "spearman_r": -0.057442412181445315,
+        "kendall_tau": -0.03839729301860905,
+        "pearson_r": -0.054163992994488666,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.002,
+        "precision_at_1000": 0.014,
+        "auroc": 0.4713463134979782,
+        "enrichment_q4_vs_q1": 0.8850867989996006,
+        "q1_mean": 2.013562285268586,
+        "q4_mean": 1.7821782827414925
+      },
+      "model_dir": "results/cadence_k562_v2",
+      "n_samples": 27565,
+      "predictions_range": [
+        -2.4267091751098633,
+        3.207111358642578
+      ],
+      "predictions_mean": -0.49656520510288676,
+      "predictions_std": 0.661507402547027
+    },
+    "cadence_hepg2": {
+      "2iL_condition": {
+        "spearman_r": -0.018650267104229373,
+        "kendall_tau": -0.013322764250241537,
+        "pearson_r": 0.056594771458772605,
+        "precision_at_100": 0.02,
+        "precision_at_500": 0.086,
+        "precision_at_1000": 0.143,
+        "auroc": 0.5138740129410289,
+        "enrichment_q4_vs_q1": 0.9322285998460605,
+        "q1_mean": 1.948650558619047,
+        "q4_mean": 1.8165887140792778
+      },
+      "SL_condition": {
+        "spearman_r": -0.0009302023623156114,
+        "kendall_tau": -0.0006047073899136842,
+        "pearson_r": 0.027920540843447157,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.014,
+        "precision_at_1000": 0.033,
+        "auroc": 0.49645199694808295,
+        "enrichment_q4_vs_q1": 0.9554631676878719,
+        "q1_mean": 1.9803715662161698,
+        "q4_mean": 1.8921730453190613
+      },
+      "model_dir": "results/cadence_hepg2_v2",
+      "n_samples": 27565,
+      "predictions_range": [
+        -2.304516077041626,
+        9.923713684082031
+      ],
+      "predictions_mean": -0.5155022633426349,
+      "predictions_std": 0.8279156811464475
+    },
+    "config4_cross_kingdom": {
+      "2iL_condition": {
+        "spearman_r": -0.06853216590547487,
+        "kendall_tau": -0.045440445843235984,
+        "pearson_r": -0.07358900748036258,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.004,
+        "precision_at_1000": 0.022,
+        "auroc": 0.4838427834871378,
+        "enrichment_q4_vs_q1": 0.8484843264024051,
+        "q1_mean": 1.8344623228460242,
+        "q4_mean": 1.5565133767949266
+      },
+      "SL_condition": {
+        "spearman_r": 0.001378353625531703,
+        "kendall_tau": 0.0005656786341261447,
+        "pearson_r": -0.01928424283446936,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.002,
+        "precision_at_1000": 0.016,
+        "auroc": 0.5109391031825503,
+        "enrichment_q4_vs_q1": 0.9812977394312741,
+        "q1_mean": 1.881948258705927,
+        "q4_mean": 1.8467525532924882
+      },
+      "model_dir": "results/config4_cross_kingdom_v1",
+      "n_samples": 27565,
+      "predictions_range": [
+        -3.104748010635376,
+        3.686424493789673
+      ],
+      "predictions_mean": -0.41598011516027844,
+      "predictions_std": 0.8553085787463724
+    },
+    "config5_universal": {
+      "2iL_condition": {
+        "spearman_r": -0.05822525342645227,
+        "kendall_tau": -0.03859146967528862,
+        "pearson_r": -0.05424911379052219,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.004,
+        "precision_at_1000": 0.029,
+        "auroc": 0.4913904583206893,
+        "enrichment_q4_vs_q1": 0.8835840855989795,
+        "q1_mean": 1.8299318497106327,
+        "q4_mean": 1.616899543719104
+      },
+      "SL_condition": {
+        "spearman_r": 0.009344583050123841,
+        "kendall_tau": 0.005704183146207006,
+        "pearson_r": 0.0012154444356300793,
+        "precision_at_100": 0.0,
+        "precision_at_500": 0.002,
+        "precision_at_1000": 0.013,
+        "auroc": 0.5180520873084997,
+        "enrichment_q4_vs_q1": 0.9979510372781565,
+        "q1_mean": 1.8813330497424339,
+        "q4_mean": 1.8774792664071767
+      },
+      "model_dir": "results/config5_universal_no_yeast_20260114_204533",
+      "n_samples": 27565,
+      "predictions_range": [
+        -3.919074296951294,
+        2.697831869125366
+      ],
+      "predictions_mean": -0.3628839217046633,
+      "predictions_std": 0.8040367799986643
+    }
+  }
+}

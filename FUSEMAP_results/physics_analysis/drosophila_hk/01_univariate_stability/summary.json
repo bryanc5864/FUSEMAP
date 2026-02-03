@@ -1,0 +1,45 @@
+{
+  "cell_types": [
+    "S2"
+  ],
+  "n_features": 390,
+  "n_significant_p05": 352,
+  "n_significant_p01": 341,
+  "top_features_by_category": {
+    "thermo": [
+      "thermo_dS_p90",
+      "thermo_dG_local_min_std",
+      "thermo_var_dG",
+      "thermo_mean_dS",
+      "thermo_total_dS"
+    ],
+    "stiff": [
+      "stiff_gc_content_global",
+      "stiff_mean_relative_energy",
+      "stiff_total_relative_energy",
+      "stiff_high_energy_fraction_t2.0",
+      "stiff_high_energy_count_t2.0"
+    ],
+    "bend": [
+      "bend_max_bend_w11_fraction_at_global_max",
+      "bend_max_bend_w11_mean",
+      "bend_mean_bending_cost",
+      "bend_total_bending_energy",
+      "bend_max_bend_w9_fraction_at_global_max"
+    ],
+    "entropy": [
+      "entropy_gc_entropy_w50_max",
+      "entropy_gc_entropy_w10_min",
+      "entropy_gc_entropy_w30_max",
+      "entropy_shannon_w50_max",
+      "entropy_shannon_w30_max"
+    ],
+    "advanced": [
+      "advanced_stacking_stacking_gc_rich_mean",
+      "advanced_stacking_skew_stacking_energy",
+      "advanced_stacking_stacking_p50",
+      "advanced_mgw_std_mgw",
+      "advanced_stacking_mean_stacking_energy"
+    ]
+  }
+}

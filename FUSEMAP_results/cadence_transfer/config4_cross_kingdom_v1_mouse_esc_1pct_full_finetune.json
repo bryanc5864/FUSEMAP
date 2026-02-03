@@ -1,0 +1,23 @@
+{
+  "experiment_name": "config4_cross_kingdom_v1_full_mouse_esc_1pct",
+  "n_train": 192,
+  "n_trainable_params": 1322465,
+  "best_epoch": 5,
+  "val_metrics": {
+    "spearman_r": 0.21396676376439855
+  },
+  "test_metrics": {
+    "spearman_r": 0.22962267106764755,
+    "pearson_r": 0.2579903431392385,
+    "auroc": 0.6000773819099676,
+    "mse": 4.991167999439684,
+    "mae": 1.9645849427853317,
+    "loss": 4.989493991389419
+  },
+  "source_model": "config4_cross_kingdom_v1",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.01,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-21T04:59:05.111657"
+}

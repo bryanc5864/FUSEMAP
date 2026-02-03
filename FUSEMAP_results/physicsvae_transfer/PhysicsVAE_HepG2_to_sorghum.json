@@ -1,0 +1,18 @@
+{
+  "source_model": "PhysicsVAE_HepG2",
+  "target_dataset": "sorghum",
+  "source_cell_type": "HepG2",
+  "n_samples": 1968,
+  "n_matched_features": 267,
+  "n_source_features": 539,
+  "source_seq_length": 230,
+  "metrics": {
+    "reconstruction_accuracy": 0.25578969392635104,
+    "reconstruction_loss": 1.6274704337120056,
+    "perplexity": 5.090275587999498,
+    "mean_position_accuracy": 0.18906194768469423,
+    "latent_mean": 0.15987874567508698,
+    "latent_std": 2.932330369949341
+  },
+  "timestamp": "2026-01-19T00:34:16.647483"
+}

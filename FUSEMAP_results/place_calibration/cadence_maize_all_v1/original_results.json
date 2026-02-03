@@ -1,0 +1,68 @@
+{
+  "jores_maize": {
+    "leaf": {
+      "pearson": {
+        "value": 0.746687650680542,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "spearman": {
+        "value": 0.749513965424698,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "r2": {
+        "value": 0.4718993902206421,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "mse": {
+        "value": 1.748997688293457,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "rmse": {
+        "value": 1.3224967630559468,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "mae": {
+        "value": 1.0455220937728882,
+        "stderr": null,
+        "n_samples": 2461
+      }
+    },
+    "proto": {
+      "pearson": {
+        "value": 0.7585701942443848,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "spearman": {
+        "value": 0.7231273461667438,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "r2": {
+        "value": -0.013211846351623535,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "mse": {
+        "value": 1.440531611442566,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "rmse": {
+        "value": 1.2002214843280243,
+        "stderr": null,
+        "n_samples": 2461
+      },
+      "mae": {
+        "value": 0.9950146079063416,
+        "stderr": null,
+        "n_samples": 2461
+      }
+    }
+  }
+}

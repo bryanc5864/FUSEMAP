@@ -1,0 +1,54 @@
+================================================================================
+INCREMENTAL CONTROL ANALYSIS REPORT
+================================================================================
+
+This analysis tests whether TF binding mediates physics effects on activity.
+If physics coefficients attenuate when adding PWM features, it suggests mediation.
+
+========================================
+Cell Type: arabidopsis
+========================================
+
+--- Incremental Model Performance ---
+Step 1 (Physics only):       R² = 0.2793 +/- 0.0186
+Step 2 (+ PWM aggregates):   R² = 0.2795 +/- 0.0184  (Delta = +0.0002)
+Step 3 (+ all PWM):          R² = 0.2958 +/- 0.0159  (Delta = +0.0165)
+
+--- Coefficient Attenuation Summary ---
+Mean attenuation: -7.58%
+Median attenuation: 7.74%
+Fully attenuated (>90%): 24 features
+Sign changes: 10 features
+
+--- Most Attenuated Features (likely mediated by TF binding) ---
+  bend_max_bend_w7_mean                   : 100.00%
+  stiff_tilt_total_energy                 : 100.00%
+  stiff_tilt_mean_energy                  : 100.00%
+  stiff_cross_terms_total                 : 100.00%
+  stiff_cross_terms_mean                  : 100.00%
+  stiff_high_energy_count_t2.0            : 100.00%
+  stiff_high_energy_fraction_t2.0         : 100.00%
+  stiff_gc_content_global                 : 100.00%
+  thermo_dS_p10                           : 100.00%
+  thermo_dS_p25                           : 100.00%
+
+--- Least Attenuated Features (independent of TF binding) ---
+  entropy_global_kmer3_entropy            : -3535.60%
+  thermo_dS_p5                            : -663.88%
+  thermo_dG_p25                           : -528.57%
+  thermo_dG_p5                            : -435.37%
+  thermo_dG_local_range_mean              : -416.42%
+  stiff_twist_zscore_mean                 : -302.81%
+  bend_rms_curvature_w7_mean              : -159.56%
+  stiff_high_energy_fraction_t5.0         : -153.91%
+  stiff_pc1_variance                      : -128.98%
+  entropy_kmer3_entropy_w30_max           : -127.46%
+
+========================================
+INTERPRETATION
+========================================
+
+Mean coefficient attenuation: -7.6%
+Mean R² improvement from PWM: +0.0165
+
+>>> Low attenuation suggests physics effects are INDEPENDENT of TF binding

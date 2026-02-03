@@ -1,0 +1,158 @@
+================================================================================
+REGIME DISCOVERY ANALYSIS REPORT
+================================================================================
+
+This analysis identifies distinct physics 'regimes' with different activity profiles.
+
+========================================
+Cell Type: K562
+========================================
+
+Number of regimes: 2
+Noise fraction: 0.01%
+
+--- Regime Profiles ---
+
+Regime 0:
+  Samples: 79363 (50.1%)
+  Activity: -0.15 +/- 0.53
+  Top distinguishing features:
+    advanced_stacking_stacking_p5      : z = -1.00
+    thermo_dS_p50                      : z = -1.00
+    advanced_stacking_stacking_p90     : z = -1.00
+    advanced_stacking_stacking_p10     : z = -1.00
+    thermo_dH_p50                      : z = -1.00
+
+Regime 1:
+  Samples: 79002 (49.9%)
+  Activity: -0.15 +/- 0.53
+  Top distinguishing features:
+    advanced_stacking_stacking_p5      : z = +1.00
+    thermo_dS_p50                      : z = +1.00
+    advanced_stacking_stacking_p90     : z = +1.00
+    thermo_dH_p50                      : z = +1.00
+    advanced_stacking_stacking_p10     : z = +1.00
+
+--- Per-Regime Model Performance ---
+  Regime 0: R² = 0.152 (n=79363)
+  Regime 1: R² = 0.000 (n=79002)
+
+========================================
+Cell Type: HepG2
+========================================
+
+Number of regimes: 2
+Noise fraction: 0.00%
+
+--- Regime Profiles ---
+
+Regime 0:
+  Samples: 47231 (48.2%)
+  Activity: -0.22 +/- 0.78
+  Top distinguishing features:
+    advanced_stacking_stacking_p5      : z = +1.04
+    advanced_stacking_stacking_p90     : z = +1.04
+    thermo_dS_p50                      : z = +1.04
+    thermo_dH_p50                      : z = +1.04
+    advanced_stacking_stacking_p10     : z = +1.04
+
+Regime 1:
+  Samples: 50691 (51.8%)
+  Activity: -0.21 +/- 0.80
+  Top distinguishing features:
+    advanced_stacking_stacking_p5      : z = -0.97
+    advanced_stacking_stacking_p90     : z = -0.97
+    thermo_dS_p50                      : z = -0.97
+    thermo_dH_p50                      : z = -0.97
+    advanced_stacking_stacking_p10     : z = -0.97
+
+--- Per-Regime Model Performance ---
+  Regime 0: R² = 0.000 (n=47231)
+  Regime 1: R² = 0.125 (n=50691)
+
+========================================
+Cell Type: WTC11
+========================================
+
+Number of regimes: 7
+Noise fraction: 8.79%
+
+--- Regime Profiles ---
+
+Regime 0:
+  Samples: 177 (0.5%)
+  Activity: -0.05 +/- 1.57
+  Top distinguishing features:
+    thermo_dS_p50                      : z = -13.79
+    thermo_dH_p50                      : z = -13.53
+    advanced_stacking_stacking_p25     : z = -5.52
+    advanced_stacking_stacking_iqr     : z = +5.46
+    thermo_dS_p25                      : z = -3.59
+
+Regime 1:
+  Samples: 968 (2.5%)
+  Activity: -0.72 +/- 1.19
+  Top distinguishing features:
+    bend_max_bending_cost              : z = -6.16
+    bend_max_bend_w5_global_max        : z = -6.16
+    bend_max_bend_w7_global_max        : z = -6.16
+    bend_max_bend_w9_global_max        : z = -6.16
+    bend_max_bend_w11_global_max       : z = -6.16
+
+Regime 2:
+  Samples: 226 (0.6%)
+  Activity: -0.70 +/- 1.04
+  Top distinguishing features:
+    advanced_stress_stress_p5          : z = +11.06
+    thermo_dS_p5                       : z = +11.06
+    thermo_dH_p5                       : z = +11.06
+    thermo_dG_p5                       : z = +11.06
+    advanced_melting_melting_dG_p5     : z = +11.06
+
+Regime 3:
+  Samples: 98 (0.2%)
+  Activity: -0.91 +/- 0.77
+  Top distinguishing features:
+    advanced_stacking_stacking_p75     : z = -13.21
+    thermo_dS_p90                      : z = -6.62
+    advanced_stacking_stacking_iqr     : z = -4.05
+    thermo_dG_p75                      : z = +3.31
+    advanced_melting_melting_dG_p75    : z = +3.31
+
+Regime 4:
+  Samples: 891 (2.3%)
+  Activity: 0.12 +/- 1.44
+  Top distinguishing features:
+    thermo_dS_p25                      : z = -5.53
+    thermo_dH_p25                      : z = -5.53
+    thermo_dH_iqr                      : z = +5.51
+    advanced_stress_stress_iqr         : z = +3.59
+    advanced_stress_stress_p25         : z = -3.46
+
+Regime 5:
+  Samples: 33283 (84.9%)
+  Activity: -0.64 +/- 1.05
+  Top distinguishing features:
+    entropy_shannon_w30_mean           : z = +0.21
+    entropy_shannon_w50_mean           : z = +0.20
+    entropy_kmer2_entropy_w50_mean     : z = +0.20
+    entropy_kmer2_entropy_w30_mean     : z = +0.20
+    entropy_kmer3_entropy_w50_mean     : z = +0.20
+
+Regime 6:
+  Samples: 114 (0.3%)
+  Activity: -0.79 +/- 0.99
+  Top distinguishing features:
+    thermo_dS_p5                       : z = +4.36
+    thermo_dH_p5                       : z = +4.36
+    thermo_dG_p5                       : z = +4.36
+    advanced_melting_melting_dG_p5     : z = +4.36
+    advanced_stress_stress_p5          : z = +4.36
+
+--- Per-Regime Model Performance ---
+  Regime 0: R² = 0.540 (n=177)
+  Regime 1: R² = 0.177 (n=968)
+  Regime 2: R² = 0.034 (n=226)
+  Regime 4: R² = 0.219 (n=891)
+  Regime 5: R² = 0.141 (n=33283)
+  Regime 6: R² = 0.000 (n=114)

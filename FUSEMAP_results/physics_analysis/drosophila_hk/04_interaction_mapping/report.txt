@@ -1,0 +1,43 @@
+================================================================================
+PHYSICS × TF INTERACTION MAPPING REPORT
+================================================================================
+
+H-statistic measures non-additive interaction strength between features.
+Values > 0.1 indicate strong interactions; > 0.05 moderate interactions.
+
+========================================
+Cell Type: S2
+========================================
+
+Mean H-statistic: 0.0259
+Max H-statistic: 0.2637
+Strong interactions (H > 0.1): 10
+
+--- Top 15 Interactions ---
+   1. advanced_mgw_std_mgw           × pwm_ZIPIC_total_weight   : H = 0.2637
+   2. entropy_kmer3_entropy_w30_mean × pwm_Daughterless_da_mean_score: H = 0.2114
+   3. thermo_dG_local_min_std        × pwm_Trl_GAGA_var_score   : H = 0.2047
+   4. advanced_stacking_stacking_gc_rich_mean × pwm_GATAe_max_score      : H = 0.1719
+   5. entropy_mi_d2                  × pwm_suHw_var_score       : H = 0.1657
+   6. advanced_mgw_std_mgw           × pwm_M1BP_Motif1_total_weight: H = 0.1398
+   7. advanced_mgw_std_mgw           × pwm_M1BP_Motif1_max_score: H = 0.1315
+   8. thermo_var_dH                  × pwm_M1BP_Motif1_max_score: H = 0.1279
+   9. entropy_gc_entropy_w50_var     × pwm_Daughterless_da_delta_g: H = 0.1140
+  10. thermo_var_dH                  × pwm_ZIPIC_delta_g        : H = 0.1076
+  11. advanced_mgw_std_mgw           × pwm_Daughterless_da_delta_g: H = 0.0953
+  12. bend_spectral_f0p143_mean_power × pwm_GATAe_max_score      : H = 0.0949
+  13. bend_rms_curvature_w7_max      × pwm_Daughterless_da_delta_g: H = 0.0936
+  14. bend_max_bend_w7_mean          × pwm_SREBP_HLH106_max_score: H = 0.0936
+  15. bend_attention_bias_mean       × pwm_M1BP_Motif1_max_score: H = 0.0907
+
+--- Physics Features Most Interactive ---
+  advanced_mgw_std_mgw                    : mean H = 0.0584
+  bend_attention_bias_mean                : mean H = 0.0475
+  advanced_stacking_stacking_gc_rich_mean : mean H = 0.0437
+  thermo_var_dH                           : mean H = 0.0340
+  thermo_dG_local_min_std                 : mean H = 0.0284
+  entropy_kmer3_entropy_w30_mean          : mean H = 0.0264
+  entropy_gc_entropy_w50_var              : mean H = 0.0253
+  bend_spectral_f0p143_mean_power         : mean H = 0.0233
+  entropy_shannon_w10_var                 : mean H = 0.0230
+  bend_max_bend_w7_mean                   : mean H = 0.0188

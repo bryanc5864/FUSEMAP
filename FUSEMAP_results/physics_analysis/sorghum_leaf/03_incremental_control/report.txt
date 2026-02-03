@@ -1,0 +1,54 @@
+================================================================================
+INCREMENTAL CONTROL ANALYSIS REPORT
+================================================================================
+
+This analysis tests whether TF binding mediates physics effects on activity.
+If physics coefficients attenuate when adding PWM features, it suggests mediation.
+
+========================================
+Cell Type: sorghum
+========================================
+
+--- Incremental Model Performance ---
+Step 1 (Physics only):       R² = 0.4509 +/- 0.0093
+Step 2 (+ PWM aggregates):   R² = 0.4519 +/- 0.0086  (Delta = +0.0010)
+Step 3 (+ all PWM):          R² = 0.4689 +/- 0.0082  (Delta = +0.0180)
+
+--- Coefficient Attenuation Summary ---
+Mean attenuation: -313.41%
+Median attenuation: 14.92%
+Fully attenuated (>90%): 42 features
+Sign changes: 14 features
+
+--- Most Attenuated Features (likely mediated by TF binding) ---
+  bend_rms_curvature_w9_mean              : 100.00%
+  bend_rms_curvature_w11_mean             : 100.00%
+  bend_curvature_var_w7_mean              : 100.00%
+  bend_curvature_var_w9_mean              : 100.00%
+  bend_curvature_var_w9_max               : 100.00%
+  bend_curvature_var_w11_mean             : 100.00%
+  bend_max_bend_w5_fraction_at_global_max : 100.00%
+  bend_max_bend_w9_fraction_at_global_max : 100.00%
+  stiff_twist_max_energy                  : 100.00%
+  stiff_rise_total_energy                 : 100.00%
+
+--- Least Attenuated Features (independent of TF binding) ---
+  thermo_mean_dS                          : -83812.35%
+  advanced_stacking_stacking_abrupt_changes: -1027.22%
+  stiff_rise_max_energy                   : -928.30%
+  advanced_stacking_stacking_transition_variance: -594.59%
+  bend_max_bend_w7_fraction_at_global_max : -533.61%
+  advanced_melting_mean_melting_dG        : -308.81%
+  thermo_total_dS                         : -207.98%
+  stiff_shift_mean_energy                 : -200.64%
+  stiff_purine_stiffness_correlation      : -179.55%
+  advanced_g4_mean_g4_score               : -178.97%
+
+========================================
+INTERPRETATION
+========================================
+
+Mean coefficient attenuation: -313.4%
+Mean R² improvement from PWM: +0.0180
+
+>>> Low attenuation suggests physics effects are INDEPENDENT of TF binding

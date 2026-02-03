@@ -1,0 +1,14 @@
+{
+  "model_name": "config5_universal_no_yeast",
+  "description": "Universal foundation model (no yeast)",
+  "calibration_source": "cross_kingdom_calibration",
+  "calibration_date": "2026-01-16T06:32:35.751448",
+  "place_stats": {
+    "n_samples": 49846,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 1.1823335886001587,
+    "residual_mean": -0.21637162566184998,
+    "residual_std": 1.087351679801941
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cell_types": [
+    "maize"
+  ],
+  "n_features": 797,
+  "n_significant_p05": 700,
+  "n_significant_p01": 680,
+  "top_features_by_category": {
+    "thermo": [
+      "thermo_dG_p90",
+      "thermo_dH_p90",
+      "thermo_total_dG",
+      "thermo_mean_dG",
+      "thermo_estimated_Tm_C"
+    ],
+    "stiff": [
+      "stiff_gc_content_global",
+      "stiff_twist_mean_energy",
+      "stiff_twist_total_energy",
+      "stiff_gc_stiffness_correlation",
+      "stiff_slide_zscore_mean"
+    ],
+    "bend": [
+      "bend_rms_curvature_w7_max",
+      "bend_rms_curvature_w5_max",
+      "bend_rms_curvature_w9_max",
+      "bend_rms_curvature_w11_max",
+      "bend_curvature_var_w11_max"
+    ],
+    "entropy": [
+      "entropy_global_gc_entropy",
+      "entropy_renyi_entropy_alpha2.0",
+      "entropy_global_kmer1_entropy",
+      "entropy_global_shannon_entropy",
+      "entropy_normalized_shannon_entropy"
+    ],
+    "advanced": [
+      "advanced_melting_unstable_fraction",
+      "advanced_stress_stress_p90",
+      "advanced_melting_melting_dG_p90",
+      "advanced_melting_mean_melting_dG",
+      "advanced_stacking_stacking_transition_variance"
+    ]
+  }
+}

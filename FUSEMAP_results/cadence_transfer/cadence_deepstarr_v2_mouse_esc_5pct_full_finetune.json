@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_deepstarr_v2_full_mouse_esc_5pct",
+  "n_train": 964,
+  "n_trainable_params": 1322465,
+  "best_epoch": 2,
+  "val_metrics": {
+    "spearman_r": 0.10473811688966156
+  },
+  "test_metrics": {
+    "spearman_r": 0.12226850114673815,
+    "pearson_r": 0.13683872560600085,
+    "auroc": 0.5498290240152045,
+    "mse": 4.9966915012005595,
+    "mae": 1.9659600331834841,
+    "loss": 4.995003208969578
+  },
+  "source_model": "cadence_deepstarr_v2",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.05,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-19T09:18:52.063372"
+}

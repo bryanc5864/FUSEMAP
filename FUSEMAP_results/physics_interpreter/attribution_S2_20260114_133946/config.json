@@ -1,0 +1,7 @@
+{
+  "cell_type": "S2",
+  "probe_type": "ridge",
+  "alpha": 1.0,
+  "n_samples": 352009,
+  "n_features": 442
+}

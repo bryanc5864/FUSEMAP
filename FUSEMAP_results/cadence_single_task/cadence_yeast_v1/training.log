@@ -1,0 +1,425 @@
+2026-01-13 06:02:57,088 - cadence_yeast_v1 - INFO - Experiment: cadence_yeast_v1
+2026-01-13 06:02:57,088 - cadence_yeast_v1 - INFO - Output directory: results/cadence_yeast_v1
+2026-01-13 06:02:57,088 - cadence_yeast_v1 - INFO - Starting training...
+2026-01-13 06:02:57,089 - cadence_yeast_v1 - INFO - Config: config1_single_celltype
+2026-01-13 06:02:57,089 - cadence_yeast_v1 - INFO - Setting up datasets...
+2026-01-13 06:05:32,717 - cadence_yeast_v1 - INFO - Experiment: cadence_yeast_v1
+2026-01-13 06:05:32,743 - cadence_yeast_v1 - INFO - Output directory: results/cadence_yeast_v1
+2026-01-13 06:05:32,749 - cadence_yeast_v1 - INFO - Starting training...
+2026-01-13 06:05:32,749 - cadence_yeast_v1 - INFO - Config: config1_single_celltype
+2026-01-13 06:05:32,749 - cadence_yeast_v1 - INFO - Setting up datasets...
+2026-01-13 06:08:09,542 - cadence_yeast_v1 - INFO - Dataset sizes: {'dream_yeast': 100000}
+2026-01-13 06:08:09,567 - cadence_yeast_v1 - INFO - Using balanced activity sampling with 10 bins...
+2026-01-13 06:08:33,787 - cadence_yeast_v1 - INFO -   dream_yeast: val set loaded
+2026-01-13 06:11:48,539 - cadence_yeast_v1 - INFO -   dream_yeast: test set loaded (71103 samples)
+2026-01-13 06:13:58,960 - cadence_yeast_v1 - INFO -   dream_yeast: calibration set loaded (67055 samples)
+2026-01-13 06:13:58,986 - cadence_yeast_v1 - INFO - Data setup complete
+2026-01-13 06:13:58,988 - cadence_yeast_v1 - INFO - Setting up model...
+2026-01-13 06:14:01,351 - cadence_yeast_v1 - INFO - Model parameters: 1,322,465 (1,322,465 trainable)
+2026-01-13 06:14:07,586 - cadence_yeast_v1 - INFO - Model setup complete
+2026-01-13 06:14:26,290 - cadence_yeast_v1 - INFO - Step 100: NLL=2.3327, MSE=1.7160, grad=14.40, lr=1.00e-03
+2026-01-13 06:14:39,096 - cadence_yeast_v1 - INFO - Step 200: NLL=1.4731, MSE=1.1822, grad=6.54, lr=1.00e-03
+2026-01-13 06:14:51,075 - cadence_yeast_v1 - INFO - Step 300: NLL=2.8142, MSE=1.7241, grad=10.76, lr=1.00e-03
+2026-01-13 06:15:03,720 - cadence_yeast_v1 - INFO - Step 400: NLL=1.5762, MSE=1.1618, grad=7.62, lr=1.00e-03
+2026-01-13 06:15:18,062 - cadence_yeast_v1 - INFO - Step 500: NLL=1.8728, MSE=1.7581, grad=11.92, lr=1.00e-03
+2026-01-13 06:15:31,231 - cadence_yeast_v1 - INFO - Step 600: NLL=1.8636, MSE=1.0356, grad=13.47, lr=1.00e-03
+2026-01-13 06:15:44,539 - cadence_yeast_v1 - INFO - Step 700: NLL=2.3927, MSE=1.3205, grad=11.33, lr=1.00e-03
+2026-01-13 06:16:22,184 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:16:22,185 - cadence_yeast_v1 - INFO - EPOCH 0 SUMMARY (BEST)
+2026-01-13 06:16:22,185 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:16:22,185 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 2.0161 | MSE: 2.0161 | r: 0.6023 | rho: 0.6026 | R2: -1.0199 | RMSE: 3.3625
+2026-01-13 06:16:22,185 - cadence_yeast_v1 - INFO - [VAL]   NLL: 2.1214 | MSE: 2.1214 | r: 0.5771 | rho: 0.5943 | R2: -1.0635 | RMSE: 3.4492
+2026-01-13 06:16:22,185 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:16:22,185 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:16:22,185 - cadence_yeast_v1 - INFO -     expression: r=0.5771 | rho=0.5943 | R2=-1.0635 | RMSE=3.4492 | MAE=2.7164
+2026-01-13 06:16:22,185 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:16:22,657 - cadence_yeast_v1 - INFO - Epoch 0 completed in 135.1s
+2026-01-13 06:16:25,745 - cadence_yeast_v1 - INFO - Step 800: NLL=1.8326, MSE=1.5073, grad=8.41, lr=1.00e-03
+2026-01-13 06:16:37,814 - cadence_yeast_v1 - INFO - Step 900: NLL=1.2760, MSE=1.1034, grad=5.30, lr=1.00e-03
+2026-01-13 06:16:50,364 - cadence_yeast_v1 - INFO - Step 1000: NLL=1.4518, MSE=1.4852, grad=9.45, lr=1.00e-03
+2026-01-13 06:17:01,629 - cadence_yeast_v1 - INFO - Step 1100: NLL=0.9459, MSE=0.9222, grad=4.98, lr=1.00e-03
+2026-01-13 06:17:12,919 - cadence_yeast_v1 - INFO - Step 1200: NLL=1.0268, MSE=0.9334, grad=6.23, lr=1.00e-03
+2026-01-13 06:17:23,846 - cadence_yeast_v1 - INFO - Step 1300: NLL=0.6736, MSE=0.7144, grad=4.41, lr=1.00e-03
+2026-01-13 06:17:35,211 - cadence_yeast_v1 - INFO - Step 1400: NLL=0.6538, MSE=0.7082, grad=4.25, lr=1.00e-03
+2026-01-13 06:17:47,198 - cadence_yeast_v1 - INFO - Step 1500: NLL=0.9604, MSE=1.0075, grad=5.15, lr=1.00e-03
+2026-01-13 06:18:18,702 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:18:18,704 - cadence_yeast_v1 - INFO - EPOCH 1 SUMMARY (BEST)
+2026-01-13 06:18:18,705 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:18:18,705 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.7780 | MSE: 0.7780 | r: 0.6489 | rho: 0.6481 | R2: 0.2205 | RMSE: 2.0888
+2026-01-13 06:18:18,709 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.8740 | MSE: 0.8740 | r: 0.5968 | rho: 0.6291 | R2: 0.1499 | RMSE: 2.2139
+2026-01-13 06:18:18,710 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:18:18,710 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:18:18,710 - cadence_yeast_v1 - INFO -     expression: r=0.5968 | rho=0.6291 | R2=0.1499 | RMSE=2.2139 | MAE=1.7118
+2026-01-13 06:18:18,710 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:18:19,213 - cadence_yeast_v1 - INFO - Epoch 1 completed in 116.6s
+2026-01-13 06:18:24,539 - cadence_yeast_v1 - INFO - Step 1600: NLL=1.1335, MSE=0.9344, grad=5.13, lr=9.98e-04
+2026-01-13 06:18:36,740 - cadence_yeast_v1 - INFO - Step 1700: NLL=0.9662, MSE=1.0743, grad=5.85, lr=9.98e-04
+2026-01-13 06:18:47,250 - cadence_yeast_v1 - INFO - Step 1800: NLL=0.8174, MSE=0.8826, grad=4.01, lr=9.98e-04
+2026-01-13 06:18:58,133 - cadence_yeast_v1 - INFO - Step 1900: NLL=1.0896, MSE=0.7901, grad=7.12, lr=9.98e-04
+2026-01-13 06:19:10,994 - cadence_yeast_v1 - INFO - Step 2000: NLL=0.7598, MSE=0.7711, grad=3.98, lr=9.98e-04
+2026-01-13 06:19:23,610 - cadence_yeast_v1 - INFO - Step 2100: NLL=0.8241, MSE=0.7946, grad=4.31, lr=9.98e-04
+2026-01-13 06:19:34,665 - cadence_yeast_v1 - INFO - Step 2200: NLL=0.7728, MSE=0.8727, grad=3.53, lr=9.98e-04
+2026-01-13 06:19:46,358 - cadence_yeast_v1 - INFO - Step 2300: NLL=0.8183, MSE=0.7304, grad=4.25, lr=9.98e-04
+2026-01-13 06:20:14,057 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:20:14,057 - cadence_yeast_v1 - INFO - EPOCH 2 SUMMARY (BEST)
+2026-01-13 06:20:14,058 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:20:14,058 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.8378 | MSE: 0.8378 | r: 0.6722 | rho: 0.6554 | R2: 0.1606 | RMSE: 2.1675
+2026-01-13 06:20:14,058 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.9434 | MSE: 0.9434 | r: 0.6075 | rho: 0.6273 | R2: 0.0824 | RMSE: 2.3001
+2026-01-13 06:20:14,058 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:20:14,058 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:20:14,058 - cadence_yeast_v1 - INFO -     expression: r=0.6075 | rho=0.6273 | R2=0.0824 | RMSE=2.3001 | MAE=1.7608
+2026-01-13 06:20:14,058 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:20:14,621 - cadence_yeast_v1 - INFO - Epoch 2 completed in 115.4s
+2026-01-13 06:20:21,738 - cadence_yeast_v1 - INFO - Step 2400: NLL=0.6648, MSE=0.7115, grad=3.49, lr=9.96e-04
+2026-01-13 06:20:33,524 - cadence_yeast_v1 - INFO - Step 2500: NLL=0.8049, MSE=0.9898, grad=5.32, lr=9.96e-04
+2026-01-13 06:20:44,424 - cadence_yeast_v1 - INFO - Step 2600: NLL=0.9002, MSE=0.8665, grad=3.67, lr=9.96e-04
+2026-01-13 06:20:56,287 - cadence_yeast_v1 - INFO - Step 2700: NLL=0.8101, MSE=0.7169, grad=3.85, lr=9.96e-04
+2026-01-13 06:21:07,998 - cadence_yeast_v1 - INFO - Step 2800: NLL=0.7377, MSE=0.7545, grad=3.35, lr=9.96e-04
+2026-01-13 06:21:20,829 - cadence_yeast_v1 - INFO - Step 2900: NLL=0.7306, MSE=0.6608, grad=3.33, lr=9.96e-04
+2026-01-13 06:21:34,875 - cadence_yeast_v1 - INFO - Step 3000: NLL=0.5782, MSE=0.6888, grad=2.79, lr=9.96e-04
+2026-01-13 06:21:47,648 - cadence_yeast_v1 - INFO - Step 3100: NLL=0.5288, MSE=0.6320, grad=3.03, lr=9.96e-04
+2026-01-13 06:22:16,011 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:22:16,012 - cadence_yeast_v1 - INFO - EPOCH 3 SUMMARY 
+2026-01-13 06:22:16,012 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:22:16,012 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.8552 | MSE: 0.8552 | r: 0.6789 | rho: 0.6627 | R2: 0.1432 | RMSE: 2.1900
+2026-01-13 06:22:16,012 - cadence_yeast_v1 - INFO - [VAL]   NLL: 1.0579 | MSE: 1.0579 | r: 0.5993 | rho: 0.6093 | R2: -0.0290 | RMSE: 2.4357
+2026-01-13 06:22:16,012 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:22:16,012 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:22:16,012 - cadence_yeast_v1 - INFO -     expression: r=0.5993 | rho=0.6093 | R2=-0.0290 | RMSE=2.4357 | MAE=1.8981
+2026-01-13 06:22:16,012 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:22:16,241 - cadence_yeast_v1 - INFO - Epoch 3 completed in 121.6s
+2026-01-13 06:22:24,783 - cadence_yeast_v1 - INFO - Step 3200: NLL=0.6260, MSE=0.7090, grad=3.22, lr=9.93e-04
+2026-01-13 06:22:36,328 - cadence_yeast_v1 - INFO - Step 3300: NLL=0.5605, MSE=0.5999, grad=2.90, lr=9.93e-04
+2026-01-13 06:22:47,405 - cadence_yeast_v1 - INFO - Step 3400: NLL=0.4705, MSE=0.5261, grad=3.41, lr=9.93e-04
+2026-01-13 06:22:58,981 - cadence_yeast_v1 - INFO - Step 3500: NLL=0.7725, MSE=0.8736, grad=5.45, lr=9.93e-04
+2026-01-13 06:23:11,051 - cadence_yeast_v1 - INFO - Step 3600: NLL=0.5321, MSE=0.5475, grad=3.51, lr=9.93e-04
+2026-01-13 06:23:22,773 - cadence_yeast_v1 - INFO - Step 3700: NLL=0.5263, MSE=0.7072, grad=3.11, lr=9.93e-04
+2026-01-13 06:23:35,082 - cadence_yeast_v1 - INFO - Step 3800: NLL=0.6098, MSE=0.6213, grad=4.49, lr=9.93e-04
+2026-01-13 06:23:46,710 - cadence_yeast_v1 - INFO - Step 3900: NLL=0.6390, MSE=0.7302, grad=4.29, lr=9.93e-04
+2026-01-13 06:24:11,340 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:24:11,340 - cadence_yeast_v1 - INFO - EPOCH 4 SUMMARY 
+2026-01-13 06:24:11,340 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:24:11,340 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.7469 | MSE: 0.7469 | r: 0.7132 | rho: 0.6941 | R2: 0.2517 | RMSE: 2.0466
+2026-01-13 06:24:11,341 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.9895 | MSE: 0.9895 | r: 0.6047 | rho: 0.6329 | R2: 0.0375 | RMSE: 2.3557
+2026-01-13 06:24:11,341 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:24:11,341 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:24:11,341 - cadence_yeast_v1 - INFO -     expression: r=0.6047 | rho=0.6329 | R2=0.0375 | RMSE=2.3557 | MAE=1.8366
+2026-01-13 06:24:11,341 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:24:11,610 - cadence_yeast_v1 - INFO - Epoch 4 completed in 115.4s
+2026-01-13 06:24:23,301 - cadence_yeast_v1 - INFO - Step 4000: NLL=0.7293, MSE=0.7837, grad=6.38, lr=9.89e-04
+2026-01-13 06:24:34,953 - cadence_yeast_v1 - INFO - Step 4100: NLL=0.5102, MSE=0.5488, grad=2.84, lr=9.89e-04
+2026-01-13 06:24:45,643 - cadence_yeast_v1 - INFO - Step 4200: NLL=0.5586, MSE=0.6159, grad=2.31, lr=9.89e-04
+2026-01-13 06:24:56,659 - cadence_yeast_v1 - INFO - Step 4300: NLL=0.5641, MSE=0.6084, grad=3.80, lr=9.89e-04
+2026-01-13 06:25:06,885 - cadence_yeast_v1 - INFO - Step 4400: NLL=0.4702, MSE=0.5545, grad=3.17, lr=9.89e-04
+2026-01-13 06:25:17,951 - cadence_yeast_v1 - INFO - Step 4500: NLL=0.5651, MSE=0.5836, grad=2.31, lr=9.89e-04
+2026-01-13 06:25:28,763 - cadence_yeast_v1 - INFO - Step 4600: NLL=0.5173, MSE=0.5851, grad=3.30, lr=9.89e-04
+2026-01-13 06:26:00,310 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:26:00,311 - cadence_yeast_v1 - INFO - EPOCH 5 SUMMARY 
+2026-01-13 06:26:00,311 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:26:00,311 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.5937 | MSE: 0.5937 | r: 0.7031 | rho: 0.6672 | R2: 0.4052 | RMSE: 1.8247
+2026-01-13 06:26:00,311 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.8309 | MSE: 0.8309 | r: 0.5626 | rho: 0.5843 | R2: 0.1918 | RMSE: 2.1586
+2026-01-13 06:26:00,312 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:26:00,312 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:26:00,312 - cadence_yeast_v1 - INFO -     expression: r=0.5626 | rho=0.5843 | R2=0.1918 | RMSE=2.1586 | MAE=1.6463
+2026-01-13 06:26:00,312 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:26:00,555 - cadence_yeast_v1 - INFO - Epoch 5 completed in 108.9s
+2026-01-13 06:26:02,004 - cadence_yeast_v1 - INFO - Step 4700: NLL=0.4657, MSE=0.5124, grad=2.63, lr=9.84e-04
+2026-01-13 06:26:12,724 - cadence_yeast_v1 - INFO - Step 4800: NLL=0.3078, MSE=0.4328, grad=1.84, lr=9.84e-04
+2026-01-13 06:26:24,213 - cadence_yeast_v1 - INFO - Step 4900: NLL=0.4994, MSE=0.5297, grad=2.65, lr=9.84e-04
+2026-01-13 06:26:35,220 - cadence_yeast_v1 - INFO - Step 5000: NLL=0.4161, MSE=0.4726, grad=2.80, lr=9.84e-04
+2026-01-13 06:26:46,572 - cadence_yeast_v1 - INFO - Step 5100: NLL=0.5456, MSE=0.5751, grad=2.64, lr=9.84e-04
+2026-01-13 06:26:57,854 - cadence_yeast_v1 - INFO - Step 5200: NLL=0.4150, MSE=0.4894, grad=4.39, lr=9.84e-04
+2026-01-13 06:27:07,946 - cadence_yeast_v1 - INFO - Step 5300: NLL=0.4993, MSE=0.6029, grad=2.17, lr=9.84e-04
+2026-01-13 06:27:18,043 - cadence_yeast_v1 - INFO - Step 5400: NLL=0.4551, MSE=0.4989, grad=4.19, lr=9.84e-04
+2026-01-13 06:27:51,034 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:27:51,035 - cadence_yeast_v1 - INFO - EPOCH 6 SUMMARY (BEST)
+2026-01-13 06:27:51,035 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:27:51,035 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.5561 | MSE: 0.5561 | r: 0.7455 | rho: 0.7181 | R2: 0.4428 | RMSE: 1.7660
+2026-01-13 06:27:51,035 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.8003 | MSE: 0.8003 | r: 0.6094 | rho: 0.6327 | R2: 0.2215 | RMSE: 2.1185
+2026-01-13 06:27:51,036 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:27:51,036 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:27:51,036 - cadence_yeast_v1 - INFO -     expression: r=0.6094 | rho=0.6327 | R2=0.2215 | RMSE=2.1185 | MAE=1.6112
+2026-01-13 06:27:51,036 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:27:51,659 - cadence_yeast_v1 - INFO - Epoch 6 completed in 111.1s
+2026-01-13 06:27:55,663 - cadence_yeast_v1 - INFO - Step 5500: NLL=0.5589, MSE=0.6155, grad=3.11, lr=9.79e-04
+2026-01-13 06:28:07,592 - cadence_yeast_v1 - INFO - Step 5600: NLL=0.4449, MSE=0.5402, grad=2.74, lr=9.79e-04
+2026-01-13 06:28:19,932 - cadence_yeast_v1 - INFO - Step 5700: NLL=0.3340, MSE=0.3879, grad=1.59, lr=9.79e-04
+2026-01-13 06:28:31,467 - cadence_yeast_v1 - INFO - Step 5800: NLL=0.4761, MSE=0.5059, grad=2.59, lr=9.79e-04
+2026-01-13 06:28:42,458 - cadence_yeast_v1 - INFO - Step 5900: NLL=0.3111, MSE=0.4204, grad=2.11, lr=9.79e-04
+2026-01-13 06:28:52,966 - cadence_yeast_v1 - INFO - Step 6000: NLL=0.3472, MSE=0.4542, grad=1.63, lr=9.79e-04
+2026-01-13 06:29:03,978 - cadence_yeast_v1 - INFO - Step 6100: NLL=0.3384, MSE=0.3810, grad=2.23, lr=9.79e-04
+2026-01-13 06:29:13,984 - cadence_yeast_v1 - INFO - Step 6200: NLL=0.3849, MSE=0.4254, grad=1.88, lr=9.79e-04
+2026-01-13 06:29:42,603 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:29:42,604 - cadence_yeast_v1 - INFO - EPOCH 7 SUMMARY (BEST)
+2026-01-13 06:29:42,604 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:29:42,604 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.5118 | MSE: 0.5118 | r: 0.7644 | rho: 0.7331 | R2: 0.4872 | RMSE: 1.6941
+2026-01-13 06:29:42,604 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.8248 | MSE: 0.8248 | r: 0.6127 | rho: 0.6315 | R2: 0.1977 | RMSE: 2.1507
+2026-01-13 06:29:42,604 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:29:42,604 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:29:42,605 - cadence_yeast_v1 - INFO -     expression: r=0.6127 | rho=0.6315 | R2=0.1977 | RMSE=2.1507 | MAE=1.6381
+2026-01-13 06:29:42,605 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:29:43,199 - cadence_yeast_v1 - INFO - Epoch 7 completed in 111.5s
+2026-01-13 06:29:48,016 - cadence_yeast_v1 - INFO - Step 6300: NLL=0.4028, MSE=0.4545, grad=3.01, lr=9.72e-04
+2026-01-13 06:29:58,235 - cadence_yeast_v1 - INFO - Step 6400: NLL=0.3318, MSE=0.3977, grad=1.60, lr=9.72e-04
+2026-01-13 06:30:07,883 - cadence_yeast_v1 - INFO - Step 6500: NLL=0.3908, MSE=0.4338, grad=2.62, lr=9.72e-04
+2026-01-13 06:30:18,879 - cadence_yeast_v1 - INFO - Step 6600: NLL=0.3421, MSE=0.4394, grad=2.05, lr=9.72e-04
+2026-01-13 06:30:29,653 - cadence_yeast_v1 - INFO - Step 6700: NLL=0.4838, MSE=0.5591, grad=2.11, lr=9.72e-04
+2026-01-13 06:30:40,265 - cadence_yeast_v1 - INFO - Step 6800: NLL=0.3316, MSE=0.4179, grad=2.26, lr=9.72e-04
+2026-01-13 06:30:52,642 - cadence_yeast_v1 - INFO - Step 6900: NLL=0.3986, MSE=0.4599, grad=2.04, lr=9.72e-04
+2026-01-13 06:31:04,018 - cadence_yeast_v1 - INFO - Step 7000: NLL=0.2668, MSE=0.3475, grad=1.88, lr=9.72e-04
+2026-01-13 06:31:31,076 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:31:31,077 - cadence_yeast_v1 - INFO - EPOCH 8 SUMMARY (BEST)
+2026-01-13 06:31:31,077 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:31:31,077 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.4390 | MSE: 0.4390 | r: 0.7804 | rho: 0.7466 | R2: 0.5601 | RMSE: 1.5691
+2026-01-13 06:31:31,077 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7436 | MSE: 0.7436 | r: 0.6162 | rho: 0.6295 | R2: 0.2767 | RMSE: 2.0421
+2026-01-13 06:31:31,078 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:31:31,078 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:31:31,078 - cadence_yeast_v1 - INFO -     expression: r=0.6162 | rho=0.6295 | R2=0.2767 | RMSE=2.0421 | MAE=1.5496
+2026-01-13 06:31:31,078 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:31:31,736 - cadence_yeast_v1 - INFO - Epoch 8 completed in 108.5s
+2026-01-13 06:31:40,558 - cadence_yeast_v1 - INFO - Step 7100: NLL=0.3675, MSE=0.4749, grad=2.03, lr=9.65e-04
+2026-01-13 06:31:53,662 - cadence_yeast_v1 - INFO - Step 7200: NLL=0.3249, MSE=0.4513, grad=1.88, lr=9.65e-04
+2026-01-13 06:32:05,205 - cadence_yeast_v1 - INFO - Step 7300: NLL=0.3887, MSE=0.4611, grad=1.63, lr=9.65e-04
+2026-01-13 06:32:16,740 - cadence_yeast_v1 - INFO - Step 7400: NLL=0.3714, MSE=0.4247, grad=3.16, lr=9.65e-04
+2026-01-13 06:32:27,789 - cadence_yeast_v1 - INFO - Step 7500: NLL=0.4910, MSE=0.5309, grad=3.77, lr=9.65e-04
+2026-01-13 06:32:38,818 - cadence_yeast_v1 - INFO - Step 7600: NLL=0.2641, MSE=0.3443, grad=1.35, lr=9.65e-04
+2026-01-13 06:32:51,076 - cadence_yeast_v1 - INFO - Step 7700: NLL=0.3003, MSE=0.3650, grad=1.56, lr=9.65e-04
+2026-01-13 06:33:02,949 - cadence_yeast_v1 - INFO - Step 7800: NLL=0.4048, MSE=0.4885, grad=1.76, lr=9.65e-04
+2026-01-13 06:33:26,782 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:33:26,782 - cadence_yeast_v1 - INFO - EPOCH 9 SUMMARY 
+2026-01-13 06:33:26,782 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:33:26,782 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.5004 | MSE: 0.5004 | r: 0.7933 | rho: 0.7588 | R2: 0.4986 | RMSE: 1.6752
+2026-01-13 06:33:26,782 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.8825 | MSE: 0.8825 | r: 0.6110 | rho: 0.6309 | R2: 0.1416 | RMSE: 2.2246
+2026-01-13 06:33:26,782 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:33:26,782 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:33:26,783 - cadence_yeast_v1 - INFO -     expression: r=0.6110 | rho=0.6309 | R2=0.1416 | RMSE=2.2246 | MAE=1.7100
+2026-01-13 06:33:26,783 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:33:27,019 - cadence_yeast_v1 - INFO - Epoch 9 completed in 115.3s
+2026-01-13 06:33:35,196 - cadence_yeast_v1 - INFO - Step 7900: NLL=0.3192, MSE=0.3858, grad=1.49, lr=9.57e-04
+2026-01-13 06:33:47,832 - cadence_yeast_v1 - INFO - Step 8000: NLL=0.3956, MSE=0.4889, grad=1.82, lr=9.57e-04
+2026-01-13 06:33:58,498 - cadence_yeast_v1 - INFO - Step 8100: NLL=0.3895, MSE=0.4294, grad=4.01, lr=9.57e-04
+2026-01-13 06:34:09,390 - cadence_yeast_v1 - INFO - Step 8200: NLL=0.3114, MSE=0.3725, grad=2.00, lr=9.57e-04
+2026-01-13 06:34:22,071 - cadence_yeast_v1 - INFO - Step 8300: NLL=0.2784, MSE=0.3477, grad=1.35, lr=9.57e-04
+2026-01-13 06:34:33,624 - cadence_yeast_v1 - INFO - Step 8400: NLL=0.3128, MSE=0.3836, grad=1.55, lr=9.57e-04
+2026-01-13 06:34:45,880 - cadence_yeast_v1 - INFO - Step 8500: NLL=0.2688, MSE=0.3254, grad=2.00, lr=9.57e-04
+2026-01-13 06:34:57,276 - cadence_yeast_v1 - INFO - Step 8600: NLL=0.2854, MSE=0.3626, grad=1.24, lr=9.57e-04
+2026-01-13 06:35:19,807 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:35:19,808 - cadence_yeast_v1 - INFO - EPOCH 10 SUMMARY 
+2026-01-13 06:35:19,808 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:35:19,808 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.4537 | MSE: 0.4537 | r: 0.8050 | rho: 0.7675 | R2: 0.5455 | RMSE: 1.5951
+2026-01-13 06:35:19,809 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.8063 | MSE: 0.8063 | r: 0.6137 | rho: 0.6277 | R2: 0.2157 | RMSE: 2.1265
+2026-01-13 06:35:19,809 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:35:19,809 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:35:19,809 - cadence_yeast_v1 - INFO -     expression: r=0.6137 | rho=0.6277 | R2=0.2157 | RMSE=2.1265 | MAE=1.6281
+2026-01-13 06:35:19,810 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:35:20,074 - cadence_yeast_v1 - INFO - Epoch 10 completed in 113.1s
+2026-01-13 06:35:32,282 - cadence_yeast_v1 - INFO - Step 8700: NLL=0.2935, MSE=0.3697, grad=1.79, lr=9.48e-04
+2026-01-13 06:35:43,860 - cadence_yeast_v1 - INFO - Step 8800: NLL=0.2809, MSE=0.3751, grad=2.24, lr=9.48e-04
+2026-01-13 06:35:55,002 - cadence_yeast_v1 - INFO - Step 8900: NLL=0.2308, MSE=0.2717, grad=1.42, lr=9.48e-04
+2026-01-13 06:36:07,211 - cadence_yeast_v1 - INFO - Step 9000: NLL=0.2546, MSE=0.3329, grad=1.76, lr=9.48e-04
+2026-01-13 06:36:18,659 - cadence_yeast_v1 - INFO - Step 9100: NLL=0.3134, MSE=0.4047, grad=1.74, lr=9.48e-04
+2026-01-13 06:36:30,328 - cadence_yeast_v1 - INFO - Step 9200: NLL=0.3337, MSE=0.4044, grad=1.59, lr=9.48e-04
+2026-01-13 06:36:42,328 - cadence_yeast_v1 - INFO - Step 9300: NLL=0.3325, MSE=0.4416, grad=2.29, lr=9.48e-04
+2026-01-13 06:37:11,450 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:37:11,450 - cadence_yeast_v1 - INFO - EPOCH 11 SUMMARY (BEST)
+2026-01-13 06:37:11,450 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:37:11,451 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.3705 | MSE: 0.3705 | r: 0.8163 | rho: 0.7843 | R2: 0.6288 | RMSE: 1.4414
+2026-01-13 06:37:11,451 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7222 | MSE: 0.7222 | r: 0.6174 | rho: 0.6357 | R2: 0.2975 | RMSE: 2.0125
+2026-01-13 06:37:11,451 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:37:11,451 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:37:11,452 - cadence_yeast_v1 - INFO -     expression: r=0.6174 | rho=0.6357 | R2=0.2975 | RMSE=2.0125 | MAE=1.5321
+2026-01-13 06:37:11,452 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:37:11,885 - cadence_yeast_v1 - INFO - Epoch 11 completed in 111.8s
+2026-01-13 06:37:14,202 - cadence_yeast_v1 - INFO - Step 9400: NLL=0.2295, MSE=0.2891, grad=1.10, lr=9.38e-04
+2026-01-13 06:37:24,866 - cadence_yeast_v1 - INFO - Step 9500: NLL=0.2604, MSE=0.3291, grad=2.81, lr=9.38e-04
+2026-01-13 06:37:36,471 - cadence_yeast_v1 - INFO - Step 9600: NLL=0.2426, MSE=0.3392, grad=1.23, lr=9.38e-04
+2026-01-13 06:37:46,214 - cadence_yeast_v1 - INFO - Step 9700: NLL=0.2090, MSE=0.2597, grad=1.99, lr=9.38e-04
+2026-01-13 06:37:56,450 - cadence_yeast_v1 - INFO - Step 9800: NLL=0.2667, MSE=0.3001, grad=1.60, lr=9.38e-04
+2026-01-13 06:38:07,023 - cadence_yeast_v1 - INFO - Step 9900: NLL=0.3060, MSE=0.4057, grad=1.71, lr=9.38e-04
+2026-01-13 06:38:18,071 - cadence_yeast_v1 - INFO - Step 10000: NLL=0.2219, MSE=0.2828, grad=1.12, lr=9.38e-04
+2026-01-13 06:38:29,392 - cadence_yeast_v1 - INFO - Step 10100: NLL=0.3070, MSE=0.4430, grad=2.37, lr=9.38e-04
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO - EPOCH 12 SUMMARY 
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.3715 | MSE: 0.3715 | r: 0.8243 | rho: 0.7882 | R2: 0.6278 | RMSE: 1.4434
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7731 | MSE: 0.7731 | r: 0.6033 | rho: 0.6220 | R2: 0.2480 | RMSE: 2.0822
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO -     expression: r=0.6033 | rho=0.6220 | R2=0.2480 | RMSE=2.0822 | MAE=1.5889
+2026-01-13 06:38:58,468 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:38:58,737 - cadence_yeast_v1 - INFO - Epoch 12 completed in 106.9s
+2026-01-13 06:39:03,558 - cadence_yeast_v1 - INFO - Step 10200: NLL=0.2604, MSE=0.3193, grad=1.49, lr=9.28e-04
+2026-01-13 06:39:15,752 - cadence_yeast_v1 - INFO - Step 10300: NLL=0.2992, MSE=0.3863, grad=3.19, lr=9.28e-04
+2026-01-13 06:39:28,323 - cadence_yeast_v1 - INFO - Step 10400: NLL=0.2821, MSE=0.3557, grad=1.27, lr=9.28e-04
+2026-01-13 06:39:40,885 - cadence_yeast_v1 - INFO - Step 10500: NLL=0.2532, MSE=0.2970, grad=1.79, lr=9.28e-04
+2026-01-13 06:39:53,079 - cadence_yeast_v1 - INFO - Step 10600: NLL=0.2686, MSE=0.3410, grad=1.87, lr=9.28e-04
+2026-01-13 06:40:04,663 - cadence_yeast_v1 - INFO - Step 10700: NLL=0.2628, MSE=0.3373, grad=1.16, lr=9.28e-04
+2026-01-13 06:40:15,064 - cadence_yeast_v1 - INFO - Step 10800: NLL=0.1830, MSE=0.2409, grad=1.46, lr=9.28e-04
+2026-01-13 06:40:26,385 - cadence_yeast_v1 - INFO - Step 10900: NLL=0.1845, MSE=0.2687, grad=0.91, lr=9.28e-04
+2026-01-13 06:40:52,379 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:40:52,379 - cadence_yeast_v1 - INFO - EPOCH 13 SUMMARY 
+2026-01-13 06:40:52,379 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:40:52,379 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.4660 | MSE: 0.4660 | r: 0.8238 | rho: 0.7914 | R2: 0.5331 | RMSE: 1.6165
+2026-01-13 06:40:52,379 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.8944 | MSE: 0.8944 | r: 0.6141 | rho: 0.6350 | R2: 0.1300 | RMSE: 2.2396
+2026-01-13 06:40:52,380 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:40:52,380 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:40:52,380 - cadence_yeast_v1 - INFO -     expression: r=0.6141 | rho=0.6350 | R2=0.1300 | RMSE=2.2396 | MAE=1.7317
+2026-01-13 06:40:52,380 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:40:52,621 - cadence_yeast_v1 - INFO - Epoch 13 completed in 113.9s
+2026-01-13 06:40:59,432 - cadence_yeast_v1 - INFO - Step 11000: NLL=0.2740, MSE=0.3993, grad=1.39, lr=9.17e-04
+2026-01-13 06:41:10,365 - cadence_yeast_v1 - INFO - Step 11100: NLL=0.2195, MSE=0.2701, grad=1.51, lr=9.17e-04
+2026-01-13 06:41:21,358 - cadence_yeast_v1 - INFO - Step 11200: NLL=0.7396, MSE=0.4012, grad=4.95, lr=9.17e-04
+2026-01-13 06:41:31,917 - cadence_yeast_v1 - INFO - Step 11300: NLL=0.2985, MSE=0.3501, grad=1.84, lr=9.17e-04
+2026-01-13 06:41:44,158 - cadence_yeast_v1 - INFO - Step 11400: NLL=0.2504, MSE=0.3330, grad=1.41, lr=9.17e-04
+2026-01-13 06:41:56,867 - cadence_yeast_v1 - INFO - Step 11500: NLL=0.2776, MSE=0.3767, grad=1.94, lr=9.17e-04
+2026-01-13 06:42:08,992 - cadence_yeast_v1 - INFO - Step 11600: NLL=0.2137, MSE=0.3279, grad=0.87, lr=9.17e-04
+2026-01-13 06:42:19,581 - cadence_yeast_v1 - INFO - Step 11700: NLL=0.2620, MSE=0.3791, grad=1.19, lr=9.17e-04
+2026-01-13 06:42:44,609 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:42:44,610 - cadence_yeast_v1 - INFO - EPOCH 14 SUMMARY 
+2026-01-13 06:42:44,610 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:42:44,610 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.2980 | MSE: 0.2980 | r: 0.8414 | rho: 0.8088 | R2: 0.7014 | RMSE: 1.2928
+2026-01-13 06:42:44,611 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7441 | MSE: 0.7441 | r: 0.5776 | rho: 0.6023 | R2: 0.2762 | RMSE: 2.0428
+2026-01-13 06:42:44,611 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:42:44,611 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:42:44,611 - cadence_yeast_v1 - INFO -     expression: r=0.5776 | rho=0.6023 | R2=0.2762 | RMSE=2.0428 | MAE=1.5622
+2026-01-13 06:42:44,612 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:42:44,873 - cadence_yeast_v1 - INFO - Epoch 14 completed in 112.2s
+2026-01-13 06:42:53,157 - cadence_yeast_v1 - INFO - Step 11800: NLL=0.2071, MSE=0.2884, grad=0.95, lr=9.05e-04
+2026-01-13 06:43:04,219 - cadence_yeast_v1 - INFO - Step 11900: NLL=0.2141, MSE=0.3168, grad=1.15, lr=9.05e-04
+2026-01-13 06:43:14,842 - cadence_yeast_v1 - INFO - Step 12000: NLL=0.1923, MSE=0.2311, grad=1.17, lr=9.05e-04
+2026-01-13 06:43:24,648 - cadence_yeast_v1 - INFO - Step 12100: NLL=0.2117, MSE=0.3057, grad=1.15, lr=9.05e-04
+2026-01-13 06:43:35,023 - cadence_yeast_v1 - INFO - Step 12200: NLL=0.1960, MSE=0.2708, grad=1.43, lr=9.05e-04
+2026-01-13 06:43:45,649 - cadence_yeast_v1 - INFO - Step 12300: NLL=0.2641, MSE=0.2981, grad=2.77, lr=9.05e-04
+2026-01-13 06:43:55,874 - cadence_yeast_v1 - INFO - Step 12400: NLL=0.1850, MSE=0.2281, grad=1.09, lr=9.05e-04
+2026-01-13 06:44:06,751 - cadence_yeast_v1 - INFO - Step 12500: NLL=0.1844, MSE=0.2330, grad=1.55, lr=9.05e-04
+2026-01-13 06:44:29,997 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:44:29,997 - cadence_yeast_v1 - INFO - EPOCH 15 SUMMARY 
+2026-01-13 06:44:29,997 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:44:29,997 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.2900 | MSE: 0.2900 | r: 0.8592 | rho: 0.8244 | R2: 0.7094 | RMSE: 1.2754
+2026-01-13 06:44:29,998 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7570 | MSE: 0.7570 | r: 0.5967 | rho: 0.6111 | R2: 0.2636 | RMSE: 2.0604
+2026-01-13 06:44:29,998 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:44:29,998 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:44:29,998 - cadence_yeast_v1 - INFO -     expression: r=0.5967 | rho=0.6111 | R2=0.2636 | RMSE=2.0604 | MAE=1.5817
+2026-01-13 06:44:29,999 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:44:30,225 - cadence_yeast_v1 - INFO - Epoch 15 completed in 105.4s
+2026-01-13 06:44:41,091 - cadence_yeast_v1 - INFO - Step 12600: NLL=0.2355, MSE=0.2638, grad=2.12, lr=8.92e-04
+2026-01-13 06:44:51,791 - cadence_yeast_v1 - INFO - Step 12700: NLL=0.2134, MSE=0.2586, grad=2.03, lr=8.92e-04
+2026-01-13 06:45:01,576 - cadence_yeast_v1 - INFO - Step 12800: NLL=0.1922, MSE=0.2843, grad=0.85, lr=8.92e-04
+2026-01-13 06:45:11,012 - cadence_yeast_v1 - INFO - Step 12900: NLL=0.2104, MSE=0.2677, grad=0.91, lr=8.92e-04
+2026-01-13 06:45:21,842 - cadence_yeast_v1 - INFO - Step 13000: NLL=0.1891, MSE=0.2868, grad=0.93, lr=8.92e-04
+2026-01-13 06:45:32,555 - cadence_yeast_v1 - INFO - Step 13100: NLL=0.1764, MSE=0.2250, grad=1.02, lr=8.92e-04
+2026-01-13 06:45:43,373 - cadence_yeast_v1 - INFO - Step 13200: NLL=0.2107, MSE=0.2766, grad=2.02, lr=8.92e-04
+2026-01-13 06:46:13,695 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:46:13,695 - cadence_yeast_v1 - INFO - EPOCH 16 SUMMARY 
+2026-01-13 06:46:13,696 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:46:13,696 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.2774 | MSE: 0.2774 | r: 0.8681 | rho: 0.8353 | R2: 0.7221 | RMSE: 1.2473
+2026-01-13 06:46:13,696 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7757 | MSE: 0.7757 | r: 0.5960 | rho: 0.6161 | R2: 0.2455 | RMSE: 2.0857
+2026-01-13 06:46:13,696 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:46:13,697 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:46:13,697 - cadence_yeast_v1 - INFO -     expression: r=0.5960 | rho=0.6161 | R2=0.2455 | RMSE=2.0857 | MAE=1.5954
+2026-01-13 06:46:13,697 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:46:13,948 - cadence_yeast_v1 - INFO - Epoch 16 completed in 103.7s
+2026-01-13 06:46:15,403 - cadence_yeast_v1 - INFO - Step 13300: NLL=0.1783, MSE=0.2458, grad=0.84, lr=8.79e-04
+2026-01-13 06:46:26,893 - cadence_yeast_v1 - INFO - Step 13400: NLL=0.2178, MSE=0.3190, grad=1.40, lr=8.79e-04
+2026-01-13 06:46:37,029 - cadence_yeast_v1 - INFO - Step 13500: NLL=0.1787, MSE=0.2271, grad=1.06, lr=8.79e-04
+2026-01-13 06:46:48,072 - cadence_yeast_v1 - INFO - Step 13600: NLL=0.2342, MSE=0.2807, grad=1.77, lr=8.79e-04
+2026-01-13 06:46:58,296 - cadence_yeast_v1 - INFO - Step 13700: NLL=0.1516, MSE=0.2135, grad=0.75, lr=8.79e-04
+2026-01-13 06:47:08,884 - cadence_yeast_v1 - INFO - Step 13800: NLL=0.2334, MSE=0.2926, grad=2.10, lr=8.79e-04
+2026-01-13 06:47:18,994 - cadence_yeast_v1 - INFO - Step 13900: NLL=0.1708, MSE=0.2531, grad=0.79, lr=8.79e-04
+2026-01-13 06:47:28,814 - cadence_yeast_v1 - INFO - Step 14000: NLL=0.1673, MSE=0.2210, grad=1.02, lr=8.79e-04
+2026-01-13 06:47:56,035 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:47:56,035 - cadence_yeast_v1 - INFO - EPOCH 17 SUMMARY 
+2026-01-13 06:47:56,035 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:47:56,035 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.2627 | MSE: 0.2627 | r: 0.8777 | rho: 0.8467 | R2: 0.7368 | RMSE: 1.2138
+2026-01-13 06:47:56,035 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7555 | MSE: 0.7555 | r: 0.6065 | rho: 0.6222 | R2: 0.2651 | RMSE: 2.0584
+2026-01-13 06:47:56,035 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:47:56,035 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:47:56,036 - cadence_yeast_v1 - INFO -     expression: r=0.6065 | rho=0.6222 | R2=0.2651 | RMSE=2.0584 | MAE=1.5705
+2026-01-13 06:47:56,036 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:47:56,366 - cadence_yeast_v1 - INFO - Epoch 17 completed in 102.4s
+2026-01-13 06:47:59,778 - cadence_yeast_v1 - INFO - Step 14100: NLL=0.1551, MSE=0.1880, grad=1.23, lr=8.65e-04
+2026-01-13 06:48:10,505 - cadence_yeast_v1 - INFO - Step 14200: NLL=0.1936, MSE=0.2696, grad=0.98, lr=8.65e-04
+2026-01-13 06:48:20,407 - cadence_yeast_v1 - INFO - Step 14300: NLL=0.1208, MSE=0.1517, grad=1.60, lr=8.65e-04
+2026-01-13 06:48:30,056 - cadence_yeast_v1 - INFO - Step 14400: NLL=0.1370, MSE=0.1762, grad=1.21, lr=8.65e-04
+2026-01-13 06:48:39,921 - cadence_yeast_v1 - INFO - Step 14500: NLL=0.1290, MSE=0.1807, grad=0.70, lr=8.65e-04
+2026-01-13 06:48:50,942 - cadence_yeast_v1 - INFO - Step 14600: NLL=0.1177, MSE=0.1520, grad=0.77, lr=8.65e-04
+2026-01-13 06:49:00,951 - cadence_yeast_v1 - INFO - Step 14700: NLL=0.1515, MSE=0.1854, grad=0.85, lr=8.65e-04
+2026-01-13 06:49:10,732 - cadence_yeast_v1 - INFO - Step 14800: NLL=0.1396, MSE=0.1952, grad=0.71, lr=8.65e-04
+2026-01-13 06:49:38,839 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:49:38,840 - cadence_yeast_v1 - INFO - EPOCH 18 SUMMARY 
+2026-01-13 06:49:38,840 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:49:38,840 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.2467 | MSE: 0.2467 | r: 0.8883 | rho: 0.8594 | R2: 0.7528 | RMSE: 1.1762
+2026-01-13 06:49:38,840 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7846 | MSE: 0.7846 | r: 0.6028 | rho: 0.6187 | R2: 0.2368 | RMSE: 2.0976
+2026-01-13 06:49:38,841 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:49:38,841 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:49:38,841 - cadence_yeast_v1 - INFO -     expression: r=0.6028 | rho=0.6187 | R2=0.2368 | RMSE=2.0976 | MAE=1.6058
+2026-01-13 06:49:38,841 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:49:39,103 - cadence_yeast_v1 - INFO - Epoch 18 completed in 102.7s
+2026-01-13 06:49:44,104 - cadence_yeast_v1 - INFO - Step 14900: NLL=0.1454, MSE=0.2079, grad=1.00, lr=8.50e-04
+2026-01-13 06:49:54,990 - cadence_yeast_v1 - INFO - Step 15000: NLL=0.1488, MSE=0.1857, grad=1.22, lr=8.50e-04
+2026-01-13 06:50:05,554 - cadence_yeast_v1 - INFO - Step 15100: NLL=0.1724, MSE=0.2306, grad=1.09, lr=8.50e-04
+2026-01-13 06:50:16,062 - cadence_yeast_v1 - INFO - Step 15200: NLL=0.1622, MSE=0.2052, grad=1.06, lr=8.50e-04
+2026-01-13 06:50:25,835 - cadence_yeast_v1 - INFO - Step 15300: NLL=0.1180, MSE=0.1447, grad=0.78, lr=8.50e-04
+2026-01-13 06:50:35,932 - cadence_yeast_v1 - INFO - Step 15400: NLL=0.1723, MSE=0.2064, grad=1.36, lr=8.50e-04
+2026-01-13 06:50:45,773 - cadence_yeast_v1 - INFO - Step 15500: NLL=0.1111, MSE=0.1553, grad=0.70, lr=8.50e-04
+2026-01-13 06:50:56,089 - cadence_yeast_v1 - INFO - Step 15600: NLL=0.2089, MSE=0.2861, grad=1.38, lr=8.50e-04
+2026-01-13 06:51:20,876 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:51:20,876 - cadence_yeast_v1 - INFO - EPOCH 19 SUMMARY 
+2026-01-13 06:51:20,877 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:51:20,877 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.1951 | MSE: 0.1951 | r: 0.9000 | rho: 0.8705 | R2: 0.8045 | RMSE: 1.0460
+2026-01-13 06:51:20,877 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7396 | MSE: 0.7396 | r: 0.5862 | rho: 0.6005 | R2: 0.2806 | RMSE: 2.0366
+2026-01-13 06:51:20,877 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:51:20,878 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:51:20,878 - cadence_yeast_v1 - INFO -     expression: r=0.5862 | rho=0.6005 | R2=0.2806 | RMSE=2.0366 | MAE=1.5566
+2026-01-13 06:51:20,878 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:51:21,072 - cadence_yeast_v1 - INFO - Epoch 19 completed in 102.0s
+2026-01-13 06:51:28,633 - cadence_yeast_v1 - INFO - Step 15700: NLL=0.1618, MSE=0.2174, grad=0.98, lr=8.35e-04
+2026-01-13 06:51:38,687 - cadence_yeast_v1 - INFO - Step 15800: NLL=0.1872, MSE=0.2497, grad=0.95, lr=8.35e-04
+2026-01-13 06:51:48,265 - cadence_yeast_v1 - INFO - Step 15900: NLL=0.1169, MSE=0.1665, grad=0.69, lr=8.35e-04
+2026-01-13 06:51:58,723 - cadence_yeast_v1 - INFO - Step 16000: NLL=0.1436, MSE=0.1767, grad=0.79, lr=8.35e-04
+2026-01-13 06:52:08,070 - cadence_yeast_v1 - INFO - Step 16100: NLL=0.1614, MSE=0.2076, grad=1.03, lr=8.35e-04
+2026-01-13 06:52:18,405 - cadence_yeast_v1 - INFO - Step 16200: NLL=0.1351, MSE=0.1937, grad=0.76, lr=8.35e-04
+2026-01-13 06:52:28,721 - cadence_yeast_v1 - INFO - Step 16300: NLL=0.1117, MSE=0.1443, grad=0.69, lr=8.35e-04
+2026-01-13 06:52:38,908 - cadence_yeast_v1 - INFO - Step 16400: NLL=0.1184, MSE=0.1470, grad=1.02, lr=8.35e-04
+2026-01-13 06:52:58,973 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:52:58,973 - cadence_yeast_v1 - INFO - EPOCH 20 SUMMARY 
+2026-01-13 06:52:58,974 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:52:58,974 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.2114 | MSE: 0.2114 | r: 0.9015 | rho: 0.8730 | R2: 0.7882 | RMSE: 1.0888
+2026-01-13 06:52:58,974 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7680 | MSE: 0.7680 | r: 0.5892 | rho: 0.6013 | R2: 0.2529 | RMSE: 2.0754
+2026-01-13 06:52:58,974 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:52:58,974 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:52:58,975 - cadence_yeast_v1 - INFO -     expression: r=0.5892 | rho=0.6013 | R2=0.2529 | RMSE=2.0754 | MAE=1.5973
+2026-01-13 06:52:58,975 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:52:59,260 - cadence_yeast_v1 - INFO - Epoch 20 completed in 98.2s
+2026-01-13 06:53:08,036 - cadence_yeast_v1 - INFO - Step 16500: NLL=0.1150, MSE=0.1549, grad=0.76, lr=8.19e-04
+2026-01-13 06:53:16,920 - cadence_yeast_v1 - INFO - Step 16600: NLL=0.1103, MSE=0.1327, grad=0.96, lr=8.19e-04
+2026-01-13 06:53:26,209 - cadence_yeast_v1 - INFO - Step 16700: NLL=0.1667, MSE=0.2264, grad=1.78, lr=8.19e-04
+2026-01-13 06:53:34,584 - cadence_yeast_v1 - INFO - Step 16800: NLL=0.1257, MSE=0.1772, grad=1.60, lr=8.19e-04
+2026-01-13 06:53:44,247 - cadence_yeast_v1 - INFO - Step 16900: NLL=0.1730, MSE=0.2255, grad=1.53, lr=8.19e-04
+2026-01-13 06:53:54,181 - cadence_yeast_v1 - INFO - Step 17000: NLL=0.0909, MSE=0.1188, grad=0.66, lr=8.19e-04
+2026-01-13 06:54:03,811 - cadence_yeast_v1 - INFO - Step 17100: NLL=0.1457, MSE=0.1981, grad=0.78, lr=8.19e-04
+2026-01-13 06:54:12,552 - cadence_yeast_v1 - INFO - Step 17200: NLL=0.1954, MSE=0.2712, grad=0.96, lr=8.19e-04
+2026-01-13 06:54:29,391 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:54:29,392 - cadence_yeast_v1 - INFO - EPOCH 21 SUMMARY 
+2026-01-13 06:54:29,392 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:54:29,392 - cadence_yeast_v1 - INFO - [TRAIN] NLL: 0.1749 | MSE: 0.1749 | r: 0.9111 | rho: 0.8821 | R2: 0.8248 | RMSE: 0.9904
+2026-01-13 06:54:29,392 - cadence_yeast_v1 - INFO - [VAL]   NLL: 0.7555 | MSE: 0.7555 | r: 0.5804 | rho: 0.5943 | R2: 0.2651 | RMSE: 2.0584
+2026-01-13 06:54:29,392 - cadence_yeast_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 06:54:29,393 - cadence_yeast_v1 - INFO -   [VAL] dream_yeast:
+2026-01-13 06:54:29,393 - cadence_yeast_v1 - INFO -     expression: r=0.5804 | rho=0.5943 | R2=0.2651 | RMSE=2.0584 | MAE=1.5768
+2026-01-13 06:54:29,393 - cadence_yeast_v1 - INFO - ================================================================================
+2026-01-13 06:54:29,625 - cadence_yeast_v1 - INFO - Early stopping triggered after 21 epochs (patience=10)
+2026-01-13 06:54:29,625 - cadence_yeast_v1 - INFO - Training complete. Running final evaluation...
+2026-01-13 06:54:43,771 - cadence_yeast_v1 - INFO - 
+============================================================
+2026-01-13 06:54:43,771 - cadence_yeast_v1 - INFO - Evaluating on TEST sets...
+2026-01-13 06:54:43,771 - cadence_yeast_v1 - INFO - ============================================================
+2026-01-13 06:54:43,772 - cadence_yeast_v1 - INFO -   Evaluating dream_yeast (test)...
+2026-01-13 06:54:59,444 - cadence_yeast_v1 - INFO -     expression: r=0.7340, rho=0.7381, R2=-233.6895, RMSE=4.8824 (n=71103)
+2026-01-13 06:54:59,445 - cadence_yeast_v1 - INFO - 
+============================================================
+2026-01-13 06:54:59,456 - cadence_yeast_v1 - INFO - Evaluating on CALIBRATION sets...
+2026-01-13 06:54:59,456 - cadence_yeast_v1 - INFO - ============================================================
+2026-01-13 06:54:59,457 - cadence_yeast_v1 - INFO -   Evaluating dream_yeast (calibration)...
+2026-01-13 06:55:16,353 - cadence_yeast_v1 - INFO -     expression: r=0.5733, rho=0.5909, R2=0.2485, RMSE=0.8698 (n=67055)
+2026-01-13 06:55:16,356 - cadence_yeast_v1 - INFO - Results saved to results/cadence_yeast_v1/final_results.json

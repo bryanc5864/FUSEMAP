@@ -1,0 +1,285 @@
+2026-01-13 05:38:54,269 - cadence_arabidopsis_all_v1 - INFO - Experiment: cadence_arabidopsis_all_v1
+2026-01-13 05:38:54,269 - cadence_arabidopsis_all_v1 - INFO - Output directory: results/cadence_arabidopsis_all_v1
+2026-01-13 05:38:54,270 - cadence_arabidopsis_all_v1 - INFO - Starting training...
+2026-01-13 05:38:54,270 - cadence_arabidopsis_all_v1 - INFO - Config: config1_single_celltype
+2026-01-13 05:38:54,271 - cadence_arabidopsis_all_v1 - INFO - Setting up datasets...
+2026-01-13 05:39:04,342 - cadence_arabidopsis_all_v1 - INFO - Dataset sizes: {'jores_arabidopsis': 12115}
+2026-01-13 05:39:04,347 - cadence_arabidopsis_all_v1 - INFO - Using balanced activity sampling with 10 bins...
+2026-01-13 05:39:05,211 - cadence_arabidopsis_all_v1 - INFO -   jores_arabidopsis: test set loaded
+2026-01-13 05:39:14,743 - cadence_arabidopsis_all_v1 - INFO - Data setup complete
+2026-01-13 05:39:14,744 - cadence_arabidopsis_all_v1 - INFO - Setting up model...
+2026-01-13 05:39:17,623 - cadence_arabidopsis_all_v1 - INFO - Model parameters: 2,811,141 (2,811,141 trainable)
+2026-01-13 05:39:23,689 - cadence_arabidopsis_all_v1 - INFO - OneCycleLR: 9500 total steps, initial_lr=0.000400, max_lr=0.01
+2026-01-13 05:39:23,690 - cadence_arabidopsis_all_v1 - INFO - Model setup complete
+2026-01-13 05:39:47,847 - cadence_arabidopsis_all_v1 - INFO - Step 100: NLL=1.9569, MSE=1.6302, grad=42.47, lr=4.29e-04
+2026-01-13 05:40:12,498 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:40:12,498 - cadence_arabidopsis_all_v1 - INFO - EPOCH 0 SUMMARY (BEST)
+2026-01-13 05:40:12,499 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:40:12,499 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.2872 | MSE: 1.2872 | r: 0.4875 | rho: 0.4572 | R2: -0.2822 | RMSE: 1.3440
+2026-01-13 05:40:12,499 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.5101 | MSE: 1.5101 | r: 0.3332 | rho: 0.3260 | R2: -0.5362 | RMSE: 1.4553
+2026-01-13 05:40:12,499 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:40:12,500 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:40:12,500 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.3708 | rho=0.3578 | R2=-0.4060 | RMSE=1.4198 | MAE=1.1473
+2026-01-13 05:40:12,500 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.2956 | rho=0.2943 | R2=-0.6664 | RMSE=1.4907 | MAE=1.2024
+2026-01-13 05:40:12,500 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:40:13,350 - cadence_arabidopsis_all_v1 - INFO - Epoch 0 completed in 49.7s
+2026-01-13 05:40:15,860 - cadence_arabidopsis_all_v1 - INFO - Step 200: NLL=1.4716, MSE=1.1626, grad=26.27, lr=5.16e-04
+2026-01-13 05:40:33,658 - cadence_arabidopsis_all_v1 - INFO - Step 300: NLL=1.1495, MSE=0.9282, grad=16.01, lr=6.60e-04
+2026-01-13 05:40:55,430 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:40:55,430 - cadence_arabidopsis_all_v1 - INFO - EPOCH 1 SUMMARY (BEST)
+2026-01-13 05:40:55,431 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:40:55,431 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.1637 | MSE: 1.1637 | r: 0.5983 | rho: 0.5721 | R2: -0.1597 | RMSE: 1.2776
+2026-01-13 05:40:55,431 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.3710 | MSE: 1.3710 | r: 0.5360 | rho: 0.5068 | R2: -0.3920 | RMSE: 1.3870
+2026-01-13 05:40:55,431 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:40:55,435 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:40:55,435 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5576 | rho=0.5251 | R2=-0.3479 | RMSE=1.3902 | MAE=1.0906
+2026-01-13 05:40:55,436 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5145 | rho=0.4885 | R2=-0.4361 | RMSE=1.3839 | MAE=1.0791
+2026-01-13 05:40:55,436 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:40:56,513 - cadence_arabidopsis_all_v1 - INFO - Epoch 1 completed in 43.2s
+2026-01-13 05:41:00,735 - cadence_arabidopsis_all_v1 - INFO - Step 400: NLL=1.2715, MSE=1.1149, grad=9.58, lr=8.59e-04
+2026-01-13 05:41:17,606 - cadence_arabidopsis_all_v1 - INFO - Step 500: NLL=1.0048, MSE=0.8696, grad=6.09, lr=1.11e-03
+2026-01-13 05:41:36,577 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:41:36,578 - cadence_arabidopsis_all_v1 - INFO - EPOCH 2 SUMMARY (BEST)
+2026-01-13 05:41:36,578 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:41:36,578 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.1962 | MSE: 1.1962 | r: 0.5829 | rho: 0.5746 | R2: -0.1949 | RMSE: 1.2887
+2026-01-13 05:41:36,578 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.2598 | MSE: 1.2598 | r: 0.5365 | rho: 0.5420 | R2: -0.2896 | RMSE: 1.3211
+2026-01-13 05:41:36,579 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:41:36,579 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:41:36,579 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5872 | rho=0.5765 | R2=0.0435 | RMSE=1.1710 | MAE=0.9104
+2026-01-13 05:41:36,579 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.4858 | rho=0.5076 | R2=-0.6228 | RMSE=1.4711 | MAE=1.1044
+2026-01-13 05:41:36,580 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:41:37,647 - cadence_arabidopsis_all_v1 - INFO - Epoch 2 completed in 41.1s
+2026-01-13 05:41:43,805 - cadence_arabidopsis_all_v1 - INFO - Step 600: NLL=1.2603, MSE=1.0845, grad=5.98, lr=1.41e-03
+2026-01-13 05:42:01,964 - cadence_arabidopsis_all_v1 - INFO - Step 700: NLL=0.8010, MSE=0.7956, grad=3.07, lr=1.76e-03
+2026-01-13 05:42:20,772 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:42:20,772 - cadence_arabidopsis_all_v1 - INFO - EPOCH 3 SUMMARY 
+2026-01-13 05:42:20,773 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:42:20,773 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.0665 | MSE: 1.0665 | r: 0.5950 | rho: 0.5438 | R2: -0.0648 | RMSE: 1.2190
+2026-01-13 05:42:20,773 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.2566 | MSE: 1.2566 | r: 0.5236 | rho: 0.4631 | R2: -0.2833 | RMSE: 1.3237
+2026-01-13 05:42:20,773 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:42:20,774 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:42:20,774 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5268 | rho=0.4711 | R2=-0.0347 | RMSE=1.2180 | MAE=0.9499
+2026-01-13 05:42:20,774 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5205 | rho=0.4551 | R2=-0.5320 | RMSE=1.4293 | MAE=1.1378
+2026-01-13 05:42:20,774 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:42:20,968 - cadence_arabidopsis_all_v1 - INFO - Epoch 3 completed in 43.3s
+2026-01-13 05:42:28,095 - cadence_arabidopsis_all_v1 - INFO - Step 800: NLL=0.8587, MSE=0.6448, grad=4.99, lr=2.15e-03
+2026-01-13 05:42:46,401 - cadence_arabidopsis_all_v1 - INFO - Step 900: NLL=0.8611, MSE=0.8641, grad=2.21, lr=2.58e-03
+2026-01-13 05:43:03,845 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:43:03,846 - cadence_arabidopsis_all_v1 - INFO - EPOCH 4 SUMMARY (BEST)
+2026-01-13 05:43:03,846 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:43:03,846 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.2252 | MSE: 1.2252 | r: 0.5608 | rho: 0.5512 | R2: -0.2239 | RMSE: 1.3041
+2026-01-13 05:43:03,846 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.1699 | MSE: 1.1699 | r: 0.5778 | rho: 0.5761 | R2: -0.1950 | RMSE: 1.2768
+2026-01-13 05:43:03,847 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:43:03,847 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:43:03,847 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5680 | rho=0.5475 | R2=0.0438 | RMSE=1.1709 | MAE=0.9365
+2026-01-13 05:43:03,847 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5875 | rho=0.6047 | R2=-0.4338 | RMSE=1.3828 | MAE=1.1273
+2026-01-13 05:43:03,848 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:43:04,793 - cadence_arabidopsis_all_v1 - INFO - Epoch 4 completed in 43.8s
+2026-01-13 05:43:14,139 - cadence_arabidopsis_all_v1 - INFO - Step 1000: NLL=0.5734, MSE=0.5654, grad=2.26, lr=3.03e-03
+2026-01-13 05:43:30,152 - cadence_arabidopsis_all_v1 - INFO - Step 1100: NLL=0.5915, MSE=0.5194, grad=2.54, lr=3.52e-03
+2026-01-13 05:43:46,145 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:43:46,151 - cadence_arabidopsis_all_v1 - INFO - EPOCH 5 SUMMARY 
+2026-01-13 05:43:46,151 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:43:46,152 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 2.5294 | MSE: 2.5294 | r: 0.6028 | rho: 0.5695 | R2: -1.5307 | RMSE: 1.8597
+2026-01-13 05:43:46,152 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 2.6631 | MSE: 2.6631 | r: 0.5630 | rho: 0.5100 | R2: -1.7334 | RMSE: 1.9112
+2026-01-13 05:43:46,152 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:43:46,152 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:43:46,152 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5543 | rho=0.5201 | R2=-0.8327 | RMSE=1.6210 | MAE=1.3432
+2026-01-13 05:43:46,153 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5718 | rho=0.4998 | R2=-2.6340 | RMSE=2.2014 | MAE=1.8922
+2026-01-13 05:43:46,153 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:43:46,644 - cadence_arabidopsis_all_v1 - INFO - Epoch 5 completed in 41.8s
+2026-01-13 05:43:56,860 - cadence_arabidopsis_all_v1 - INFO - Step 1200: NLL=0.7021, MSE=0.5687, grad=3.07, lr=4.02e-03
+2026-01-13 05:44:14,040 - cadence_arabidopsis_all_v1 - INFO - Step 1300: NLL=0.9825, MSE=0.9987, grad=1.31, lr=4.54e-03
+2026-01-13 05:44:28,053 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:44:28,054 - cadence_arabidopsis_all_v1 - INFO - EPOCH 6 SUMMARY 
+2026-01-13 05:44:28,054 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:44:28,054 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.1004 | MSE: 1.1004 | r: 0.5758 | rho: 0.5535 | R2: -0.0941 | RMSE: 1.2399
+2026-01-13 05:44:28,054 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.2509 | MSE: 1.2509 | r: 0.4374 | rho: 0.4384 | R2: -0.2663 | RMSE: 1.3237
+2026-01-13 05:44:28,054 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:44:28,054 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:44:28,054 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5220 | rho=0.5231 | R2=-0.3282 | RMSE=1.3799 | MAE=1.0850
+2026-01-13 05:44:28,054 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.3527 | rho=0.3536 | R2=-0.2044 | RMSE=1.2674 | MAE=0.9698
+2026-01-13 05:44:28,055 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:44:28,614 - cadence_arabidopsis_all_v1 - INFO - Epoch 6 completed in 42.0s
+2026-01-13 05:44:42,385 - cadence_arabidopsis_all_v1 - INFO - Step 1400: NLL=1.0964, MSE=0.9258, grad=2.15, lr=5.07e-03
+2026-01-13 05:44:59,740 - cadence_arabidopsis_all_v1 - INFO - Step 1500: NLL=0.9220, MSE=0.9577, grad=2.70, lr=5.60e-03
+2026-01-13 05:45:10,657 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:45:10,657 - cadence_arabidopsis_all_v1 - INFO - EPOCH 7 SUMMARY (BEST)
+2026-01-13 05:45:10,658 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:45:10,658 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.0902 | MSE: 1.0902 | r: 0.6449 | rho: 0.6192 | R2: -0.0887 | RMSE: 1.2317
+2026-01-13 05:45:10,658 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.2028 | MSE: 1.2028 | r: 0.6016 | rho: 0.5809 | R2: -0.2275 | RMSE: 1.2960
+2026-01-13 05:45:10,658 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:45:10,659 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:45:10,659 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5797 | rho=0.5628 | R2=-0.0149 | RMSE=1.2063 | MAE=0.9468
+2026-01-13 05:45:10,659 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.6234 | rho=0.5989 | R2=-0.4401 | RMSE=1.3858 | MAE=1.1102
+2026-01-13 05:45:10,659 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:45:11,826 - cadence_arabidopsis_all_v1 - INFO - Epoch 7 completed in 43.2s
+2026-01-13 05:45:27,076 - cadence_arabidopsis_all_v1 - INFO - Step 1600: NLL=0.7658, MSE=0.6138, grad=0.97, lr=6.12e-03
+2026-01-13 05:45:45,065 - cadence_arabidopsis_all_v1 - INFO - Step 1700: NLL=0.7555, MSE=0.7278, grad=1.25, lr=6.64e-03
+2026-01-13 05:45:53,414 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:45:53,414 - cadence_arabidopsis_all_v1 - INFO - EPOCH 8 SUMMARY 
+2026-01-13 05:45:53,414 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:45:53,414 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.4518 | MSE: 1.4518 | r: 0.6202 | rho: 0.5678 | R2: -0.4457 | RMSE: 1.4272
+2026-01-13 05:45:53,414 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.6722 | MSE: 1.6722 | r: 0.5181 | rho: 0.4889 | R2: -0.6986 | RMSE: 1.5318
+2026-01-13 05:45:53,414 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:45:53,414 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:45:53,414 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5058 | rho=0.4763 | R2=-0.6225 | RMSE=1.5252 | MAE=1.2334
+2026-01-13 05:45:53,415 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5304 | rho=0.5015 | R2=-0.7746 | RMSE=1.5384 | MAE=1.2666
+2026-01-13 05:45:53,415 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:45:53,766 - cadence_arabidopsis_all_v1 - INFO - Epoch 8 completed in 41.9s
+2026-01-13 05:46:07,212 - cadence_arabidopsis_all_v1 - INFO - Step 1800: NLL=0.7173, MSE=0.8206, grad=0.95, lr=7.13e-03
+2026-01-13 05:46:24,312 - cadence_arabidopsis_all_v1 - INFO - Step 1900: NLL=0.5190, MSE=0.5024, grad=0.96, lr=7.60e-03
+2026-01-13 05:46:32,028 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:46:32,029 - cadence_arabidopsis_all_v1 - INFO - EPOCH 9 SUMMARY (BEST)
+2026-01-13 05:46:32,029 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:46:32,029 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.6521 | MSE: 0.6521 | r: 0.6573 | rho: 0.6200 | R2: 0.3504 | RMSE: 0.9566
+2026-01-13 05:46:32,029 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 0.6940 | MSE: 0.6940 | r: 0.6209 | rho: 0.5793 | R2: 0.2959 | RMSE: 0.9868
+2026-01-13 05:46:32,029 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:46:32,029 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:46:32,030 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.6248 | rho=0.5906 | R2=0.3047 | RMSE=0.9985 | MAE=0.7826
+2026-01-13 05:46:32,030 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.6171 | rho=0.5681 | R2=0.2871 | RMSE=0.9751 | MAE=0.7543
+2026-01-13 05:46:32,030 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:46:33,146 - cadence_arabidopsis_all_v1 - INFO - Epoch 9 completed in 39.4s
+2026-01-13 05:46:50,386 - cadence_arabidopsis_all_v1 - INFO - Step 2000: NLL=0.5402, MSE=0.5594, grad=0.72, lr=8.05e-03
+2026-01-13 05:47:11,820 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:47:11,820 - cadence_arabidopsis_all_v1 - INFO - EPOCH 10 SUMMARY (BEST)
+2026-01-13 05:47:11,821 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:47:11,821 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.7461 | MSE: 0.7461 | r: 0.6789 | rho: 0.6304 | R2: 0.2545 | RMSE: 1.0171
+2026-01-13 05:47:11,821 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 0.8218 | MSE: 0.8218 | r: 0.6230 | rho: 0.5834 | R2: 0.1598 | RMSE: 1.0691
+2026-01-13 05:47:11,821 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:47:11,821 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:47:11,822 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.6383 | rho=0.6011 | R2=0.3461 | RMSE=0.9683 | MAE=0.7597
+2026-01-13 05:47:11,822 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.6078 | rho=0.5657 | R2=-0.0265 | RMSE=1.1700 | MAE=0.9404
+2026-01-13 05:47:11,822 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:47:13,056 - cadence_arabidopsis_all_v1 - INFO - Epoch 10 completed in 39.9s
+2026-01-13 05:47:16,167 - cadence_arabidopsis_all_v1 - INFO - Step 2100: NLL=0.8098, MSE=0.8137, grad=1.52, lr=8.45e-03
+2026-01-13 05:47:33,937 - cadence_arabidopsis_all_v1 - INFO - Step 2200: NLL=0.5534, MSE=0.5886, grad=0.42, lr=8.82e-03
+2026-01-13 05:47:56,300 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:47:56,301 - cadence_arabidopsis_all_v1 - INFO - EPOCH 11 SUMMARY 
+2026-01-13 05:47:56,301 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:47:56,302 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.5274 | MSE: 1.5274 | r: 0.6652 | rho: 0.6172 | R2: -0.5188 | RMSE: 1.4613
+2026-01-13 05:47:56,302 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.7535 | MSE: 1.7535 | r: 0.5727 | rho: 0.5257 | R2: -0.7741 | RMSE: 1.5666
+2026-01-13 05:47:56,302 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:47:56,303 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:47:56,303 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5889 | rho=0.5543 | R2=-0.8881 | RMSE=1.6453 | MAE=1.3503
+2026-01-13 05:47:56,303 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5564 | rho=0.4972 | R2=-0.6601 | RMSE=1.4879 | MAE=1.2171
+2026-01-13 05:47:56,303 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:47:56,600 - cadence_arabidopsis_all_v1 - INFO - Epoch 11 completed in 43.5s
+2026-01-13 05:47:59,850 - cadence_arabidopsis_all_v1 - INFO - Step 2300: NLL=0.6882, MSE=0.6347, grad=0.60, lr=9.15e-03
+2026-01-13 05:48:16,923 - cadence_arabidopsis_all_v1 - INFO - Step 2400: NLL=0.8003, MSE=0.7765, grad=1.02, lr=9.42e-03
+2026-01-13 05:48:36,429 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:48:36,430 - cadence_arabidopsis_all_v1 - INFO - EPOCH 12 SUMMARY 
+2026-01-13 05:48:36,430 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:48:36,431 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.6575 | MSE: 0.6575 | r: 0.6650 | rho: 0.6203 | R2: 0.3442 | RMSE: 0.9594
+2026-01-13 05:48:36,431 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 0.8238 | MSE: 0.8238 | r: 0.5672 | rho: 0.5347 | R2: 0.1603 | RMSE: 1.0736
+2026-01-13 05:48:36,431 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:48:36,431 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:48:36,431 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5800 | rho=0.5512 | R2=0.2792 | RMSE=1.0166 | MAE=0.8055
+2026-01-13 05:48:36,431 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5544 | rho=0.5182 | R2=0.0414 | RMSE=1.1307 | MAE=0.9076
+2026-01-13 05:48:36,432 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:48:36,848 - cadence_arabidopsis_all_v1 - INFO - Epoch 12 completed in 40.2s
+2026-01-13 05:48:41,960 - cadence_arabidopsis_all_v1 - INFO - Step 2500: NLL=0.6369, MSE=0.6620, grad=0.76, lr=9.65e-03
+2026-01-13 05:48:56,479 - cadence_arabidopsis_all_v1 - INFO - Step 2600: NLL=0.6612, MSE=0.6558, grad=0.87, lr=9.82e-03
+2026-01-13 05:49:13,733 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:49:13,733 - cadence_arabidopsis_all_v1 - INFO - EPOCH 13 SUMMARY 
+2026-01-13 05:49:13,733 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:49:13,733 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.5979 | MSE: 0.5979 | r: 0.6888 | rho: 0.6516 | R2: 0.4036 | RMSE: 0.9150
+2026-01-13 05:49:13,733 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 0.7685 | MSE: 0.7685 | r: 0.5629 | rho: 0.5399 | R2: 0.2161 | RMSE: 1.0365
+2026-01-13 05:49:13,734 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:49:13,734 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:49:13,734 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.6064 | rho=0.5878 | R2=0.3407 | RMSE=0.9722 | MAE=0.7699
+2026-01-13 05:49:13,734 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5194 | rho=0.4920 | R2=0.0915 | RMSE=1.1007 | MAE=0.8615
+2026-01-13 05:49:13,735 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:49:14,294 - cadence_arabidopsis_all_v1 - INFO - Epoch 13 completed in 37.4s
+2026-01-13 05:49:23,393 - cadence_arabidopsis_all_v1 - INFO - Step 2700: NLL=0.3915, MSE=0.4320, grad=0.50, lr=9.94e-03
+2026-01-13 05:49:43,211 - cadence_arabidopsis_all_v1 - INFO - Step 2800: NLL=0.5727, MSE=0.6574, grad=0.83, lr=9.99e-03
+2026-01-13 05:50:00,640 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:50:00,641 - cadence_arabidopsis_all_v1 - INFO - EPOCH 14 SUMMARY 
+2026-01-13 05:50:00,641 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:50:00,641 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.0093 | MSE: 1.0093 | r: 0.6444 | rho: 0.6348 | R2: -0.0058 | RMSE: 1.1899
+2026-01-13 05:50:00,641 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.1638 | MSE: 1.1638 | r: 0.5155 | rho: 0.5112 | R2: -0.1859 | RMSE: 1.2764
+2026-01-13 05:50:00,641 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:50:00,642 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:50:00,642 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5693 | rho=0.5633 | R2=-0.0296 | RMSE=1.2150 | MAE=0.9694
+2026-01-13 05:50:00,642 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.4618 | rho=0.4592 | R2=-0.3422 | RMSE=1.3379 | MAE=1.0403
+2026-01-13 05:50:00,642 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:50:01,028 - cadence_arabidopsis_all_v1 - INFO - Epoch 14 completed in 46.7s
+2026-01-13 05:50:10,528 - cadence_arabidopsis_all_v1 - INFO - Step 2900: NLL=0.4882, MSE=0.5292, grad=0.45, lr=1.00e-02
+2026-01-13 05:50:25,713 - cadence_arabidopsis_all_v1 - INFO - Step 3000: NLL=0.7318, MSE=0.6699, grad=0.86, lr=9.99e-03
+2026-01-13 05:50:42,647 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:50:42,648 - cadence_arabidopsis_all_v1 - INFO - EPOCH 15 SUMMARY 
+2026-01-13 05:50:42,648 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:50:42,648 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.9071 | MSE: 0.9071 | r: 0.7054 | rho: 0.6583 | R2: 0.0967 | RMSE: 1.1282
+2026-01-13 05:50:42,649 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.1067 | MSE: 1.1067 | r: 0.6115 | rho: 0.5607 | R2: -0.1238 | RMSE: 1.2462
+2026-01-13 05:50:42,649 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:50:42,649 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:50:42,649 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.6239 | rho=0.5786 | R2=-0.0844 | RMSE=1.2469 | MAE=0.9983
+2026-01-13 05:50:42,649 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5991 | rho=0.5428 | R2=-0.1632 | RMSE=1.2455 | MAE=1.0233
+2026-01-13 05:50:42,649 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:50:43,207 - cadence_arabidopsis_all_v1 - INFO - Epoch 15 completed in 42.2s
+2026-01-13 05:50:51,946 - cadence_arabidopsis_all_v1 - INFO - Step 3100: NLL=0.6749, MSE=0.7028, grad=0.72, lr=9.96e-03
+2026-01-13 05:51:09,907 - cadence_arabidopsis_all_v1 - INFO - Step 3200: NLL=0.4902, MSE=0.5490, grad=0.41, lr=9.93e-03
+2026-01-13 05:51:26,787 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:51:26,788 - cadence_arabidopsis_all_v1 - INFO - EPOCH 16 SUMMARY 
+2026-01-13 05:51:26,788 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:51:26,789 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.6596 | MSE: 0.6596 | r: 0.6875 | rho: 0.6544 | R2: 0.3428 | RMSE: 0.9620
+2026-01-13 05:51:26,789 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 0.8149 | MSE: 0.8149 | r: 0.5495 | rho: 0.5329 | R2: 0.1711 | RMSE: 1.0691
+2026-01-13 05:51:26,789 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:51:26,789 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:51:26,789 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5915 | rho=0.5738 | R2=0.2389 | RMSE=1.0446 | MAE=0.8165
+2026-01-13 05:51:26,789 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5076 | rho=0.4920 | R2=0.1033 | RMSE=1.0936 | MAE=0.8176
+2026-01-13 05:51:26,790 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:51:27,335 - cadence_arabidopsis_all_v1 - INFO - Epoch 16 completed in 44.1s
+2026-01-13 05:51:42,029 - cadence_arabidopsis_all_v1 - INFO - Step 3300: NLL=0.5923, MSE=0.6417, grad=0.77, lr=9.89e-03
+2026-01-13 05:52:04,691 - cadence_arabidopsis_all_v1 - INFO - Step 3400: NLL=0.8553, MSE=0.8157, grad=0.73, lr=9.83e-03
+2026-01-13 05:52:18,729 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:52:18,730 - cadence_arabidopsis_all_v1 - INFO - EPOCH 17 SUMMARY 
+2026-01-13 05:52:18,730 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:52:18,730 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.6637 | MSE: 0.6637 | r: 0.6951 | rho: 0.6532 | R2: 0.3405 | RMSE: 0.9616
+2026-01-13 05:52:18,730 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 0.8298 | MSE: 0.8298 | r: 0.5622 | rho: 0.5285 | R2: 0.1604 | RMSE: 1.0778
+2026-01-13 05:52:18,731 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:52:18,731 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:52:18,731 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5983 | rho=0.5613 | R2=0.1072 | RMSE=1.1314 | MAE=0.9089
+2026-01-13 05:52:18,731 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5262 | rho=0.4958 | R2=0.2135 | RMSE=1.0241 | MAE=0.8008
+2026-01-13 05:52:18,732 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:52:19,492 - cadence_arabidopsis_all_v1 - INFO - Epoch 17 completed in 52.2s
+2026-01-13 05:52:37,537 - cadence_arabidopsis_all_v1 - INFO - Step 3500: NLL=0.4580, MSE=0.5368, grad=0.37, lr=9.77e-03
+2026-01-13 05:52:57,082 - cadence_arabidopsis_all_v1 - INFO - Step 3600: NLL=0.6661, MSE=0.6609, grad=0.64, lr=9.69e-03
+2026-01-13 05:53:07,911 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:53:07,911 - cadence_arabidopsis_all_v1 - INFO - EPOCH 18 SUMMARY 
+2026-01-13 05:53:07,911 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:53:07,911 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 1.3087 | MSE: 1.3087 | r: 0.6494 | rho: 0.6477 | R2: -0.3017 | RMSE: 1.3534
+2026-01-13 05:53:07,912 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.4977 | MSE: 1.4977 | r: 0.5141 | rho: 0.5172 | R2: -0.5184 | RMSE: 1.4493
+2026-01-13 05:53:07,912 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:53:07,912 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:53:07,912 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.5455 | rho=0.5508 | R2=-0.5316 | RMSE=1.4818 | MAE=1.2063
+2026-01-13 05:53:07,913 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.4827 | rho=0.4836 | R2=-0.5052 | RMSE=1.4168 | MAE=1.0910
+2026-01-13 05:53:07,913 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:53:08,512 - cadence_arabidopsis_all_v1 - INFO - Epoch 18 completed in 49.0s
+2026-01-13 05:53:27,240 - cadence_arabidopsis_all_v1 - INFO - Step 3700: NLL=0.6850, MSE=0.7051, grad=0.62, lr=9.60e-03
+2026-01-13 05:53:44,983 - cadence_arabidopsis_all_v1 - INFO - Step 3800: NLL=0.8045, MSE=0.8225, grad=1.97, lr=9.50e-03
+2026-01-13 05:53:54,327 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:53:54,327 - cadence_arabidopsis_all_v1 - INFO - EPOCH 19 SUMMARY 
+2026-01-13 05:53:54,327 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:53:54,328 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.9156 | MSE: 0.9156 | r: 0.6835 | rho: 0.6799 | R2: 0.0874 | RMSE: 1.1331
+2026-01-13 05:53:54,328 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 1.0335 | MSE: 1.0335 | r: 0.5998 | rho: 0.6054 | R2: -0.0513 | RMSE: 1.2039
+2026-01-13 05:53:54,328 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:53:54,328 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:53:54,328 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.6221 | rho=0.6241 | R2=0.0380 | RMSE=1.1744 | MAE=0.9383
+2026-01-13 05:53:54,329 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5774 | rho=0.5867 | R2=-0.1406 | RMSE=1.2334 | MAE=0.9547
+2026-01-13 05:53:54,329 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:53:54,860 - cadence_arabidopsis_all_v1 - INFO - Epoch 19 completed in 46.3s
+2026-01-13 05:54:14,959 - cadence_arabidopsis_all_v1 - INFO - Step 3900: NLL=0.5358, MSE=0.6237, grad=0.69, lr=9.40e-03
+2026-01-13 05:54:41,567 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:54:41,568 - cadence_arabidopsis_all_v1 - INFO - EPOCH 20 SUMMARY 
+2026-01-13 05:54:41,568 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:54:41,568 - cadence_arabidopsis_all_v1 - INFO - [TRAIN] NLL: 0.5134 | MSE: 0.5134 | r: 0.7258 | rho: 0.6743 | R2: 0.4889 | RMSE: 0.8486
+2026-01-13 05:54:41,568 - cadence_arabidopsis_all_v1 - INFO - [VAL]   NLL: 0.6954 | MSE: 0.6954 | r: 0.5977 | rho: 0.5558 | R2: 0.2947 | RMSE: 0.9877
+2026-01-13 05:54:41,569 - cadence_arabidopsis_all_v1 - INFO - --------------------------------------------------------------------------------
+2026-01-13 05:54:41,569 - cadence_arabidopsis_all_v1 - INFO -   [VAL] jores_arabidopsis:
+2026-01-13 05:54:41,569 - cadence_arabidopsis_all_v1 - INFO -     leaf: r=0.6147 | rho=0.5791 | R2=0.2965 | RMSE=1.0043 | MAE=0.7905
+2026-01-13 05:54:41,569 - cadence_arabidopsis_all_v1 - INFO -     proto: r=0.5807 | rho=0.5325 | R2=0.2928 | RMSE=0.9711 | MAE=0.7542
+2026-01-13 05:54:41,569 - cadence_arabidopsis_all_v1 - INFO - ================================================================================
+2026-01-13 05:54:42,022 - cadence_arabidopsis_all_v1 - INFO - Early stopping triggered after 20 epochs (patience=10)
+2026-01-13 05:54:42,022 - cadence_arabidopsis_all_v1 - INFO - Training complete. Running final evaluation...
+2026-01-13 05:54:45,795 - cadence_arabidopsis_all_v1 - INFO - Results saved to results/cadence_arabidopsis_all_v1/final_results.json

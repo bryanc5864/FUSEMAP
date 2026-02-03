@@ -1,0 +1,14 @@
+{
+  "model_name": "config2_multi_celltype_v1",
+  "description": "Multi-cell-type human (HepG2 r=0.67)",
+  "calibration_source": "encode4_calibration",
+  "calibration_date": "2026-01-14T05:29:00.100469",
+  "place_stats": {
+    "n_samples": 42230,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.5682579874992371,
+    "residual_mean": -0.1294853687286377,
+    "residual_std": 0.7538288831710815
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "cell_types": [
+    "K562",
+    "HepG2",
+    "WTC11"
+  ],
+  "mean_r2_cv": 0.17772512762852322,
+  "physics_only_mean_r2": 0.09241045514824175,
+  "pwm_improvement_mean": 0.08531467248028142
+}

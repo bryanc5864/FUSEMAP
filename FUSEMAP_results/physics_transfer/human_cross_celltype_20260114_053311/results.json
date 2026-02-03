@@ -1,0 +1,178 @@
+{
+  "experiment": "human_cross_celltype",
+  "description": "K562+HepG2 \u2192 WTC11: Within-species cross-cell-type",
+  "protocols": {
+    "zero_shot": {
+      "protocol": "zero_shot",
+      "source_datasets": [
+        "K562",
+        "HepG2"
+      ],
+      "target_dataset": "WTC11",
+      "source_pearson": 0.2570398043836245,
+      "source_spearman": 0.19344146057025396,
+      "target_pearson": 0.33805994039574433,
+      "target_spearman": 0.2541194863437894,
+      "fine_tuned_pearson": null,
+      "fine_tuned_spearman": null,
+      "fine_tune_n_samples": null,
+      "transfer_efficiency": 1.3152046283508667,
+      "n_common_features": 245,
+      "feature_contributions": {
+        "thermo": 15.860591512532515,
+        "stiff": 4.2866071202709515,
+        "bend": 29.363019891991883,
+        "entropy": 23.624862804496104,
+        "advanced": 26.864918670708537
+      }
+    },
+    "fine_tuning": [
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2"
+        ],
+        "target_dataset": "WTC11",
+        "source_pearson": 0.2570398043836245,
+        "source_spearman": 0.19344146057025396,
+        "target_pearson": 0.33805994039574433,
+        "target_spearman": 0.2541194863437894,
+        "fine_tuned_pearson": 0.2539196157654526,
+        "fine_tuned_spearman": 0.2082267935132579,
+        "fine_tune_n_samples": 1000,
+        "transfer_efficiency": 0.9878610683444377,
+        "n_common_features": 245,
+        "feature_contributions": {
+          "thermo": 9.058078672121987,
+          "stiff": 22.934158566599557,
+          "bend": 22.95617374793678,
+          "entropy": 25.45415142248849,
+          "advanced": 19.59743759085318
+        }
+      },
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2"
+        ],
+        "target_dataset": "WTC11",
+        "source_pearson": 0.2570398043836245,
+        "source_spearman": 0.19344146057025396,
+        "target_pearson": 0.33805994039574433,
+        "target_spearman": 0.2541194863437894,
+        "fine_tuned_pearson": 0.34027683426939836,
+        "fine_tuned_spearman": 0.2823978930590222,
+        "fine_tune_n_samples": 5000,
+        "transfer_efficiency": 1.323829338749204,
+        "n_common_features": 245,
+        "feature_contributions": {
+          "thermo": 16.61668448950898,
+          "stiff": 12.414316606597666,
+          "bend": 29.898706391017566,
+          "entropy": 18.993722895265222,
+          "advanced": 22.076569617610563
+        }
+      },
+      {
+        "protocol": "physics_anchored_fine_tuning",
+        "source_datasets": [
+          "K562",
+          "HepG2"
+        ],
+        "target_dataset": "WTC11",
+        "source_pearson": 0.2570398043836245,
+        "source_spearman": 0.19344146057025396,
+        "target_pearson": 0.33805994039574433,
+        "target_spearman": 0.2541194863437894,
+        "fine_tuned_pearson": 0.35663961101274144,
+        "fine_tuned_spearman": 0.28771334911469926,
+        "fine_tune_n_samples": 10000,
+        "transfer_efficiency": 1.3874878712577414,
+        "n_common_features": 245,
+        "feature_contributions": {
+          "thermo": 14.725942085356547,
+          "stiff": 13.000626024931607,
+          "bend": 26.33708099169419,
+          "entropy": 15.076749506080892,
+          "advanced": 30.85960139193676
+        }
+      }
+    ],
+    "joint_training": {
+      "HepG2": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "HepG2",
+          "K562"
+        ],
+        "target_dataset": "HepG2",
+        "source_pearson": 0.2567554788739773,
+        "source_spearman": 0.19428155952144915,
+        "target_pearson": 0.25494657718255803,
+        "target_spearman": 0.19581107246758167,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 0.9929547688744467,
+        "n_common_features": 245,
+        "feature_contributions": {
+          "thermo": 15.860591494123097,
+          "stiff": 4.286607112646737,
+          "bend": 29.36301991391109,
+          "entropy": 23.624862807770995,
+          "advanced": 26.86491867154809
+        }
+      },
+      "K562": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "HepG2",
+          "K562"
+        ],
+        "target_dataset": "K562",
+        "source_pearson": 0.2567554788739773,
+        "source_spearman": 0.19428155952144915,
+        "target_pearson": 0.2720867257570125,
+        "target_spearman": 0.21862738137056004,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 1.0597114692557745,
+        "n_common_features": 245,
+        "feature_contributions": {
+          "thermo": 15.860591494123097,
+          "stiff": 4.286607112646737,
+          "bend": 29.36301991391109,
+          "entropy": 23.624862807770995,
+          "advanced": 26.86491867154809
+        }
+      },
+      "WTC11": {
+        "protocol": "multi_species_joint",
+        "source_datasets": [
+          "HepG2",
+          "K562"
+        ],
+        "target_dataset": "WTC11",
+        "source_pearson": 0.2567554788739773,
+        "source_spearman": 0.19428155952144915,
+        "target_pearson": 0.33805994039730847,
+        "target_spearman": 0.2541194863437894,
+        "fine_tuned_pearson": null,
+        "fine_tuned_spearman": null,
+        "fine_tune_n_samples": null,
+        "transfer_efficiency": 1.31666105774996,
+        "n_common_features": 245,
+        "feature_contributions": {
+          "thermo": 15.860591494123097,
+          "stiff": 4.286607112646737,
+          "bend": 29.36301991391109,
+          "entropy": 23.624862807770995,
+          "advanced": 26.86491867154809
+        }
+      }
+    }
+  }
+}

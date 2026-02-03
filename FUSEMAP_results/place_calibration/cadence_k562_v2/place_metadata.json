@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_k562_v2",
+  "description": "K562 single-celltype (r=0.81 test)",
+  "calibration_source": "encode4_k562_calibration",
+  "calibration_date": "2026-01-16T06:14:54.631254",
+  "place_stats": {
+    "n_samples": 22633,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.348994642496109,
+    "residual_mean": -0.03272281959652901,
+    "residual_std": 0.5907576680183411
+  }
+}

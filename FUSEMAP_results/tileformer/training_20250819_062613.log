@@ -1,0 +1,16 @@
+2025-08-19 06:26:13,758 - INFO - Using GPU 1: NVIDIA GeForce RTX 2080 Ti
+2025-08-19 06:26:13,759 - INFO - Device: cuda:1
+2025-08-19 06:26:13,759 - INFO - Loading pre-split datasets from /home/bcheng/TileFormer/data/splits
+2025-08-19 06:26:14,242 - INFO - Loaded datasets - Train: 41582, Val: 5197, Test: 5199
+2025-08-19 06:26:18,977 - INFO - Model parameters: 5,021,196
+2025-08-19 06:26:18,978 - INFO - Starting training for 25 epochs
+2025-08-19 06:26:18,978 - INFO - 
+Epoch 1/25
+2025-08-19 06:27:35,145 - INFO - Train Loss: 0.045388
+2025-08-19 06:31:26,162 - INFO - Validation MSE: 0.002362
+2025-08-19 06:31:26,165 - INFO - Validation RMSE: 0.048601
+2025-08-19 06:31:26,165 - INFO - Validation MAE: 0.034743
+2025-08-19 06:31:26,408 - INFO - Saved best model to checkpoints/run_20250819_062613/best_model.pth
+2025-08-19 06:31:26,408 - INFO - 
+Epoch 2/25
+2025-08-19 06:32:38,433 - INFO - Train Loss: 0.009992

@@ -1,0 +1,68 @@
+{
+  "jores_sorghum": {
+    "leaf": {
+      "pearson": {
+        "value": 0.7822255492210388,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "spearman": {
+        "value": 0.777801914010283,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "r2": {
+        "value": 0.5908804535865784,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "mse": {
+        "value": 1.1318538188934326,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "rmse": {
+        "value": 1.0638861870018956,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "mae": {
+        "value": 0.8303274512290955,
+        "stderr": null,
+        "n_samples": 1968
+      }
+    },
+    "proto": {
+      "pearson": {
+        "value": 0.7687469720840454,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "spearman": {
+        "value": 0.700363958279118,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "r2": {
+        "value": 0.5719608664512634,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "mse": {
+        "value": 0.5647336840629578,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "rmse": {
+        "value": 0.751487647312288,
+        "stderr": null,
+        "n_samples": 1968
+      },
+      "mae": {
+        "value": 0.5876450538635254,
+        "stderr": null,
+        "n_samples": 1968
+      }
+    }
+  }
+}

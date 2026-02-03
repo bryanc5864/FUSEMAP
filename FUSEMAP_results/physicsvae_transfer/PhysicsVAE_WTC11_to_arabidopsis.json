@@ -1,0 +1,18 @@
+{
+  "source_model": "PhysicsVAE_WTC11",
+  "target_dataset": "arabidopsis",
+  "source_cell_type": "WTC11",
+  "n_samples": 1347,
+  "n_matched_features": 267,
+  "n_source_features": 539,
+  "source_seq_length": 230,
+  "metrics": {
+    "reconstruction_accuracy": 0.23659111751604875,
+    "reconstruction_loss": 1.8609785636266072,
+    "perplexity": 6.4230783356454735,
+    "mean_position_accuracy": 0.1748716955553404,
+    "latent_mean": 0.10335493832826614,
+    "latent_std": 3.2163426876068115
+  },
+  "timestamp": "2026-01-19T00:36:09.119115"
+}

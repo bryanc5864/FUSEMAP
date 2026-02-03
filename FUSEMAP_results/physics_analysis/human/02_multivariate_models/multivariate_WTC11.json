@@ -1,0 +1,996 @@
+{
+  "elastic_net": {
+    "model_type": "ElasticNet",
+    "best_alpha": 0.0001,
+    "best_l1_ratio": 0.5,
+    "r2_train": 0.26512193682489693,
+    "r2_cv_mean": 0.2480242260801405,
+    "r2_cv_std": 0.004428670319795982,
+    "rmse_train": 0.9312179930777412,
+    "n_features_total": 518,
+    "n_features_nonzero": 451,
+    "sparsity": 0.1293436293436293,
+    "top_features": [
+      {
+        "feature": "stiff_gc_content_global",
+        "coefficient": -1.4998186835278926,
+        "rank": 1
+      },
+      {
+        "feature": "advanced_mgw_mean_mgw",
+        "coefficient": 1.1251093414169,
+        "rank": 2
+      },
+      {
+        "feature": "advanced_melting_soft_min_melting_dG",
+        "coefficient": 1.067594997279965,
+        "rank": 3
+      },
+      {
+        "feature": "thermo_var_dG",
+        "coefficient": 0.9119307243937442,
+        "rank": 4
+      },
+      {
+        "feature": "advanced_stress_mean_stress_opening",
+        "coefficient": -0.9075554425466228,
+        "rank": 5
+      },
+      {
+        "feature": "bend_bending_energy_variance",
+        "coefficient": 0.7861444703017474,
+        "rank": 6
+      },
+      {
+        "feature": "advanced_melting_std_melting_dG",
+        "coefficient": -0.6449749876045628,
+        "rank": 7
+      },
+      {
+        "feature": "bend_curvature_var_w9_mean",
+        "coefficient": -0.5467897959712056,
+        "rank": 8
+      },
+      {
+        "feature": "bend_max_bend_w11_mean",
+        "coefficient": 0.47766218374880004,
+        "rank": 9
+      },
+      {
+        "feature": "thermo_total_dH",
+        "coefficient": -0.4610249624340499,
+        "rank": 10
+      },
+      {
+        "feature": "thermo_total_dG",
+        "coefficient": -0.4402449158273799,
+        "rank": 11
+      },
+      {
+        "feature": "bend_total_bending_energy",
+        "coefficient": -0.40885661259928074,
+        "rank": 12
+      },
+      {
+        "feature": "entropy_renyi_entropy_alpha2.0",
+        "coefficient": -0.38193926110578624,
+        "rank": 13
+      },
+      {
+        "feature": "pwm_min_delta_g",
+        "coefficient": -0.3761033281680244,
+        "rank": 14
+      },
+      {
+        "feature": "bend_max_bend_w11_fraction_at_global_max",
+        "coefficient": -0.3181703578764425,
+        "rank": 15
+      },
+      {
+        "feature": "pwm_MA0142.1_mean_score",
+        "coefficient": 0.3120234864631239,
+        "rank": 16
+      },
+      {
+        "feature": "pwm_max_of_max_score",
+        "coefficient": -0.30362042429858516,
+        "rank": 17
+      },
+      {
+        "feature": "advanced_stress_sum_stress_opening",
+        "coefficient": -0.29637467914888094,
+        "rank": 18
+      },
+      {
+        "feature": "pwm_MA0787.1_mean_score",
+        "coefficient": 0.28864723324019875,
+        "rank": 19
+      },
+      {
+        "feature": "pwm_MA0506.3_max_score",
+        "coefficient": 0.2659504529901713,
+        "rank": 20
+      },
+      {
+        "feature": "pwm_MA0785.2_max_score",
+        "coefficient": 0.25726875169667773,
+        "rank": 21
+      },
+      {
+        "feature": "stiff_gc_skew",
+        "coefficient": 0.2551124275627982,
+        "rank": 22
+      },
+      {
+        "feature": "bend_max_bend_w5_mean",
+        "coefficient": 0.24434865925681737,
+        "rank": 23
+      },
+      {
+        "feature": "entropy_gc_entropy_w30_mean",
+        "coefficient": 0.23161770432484305,
+        "rank": 24
+      },
+      {
+        "feature": "pwm_MA0139.2_delta_g",
+        "coefficient": 0.22942942473755543,
+        "rank": 25
+      },
+      {
+        "feature": "pwm_MA0785.2_delta_g",
+        "coefficient": 0.22773528522656616,
+        "rank": 26
+      },
+      {
+        "feature": "advanced_melting_unstable_fraction",
+        "coefficient": -0.20478611153525653,
+        "rank": 27
+      },
+      {
+        "feature": "pwm_MA0139.2_max_score",
+        "coefficient": 0.1982437516824066,
+        "rank": 28
+      },
+      {
+        "feature": "bend_max_bend_w7_fraction_at_global_max",
+        "coefficient": 0.1953093274520189,
+        "rank": 29
+      },
+      {
+        "feature": "advanced_mgw_narrow_groove_fraction",
+        "coefficient": 0.1882692226909526,
+        "rank": 30
+      },
+      {
+        "feature": "advanced_stress_stress_iqr",
+        "coefficient": -0.18327507848760446,
+        "rank": 31
+      },
+      {
+        "feature": "pwm_MA0018.5_max_score",
+        "coefficient": 0.16509880852560116,
+        "rank": 32
+      },
+      {
+        "feature": "advanced_g4_mean_g4_score",
+        "coefficient": 0.16264177884435255,
+        "rank": 33
+      },
+      {
+        "feature": "pwm_MA0809.3_max_score",
+        "coefficient": -0.16229309943605255,
+        "rank": 34
+      },
+      {
+        "feature": "pwm_MA0514.3_var_score",
+        "coefficient": -0.16127976267499458,
+        "rank": 35
+      },
+      {
+        "feature": "thermo_dG_iqr",
+        "coefficient": 0.15559283310471528,
+        "rank": 36
+      },
+      {
+        "feature": "pwm_MA0142.1_max_score",
+        "coefficient": 0.15513821757670493,
+        "rank": 37
+      },
+      {
+        "feature": "pwm_MA0059.2_mean_score",
+        "coefficient": 0.1541634530255092,
+        "rank": 38
+      },
+      {
+        "feature": "entropy_global_shannon_entropy",
+        "coefficient": 0.15320637259131017,
+        "rank": 39
+      },
+      {
+        "feature": "entropy_global_gc_entropy",
+        "coefficient": -0.1512519987457727,
+        "rank": 40
+      },
+      {
+        "feature": "advanced_stress_stress_p50",
+        "coefficient": -0.15124543831535792,
+        "rank": 41
+      },
+      {
+        "feature": "pwm_sum_top5_delta_g",
+        "coefficient": -0.14921360260935754,
+        "rank": 42
+      },
+      {
+        "feature": "pwm_MA0084.2_delta_g",
+        "coefficient": -0.14775812872909388,
+        "rank": 43
+      },
+      {
+        "feature": "pwm_MA0514.3_delta_g",
+        "coefficient": -0.14639270795145093,
+        "rank": 44
+      },
+      {
+        "feature": "pwm_MA0060.4_max_score",
+        "coefficient": 0.14575590908851452,
+        "rank": 45
+      },
+      {
+        "feature": "pwm_MA0084.2_max_score",
+        "coefficient": -0.13921524198840815,
+        "rank": 46
+      },
+      {
+        "feature": "advanced_stacking_mean_stacking_energy",
+        "coefficient": -0.12770017757972474,
+        "rank": 47
+      },
+      {
+        "feature": "thermo_mean_dG",
+        "coefficient": -0.12664863204639026,
+        "rank": 48
+      },
+      {
+        "feature": "entropy_gc_entropy_w50_mean",
+        "coefficient": 0.12471727659977697,
+        "rank": 49
+      },
+      {
+        "feature": "stiff_at_skew",
+        "coefficient": -0.12110018134541463,
+        "rank": 50
+      }
+    ],
+    "feature_importances": {
+      "pwm_MA0142.1_max_score": 0.15513821757670493,
+      "pwm_MA0142.1_delta_g": 0.05723782965053406,
+      "pwm_MA0142.1_mean_score": 0.3120234864631239,
+      "pwm_MA0142.1_var_score": 0.08234713070368793,
+      "pwm_MA0142.1_total_weight": 0.002959029709586487,
+      "pwm_MA0142.1_num_high_affinity": 0.023302372792337774,
+      "pwm_MA0142.1_entropy": 0.039978074815184846,
+      "pwm_MA0142.1_top_k_mean": -0.06041626177400048,
+      "pwm_MA0515.1_delta_g": 0.013175052083921529,
+      "pwm_MA0515.1_var_score": -0.0018051822376329919,
+      "pwm_MA0515.1_total_weight": -0.017656427638745302,
+      "pwm_MA0515.1_num_high_affinity": 0.0311003990237749,
+      "pwm_MA0515.1_entropy": -0.012108565876225677,
+      "pwm_MA0515.1_top_k_mean": -0.00996131897110177,
+      "pwm_MA0083.3_max_score": 0.012759535882204237,
+      "pwm_MA0083.3_mean_score": 0.01495050233057187,
+      "pwm_MA0083.3_var_score": 0.027299360258085225,
+      "pwm_MA0083.3_total_weight": 0.013797756472687637,
+      "pwm_MA0083.3_num_high_affinity": -0.004646260518397503,
+      "pwm_MA0083.3_entropy": -0.0014695039499189554,
+      "pwm_MA0083.3_top_k_mean": -0.019618152312855255,
+      "pwm_MA0088.2_max_score": 0.04140814548921302,
+      "pwm_MA0088.2_mean_score": 0.07722533265904723,
+      "pwm_MA0088.2_var_score": -0.038831977222103,
+      "pwm_MA0088.2_total_weight": 0.006216705334243253,
+      "pwm_MA0088.2_num_high_affinity": 0.03393431565158101,
+      "pwm_MA0088.2_entropy": 0.009911304224545772,
+      "pwm_MA0088.2_top_k_mean": -0.007776612921223806,
+      "pwm_MA0787.1_max_score": -7.079220231237693e-05,
+      "pwm_MA0787.1_delta_g": -0.017058269693230665,
+      "pwm_MA0787.1_mean_score": 0.28864723324019875,
+      "pwm_MA0787.1_var_score": 0.03437528669935239,
+      "pwm_MA0787.1_total_weight": -0.025520077146239353,
+      "pwm_MA0787.1_num_high_affinity": -0.0013606163568778981,
+      "pwm_MA0787.1_entropy": -0.01582039887491185,
+      "pwm_MA0787.1_top_k_mean": -0.059752943630702736,
+      "pwm_MA0024.3_max_score": 0.02888878151604108,
+      "pwm_MA0024.3_var_score": -0.040348685649958006,
+      "pwm_MA0024.3_total_weight": -0.01897907697902878,
+      "pwm_MA0024.3_num_high_affinity": -0.0005870105702814321,
+      "pwm_MA0024.3_entropy": 0.015110591126333462,
+      "pwm_MA0024.3_top_k_mean": -0.029341690663757986,
+      "pwm_MA0866.1_max_score": 0.002374329862557156,
+      "pwm_MA0866.1_var_score": -0.01893182394586249,
+      "pwm_MA0866.1_total_weight": -0.0025173085610593936,
+      "pwm_MA0866.1_num_high_affinity": -8.77702335278411e-05,
+      "pwm_MA0866.1_entropy": 0.0012507320986161943,
+      "pwm_MA0866.1_top_k_mean": -0.012745632842173884,
+      "pwm_MA0870.1_delta_g": -7.34911681443496e-05,
+      "pwm_MA0870.1_mean_score": 0.06732299709656539,
+      "pwm_MA0870.1_var_score": 0.01127679618036575,
+      "pwm_MA0870.1_total_weight": -0.002615567591084926,
+      "pwm_MA0870.1_num_high_affinity": -0.002846196666130582,
+      "pwm_MA0870.1_entropy": -0.0009115218956457966,
+      "pwm_MA0870.1_top_k_mean": -0.008919248455821423,
+      "pwm_MA0079.5_delta_g": 0.037843191812141797,
+      "pwm_MA0079.5_mean_score": -0.016860243561684748,
+      "pwm_MA0079.5_var_score": 0.021196201603201723,
+      "pwm_MA0079.5_total_weight": 0.061508696548846366,
+      "pwm_MA0079.5_num_high_affinity": 0.04844032729532684,
+      "pwm_MA0079.5_entropy": -0.013501051916677321,
+      "pwm_MA0079.5_top_k_mean": 0.06825096921510523,
+      "pwm_MA0018.5_max_score": 0.16509880852560116,
+      "pwm_MA0018.5_delta_g": 0.030970227493703026,
+      "pwm_MA0018.5_var_score": 0.07510805006478803,
+      "pwm_MA0018.5_total_weight": -0.011257032559160182,
+      "pwm_MA0018.5_num_high_affinity": -0.011196421687677071,
+      "pwm_MA0018.5_entropy": 0.07611220223201359,
+      "pwm_MA0018.5_top_k_mean": -0.027095012022884286,
+      "pwm_MA0139.2_max_score": 0.1982437516824066,
+      "pwm_MA0139.2_delta_g": 0.22942942473755543,
+      "pwm_MA0139.2_var_score": 0.03493345354635909,
+      "pwm_MA0139.2_total_weight": -0.019564678528375155,
+      "pwm_MA0139.2_num_high_affinity": 0.005086578191387721,
+      "pwm_MA0139.2_entropy": 0.016751230818425528,
+      "pwm_MA0139.2_top_k_mean": 0.04882389225769828,
+      "pwm_MA0028.3_max_score": 0.08700074346665165,
+      "pwm_MA0028.3_delta_g": -0.025955020933169273,
+      "pwm_MA0028.3_mean_score": -0.005940240236487118,
+      "pwm_MA0028.3_var_score": -0.01567706798225136,
+      "pwm_MA0028.3_total_weight": 0.01610239221490031,
+      "pwm_MA0028.3_num_high_affinity": 0.027484071840015886,
+      "pwm_MA0028.3_entropy": 0.004641811531737856,
+      "pwm_MA0028.3_top_k_mean": -0.002809801292516481,
+      "pwm_MA0058.4_delta_g": 0.026545806018825023,
+      "pwm_MA0058.4_var_score": -0.005720235151600139,
+      "pwm_MA0058.4_total_weight": -0.05561397988838486,
+      "pwm_MA0058.4_num_high_affinity": -0.0034819689766593994,
+      "pwm_MA0058.4_entropy": 0.003767523941717996,
+      "pwm_MA0058.4_top_k_mean": -0.012786156914697663,
+      "pwm_MA0141.4_max_score": 0.004807536709033838,
+      "pwm_MA0141.4_var_score": 0.010181464597326606,
+      "pwm_MA0141.4_total_weight": -0.010891137335758604,
+      "pwm_MA0141.4_num_high_affinity": -0.0017449958080825302,
+      "pwm_MA0141.4_entropy": -0.00014730492331315977,
+      "pwm_MA0141.4_top_k_mean": -0.022537646850052242,
+      "pwm_MA0099.4_max_score": 0.018102725817804817,
+      "pwm_MA0099.4_delta_g": 0.046414796642045855,
+      "pwm_MA0099.4_var_score": 0.028254721191021744,
+      "pwm_MA0099.4_total_weight": -0.004205781484619147,
+      "pwm_MA0099.4_num_high_affinity": 0.0011677757677685799,
+      "pwm_MA0099.4_entropy": -0.0026270800477175616,
+      "pwm_MA0099.4_top_k_mean": 0.032314241255182355,
+      "pwm_MA0143.5_max_score": -0.08948711040672086,
+      "pwm_MA0143.5_delta_g": 0.0788148472887283,
+      "pwm_MA0143.5_var_score": 0.08430105491617221,
+      "pwm_MA0143.5_total_weight": 0.07578710672328795,
+      "pwm_MA0143.5_num_high_affinity": 0.014120471564501122,
+      "pwm_MA0143.5_entropy": -0.045204767115344144,
+      "pwm_MA0143.5_top_k_mean": 0.08501855412449177,
+      "pwm_MA0039.5_delta_g": 0.05091892674418261,
+      "pwm_MA0039.5_var_score": 0.01396370807116246,
+      "pwm_MA0039.5_total_weight": 0.00850773993464626,
+      "pwm_MA0039.5_num_high_affinity": 0.0006906337043562007,
+      "pwm_MA0039.5_entropy": -0.015102066606405153,
+      "pwm_MA0039.5_top_k_mean": 0.0952722195141291,
+      "pwm_MA0059.2_delta_g": -0.03230870774684765,
+      "pwm_MA0059.2_mean_score": 0.1541634530255092,
+      "pwm_MA0059.2_var_score": 0.006171102616488814,
+      "pwm_MA0059.2_total_weight": -0.011426473632957226,
+      "pwm_MA0059.2_num_high_affinity": 0.0036139589136930583,
+      "pwm_MA0059.2_entropy": 0.016167518051515985,
+      "pwm_MA0059.2_top_k_mean": -0.03864132323908033,
+      "pwm_MA0060.4_max_score": 0.14575590908851452,
+      "pwm_MA0060.4_delta_g": 0.012034235738443545,
+      "pwm_MA0060.4_mean_score": 0.0001177902082877361,
+      "pwm_MA0060.4_var_score": 0.013031911833104063,
+      "pwm_MA0060.4_total_weight": 0.04025913088026315,
+      "pwm_MA0060.4_num_high_affinity": -0.005828553470473893,
+      "pwm_MA0060.4_entropy": 0.06553598517159073,
+      "pwm_MA0060.4_top_k_mean": -0.024412460329197368,
+      "pwm_MA0785.2_max_score": 0.25726875169667773,
+      "pwm_MA0785.2_delta_g": 0.22773528522656616,
+      "pwm_MA0785.2_var_score": -0.08453501037411766,
+      "pwm_MA0785.2_total_weight": 0.06431321485517946,
+      "pwm_MA0785.2_num_high_affinity": 0.03913278318305322,
+      "pwm_MA0785.2_entropy": 0.0547249280062539,
+      "pwm_MA0785.2_top_k_mean": 0.018122693664046247,
+      "pwm_MA1723.2_max_score": -0.07958850084706734,
+      "pwm_MA1723.2_var_score": -0.007619903269868456,
+      "pwm_MA1723.2_total_weight": -0.009342103644857927,
+      "pwm_MA1723.2_num_high_affinity": -0.046552210378998225,
+      "pwm_MA1723.2_entropy": -0.015778520775955505,
+      "pwm_MA1723.2_top_k_mean": 0.014503208665605538,
+      "pwm_MA0077.2_max_score": 0.03860970061170836,
+      "pwm_MA0077.2_var_score": 0.007611239867202257,
+      "pwm_MA0077.2_total_weight": -0.011901858396905718,
+      "pwm_MA0077.2_num_high_affinity": -0.013683475108825602,
+      "pwm_MA0077.2_entropy": 0.02676661053927944,
+      "pwm_MA0077.2_top_k_mean": 0.0548371882270794,
+      "pwm_MA0084.2_max_score": -0.13921524198840815,
+      "pwm_MA0084.2_delta_g": -0.14775812872909388,
+      "pwm_MA0084.2_var_score": 0.021374518584664128,
+      "pwm_MA0084.2_total_weight": 0.009246213708969631,
+      "pwm_MA0084.2_num_high_affinity": 0.0023612516578573575,
+      "pwm_MA0084.2_entropy": -0.011758330686244893,
+      "pwm_MA0084.2_top_k_mean": -0.025679349940881405,
+      "pwm_MA0090.4_max_score": 0.012947354050093705,
+      "pwm_MA0090.4_delta_g": 0.02864653532374868,
+      "pwm_MA0090.4_mean_score": 0.05309783443843634,
+      "pwm_MA0090.4_var_score": 0.057276930125990125,
+      "pwm_MA0090.4_total_weight": -0.006593335079327732,
+      "pwm_MA0090.4_num_high_affinity": -0.006885148591333089,
+      "pwm_MA0090.4_entropy": 0.017447169271215056,
+      "pwm_MA0090.4_top_k_mean": 0.04958391474161481,
+      "pwm_MA0809.3_max_score": -0.16229309943605255,
+      "pwm_MA0809.3_delta_g": -0.10134186442804015,
+      "pwm_MA0809.3_mean_score": 0.0015692396873950003,
+      "pwm_MA0809.3_var_score": 0.03168913337912823,
+      "pwm_MA0809.3_total_weight": -0.028686350686698767,
+      "pwm_MA0809.3_num_high_affinity": -0.022898776503760657,
+      "pwm_MA0809.3_entropy": -0.05635203937174701,
+      "pwm_MA0809.3_top_k_mean": -0.03846663629741646,
+      "pwm_MA0093.4_delta_g": -0.034215438827897855,
+      "pwm_MA0093.4_var_score": -0.05924181189498624,
+      "pwm_MA0093.4_total_weight": 0.021150378534601572,
+      "pwm_MA0093.4_num_high_affinity": 0.023994943977791193,
+      "pwm_MA0093.4_entropy": 0.016766962879665833,
+      "pwm_MA0093.4_top_k_mean": -0.04406767799519131,
+      "pwm_MA0526.5_delta_g": -0.038600659278261305,
+      "pwm_MA0526.5_var_score": -0.009777907133372388,
+      "pwm_MA0526.5_total_weight": 0.022032397743315345,
+      "pwm_MA0526.5_num_high_affinity": 0.033696997314977425,
+      "pwm_MA0526.5_entropy": 0.007140300119759336,
+      "pwm_MA0526.5_top_k_mean": -0.0034208608859553156,
+      "pwm_MA0527.2_max_score": -0.012934942532960738,
+      "pwm_MA0527.2_delta_g": -0.0009256926982602351,
+      "pwm_MA0527.2_var_score": -0.07719118195403184,
+      "pwm_MA0527.2_total_weight": 0.03572818207935412,
+      "pwm_MA0527.2_num_high_affinity": -0.025758172995226786,
+      "pwm_MA0527.2_entropy": -0.003012507121965632,
+      "pwm_MA0527.2_top_k_mean": 0.0013790484591473665,
+      "pwm_MA2339.1_max_score": -0.04931438480675382,
+      "pwm_MA2339.1_delta_g": -0.03472443085499317,
+      "pwm_MA2339.1_var_score": -0.017832060339140986,
+      "pwm_MA2339.1_total_weight": -0.008302329945690391,
+      "pwm_MA2339.1_num_high_affinity": -0.006043979147791329,
+      "pwm_MA2339.1_entropy": 0.005545626590165995,
+      "pwm_MA2339.1_top_k_mean": 0.024585573828934625,
+      "pwm_MA0506.3_max_score": 0.2659504529901713,
+      "pwm_MA0506.3_delta_g": 0.09216233694384571,
+      "pwm_MA0506.3_var_score": 0.036633023348139684,
+      "pwm_MA0506.3_total_weight": 0.03217014246823462,
+      "pwm_MA0506.3_num_high_affinity": -0.05739643431978211,
+      "pwm_MA0506.3_entropy": 0.0885169054520531,
+      "pwm_MA0506.3_top_k_mean": -0.02976083314838952,
+      "pwm_MA0078.3_max_score": 0.024193404376575255,
+      "pwm_MA0078.3_delta_g": 0.009160183055383285,
+      "pwm_MA0078.3_var_score": 0.04744081587066746,
+      "pwm_MA0078.3_total_weight": -0.0005470896230740258,
+      "pwm_MA0078.3_num_high_affinity": 0.003572454834531637,
+      "pwm_MA0078.3_entropy": 0.0014176416940061857,
+      "pwm_MA0078.3_top_k_mean": 0.016221360627045277,
+      "pwm_MA0514.3_max_score": -0.03548042226814865,
+      "pwm_MA0514.3_delta_g": -0.14639270795145093,
+      "pwm_MA0514.3_var_score": -0.16127976267499458,
+      "pwm_MA0514.3_total_weight": -0.10482102014244103,
+      "pwm_MA0514.3_num_high_affinity": 0.003276722135832799,
+      "pwm_MA0514.3_entropy": 0.010516434788913072,
+      "pwm_MA0514.3_top_k_mean": -0.07623363538569834,
+      "pwm_MA0095.4_max_score": 0.05469853391245858,
+      "pwm_MA0095.4_delta_g": 0.0022995720750538084,
+      "pwm_MA0095.4_var_score": 0.05803653015950564,
+      "pwm_MA0095.4_total_weight": -0.0011126789308801269,
+      "pwm_MA0095.4_num_high_affinity": -0.02028522541908535,
+      "pwm_MA0095.4_entropy": 0.02969952954080439,
+      "pwm_MA0095.4_top_k_mean": -0.03085259595260299,
+      "pwm_MA0108.3_max_score": -0.07093355733582028,
+      "pwm_MA0108.3_var_score": 0.03427983419461865,
+      "pwm_MA0108.3_total_weight": -0.0047216565562256604,
+      "pwm_MA0108.3_num_high_affinity": 0.0423187672310622,
+      "pwm_MA0108.3_entropy": -0.03825642984430687,
+      "pwm_MA0108.3_top_k_mean": -0.021511999611811355,
+      "pwm_max_of_max_score": -0.30362042429858516,
+      "pwm_min_delta_g": -0.3761033281680244,
+      "pwm_tf_binding_diversity": 0.006567489659090505,
+      "pwm_sum_top5_delta_g": -0.14921360260935754,
+      "pwm_best_tf_index": -0.0011921689262110772,
+      "thermo_total_dH": -0.4610249624340499,
+      "thermo_total_dG": -0.4402449158273799,
+      "thermo_mean_dS": 0.09573756661666896,
+      "thermo_mean_dG": -0.12664863204639026,
+      "thermo_var_dH": -0.039912698052360675,
+      "thermo_var_dG": 0.9119307243937442,
+      "thermo_dH_p10": 0.021878249546962884,
+      "thermo_dH_p25": -0.014547342630572144,
+      "thermo_dH_p50": -0.04880646501846692,
+      "thermo_dH_p75": -0.0006592278675891255,
+      "thermo_dH_p90": -0.041313312808533564,
+      "thermo_dH_p95": -0.016166328043703857,
+      "thermo_dS_p10": 0.004546462427378381,
+      "thermo_dS_p50": 0.045003367333980956,
+      "thermo_dS_p75": -0.020222249455812833,
+      "thermo_dS_p90": -0.0034677920104149496,
+      "thermo_dS_p95": -0.004103168908601521,
+      "thermo_dG_p10": -0.08767913897592716,
+      "thermo_dG_p25": -0.0035449785593612906,
+      "thermo_dG_p50": 0.0010523398532015261,
+      "thermo_dG_p90": -0.01057163801191223,
+      "thermo_dG_p95": -0.031047387544769812,
+      "thermo_dH_iqr": 0.030559070780473565,
+      "thermo_dG_iqr": 0.15559283310471528,
+      "thermo_estimated_Tm_C": 0.04947168856364116,
+      "thermo_estimated_Tm_K": 0.00326673556867941,
+      "entropy_global_shannon_entropy": 0.15320637259131017,
+      "entropy_normalized_shannon_entropy": 0.03879122285858324,
+      "entropy_global_gc_entropy": -0.1512519987457727,
+      "entropy_global_kmer1_entropy": 0.08352238304874007,
+      "entropy_global_kmer2_entropy": 0.00469699498126202,
+      "entropy_global_kmer3_entropy": 0.013117514843811896,
+      "entropy_global_kmer4_entropy": -0.07514522859429278,
+      "entropy_global_kmer5_entropy": -0.0013935632554201252,
+      "entropy_global_kmer6_entropy": -0.056458176277569896,
+      "entropy_sequence_compressibility": 0.02245283686217349,
+      "entropy_renyi_entropy_alpha2.0": -0.38193926110578624,
+      "entropy_shannon_w10_mean": -0.012940051845637856,
+      "entropy_shannon_w10_var": 0.11901298337473341,
+      "entropy_shannon_w10_min": -0.013615176900723601,
+      "entropy_shannon_w30_var": -0.05508861388414721,
+      "entropy_shannon_w30_max": 0.012790970058532906,
+      "entropy_shannon_w30_min": 0.008177156113704755,
+      "entropy_shannon_w50_mean": -0.03479088231681475,
+      "entropy_shannon_w50_var": 0.03121211474670926,
+      "entropy_shannon_w50_max": -0.04108093384685726,
+      "entropy_shannon_w50_min": 0.03738250536093187,
+      "entropy_gc_entropy_w10_mean": 0.027252737770937847,
+      "entropy_gc_entropy_w10_var": -0.08229418743002728,
+      "entropy_gc_entropy_w10_min": -0.03552083650286076,
+      "entropy_gc_entropy_w30_mean": 0.23161770432484305,
+      "entropy_gc_entropy_w30_var": 0.08279611982688431,
+      "entropy_gc_entropy_w30_max": -0.010410907150298949,
+      "entropy_gc_entropy_w30_min": -0.010113297257050138,
+      "entropy_gc_entropy_w50_mean": 0.12471727659977697,
+      "entropy_gc_entropy_w50_var": -0.04234227136403178,
+      "entropy_gc_entropy_w50_max": 0.017901271405752057,
+      "entropy_gc_entropy_w50_min": 0.0772630764590152,
+      "entropy_kmer2_entropy_w30_mean": 0.07273860389604095,
+      "entropy_kmer2_entropy_w30_var": 0.022755914502104298,
+      "entropy_kmer2_entropy_w30_max": -0.0007938751594541228,
+      "entropy_kmer2_entropy_w50_mean": -0.016247074659996613,
+      "entropy_kmer2_entropy_w50_var": 0.0013468763670219156,
+      "entropy_kmer2_entropy_w50_max": -0.008364040689345284,
+      "entropy_kmer3_entropy_w30_mean": 0.03200123729538299,
+      "entropy_kmer3_entropy_w30_var": -0.0402343049439353,
+      "entropy_kmer3_entropy_w30_max": -0.008138292231799378,
+      "entropy_kmer3_entropy_w50_mean": -0.012496945436223848,
+      "entropy_kmer3_entropy_w50_var": 0.010085983829429703,
+      "entropy_kmer3_entropy_w50_max": 0.005899641711571348,
+      "entropy_mi_d1": 0.05060621273165929,
+      "entropy_mi_d2": -0.015589529934078349,
+      "entropy_mi_d3": -0.02130979803821312,
+      "entropy_mi_d4": 0.0009217131179576903,
+      "entropy_mi_d5": 0.01653260923231056,
+      "entropy_mi_d6": -0.014322488712239404,
+      "entropy_mi_d7": 0.015332309001783959,
+      "entropy_mi_d8": -0.0042894442432480995,
+      "entropy_mi_d9": -0.003559579932355707,
+      "entropy_mi_d10": -0.0021986900691826354,
+      "entropy_entropy_rate_estimate": 0.02351617377763557,
+      "entropy_complexity_index": 0.00414384799366273,
+      "advanced_fractal_fractal_exponent": 0.005575075872914512,
+      "advanced_fractal_mean_rho": 0.011601565170556419,
+      "advanced_fractal_std_rho": 0.000243588103726505,
+      "advanced_fractal_fit_r_squared": 0.006790785326170349,
+      "advanced_melting_mean_melting_dG": -0.03282281785161394,
+      "advanced_melting_std_melting_dG": -0.6449749876045628,
+      "advanced_melting_unstable_fraction": -0.20478611153525653,
+      "advanced_melting_melting_dG_p10": -0.023299027872314203,
+      "advanced_melting_melting_dG_p50": 0.09948081500697674,
+      "advanced_melting_melting_dG_iqr": 0.062493419215790505,
+      "advanced_melting_soft_min_melting_dG": 1.067594997279965,
+      "advanced_mgw_mean_mgw": 1.1251093414169,
+      "advanced_mgw_std_mgw": 0.014717158652069491,
+      "advanced_mgw_narrow_groove_fraction": 0.1882692226909526,
+      "advanced_mgw_min_mgw": 0.0034603580009866684,
+      "advanced_mgw_max_mgw": -0.009921145528050198,
+      "advanced_stacking_mean_stacking_energy": -0.12770017757972474,
+      "advanced_stacking_std_stacking_energy": 0.09954822691757784,
+      "advanced_stacking_skew_stacking_energy": -0.0853163617555506,
+      "advanced_stacking_stacking_p5": -0.011152266956262565,
+      "advanced_stacking_stacking_p10": 0.027301634185148832,
+      "advanced_stacking_stacking_p25": -0.001984354898404398,
+      "advanced_stacking_stacking_p50": 0.005452090291975857,
+      "advanced_stacking_stacking_p75": -0.015600098591775633,
+      "advanced_g4_max_g4_score": 0.011468932525509004,
+      "advanced_g4_mean_g4_score": 0.16264177884435255,
+      "advanced_g4_g4_peak_distance": 0.0096644250111778,
+      "advanced_stress_mean_stress_opening": -0.9075554425466228,
+      "advanced_stress_sum_stress_opening": -0.29637467914888094,
+      "advanced_stress_local_opening_rate": -0.004580531644902609,
+      "advanced_stress_stress_p5": 0.006010051541136341,
+      "advanced_stress_stress_p10": 0.10568550201180055,
+      "advanced_stress_stress_p25": 0.059340151313808404,
+      "advanced_stress_stress_p50": -0.15124543831535792,
+      "advanced_stress_stress_p75": -0.05469580657945658,
+      "advanced_stress_stress_p90": 0.10077936240193128,
+      "advanced_stress_stress_p95": 0.037864569471900145,
+      "advanced_stress_stress_iqr": -0.18327507848760446,
+      "bend_total_bending_energy": -0.40885661259928074,
+      "bend_mean_bending_cost": -0.08514356093614696,
+      "bend_bending_energy_variance": 0.7861444703017474,
+      "bend_rms_curvature_w5_max": -0.015228596269650462,
+      "bend_rms_curvature_w7_mean": -0.08390817565654435,
+      "bend_rms_curvature_w7_max": 0.0020235854338619456,
+      "bend_rms_curvature_w9_mean": -0.08988122729600977,
+      "bend_rms_curvature_w9_max": 0.011593668009675791,
+      "bend_rms_curvature_w11_max": -0.02139163272612123,
+      "bend_curvature_var_w5_mean": 0.01796338919661212,
+      "bend_curvature_var_w5_max": 0.04743706375970278,
+      "bend_curvature_var_w7_mean": -0.028963113557090303,
+      "bend_curvature_var_w7_max": 0.014489537718907472,
+      "bend_curvature_var_w9_mean": -0.5467897959712056,
+      "bend_curvature_var_w9_max": 0.0024892673628002797,
+      "bend_curvature_var_w11_mean": -0.007710128422472037,
+      "bend_curvature_var_w11_max": 0.01071058982065464,
+      "bend_curvature_gradient_mean": -0.0860719661228738,
+      "bend_curvature_gradient_max": 0.0185578003727079,
+      "bend_max_bend_w5_mean": 0.24434865925681737,
+      "bend_max_bend_w5_global_max": -0.04878401542687964,
+      "bend_max_bend_w5_fraction_at_global_max": 0.026339604917869575,
+      "bend_max_bend_w7_mean": -0.019392112548019955,
+      "bend_max_bend_w7_global_max": -0.04702837826220891,
+      "bend_max_bend_w7_fraction_at_global_max": 0.1953093274520189,
+      "bend_max_bend_w9_global_max": -0.0005444490918628978,
+      "bend_max_bend_w11_mean": 0.47766218374880004,
+      "bend_max_bend_w11_global_max": -0.0013520588413686618,
+      "bend_max_bend_w11_fraction_at_global_max": -0.3181703578764425,
+      "bend_hotspot_count": 0.017965303446328657,
+      "bend_hotspot_density": 0.008085951924939504,
+      "bend_spectral_f0p200_mean_power": -0.07958698153359256,
+      "bend_spectral_f0p200_max_power": -0.004959186320276329,
+      "bend_spectral_f0p143_mean_power": -0.051772074198286284,
+      "bend_spectral_f0p143_max_power": -0.0035102060788416538,
+      "bend_spectral_f0p100_mean_power": -0.030576751555318183,
+      "bend_spectral_f0p100_max_power": -0.0018721500738015046,
+      "stiff_var_relative_energy": 0.029340666788753595,
+      "stiff_max_relative_energy": -0.00273852611535217,
+      "stiff_min_relative_energy": 0.014394294391705637,
+      "stiff_twist_total_energy": -0.008047527411144855,
+      "stiff_twist_mean_energy": -0.004359580956502046,
+      "stiff_twist_max_energy": 0.00331967455343469,
+      "stiff_tilt_total_energy": -0.016082610900748293,
+      "stiff_tilt_mean_energy": -0.007375896975216592,
+      "stiff_tilt_max_energy": 0.008342016707546184,
+      "stiff_roll_total_energy": 0.024621866347557034,
+      "stiff_roll_mean_energy": 0.01125893834573129,
+      "stiff_roll_max_energy": -0.006617545092396657,
+      "stiff_shift_total_energy": -0.03119521010398902,
+      "stiff_shift_mean_energy": -0.013972516067926806,
+      "stiff_shift_max_energy": -0.010733594315477383,
+      "stiff_slide_total_energy": 0.009960426429761223,
+      "stiff_slide_mean_energy": 0.004544806182314251,
+      "stiff_slide_max_energy": -0.00830275225469857,
+      "stiff_rise_total_energy": 0.024019733444151405,
+      "stiff_rise_mean_energy": 0.010560673982809656,
+      "stiff_avg_pc1": 0.026451965829223763,
+      "stiff_avg_pc2": 0.0101942900968339,
+      "stiff_pc1_variance": -0.013708941286867813,
+      "stiff_pc2_variance": -0.00119191423037383,
+      "stiff_cross_terms_max": -0.005528896517502197,
+      "stiff_twist_zscore_mean": -0.0031125717758790673,
+      "stiff_twist_zscore_var": 0.0006155616321895565,
+      "stiff_twist_zscore_max": -0.0019464603701006503,
+      "stiff_tilt_zscore_mean": -0.012198942089278192,
+      "stiff_tilt_zscore_var": 0.015376647674143522,
+      "stiff_tilt_zscore_max": -0.004974518300866022,
+      "stiff_roll_zscore_mean": -0.01593051994517492,
+      "stiff_roll_zscore_var": -0.028522302403375676,
+      "stiff_roll_zscore_max": 0.0019918590248957,
+      "stiff_shift_zscore_mean": 0.001058958359517172,
+      "stiff_shift_zscore_var": 0.051349006005823795,
+      "stiff_shift_zscore_max": 0.002361966378577381,
+      "stiff_slide_zscore_mean": 0.0073888457367092516,
+      "stiff_slide_zscore_var": 0.001118831981027707,
+      "stiff_slide_zscore_max": -0.005198166138085028,
+      "stiff_rise_zscore_mean": 0.004936416236464793,
+      "stiff_rise_zscore_var": -0.023862229698236596,
+      "stiff_rise_zscore_max": -0.0019194929783867508,
+      "stiff_high_energy_count_t2.0": -0.006432264508993699,
+      "stiff_high_energy_fraction_t2.0": -0.0030820314617975323,
+      "stiff_high_energy_count_t5.0": -0.013822495352188283,
+      "stiff_high_energy_fraction_t5.0": -0.006408389222704656,
+      "stiff_high_energy_count_t10.0": -0.0009563526839052971,
+      "stiff_high_energy_fraction_t10.0": -0.00045876673042499847,
+      "stiff_energy_distribution_entropy_raw": -0.009397056420363944,
+      "stiff_gc_stiffness_correlation": -0.008538236649835057,
+      "stiff_purine_stiffness_correlation": 0.004772194119625679,
+      "stiff_at_skew": -0.12110018134541463,
+      "stiff_gc_skew": 0.2551124275627982,
+      "stiff_purine_pyrimidine_ratio": -0.06695205690444139,
+      "stiff_gc_content_global": -1.4998186835278926
+    }
+  },
+  "ridge": {
+    "model_type": "Ridge",
+    "best_alpha": 24.420530945486497,
+    "r2_train": 0.26411657499710495,
+    "r2_cv_mean": 0.14842144598423027,
+    "r2_cv_std": 0.19604609795625072,
+    "rmse_train": 0.9318547592908523,
+    "n_features_total": 518,
+    "top_features": [
+      {
+        "feature": "bend_bending_energy_variance",
+        "coefficient": 0.5636990456608624,
+        "rank": 1
+      },
+      {
+        "feature": "advanced_mgw_mean_mgw",
+        "coefficient": 0.525858343977813,
+        "rank": 2
+      },
+      {
+        "feature": "thermo_var_dG",
+        "coefficient": 0.5157353723184358,
+        "rank": 3
+      },
+      {
+        "feature": "advanced_melting_std_melting_dG",
+        "coefficient": -0.395359018870325,
+        "rank": 4
+      },
+      {
+        "feature": "advanced_melting_soft_min_melting_dG",
+        "coefficient": 0.3899002250903776,
+        "rank": 5
+      },
+      {
+        "feature": "advanced_stress_mean_stress_opening",
+        "coefficient": -0.36152362075463296,
+        "rank": 6
+      },
+      {
+        "feature": "advanced_stress_sum_stress_opening",
+        "coefficient": -0.361497329870565,
+        "rank": 7
+      },
+      {
+        "feature": "pwm_min_delta_g",
+        "coefficient": -0.34692704030425014,
+        "rank": 8
+      },
+      {
+        "feature": "entropy_renyi_entropy_alpha2.0",
+        "coefficient": -0.3345203617090032,
+        "rank": 9
+      },
+      {
+        "feature": "advanced_stress_local_opening_rate",
+        "coefficient": -0.3325753185645499,
+        "rank": 10
+      },
+      {
+        "feature": "bend_max_bend_w11_mean",
+        "coefficient": 0.3084046121997559,
+        "rank": 11
+      },
+      {
+        "feature": "pwm_max_of_max_score",
+        "coefficient": -0.27311155093042533,
+        "rank": 12
+      },
+      {
+        "feature": "stiff_gc_skew",
+        "coefficient": 0.2398836681843458,
+        "rank": 13
+      },
+      {
+        "feature": "pwm_MA0506.3_max_score",
+        "coefficient": 0.23795690431721797,
+        "rank": 14
+      },
+      {
+        "feature": "entropy_gc_entropy_w30_mean",
+        "coefficient": 0.22303441552224795,
+        "rank": 15
+      },
+      {
+        "feature": "advanced_mgw_narrow_groove_fraction",
+        "coefficient": 0.2135153008285236,
+        "rank": 16
+      },
+      {
+        "feature": "pwm_MA0785.2_max_score",
+        "coefficient": 0.2078296704109842,
+        "rank": 17
+      },
+      {
+        "feature": "pwm_MA0785.2_delta_g",
+        "coefficient": 0.1852788432886556,
+        "rank": 18
+      },
+      {
+        "feature": "bend_total_bending_energy",
+        "coefficient": -0.18147929181381484,
+        "rank": 19
+      },
+      {
+        "feature": "bend_mean_bending_cost",
+        "coefficient": -0.181475993408976,
+        "rank": 20
+      },
+      {
+        "feature": "bend_max_bend_w5_mean",
+        "coefficient": 0.17763571376176612,
+        "rank": 21
+      },
+      {
+        "feature": "advanced_g4_mean_g4_score",
+        "coefficient": 0.16783600704900892,
+        "rank": 22
+      },
+      {
+        "feature": "pwm_MA0514.3_var_score",
+        "coefficient": -0.16626053990859924,
+        "rank": 23
+      },
+      {
+        "feature": "pwm_MA0018.5_max_score",
+        "coefficient": 0.16102635288737058,
+        "rank": 24
+      },
+      {
+        "feature": "advanced_stress_stress_p50",
+        "coefficient": -0.16060204629014113,
+        "rank": 25
+      },
+      {
+        "feature": "pwm_MA0139.2_delta_g",
+        "coefficient": 0.15697874075153267,
+        "rank": 26
+      },
+      {
+        "feature": "pwm_MA0809.3_max_score",
+        "coefficient": -0.1536251101684683,
+        "rank": 27
+      },
+      {
+        "feature": "bend_curvature_var_w9_mean",
+        "coefficient": -0.14958597318107308,
+        "rank": 28
+      },
+      {
+        "feature": "pwm_sum_top5_delta_g",
+        "coefficient": -0.14921006707521495,
+        "rank": 29
+      },
+      {
+        "feature": "pwm_MA0060.4_max_score",
+        "coefficient": 0.14700174152970638,
+        "rank": 30
+      },
+      {
+        "feature": "bend_max_bend_w11_fraction_at_global_max",
+        "coefficient": -0.14624399193653786,
+        "rank": 31
+      },
+      {
+        "feature": "pwm_MA0142.1_max_score",
+        "coefficient": 0.14588071159346228,
+        "rank": 32
+      },
+      {
+        "feature": "pwm_MA0514.3_delta_g",
+        "coefficient": -0.14375300245877934,
+        "rank": 33
+      },
+      {
+        "feature": "entropy_gc_entropy_w50_mean",
+        "coefficient": 0.13269237895594677,
+        "rank": 34
+      },
+      {
+        "feature": "stiff_at_skew",
+        "coefficient": -0.129529955969137,
+        "rank": 35
+      },
+      {
+        "feature": "bend_max_bend_w9_mean",
+        "coefficient": 0.12812288605461444,
+        "rank": 36
+      },
+      {
+        "feature": "thermo_total_dG",
+        "coefficient": -0.12700049753805748,
+        "rank": 37
+      },
+      {
+        "feature": "advanced_melting_mean_melting_dG",
+        "coefficient": -0.12699616271495112,
+        "rank": 38
+      },
+      {
+        "feature": "thermo_mean_dG",
+        "coefficient": -0.12699616271494268,
+        "rank": 39
+      },
+      {
+        "feature": "bend_rms_curvature_w9_mean",
+        "coefficient": -0.1232321697838643,
+        "rank": 40
+      },
+      {
+        "feature": "bend_rms_curvature_w7_mean",
+        "coefficient": -0.12220421908964275,
+        "rank": 41
+      },
+      {
+        "feature": "bend_rms_curvature_w5_mean",
+        "coefficient": -0.11993058187672088,
+        "rank": 42
+      },
+      {
+        "feature": "pwm_MA0139.2_max_score",
+        "coefficient": 0.11966329188528747,
+        "rank": 43
+      },
+      {
+        "feature": "entropy_shannon_w10_var",
+        "coefficient": 0.11813275049687069,
+        "rank": 44
+      },
+      {
+        "feature": "thermo_total_dH",
+        "coefficient": -0.11177909742793088,
+        "rank": 45
+      },
+      {
+        "feature": "thermo_mean_dH",
+        "coefficient": -0.11174486460695841,
+        "rank": 46
+      },
+      {
+        "feature": "thermo_estimated_Tm_K",
+        "coefficient": 0.10952830634415794,
+        "rank": 47
+      },
+      {
+        "feature": "thermo_estimated_Tm_C",
+        "coefficient": 0.10950455303363262,
+        "rank": 48
+      },
+      {
+        "feature": "advanced_stress_stress_p75",
+        "coefficient": -0.10700521056753225,
+        "rank": 49
+      },
+      {
+        "feature": "pwm_MA0084.2_delta_g",
+        "coefficient": -0.10627091068587514,
+        "rank": 50
+      }
+    ]
+  },
+  "physics_vs_full": {
+    "physics_only": {
+      "n_features": 241,
+      "r2_cv": 0.14257518814845555,
+      "n_nonzero": 234
+    },
+    "with_pwm": {
+      "n_features": 518,
+      "r2_cv": 0.2480242260801405,
+      "n_nonzero": 451
+    },
+    "r2_improvement_from_pwm": 0.10544903793168495
+  },
+  "gam": {
+    "error": "terms must be instances of Term or TermList, but found term: 0"
+  }
+}

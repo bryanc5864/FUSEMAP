@@ -1,0 +1,1002 @@
+{
+  "n_clusters": 7,
+  "noise_fraction": 0.08785490166067192,
+  "cluster_profiles": {
+    "-1": {
+      "n_samples": 3444,
+      "fraction": 0.08785490166067192,
+      "activity_mean": -0.3855667403148971,
+      "activity_std": 1.1810650969862455,
+      "activity_median": -0.6088799624071743,
+      "activity_q25": -1.217112367325224,
+      "activity_q75": 0.3538451996835616,
+      "top_positive_features": [
+        {
+          "feature": "entropy_shannon_w30_var",
+          "z_score": 1.3445902986491223
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w30_var",
+          "z_score": 1.337098198667104
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w30_var",
+          "z_score": 1.3115109186437564
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w50_var",
+          "z_score": 1.2622916294299313
+        },
+        {
+          "feature": "entropy_shannon_w50_var",
+          "z_score": 1.2583268524758766
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "entropy_global_kmer6_entropy",
+          "z_score": -1.3191359007320687
+        },
+        {
+          "feature": "entropy_global_kmer5_entropy",
+          "z_score": -1.2570085605023429
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w30_mean",
+          "z_score": -1.225656437482246
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w50_mean",
+          "z_score": -1.1722215604880626
+        },
+        {
+          "feature": "entropy_shannon_w50_min",
+          "z_score": -1.16911367639421
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "entropy_shannon_w30_var",
+          "z_score": 1.3445902986491223
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w30_var",
+          "z_score": 1.337098198667104
+        },
+        {
+          "feature": "entropy_global_kmer6_entropy",
+          "z_score": -1.3191359007320687
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w30_var",
+          "z_score": 1.3115109186437564
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w50_var",
+          "z_score": 1.2622916294299313
+        },
+        {
+          "feature": "entropy_shannon_w50_var",
+          "z_score": 1.2583268524758766
+        },
+        {
+          "feature": "entropy_global_kmer5_entropy",
+          "z_score": -1.2570085605023429
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w50_var",
+          "z_score": 1.2446258509665722
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w30_mean",
+          "z_score": -1.225656437482246
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w50_mean",
+          "z_score": -1.1722215604880626
+        }
+      ]
+    },
+    "0": {
+      "n_samples": 177,
+      "fraction": 0.004515190939006658,
+      "activity_mean": -0.0485408007155467,
+      "activity_std": 1.5684274948617178,
+      "activity_median": -0.4867761674983424,
+      "activity_q25": -1.3286041063386314,
+      "activity_q75": 1.5000433414054066,
+      "top_positive_features": [
+        {
+          "feature": "advanced_stacking_stacking_iqr",
+          "z_score": 5.461976485876741
+        },
+        {
+          "feature": "thermo_dH_iqr",
+          "z_score": 3.4054473415545243
+        },
+        {
+          "feature": "advanced_stress_stress_iqr",
+          "z_score": 2.471853531979243
+        },
+        {
+          "feature": "advanced_stacking_std_stacking_energy",
+          "z_score": 2.421388212429357
+        },
+        {
+          "feature": "thermo_var_dH",
+          "z_score": 2.1488190801677662
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "thermo_dS_p50",
+          "z_score": -13.792185839956698
+        },
+        {
+          "feature": "thermo_dH_p50",
+          "z_score": -13.52952040869405
+        },
+        {
+          "feature": "advanced_stacking_stacking_p25",
+          "z_score": -5.522040228986074
+        },
+        {
+          "feature": "thermo_dS_p25",
+          "z_score": -3.5940594741102645
+        },
+        {
+          "feature": "thermo_dH_p25",
+          "z_score": -3.5933658465016225
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "thermo_dS_p50",
+          "z_score": -13.792185839956698
+        },
+        {
+          "feature": "thermo_dH_p50",
+          "z_score": -13.52952040869405
+        },
+        {
+          "feature": "advanced_stacking_stacking_p25",
+          "z_score": -5.522040228986074
+        },
+        {
+          "feature": "advanced_stacking_stacking_iqr",
+          "z_score": 5.461976485876741
+        },
+        {
+          "feature": "thermo_dS_p25",
+          "z_score": -3.5940594741102645
+        },
+        {
+          "feature": "thermo_dH_p25",
+          "z_score": -3.5933658465016225
+        },
+        {
+          "feature": "thermo_dH_iqr",
+          "z_score": 3.4054473415545243
+        },
+        {
+          "feature": "thermo_total_dS",
+          "z_score": -2.905188486675717
+        },
+        {
+          "feature": "thermo_mean_dS",
+          "z_score": -2.9051882788236476
+        },
+        {
+          "feature": "thermo_total_dH",
+          "z_score": -2.549661788332034
+        }
+      ]
+    },
+    "1": {
+      "n_samples": 968,
+      "fraction": 0.024693247621234152,
+      "activity_mean": -0.7210922888802016,
+      "activity_std": 1.1890670212747685,
+      "activity_median": -0.9752794593119363,
+      "activity_q25": -1.5375796598375977,
+      "activity_q75": -0.10187662413540595,
+      "top_positive_features": [
+        {
+          "feature": "bend_max_bend_w5_fraction_at_global_max",
+          "z_score": 4.525399236714854
+        },
+        {
+          "feature": "bend_max_bend_w7_fraction_at_global_max",
+          "z_score": 4.302518964602612
+        },
+        {
+          "feature": "bend_max_bend_w9_fraction_at_global_max",
+          "z_score": 4.03246697945846
+        },
+        {
+          "feature": "bend_max_bend_w11_fraction_at_global_max",
+          "z_score": 3.7725972061751
+        },
+        {
+          "feature": "thermo_estimated_Tm_K",
+          "z_score": 1.433228370786117
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "bend_max_bending_cost",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_max_bend_w5_global_max",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_max_bend_w7_global_max",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_max_bend_w9_global_max",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_max_bend_w11_global_max",
+          "z_score": -6.155475688554131
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "bend_max_bending_cost",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_max_bend_w5_global_max",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_max_bend_w7_global_max",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_max_bend_w9_global_max",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_max_bend_w11_global_max",
+          "z_score": -6.155475688554131
+        },
+        {
+          "feature": "bend_curvature_gradient_max",
+          "z_score": -6.00413421094982
+        },
+        {
+          "feature": "bend_max_bend_w5_fraction_at_global_max",
+          "z_score": 4.525399236714854
+        },
+        {
+          "feature": "bend_max_bend_w7_fraction_at_global_max",
+          "z_score": 4.302518964602612
+        },
+        {
+          "feature": "bend_curvature_var_w5_max",
+          "z_score": -4.107007577954111
+        },
+        {
+          "feature": "bend_max_bend_w9_fraction_at_global_max",
+          "z_score": 4.03246697945846
+        }
+      ]
+    },
+    "2": {
+      "n_samples": 226,
+      "fraction": 0.005765159052064999,
+      "activity_mean": -0.7048984031069994,
+      "activity_std": 1.0386415805366551,
+      "activity_median": -0.8951316025383489,
+      "activity_q25": -1.3004971622454256,
+      "activity_q75": -0.42470623827799414,
+      "top_positive_features": [
+        {
+          "feature": "advanced_stress_stress_p5",
+          "z_score": 11.062877247297946
+        },
+        {
+          "feature": "thermo_dS_p5",
+          "z_score": 11.06287680050083
+        },
+        {
+          "feature": "thermo_dH_p5",
+          "z_score": 11.062876800500788
+        },
+        {
+          "feature": "thermo_dG_p5",
+          "z_score": 11.062876800500787
+        },
+        {
+          "feature": "advanced_melting_melting_dG_p5",
+          "z_score": 11.062876800500787
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "advanced_mgw_max_mgw",
+          "z_score": -1.6528139586483694
+        },
+        {
+          "feature": "advanced_stacking_std_stacking_energy",
+          "z_score": -1.634304644628041
+        },
+        {
+          "feature": "thermo_estimated_Tm_K",
+          "z_score": -1.6049473534597367
+        },
+        {
+          "feature": "thermo_estimated_Tm_C",
+          "z_score": -1.6049472378859229
+        },
+        {
+          "feature": "thermo_var_dH",
+          "z_score": -1.5902463335886068
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "advanced_stress_stress_p5",
+          "z_score": 11.062877247297946
+        },
+        {
+          "feature": "thermo_dS_p5",
+          "z_score": 11.06287680050083
+        },
+        {
+          "feature": "thermo_dH_p5",
+          "z_score": 11.062876800500788
+        },
+        {
+          "feature": "thermo_dG_p5",
+          "z_score": 11.062876800500787
+        },
+        {
+          "feature": "advanced_melting_melting_dG_p5",
+          "z_score": 11.062876800500787
+        },
+        {
+          "feature": "thermo_dG_p75",
+          "z_score": 1.9141388782519724
+        },
+        {
+          "feature": "advanced_melting_melting_dG_p75",
+          "z_score": 1.9141388782519724
+        },
+        {
+          "feature": "advanced_stress_stress_p75",
+          "z_score": 1.9110437053141551
+        },
+        {
+          "feature": "advanced_melting_soft_min_melting_dG",
+          "z_score": 1.8594197316548262
+        },
+        {
+          "feature": "advanced_mgw_narrow_groove_fraction",
+          "z_score": 1.7600408096515097
+        }
+      ]
+    },
+    "3": {
+      "n_samples": 98,
+      "fraction": 0.002499936226116681,
+      "activity_mean": -0.9055084547913537,
+      "activity_std": 0.7691860648848315,
+      "activity_median": -0.904841798247034,
+      "activity_q25": -1.3825529322387633,
+      "activity_q75": -0.455518908647046,
+      "top_positive_features": [
+        {
+          "feature": "thermo_dG_p75",
+          "z_score": 3.311948007245365
+        },
+        {
+          "feature": "advanced_melting_melting_dG_p75",
+          "z_score": 3.311948007245365
+        },
+        {
+          "feature": "advanced_stress_stress_p75",
+          "z_score": 3.3059241949755025
+        },
+        {
+          "feature": "thermo_dH_p75",
+          "z_score": 3.0197096419188716
+        },
+        {
+          "feature": "bend_mean_bending_cost",
+          "z_score": 2.941163198006298
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "advanced_stacking_stacking_p75",
+          "z_score": -13.210668341694875
+        },
+        {
+          "feature": "thermo_dS_p90",
+          "z_score": -6.616508143497791
+        },
+        {
+          "feature": "advanced_stacking_stacking_iqr",
+          "z_score": -4.050177367830316
+        },
+        {
+          "feature": "advanced_stacking_stacking_p50",
+          "z_score": -2.5728697073292204
+        },
+        {
+          "feature": "advanced_stacking_mean_stacking_energy",
+          "z_score": -2.5684784050136336
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "advanced_stacking_stacking_p75",
+          "z_score": -13.210668341694875
+        },
+        {
+          "feature": "thermo_dS_p90",
+          "z_score": -6.616508143497791
+        },
+        {
+          "feature": "advanced_stacking_stacking_iqr",
+          "z_score": -4.050177367830316
+        },
+        {
+          "feature": "thermo_dG_p75",
+          "z_score": 3.311948007245365
+        },
+        {
+          "feature": "advanced_melting_melting_dG_p75",
+          "z_score": 3.311948007245365
+        },
+        {
+          "feature": "advanced_stress_stress_p75",
+          "z_score": 3.3059241949755025
+        },
+        {
+          "feature": "thermo_dH_p75",
+          "z_score": 3.0197096419188716
+        },
+        {
+          "feature": "bend_mean_bending_cost",
+          "z_score": 2.941163198006298
+        },
+        {
+          "feature": "bend_total_bending_energy",
+          "z_score": 2.9411630357097467
+        },
+        {
+          "feature": "thermo_dH_p90",
+          "z_score": 2.931514258017552
+        }
+      ]
+    },
+    "4": {
+      "n_samples": 891,
+      "fraction": 0.022729012014999616,
+      "activity_mean": 0.123469846297828,
+      "activity_std": 1.4410076705817587,
+      "activity_median": 0.067699103546056,
+      "activity_q25": -1.1146933342279137,
+      "activity_q75": 1.3496722740094578,
+      "top_positive_features": [
+        {
+          "feature": "thermo_dH_iqr",
+          "z_score": 5.510140698037624
+        },
+        {
+          "feature": "advanced_stress_stress_iqr",
+          "z_score": 3.59358440763935
+        },
+        {
+          "feature": "thermo_dS_iqr",
+          "z_score": 3.0893739378918794
+        },
+        {
+          "feature": "thermo_dG_iqr",
+          "z_score": 2.7075765402314538
+        },
+        {
+          "feature": "advanced_melting_melting_dG_iqr",
+          "z_score": 2.7075765402314538
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "thermo_dS_p25",
+          "z_score": -5.529468938989928
+        },
+        {
+          "feature": "thermo_dH_p25",
+          "z_score": -5.528227052687659
+        },
+        {
+          "feature": "advanced_stress_stress_p25",
+          "z_score": -3.4611261678364884
+        },
+        {
+          "feature": "advanced_stress_stress_p50",
+          "z_score": -2.8706708942738977
+        },
+        {
+          "feature": "entropy_global_gc_entropy",
+          "z_score": -2.7295227208376533
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "thermo_dS_p25",
+          "z_score": -5.529468938989928
+        },
+        {
+          "feature": "thermo_dH_p25",
+          "z_score": -5.528227052687659
+        },
+        {
+          "feature": "thermo_dH_iqr",
+          "z_score": 5.510140698037624
+        },
+        {
+          "feature": "advanced_stress_stress_iqr",
+          "z_score": 3.59358440763935
+        },
+        {
+          "feature": "advanced_stress_stress_p25",
+          "z_score": -3.4611261678364884
+        },
+        {
+          "feature": "thermo_dS_iqr",
+          "z_score": 3.0893739378918794
+        },
+        {
+          "feature": "advanced_stress_stress_p50",
+          "z_score": -2.8706708942738977
+        },
+        {
+          "feature": "entropy_global_gc_entropy",
+          "z_score": -2.7295227208376533
+        },
+        {
+          "feature": "thermo_dG_iqr",
+          "z_score": 2.7075765402314538
+        },
+        {
+          "feature": "advanced_melting_melting_dG_iqr",
+          "z_score": 2.7075765402314538
+        }
+      ]
+    },
+    "5": {
+      "n_samples": 33283,
+      "fraction": 0.8490344634065458,
+      "activity_mean": -0.6385517007344357,
+      "activity_std": 1.0490497663618057,
+      "activity_median": -0.8540282427751181,
+      "activity_q25": -1.3104379239795434,
+      "activity_q75": -0.1969499223184226,
+      "top_positive_features": [
+        {
+          "feature": "entropy_shannon_w30_mean",
+          "z_score": 0.20554288110153532
+        },
+        {
+          "feature": "entropy_shannon_w50_mean",
+          "z_score": 0.20457426701484324
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w50_mean",
+          "z_score": 0.2006908483156245
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w30_mean",
+          "z_score": 0.1980846740297597
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w50_mean",
+          "z_score": 0.1968608377701504
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "entropy_shannon_w30_var",
+          "z_score": -0.1835830887355605
+        },
+        {
+          "feature": "thermo_dH_iqr",
+          "z_score": -0.18255555120902694
+        },
+        {
+          "feature": "entropy_shannon_w50_var",
+          "z_score": -0.17174366778123518
+        },
+        {
+          "feature": "entropy_gc_entropy_w10_var",
+          "z_score": -0.16643723509074404
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w30_var",
+          "z_score": -0.16463144532944685
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "entropy_shannon_w30_mean",
+          "z_score": 0.20554288110153532
+        },
+        {
+          "feature": "entropy_shannon_w50_mean",
+          "z_score": 0.20457426701484324
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w50_mean",
+          "z_score": 0.2006908483156245
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w30_mean",
+          "z_score": 0.1980846740297597
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w50_mean",
+          "z_score": 0.1968608377701504
+        },
+        {
+          "feature": "entropy_kmer3_entropy_w30_mean",
+          "z_score": 0.19399838191549704
+        },
+        {
+          "feature": "entropy_global_kmer4_entropy",
+          "z_score": 0.19264661862253024
+        },
+        {
+          "feature": "entropy_global_kmer5_entropy",
+          "z_score": 0.19217544014618687
+        },
+        {
+          "feature": "entropy_global_kmer2_entropy",
+          "z_score": 0.19100815464280527
+        },
+        {
+          "feature": "entropy_global_shannon_entropy",
+          "z_score": 0.1901241221761068
+        }
+      ]
+    },
+    "6": {
+      "n_samples": 114,
+      "fraction": 0.00290808907936022,
+      "activity_mean": -0.7894496804436539,
+      "activity_std": 0.9895108128631547,
+      "activity_median": -0.9428933791718654,
+      "activity_q25": -1.3385073078428285,
+      "activity_q75": -0.3731284359670375,
+      "top_positive_features": [
+        {
+          "feature": "thermo_dS_p5",
+          "z_score": 4.3585193160024565
+        },
+        {
+          "feature": "thermo_dH_p5",
+          "z_score": 4.358519316002452
+        },
+        {
+          "feature": "thermo_dG_p5",
+          "z_score": 4.358519316002452
+        },
+        {
+          "feature": "advanced_melting_melting_dG_p5",
+          "z_score": 4.358519316002452
+        },
+        {
+          "feature": "advanced_stress_stress_p5",
+          "z_score": 4.3585183073464355
+        }
+      ],
+      "top_negative_features": [
+        {
+          "feature": "thermo_var_dH",
+          "z_score": -1.420095744630193
+        },
+        {
+          "feature": "advanced_mgw_max_mgw",
+          "z_score": -1.4076815024018838
+        },
+        {
+          "feature": "thermo_estimated_Tm_K",
+          "z_score": -1.4015363052923644
+        },
+        {
+          "feature": "thermo_estimated_Tm_C",
+          "z_score": -1.4015359986649583
+        },
+        {
+          "feature": "stiff_gc_content_global",
+          "z_score": -1.375064243520664
+        }
+      ],
+      "top_distinguishing": [
+        {
+          "feature": "thermo_dS_p5",
+          "z_score": 4.3585193160024565
+        },
+        {
+          "feature": "thermo_dH_p5",
+          "z_score": 4.358519316002452
+        },
+        {
+          "feature": "thermo_dG_p5",
+          "z_score": 4.358519316002452
+        },
+        {
+          "feature": "advanced_melting_melting_dG_p5",
+          "z_score": 4.358519316002452
+        },
+        {
+          "feature": "advanced_stress_stress_p5",
+          "z_score": 4.3585183073464355
+        },
+        {
+          "feature": "advanced_melting_soft_min_melting_dG",
+          "z_score": 1.6136060812155684
+        },
+        {
+          "feature": "thermo_total_dH",
+          "z_score": 1.5100693569834043
+        },
+        {
+          "feature": "thermo_mean_dH",
+          "z_score": 1.5100686697357768
+        },
+        {
+          "feature": "advanced_mgw_narrow_groove_fraction",
+          "z_score": 1.499822017646814
+        },
+        {
+          "feature": "thermo_dG_p25",
+          "z_score": 1.4749726537059011
+        }
+      ]
+    }
+  },
+  "regime_models": {
+    "0": {
+      "n_samples": 177,
+      "r2": 0.5400039569150002,
+      "n_nonzero_features": 54,
+      "top_features": [
+        {
+          "feature": "thermo_dS_iqr",
+          "coefficient": 0.3007059369605801
+        },
+        {
+          "feature": "entropy_mi_d1",
+          "coefficient": -0.2981985045878807
+        },
+        {
+          "feature": "entropy_shannon_w10_min",
+          "coefficient": -0.28620747514040734
+        },
+        {
+          "feature": "entropy_mi_d3",
+          "coefficient": -0.22249868087398617
+        },
+        {
+          "feature": "bend_spectral_f0p143_mean_power",
+          "coefficient": 0.22054092915022078
+        },
+        {
+          "feature": "advanced_stress_stress_p95",
+          "coefficient": 0.19265437331876328
+        },
+        {
+          "feature": "advanced_mgw_min_mgw",
+          "coefficient": -0.1785500047856671
+        },
+        {
+          "feature": "entropy_kmer2_entropy_w30_max",
+          "coefficient": 0.14855077759918447
+        },
+        {
+          "feature": "advanced_mgw_std_mgw",
+          "coefficient": 0.13532024991904018
+        },
+        {
+          "feature": "entropy_sequence_compressibility",
+          "coefficient": -0.12533414189945638
+        }
+      ]
+    },
+    "1": {
+      "n_samples": 968,
+      "r2": 0.17728740690756262,
+      "n_nonzero_features": 24,
+      "top_features": [
+        {
+          "feature": "entropy_shannon_w10_var",
+          "coefficient": 0.21683241274313542
+        },
+        {
+          "feature": "advanced_stress_stress_p90",
+          "coefficient": 0.14504835595555496
+        },
+        {
+          "feature": "entropy_shannon_w10_min",
+          "coefficient": -0.07472743906010298
+        },
+        {
+          "feature": "thermo_var_dG",
+          "coefficient": 0.060341577692366914
+        },
+        {
+          "feature": "advanced_stacking_skew_stacking_energy",
+          "coefficient": 0.03546965369389982
+        },
+        {
+          "feature": "entropy_shannon_w50_max",
+          "coefficient": -0.032957193297327755
+        },
+        {
+          "feature": "entropy_shannon_w10_mean",
+          "coefficient": -0.032053785055162494
+        },
+        {
+          "feature": "advanced_fractal_mean_rho",
+          "coefficient": -0.03180212393934358
+        },
+        {
+          "feature": "entropy_gc_entropy_w30_max",
+          "coefficient": -0.02689564141472462
+        },
+        {
+          "feature": "thermo_total_dS",
+          "coefficient": -0.023334241360739427
+        }
+      ]
+    },
+    "2": {
+      "n_samples": 226,
+      "r2": 0.03413747584797766,
+      "n_nonzero_features": 7,
+      "top_features": [
+        {
+          "feature": "advanced_stacking_stacking_p25",
+          "coefficient": 0.060873357572754014
+        },
+        {
+          "feature": "advanced_fractal_fractal_exponent",
+          "coefficient": -0.02288478859464869
+        },
+        {
+          "feature": "thermo_dS_p90",
+          "coefficient": 0.011503815400211817
+        },
+        {
+          "feature": "stiff_energy_distribution_entropy_norm",
+          "coefficient": 0.006004569080801113
+        },
+        {
+          "feature": "stiff_energy_distribution_entropy_raw",
+          "coefficient": 0.005329569056915647
+        },
+        {
+          "feature": "stiff_slide_zscore_var",
+          "coefficient": -0.004663204609291007
+        },
+        {
+          "feature": "advanced_stacking_stacking_iqr",
+          "coefficient": -0.0009226729079119367
+        }
+      ]
+    },
+    "4": {
+      "n_samples": 891,
+      "r2": 0.21887241242552669,
+      "n_nonzero_features": 67,
+      "top_features": [
+        {
+          "feature": "entropy_shannon_w10_var",
+          "coefficient": 0.20617428573469546
+        },
+        {
+          "feature": "advanced_stacking_skew_stacking_energy",
+          "coefficient": 0.2023190148731287
+        },
+        {
+          "feature": "entropy_shannon_w10_min",
+          "coefficient": -0.17913653463288592
+        },
+        {
+          "feature": "entropy_shannon_w10_mean",
+          "coefficient": -0.17700492549754074
+        },
+        {
+          "feature": "entropy_gc_entropy_w50_min",
+          "coefficient": 0.17012659322740784
+        },
+        {
+          "feature": "entropy_gc_entropy_w10_var",
+          "coefficient": -0.14893456821835463
+        },
+        {
+          "feature": "thermo_var_dG",
+          "coefficient": 0.14638595369976937
+        },
+        {
+          "feature": "entropy_mi_d5",
+          "coefficient": 0.14578518315364103
+        },
+        {
+          "feature": "entropy_shannon_w50_var",
+          "coefficient": 0.12874421123029003
+        },
+        {
+          "feature": "advanced_mgw_min_mgw",
+          "coefficient": 0.12145263066992638
+        }
+      ]
+    },
+    "5": {
+      "n_samples": 33283,
+      "r2": 0.14128362480883982,
+      "n_nonzero_features": 170,
+      "top_features": [
+        {
+          "feature": "advanced_mgw_mean_mgw",
+          "coefficient": 1.409213068823349
+        },
+        {
+          "feature": "thermo_var_dG",
+          "coefficient": 1.3974635823733959
+        },
+        {
+          "feature": "stiff_gc_content_global",
+          "coefficient": -0.9013559680550107
+        },
+        {
+          "feature": "advanced_stress_mean_stress_opening",
+          "coefficient": -0.791635736626492
+        },
+        {
+          "feature": "advanced_melting_std_melting_dG",
+          "coefficient": -0.7883990628958281
+        },
+        {
+          "feature": "advanced_melting_soft_min_melting_dG",
+          "coefficient": 0.7661263845794014
+        },
+        {
+          "feature": "bend_curvature_var_w9_mean",
+          "coefficient": -0.697222959335202
+        },
+        {
+          "feature": "thermo_var_dH",
+          "coefficient": -0.6151389915796592
+        },
+        {
+          "feature": "bend_max_bend_w5_fraction_at_global_max",
+          "coefficient": 0.5968393105347524
+        },
+        {
+          "feature": "entropy_global_gc_entropy",
+          "coefficient": -0.356593946017909
+        }
+      ]
+    },
+    "6": {
+      "n_samples": 114,
+      "r2": 0.0,
+      "n_nonzero_features": 1,
+      "top_features": [
+        {
+          "feature": "stiff_high_energy_fraction_t10.0",
+          "coefficient": -8.648317139160762e-17
+        }
+      ]
+    }
+  }
+}

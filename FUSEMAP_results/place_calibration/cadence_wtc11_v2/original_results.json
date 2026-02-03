@@ -1,0 +1,60 @@
+{
+  "encode4_wtc11": {
+    "activity": {
+      "pearson": {
+        "value": 0.6590641736984253,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "spearman": {
+        "value": 0.5577999945384335,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "r2": {
+        "value": 0.40892887115478516,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "mse": {
+        "value": 0.660192608833313,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "rmse": {
+        "value": 0.8125223743585853,
+        "stderr": null,
+        "n_samples": 5596
+      },
+      "mae": {
+        "value": 0.605516254901886,
+        "stderr": null,
+        "n_samples": 5596
+      }
+    }
+  },
+  "test": {
+    "encode4_wtc11": {
+      "activity": {
+        "pearson": 0.697928786277771,
+        "spearman": 0.5909329575829306,
+        "r2": 0.47228938341140747,
+        "rmse": 0.7299191355705261,
+        "mae": 0.5441800951957703,
+        "n_samples": 5597
+      }
+    }
+  },
+  "calibration": {
+    "encode4_wtc11": {
+      "activity": {
+        "pearson": 0.6957159042358398,
+        "spearman": 0.6003125607741366,
+        "r2": 0.467193603515625,
+        "rmse": 0.7188206315040588,
+        "mae": 0.5338448882102966,
+        "n_samples": 5595
+      }
+    }
+  }
+}

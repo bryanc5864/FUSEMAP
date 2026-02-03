@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_k562_v2_frozen_mouse_esc_5pct",
+  "n_train": 964,
+  "n_trainable_params": 66561,
+  "best_epoch": 1,
+  "val_metrics": {
+    "spearman_r": 0.11073389465044088
+  },
+  "test_metrics": {
+    "spearman_r": 0.06341390106297766,
+    "pearson_r": 0.0617346931888632,
+    "auroc": 0.5206737838070403,
+    "mse": 4.9843546523403734,
+    "mae": 1.9631008891510735,
+    "loss": 4.982682871096062
+  },
+  "source_model": "cadence_k562_v2",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.05,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-18T10:30:58.494051"
+}

@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_arabidopsis_v1_frozen_s2_drosophila_1pct",
+  "n_train": 2464,
+  "n_trainable_params": 66561,
+  "best_epoch": 1,
+  "val_metrics": {
+    "spearman_r": 0.12116203629464666
+  },
+  "test_metrics": {
+    "spearman_r": 0.1085757778956576,
+    "pearson_r": 0.10423062012950275,
+    "auroc": 0.5304266803422494,
+    "mse": 2.4249808964298922,
+    "mae": 1.1903472044984857,
+    "loss": 2.4247412545917686
+  },
+  "source_model": "cadence_arabidopsis_v1",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.01,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-19T14:51:04.688088"
+}

@@ -1,0 +1,18 @@
+{
+  "source_model": "PhysicsVAE_WTC11",
+  "target_dataset": "HepG2",
+  "source_cell_type": "WTC11",
+  "n_samples": 5000,
+  "n_matched_features": 411,
+  "n_source_features": 539,
+  "source_seq_length": 230,
+  "metrics": {
+    "reconstruction_accuracy": 0.5052165217391305,
+    "reconstruction_loss": 1.0003129690885544,
+    "perplexity": 2.71924408669507,
+    "mean_position_accuracy": 0.5052165217391305,
+    "latent_mean": -0.003950399812310934,
+    "latent_std": 0.3559746742248535
+  },
+  "timestamp": "2026-01-19T00:35:00.200010"
+}

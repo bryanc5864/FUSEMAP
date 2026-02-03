@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_yeast_v1_full_mouse_esc_5pct",
+  "n_train": 964,
+  "n_trainable_params": 1322465,
+  "best_epoch": 8,
+  "val_metrics": {
+    "spearman_r": 0.16788277747345984
+  },
+  "test_metrics": {
+    "spearman_r": 0.1801015520345619,
+    "pearson_r": 0.18482744422481084,
+    "auroc": 0.5838842351661809,
+    "mse": 4.290086340340034,
+    "mae": 1.7912607256625284,
+    "loss": 4.295130223938913
+  },
+  "source_model": "cadence_yeast_v1",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.05,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-20T20:06:03.811766"
+}

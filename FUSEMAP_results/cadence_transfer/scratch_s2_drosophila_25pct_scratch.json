@@ -1,0 +1,23 @@
+{
+  "experiment_name": "scratch_s2_drosophila_25pct",
+  "n_train": 61601,
+  "n_trainable_params": 1322465,
+  "best_epoch": 5,
+  "val_metrics": {
+    "spearman_r": 0.5542200615334008
+  },
+  "test_metrics": {
+    "spearman_r": 0.5530095243712361,
+    "pearson_r": 0.5775416174636316,
+    "auroc": 0.803942022089219,
+    "mse": 1.5806792678471373,
+    "mae": 0.9714018180615658,
+    "loss": 1.5808944788741142
+  },
+  "source_model": "scratch",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.25,
+  "strategy": "scratch",
+  "seed": 42,
+  "timestamp": "2026-01-21T20:41:41.900757"
+}

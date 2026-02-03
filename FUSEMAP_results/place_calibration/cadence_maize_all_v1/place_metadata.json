@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_maize_all_v1",
+  "description": "Maize all modules",
+  "calibration_source": "jores_maize_test",
+  "calibration_date": "2026-01-16T06:25:46.245928",
+  "place_stats": {
+    "n_samples": 4922,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 1.0260655879974365,
+    "residual_mean": -0.4456559419631958,
+    "residual_std": 1.012948989868164
+  }
+}

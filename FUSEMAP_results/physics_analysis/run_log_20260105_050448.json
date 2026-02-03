@@ -1,0 +1,41 @@
+{
+  "timestamp": "20260105_050448",
+  "datasets": [
+    "human"
+  ],
+  "n_jobs": 32,
+  "results": {
+    "human": {
+      "01": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/human/01_univariate_stability"
+      },
+      "02": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/human/02_multivariate_models"
+      },
+      "03": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/human/03_incremental_control"
+      },
+      "04": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/human/04_interaction_mapping"
+      },
+      "05": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/human/05_regime_discovery"
+      },
+      "06": {
+        "status": "success",
+        "returncode": 0,
+        "output_dir": "/home/bcheng/sequence_optimization/FUSEMAP/physics/results/human/06_cross_cell_type"
+      }
+    }
+  }
+}

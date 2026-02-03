@@ -1,0 +1,550 @@
+{
+  "maize": {
+    "top_physics_features": [
+      "bend_rms_curvature_w5_max",
+      "bend_rms_curvature_w7_max",
+      "advanced_mgw_mean_mgw",
+      "advanced_stacking_std_stacking_energy",
+      "advanced_stacking_stacking_abrupt_changes",
+      "advanced_stacking_stacking_transition_variance",
+      "stiff_gc_skew",
+      "advanced_mgw_min_mgw",
+      "advanced_stress_local_opening_rate",
+      "bend_curvature_var_w5_max",
+      "advanced_melting_mean_melting_dG",
+      "thermo_dG_max_high_energy_run",
+      "bend_rms_curvature_w9_max",
+      "entropy_gc_entropy_w30_mean",
+      "entropy_gc_entropy_w50_mean"
+    ],
+    "top_pwm_features": [
+      "pwm_MA0110.4_mean_score",
+      "pwm_MA0054.1_mean_score",
+      "pwm_MA1822.2_var_score",
+      "pwm_MA0082.2_top_k_mean",
+      "pwm_MA0123.1_var_score",
+      "pwm_MA0008.4_top_k_mean",
+      "pwm_MA0001.3_max_score",
+      "pwm_MA1828.2_mean_score",
+      "pwm_MA2413.1_mean_score",
+      "pwm_MA1416.1_var_score",
+      "pwm_MA0082.2_max_score",
+      "pwm_MA0001.3_total_weight",
+      "pwm_MA1835.2_var_score",
+      "pwm_MA0082.2_total_weight",
+      "pwm_MA0001.3_delta_g"
+    ],
+    "h_matrix": [
+      [
+        0.08241961716243879,
+        0.09570880266893111,
+        0.011832743228499734,
+        0.03529536211252553,
+        0.011825800309835204,
+        0.0002801711638460185,
+        0.02379556586964504,
+        0.06769707138335111,
+        0.012667051850515164,
+        0.003985044302476258,
+        0.007640624568721513,
+        0.011496900883859473,
+        0.0032661814118640567,
+        0.020009480266995037,
+        0.014064963483789177
+      ],
+      [
+        0.0368402250562218,
+        0.06957231254761286,
+        0.011387552190918257,
+        0.016146348099889584,
+        4.2508223721990176e-16,
+        0.009115128878243199,
+        0.025500469008711783,
+        1.973284563090165e-16,
+        0.06085278890111482,
+        0.0024078131657330904,
+        0.00831650226949678,
+        0.03463073044888525,
+        0.013582681728876002,
+        0.013388606993814809,
+        0.04929696457300097
+      ],
+      [
+        1.0069598207992277e-15,
+        1.140258230183913e-15,
+        1.2229725534298737e-15,
+        0.054253659590739065,
+        0.04370781189743709,
+        3.687529781284244e-15,
+        0.03865312892875829,
+        2.3922141804367228e-15,
+        2.379205280999203e-15,
+        1.1085867482274092e-15,
+        2.9851493947578636e-15,
+        0.0695780955502374,
+        2.8542597018399076e-15,
+        3.674168493879846e-15,
+        2.425337195801233e-15
+      ],
+      [
+        0.04721017031361706,
+        0.05103916681208382,
+        1.281672376574821e-15,
+        1.4281140775318086e-15,
+        1.989263778906083e-15,
+        2.3915232143185225e-15,
+        0.0260665787055645,
+        1.3567428089197174e-15,
+        3.558771211445325e-15,
+        1.6715646828766756e-15,
+        2.253556630588665e-15,
+        0.12489590338039937,
+        2.1930451916000108e-15,
+        0.07606218499731764,
+        0.09041910029149501
+      ],
+      [
+        0.15896848592082266,
+        0.08149717741839888,
+        1.8242191342509853e-15,
+        0.1710376684150185,
+        0.0452023240573081,
+        1.4371419874278864e-15,
+        0.024681600525847107,
+        0.0842741748859423,
+        7.97565997153663e-16,
+        1.0481514757551282e-15,
+        1.0139277041994037e-15,
+        1.879167192635996e-15,
+        1.1823689223841017e-15,
+        1.305319340054485e-15,
+        1.482623541362654e-15
+      ],
+      [
+        0.11349492831914115,
+        0.18562794861675955,
+        9.559429390989023e-16,
+        0.032971420558250815,
+        0.035071675291096005,
+        9.111336346316402e-16,
+        0.03372568893535447,
+        0.026815691206354172,
+        6.411259889732397e-16,
+        7.060019396424152e-16,
+        8.120780808012901e-16,
+        0.032565219972690816,
+        8.453877562154908e-16,
+        0.040508317979434466,
+        0.006531551055035214
+      ],
+      [
+        1.900905096434899e-15,
+        8.050355626373712e-16,
+        1.7618971348326453e-15,
+        0.0840030937174517,
+        1.3173240721640894e-15,
+        2.867655313152214e-15,
+        0.025528933621795896,
+        1.3837667106316376e-15,
+        2.3613317693574733e-15,
+        0.033103598819158926,
+        0.12158210159384746,
+        2.18579540359124e-15,
+        0.014988959914087264,
+        0.08012050705665423,
+        1.7290558495990026e-15
+      ],
+      [
+        0.06603611081201152,
+        0.06970692137950364,
+        1.439717738538439e-15,
+        1.2727250821804332e-15,
+        9.987560226360716e-16,
+        8.631623133281306e-16,
+        5.943777520636515e-16,
+        8.252487427000212e-16,
+        1.087366796418652e-15,
+        9.055454457724018e-16,
+        0.009217873238337957,
+        0.005965415067190589,
+        1.1782023273002e-15,
+        0.15170506159365735,
+        0.08906108510491077
+      ],
+      [
+        9.556353958076304e-16,
+        1.2498249986333406e-15,
+        1.877362413992445e-15,
+        1.3295068581198165e-15,
+        4.23979605663885e-15,
+        3.741348960952577e-15,
+        1.0460287893871825e-15,
+        0.0,
+        3.3565147358083396e-15,
+        1.7395647663228903e-15,
+        4.248452875772887e-15,
+        3.2649704357734334e-15,
+        3.457971391837421e-15,
+        3.921259649854083e-15,
+        2.3157733954858858e-15
+      ],
+      [
+        0.08339375824238048,
+        0.03459014809719938,
+        0.02068775324082638,
+        0.034383137470210844,
+        0.01904296346074438,
+        1.0665191097261244e-15,
+        0.10109102349294996,
+        6.337743411781809e-16,
+        0.010349682640608029,
+        7.856302681567421e-16,
+        0.07731814949262454,
+        4.584368090753384e-16,
+        0.0498938379406603,
+        0.015791192684184465,
+        0.030650773820485856
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.646183579015162e-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.019806008330925683,
+        0.019811952820207743,
+        0.009927631681205515,
+        0.048307658900777505,
+        4.1997382024692066e-16,
+        0.06614589793079288,
+        0.024403954382112198,
+        1.7043128324350774e-16,
+        0.006829949678999703,
+        0.008400998690364387,
+        0.04031681403997815,
+        4.945092836401709e-16,
+        0.0012560912293049771,
+        0.00232763298809984,
+        0.011470608842103722
+      ],
+      [
+        0.07020839655171825,
+        0.03425424622761584,
+        2.1125665768848086e-15,
+        2.641280988347365e-15,
+        4.4439844493223165e-15,
+        7.108363893284203e-15,
+        5.8518398027741965e-16,
+        1.2238059958090273e-15,
+        4.926664086211215e-15,
+        2.3910772386381447e-15,
+        5.0449048347407924e-15,
+        3.64506265555793e-15,
+        0.0865791710901138,
+        4.0903309966594164e-15,
+        2.3436163568632885e-15
+      ],
+      [
+        1.8680436296342297e-15,
+        1.1011448501756337e-15,
+        0.05438952517911762,
+        2.0397443882772677e-15,
+        2.4150966376562966e-15,
+        0.545551285202653,
+        0.022973962019834773,
+        4.061651543925141e-16,
+        0.1283547270536549,
+        1.6005979168659771e-15,
+        3.601246743099006e-15,
+        2.855124189463618e-15,
+        5.3990510937745454e-15,
+        4.392194832057317e-15,
+        0.015283838093401673
+      ],
+      [
+        0.013667840617935976,
+        0.011719032006780263,
+        2.540805554142984e-15,
+        2.4960890342932923e-15,
+        2.2792107903723057e-15,
+        4.201039469886932e-15,
+        0.02917380975553474,
+        5.769950638748991e-16,
+        3.3844967211783833e-15,
+        1.3274027157529103e-15,
+        2.7184451760294484e-15,
+        2.142181781112083e-15,
+        2.900775024846794e-15,
+        2.614829162650083e-15,
+        0.020423630453686416
+      ]
+    ],
+    "top_interactions": [
+      {
+        "physics_feature": "entropy_gc_entropy_w30_mean",
+        "pwm_feature": "pwm_MA0008.4_top_k_mean",
+        "h_statistic": 0.545551285202653
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_transition_variance",
+        "pwm_feature": "pwm_MA0054.1_mean_score",
+        "h_statistic": 0.18562794861675955
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_abrupt_changes",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.1710376684150185
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_abrupt_changes",
+        "pwm_feature": "pwm_MA0110.4_mean_score",
+        "h_statistic": 0.15896848592082266
+      },
+      {
+        "physics_feature": "advanced_mgw_min_mgw",
+        "pwm_feature": "pwm_MA0082.2_total_weight",
+        "h_statistic": 0.15170506159365735
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w30_mean",
+        "pwm_feature": "pwm_MA2413.1_mean_score",
+        "h_statistic": 0.1283547270536549
+      },
+      {
+        "physics_feature": "advanced_stacking_std_stacking_energy",
+        "pwm_feature": "pwm_MA0001.3_total_weight",
+        "h_statistic": 0.12489590338039937
+      },
+      {
+        "physics_feature": "stiff_gc_skew",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.12158210159384746
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_transition_variance",
+        "pwm_feature": "pwm_MA0110.4_mean_score",
+        "h_statistic": 0.11349492831914115
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA0001.3_max_score",
+        "h_statistic": 0.10109102349294996
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w5_max",
+        "pwm_feature": "pwm_MA0054.1_mean_score",
+        "h_statistic": 0.09570880266893111
+      },
+      {
+        "physics_feature": "advanced_stacking_std_stacking_energy",
+        "pwm_feature": "pwm_MA0001.3_delta_g",
+        "h_statistic": 0.09041910029149501
+      },
+      {
+        "physics_feature": "advanced_mgw_min_mgw",
+        "pwm_feature": "pwm_MA0001.3_delta_g",
+        "h_statistic": 0.08906108510491077
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w9_max",
+        "pwm_feature": "pwm_MA1835.2_var_score",
+        "h_statistic": 0.0865791710901138
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_abrupt_changes",
+        "pwm_feature": "pwm_MA1828.2_mean_score",
+        "h_statistic": 0.0842741748859423
+      },
+      {
+        "physics_feature": "stiff_gc_skew",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.0840030937174517
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA0110.4_mean_score",
+        "h_statistic": 0.08339375824238048
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w5_max",
+        "pwm_feature": "pwm_MA0110.4_mean_score",
+        "h_statistic": 0.08241961716243879
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_abrupt_changes",
+        "pwm_feature": "pwm_MA0054.1_mean_score",
+        "h_statistic": 0.08149717741839888
+      },
+      {
+        "physics_feature": "stiff_gc_skew",
+        "pwm_feature": "pwm_MA0082.2_total_weight",
+        "h_statistic": 0.08012050705665423
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.07731814949262454
+      },
+      {
+        "physics_feature": "advanced_stacking_std_stacking_energy",
+        "pwm_feature": "pwm_MA0082.2_total_weight",
+        "h_statistic": 0.07606218499731764
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w9_max",
+        "pwm_feature": "pwm_MA0110.4_mean_score",
+        "h_statistic": 0.07020839655171825
+      },
+      {
+        "physics_feature": "advanced_mgw_min_mgw",
+        "pwm_feature": "pwm_MA0054.1_mean_score",
+        "h_statistic": 0.06970692137950364
+      },
+      {
+        "physics_feature": "advanced_mgw_mean_mgw",
+        "pwm_feature": "pwm_MA0001.3_total_weight",
+        "h_statistic": 0.0695780955502374
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA0054.1_mean_score",
+        "h_statistic": 0.06957231254761286
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w5_max",
+        "pwm_feature": "pwm_MA1828.2_mean_score",
+        "h_statistic": 0.06769707138335111
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA0008.4_top_k_mean",
+        "h_statistic": 0.06614589793079288
+      },
+      {
+        "physics_feature": "advanced_mgw_min_mgw",
+        "pwm_feature": "pwm_MA0110.4_mean_score",
+        "h_statistic": 0.06603611081201152
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA2413.1_mean_score",
+        "h_statistic": 0.06085278890111482
+      },
+      {
+        "physics_feature": "entropy_gc_entropy_w30_mean",
+        "pwm_feature": "pwm_MA1822.2_var_score",
+        "h_statistic": 0.05438952517911762
+      },
+      {
+        "physics_feature": "advanced_mgw_mean_mgw",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.054253659590739065
+      },
+      {
+        "physics_feature": "advanced_stacking_std_stacking_energy",
+        "pwm_feature": "pwm_MA0054.1_mean_score",
+        "h_statistic": 0.05103916681208382
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA1835.2_var_score",
+        "h_statistic": 0.0498938379406603
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA0001.3_delta_g",
+        "h_statistic": 0.04929696457300097
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.048307658900777505
+      },
+      {
+        "physics_feature": "advanced_stacking_std_stacking_energy",
+        "pwm_feature": "pwm_MA0110.4_mean_score",
+        "h_statistic": 0.04721017031361706
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_abrupt_changes",
+        "pwm_feature": "pwm_MA0123.1_var_score",
+        "h_statistic": 0.0452023240573081
+      },
+      {
+        "physics_feature": "advanced_mgw_mean_mgw",
+        "pwm_feature": "pwm_MA0123.1_var_score",
+        "h_statistic": 0.04370781189743709
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_transition_variance",
+        "pwm_feature": "pwm_MA0082.2_total_weight",
+        "h_statistic": 0.040508317979434466
+      },
+      {
+        "physics_feature": "thermo_dG_max_high_energy_run",
+        "pwm_feature": "pwm_MA0082.2_max_score",
+        "h_statistic": 0.04031681403997815
+      },
+      {
+        "physics_feature": "advanced_mgw_mean_mgw",
+        "pwm_feature": "pwm_MA0001.3_max_score",
+        "h_statistic": 0.03865312892875829
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA0110.4_mean_score",
+        "h_statistic": 0.0368402250562218
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w5_max",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.03529536211252553
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_transition_variance",
+        "pwm_feature": "pwm_MA0123.1_var_score",
+        "h_statistic": 0.035071675291096005
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w7_max",
+        "pwm_feature": "pwm_MA0001.3_total_weight",
+        "h_statistic": 0.03463073044888525
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA0054.1_mean_score",
+        "h_statistic": 0.03459014809719938
+      },
+      {
+        "physics_feature": "bend_curvature_var_w5_max",
+        "pwm_feature": "pwm_MA0082.2_top_k_mean",
+        "h_statistic": 0.034383137470210844
+      },
+      {
+        "physics_feature": "bend_rms_curvature_w9_max",
+        "pwm_feature": "pwm_MA0054.1_mean_score",
+        "h_statistic": 0.03425424622761584
+      },
+      {
+        "physics_feature": "advanced_stacking_stacking_transition_variance",
+        "pwm_feature": "pwm_MA0001.3_max_score",
+        "h_statistic": 0.03372568893535447
+      }
+    ],
+    "mean_h_statistic": 0.022078577441882404,
+    "max_h_statistic": 0.545551285202653,
+    "n_strong_interactions": 10
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "name": "cadence_wtc11_all_v2",
+  "config_type": "ConfigurationType.SINGLE_CELLTYPE",
+  "description": "Single cell type baseline for encode4_wtc11",
+  "datasets": [
+    "encode4_wtc11"
+  ],
+  "target_sequence_length": 256,
+  "model": {
+    "stem_channels": 64,
+    "stem_kernel_size": 11,
+    "block_channels": [
+      80,
+      96,
+      112,
+      128
+    ],
+    "block_kernel": 9,
+    "expand_ratio": 4,
+    "use_rc_stem": true,
+    "use_pwm_stem": false,
+    "pwm_stem_scales": [
+      7,
+      11,
+      15
+    ],
+    "use_cluster_space": true,
+    "cluster_dilations": [
+      1,
+      2,
+      4,
+      1
+    ],
+    "use_grammar": true,
+    "grammar_hidden": 128,
+    "use_micromotif": true,
+    "micromotif_windows": [
+      5,
+      11,
+      21
+    ],
+    "use_motif_correlator": true,
+    "correlator_factors": 32,
+    "correlator_rank": 8,
+    "use_species_embedding": false,
+    "species_embed_dim": 16,
+    "use_celltype_embedding": false,
+    "celltype_embed_dim": 32,
+    "use_kingdom_embedding": false,
+    "kingdom_embed_dim": 8,
+    "use_length_embedding": false,
+    "length_embed_dim": 16,
+    "head_hidden": 256,
+    "use_uncertainty": false,
+    "dropout": 0.3
+  },
+  "training": {
+    "max_epochs": 30,
+    "batch_size": 1024,
+    "learning_rate": 0.01,
+    "weight_decay": 0.1,
+    "scheduler": "onecycle",
+    "warmup_epochs": 5,
+    "min_lr": 1e-06,
+    "onecycle_pct_start": 0.3,
+    "onecycle_div_factor": 25.0,
+    "patience": 30,
+    "min_delta": 0.0001,
+    "monitor": "val_pearson",
+    "mode": "max",
+    "gradient_clip": 1.0,
+    "gradient_accumulation_steps": 1,
+    "use_amp": true,
+    "sampling_temperature": 0.5,
+    "samples_per_epoch": null,
+    "save_top_k": 3,
+    "checkpoint_dir": "checkpoints",
+    "log_every_n_steps": 100,
+    "val_every_n_epochs": 1,
+    "use_extreme_weights": false,
+    "extreme_alpha": 0.0,
+    "extreme_beta": 2.0,
+    "use_extreme_sampling": false,
+    "sampling_extreme_alpha": 0.5,
+    "use_balanced_sampling": false,
+    "balanced_sampling_bins": 10
+  },
+  "output_dir": "results",
+  "seed": 42,
+  "training_phases": null
+}

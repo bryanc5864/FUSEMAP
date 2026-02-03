@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_deepstarr_v2_full_s2_drosophila_5pct",
+  "n_train": 12320,
+  "n_trainable_params": 1322465,
+  "best_epoch": 4,
+  "val_metrics": {
+    "spearman_r": 0.9702644141624308
+  },
+  "test_metrics": {
+    "spearman_r": 0.9704588232986132,
+    "pearson_r": 0.9735149405036909,
+    "auroc": 0.9877501617325105,
+    "mse": 0.12092513918983724,
+    "mae": 0.21495449904626557,
+    "loss": 0.12083989535131408
+  },
+  "source_model": "cadence_deepstarr_v2",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.05,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-19T11:48:18.162171"
+}

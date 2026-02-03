@@ -1,0 +1,45 @@
+{
+  "cell_types": [
+    "maize"
+  ],
+  "n_features": 797,
+  "n_significant_p05": 605,
+  "n_significant_p01": 551,
+  "top_features_by_category": {
+    "thermo": [
+      "thermo_var_dG",
+      "thermo_dG_max_high_energy_run",
+      "thermo_dG_num_high_energy_runs",
+      "thermo_var_dH",
+      "thermo_dS_p75"
+    ],
+    "stiff": [
+      "stiff_gc_skew",
+      "stiff_purine_pyrimidine_ratio",
+      "stiff_total_relative_energy",
+      "stiff_mean_relative_energy",
+      "stiff_gc_stiffness_correlation"
+    ],
+    "bend": [
+      "bend_rms_curvature_w5_max",
+      "bend_rms_curvature_w7_max",
+      "bend_curvature_var_w7_max",
+      "bend_rms_curvature_w9_max",
+      "bend_curvature_var_w9_max"
+    ],
+    "entropy": [
+      "entropy_gc_entropy_w50_mean",
+      "entropy_gc_entropy_w30_mean",
+      "entropy_gc_entropy_w50_max",
+      "entropy_gc_entropy_w30_max",
+      "entropy_global_gc_entropy"
+    ],
+    "advanced": [
+      "advanced_melting_std_melting_dG",
+      "advanced_stacking_stacking_at_rich_mean",
+      "advanced_stacking_stacking_entropy",
+      "advanced_g4_mean_g4_score",
+      "advanced_stress_stress_p95"
+    ]
+  }
+}

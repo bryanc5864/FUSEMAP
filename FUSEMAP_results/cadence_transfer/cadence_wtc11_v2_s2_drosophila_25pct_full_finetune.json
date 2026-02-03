@@ -1,0 +1,23 @@
+{
+  "experiment_name": "cadence_wtc11_v2_full_s2_drosophila_25pct",
+  "n_train": 61601,
+  "n_trainable_params": 1322465,
+  "best_epoch": 5,
+  "val_metrics": {
+    "spearman_r": 0.4839314667632769
+  },
+  "test_metrics": {
+    "spearman_r": 0.4885401161816618,
+    "pearson_r": 0.5001200829717349,
+    "auroc": 0.7632673960799841,
+    "mse": 1.7431652392507444,
+    "mae": 1.0203984545075981,
+    "loss": 1.7432729738965163
+  },
+  "source_model": "cadence_wtc11_v2",
+  "target_dataset": "s2_drosophila",
+  "data_fraction": 0.25,
+  "strategy": "full_finetune",
+  "seed": 42,
+  "timestamp": "2026-01-19T09:02:15.528331"
+}

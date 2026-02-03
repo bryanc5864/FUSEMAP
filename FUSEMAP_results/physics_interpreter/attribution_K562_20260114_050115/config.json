@@ -1,0 +1,7 @@
+{
+  "cell_type": "K562",
+  "probe_type": "ridge",
+  "alpha": 1.0,
+  "n_samples": 158377,
+  "n_features": 519
+}

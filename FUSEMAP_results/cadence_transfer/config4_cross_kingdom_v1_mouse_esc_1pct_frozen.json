@@ -1,0 +1,23 @@
+{
+  "experiment_name": "config4_cross_kingdom_v1_frozen_mouse_esc_1pct",
+  "n_train": 192,
+  "n_trainable_params": 66561,
+  "best_epoch": 2,
+  "val_metrics": {
+    "spearman_r": 0.1727375205579762
+  },
+  "test_metrics": {
+    "spearman_r": 0.2000311088957715,
+    "pearson_r": 0.21967437504912798,
+    "auroc": 0.581697151772052,
+    "mse": 4.994533214575702,
+    "mae": 1.9653048102178847,
+    "loss": 4.992847623247089
+  },
+  "source_model": "config4_cross_kingdom_v1",
+  "target_dataset": "mouse_esc",
+  "data_fraction": 0.01,
+  "strategy": "frozen",
+  "seed": 42,
+  "timestamp": "2026-01-21T04:57:07.754005"
+}

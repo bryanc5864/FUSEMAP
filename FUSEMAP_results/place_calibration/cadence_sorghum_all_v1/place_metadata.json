@@ -1,0 +1,14 @@
+{
+  "model_name": "cadence_sorghum_all_v1",
+  "description": "Sorghum all modules",
+  "calibration_source": "jores_sorghum_test",
+  "calibration_date": "2026-01-16T06:25:57.503861",
+  "place_stats": {
+    "n_samples": 3936,
+    "n_neighbors": 200,
+    "alpha": 0.1,
+    "noise_var": 0.8242108225822449,
+    "residual_mean": -1.0299352407455444,
+    "residual_std": 0.9078605771064758
+  }
+}

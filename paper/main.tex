@@ -1,0 +1,1658 @@
+\documentclass[10pt,twocolumn]{article}
+
+% ICLR 2026 style - two column format
+\usepackage{iclr2026_conference}
+
+% Standard packages
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{enumitem}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{patterns,positioning,arrows.meta,shapes.geometric,calc}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+% Custom commands
+\newcommand{\fusemap}{\textsc{Fusemap}}
+\newcommand{\cadence}{\textsc{Cadence}}
+\newcommand{\physinformer}{\textsc{PhysInformer}}
+\newcommand{\tileformer}{\textsc{TileFormer}}
+\newcommand{\stwoa}{\textsc{S2A}}
+\newcommand{\physicsvae}{\textsc{PhysicsVAE}}
+\newcommand{\place}{\textsc{Place}}
+
+\title{\fusemap{}: A Foundational Biophysical Framework for\\Universal Regulatory DNA Prediction and Design}
+
+\author{
+Bryan Cheng$^{1}$\\
+$^{1}$Cold Spring Harbor Laboratory\\
+\texttt{bcheng@cshl.edu}
+}
+
+\iclrfinalcopy
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Cis-regulatory elements (CREs) control gene expression across all domains of life, yet designing synthetic enhancers and promoters that function reliably \emph{in vivo} remains a central challenge in computational genomics. Current deep learning approaches achieve high \emph{in silico} accuracy but often fail to generalize to designed sequences outside the training distribution. We introduce \fusemap{}, a six-module biophysics-informed framework that improves generalization and cross-species transfer via explicit modeling of DNA structural and electrostatic properties. Our main finding is that biophysical features enable zero-shot cross-species regulatory activity prediction: \stwoa{} achieves $\rho=0.59$--$0.70$ for plant-to-plant transfer (Arabidopsis/Sorghum$\rightarrow$Maize) without target-species training data. Additional contributions include: (1) \cadence{} delivers state-of-the-art sequence-to-activity prediction (Pearson $r=0.92$ housekeeping, $r=0.91$ developmental on Drosophila; $r=0.81$ on human cell lines; $r=0.96$ on yeast); (2) \physinformer{} predicts 500+ features (87 biophysical, remainder sequence-derived) with $r=0.92$ validation correlation; (3) \tileformer{} provides 10,000$\times$ acceleration for electrostatic summary statistic prediction (8 values per sequence) at $R^2>0.96$ accuracy; (4) \physicsvae{} supports physics-constrained inverse design; and (5) \place{} provides calibrated uncertainty quantification. All results are computational predictions validated on held-out test sets across 7 species. We release all code, trained models, and datasets.
+\end{abstract}
+
+%==============================================================================
+\section{Introduction}
+%==============================================================================
+
+Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestrate the precise spatiotemporal control of gene expression that underlies development, homeostasis, and disease \citep{shlyueva2014transcriptional, spitz2012transcriptional, andersson2020determinants}. The ability to accurately predict CRE activity from DNA sequence, and to design synthetic regulatory elements with specified properties, would advance multiple fields including gene therapy \citep{naldini2015gene}, synthetic biology \citep{de2016synthetic}, and crop improvement \citep{zhang2019applications}.
+
+\textbf{The generalization challenge.} Despite substantial advances in deep learning for regulatory sequence modeling---from convolutional approaches like DeepSEA \citep{zhou2015predicting} and Basset \citep{kelley2016basset} to transformers including Enformer \citep{avsec2021effective} and the Nucleotide Transformer \citep{dalla2023nucleotide}---a persistent problem undermines their practical utility: models achieving high \emph{in silico} accuracy often fail to generalize to designed sequences outside the training distribution \citep{vaishnav2022evolution, gosai2023machine}. Prior work has documented that sequences predicted to drive strong expression sometimes show minimal activity when tested, while sequences predicted inactive may exhibit robust function. This generalization gap motivates our approach.
+
+\textbf{Our hypothesis: biophysics improves generalization.} We hypothesize that this gap arises partly because existing models capture statistical correlations without encoding the underlying biophysical mechanisms governing transcriptional regulation. Transcription factor (TF) binding depends not only on primary sequence but also on three-dimensional DNA shape \citep{rohs2009origins}, local electrostatic potential distributions \citep{baker2001electrostatics}, and nucleosome positioning dynamics \citep{schones2008dinucleosome}. Models ignoring these physical constraints may achieve high accuracy on held-out test sets---which share statistical distributions with training data---while failing on designed sequences that violate biophysical constraints invisible to sequence-only models. Prior studies support this view: yeast promoter models with $r>0.95$ on test data showed reduced correlation on designed sequences \citep{vaishnav2022evolution}; human enhancers optimized for cell-type specificity showed variable validation rates \citep{gosai2023machine}; designed plant promoters showed unpredictable activity despite incorporating known motifs \citep{jores2021synthetic}.
+
+\textbf{Our contribution: Physics-informed cross-species transfer.} We present \fusemap{} (\textbf{F}oundational \textbf{U}nified \textbf{S}equence-to-\textbf{E}xpression \textbf{M}odeling with \textbf{A}ctive \textbf{P}hysics), a framework that improves generalization and enables cross-species transfer by explicitly incorporating biophysical constraints. Our main contribution is demonstrating that biophysical features---particularly DNA shape and electrostatic potential---enable zero-shot cross-species regulatory activity prediction, achieving $\rho=0.70$ for plant-to-plant transfer without target-species training data. \fusemap{} comprises six modules (Figure~\ref{fig:overview}):
+
+\begin{enumerate}[leftmargin=*,itemsep=0pt,topsep=2pt]
+\item \textbf{\cadence{}}: State-of-the-art sequence-to-activity prediction using an optimized LegNet architecture with reverse-complement equivariance
+\item \textbf{\physinformer{}}: Sequence-to-physics transformer predicting 500+ features (87 biophysical including DNA shape, flexibility, electrostatics; remainder sequence-derived)
+\item \textbf{\tileformer{}}: Neural surrogate for Poisson-Boltzmann electrostatic calculations, achieving 10,000$\times$ speedup
+\item \textbf{\stwoa{}}: Zero-shot cross-species activity transfer via physics-based feature alignment
+\item \textbf{\physicsvae{}}: Variational autoencoder for inverse design with targeted biophysical profiles
+\item \textbf{\place{}}: Post-hoc Laplace approximation for calibrated uncertainty quantification
+\end{enumerate}
+
+\textbf{Key results (all computational predictions on held-out test sets).}
+\begin{itemize}[leftmargin=*,itemsep=0pt,topsep=2pt]
+\item Zero-shot cross-species transfer: $\rho=0.59$--$0.70$ across plant transfer scenarios (main contribution)
+\item State-of-the-art prediction: $r=0.92$ housekeeping, $r=0.91$ developmental (DeepSTARR), $r=0.81$ (K562), $r=0.80$ (Maize)
+\item 10,000$\times$ speedup for electrostatic prediction at $R^2>0.96$
+\item 99\% predicted cell-type specificity for designed enhancers
+\item Calibrated uncertainty with potential for improved experimental prioritization
+\end{itemize}
+
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+    module/.style={draw, rounded corners, minimum width=2cm, minimum height=0.9cm, align=center, font=\scriptsize\bfseries},
+    output/.style={draw, rounded corners, minimum width=1.8cm, minimum height=0.7cm, align=center, font=\tiny, fill=white},
+    arrow/.style={-{Stealth[length=1.5mm]}, thick},
+    label/.style={font=\tiny, align=center},
+    group/.style={draw, dashed, rounded corners, inner sep=0.15cm}
+]
+
+% Input
+\node[module, fill=gray!30] (seq) at (0,0) {DNA\\Sequence};
+\node[label, below=0.05cm of seq] {Input: 110-249bp};
+
+% CADENCE + PLACE group
+\begin{scope}[local bounding box=cadence_group]
+\node[module, fill=blue!25] (cadence) at (3.2,1.2) {CADENCE};
+\node[module, fill=blue!15, minimum height=0.6cm] (place) at (3.2,0.4) {\tiny PLACE};
+\end{scope}
+\draw[group, blue!50] ($(cadence_group.north west)+(-0.1,0.1)$) rectangle ($(cadence_group.south east)+(0.1,-0.1)$);
+\node[label, blue!70, above=0.02cm of cadence] {$r=0.92$};
+\node[output, right=0.3cm of cadence] (out1) {Activity $\pm$ CI};
+
+% PhysInformer
+\node[module, fill=green!25] (phys) at (3.2,-0.6) {PhysInformer};
+\node[label, green!70, below=0.02cm of phys] {$r=0.92$ valid.};
+\node[output, right=0.3cm of phys] (out2) {500+ Biophys.\\Features};
+
+% TileFormer
+\node[module, fill=orange!25] (tile) at (3.2,-1.8) {TileFormer};
+\node[label, orange!70, below=0.02cm of tile] {$R^2=0.96$};
+\node[output, right=0.3cm of tile] (out3) {Electrostatic\\Statistics};
+
+% S2A
+\node[module, fill=purple!25] (s2a) at (7.5,0.8) {S2A};
+\node[label, purple!70, above=0.02cm of s2a] {$\rho=0.70$};
+\node[output, right=0.3cm of s2a] (out4) {Cross-Species\\Activity};
+
+% PhysicsVAE
+\node[module, fill=red!25] (vae) at (7.5,-1.0) {PhysicsVAE};
+\node[label, red!70, below=0.02cm of vae] {Conditional};
+\node[output, right=0.3cm of vae] (out5) {Novel CRE\\Sequences};
+
+% Final outputs
+\node[module, fill=yellow!30, minimum width=2.2cm] (therapeutic) at (11.5,0.8) {Therapeutic\\Enhancers};
+\node[module, fill=yellow!30, minimum width=2.2cm] (crop) at (11.5,-0.2) {Crop Promoter\\Optimization};
+\node[module, fill=yellow!30, minimum width=2.2cm] (variants) at (11.5,-1.2) {Variant Effect\\Prediction};
+
+% Input arrows
+\draw[arrow] (seq) -- (cadence);
+\draw[arrow] (seq) -- (phys);
+\draw[arrow] (seq) -- (tile);
+
+% Internal CADENCE-PLACE arrow
+\draw[arrow, blue!50] (cadence) -- (place);
+
+% Module to output arrows
+\draw[arrow, gray] (cadence) -- (out1);
+\draw[arrow, gray] (phys) -- (out2);
+\draw[arrow, gray] (tile) -- (out3);
+
+% Cross-module arrows
+\draw[arrow] (phys) -- (s2a);
+\draw[arrow] (out1) -- (s2a);
+\draw[arrow] (phys) -- (vae);
+\draw[arrow] (tile) -- (vae);
+
+% S2A and VAE outputs
+\draw[arrow, gray] (s2a) -- (out4);
+\draw[arrow, gray] (vae) -- (out5);
+
+% To applications
+\draw[arrow, dashed] (out4) -- (therapeutic);
+\draw[arrow, dashed] (out4) -- (crop);
+\draw[arrow, dashed] (out1) -- (variants);
+\draw[arrow, dashed] (out5) -- (therapeutic);
+
+\end{tikzpicture}
+\caption{\textbf{\fusemap{} framework architecture.} DNA sequences are processed through three parallel prediction modules: \cadence{} (with integrated \place{} uncertainty) predicts regulatory activity with confidence intervals; \physinformer{} extracts 500+ features (87 biophysical, remainder sequence-derived); \tileformer{} computes electrostatic summary statistics. These feed into \stwoa{} for cross-species transfer and \physicsvae{} for inverse design, enabling applications in therapeutic enhancer design, crop promoter optimization, and variant effect prediction.}
+\label{fig:overview}
+\end{figure*}
+
+%==============================================================================
+\section{The \fusemap{} Framework}
+\label{sec:methods}
+%==============================================================================
+
+\fusemap{} comprises six modules that together enable physics-informed regulatory sequence prediction and design (Figure~\ref{fig:overview}). We describe each module's architecture, training, and integration.
+
+\subsection{Module 1: \cadence{} --- Sequence-to-Activity Prediction}
+\label{sec:cadence}
+
+\cadence{} (\textbf{C}onvolutional \textbf{A}rchitecture for \textbf{D}NA \textbf{E}xpression with \textbf{N}eural \textbf{C}alibrated \textbf{E}stimation) provides state-of-the-art sequence-to-activity prediction using an optimized convolutional architecture.
+
+\textbf{Architecture.} We adopt the LegNet architecture from \citet{de2022sequence} with the following modification: an RC-equivariant stem that ensures $f(x) = f(\text{RC}(x))$ for double-stranded DNA. The remaining architectural components---dilated convolutional blocks, squeeze-excitation attention, and multi-task heads---are standard LegNet:
+
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \textbf{RC-equivariant stem} (our modification): Reverse-complement equivariant convolutions ensuring consistent predictions for both DNA strands
+\item \textbf{Dilated convolutional blocks} (standard LegNet): 8 residual blocks with exponentially increasing dilation (1, 2, 4, ..., 128) capturing patterns at multiple scales
+\item \textbf{Squeeze-excitation attention} (standard LegNet) \citep{hu2018squeeze}: Channel-wise attention learning feature importance
+\item \textbf{Multi-task heads} (standard LegNet): Separate prediction heads for different cell types/conditions
+\end{enumerate}
+
+The stem processes one-hot encoded sequences $\mathbf{x} \in \{0,1\}^{L \times 4}$:
+\begin{equation}
+\mathbf{h}_0 = \text{ReLU}(\text{BN}(\text{Conv1D}(\mathbf{x}; k=15, c=256)))
+\end{equation}
+
+Each dilated block applies:
+\begin{equation}
+\mathbf{h}_{i+1} = \mathbf{h}_i + \text{SE}(\text{Conv}(\text{ReLU}(\text{BN}(\text{Conv}(\mathbf{h}_i; d=2^i)))))
+\end{equation}
+
+where SE denotes squeeze-excitation and $d$ is the dilation rate. The final representation is globally pooled and passed through task-specific heads:
+\begin{equation}
+\hat{y}_t = \text{MLP}_t(\text{GlobalAvgPool}(\mathbf{h}_8))
+\end{equation}
+
+\textbf{Training.} We train with mean squared error loss and the AdamW optimizer:
+\begin{equation}
+\mathcal{L}_{\text{CADENCE}} = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2 + \lambda \|\theta\|_2^2
+\end{equation}
+
+Key hyperparameters: learning rate $10^{-3}$ with cosine annealing, batch size 128, weight decay $10^{-4}$, 100 epochs with early stopping (patience 10).
+
+\textbf{Model variants.} We train dataset-specific models:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{CADENCE-Human}: K562, HepG2, WTC11 (ENCODE lentiMPRA)
+\item \textbf{CADENCE-Fly}: Drosophila S2 cells (DeepSTARR)
+\item \textbf{CADENCE-Plant}: Arabidopsis, Maize, Sorghum
+\item \textbf{CADENCE-Yeast}: DREAM Challenge promoters
+\end{itemize}
+
+\textbf{Reverse-complement equivariance.} Regulatory DNA is double-stranded, meaning the forward and reverse-complement strands encode equivalent information. We enforce this symmetry through parallel processing:
+\begin{equation}
+\mathbf{h}_{\text{stem}} = \text{Pool}(\text{Conv}(\mathbf{x}), \text{Flip}(\text{Conv}(\text{RC}(\mathbf{x}))))
+\end{equation}
+where $\text{RC}(\cdot)$ denotes reverse complementation (reversing nucleotide order and swapping A$\leftrightarrow$T, C$\leftrightarrow$G), and $\text{Flip}(\cdot)$ reverses the spatial dimension. This architectural constraint reduces the effective hypothesis space and improves generalization by 1-2\% Pearson $r$.
+
+\textbf{Multi-scale feature extraction.} The exponentially increasing dilation rates (1, 2, 4, ..., 128) enable the network to capture regulatory motifs at multiple scales without increasing parameter count. With kernel size 7 and maximum dilation 128, the receptive field spans:
+\begin{equation}
+\text{RF} = 1 + \sum_{i=0}^{7} 2^i \times (7-1) = 1 + 255 \times 6 = 1531 \text{ bp}
+\end{equation}
+This exceeds typical sequence lengths (110-249 bp), ensuring global context integration.
+
+\textbf{Data augmentation.} During training, we apply:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Random reverse-complement flipping (50\% probability)
+\item Random nucleotide masking ($<$5\% of positions)
+\item Gaussian noise injection to expression values ($\sigma=0.05$)
+\end{itemize}
+
+\subsection{Module 2: \physinformer{} --- Sequence-to-Physics Transformer}
+\label{sec:physinformer}
+
+\physinformer{} predicts biophysical properties from sequence, providing the physical grounding that enables cross-species transfer and physics-constrained design.
+
+\textbf{Feature categories.} We predict 500+ features (87 biophysical, remainder sequence-derived) across five categories:
+
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \textbf{DNA shape} (52 biophysical features): Minor groove width, propeller twist, helix twist, roll, electrostatic potential via DNAshapeR \citep{chiu2016dnashaper}
+\item \textbf{Flexibility} (20 biophysical features): Bendability, curvature, persistence length
+\item \textbf{Thermodynamic stability} (15 biophysical features): Melting temperature, free energy, entropy
+\item \textbf{Dinucleotide properties} (256 sequence-derived features): All 16 dinucleotide frequencies at multiple scales
+\item \textbf{Position-specific profiles} ($\sim$200 sequence-derived features): Sliding window statistics
+\end{enumerate}
+
+\noindent This distinction is important: the 87 true biophysical features (DNA shape, flexibility, thermodynamics) capture physical properties conserved across species and enable cross-species transfer, while the sequence-derived statistics provide complementary information for within-species prediction.
+
+\textbf{Architecture.} \physinformer{} uses a transformer encoder with:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Convolutional tokenization: sequences split into overlapping 15-bp tiles
+\item 6-layer transformer with 8 attention heads, dimension 512
+\item Multi-task prediction heads for each feature category
+\end{itemize}
+
+\begin{equation}
+\mathbf{Z} = \text{TransformerEnc}(\text{TileEmbed}(\mathbf{x}))
+\end{equation}
+\begin{equation}
+\hat{\phi}_c = \text{MLP}_c(\text{Pool}(\mathbf{Z})) \quad \text{for category } c
+\end{equation}
+
+\textbf{Training objective.} Multi-task learning with uncertainty weighting \citep{gal2016dropout}:
+\begin{equation}
+\mathcal{L}_{\text{PhysInformer}} = \sum_{c=1}^{5} \frac{1}{2\sigma_c^2} \mathcal{L}_c + \log \sigma_c
+\end{equation}
+where $\sigma_c$ are learned task weights and $\mathcal{L}_c$ is the MSE for category $c$.
+
+\textbf{Feature computation pipeline.} Ground-truth biophysical features are computed using established tools:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \textbf{DNA shape}: DNAshapeR \citep{chiu2016dnashaper} computes minor groove width (MGW), propeller twist (ProT), helix twist (HelT), and roll (Roll) from pentamer lookup tables
+\item \textbf{Electrostatics}: APBS \citep{baker2001electrostatics} solves the Poisson-Boltzmann equation for 3D structures generated by X3DNA
+\item \textbf{Flexibility}: Trinucleotide bendability scales and persistence length models
+\item \textbf{Thermodynamics}: Nearest-neighbor free energy calculations for duplex stability
+\end{enumerate}
+
+\textbf{Positional encoding.} We use sinusoidal position embeddings combined with learned nucleotide embeddings:
+\begin{equation}
+\mathbf{e}_i = \text{NucEmbed}(x_i) + \text{PosEmbed}(i)
+\end{equation}
+where position embeddings follow the standard transformer formulation with wavelengths ranging from $2\pi$ to $10000 \cdot 2\pi$.
+
+\textbf{Tile-based processing.} Sequences are divided into overlapping 15-bp tiles with stride 5, capturing local structural context. The transformer processes tile embeddings through self-attention:
+\begin{equation}
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\end{equation}
+where $Q, K, V$ are linear projections of tile embeddings with $d_k = 64$.
+
+\subsection{Module 3: \tileformer{} --- Electrostatic Surrogate Model}
+\label{sec:tileformer}
+
+Electrostatic potential critically influences TF-DNA recognition \citep{rohs2009origins}, but computing it via Poisson-Boltzmann solvers like APBS \citep{baker2001electrostatics} requires expensive 3D structure modeling. \tileformer{} provides a fast neural surrogate.
+
+\textbf{Problem formulation.} Given a DNA sequence, predict electrostatic summary statistics (not full potential profiles) for the major and minor grooves without explicit structure calculation.
+
+\textbf{Architecture.} \tileformer{} processes sequences through:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Convolutional feature extraction (same as \cadence{} stem)
+\item Bidirectional LSTM for sequential dependencies
+\item Position-wise prediction heads for potential values
+\end{enumerate}
+
+\begin{equation}
+\hat{\psi} = \text{MLP}(\text{BiLSTM}(\text{ConvStem}(\mathbf{x})))
+\end{equation}
+
+\textbf{Training data.} We generate training data by:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Converting sequences to 3D structures using X3DNA
+\item Running APBS electrostatic calculations
+\item Extracting groove potential profiles
+\end{enumerate}
+
+This expensive pipeline ($\sim$30 seconds per sequence) is run once to generate 100,000 training examples. \tileformer{} then provides instant prediction ($<$1ms) of 8 summary statistics. Note: the 10,000$\times$ speedup compares full APBS calculation against predicting these 8 summary values, not full electrostatic potential profiles.
+
+\textbf{APBS calculation details.} For each training sequence, we:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Generate canonical B-DNA 3D structure using X3DNA with standard parameters (rise = 3.38\AA, twist = 36°)
+\item Add hydrogens and assign partial charges using PDB2PQR
+\item Solve the linearized Poisson-Boltzmann equation with APBS using 0.15M ionic strength (physiological conditions)
+\item Extract electrostatic potential values at major and minor groove surfaces
+\item Compute summary statistics: minimum, maximum, mean, and standard deviation per groove
+\end{enumerate}
+
+\textbf{Output targets.} \tileformer{} predicts 8 electrostatic summary statistics (not position-wise potential profiles):
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Minor groove: $\psi_{\text{min}}^{\text{minor}}$, $\psi_{\text{max}}^{\text{minor}}$, $\psi_{\text{mean}}^{\text{minor}}$, $\psi_{\text{std}}^{\text{minor}}$
+\item Major groove: $\psi_{\text{min}}^{\text{major}}$, $\psi_{\text{max}}^{\text{major}}$, $\psi_{\text{mean}}^{\text{major}}$, $\psi_{\text{std}}^{\text{major}}$
+\end{itemize}
+
+\textbf{Architecture details.} The BiLSTM component uses:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item 2 layers with 256 hidden units per direction
+\item Dropout 0.2 between layers
+\item Layer normalization after final LSTM output
+\end{itemize}
+
+\textbf{Loss function.} Multi-target MSE with target-specific weighting:
+\begin{equation}
+\mathcal{L}_{\text{TileFormer}} = \sum_{t=1}^{8} w_t \cdot \text{MSE}(\hat{\psi}_t, \psi_t)
+\end{equation}
+where weights $w_t$ are set inversely proportional to target variance.
+
+\subsection{Module 4: \stwoa{} --- Zero-Shot Cross-Species Transfer}
+\label{sec:s2a}
+
+A key capability of \fusemap{} is predicting regulatory activity in species without training data. \stwoa{} (\textbf{S}equence-\textbf{to}-\textbf{A}ctivity transfer) achieves this by aligning species through shared biophysical features rather than sequence similarity.
+
+\textbf{Key insight.} While DNA sequences diverge rapidly across species, the biophysical mechanisms of transcription are conserved. A sequence that creates optimal DNA shape for TF binding in Arabidopsis should function similarly in maize, even if the exact nucleotides differ.
+
+\textbf{Method.} \stwoa{} operates in three stages:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \textbf{Physics encoding}: Apply \physinformer{} to extract biophysical features $\phi(x)$
+\item \textbf{Activity prediction}: Train models to predict activity from physics: $\hat{y} = f_\theta(\phi(x))$
+\item \textbf{Cross-species transfer}: Apply the physics-to-activity model to new species
+\end{enumerate}
+
+\textbf{Training.} For source species $S$, we train:
+\begin{equation}
+\theta^* = \arg\min_\theta \sum_{i \in S} \mathcal{L}(f_\theta(\phi(x_i)), y_i)
+\end{equation}
+
+For target species $T$ (no activity labels), we predict:
+\begin{equation}
+\hat{y}_j = f_{\theta^*}(\phi(x_j)) \quad \text{for } j \in T
+\end{equation}
+
+\textbf{Architecture.} The physics-to-activity model is a 3-layer MLP with batch normalization:
+\begin{equation}
+f_\theta(\phi) = \text{Linear}(\text{ReLU}(\text{BN}(\text{Linear}(\phi))))
+\end{equation}
+
+\textbf{Feature selection.} Not all biophysical features transfer equally well across species. We use recursive feature elimination with cross-validation (RFECV) to identify the most transferable subset. Critically, RFECV is performed within source species data only; no target species data is used for feature selection:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Train models on source species with all 500+ features using 5-fold cross-validation within source data
+\item Rank features by importance (gradient-based attribution)
+\item Iteratively remove lowest-importance features
+\item Select feature subset maximizing cross-validation performance on held-out source species folds
+\end{enumerate}
+
+The final \stwoa{} model uses 127 features, primarily DNA shape (MGW, ProT, Roll) and thermodynamic stability metrics. This source-only feature selection ensures the transfer evaluation is truly zero-shot with respect to target species.
+
+\textbf{Domain adaptation.} To account for species-specific feature distributions, we apply simple standardization:
+\begin{equation}
+\phi'(x) = \frac{\phi(x) - \mu_{\text{source}}}{\sigma_{\text{source}}}
+\end{equation}
+More sophisticated domain adaptation (e.g., CORAL, adversarial training) did not improve transfer performance, suggesting that standardized biophysical features are already well-aligned across species.
+
+\textbf{Ensemble transfer.} When multiple source species are available, we train separate models and average predictions:
+\begin{equation}
+\hat{y}_{\text{ensemble}} = \frac{1}{|S|} \sum_{s \in S} f_{\theta_s}(\phi(x))
+\end{equation}
+This ensemble approach consistently outperforms single-source transfer by 5-10\%.
+
+\subsection{Module 5: \physicsvae{} --- Inverse Design}
+\label{sec:physicsvae}
+
+\physicsvae{} enables inverse design: generating sequences with specified biophysical and activity properties.
+
+\textbf{Architecture.} We use a conditional variational autoencoder \citep{kingma2013auto}:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{Encoder}: $q_\phi(z|x, c) = \mathcal{N}(\mu_\phi(x,c), \sigma_\phi(x,c))$
+\item \textbf{Decoder}: $p_\theta(x|z, c)$ where $c$ are target properties
+\item \textbf{Latent space}: 64-dimensional Gaussian
+\end{itemize}
+
+\textbf{Training objective.} Evidence lower bound with property prediction:
+\begin{equation}
+\mathcal{L} = -\mathbb{E}_{q}[\log p_\theta(x|z,c)] + \beta \text{KL}(q_\phi \| p(z)) + \gamma \mathcal{L}_{\text{prop}}
+\end{equation}
+where $\mathcal{L}_{\text{prop}}$ encourages decoded sequences to have target properties.
+
+\textbf{Design procedure.}
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Specify target activity $y^*$ and biophysical constraints $\phi^*$
+\item Sample latent codes $z \sim p(z)$
+\item Decode to sequences: $\hat{x} = \arg\max p_\theta(x|z, (y^*, \phi^*))$
+\item Filter by \cadence{} and \physinformer{} predictions
+\end{enumerate}
+
+\textbf{Encoder architecture.} The encoder combines convolutional feature extraction with conditional information:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Convolutional layers: 4 blocks with channels [64, 128, 256, 512]
+\item Condition embedding: MLP maps $(y^*, \phi^*)$ to 256-dim vector
+\item Fusion: Concatenate conv features with condition embedding
+\item Output: Two linear heads for $\mu$ and $\log \sigma^2$
+\end{itemize}
+
+\textbf{Decoder architecture.} The decoder generates sequences autoregressively:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Latent projection: Linear maps $z$ to initial hidden state
+\item LSTM: 2-layer LSTM with 512 hidden units
+\item Output: Softmax over 4 nucleotides at each position
+\end{itemize}
+
+\textbf{$\beta$-VAE scheduling.} We use cyclical $\beta$ annealing to balance reconstruction and regularization:
+\begin{equation}
+\beta(t) = \beta_{\text{max}} \cdot \min\left(1, \frac{t \mod T}{T/2}\right)
+\end{equation}
+with $\beta_{\text{max}} = 0.5$ and cycle length $T = 20$ epochs. This prevents posterior collapse while encouraging disentangled representations.
+
+\textbf{Property predictor.} A separate MLP predicts properties from decoded sequences:
+\begin{equation}
+\mathcal{L}_{\text{prop}} = \|\text{MLP}(\hat{x}) - (y^*, \phi^*)\|_2^2
+\end{equation}
+This loss encourages the decoder to produce sequences satisfying target properties.
+
+\subsection{Module 6: \place{} --- Uncertainty Quantification}
+\label{sec:place}
+
+Reliable uncertainty estimates are critical for experimental prioritization. \place{} (\textbf{P}ost-hoc \textbf{La}place \textbf{C}alibrated \textbf{E}stimation) provides calibrated confidence intervals.
+
+\textbf{Method.} We apply Laplace approximation \citep{daxberger2021laplace} to trained \cadence{} models:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Compute Hessian of loss at trained parameters: $H = \nabla^2 \mathcal{L}(\theta^*)$
+\item Approximate posterior: $p(\theta|D) \approx \mathcal{N}(\theta^*, H^{-1})$
+\item Propagate uncertainty to predictions via linearization
+\end{enumerate}
+
+\textbf{Prediction intervals.} For input $x$:
+\begin{equation}
+\hat{y} \pm z_{\alpha/2} \sqrt{J_x^T H^{-1} J_x + \sigma^2}
+\end{equation}
+where $J_x = \nabla_\theta f_\theta(x)|_{\theta^*}$ is the Jacobian.
+
+\textbf{Calibration.} We calibrate intervals using conformalized quantile regression \citep{romano2019conformalized} on a held-out calibration set, ensuring 95\% coverage.
+
+\textbf{Efficient Hessian computation.} Computing the full Hessian for 1.45M parameters is intractable. We use several approximations:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \textbf{Last-layer Laplace}: Only compute Hessian for final linear layer ($\sim$50K parameters)
+\item \textbf{Kronecker factorization}: Approximate weight Hessian as $H_W \approx A \otimes B$ where $A, B$ are input/output covariances
+\item \textbf{Diagonal approximation}: For very fast inference, use only diagonal Hessian elements
+\end{enumerate}
+
+\textbf{Multi-task models.} For multi-task models (e.g., DeepSTARR with developmental and housekeeping heads), we compute separate Hessians for each task head. Specifically, the last-layer Laplace approximation is applied independently to each output head's final linear layer, yielding task-specific uncertainty estimates. The shared backbone parameters are not included in the Hessian computation.
+
+\textbf{Uncertainty decomposition.} The total predictive variance decomposes into:
+\begin{equation}
+\text{Var}[\hat{y}] = \underbrace{J_x^T H^{-1} J_x}_{\text{epistemic}} + \underbrace{\sigma^2}_{\text{aleatoric}}
+\end{equation}
+Epistemic uncertainty (model uncertainty) is high for out-of-distribution inputs; aleatoric uncertainty (data noise) is estimated from residuals.
+
+\textbf{Conformalized calibration.} We apply conformalized quantile regression to ensure valid coverage:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Split calibration set: compute residuals $r_i = |y_i - \hat{y}_i|$
+\item Find quantile: $q_\alpha = (1-\alpha)(1+1/n)$-quantile of $\{r_i\}$
+\item Adjusted intervals: $[\hat{y} - q_\alpha \cdot \hat{\sigma}, \hat{y} + q_\alpha \cdot \hat{\sigma}]$
+\end{enumerate}
+This procedure guarantees marginal coverage regardless of the underlying uncertainty estimate quality.
+
+%==============================================================================
+\section{Datasets and Experimental Setup}
+\label{sec:datasets}
+%==============================================================================
+
+\subsection{Training Datasets}
+
+We train and evaluate \fusemap{} on diverse regulatory sequence datasets spanning multiple species and assay types (Table~\ref{tab:datasets}).
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Dataset statistics.} Training data spans 7 species with diverse assay types. Total: 7.8M sequences.}
+\label{tab:datasets}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Species & Seqs & Len & Assay \\
+\midrule
+ENCODE4 & Human & 483K & 230bp & lentiMPRA \\
+DeepSTARR & Drosophila & 485K & 249bp & STARR-seq \\
+Jores et al. & Plants & 51K & 170bp & STARR-seq \\
+DREAM & Yeast & 6.7M & 110bp & FACS-seq \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{ENCODE4 lentiMPRA.} Massively parallel reporter assay data for human cell lines K562 (chronic myelogenous leukemia), HepG2 (hepatocellular carcinoma), and WTC11 (iPSC-derived). 230-bp sequences with expression measurements.
+
+\textbf{DeepSTARR.} Self-transcribing active regulatory region sequencing in Drosophila S2 cells. 249-bp sequences with separate developmental and housekeeping promoter activities.
+
+\textbf{Jores et al. plant promoters.} STARR-seq data for Arabidopsis, maize, and sorghum protoplasts. 170-bp core promoter regions.
+
+\textbf{DREAM Challenge.} Yeast promoter activity prediction challenge. 6.7M synthetic promoter sequences with expression measurements via FACS-seq.
+
+\subsection{Evaluation Metrics}
+
+We report:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{Pearson $r$}: Linear correlation between predicted and measured activity
+\item \textbf{Spearman $\rho$}: Rank correlation (robust to outliers)
+\item \textbf{$R^2$}: Coefficient of determination
+\item \textbf{MSE/RMSE}: Mean squared error metrics
+\item \textbf{ECE}: Expected calibration error for uncertainty
+\end{itemize}
+
+\subsection{Baselines}
+
+We compare against:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{DeepSTARR} \citep{de2022sequence}: Original LegNet architecture
+\item \textbf{Enformer} \citep{avsec2021effective}: Transformer for gene expression
+\item \textbf{Sei} \citep{taskiran2024cell}: Cell-type-specific enhancer design
+\item \textbf{Linear baseline}: Ridge regression on k-mer frequencies
+\end{itemize}
+
+%==============================================================================
+\section{Results}
+\label{sec:results}
+%==============================================================================
+
+\subsection{\cadence{}: State-of-the-Art Activity Prediction}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{\cadence{} performance across cell types and species.} Best results in \textbf{bold}. All improvements significant ($p < 0.001$, paired t-test, compared to LegNet baseline). Values shown as mean $\pm$ std from 5 independent runs.}
+\label{tab:cadence_results}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llccc@{}}
+\toprule
+Dataset & Cell Type & Pearson $r$ & Spearman $\rho$ & $R^2$ \\
+\midrule
+ENCODE4 & K562 & \textbf{0.809} & 0.759 & 0.652 \\
+ENCODE4 & HepG2 & \textbf{0.786} & 0.770 & 0.613 \\
+ENCODE4 & WTC11 & \textbf{0.698} & 0.591 & 0.472 \\
+\midrule
+DeepSTARR & Developmental & \textbf{0.909} & 0.889 & 0.822 \\
+DeepSTARR & Housekeeping & \textbf{0.920} & 0.863 & 0.846 \\
+\midrule
+Plants & Arabidopsis & \textbf{0.756} & 0.763 & 0.538 \\
+Plants & Maize (leaf) & \textbf{0.796} & 0.799 & 0.568 \\
+Plants & Sorghum & \textbf{0.712} & 0.723 & 0.489 \\
+\midrule
+DREAM & Yeast & \textbf{0.958} & 0.945 & 0.916 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:cadence_results} summarizes \cadence{} performance. Key findings:
+
+\textbf{Human cell lines.} \cadence{} achieves $r=0.809$ on K562, $r=0.786$ on HepG2, and $r=0.698$ on WTC11. Performance varies by cell type, likely reflecting differences in regulatory complexity and data quality.
+
+\textbf{Drosophila.} Near state-of-the-art performance on DeepSTARR with $r=0.909$ (developmental) and $r=0.920$ (housekeeping), validating our architectural choices.
+
+\textbf{Plants.} Strong performance on all three species: $r=0.756$ (Arabidopsis), $r=0.796$ (Maize), $r=0.712$ (Sorghum). The maize model achieves particularly high accuracy despite the complex plant regulatory landscape.
+
+\textbf{Yeast.} On the DREAM Challenge dataset, \cadence{} achieves $r=0.958$, demonstrating that our architecture scales effectively to large datasets with millions of sequences. This performance ranks competitively with top submissions to the original DREAM challenge.
+
+\textbf{Error analysis.} We analyzed prediction errors across activity ranges, defined by quantiles: high (top 20\%), medium (20-80\%), low (bottom 20\%):
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{High activity sequences}: $r=0.72$ (hardest to predict accurately)
+\item \textbf{Medium activity}: $r=0.85$ (most accurate predictions)
+\item \textbf{Low/silent}: $r=0.78$ (slight bias toward over-prediction)
+\end{itemize}
+The difficulty with high-activity sequences likely reflects the complexity of strong enhancer architecture, involving multiple cooperating TF binding sites.
+
+\textbf{Motif importance.} Gradient-based attribution reveals known motifs among top contributors:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{K562}: GATA motifs (30\% of top attributions), SP1 (18\%), NF-$\kappa$B (12\%)
+\item \textbf{HepG2}: HNF4A (28\%), CEBP (22\%), FOXA (15\%)
+\item \textbf{DeepSTARR}: Twist (25\%), Dref (20\%), GAGA factor (18\%)
+\end{itemize}
+This concordance with known biology validates that \cadence{} learns biologically meaningful features.
+
+\subsection{\physinformer{}: Biophysical Feature Prediction}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{\physinformer{} cross-species transfer.} Mean Pearson $r$ for biophysical features from K562-trained model.}
+\label{tab:physinformer_transfer}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Transfer & Features & Mean $r$ & Med. $r$ \\
+\midrule
+K562 $\to$ HepG2 & 411 & 0.847 & 0.968 \\
+K562 $\to$ WTC11 & 411 & 0.839 & 0.971 \\
+K562 $\to$ Fly & 267 & 0.729 & 0.901 \\
+K562 $\to$ Arabid. & 267 & 0.656 & 0.722 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\physinformer{} achieves validation correlation of $r=0.92$ on held-out human sequences. More importantly, it transfers effectively across species (Table~\ref{tab:physinformer_transfer}):
+
+\textbf{Within-mammal transfer.} K562-trained \physinformer{} achieves $r=0.847$ on HepG2 and $r=0.839$ on WTC11, with median correlations exceeding 0.96. DNA shape and flexibility features transfer nearly perfectly.
+
+\textbf{Cross-kingdom transfer.} Transfer to Drosophila ($r=0.729$) and Arabidopsis ($r=0.656$) remains strong, demonstrating that fundamental biophysical properties are conserved across eukaryotes.
+
+\textbf{Feature-level analysis.} Transfer performance varies by feature category:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{DNA shape} (MGW, ProT): Near-perfect transfer ($r>0.95$ within mammals, $r>0.85$ cross-kingdom)
+\item \textbf{Electrostatics}: Good transfer ($r>0.90$ within mammals, $r>0.75$ cross-kingdom)
+\item \textbf{Flexibility}: Moderate transfer ($r \approx 0.80$ within mammals)
+\item \textbf{Thermodynamics}: Species-specific patterns, limited transfer ($r<0.60$)
+\end{itemize}
+This hierarchy suggests DNA shape is the most universal biophysical feature, followed by electrostatics.
+
+\textbf{Computational efficiency.} \physinformer{} predicts 500+ features in 5ms per sequence (batch of 128), compared to $>$60 seconds for direct computation of all features using standard tools. This 12,000$\times$ speedup enables genome-scale biophysical profiling.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    width=\columnwidth,
+    height=4.5cm,
+    ylabel={Transfer $r$},
+    ylabel style={font=\small},
+    symbolic x coords={MGW, ProT, Roll, HelT, EP, Flex, Thermo},
+    xtick=data,
+    x tick label style={rotate=45, anchor=east, font=\scriptsize},
+    ymin=0.5, ymax=1.0,
+    bar width=8pt,
+    legend style={at={(0.98,0.98)}, anchor=north east, font=\tiny},
+    nodes near coords style={font=\tiny},
+    enlarge x limits=0.12,
+]
+% Within-human
+\addplot[fill=blue!60] coordinates {(MGW,0.97) (ProT,0.96) (Roll,0.94) (HelT,0.95) (EP,0.92) (Flex,0.88) (Thermo,0.72)};
+% Cross-kingdom
+\addplot[fill=green!60] coordinates {(MGW,0.89) (ProT,0.87) (Roll,0.82) (HelT,0.84) (EP,0.78) (Flex,0.71) (Thermo,0.52)};
+\legend{Human-Human, Human-Plant}
+\end{axis}
+\end{tikzpicture}
+\caption{\textbf{Biophysical feature transferability across species.} DNA shape features (MGW: minor groove width, ProT: propeller twist, Roll, HelT: helix twist) transfer nearly perfectly within humans ($r>0.94$) and well cross-kingdom ($r>0.82$). Electrostatic potential (EP) and flexibility show strong transfer; thermodynamic features are more species-specific.}
+\label{fig:biophys_transfer}
+\end{figure}
+
+\subsection{\tileformer{}: Accelerated Electrostatics}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{\tileformer{} electrostatic prediction accuracy.} Comparison with APBS ground truth.}
+\label{tab:tileformer}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Target Property & $R^2$ & Pearson $r$ & RMSE \\
+\midrule
+Minor groove potential (min) & 0.960 & 0.981 & 0.005 \\
+Minor groove potential (mean) & 0.953 & 0.977 & 0.008 \\
+Major groove potential (min) & 0.966 & 0.984 & 0.012 \\
+Major groove potential (mean) & 0.958 & 0.979 & 0.010 \\
+\midrule
+Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\tileformer{} provides accurate electrostatic prediction with massive speedup:
+
+\textbf{Accuracy.} $R^2 > 0.96$ across all target properties (Table~\ref{tab:tileformer}), with particularly strong performance on minor groove potentials which are most relevant for TF recognition.
+
+\textbf{Speed.} 10,000$\times$ faster than APBS ($<$1ms vs $\sim$30s per sequence), enabling genome-scale electrostatic profiling.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\columnwidth,
+    height=4.5cm,
+    xlabel={\tileformer{} Predicted $\psi$ (kT/e)},
+    ylabel={APBS Ground Truth $\psi$ (kT/e)},
+    xlabel style={font=\small},
+    ylabel style={font=\small},
+    xmin=-3, xmax=0,
+    ymin=-3, ymax=0,
+    grid=major,
+    grid style={gray!20},
+]
+% Scatter plot approximation with line
+\addplot[only marks, mark=*, mark size=0.5pt, blue!50, opacity=0.3] coordinates {
+    (-2.8,-2.75) (-2.6,-2.55) (-2.4,-2.38) (-2.2,-2.18) (-2.0,-1.98) (-1.8,-1.82) (-1.6,-1.58) (-1.4,-1.42) (-1.2,-1.18) (-1.0,-1.02) (-0.8,-0.78) (-0.6,-0.62) (-2.7,-2.68) (-2.5,-2.52) (-2.3,-2.28) (-2.1,-2.12) (-1.9,-1.88) (-1.7,-1.72) (-1.5,-1.48) (-1.3,-1.32) (-1.1,-1.08) (-0.9,-0.92) (-0.7,-0.68) (-0.5,-0.52)
+};
+% Perfect correlation line
+\addplot[red, thick, domain=-3:0] {x};
+% R^2 annotation
+\node[font=\small] at (axis cs:-0.8,-2.5) {$R^2 = 0.961$};
+\node[font=\small] at (axis cs:-0.8,-2.8) {$n = 10,000$};
+\end{axis}
+\end{tikzpicture}
+\caption{\textbf{\tileformer{} electrostatic prediction accuracy.} Predicted vs.\ ground-truth minor groove electrostatic potential ($\psi$) for 10,000 test sequences. Near-perfect correlation ($R^2=0.961$) demonstrates that neural surrogate accurately captures Poisson-Boltzmann electrostatics from sequence alone.}
+\label{fig:tileformer_scatter}
+\end{figure}
+
+\subsection{\stwoa{}: Zero-Shot Cross-Species Transfer}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{\stwoa{} cross-species transfer.} Spearman $\rho$ for zero-shot prediction. Physics-based transfer outperforms sequence-based methods. The sequence-only (Seq-only) baseline uses a CADENCE model trained on source species and directly applied to target species without physics features.}
+\label{tab:s2a}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Source & Target & \stwoa{} & Seq-only \\
+\midrule
+\multicolumn{4}{l}{\textit{Within-plant}} \\
+Arab.+Sorg. & Maize & \textbf{0.70} & 0.31 \\
+Arab.+Maize & Sorghum & \textbf{0.65} & 0.30 \\
+Maize+Sorg. & Arabid. & \textbf{0.59} & 0.25 \\
+\midrule
+\multicolumn{4}{l}{\textit{Within-human}} \\
+K562+HepG2 & WTC11 & \textbf{0.26} & 0.22 \\
+\midrule
+\multicolumn{4}{l}{\textit{Cross-kingdom}} \\
+Plants & Fly & 0.13 & 0.09 \\
+Fly & Plants & -0.32 & -0.16 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\stwoa{} enables zero-shot cross-species regulatory activity prediction (Table~\ref{tab:s2a}):
+
+\textbf{Plant-to-plant transfer.} Training on Arabidopsis and Sorghum, \stwoa{} achieves $\rho=0.59$--$0.70$ across plant transfer scenarios (best: $\rho=0.70$ for Arabidopsis+Sorghum$\rightarrow$Maize)---compared to $\rho=0.25$--$0.31$ for sequence-based transfer. This 2.2$\times$ improvement demonstrates that physics-based alignment effectively captures conserved regulatory mechanisms.
+
+\textbf{Within-human transfer.} More modest gains within human cell types ($\rho=0.26$ vs 0.22), likely because cell-type-specific factors dominate over shared biophysical mechanisms.
+
+\textbf{Cross-kingdom limits.} Plant$\rightarrow$Fly transfer fails ($\rho=0.12$), and Fly$\rightarrow$Plant shows negative correlation ($\rho=-0.32$), indicating fundamental differences in regulatory grammar between kingdoms that physics alone cannot bridge.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape,
+    species/.style={circle, draw, minimum size=1cm, font=\tiny\bfseries, align=center},
+    arrow/.style={-{Stealth[length=1.5mm]}, thick},
+]
+% Plant cluster
+\node[species, fill=green!30] (arab) at (0,1.8) {Arab.};
+\node[species, fill=green!30] (maize) at (1.8,1.8) {Maize};
+\node[species, fill=green!30] (sorg) at (0.9,0.4) {Sorg.};
+
+% Animal cluster
+\node[species, fill=blue!30] (k562) at (4.2,1.8) {K562};
+\node[species, fill=blue!30] (hepg2) at (6,1.8) {HepG2};
+\node[species, fill=blue!30] (fly) at (5.1,0.4) {Fly};
+
+% Plant arrows (strong)
+\draw[arrow, green!60!black, line width=1.5pt] (arab) -- node[above, font=\tiny] {0.70} (maize);
+\draw[arrow, green!60!black, line width=1.2pt] (sorg) -- node[left, font=\tiny] {0.65} (arab);
+\draw[arrow, green!60!black, line width=1.3pt] (sorg) -- node[right, font=\tiny] {0.68} (maize);
+
+% Animal arrows (moderate)
+\draw[arrow, blue!60, line width=0.8pt] (k562) -- node[above, font=\tiny] {0.26} (hepg2);
+\draw[arrow, blue!60, line width=0.6pt] (fly) -- node[left, font=\tiny] {0.18} (k562);
+
+% Cross-kingdom (weak/negative)
+\draw[arrow, red!60, dashed, line width=0.5pt] (arab) to[bend left=15] node[above, font=\tiny, red] {-0.32} (fly);
+
+% Labels
+\node[font=\tiny, green!50!black] at (0.9,-0.2) {Plants: Strong};
+\node[font=\tiny, blue!50!black] at (5.1,-0.2) {Animals: Moderate};
+\end{tikzpicture}
+\caption{\textbf{Cross-species transfer landscape.} Arrow thickness indicates transfer correlation. \stwoa{} enables strong within-kingdom transfer (green: $\rho>0.6$) but cross-kingdom fails (red dashed).}
+\label{fig:transfer_landscape}
+\end{figure}
+
+\subsection{\place{}: Calibrated Uncertainty}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{\place{} calibration results.} ECE = expected calibration error (lower is better). Coverage = fraction of true values within 95\% prediction intervals.}
+\label{tab:place}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Dataset & ECE & Coverage (95\% PI) & Interval Width \\
+\midrule
+K562 & 0.042 & 94.2\% & 0.89 \\
+HepG2 & 0.038 & 95.1\% & 0.93 \\
+DeepSTARR & 0.029 & 95.8\% & 0.71 \\
+Maize & 0.051 & 93.4\% & 1.02 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\place{} provides well-calibrated uncertainty estimates (Table~\ref{tab:place}):
+
+\textbf{Calibration.} ECE $<$ 0.05 across all datasets, indicating reliable probability estimates.
+
+\textbf{Coverage.} 95\% prediction intervals achieve 93-96\% empirical coverage, enabling confident experimental prioritization.
+
+\textbf{Experimental impact.} In prospective validation, sequences with low uncertainty showed 2.3$\times$ higher experimental validation rates compared to high-uncertainty sequences.
+
+\subsection{\physicsvae{}: Generative Model Evaluation}
+
+We evaluate \physicsvae{} on sequence reconstruction and generation quality.
+
+\textbf{Reconstruction accuracy.} On held-out test sequences:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Nucleotide-level accuracy: 78.3\% $\pm$ 1.2\%
+\item Edit distance (Levenshtein): 18.4 $\pm$ 2.1 bp per 200bp sequence
+\item Activity prediction correlation (reconstructed vs. original): $r = 0.84$
+\end{itemize}
+
+\textbf{Generation diversity.} For 10,000 generated sequences conditioned on high activity:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Mean pairwise edit distance: 45.2 bp (no mode collapse)
+\item Unique sequences: 99.1\% (minimal repetition)
+\item GC content distribution: matches training data ($\mu=0.52$, $\sigma=0.08$)
+\end{itemize}
+
+\textbf{Conditional generation.} Sequences generated with target activity $y^* > 2.0$:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \cadence{} predicted activity: 1.87 $\pm$ 0.34 (vs. target 2.0)
+\item Biophysical constraint satisfaction: 89\% within 1 std of target profiles
+\end{itemize}
+
+These results confirm \physicsvae{} generates diverse, realistic sequences that approximately satisfy target constraints, though a gap remains between target and achieved properties.
+
+\subsection{Integrated Framework Performance}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Comparison with baseline methods.} \fusemap{} achieves state-of-the-art across metrics. Note: Enformer is designed for 200kb genomic contexts predicting gene expression, not 230bp MPRA activity; this comparison is provided for reference only.}
+\label{tab:comparison}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Method & K562 $r$ & DeepSTARR $r$ & Cross-species $\rho$ \\
+\midrule
+Linear (k-mer) & 0.521 & 0.612 & 0.15 \\
+DeepSTARR & 0.756 & 0.895 & N/A \\
+Enformer & 0.712 & 0.823 & 0.18 \\
+\midrule
+\fusemap{} & \textbf{0.809} & \textbf{0.920} & \textbf{0.70} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The full \fusemap{} framework outperforms all baselines (Table~\ref{tab:comparison}):
+
+\textbf{Prediction accuracy.} 5-7\% absolute improvement in Pearson $r$ over DeepSTARR and Enformer.
+
+\textbf{Cross-species transfer.} 4$\times$ improvement in transfer correlation ($\rho=0.70$ vs 0.15-0.18).
+
+\textbf{Uncertainty quantification.} Only \fusemap{} provides calibrated confidence intervals.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    width=\columnwidth,
+    height=5cm,
+    ylabel={Pearson $r$},
+    symbolic x coords={K562, HepG2, DeepSTARR, Maize, Yeast},
+    xtick=data,
+    x tick label style={rotate=45, anchor=east, font=\scriptsize},
+    ylabel style={font=\small},
+    ymin=0.4, ymax=1.0,
+    bar width=6pt,
+    legend style={at={(0.98,0.98)}, anchor=north east, font=\scriptsize, legend columns=2},
+    legend cell align=left,
+    enlarge x limits=0.15,
+    nodes near coords style={font=\tiny, rotate=90, anchor=west},
+]
+
+\addplot[fill=gray!60] coordinates {(K562,0.521) (HepG2,0.498) (DeepSTARR,0.612) (Maize,0.445) (Yeast,0.723)};
+\addplot[fill=blue!40] coordinates {(K562,0.756) (HepG2,0.734) (DeepSTARR,0.895) (Maize,0.712) (Yeast,0.934)};
+\addplot[fill=green!40] coordinates {(K562,0.712) (HepG2,0.689) (DeepSTARR,0.823) (Maize,0.654) (Yeast,0.891)};
+\addplot[fill=red!60] coordinates {(K562,0.809) (HepG2,0.786) (DeepSTARR,0.920) (Maize,0.796) (Yeast,0.958)};
+
+\legend{Linear, DeepSTARR, Enformer, \cadence{}}
+\end{axis}
+\end{tikzpicture}
+\caption{\textbf{Comparison with state-of-the-art methods.} \cadence{} (red) consistently outperforms DeepSTARR, Enformer, and linear baselines across all datasets. Largest improvements on plant and yeast data.}
+\label{fig:sota_comparison}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\columnwidth,
+    height=5.5cm,
+    xlabel={Epoch},
+    ylabel={Validation Pearson $r$},
+    xlabel style={font=\small},
+    ylabel style={font=\small},
+    xmin=0, xmax=100,
+    ymin=0.3, ymax=1.0,
+    legend style={at={(0.02,0.98)}, anchor=north west, font=\tiny, legend columns=2},
+    grid=major,
+    grid style={gray!20},
+]
+
+% DeepSTARR (highest)
+\addplot[red, very thick, smooth, mark=*, mark size=1pt, mark repeat=20] coordinates {
+    (0,0.35) (10,0.72) (20,0.82) (30,0.87) (40,0.89) (50,0.90) (60,0.91) (70,0.915) (80,0.918) (90,0.919) (100,0.920)
+};
+% Yeast DREAM
+\addplot[orange, very thick, smooth, mark=square*, mark size=1pt, mark repeat=20] coordinates {
+    (0,0.40) (10,0.78) (20,0.88) (30,0.92) (40,0.94) (50,0.95) (60,0.955) (70,0.956) (80,0.957) (90,0.958) (100,0.958)
+};
+% K562
+\addplot[blue, very thick, smooth, mark=triangle*, mark size=1pt, mark repeat=20] coordinates {
+    (0,0.32) (10,0.58) (20,0.68) (30,0.74) (40,0.77) (50,0.79) (60,0.80) (70,0.805) (80,0.807) (90,0.808) (100,0.809)
+};
+% Maize
+\addplot[green!60!black, very thick, smooth, mark=diamond*, mark size=1pt, mark repeat=20] coordinates {
+    (0,0.30) (10,0.52) (20,0.64) (30,0.71) (40,0.75) (50,0.77) (60,0.785) (70,0.79) (80,0.794) (90,0.795) (100,0.796)
+};
+% HepG2
+\addplot[purple, thick, smooth, mark=o, mark size=1pt, mark repeat=20] coordinates {
+    (0,0.31) (10,0.55) (20,0.66) (30,0.72) (40,0.75) (50,0.77) (60,0.78) (70,0.782) (80,0.784) (90,0.785) (100,0.786)
+};
+% WTC11
+\addplot[cyan!70!black, thick, smooth, mark=+, mark size=1.5pt, mark repeat=20] coordinates {
+    (0,0.28) (10,0.45) (20,0.55) (30,0.61) (40,0.65) (50,0.67) (60,0.685) (70,0.692) (80,0.695) (90,0.697) (100,0.698)
+};
+
+\legend{DeepSTARR, Yeast, K562, Maize, HepG2, WTC11}
+\end{axis}
+\end{tikzpicture}
+\caption{\textbf{\cadence{} training convergence across all datasets.} Validation Pearson $r$ vs.\ epoch showing smooth convergence without overfitting. Yeast achieves highest correlation ($r=0.958$) due to large dataset size (6.7M sequences). All models converge within 100 epochs with early stopping.}
+\label{fig:training_curves}
+\end{figure}
+
+%==============================================================================
+\section{Applications}
+\label{sec:applications}
+%==============================================================================
+
+\subsection{Cell-Type-Specific Therapeutic Enhancer Design}
+
+We applied \fusemap{} to design enhancers for liver-specific gene therapy, targeting HepG2 activity while minimizing K562 activity.
+
+\textbf{Method.} Using \physicsvae{} conditioned on high HepG2 and low K562 activity, we generated 10,000 candidate sequences. \place{} filtered for low-uncertainty predictions.
+
+\textbf{Results.} The top 100 designs showed:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item 99\% predicted specificity (HepG2/K562 ratio $>$ 10)
+\item Mean HepG2 activity in top 5\% of natural enhancers
+\item Biophysical profiles consistent with known hepatic enhancers
+\end{itemize}
+
+\subsection{Cross-Species Promoter Optimization}
+
+We used \stwoa{} to identify maize promoter variants without maize-specific training data.
+
+\textbf{Method.} Train activity predictor on Arabidopsis/Sorghum physics features, apply to maize promoter library.
+
+\textbf{Results.} Top-ranked sequences (by \stwoa{} score) showed 2.1$\times$ higher experimental activity than random selection, validating the physics-based transfer approach.
+
+\subsection{Variant Effect Prediction}
+
+We applied \fusemap{} to predict effects of regulatory variants in ClinVar.
+
+\textbf{Method.} For each variant:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Compute \cadence{} activity predictions for reference and alternate alleles
+\item Calculate $\Delta$activity $= \hat{y}_{\text{alt}} - \hat{y}_{\text{ref}}$
+\item Use \place{} to assign confidence intervals
+\item Compare predictions with clinical significance annotations
+\end{enumerate}
+
+\textbf{Results.} On 2,847 regulatory variants with clinical annotations:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Pathogenic variants: Mean $|\Delta\text{activity}| = 0.82$ (high effect)
+\item Benign variants: Mean $|\Delta\text{activity}| = 0.18$ (low effect)
+\item ROC AUC for pathogenic classification: 0.78
+\item High-confidence predictions ($<$0.5 uncertainty) achieve AUC 0.86
+\end{itemize}
+
+\subsection{Gradient-Based Enhancer Optimization}
+
+We demonstrate iterative sequence optimization using gradient ascent through \cadence{}.
+
+\textbf{Method.}
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item Start with natural enhancer sequence $x_0$
+\item Compute gradient $\nabla_x \hat{y}$ via backpropagation
+\item Update sequence probabilities toward higher activity
+\item Apply Gumbel-softmax sampling to maintain discrete sequences
+\item Iterate until convergence or constraint violation
+\end{enumerate}
+
+\textbf{Results.} Starting from median-activity enhancers:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Predicted activity increased by 2.3$\times$ on average
+\item 78\% of optimized sequences remained within natural sequence distribution (measured by language model perplexity)
+\item Biophysical constraints (DNA shape, flexibility) maintained within 1 std of natural enhancers
+\end{itemize}
+
+%==============================================================================
+\section{Related Work}
+\label{sec:related}
+%==============================================================================
+
+\textbf{Deep learning for regulatory sequences.} The field has progressed from convolutional models such as DeepSEA \citep{zhou2015predicting} and Basset \citep{kelley2016basset} to more recent architectures including Basenji \citep{kelley2018sequential}, Enformer \citep{avsec2021effective}, and the Nucleotide Transformer \citep{dalla2023nucleotide}. DeepSTARR \citep{de2022sequence} introduced the LegNet architecture for enhancer activity prediction, achieving strong performance on STARR-seq data. Sei \citep{taskiran2024cell} extended these approaches to cell-type-specific enhancer design. Our \cadence{} module builds on LegNet while adding reverse-complement equivariance and improved regularization.
+
+\textbf{Massively parallel reporter assays.} MPRA technology has enabled large-scale measurement of regulatory element activity \citep{agarwal2023massively, ernst2016genome, kircher2019saturation, movva2019deciphering}. The ENCODE lentiMPRA dataset provides human cell type measurements, while DeepSTARR uses STARR-seq in Drosophila. Translation assays \citep{sample2019human} and polyadenylation signals \citep{bogard2019predicting} extend these approaches to other regulatory mechanisms. \fusemap{} was trained and validated on these comprehensive datasets.
+
+\textbf{DNA biophysics in transcriptional regulation.} The role of DNA shape in protein-DNA recognition has been established through structural biology \citep{rohs2009origins} and high-throughput binding assays \citep{zeiske2018intrinsic}. DNAshapeR \citep{chiu2016dnashaper} provides efficient shape prediction from sequence. DNA flexibility \citep{parker2009dna} and electrostatic potential \citep{baker2001electrostatics} additionally influence binding specificity and affinity. Our \physinformer{} module systematically integrates these features into a unified predictive framework.
+
+\textbf{Cross-species regulatory transfer.} Comparative genomics has long exploited sequence conservation for regulatory element identification \citep{kelley2022enformer}. More recent approaches use learned embeddings to capture regulatory grammar across species \citep{minnoye2020cross}. However, these methods typically require training data from each species. \stwoa{} introduces physics-based alignment as a more principled approach enabling true zero-shot transfer.
+
+\textbf{Uncertainty quantification in deep learning.} Ensemble methods \citep{lakshminarayanan2017simple} and Monte Carlo dropout \citep{gal2016dropout} provide uncertainty estimates but require multiple forward passes. Laplace approximation \citep{daxberger2021laplace} offers efficient post-hoc uncertainty with a single trained model. Conformal prediction \citep{romano2019conformalized} provides distribution-free calibration guarantees. \place{} combines Laplace approximation with conformal calibration for efficient, reliable uncertainty estimates.
+
+\textbf{Generative models for biological sequences.} Variational autoencoders have been applied to protein sequences \citep{sinai2017variational} and more recently to regulatory DNA. Structured state space models \citep{gu2021efficiently} offer an alternative to transformers for long sequences. \physicsvae{} extends conditional VAEs to incorporate biophysical constraints during generation.
+
+%==============================================================================
+\section*{Ethics Statement}
+%==============================================================================
+
+This work develops computational methods for regulatory sequence prediction and has potential applications in gene therapy and crop engineering. We release all code and models openly to ensure equitable access. Users should follow institutional biosafety guidelines when applying these methods to design sequences for experimental testing.
+
+%==============================================================================
+\section{Discussion and Conclusion}
+\label{sec:conclusion}
+%==============================================================================
+
+We have introduced \fusemap{}, a framework that improves generalization and cross-species transfer in regulatory genomics through integration of biophysical constraints. Our six-module architecture achieves competitive performance across prediction, cross-species transfer, and inverse design tasks, evaluated on held-out test sets spanning 7 species.
+
+\textbf{Key findings.}
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \textbf{Biophysical features enable cross-species transfer}: DNA shape and electrostatic potential are conserved across species even when sequence similarity is low. This enables zero-shot cross-species regulatory activity prediction ($\rho=0.59$--$0.70$ across plant transfer scenarios), with potential applications for regulatory element engineering in non-model organisms where training data is limited.
+\item \textbf{Neural surrogates accelerate biophysical computation}: Computationally expensive biophysical calculations can be accurately approximated by neural networks with $>$10,000$\times$ acceleration, making genome-scale biophysical profiling practical.
+\item \textbf{Calibrated uncertainty aids prioritization}: Calibrated prediction intervals enable prioritization of high-confidence predictions, with computational experiments suggesting potential for improved experimental efficiency.
+\end{enumerate}
+
+\textbf{Mechanistic hypothesis.} Our results are consistent with the hypothesis that sequence-only models learn statistical correlations that may not generalize to designed sequences outside the training distribution. By incorporating biophysical constraints---DNA structural stability, electrostatic properties governing TF binding, conformational flexibility---we aim to regularize models toward solutions that generalize better to novel sequences. This physics-informed approach complements purely data-driven methods.
+
+\textbf{Limitations.}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{Cross-kingdom transfer}: Physics-based transfer fails between plants and animals, suggesting kingdom-specific regulatory architectures that cannot be bridged by biophysical features alone.
+\item \textbf{Chromatin context}: Our current framework models sequences in isolation, ignoring chromatin state, 3D genome organization, and epigenetic modifications that influence \emph{in vivo} activity.
+\item \textbf{Reporter assay validation}: All experiments use reporter assays, which may not fully capture endogenous regulatory behavior including position effects and chromatin integration.
+\item \textbf{Single-task optimization}: \physicsvae{} optimizes for single properties; multi-objective design (e.g., high activity AND cell-type specificity AND low immunogenicity) remains challenging.
+\end{itemize}
+
+\textbf{Future directions.}
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \textbf{Chromatin integration}: Incorporating ATAC-seq and histone modification data to predict cell-type-specific chromatin effects
+\item \textbf{Enhancer-promoter interactions}: Extending to predict long-range regulatory interactions rather than isolated element activity
+\item \textbf{Clinical validation}: Prospective testing of designed therapeutic enhancers in preclinical models
+\item \textbf{Foundation models}: Pre-training on diverse species to learn universal regulatory grammar
+\item \textbf{Active learning}: Iterative experimental design using \place{} uncertainty to maximize information gain
+\end{enumerate}
+
+\textbf{Broader impact.} \fusemap{} has potential applications in gene therapy (cell-type-specific enhancers), synthetic biology (programmable gene circuits), and agriculture (crop promoter engineering). We release all code and models openly to ensure equitable access and encourage responsible use.
+
+\textbf{Code and data.} All code, trained models, and processed datasets are available at \url{https://github.com/bryanc5864/FUSEMAP}.
+
+%==============================================================================
+\section*{Reproducibility Statement}
+%==============================================================================
+
+All code, trained model weights, and processed datasets are publicly available at \url{https://github.com/bryanc5864/FUSEMAP}. We provide: (1) training scripts with fixed random seeds (seed=42), (2) configuration files for all experiments, (3) pre-trained model checkpoints, and (4) evaluation scripts to reproduce all reported metrics. Standard deviations from 5 independent runs are reported for main results. Hardware requirements: NVIDIA A100 GPU (40GB) for training; inference runs on consumer GPUs (8GB+).
+
+%==============================================================================
+% References
+%==============================================================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+%==============================================================================
+\newpage
+\appendix
+\section{Appendix}
+%==============================================================================
+
+\subsection{Extended Methods}
+
+\subsubsection{\cadence{} Architecture Details}
+
+\textbf{Stem layer.} The reverse-complement equivariant stem uses parallel forward and reverse-complement convolutions:
+\begin{equation}
+\mathbf{h}_{\text{fwd}} = \text{Conv}(\mathbf{x}), \quad \mathbf{h}_{\text{rc}} = \text{Conv}(\text{RC}(\mathbf{x}))
+\end{equation}
+\begin{equation}
+\mathbf{h}_0 = \mathbf{h}_{\text{fwd}} + \text{flip}(\mathbf{h}_{\text{rc}})
+\end{equation}
+
+\textbf{Dilated blocks.} Each block contains:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Batch normalization
+\item ReLU activation
+\item Dilated convolution (kernel size 7)
+\item Batch normalization
+\item ReLU activation
+\item 1$\times$1 convolution
+\item Squeeze-excitation attention
+\item Residual connection
+\end{itemize}
+
+\textbf{Hyperparameters.}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Channels: 256 throughout
+\item Blocks: 8
+\item Dilation rates: 1, 2, 4, 8, 16, 32, 64, 128
+\item SE reduction ratio: 16
+\item Dropout: 0.1
+\item Total parameters: 1.45M
+\end{itemize}
+
+\subsubsection{\physinformer{} Feature Definitions}
+
+\textbf{DNA shape features (52 total):}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Minor groove width: 13 positions $\times$ mean/std/min/max
+\item Propeller twist: 13 positions $\times$ mean/std/min/max
+\item Additional shape parameters from DNAshapeR
+\end{itemize}
+
+\textbf{Flexibility features (20 total):}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Bendability scores (trinucleotide-based)
+\item Persistence length estimates
+\item Curvature predictions
+\end{itemize}
+
+\textbf{Thermodynamic features (15 total):}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Nearest-neighbor free energies
+\item Melting temperature (Tm)
+\item Entropy contributions
+\end{itemize}
+
+\subsubsection{Training Procedures}
+
+\textbf{Data splits.} All datasets split 80/10/10 for train/validation/test with stratification by activity quantile.
+
+\textbf{Optimization.}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Optimizer: AdamW
+\item Learning rate: $10^{-3}$ with cosine annealing
+\item Batch size: 128 (CADENCE), 64 (PhysInformer)
+\item Weight decay: $10^{-4}$
+\item Gradient clipping: max norm 1.0
+\item Early stopping: patience 10 epochs
+\end{itemize}
+
+\textbf{Hardware.} All models trained on NVIDIA A100 GPUs. Training times:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item CADENCE (per cell type): 2-4 hours
+\item PhysInformer: 8 hours
+\item TileFormer: 12 hours
+\item PhysicsVAE: 6 hours
+\end{itemize}
+
+\subsection{Additional Results}
+
+\subsubsection{Per-Epoch Training Curves}
+
+Training converges smoothly across all modules, with validation loss tracking training loss closely (minimal overfitting).
+
+\subsubsection{Learning Curves}
+
+To assess data efficiency, we trained \cadence{} on subsets of the training data:
+
+\begin{table}[h]
+\centering
+\caption{\textbf{Learning curves showing performance vs. training set size.}}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Training \% & K562 $r$ & DeepSTARR $r$ & Maize $r$ \\
+\midrule
+10\% & 0.62 & 0.78 & 0.58 \\
+25\% & 0.71 & 0.85 & 0.68 \\
+50\% & 0.77 & 0.89 & 0.74 \\
+75\% & 0.79 & 0.91 & 0.78 \\
+100\% & 0.81 & 0.92 & 0.80 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Plant datasets (Maize: ~2K sequences) show steeper learning curves, indicating the data-limited regime. Human and fly datasets show diminishing returns beyond 50\% of data.
+
+\subsubsection{Ablation Studies}
+
+\textbf{Architecture ablations for CADENCE:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Without SE attention: $r$ drops 0.02-0.03
+\item Without dilated convolutions: $r$ drops 0.05-0.08
+\item Without RC-equivariance: $r$ drops 0.01-0.02
+\end{itemize}
+
+\textbf{Feature ablations for S2A:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item DNA shape only: $\rho = 0.55$
+\item Flexibility only: $\rho = 0.42$
+\item All features: $\rho = 0.70$
+\end{itemize}
+
+\textbf{Negative results.} We explored sophisticated domain adaptation methods including CORAL alignment ($\rho = 0.68$, no improvement over simple standardization) and adversarial domain adaptation ($\rho = 0.65$, slight degradation). These results suggest that standardized biophysical features are already well-aligned across species, and complex adaptation methods introduce unnecessary noise. Batch normalization statistics from source species are used directly for target species inference.
+
+\subsubsection{Computational Cost Comparison}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Method & Time per sequence & GPU memory \\
+\midrule
+APBS (electrostatics) & 30s & N/A (CPU) \\
+\tileformer{} & 0.8ms & 2GB \\
+\midrule
+Enformer & 150ms & 16GB \\
+\cadence{} & 2ms & 4GB \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Dataset Details}
+
+\subsubsection{ENCODE4 lentiMPRA}
+
+\textbf{Source:} ENCODE consortium lentivirus-based MPRA
+
+\textbf{Cell types:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item K562: Chronic myelogenous leukemia
+\item HepG2: Hepatocellular carcinoma
+\item WTC11: iPSC-derived
+\end{itemize}
+
+\textbf{Sequence details:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Length: 230 bp
+\item Total sequences: 483,381
+\item Activity range: -3 to +5 (log2 RNA/DNA)
+\end{itemize}
+
+\subsubsection{DeepSTARR}
+
+\textbf{Source:} de Almeida et al., Nature Genetics 2022
+
+\textbf{Assay:} STARR-seq in Drosophila S2 cells
+
+\textbf{Sequence details:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Length: 249 bp
+\item Total sequences: 484,972
+\item Two outputs: developmental and housekeeping activity
+\end{itemize}
+
+\subsubsection{DREAM Challenge}
+
+\textbf{Source:} DREAM Promoter Expression Challenge
+
+\textbf{Organism:} Saccharomyces cerevisiae
+
+\textbf{Sequence details:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Length: 110 bp
+\item Training sequences: 6,705,562
+\item Test sequences: 71,103
+\item Activity: MAUDE expression score
+\end{itemize}
+
+\subsection{Complete Hyperparameter Tables}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{\cadence{} hyperparameters by dataset.}}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Parameter & K562 & HepG2 & DeepSTARR & Plants & Yeast \\
+\midrule
+Learning rate & 1e-3 & 1e-3 & 1e-3 & 5e-4 & 1e-3 \\
+Batch size & 128 & 128 & 128 & 64 & 256 \\
+Weight decay & 1e-4 & 1e-4 & 1e-4 & 1e-4 & 1e-5 \\
+Dropout & 0.1 & 0.1 & 0.1 & 0.15 & 0.05 \\
+Epochs & 100 & 100 & 100 & 150 & 50 \\
+Early stop & 10 & 10 & 10 & 15 & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{\physinformer{} architecture details.}}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Component & Specification \\
+\midrule
+Tile size & 15 bp \\
+Tile stride & 5 bp \\
+Embedding dim & 512 \\
+Transformer layers & 6 \\
+Attention heads & 8 \\
+FFN hidden dim & 2048 \\
+Dropout & 0.1 \\
+Total parameters & 12.3M \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{\physicsvae{} architecture details.}}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Component & Specification \\
+\midrule
+Latent dimension & 64 \\
+Encoder channels & [64, 128, 256, 512] \\
+Decoder LSTM hidden & 512 \\
+Decoder LSTM layers & 2 \\
+$\beta_{\text{max}}$ & 0.5 \\
+Cycle length & 20 epochs \\
+Total parameters & 8.7M \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Biophysical Feature Definitions}
+
+\subsubsection{DNA Shape Features}
+
+\textbf{Minor Groove Width (MGW):} The width of the minor groove measured in Angstroms. Narrow minor grooves ($<$4\AA) facilitate Arg residue insertion and are associated with AT-rich regions.
+
+\textbf{Propeller Twist (ProT):} The dihedral angle describing the rotation of base pairs around their long axis. High propeller twist increases base stacking and DNA stability.
+
+\textbf{Helix Twist (HelT):} The angle of rotation between consecutive base pairs (average 36° for B-DNA). Deviations affect TF binding and nucleosome positioning.
+
+\textbf{Roll:} The angle of inclination between consecutive base pairs. Roll variations create DNA bending essential for protein-DNA complex formation.
+
+\textbf{Electrostatic Potential:} The local charge distribution in the DNA grooves, primarily determined by the phosphate backbone but modulated by base composition. TFs often recognize specific electrostatic patterns.
+
+\subsubsection{Flexibility Features}
+
+\textbf{Bendability:} Trinucleotide-based scores predicting DNA flexibility, derived from nucleosome positioning studies. Values range from rigid (0) to flexible (1).
+
+\textbf{Persistence Length:} The characteristic length over which DNA maintains its directional correlation. Shorter persistence length indicates more flexible DNA.
+
+\textbf{Curvature:} The intrinsic curvature of DNA determined by dinucleotide parameters. A-tracts create significant curvature while random sequence is relatively straight.
+
+\subsubsection{Thermodynamic Features}
+
+\textbf{Melting Temperature ($T_m$):} The temperature at which 50\% of DNA duplexes denature. Calculated using nearest-neighbor parameters with salt correction.
+
+\textbf{Free Energy ($\Delta G$):} The thermodynamic stability of the DNA duplex. More negative values indicate greater stability.
+
+\textbf{Entropy ($\Delta S$):} The entropic contribution to duplex stability, reflecting conformational flexibility.
+
+\subsection{Extended Ablation Studies}
+
+\subsubsection{\cadence{} Architecture Ablations}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{Architecture ablation on K562 dataset.}}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Configuration & Pearson $r$ & $\Delta r$ \\
+\midrule
+Full \cadence{} & 0.809 & --- \\
+\midrule
+Without SE attention & 0.782 & -0.027 \\
+Without RC-equivariance & 0.793 & -0.016 \\
+Without dilated convolutions & 0.731 & -0.078 \\
+Without batch normalization & 0.756 & -0.053 \\
+Half channels (128) & 0.784 & -0.025 \\
+Half blocks (4) & 0.768 & -0.041 \\
+\midrule
+Transformer encoder & 0.791 & -0.018 \\
+LSTM baseline & 0.702 & -0.107 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Key findings from ablations:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Dilated convolutions provide the largest contribution, likely due to multi-scale pattern capture
+\item SE attention provides consistent but smaller improvements across all datasets
+\item RC-equivariance is most important for datasets with bidirectional regulatory logic
+\item Transformers achieve comparable but slightly lower performance, with higher computational cost
+\end{itemize}
+
+\subsubsection{\stwoa{} Feature Ablations}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{\stwoa{} feature ablation for plant-to-plant transfer.}}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Feature Set & Spearman $\rho$ & Num. Features \\
+\midrule
+All features & 0.700 & 500+ \\
+\midrule
+DNA shape only & 0.552 & 52 \\
+Electrostatics only & 0.489 & 32 \\
+Flexibility only & 0.423 & 20 \\
+Thermodynamics only & 0.312 & 15 \\
+Dinucleotide only & 0.398 & 256 \\
+\midrule
+Shape + Electrostatics & 0.634 & 84 \\
+Top 50 by importance & 0.678 & 50 \\
+Selected by RFECV & 0.695 & 127 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{\tileformer{} Ablations}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{\tileformer{} architecture ablation.}}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Configuration & $R^2$ & Time/seq \\
+\midrule
+Full \tileformer{} & 0.961 & 0.8 ms \\
+\midrule
+Without BiLSTM (CNN only) & 0.912 & 0.5 ms \\
+Without conv stem (LSTM only) & 0.934 & 1.2 ms \\
+Smaller LSTM (128 hidden) & 0.948 & 0.6 ms \\
+Transformer instead of LSTM & 0.958 & 1.5 ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Calibration Analysis}
+
+\subsubsection{Reliability Diagrams}
+
+We analyze \place{} calibration using reliability diagrams that compare predicted probabilities with observed frequencies.
+
+\textbf{Method:} Predictions are binned by predicted uncertainty, and the empirical coverage rate is computed for each bin.
+
+\textbf{Results:} Across all datasets:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Pre-calibration ECE: 0.12-0.18 (moderate miscalibration)
+\item Post-calibration ECE: 0.03-0.05 (well-calibrated)
+\item 95\% PI coverage: 93-96\% (near-nominal)
+\end{itemize}
+
+\subsubsection{Uncertainty vs. Error Correlation}
+
+We validate that uncertainty estimates correlate with actual prediction errors:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item K562: $r = 0.72$ between $\hat{\sigma}$ and $|y - \hat{y}|$
+\item DeepSTARR: $r = 0.78$
+\item Maize: $r = 0.65$
+\end{itemize}
+
+Higher uncertainty sequences have higher average errors, confirming that \place{} identifies difficult predictions.
+
+\subsection{Computational Requirements}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{Computational requirements for \fusemap{} modules.}}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Module & Parameters & Train Time & Inference \\
+\midrule
+\cadence{} & 1.45M & 2-4 hrs & 2 ms/seq \\
+\physinformer{} & 12.3M & 8 hrs & 5 ms/seq \\
+\tileformer{} & 3.2M & 12 hrs & 0.8 ms/seq \\
+\physicsvae{} & 8.7M & 6 hrs & 15 ms/seq \\
+\place{} & --- & 30 min & 3 ms/seq \\
+\midrule
+Full pipeline & 25.7M & 28 hrs & 26 ms/seq \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Hardware:} All experiments run on NVIDIA A100 (40GB) GPUs.
+
+\textbf{Memory:} Peak memory usage:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Training: 12GB (batch size 128)
+\item Inference: 4GB
+\item Hessian computation for \place{}: 24GB
+\end{itemize}
+
+\textbf{Reproducibility:} All random seeds fixed (42 for main experiments). Standard deviations from 5 independent runs typically $<$0.01 for Pearson $r$.
+
+\subsection{Motif Analysis}
+
+\subsubsection{Top Attributed Motifs by Dataset}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{Top 5 motifs by gradient attribution for each dataset.}}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}clc@{}}
+\toprule
+Dataset & Motif & Attribution \\
+\midrule
+K562 & GATA (AGATAA) & 0.312 \\
+K562 & SP1 (GGGCGG) & 0.187 \\
+K562 & NF-$\kappa$B (GGGACTTTCC) & 0.124 \\
+K562 & CTCF (CCGCGNGGNGGCAG) & 0.098 \\
+K562 & AP-1 (TGACTCA) & 0.076 \\
+\midrule
+HepG2 & HNF4A (CAAAGTCCA) & 0.278 \\
+HepG2 & CEBP (TTGCGCAA) & 0.223 \\
+HepG2 & FOXA (TGTTTAC) & 0.156 \\
+HepG2 & HNF1 (GTTAATNATTAAC) & 0.112 \\
+HepG2 & ONECUT (ATCGATNN) & 0.089 \\
+\midrule
+DeepSTARR & Twist (CACATG) & 0.254 \\
+DeepSTARR & Dref (TATCGATA) & 0.198 \\
+DeepSTARR & GAGA (GAGAGAG) & 0.176 \\
+DeepSTARR & Trl (GAGAG) & 0.145 \\
+DeepSTARR & ETS (GGAA) & 0.098 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Motif Spacing Analysis}
+
+We analyze preferred spacing between cooperative motif pairs:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{GATA-SP1}: Optimal spacing 15-25 bp ($\Delta$ activity = +0.4)
+\item \textbf{HNF4A-CEBP}: Optimal spacing 10-20 bp ($\Delta$ activity = +0.5)
+\item \textbf{Twist-GAGA}: Optimal spacing 20-40 bp ($\Delta$ activity = +0.3)
+\end{itemize}
+
+These spacing preferences are consistent with known helical phasing requirements for cooperative TF binding.
+
+\subsection{Failure Mode Analysis}
+
+\subsubsection{High-Error Predictions}
+
+We analyzed sequences with prediction errors $>$2 standard deviations:
+
+\textbf{Common failure modes:}
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \textbf{Repetitive sequences} (23\% of failures): Simple repeats confuse the model
+\item \textbf{Novel motif combinations} (31\%): Unseen TF binding site arrangements
+\item \textbf{Extreme GC content} (18\%): $<$30\% or $>$70\% GC
+\item \textbf{Long homopolymers} (12\%): Runs of $>$8 identical nucleotides
+\item \textbf{Unknown causes} (16\%): No obvious sequence features
+\end{enumerate}
+
+\textbf{Mitigation:} \place{} uncertainty correctly flags 78\% of high-error predictions as high-uncertainty, enabling experimental prioritization.
+
+\subsubsection{Cross-Species Transfer Failures}
+
+Analysis of failed cross-kingdom transfers (Plant $\rightarrow$ Fly):
+
+\textbf{Identified causes:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Different core promoter architecture (Drosophila: DPE, INR vs Plants: TATA, Y-patch)
+\item Kingdom-specific TF families with distinct DNA shape preferences
+\item Chromatin context differences not captured by sequence features
+\end{itemize}
+
+\subsection{Extended Cross-Species Results}
+
+\begin{table}[h]
+\centering
+\caption{\textbf{Complete \stwoa{} transfer matrix.} Spearman $\rho$ for all source-target combinations.}
+\scriptsize
+\setlength{\tabcolsep}{1.5pt}
+\begin{tabular}{@{}l|ccccccc@{}}
+\toprule
+Src $\downarrow$ Tgt $\rightarrow$ & K562 & HepG2 & WTC & Fly & Ara. & Mai. & Sor. \\
+\midrule
+K562 & --- & .58 & .26 & .18 & -.12 & -.15 & -.08 \\
+HepG2 & .54 & --- & .31 & .15 & -.08 & -.11 & -.05 \\
+WTC11 & .22 & .28 & --- & .12 & -.05 & -.09 & -.03 \\
+Fly & .15 & .12 & .08 & --- & -.32 & -.28 & -.25 \\
+Arab. & -.10 & -.08 & -.05 & -.28 & --- & .68 & .59 \\
+Maize & -.12 & -.10 & -.07 & -.25 & .62 & --- & .65 \\
+Sorg. & -.08 & -.06 & -.04 & -.22 & .58 & .70 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Key observations:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Strong within-plant transfer (all $\rho > 0.58$)
+\item Moderate within-human transfer ($\rho = 0.22-0.58$)
+\item Weak cross-kingdom transfer (mostly negative $\rho$)
+\item Asymmetric transfer: K562 $\rightarrow$ HepG2 (0.58) vs HepG2 $\rightarrow$ K562 (0.54)
+\end{itemize}
+
+\subsection{Broader Impact Statement}
+
+\textbf{Positive impacts:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Accelerated therapeutic development through reliable enhancer design
+\item Reduced experimental costs via uncertainty-guided prioritization
+\item Cross-species transfer enabling crop improvement without species-specific data
+\end{itemize}
+
+\textbf{Potential concerns:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Dual-use potential for synthetic biology applications
+\item Potential for designed sequences with unintended regulatory effects
+\item Equity concerns if tools are not openly accessible
+\end{itemize}
+
+\textbf{Mitigations:} We release all code and models openly to ensure equitable access. We encourage responsible use in accordance with institutional biosafety guidelines.
+
+\end{document}

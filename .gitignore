@@ -55,3 +55,8 @@ ENV/
 # Embedded git repos (have their own repos)
 comparison_models/human_legnet/
 comparison_models/random-promoter-dream-challenge-2022/
+
+# Presentation materials (not for repo)
+presentation_figures/
+stair poster.pdf
+comparison_models/

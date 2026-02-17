@@ -1,4 +1,4 @@
-# FUSEMAP: Biophysics-Informed Deep Learning for Regulatory DNA Prediction and Design
+# FUSEMAP: A Foundational Biophysical Framework for Universal Regulatory DNA Prediction and Design
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -153,7 +153,7 @@ FUSEMAP was trained and evaluated on:
 
 ```bibtex
 @article{cheng2026fusemap,
-  title={FUSEMAP: Biophysics-Informed Deep Learning for Regulatory DNA Prediction and Design},
+  title={FUSEMAP: A Foundational Biophysical Framework for Universal Regulatory DNA Prediction and Design},
   author={Cheng, Bryan},
   journal={},
   year={2026}

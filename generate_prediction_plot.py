@@ -259,9 +259,9 @@ def main():
     ax.set_aspect("equal", adjustable="box")
 
     plt.tight_layout()
-    plt.savefig("cadence_hepg2_predictions.png", dpi=200,
+    plt.savefig("hepg2_predictions.png", dpi=200,
                 bbox_inches="tight", facecolor="white", edgecolor="none")
-    print(f"\nSaved: cadence_hepg2_predictions.png")
+    print(f"\nSaved: hepg2_predictions.png")
 
 
 if __name__ == "__main__":

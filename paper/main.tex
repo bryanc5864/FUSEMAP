@@ -56,7 +56,7 @@ $^{1}$Cold Spring Harbor Laboratory\\
 \maketitle
 
 \begin{abstract}
-DNA shape and electrostatic properties form a conserved biophysical language that enables regulatory activity prediction across species boundaries. Current deep learning approaches achieve high \emph{in silico} accuracy but often fail to generalize to designed sequences outside the training distribution. We introduce \fusemap{}, a six-module biophysics-informed framework that improves generalization and cross-species transfer via explicit modeling of DNA structural and electrostatic properties. Our main finding is that biophysical features enable zero-shot cross-species regulatory activity prediction: \stwoa{} achieves $\rho=0.59$--$0.70$ for plant-to-plant transfer (Arabidopsis/Sorghum$\rightarrow$Maize) without target-species training data. Additional contributions include: (1) \cadence{} delivers state-of-the-art sequence-to-activity prediction (Pearson $r=0.92$ housekeeping, $r=0.91$ developmental on Drosophila; $r=0.81$ on human cell lines; $r=0.96$ on yeast); (2) \physinformer{} predicts 521 features (87 biophysical + 434 sequence-derived) with $r=0.92$ validation correlation; (3) \tileformer{} provides 10,000$\times$ acceleration for electrostatic summary statistic prediction (8 values per sequence) at $R^2>0.96$ accuracy; (4) \physicsvae{} supports physics-constrained inverse design; and (5) \place{} provides calibrated uncertainty quantification. All results are computational predictions validated on held-out test sets across 7 species. We release all code, trained models, and datasets.
+DNA shape and electrostatic properties form a conserved biophysical language that enables regulatory activity prediction across species boundaries. Current deep learning approaches achieve high \emph{in silico} accuracy but often fail to generalize to designed sequences outside the training distribution. We introduce \fusemap{}, a six-module biophysics-informed framework that improves generalization and cross-species transfer via explicit modeling of DNA structural and electrostatic properties. Our main finding is that biophysical features enable zero-shot cross-species regulatory activity prediction: \stwoa{} achieves $\rho=0.59$--$0.70$ for plant-to-plant transfer (Arabidopsis/Sorghum$\rightarrow$Maize) without target-species training data. Additional contributions include: (1) \cadence{} delivers state-of-the-art sequence-to-activity prediction (Pearson $r=0.92$ housekeeping, $r=0.91$ developmental on Drosophila; $r=0.81$ on human cell lines; $r=0.96$ on yeast); (2) \physinformer{} predicts 521 biophysical features with $r=0.92$ validation correlation; (3) \tileformer{} provides 10,000$\times$ acceleration for electrostatic summary statistic prediction (8 values per sequence) at $R^2>0.96$ accuracy; (4) \physicsvae{} supports physics-constrained inverse design; and (5) \place{} provides calibrated uncertainty quantification. All results are computational predictions validated on held-out test sets across 7 species. We release all code, trained models, and datasets.
 \end{abstract}
 
 %==============================================================================
@@ -75,7 +75,7 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 
 \begin{enumerate}[leftmargin=*,itemsep=0pt,topsep=2pt]
 \item \textbf{\cadence{}}: State-of-the-art sequence-to-activity prediction using an optimized LegNet architecture with reverse-complement equivariance
-\item \textbf{\physinformer{}}: Sequence-to-physics transformer predicting 521 features (87 biophysical including DNA shape, flexibility, electrostatics; 434 sequence-derived)
+\item \textbf{\physinformer{}}: Sequence-to-physics transformer predicting 521 biophysical features including DNA shape, flexibility, electrostatics, and sequence composition
 \item \textbf{\tileformer{}}: Neural surrogate for Poisson-Boltzmann electrostatic calculations, achieving 10,000$\times$ speedup
 \item \textbf{\stwoa{}}: Zero-shot cross-species activity transfer via physics-based feature alignment
 \item \textbf{\physicsvae{}}: Variational autoencoder for inverse design with targeted biophysical profiles
@@ -241,17 +241,17 @@ This exceeds typical sequence lengths (110-249 bp), ensuring global context inte
 
 \physinformer{} predicts biophysical properties from sequence, providing the physical grounding that enables cross-species transfer and physics-constrained design.
 
-\textbf{Feature categories.} We predict 521 features (87 biophysical + 434 sequence-derived) across five categories:
+\textbf{Feature categories.} We predict 521 biophysical features across five categories:
 
 \begin{enumerate}[leftmargin=*,itemsep=0pt]
-\item \textbf{DNA shape} (52 biophysical features): Minor groove width, propeller twist, helix twist, roll, electrostatic potential via DNAshapeR \citep{chiu2016dnashaper}
-\item \textbf{Flexibility} (20 biophysical features): Bendability, curvature, persistence length
-\item \textbf{Thermodynamic stability} (15 biophysical features): Melting temperature, free energy, entropy
-\item \textbf{Dinucleotide properties} (256 sequence-derived features): All 16 dinucleotide frequencies at multiple scales
-\item \textbf{Position-specific profiles} ($\sim$200 sequence-derived features): Sliding window statistics
+\item \textbf{DNA shape} (52 features): Minor groove width, propeller twist, helix twist, roll, electrostatic potential via DNAshapeR \citep{chiu2016dnashaper}
+\item \textbf{Flexibility} (20 features): Bendability, curvature, persistence length
+\item \textbf{Thermodynamic stability} (15 features): Melting temperature, free energy, entropy
+\item \textbf{Dinucleotide properties} (256 features): All 16 dinucleotide frequencies at multiple scales, capturing local sequence context that influences DNA structure
+\item \textbf{Position-specific profiles} ($\sim$200 features): Sliding window statistics capturing positional biophysical patterns
 \end{enumerate}
 
-\noindent This distinction is important: the 87 true biophysical features (DNA shape, flexibility, thermodynamics) capture physical properties conserved across species and enable cross-species transfer, while the sequence-derived statistics provide complementary information for within-species prediction.
+\noindent All 521 features capture biophysical properties that influence DNA structure, flexibility, and protein-DNA interactions. These features are conserved across species and enable cross-species transfer.
 
 \textbf{Architecture.} \physinformer{} uses a transformer encoder with:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
@@ -411,13 +411,13 @@ f_\theta(\phi) = \text{Linear}(\text{ReLU}(\text{BN}(\text{Linear}(\phi))))
 
 \textbf{Feature selection.} Not all biophysical features transfer equally well across species. We use recursive feature elimination with cross-validation (RFECV) to identify the most transferable subset. Critically, RFECV is performed within source species data only; no target species data is used for feature selection:
 \begin{enumerate}[leftmargin=*,itemsep=0pt]
-\item Train models on source species with all 521 features using 5-fold cross-validation within source data
+\item Train models on source species with all 521 biophysical features using 5-fold cross-validation within source data
 \item Rank features by importance (gradient-based attribution)
 \item Iteratively remove lowest-importance features
 \item Select feature subset maximizing cross-validation performance on held-out source species folds
 \end{enumerate}
 
-The final \stwoa{} model uses 127 selected features (from 521 total), primarily DNA shape (MGW, ProT, Roll) and thermodynamic stability metrics. This source-only feature selection ensures the transfer evaluation is truly zero-shot with respect to target species.
+The final \stwoa{} model uses 127 selected biophysical features (from 521 total), primarily DNA shape (MGW, ProT, Roll) and thermodynamic stability metrics. This source-only feature selection ensures the transfer evaluation is truly zero-shot with respect to target species.
 
 \textbf{Domain adaptation.} To account for species-specific feature distributions, we apply simple standardization:
 \begin{equation}
@@ -639,7 +639,7 @@ This concordance with known cell-type-specific regulatory programs (erythroid GA
 
 \begin{table}[t]
 \centering
-\caption{\textbf{\physinformer{} cross-species transfer.} Mean Pearson $r$ for biophysical features from K562-trained model. Feature counts vary as some sequence-derived features are undefined cross-kingdom.}
+\caption{\textbf{\physinformer{} cross-species transfer.} Mean Pearson $r$ for biophysical features from K562-trained model. Feature counts vary as some biophysical features are undefined cross-kingdom.}
 \label{tab:physinformer_transfer}
 \small
 \begin{tabular}{@{}lccc@{}}
@@ -669,7 +669,7 @@ K562 $\to$ Arabid. & 267 & 0.656 & 0.857 \\
 \end{itemize}
 This hierarchy suggests DNA shape is the most universal biophysical feature, followed by electrostatics.
 
-\textbf{Computational efficiency.} \physinformer{} predicts 521 features in 5ms per sequence (batch of 128), compared to $>$60 seconds for direct computation of all features using standard tools. This 12,000$\times$ speedup enables genome-scale biophysical profiling.
+\textbf{Computational efficiency.} \physinformer{} predicts 521 biophysical features in 5ms per sequence (batch of 128), compared to $>$60 seconds for direct computation of all features using standard tools. This 12,000$\times$ speedup enables genome-scale biophysical profiling.
 
 \begin{figure}[t]
 \centering

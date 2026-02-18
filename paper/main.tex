@@ -469,7 +469,7 @@ where $\mathcal{L}_{\text{prop}}$ encourages decoded sequences to have target pr
 
 \textbf{Encoder architecture.} The encoder combines convolutional feature extraction with conditional information:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Convolutional layers: 4 blocks with channels [64, 128, 256, 512]
+\item Convolutional layers: 3 blocks with channels [64, 128, 256]
 \item Condition embedding: MLP maps $(y^*, \phi^*)$ to 256-dim vector
 \item Fusion: Concatenate conv features with condition embedding
 \item Output: Two linear heads for $\mu$ and $\log \sigma^2$
@@ -559,7 +559,7 @@ Dataset & Species & Seqs & Len & Assay \\
 \midrule
 ENCODE4 \citep{encode2020perspectives} & Human & 483K & 230bp & lentiMPRA \\
 DeepSTARR \citep{de2022sequence} & Drosophila & 485K & 249bp & STARR-seq \\
-Jores et al.\ \citep{jores2021synthetic} & Plants & 51K & 170bp & STARR-seq \\
+Jores et al.\ \citep{jores2021synthetic} & Plants & 58K & 170bp & STARR-seq \\
 DREAM \citep{schaffer2022dream} & Yeast & 6.7M & 110bp & FACS-seq \\
 \bottomrule
 \end{tabular}
@@ -1590,7 +1590,7 @@ Total parameters & 12.3M \\
 Component & Specification \\
 \midrule
 Latent dimension & 64 \\
-Encoder channels & [64, 128, 256, 512] \\
+Encoder channels & [64, 128, 256] \\
 Decoder LSTM hidden & 512 \\
 Decoder LSTM layers & 2 \\
 $\beta_{\text{max}}$ & 0.5 \\

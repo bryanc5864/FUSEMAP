@@ -1558,13 +1558,14 @@ Early stop & 10 & 10 & 10 & 15 & 10 \\
 \toprule
 Component & Specification \\
 \midrule
-Tile size & 15 bp \\
-Tile stride & 5 bp \\
+Input & Per-nucleotide embedding \\
 Embedding dim & 512 \\
-Transformer layers & 6 \\
+Positional encoding & Sinusoidal \\
+Transformer layers & 8 \\
 Attention heads & 8 \\
 FFN hidden dim & 2048 \\
 Dropout & 0.1 \\
+Output heads & 521 (one per feature) \\
 Total parameters & 12.3M \\
 \bottomrule
 \end{tabular}

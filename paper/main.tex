@@ -56,7 +56,7 @@ $^{1}$Cold Spring Harbor Laboratory\\
 \maketitle
 
 \begin{abstract}
-DNA shape and electrostatic properties form a conserved biophysical language that enables regulatory activity prediction across species boundaries. Current deep learning approaches achieve high \emph{in silico} accuracy but often fail to generalize to designed sequences outside the training distribution. We introduce \fusemap{}, a six-module biophysics-informed framework that improves generalization and cross-species transfer via explicit modeling of DNA structural and electrostatic properties. Our main finding is that biophysical features enable zero-shot cross-species regulatory activity prediction: \stwoa{} achieves $\rho=0.59$--$0.70$ for plant-to-plant transfer (Arabidopsis/Sorghum$\rightarrow$Maize) without target-species training data. Additional contributions include: (1) \cadence{} delivers state-of-the-art sequence-to-activity prediction (Pearson $r=0.92$ housekeeping, $r=0.91$ developmental on Drosophila; $r=0.81$ on human cell lines; $r=0.96$ on yeast); (2) \physinformer{} predicts 521 biophysical features with $r=0.92$ validation correlation; (3) \tileformer{} provides 10,000$\times$ acceleration for electrostatic summary statistic prediction (6 values per sequence) at $R^2>0.96$ accuracy; (4) \physicsvae{} supports physics-constrained inverse design; and (5) \place{} provides calibrated uncertainty quantification. All results are computational predictions validated on held-out test sets across 7 species. We release all code, trained models, and datasets.
+DNA shape and electrostatic properties form a conserved biophysical language that enables regulatory activity prediction across species boundaries. Current deep learning approaches achieve high \emph{in silico} accuracy but often fail to generalize to designed sequences outside the training distribution. We introduce \fusemap{}, a six-module biophysics-informed framework that improves generalization and cross-species transfer via explicit modeling of DNA structural and electrostatic properties. Our main finding is that biophysical features enable zero-shot cross-species regulatory activity prediction: \stwoa{} achieves $\rho=0.59$--$0.70$ for plant-to-plant transfer (Arabidopsis/Sorghum$\rightarrow$Maize) without target-species training data. Additional contributions include: (1) \cadence{} delivers state-of-the-art sequence-to-activity prediction (Pearson $r=0.92$ housekeeping, $r=0.91$ developmental on Drosophila; $r=0.81$ on human cell lines; $r=0.96$ on yeast); (2) \physinformer{} predicts 521 biophysical features with $r=0.92$ validation correlation; (3) \tileformer{} provides 10,000$\times$ acceleration for electrostatic summary statistic prediction (6 values per sequence) at $r=0.89$ correlation; (4) \physicsvae{} supports physics-constrained inverse design; and (5) \place{} provides calibrated uncertainty quantification. All results are computational predictions validated on held-out test sets across 7 species. We release all code, trained models, and datasets.
 \end{abstract}
 
 %==============================================================================
@@ -79,14 +79,14 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 \item \textbf{\tileformer{}}: Neural surrogate for Poisson-Boltzmann electrostatic calculations, achieving 10,000$\times$ speedup
 \item \textbf{\stwoa{}}: Zero-shot cross-species activity transfer via physics-based feature alignment
 \item \textbf{\physicsvae{}}: Variational autoencoder for inverse design with targeted biophysical profiles
-\item \textbf{\place{}}: Post-hoc Laplace approximation for calibrated uncertainty quantification
+\item \textbf{\place{}}: Post-hoc Laplace and conformal estimation for calibrated uncertainty quantification
 \end{enumerate}
 
 \textbf{Key results (all computational predictions on held-out test sets).}
 \begin{itemize}[leftmargin=*,itemsep=0pt,topsep=2pt]
 \item Zero-shot cross-species transfer: $\rho=0.59$--$0.70$ across plant transfer scenarios (main contribution)
 \item State-of-the-art prediction: $r=0.92$ housekeeping, $r=0.91$ developmental (DeepSTARR), $r=0.81$ (K562), $r=0.80$ (Maize)
-\item 10,000$\times$ speedup for electrostatic prediction at $R^2>0.96$
+\item 10,000$\times$ speedup for electrostatic prediction at $r=0.89$
 \item 99\% predicted cell-type specificity for designed enhancers
 \item Calibrated uncertainty with potential for improved experimental prioritization
 \end{itemize}
@@ -217,6 +217,12 @@ Key hyperparameters: learning rate $10^{-3}$ with cosine annealing, batch size 1
 \item \textbf{CADENCE-Yeast}: DREAM Challenge promoters
 \end{itemize}
 
+We also train multi-task configurations with shared backbones:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{CADENCE-MultiHuman}: Joint training on K562+HepG2+WTC11 with cell-type conditioning
+\item \textbf{CADENCE-Universal}: Foundation model across all species (excluding yeast) with species and kingdom embeddings
+\end{itemize}
+
 \textbf{Reverse-complement equivariance.} Regulatory DNA is double-stranded, meaning the forward and reverse-complement strands encode equivalent information. We enforce this symmetry through parallel processing:
 \begin{equation}
 \mathbf{h}_{\text{stem}} = \text{Pool}(\text{Conv}(\mathbf{x}), \text{Flip}(\text{Conv}(\text{RC}(\mathbf{x}))))
@@ -298,7 +304,7 @@ where $Q, K, V$ are linear projections of nucleotide embeddings with $d_k = 64$.
 
 Electrostatic potential critically influences TF-DNA recognition \citep{rohs2009origins}, but computing it via Poisson-Boltzmann solvers like APBS \citep{baker2001electrostatics} requires expensive 3D structure modeling. \tileformer{} provides a fast neural surrogate.
 
-\textbf{Problem formulation.} Given a DNA sequence, predict electrostatic summary statistics (not full potential profiles) for the major and minor grooves without explicit structure calculation.
+\textbf{Problem formulation.} Given a DNA sequence, predict electrostatic potential summary statistics (not full potential profiles) without explicit 3D structure calculation.
 
 \textbf{Architecture.} \tileformer{} uses a transformer encoder:
 \begin{enumerate}[leftmargin=*,itemsep=0pt]
@@ -315,7 +321,7 @@ Electrostatic potential critically influences TF-DNA recognition \citep{rohs2009
 \begin{enumerate}[leftmargin=*,itemsep=0pt]
 \item Converting sequences to 3D structures using X3DNA
 \item Running APBS electrostatic calculations
-\item Extracting groove potential profiles
+\item Extracting electrostatic potential statistics
 \end{enumerate}
 
 This expensive pipeline ($\sim$30 seconds per sequence) is run once to generate 50,000 examples, split 80/10/10 into 40,000 training, 5,000 validation, and 5,000 test sequences. \tileformer{} then provides instant prediction ($<$1ms) of 6 summary statistics. Note: the 10,000$\times$ speedup compares full APBS calculation against predicting these 6 summary values, not full electrostatic potential profiles.
@@ -325,8 +331,8 @@ This expensive pipeline ($\sim$30 seconds per sequence) is run once to generate 
 \item Generate canonical B-DNA 3D structure using X3DNA with standard parameters (rise = 3.38\AA, twist = 36°)
 \item Add hydrogens and assign partial charges using PDB2PQR \citep{dolinsky2004pdb2pqr}
 \item Solve the linearized Poisson-Boltzmann equation with APBS using 0.15M ionic strength (physiological conditions)
-\item Extract electrostatic potential values at major and minor groove surfaces
-\item Compute summary statistics: minimum, maximum, mean, and standard deviation per groove
+\item Extract electrostatic potential values at standard and enhanced ionic strength conditions
+\item Compute summary statistics: minimum, maximum, and mean per condition
 \end{enumerate}
 
 \textbf{Output targets.} \tileformer{} predicts 6 electrostatic summary statistics (not position-wise potential profiles):
@@ -487,7 +493,7 @@ This loss encourages the decoder to produce sequences satisfying target properti
 \subsection{Module 6: \place{} --- Uncertainty Quantification}
 \label{sec:place}
 
-Reliable uncertainty estimates are critical for experimental prioritization. \place{} (\textbf{P}ost-hoc \textbf{La}place \textbf{C}alibrated \textbf{E}stimation) provides calibrated confidence intervals.
+Reliable uncertainty estimates are critical for experimental prioritization. \place{} (\textbf{P}ost-hoc \textbf{La}place \textbf{A}nd \textbf{C}onformal \textbf{E}stimation) provides calibrated confidence intervals.
 
 \textbf{Method.} We apply Laplace approximation \citep{daxberger2021laplace} to trained \cadence{} models:
 \begin{enumerate}[leftmargin=*,itemsep=0pt]
@@ -546,10 +552,10 @@ We train and evaluate \fusemap{} on diverse regulatory sequence datasets spannin
 \toprule
 Dataset & Species & Seqs & Len & Assay \\
 \midrule
-ENCODE4 & Human & 483K & 230bp & lentiMPRA \\
-DeepSTARR & Drosophila & 485K & 249bp & STARR-seq \\
-Jores et al. & Plants & 51K & 170bp & STARR-seq \\
-DREAM & Yeast & 6.7M & 110bp & FACS-seq \\
+ENCODE4 \citep{encode2020perspectives} & Human & 483K & 230bp & lentiMPRA \\
+DeepSTARR \citep{de2022sequence} & Drosophila & 485K & 249bp & STARR-seq \\
+Jores et al.\ \citep{jores2021synthetic} & Plants & 51K & 170bp & STARR-seq \\
+DREAM \citep{schaffer2022dream} & Yeast & 6.7M & 110bp & FACS-seq \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -735,12 +741,14 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 \toprule
 Target Property & $R^2$ & Pearson $r$ & RMSE \\
 \midrule
-Minor groove potential (min) & 0.960 & 0.981 & 0.005 \\
-Minor groove potential (mean) & 0.953 & 0.977 & 0.008 \\
-Major groove potential (min) & 0.966 & 0.984 & 0.012 \\
-Major groove potential (mean) & 0.958 & 0.979 & 0.010 \\
+Standard $\psi$ (min) & 0.772 & 0.903 & 0.012 \\
+Standard $\psi$ (max) & 0.528 & 0.839 & 0.006 \\
+Standard $\psi$ (mean) & 0.824 & 0.910 & 0.007 \\
+Enhanced $\psi$ (min) & 0.740 & 0.894 & 0.034 \\
+Enhanced $\psi$ (max) & 0.737 & 0.893 & 0.030 \\
+Enhanced $\psi$ (mean) & 0.746 & 0.893 & 0.031 \\
 \midrule
-Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
+Overall & \textbf{0.725} & \textbf{0.889} & 0.023 \\
 \bottomrule
 \end{tabular}%
 }
@@ -748,7 +756,7 @@ Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
 
 \tileformer{} provides accurate electrostatic prediction with massive speedup:
 
-\textbf{Accuracy.} $R^2 > 0.96$ across all target properties (Table~\ref{tab:tileformer}), with particularly strong performance on minor groove potentials which are most relevant for TF recognition.
+\textbf{Accuracy.} Mean Pearson $r = 0.89$ across all target properties (Table~\ref{tab:tileformer}), with strongest performance on standard ionic strength conditions. These correlations enable effective ranking of sequences by electrostatic properties.
 
 \textbf{Speed.} 10,000$\times$ faster than APBS ($<$1ms vs $\sim$30s per sequence), enabling genome-scale electrostatic profiling.
 
@@ -794,11 +802,11 @@ Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
 % Perfect correlation line
 \addplot[red, very thick, domain=-0.24:-0.13] {x};
 % R^2 annotation
-\node[font=\normalsize\bfseries] at (axis cs:-0.145,-0.215) {$R^2 = 0.961$};
+\node[font=\normalsize\bfseries] at (axis cs:-0.145,-0.215) {$r = 0.89$};
 \node[font=\small] at (axis cs:-0.145,-0.228) {$n = 5{,}199$};
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{\tileformer{} predicts electrostatics with $R^2=0.96$.} Predicted minor groove potential vs.\ APBS ground truth for held-out sequences. Tight clustering around $y=x$ shows our surrogate captures electrostatics with 10,000$\times$ speedup. Data: 200 sequences from 5,199-sequence test set.}
+\caption{\textbf{\tileformer{} predicts electrostatics with $r=0.89$.} Predicted electrostatic potential vs.\ APBS ground truth for held-out sequences. Clustering around $y=x$ shows our surrogate captures electrostatics with 10,000$\times$ speedup. Data: 200 sequences from 5,199-sequence test set.}
 \label{fig:tileformer_scatter}
 \end{figure}
 
@@ -1134,7 +1142,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
     ylabel style={font=\small},
     ymin=0.6, ymax=1.0,
     bar width=12pt,
-    legend style={at={(0.98,0.98)}, anchor=north east, font=\tiny},
+    legend style={at={(0.02,0.98)}, anchor=north west, font=\tiny},
     legend cell align=left,
     enlarge x limits=0.35,
     nodes near coords,

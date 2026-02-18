@@ -31,6 +31,16 @@
 \usetikzlibrary{patterns,positioning,arrows.meta,shapes.geometric,calc}
 \usepackage{tabularx}
 \usepackage{adjustbox}
+\usepackage{placeins}
+
+% Float placement parameters - reduce floating
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.10}
+\renewcommand{\floatpagefraction}{0.85}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{6}
 
 % Custom commands
 \newcommand{\fusemap}{\textsc{Fusemap}}
@@ -97,66 +107,62 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 
 \begin{figure*}[t]
 \centering
-\begin{tikzpicture}[scale=0.95, transform shape]
+\begin{tikzpicture}[scale=0.88, transform shape]
 
 % === LEFT PANEL: Arabidopsis Promoter ===
-\node[font=\normalsize\bfseries, green!50!black] at (0, 5.0) {Arabidopsis Promoter};
-\node[font=\scriptsize\ttfamily] at (0, 4.4) {5'-AGCCCTTAATTATCCA\textcolor{red!70!black}{\underline{TATA}}AGCC...-3'};
-\node[font=\scriptsize, red!70!black] at (0.8, 3.95) {TATA box};
+\node[font=\normalsize\bfseries, green!50!black] at (0, 5.2) {Arabidopsis Promoter};
+\node[font=\scriptsize\ttfamily] at (0, 4.5) {5'-AGCCCTTAATTATCCA\textcolor{red!70!black}{\underline{TATA}}AGCC...-3'};
 
 % MGW profile
-\node[font=\scriptsize, anchor=east] at (-2.4, 3.2) {MGW (\AA)};
-\draw[very thick, blue!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {3.2 + 0.25 - 0.35*exp(-(\x-0.2)^2/0.3)});
-\node[font=\tiny, gray, anchor=west] at (2.3, 3.0) {4.35};
+\node[font=\scriptsize, anchor=east] at (-2.2, 3.4) {MGW};
+\draw[very thick, blue!70] plot[smooth, samples=30, domain=-2.0:2.0] (\x, {3.4 + 0.2 - 0.3*exp(-(\x-0.2)^2/0.3)});
 
 % ProT profile
-\node[font=\scriptsize, anchor=east] at (-2.4, 2.4) {ProT ($^\circ$)};
-\draw[very thick, purple!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {2.4 + 0.15*sin(\x*150) + 0.1*cos(\x*80)});
+\node[font=\scriptsize, anchor=east] at (-2.2, 2.6) {ProT};
+\draw[very thick, purple!70] plot[smooth, samples=30, domain=-2.0:2.0] (\x, {2.6 + 0.12*sin(\x*150) + 0.08*cos(\x*80)});
 
 % Electrostatic profile
-\node[font=\scriptsize, anchor=east] at (-2.4, 1.6) {$\psi$ (kT/e)};
-\draw[very thick, red!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {1.6 - 0.2 + 0.25*exp(-(\x-0.2)^2/0.4)});
+\node[font=\scriptsize, anchor=east] at (-2.2, 1.8) {$\psi$};
+\draw[very thick, red!70] plot[smooth, samples=30, domain=-2.0:2.0] (\x, {1.8 - 0.15 + 0.2*exp(-(\x-0.2)^2/0.4)});
 
 % Activity box
-\node[draw, fill=green!20, rounded corners, font=\scriptsize\bfseries, minimum width=1.8cm] at (0, 0.9) {Activity: 4.16};
+\node[draw, fill=green!20, rounded corners, font=\scriptsize\bfseries] at (0, 1.0) {Activity: 4.16};
 
-\draw[rounded corners, gray!60, thick] (-2.6, 0.4) rectangle (2.6, 5.3);
+\draw[rounded corners, gray!50, thick] (-2.4, 0.5) rectangle (2.4, 5.5);
 
 % === CENTER: Conservation Arrow ===
-\draw[-{Stealth[length=4mm]}, ultra thick, green!60!black] (3.0, 2.8) -- (4.6, 2.8);
-\node[font=\scriptsize, align=center, green!50!black] at (3.8, 3.5) {Conserved\\biophysics};
-\node[font=\scriptsize, align=center, gray] at (3.8, 2.1) {36\% seq.\\identity};
+\draw[-{Stealth[length=3mm]}, ultra thick, green!60!black] (2.8, 3.0) -- (4.2, 3.0);
+\node[font=\tiny, align=center, green!50!black] at (3.5, 3.6) {Conserved\\biophysics};
+\node[font=\tiny, align=center, gray] at (3.5, 2.4) {36\% seq.\\identity};
 
 % === RIGHT PANEL: Maize Promoter ===
-\node[font=\normalsize\bfseries, green!50!black] at (7.5, 5.0) {Maize Promoter};
-\node[font=\scriptsize\ttfamily] at (7.5, 4.4) {5'-GCAAAAAAAACTCAAACCAACCCGAA...-3'};
-\node[font=\scriptsize, gray] at (7.5, 3.95) {(high activity)};
+\node[font=\normalsize\bfseries, green!50!black] at (7.0, 5.2) {Maize Promoter};
+\node[font=\scriptsize\ttfamily] at (7.0, 4.5) {5'-GCAAAAAAAACTCAAACCAACCC...-3'};
 
 % MGW profile
-\node[font=\scriptsize, anchor=east] at (5.1, 3.2) {MGW (\AA)};
-\draw[very thick, blue!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {3.2 + 0.25 - 0.33*exp(-(\x-7.5)^2/0.35)});
-\node[font=\tiny, gray, anchor=west] at (9.8, 3.0) {4.45};
+\node[font=\scriptsize, anchor=east] at (4.8, 3.4) {MGW};
+\draw[very thick, blue!70] plot[smooth, samples=30, domain=5.0:9.0] (\x, {3.4 + 0.2 - 0.28*exp(-(\x-7.0)^2/0.35)});
 
 % ProT profile
-\node[font=\scriptsize, anchor=east] at (5.1, 2.4) {ProT ($^\circ$)};
-\draw[very thick, purple!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {2.4 + 0.15*sin((\x-5.3)*150) + 0.1*cos((\x-5.3)*80)});
+\node[font=\scriptsize, anchor=east] at (4.8, 2.6) {ProT};
+\draw[very thick, purple!70] plot[smooth, samples=30, domain=5.0:9.0] (\x, {2.6 + 0.12*sin((\x-5.0)*150) + 0.08*cos((\x-5.0)*80)});
 
 % Electrostatic profile
-\node[font=\scriptsize, anchor=east] at (5.1, 1.6) {$\psi$ (kT/e)};
-\draw[very thick, red!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {1.6 - 0.2 + 0.23*exp(-(\x-7.5)^2/0.45)});
+\node[font=\scriptsize, anchor=east] at (4.8, 1.8) {$\psi$};
+\draw[very thick, red!70] plot[smooth, samples=30, domain=5.0:9.0] (\x, {1.8 - 0.15 + 0.18*exp(-(\x-7.0)^2/0.45)});
 
 % Activity box
-\node[draw, fill=green!20, rounded corners, font=\scriptsize\bfseries, minimum width=1.8cm] at (7.5, 0.9) {Activity: 2.59};
+\node[draw, fill=green!20, rounded corners, font=\scriptsize\bfseries] at (7.0, 1.0) {Activity: 2.59};
 
-\draw[rounded corners, gray!60, thick] (4.9, 0.4) rectangle (10.1, 5.3);
+\draw[rounded corners, gray!50, thick] (4.6, 0.5) rectangle (9.4, 5.5);
 
 % === S2A Transfer Arrow ===
-\draw[-{Stealth[length=3mm]}, very thick, blue!60] (0, 0.3) -- (0, -0.3) -- (7.5, -0.3) -- (7.5, 0.3);
-\node[font=\small\bfseries, blue!60, fill=white, inner sep=2pt] at (3.75, -0.3) {S2A Transfer: $\rho$=0.70};
+\draw[-{Stealth[length=2.5mm]}, very thick, blue!60] (0, 0.4) -- (0, -0.2) -- (7.0, -0.2) -- (7.0, 0.4);
+\node[font=\small\bfseries, blue!60, fill=white, inner sep=2pt] at (3.5, -0.2) {S2A: $\rho$=0.70};
 
 % === MODULE STRIP ===
-\node[draw, rounded corners, fill=gray!8, font=\scriptsize, minimum width=12cm, minimum height=0.6cm] at (3.75, -1.1) {
-\textbf{FUSEMAP:} CADENCE ($r$=0.81) \quad PhysInformer (521 features) \quad TileFormer (10,000$\times$) \quad S2A ($\rho$=0.70) \quad PLACE (90\% cov.)
+\node[draw, rounded corners, fill=gray!8, font=\tiny, minimum width=11cm, minimum height=0.5cm] at (3.5, -0.9) {
+\textbf{FUSEMAP:} CADENCE ($r$=0.81) | PhysInformer (521 feat) | TileFormer (10k$\times$) | S2A ($\rho$=0.70) | PLACE (90\% cov.)
 };
 
 \end{tikzpicture}
@@ -359,7 +365,7 @@ A key capability of \fusemap{} is predicting regulatory activity in species with
 
 \textbf{Key insight.} While DNA sequences diverge rapidly across species, the biophysical mechanisms of transcription are conserved. A sequence that creates optimal DNA shape for TF binding in Arabidopsis should function similarly in maize, even if the exact nucleotides differ.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.9]
 % === S2A Prediction Scatter ===
@@ -531,6 +537,7 @@ Epistemic uncertainty (model uncertainty) is high for out-of-distribution inputs
 \end{enumerate}
 This procedure guarantees marginal coverage regardless of the underlying uncertainty estimate quality.
 
+\FloatBarrier
 %==============================================================================
 \section{Datasets and Experimental Setup}
 \label{sec:datasets}
@@ -540,7 +547,7 @@ This procedure guarantees marginal coverage regardless of the underlying uncerta
 
 We train and evaluate \fusemap{} on diverse regulatory sequence datasets spanning multiple species and assay types (Table~\ref{tab:datasets}).
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{\textbf{Dataset statistics.} Training data spans 7 species with diverse assay types. Total: 7.8M sequences.}
 \label{tab:datasets}
@@ -585,6 +592,7 @@ We compare against pure sequence-to-activity models:
 \item \textbf{DREAM-RNN} \citep{de2022sequence}: Original LegNet architecture achieving top performance on DeepSTARR/DREAM challenges
 \end{itemize}
 
+\FloatBarrier
 %==============================================================================
 \section{Results}
 \label{sec:results}
@@ -592,7 +600,7 @@ We compare against pure sequence-to-activity models:
 
 \subsection{\cadence{}: State-of-the-Art Activity Prediction}
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{\textbf{\cadence{} performance across cell types and species.} Best results in \textbf{bold}. Values shown as mean $\pm$ std from 5 runs.}
 \label{tab:cadence_results}
@@ -641,7 +649,7 @@ This concordance with known cell-type-specific regulatory programs (erythroid GA
 
 \subsection{\physinformer{}: Biophysical Feature Prediction}
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{\textbf{\physinformer{} cross-species transfer.} Mean Pearson $r$ for biophysical features from K562-trained model. Feature counts vary as some biophysical features are undefined cross-kingdom.}
 \label{tab:physinformer_transfer}
@@ -675,7 +683,7 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 
 \textbf{Computational efficiency.} \physinformer{} predicts 521 biophysical features in 5ms per sequence (batch of 128), compared to $>$60 seconds for direct computation of all features using standard tools. This 12,000$\times$ speedup enables genome-scale biophysical profiling.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.85]
 % Heatmap for feature transfer - REAL DATA from generate_figure8.py
@@ -729,7 +737,7 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 
 \subsection{\tileformer{}: Accelerated Electrostatics}
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{\textbf{\tileformer{} electrostatic prediction accuracy.} Comparison with APBS ground truth.}
 \label{tab:tileformer}
@@ -758,7 +766,7 @@ Overall & \textbf{0.960} & \textbf{0.982} & 0.008 \\
 
 \textbf{Speed.} 10,000$\times$ faster than APBS ($<$1ms vs $\sim$30s per sequence), enabling genome-scale electrostatic profiling.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -810,7 +818,7 @@ Overall & \textbf{0.960} & \textbf{0.982} & 0.008 \\
 
 \subsection{\stwoa{}: Zero-Shot Cross-Species Transfer}
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{\textbf{\stwoa{} cross-species transfer.} Spearman $\rho$ for zero-shot prediction using physics-based features. Values from held-out test sets.}
 \label{tab:s2a}
@@ -842,7 +850,7 @@ Fly & Plants & -0.32 \\
 
 \textbf{Cross-kingdom limits.} Plant$\rightarrow$Fly transfer fails ($\rho=0.12$), and Fly$\rightarrow$Plant shows negative correlation ($\rho=-0.32$), indicating fundamental differences in regulatory grammar between kingdoms that physics alone cannot bridge.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.75, transform shape,
     species/.style={circle, draw, minimum size=0.9cm, font=\scriptsize\bfseries, align=center},
@@ -878,7 +886,7 @@ Fly & Plants & -0.32 \\
 \label{fig:transfer_landscape}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.75]
 \def\cellsize{0.9}
@@ -928,7 +936,7 @@ Fly & Plants & -0.32 \\
 
 \subsection{\place{}: Calibrated Uncertainty}
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{\textbf{\place{} k-NN calibration results.} All models use $k$=200 neighbors with $\alpha$=0.1 targeting 90\% coverage.}
 \label{tab:place}
@@ -954,7 +962,7 @@ Yeast & 67,055 & 0.719 & 0.848 \\
 
 \textbf{Predictive impact.} Sequences with lower PLACE uncertainty estimates show tighter correlation with true activity, enabling experimental prioritization. The adaptive interval widths (proportional to local residual std in Table~\ref{tab:place}) allow researchers to identify high-confidence predictions for validation.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
@@ -1002,7 +1010,7 @@ We evaluate \physicsvae{} on sequence reconstruction and generation quality.
 
 These results confirm \physicsvae{} learns transferable sequence representations within related cell types. The 63.7\% multi-human accuracy (2.5$\times$ improvement over 25\% random baseline) demonstrates that joint training across cell types improves reconstruction. Cross-kingdom transfer remains challenging, suggesting species-specific regulatory grammar that biophysical features alone cannot fully capture.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.0]
 % Real UMAP from K562 regime discovery: 158,377 sequences embedded in 521-D physics feature space
@@ -1099,7 +1107,7 @@ These results confirm \physicsvae{} learns transferable sequence representations
 
 \subsection{Integrated Framework Performance}
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{\textbf{Comparison with baselines.} \fusemap{} matches LegNet on human MPRA, outperforms DREAM-RNN on DeepSTARR, and uniquely enables cross-species transfer.}
 \label{tab:comparison}
@@ -1126,7 +1134,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 
 \textbf{Uncertainty quantification.} Only \fusemap{} provides calibrated confidence intervals.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -1158,7 +1166,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \end{figure}
 
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
@@ -1184,7 +1192,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \label{fig:s2a_features}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -1216,6 +1224,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \label{fig:training_curves}
 \end{figure}
 
+\FloatBarrier
 %==============================================================================
 \section{Applications}
 \label{sec:applications}
@@ -1279,6 +1288,7 @@ We demonstrate iterative sequence optimization using gradient ascent through \ca
 
 \textbf{Capability.} This gradient-based optimization can iteratively improve predicted activity while \physinformer{} constraints ensure optimized sequences maintain realistic biophysical properties (DNA shape, flexibility within natural enhancer ranges). Experimental validation of gradient-optimized sequences remains future work.
 
+\FloatBarrier
 %==============================================================================
 \section{Related Work}
 \label{sec:related}
@@ -1302,6 +1312,7 @@ We demonstrate iterative sequence optimization using gradient ascent through \ca
 
 This work develops computational methods for regulatory sequence prediction and has potential applications in gene therapy and crop engineering. We release all code and models openly to ensure equitable access. Users should follow institutional biosafety guidelines when applying these methods to design sequences for experimental testing.
 
+\FloatBarrier
 %==============================================================================
 \section{Discussion and Conclusion}
 \label{sec:conclusion}
@@ -1351,6 +1362,7 @@ All code, trained model weights, and processed datasets are publicly available a
 \bibliographystyle{plainnat}
 \bibliography{references}
 
+\FloatBarrier
 %==============================================================================
 \newpage
 \appendix

@@ -247,11 +247,7 @@ def main():
     ax.set_ylim(lo, hi)
 
     ax.set_xlabel("Measured Activity (log\u2082 RNA/DNA)", fontsize=14)
-    ax.set_ylabel("CADENCE Predicted Activity", fontsize=14)
-    ax.set_title(
-        "CADENCE Prediction vs. Measured Activity\n"
-        f"HepG2 lentiMPRA \u2014 {n_samples:,} held-out sequences (val + test)",
-        fontsize=15, fontweight="bold")
+    ax.set_ylabel("Predicted Activity", fontsize=14)
 
     text = (f"Pearson $r$ = {r:.3f}\n"
             f"Spearman $\\rho$ = {rho:.3f}\n"

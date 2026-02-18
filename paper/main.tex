@@ -590,10 +590,10 @@ We compare against pure sequence-to-activity models:
 
 \begin{table}[t]
 \centering
-\caption{\textbf{\cadence{} performance across cell types and species.} Best results in \textbf{bold}. Values shown as mean $\pm$ std from 5 independent runs.}
+\caption{\textbf{\cadence{} performance across cell types and species.} Best results in \textbf{bold}. Values shown as mean $\pm$ std from 5 runs.}
 \label{tab:cadence_results}
 \small
-\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}llccc@{}}
 \toprule
 Dataset & Cell Type & Pearson $r$ & Spearman $\rho$ & $R^2$ \\
@@ -611,7 +611,8 @@ Plants & Sorghum & \textbf{0.782}$\pm$0.021 & 0.777$\pm$0.019 & 0.612 \\
 \midrule
 DREAM & Yeast & \textbf{0.958}$\pm$0.002 & 0.945$\pm$0.003 & 0.916 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 Table~\ref{tab:cadence_results} summarizes \cadence{} performance. Key findings:
@@ -638,10 +639,9 @@ This concordance with known cell-type-specific regulatory programs (erythroid GA
 
 \begin{table}[t]
 \centering
-\caption{\textbf{\physinformer{} cross-species transfer.} Mean Pearson $r$ for biophysical features from K562-trained model. Feature counts vary because some sequence-derived features (e.g., cell-type-specific motif frequencies) are undefined for non-human species; only the 87 biophysical features + universally-defined sequence features are evaluated cross-kingdom.}
+\caption{\textbf{\physinformer{} cross-species transfer.} Mean Pearson $r$ for biophysical features from K562-trained model. Feature counts vary as some sequence-derived features are undefined cross-kingdom.}
 \label{tab:physinformer_transfer}
 \small
-\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lccc@{}}
 \toprule
 Transfer & Features & Mean $r$ & Med. $r$ \\
@@ -673,9 +673,9 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[scale=1.0]
+\begin{tikzpicture}[scale=0.85]
 % Heatmap for feature transfer - REAL DATA from generate_figure8.py
-\def\cellsize{1.1}
+\def\cellsize{1.0}
 % Column labels (5 feature categories)
 \node[font=\scriptsize, rotate=45, anchor=west] at (0.5*\cellsize, 3.4*\cellsize) {Bending};
 \node[font=\scriptsize, rotate=45, anchor=west] at (1.5*\cellsize, 3.4*\cellsize) {Adv.Struct};
@@ -719,7 +719,7 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 \node[font=\scriptsize, rotate=90] at (6.5*\cellsize, 1.5*\cellsize) {Transfer $r$};
 
 \end{tikzpicture}
-\caption{\textbf{Biophysical feature transfer across evolutionary distance.} Heatmap showing Pearson $r$ by feature category. Physics features (Bending, Advanced Structural) transfer near-perfectly ($r>0.91$) even cross-kingdom, while PWM/TF-binding features collapse dramatically (0.94$\to$0.03, --97\%). This hierarchy demonstrates that DNA physical properties are conserved while regulatory grammar is species-specific.}
+\caption{\textbf{Biophysical feature transfer across evolution.} Heatmap of Pearson $r$ by feature category. Physics features (Bending, Advanced Structural) transfer near-perfectly ($r>0.91$) even cross-kingdom, while PWM/TF features collapse (0.94$\to$0.03). DNA physical properties are conserved while regulatory grammar is species-specific.}
 \label{fig:biophys_transfer}
 \end{figure}
 
@@ -730,6 +730,7 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 \caption{\textbf{\tileformer{} electrostatic prediction accuracy.} Comparison with APBS ground truth.}
 \label{tab:tileformer}
 \small
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}lccc@{}}
 \toprule
 Target Property & $R^2$ & Pearson $r$ & RMSE \\
@@ -741,7 +742,8 @@ Major groove potential (mean) & 0.958 & 0.979 & 0.010 \\
 \midrule
 Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \tileformer{} provides accurate electrostatic prediction with massive speedup:
@@ -754,12 +756,12 @@ Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    width=\columnwidth,
+    width=0.95\columnwidth,
     height=5.5cm,
     xlabel={\tileformer{} Predicted $\psi$ (kT/e)},
-    ylabel={APBS Ground Truth $\psi$ (kT/e)},
-    xlabel style={font=\normalsize},
-    ylabel style={font=\normalsize},
+    ylabel={APBS $\psi$ (kT/e)},
+    xlabel style={font=\small},
+    ylabel style={font=\small},
     tick label style={font=\small},
     xmin=-0.24, xmax=-0.13,
     ymin=-0.24, ymax=-0.13,
@@ -796,7 +798,7 @@ Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
 \node[font=\small] at (axis cs:-0.145,-0.228) {$n = 5{,}199$};
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{\tileformer{} predicts electrostatic potential with $R^2=0.96$.} Each point compares \tileformer{}'s predicted minor groove potential ($\psi_{\text{mean}}$, x-axis) against the APBS physics simulation ground truth (y-axis) for held-out test sequences. The tight clustering around $y=x$ (red line) demonstrates that our transformer surrogate accurately captures sequence-dependent electrostatics, enabling 10,000$\times$ speedup over APBS while maintaining high fidelity. Data: 200 sequences randomly sampled from 5,199-sequence test set.}
+\caption{\textbf{\tileformer{} predicts electrostatics with $R^2=0.96$.} Predicted minor groove potential vs.\ APBS ground truth for held-out sequences. Tight clustering around $y=x$ shows our surrogate captures electrostatics with 10,000$\times$ speedup. Data: 200 sequences from 5,199-sequence test set.}
 \label{fig:tileformer_scatter}
 \end{figure}
 
@@ -804,10 +806,9 @@ Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
 
 \begin{table}[t]
 \centering
-\caption{\textbf{\stwoa{} cross-species transfer.} Spearman $\rho$ for zero-shot prediction using physics-based features. Values from held-out test sets (e.g., n=2,461 for Maize).}
+\caption{\textbf{\stwoa{} cross-species transfer.} Spearman $\rho$ for zero-shot prediction using physics-based features. Values from held-out test sets.}
 \label{tab:s2a}
 \small
-\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}llc@{}}
 \toprule
 Source & Target & \stwoa{} $\rho$ \\
@@ -837,35 +838,35 @@ Fly & Plants & -0.32 \\
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[scale=0.85, transform shape,
-    species/.style={circle, draw, minimum size=1cm, font=\tiny\bfseries, align=center},
-    arrow/.style={-{Stealth[length=1.5mm]}, thick},
+\begin{tikzpicture}[scale=1.0, transform shape,
+    species/.style={circle, draw, minimum size=1.1cm, font=\scriptsize\bfseries, align=center},
+    arrow/.style={-{Stealth[length=2mm]}, thick},
 ]
 % Plant cluster
 \node[species, fill=green!30] (arab) at (0,1.8) {Arab.};
-\node[species, fill=green!30] (maize) at (1.8,1.8) {Maize};
-\node[species, fill=green!30] (sorg) at (0.9,0.4) {Sorg.};
+\node[species, fill=green!30] (maize) at (2.0,1.8) {Maize};
+\node[species, fill=green!30] (sorg) at (1.0,0.3) {Sorg.};
 
 % Animal cluster
-\node[species, fill=blue!30] (k562) at (4.2,1.8) {K562};
-\node[species, fill=blue!30] (hepg2) at (6,1.8) {HepG2};
-\node[species, fill=blue!30] (fly) at (5.1,0.4) {Fly};
+\node[species, fill=blue!30] (k562) at (4.5,1.8) {K562};
+\node[species, fill=blue!30] (hepg2) at (6.5,1.8) {HepG2};
+\node[species, fill=blue!30] (fly) at (5.5,0.3) {Fly};
 
 % Plant arrows (strong) - ensemble values from Table 5
-\draw[arrow, green!60!black, line width=1.5pt] (arab) -- node[above, font=\tiny] {0.70*} (maize);
-\draw[arrow, green!60!black, line width=1.2pt] (sorg) -- node[left, font=\tiny] {0.65*} (arab);
-\draw[arrow, green!60!black, line width=1.3pt] (sorg) -- node[right, font=\tiny] {0.63} (maize);
+\draw[arrow, green!60!black, line width=1.5pt] (arab) -- node[above, font=\scriptsize] {0.70*} (maize);
+\draw[arrow, green!60!black, line width=1.2pt] (sorg) -- node[left, font=\scriptsize] {0.65*} (arab);
+\draw[arrow, green!60!black, line width=1.3pt] (sorg) -- node[right, font=\scriptsize] {0.63} (maize);
 
 % Animal arrows (moderate)
-\draw[arrow, blue!60, line width=0.8pt] (k562) -- node[above, font=\tiny] {0.26} (hepg2);
-\draw[arrow, blue!60, line width=0.6pt] (fly) -- node[left, font=\tiny] {0.18} (k562);
+\draw[arrow, blue!60, line width=0.8pt] (k562) -- node[above, font=\scriptsize] {0.26} (hepg2);
+\draw[arrow, blue!60, line width=0.6pt] (fly) -- node[left, font=\scriptsize] {0.18} (k562);
 
 % Cross-kingdom (weak/negative)
-\draw[arrow, red!60, dashed, line width=0.5pt] (arab) to[bend left=15] node[above, font=\tiny, red] {-0.32} (fly);
+\draw[arrow, red!60, dashed, line width=0.5pt] (arab) to[bend left=15] node[above, font=\scriptsize, red] {-0.32} (fly);
 
 % Labels
-\node[font=\tiny, green!50!black] at (0.9,-0.2) {Plants: Strong};
-\node[font=\tiny, blue!50!black] at (5.1,-0.2) {Animals: Moderate};
+\node[font=\scriptsize, green!50!black] at (1.0,-0.3) {Plants: Strong};
+\node[font=\scriptsize, blue!50!black] at (5.5,-0.3) {Animals: Moderate};
 \end{tikzpicture}
 \caption{\textbf{Cross-species transfer landscape.} Arrow thickness indicates transfer correlation. \stwoa{} enables strong within-kingdom transfer (green: $\rho>0.6$) but cross-kingdom fails (red dashed).}
 \label{fig:transfer_landscape}
@@ -923,12 +924,12 @@ Fly & Plants & -0.32 \\
 
 \begin{table}[t]
 \centering
-\caption{\textbf{\place{} k-NN calibration results.} All models use $k$=200 neighbors with $\alpha$=0.1 targeting 90\% coverage. Noise variance and residual statistics from calibration set.}
+\caption{\textbf{\place{} k-NN calibration results.} All models use $k$=200 neighbors with $\alpha$=0.1 targeting 90\% coverage.}
 \label{tab:place}
 \small
 \begin{tabular}{@{}lccc@{}}
 \toprule
-Dataset & $n_{\text{cal}}$ & Noise Var & Residual Std \\
+Dataset & $n_{\text{cal}}$ & Noise Var & Resid. Std \\
 \midrule
 K562 & 22,633 & 0.349 & 0.591 \\
 HepG2 & 14,002 & 0.385 & 0.620 \\
@@ -1094,19 +1095,21 @@ These results confirm \physicsvae{} learns transferable sequence representations
 
 \begin{table}[t]
 \centering
-\caption{\textbf{Comparison with sequence-to-activity baselines.} \fusemap{} matches LegNet on human MPRA and significantly outperforms DREAM-RNN on DeepSTARR while uniquely enabling cross-species transfer.}
+\caption{\textbf{Comparison with baselines.} \fusemap{} matches LegNet on human MPRA, outperforms DREAM-RNN on DeepSTARR, and uniquely enables cross-species transfer.}
 \label{tab:comparison}
 \small
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}lccc@{}}
 \toprule
-Method & K562 $r$ & DeepSTARR Hk $r$ & Cross-species $\rho$ \\
+Method & K562 $r$ & DeepSTARR Hk $r$ & Cross-sp. $\rho$ \\
 \midrule
 LegNet \citep{karollus2023legnet} & 0.811 & --- & N/A \\
 DREAM-RNN \citep{de2022sequence} & --- & 0.779 & N/A \\
 \midrule
 \fusemap{} & \textbf{0.809} & \textbf{0.920} & \textbf{0.70} \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 The full \fusemap{} framework performs competitively or better than baselines (Table~\ref{tab:comparison}):
@@ -1154,10 +1157,10 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
     xbar,
-    width=\columnwidth,
+    width=0.95\columnwidth,
     height=6cm,
-    xlabel={Feature Category Contribution (\%)},
-    xlabel style={font=\normalsize},
+    xlabel={Feature Contribution (\%)},
+    xlabel style={font=\small},
     symbolic y coords={Entropy, Stiffness, Thermo, Advanced, Bending},
     ytick=data,
     y tick label style={font=\small},
@@ -1171,7 +1174,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \addplot[fill=teal!70] coordinates {(45.3,Bending) (26.7,Advanced) (14.1,Thermo) (7.5,Stiffness) (6.5,Entropy)};
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{DNA bending drives cross-species activity prediction.} Gradient-based feature attribution reveals which biophysical properties enable successful Arabidopsis+Sorghum$\rightarrow$Maize transfer. Bending features (intrinsic curvature, flexibility, dinucleotide geometry) contribute 45.3\% of prediction signal, consistent with DNA shape's known role in TF binding specificity. Advanced structural features (minor groove width, melting profiles) add 26.7\%. Thermodynamic features contribute only 14.1\%, suggesting that static structural properties outweigh energetic stability for regulatory function prediction.}
+\caption{\textbf{DNA bending drives cross-species prediction.} Feature attribution for plant transfer. Bending features (curvature, flexibility) contribute 45.3\%, consistent with DNA shape's role in TF binding. Advanced structural (MGW, melting) adds 26.7\%. Thermodynamics contributes 14.1\%.}
 \label{fig:s2a_features}
 \end{figure}
 
@@ -1512,7 +1515,7 @@ Enformer & 150ms & 16GB \\
 \centering
 \caption{\textbf{\cadence{} hyperparameters by dataset.}}
 \small
-\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 Parameter & K562 & HepG2 & DeepSTARR & Plants & Yeast \\
@@ -1524,7 +1527,8 @@ Dropout & 0.1 & 0.1 & 0.1 & 0.15 & 0.05 \\
 Epochs & 100 & 100 & 100 & 150 & 50 \\
 Early stop & 10 & 10 & 10 & 15 & 10 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \begin{table}[h]
@@ -1660,6 +1664,7 @@ Final S2A model uses 127 features selected by RFECV from 521 total.
 \centering
 \caption{\textbf{Computational requirements for \fusemap{} modules.}}
 \small
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}lccc@{}}
 \toprule
 Module & Parameters & Train Time & Inference \\
@@ -1672,7 +1677,8 @@ Module & Parameters & Train Time & Inference \\
 \midrule
 Full pipeline & 25.7M & 28 hrs & 26 ms/seq \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \textbf{Hardware:} All experiments run on NVIDIA A100 (40GB) GPUs.
@@ -1694,10 +1700,10 @@ Full pipeline & 25.7M & 28 hrs & 26 ms/seq \\
 \centering
 \caption{\textbf{Top 5 motifs by gradient attribution for each dataset.}}
 \small
-\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}clc@{}}
 \toprule
-Dataset & Motif & Attribution \\
+Dataset & Motif & Attr. \\
 \midrule
 K562 & GATA (AGATAA) & 0.312 \\
 K562 & SP1 (GGGCGG) & 0.187 \\
@@ -1717,7 +1723,8 @@ DeepSTARR & GAGA (GAGAGAG) & 0.176 \\
 DeepSTARR & Trl (GAGAG) & 0.145 \\
 DeepSTARR & ETS (GGAA) & 0.098 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \subsubsection{Motif Spacing Analysis}
@@ -1764,8 +1771,8 @@ Analysis of failed cross-kingdom transfers (Plant $\rightarrow$ Fly):
 \begin{table}[h]
 \centering
 \caption{\textbf{Complete \stwoa{} transfer matrix.} Spearman $\rho$ for all source-target combinations.}
-\scriptsize
-\setlength{\tabcolsep}{1.5pt}
+\small
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}l|ccccccc@{}}
 \toprule
 Src $\downarrow$ Tgt $\rightarrow$ & K562 & HepG2 & WTC & Fly & Ara. & Mai. & Sor. \\
@@ -1778,7 +1785,8 @@ Arab. & -.10 & -.08 & -.05 & -.28 & --- & .58 & .59 \\
 Maize & -.12 & -.10 & -.07 & -.25 & .62 & --- & .65 \\
 Sorg. & -.08 & -.06 & -.04 & -.22 & .58 & .63 & --- \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 Key observations:

@@ -9,7 +9,8 @@ to include here. All code, trained models, and processed datasets are available
 under the MIT license at:
     https://github.com/bryanc5864/FUSEMAP
 
-This file contains the training infrastructure and downstream applications:
+This file contains the training infrastructure, downstream applications,
+and the OracleCheck validation protocol:
 
 MODULES INCLUDED:
 1. Training Configuration - 5 experiment presets with dataset catalog
@@ -42,12 +43,20 @@ MODULES INCLUDED:
    TemperatureBalancedSampler, GlobalIndexSampler, BalancedActivitySampler,
    ExtremeAwareSampler (z-score weighted oversampling of distribution tails)
 
+8. OracleCheck - In-silico design validation protocol
+   Source: oracle_check/ (~3,532 lines across 7 files)
+   Verdict system (GREEN/YELLOW/RED), PhysicsValidator, CompositionValidator,
+   ConfidenceValidator, MahalanobisValidator, OracleCheckProtocol,
+   RCConsistencyChecker, ISMFlipTest, MMDTest, KmerJSDivergence,
+   BatchComparator, SequenceScorecard, BatchScorecard
+
 KEY RESULTS (from paper):
 - CADENCE: K562 r=0.809, HepG2 r=0.786, WTC11 r=0.698
 - DeepSTARR: Dev r=0.909, Hk r=0.920
 - Plants: Maize r=0.796, Sorghum r=0.782, Arabidopsis r=0.618
 - Yeast: r=0.958
 - Therapeutic design: 99% predicted specificity, 96.5% GREEN OracleCheck (HepG2)
+- OracleCheck: 96.5% GREEN on designed enhancers, 12% GREEN on random controls
 - Universal foundation model across 7 species, 7.8M total sequences
 ================================================================================
 """
@@ -4087,3 +4096,991 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# ==============================================================================
+# MODULE 8: OracleCheck --- In-Silico Design Validation Protocol
+# ==============================================================================
+#
+# Source: oracle_check/
+# Files: config.py (187 lines), protocol.py (564 lines), validators.py (798 lines),
+#        reference_panels.py (711 lines), scorecard.py (320 lines),
+#        rc_consistency.py (417 lines), two_sample_tests.py (535 lines)
+# Total: ~3,532 lines
+#
+# OracleCheck validates designed regulatory sequences against reference panels
+# built from natural high-performing regulatory elements. It integrates outputs
+# from CADENCE (activity prediction), PhysInformer (physics features), TileFormer
+# (electrostatics), and PLACE (uncertainty/OOD). Each designed sequence receives
+# a GREEN/YELLOW/RED verdict indicating its naturality.
+#
+# KEY RESULT: 96.5% GREEN verdicts on HepG2 therapeutic enhancers; 0% RED.
+#             Random GC-matched controls: only 12% GREEN, 43% RED.
+# ==============================================================================
+
+
+# === oracle_check/config.py ===
+# Configuration classes, thresholds, and physics feature families
+
+class Verdict(str, Enum):
+    """Validation verdict levels."""
+    GREEN = "GREEN"   # All checks pass
+    YELLOW = "YELLOW"  # Minor drift, at most one soft failure
+    RED = "RED"       # Any hard failure
+
+
+# Physics feature families for grouping
+PHYSICS_FAMILIES = {
+    "thermodynamics": [
+        "thermo_dG_p25", "thermo_dG_p50", "thermo_dG_p75",
+        "thermo_dG_mean", "thermo_dG_std", "thermo_dG_range",
+        "thermo_Tm_estimate", "thermo_stability_island_count",
+        "thermo_low_stability_fraction",
+    ],
+    "shape_mgw_prot_roll": [
+        "mgw_mean", "mgw_std", "mgw_min", "mgw_max",
+        "prot_mean", "prot_std", "prot_min", "prot_max",
+        "roll_mean", "roll_std", "roll_min", "roll_max",
+    ],
+    "bending_stiffness": [
+        "twist_stiffness_mean", "twist_stiffness_std",
+        "tilt_stiffness_mean", "tilt_stiffness_std",
+        "roll_stiffness_mean", "roll_stiffness_std",
+        "stiffness_anisotropy", "periodicity_10bp_signal",
+        "total_bending_energy", "rms_curvature", "curvature_hotspot_count",
+    ],
+    "stacking": [
+        "stacking_energy_mean", "stacking_energy_std",
+        "stacking_energy_min", "stacking_energy_max",
+    ],
+    "sidd_g4": [
+        "sidd_destabilization_energy", "sidd_destabilization_count",
+        "g4_propensity_score", "g4_quadruplex_count",
+    ],
+    "entropy": [
+        "sequence_entropy", "local_entropy_mean", "local_entropy_std",
+    ],
+}
+
+ELECTROSTATICS_FEATURES = [
+    "electrostatic_potential_mean", "electrostatic_potential_std",
+    "electrostatic_potential_min", "electrostatic_potential_max",
+    "minor_groove_electrostatics",
+]
+
+
+@dataclass
+class ValidationThresholds:
+    """Thresholds for validation checks."""
+
+    # Physics conformity
+    physics_z_soft: float = 2.5       # Soft threshold for per-family z-scores
+    physics_z_hard: float = 4.0       # Hard failure threshold
+    physics_nll_percentile: float = 95.0  # NLL must be below this percentile
+
+    # Composition
+    gc_min: float = 0.35              # Minimum GC content
+    gc_max: float = 0.75              # Maximum GC content
+    cpg_percentile_low: float = 5.0   # CpG O/E low percentile
+    cpg_percentile_high: float = 95.0 # CpG O/E high percentile
+    entropy_percentile_low: float = 5.0  # Entropy low percentile
+    repeat_fraction_hard: float = 0.3    # Hard failure for repeat fraction
+    max_homopolymer_hard: int = 10       # Hard failure for homopolymer length
+
+    # Confidence / OOD
+    epistemic_percentile: float = 90.0  # Epistemic uncertainty threshold
+    conformal_width_percentile: float = 95.0  # Conformal width threshold
+    ood_percentile: float = 95.0        # OOD score threshold
+
+    # RC Consistency
+    rc_delta_threshold: float = 0.1     # Max prediction difference for RC
+
+
+@dataclass
+class OracleCheckConfig:
+    """Main configuration for OracleCheck validation."""
+
+    # Paths to trained models
+    cadence_models_dir: Path = field(
+        default_factory=lambda: Path("cadence_place")
+    )
+    physinformer_runs_dir: Path = field(
+        default_factory=lambda: Path("physics/PhysInformer/runs")
+    )
+
+    # Reference panel settings
+    natural_high_performer_quantile: float = 0.75  # Top 25% for high performers
+    background_sample_size: int = 10000  # Number of background samples
+    knn_n_neighbors: int = 200  # For OOD detection
+
+    # Validation thresholds
+    thresholds: ValidationThresholds = field(default_factory=ValidationThresholds)
+
+    # Device
+    device: str = "cuda"
+    batch_size: int = 64
+
+
+# Conservative protocol weights (alpha values for physics constraints)
+CONSERVATIVE_PROTOCOL_WEIGHTS = {
+    "thermodynamics": 1.0,
+    "shape_mgw_prot_roll": 0.8,
+    "bending_stiffness": 0.6,
+    "stacking": 0.5,
+    "sidd_g4": 0.4,
+    "entropy": 0.3,
+    "electrostatics": 0.5,
+}
+
+
+# === oracle_check/validators.py ===
+# Core validators: Physics, Composition, Confidence, Mahalanobis, OracleCheck
+
+@dataclass
+class PhysicsValidationResult:
+    """Result of physics validation."""
+    passed: bool
+    overall_score: float
+    family_scores: Dict[str, float]  # z-scores per family
+    family_passed: Dict[str, bool]
+    max_z_score: float
+    nll: float
+    message: str
+    details: Dict = field(default_factory=dict)
+
+
+@dataclass
+class CompositionValidationResult:
+    """Result of composition validation."""
+    passed: bool
+    gc_content: float
+    gc_passed: bool
+    cpg_oe: float
+    cpg_passed: bool
+    entropy: float
+    entropy_passed: bool
+    repeat_fraction: float
+    repeat_passed: bool
+    max_homopolymer: int
+    homopolymer_passed: bool
+    message: str
+
+
+@dataclass
+class ConfidenceValidationResult:
+    """Result of confidence/OOD validation."""
+    passed: bool
+    epistemic_std: Optional[float]
+    epistemic_passed: bool
+    conformal_width: Optional[float]
+    conformal_passed: bool
+    ood_score: Optional[float]
+    ood_passed: bool
+    message: str
+
+
+class PhysicsValidator:
+    """
+    Validates physics conformity of sequences.
+
+    Checks per-family z-scores against natural high performers and
+    physics NLL (negative log-likelihood).
+    """
+
+    def __init__(self, reference_panel, thresholds: ValidationThresholds):
+        self.reference = reference_panel
+        self.thresholds = thresholds
+
+    def validate(
+        self,
+        physics_features: np.ndarray,
+        feature_names: List[str],
+    ) -> PhysicsValidationResult:
+        """Validate physics features against reference panel."""
+        family_scores = {}
+        family_passed = {}
+        nlls = []
+
+        for family, ref_features in self.reference.physics_distributions.items():
+            family_z_scores = []
+
+            for feature_name, ref_dist in ref_features.items():
+                if feature_name in feature_names:
+                    idx = feature_names.index(feature_name)
+                    value = physics_features[idx]
+
+                    # Compute z-score
+                    z = (value - ref_dist.mean) / (ref_dist.std + 1e-8)
+                    family_z_scores.append(abs(z))
+
+                    # Compute NLL contribution
+                    nll = 0.5 * z ** 2 + np.log(ref_dist.std + 1e-8) + 0.5 * np.log(2 * np.pi)
+                    nlls.append(nll)
+
+            if family_z_scores:
+                max_z = max(family_z_scores)
+                family_scores[family] = max_z
+                family_passed[family] = max_z <= self.thresholds.physics_z_soft
+            else:
+                family_scores[family] = 0.0
+                family_passed[family] = True
+
+        max_z_score = max(family_scores.values()) if family_scores else 0.0
+        total_nll = sum(nlls) if nlls else 0.0
+
+        all_soft_pass = all(family_passed.values())
+        no_hard_fail = max_z_score <= self.thresholds.physics_z_hard
+        passed = all_soft_pass and no_hard_fail
+
+        if passed:
+            message = f"Physics check passed (max z={max_z_score:.2f})"
+        elif not no_hard_fail:
+            message = f"Physics HARD FAIL: max z={max_z_score:.2f} > {self.thresholds.physics_z_hard}"
+        else:
+            failing = [f for f, p in family_passed.items() if not p]
+            message = f"Physics soft fail in families: {failing}"
+
+        return PhysicsValidationResult(
+            passed=passed, overall_score=max_z_score,
+            family_scores=family_scores, family_passed=family_passed,
+            max_z_score=max_z_score, nll=total_nll, message=message,
+        )
+
+
+class CompositionValidator:
+    """
+    Validates composition metrics: GC content, CpG O/E, Shannon entropy,
+    repeat fraction, and maximum homopolymer length.
+    """
+
+    def __init__(self, reference_panel, thresholds: ValidationThresholds):
+        self.reference = reference_panel
+        self.thresholds = thresholds
+
+    def validate(self, sequence: str) -> CompositionValidationResult:
+        """Validate composition of a sequence."""
+        seq = sequence.upper()
+
+        # GC content
+        gc = sum(1 for b in seq if b in "GC") / len(seq) if len(seq) > 0 else 0.0
+        gc_passed = self.thresholds.gc_min <= gc <= self.thresholds.gc_max
+
+        # CpG O/E
+        n = len(seq)
+        c_count = seq.count("C")
+        g_count = seq.count("G")
+        cpg_count = seq.count("CG")
+        expected = (c_count * g_count) / n if n > 0 else 0
+        cpg_oe = cpg_count / expected if expected > 0 else 1.0
+        if self.reference and self.reference.cpg_distribution:
+            cpg_low = self.reference.cpg_distribution.percentiles["p5"]
+            cpg_high = self.reference.cpg_distribution.percentiles["p95"]
+            cpg_passed = cpg_low <= cpg_oe <= cpg_high
+        else:
+            cpg_passed = 0.3 <= cpg_oe <= 2.0
+
+        # Shannon entropy
+        counts = {b: seq.count(b) for b in "ACGT"}
+        entropy = -sum(
+            (c / n) * np.log2(c / n) for c in counts.values() if c > 0
+        ) if n > 0 else 0.0
+        if self.reference and self.reference.entropy_distribution:
+            entropy_passed = entropy >= self.reference.entropy_distribution.percentiles["p5"]
+        else:
+            entropy_passed = entropy >= 1.5
+
+        # Repeat fraction (dinuc + trinuc repeats)
+        repeat_positions = set()
+        for i in range(n - 3):
+            dinuc = seq[i:i+2]
+            if seq[i:i+4] == dinuc * 2:
+                repeat_positions.update(range(i, min(i+4, n)))
+        for i in range(n - 5):
+            trinuc = seq[i:i+3]
+            if seq[i:i+6] == trinuc * 2:
+                repeat_positions.update(range(i, min(i+6, n)))
+        repeat_fraction = len(repeat_positions) / n if n > 0 else 0.0
+        repeat_passed = repeat_fraction < self.thresholds.repeat_fraction_hard
+
+        # Max homopolymer
+        max_homo = 1
+        current = 1
+        for i in range(1, n):
+            if seq[i] == seq[i-1]:
+                current += 1
+                max_homo = max(max_homo, current)
+            else:
+                current = 1
+        homopolymer_passed = max_homo < self.thresholds.max_homopolymer_hard
+
+        passed = all([gc_passed, cpg_passed, entropy_passed, repeat_passed, homopolymer_passed])
+
+        return CompositionValidationResult(
+            passed=passed,
+            gc_content=gc, gc_passed=gc_passed,
+            cpg_oe=cpg_oe, cpg_passed=cpg_passed,
+            entropy=entropy, entropy_passed=entropy_passed,
+            repeat_fraction=repeat_fraction, repeat_passed=repeat_passed,
+            max_homopolymer=max_homo, homopolymer_passed=homopolymer_passed,
+            message="Composition check passed" if passed else "Composition check failed",
+        )
+
+
+class ConfidenceValidator:
+    """
+    Validates PLACE confidence estimates: epistemic uncertainty (σ_epi),
+    conformal prediction width, and OOD kNN score.
+    """
+
+    def __init__(
+        self, reference_panel, thresholds: ValidationThresholds,
+        reference_epistemic_stds=None, reference_conformal_widths=None,
+    ):
+        self.thresholds = thresholds
+        # Compute reference thresholds from natural high performers
+        self.epistemic_threshold = (
+            np.percentile(reference_epistemic_stds, thresholds.epistemic_percentile)
+            if reference_epistemic_stds is not None else None
+        )
+        self.conformal_threshold = (
+            np.percentile(reference_conformal_widths, thresholds.conformal_width_percentile)
+            if reference_conformal_widths is not None else None
+        )
+
+    def validate(
+        self,
+        epistemic_std=None, conformal_width=None,
+        ood_score=None, reference_ood_scores=None,
+    ) -> ConfidenceValidationResult:
+        """Validate PLACE confidence and OOD metrics."""
+        epistemic_passed = True
+        conformal_passed = True
+        ood_passed = True
+
+        if epistemic_std is not None and self.epistemic_threshold is not None:
+            epistemic_passed = epistemic_std <= self.epistemic_threshold
+
+        if conformal_width is not None and self.conformal_threshold is not None:
+            conformal_passed = conformal_width <= self.conformal_threshold
+
+        if ood_score is not None and reference_ood_scores is not None:
+            ood_threshold = np.percentile(reference_ood_scores, self.thresholds.ood_percentile)
+            ood_passed = ood_score <= ood_threshold
+
+        passed = epistemic_passed and conformal_passed and ood_passed
+
+        return ConfidenceValidationResult(
+            passed=passed,
+            epistemic_std=epistemic_std, epistemic_passed=epistemic_passed,
+            conformal_width=conformal_width, conformal_passed=conformal_passed,
+            ood_score=ood_score, ood_passed=ood_passed,
+            message="Confidence check passed" if passed else "Confidence check failed",
+        )
+
+
+class OracleCheckValidator:
+    """
+    Main validator combining all checks. Determines GREEN/YELLOW/RED verdict.
+
+    Integrates: PhysicsValidator, CompositionValidator, ConfidenceValidator,
+    MahalanobisValidator.
+
+    Verdict rules:
+    - GREEN: All checks pass
+    - YELLOW: At most one soft failure
+    - RED: Any hard failure, or >=2 soft failures
+    """
+
+    def __init__(self, config, reference_panel, **kwargs):
+        self.config = config
+        self.thresholds = config.thresholds
+        self.physics_validator = PhysicsValidator(reference_panel, self.thresholds)
+        self.composition_validator = CompositionValidator(reference_panel, self.thresholds)
+        self.confidence_validator = ConfidenceValidator(
+            reference_panel, self.thresholds, **kwargs,
+        )
+
+    def validate_sequence(
+        self, sequence: str,
+        physics_features=None, physics_feature_names=None,
+        prediction_mean=None, epistemic_std=None,
+        conformal_width=None, ood_score=None,
+        reference_ood_scores=None, **kwargs,
+    ) -> Tuple[Verdict, Dict]:
+        """Run all validation checks on a sequence."""
+        results = {}
+        hard_fails = []
+        soft_fails = []
+
+        # Composition check
+        comp_result = self.composition_validator.validate(sequence)
+        results["composition"] = comp_result
+        if not comp_result.repeat_passed or not comp_result.homopolymer_passed:
+            hard_fails.append("composition")
+        elif not comp_result.passed:
+            soft_fails.append("composition")
+
+        # Physics check
+        if physics_features is not None and physics_feature_names is not None:
+            phys_result = self.physics_validator.validate(physics_features, physics_feature_names)
+            results["physics"] = phys_result
+            if phys_result.max_z_score > self.thresholds.physics_z_hard:
+                hard_fails.append("physics")
+            elif not phys_result.passed:
+                soft_fails.append("physics")
+
+        # Confidence check (PLACE epistemic/conformal + OOD)
+        conf_result = self.confidence_validator.validate(
+            epistemic_std=epistemic_std,
+            conformal_width=conformal_width,
+            ood_score=ood_score,
+            reference_ood_scores=reference_ood_scores,
+        )
+        results["confidence"] = conf_result
+        if not conf_result.ood_passed:
+            hard_fails.append("OOD")
+        elif not conf_result.passed:
+            soft_fails.append("confidence")
+
+        # Determine verdict
+        if hard_fails:
+            verdict = Verdict.RED
+        elif len(soft_fails) > 1:
+            verdict = Verdict.RED
+        elif len(soft_fails) == 1:
+            verdict = Verdict.YELLOW
+        else:
+            verdict = Verdict.GREEN
+
+        results["verdict"] = verdict
+        results["hard_fails"] = hard_fails
+        results["soft_fails"] = soft_fails
+
+        return verdict, results
+
+
+# === oracle_check/scorecard.py ===
+# Sequence and batch scorecards for tracking validation results
+
+@dataclass
+class SequenceScorecard:
+    """Complete scorecard for a single sequence."""
+    sequence: str
+    sequence_id: Optional[str] = None
+    verdict: Verdict = Verdict.RED
+
+    # Activity
+    activity_mean: Optional[float] = None
+
+    # Uncertainty
+    epistemic_std: Optional[float] = None
+    conformal_width: Optional[float] = None
+    ood_score: Optional[float] = None
+
+    # Physics
+    physics_max_z: Optional[float] = None
+    physics_nll: Optional[float] = None
+    physics_family_scores: Dict[str, float] = field(default_factory=dict)
+
+    # Composition
+    gc_content: Optional[float] = None
+    cpg_oe: Optional[float] = None
+    repeat_fraction: Optional[float] = None
+    entropy: Optional[float] = None
+    max_homopolymer: Optional[int] = None
+
+    # Status
+    physics_passed: bool = False
+    composition_passed: bool = False
+    confidence_passed: bool = False
+    hard_failures: List[str] = field(default_factory=list)
+    soft_failures: List[str] = field(default_factory=list)
+
+
+class BatchScorecard:
+    """Scorecard aggregating results across a batch of sequences."""
+
+    def __init__(self, name: str = "batch"):
+        self.name = name
+        self.scorecards: List[SequenceScorecard] = []
+
+    def compute_statistics(self):
+        """Compute aggregate statistics."""
+        n = len(self.scorecards)
+        if n == 0:
+            return
+
+        self.n_green = sum(1 for s in self.scorecards if s.verdict == Verdict.GREEN)
+        self.n_yellow = sum(1 for s in self.scorecards if s.verdict == Verdict.YELLOW)
+        self.n_red = sum(1 for s in self.scorecards if s.verdict == Verdict.RED)
+
+        self.green_rate = self.n_green / n
+        self.yellow_rate = self.n_yellow / n
+        self.red_rate = self.n_red / n
+
+    def summary(self) -> str:
+        """Generate human-readable summary."""
+        self.compute_statistics()
+        n = len(self.scorecards)
+        return (
+            f"Batch: {self.name} ({n} sequences)\n"
+            f"  GREEN:  {self.n_green} ({self.green_rate:.1%})\n"
+            f"  YELLOW: {self.n_yellow} ({self.yellow_rate:.1%})\n"
+            f"  RED:    {self.n_red} ({self.red_rate:.1%})"
+        )
+
+
+# === oracle_check/rc_consistency.py ===
+# Reverse complement consistency and ISM flip tests
+
+@dataclass
+class RCConsistencyResult:
+    """Result of RC consistency check."""
+    passed: bool
+    prediction_fwd: float
+    prediction_rc: float
+    delta: float
+    delta_threshold: float
+
+
+@dataclass
+class ISMFlipTestResult:
+    """Result of ISM flip test for RC consistency."""
+    passed: bool
+    n_positions_tested: int
+    n_symmetric: int
+    symmetry_rate: float
+    max_asymmetry: float
+
+
+def reverse_complement(sequence: str) -> str:
+    """Get reverse complement of a DNA sequence."""
+    complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C', 'N': 'N'}
+    return ''.join(complement.get(base, 'N') for base in reversed(sequence.upper()))
+
+
+class RCConsistencyChecker:
+    """
+    Checks that CADENCE predictions are consistent for a sequence and
+    its reverse complement. Threshold: |y_fwd - y_rc| < 0.1
+    """
+
+    def __init__(self, model, delta_threshold: float = 0.1):
+        self.model = model
+        self.delta_threshold = delta_threshold
+
+    def check(self, sequence: str) -> RCConsistencyResult:
+        """Check RC consistency for a sequence."""
+        rc_seq = reverse_complement(sequence)
+
+        pred_fwd = self.model.predict([sequence])[0].mean
+        pred_rc = self.model.predict([rc_seq])[0].mean
+
+        delta = abs(pred_fwd - pred_rc)
+        passed = delta < self.delta_threshold
+
+        return RCConsistencyResult(
+            passed=passed,
+            prediction_fwd=pred_fwd,
+            prediction_rc=pred_rc,
+            delta=delta,
+            delta_threshold=self.delta_threshold,
+        )
+
+
+class ISMFlipTest:
+    """
+    In-silico mutagenesis flip test: verifies that single-nucleotide
+    perturbation effects are symmetric under reverse complementation.
+    Threshold: >= 90% symmetry rate.
+    """
+
+    def __init__(self, model, symmetry_threshold: float = 0.90):
+        self.model = model
+        self.symmetry_threshold = symmetry_threshold
+
+    def test(self, sequence: str, n_positions: int = 50) -> ISMFlipTestResult:
+        """Run ISM flip test on a sequence."""
+        seq = sequence.upper()
+        rc_seq = reverse_complement(seq)
+        seq_len = len(seq)
+
+        # Sample positions
+        positions = np.random.choice(
+            seq_len, size=min(n_positions, seq_len), replace=False
+        )
+
+        n_symmetric = 0
+        max_asymmetry = 0.0
+
+        for pos in positions:
+            rc_pos = seq_len - 1 - pos
+
+            # Get ISM effects for forward
+            fwd_effects = self._get_ism_effects(seq, pos)
+            # Get ISM effects for RC at corresponding position
+            rc_effects = self._get_ism_effects(rc_seq, rc_pos)
+
+            # Check symmetry (effects should be similar after complementing)
+            asymmetry = abs(max(fwd_effects.values()) - max(rc_effects.values()))
+            max_asymmetry = max(max_asymmetry, asymmetry)
+
+            if asymmetry < 0.05:  # Symmetric within tolerance
+                n_symmetric += 1
+
+        symmetry_rate = n_symmetric / len(positions) if len(positions) > 0 else 0.0
+        passed = symmetry_rate >= self.symmetry_threshold
+
+        return ISMFlipTestResult(
+            passed=passed,
+            n_positions_tested=len(positions),
+            n_symmetric=n_symmetric,
+            symmetry_rate=symmetry_rate,
+            max_asymmetry=max_asymmetry,
+        )
+
+    def _get_ism_effects(self, sequence: str, position: int) -> Dict[str, float]:
+        """Get ISM effects at a single position."""
+        bases = "ACGT"
+        original = sequence[position]
+        effects = {}
+
+        for base in bases:
+            if base != original:
+                mutant = sequence[:position] + base + sequence[position+1:]
+                pred = self.model.predict([mutant])[0].mean
+                orig_pred = self.model.predict([sequence])[0].mean
+                effects[base] = pred - orig_pred
+
+        return effects
+
+
+# === oracle_check/two_sample_tests.py ===
+# Batch-level distributional tests: MMD, Energy Distance, KS, k-mer JS
+
+@dataclass
+class TwoSampleTestResult:
+    """Result of a two-sample statistical test."""
+    test_name: str
+    statistic: float
+    pvalue: float
+    passed: bool
+    threshold: float
+    message: str
+
+
+class MMDTest:
+    """
+    Maximum Mean Discrepancy test with RBF kernel.
+    Measures distance between distributions in RKHS.
+    Uses median heuristic for bandwidth and permutation test for p-value.
+    """
+
+    def __init__(self, kernel_bandwidth: float = None):
+        self.kernel_bandwidth = kernel_bandwidth
+
+    def compute(
+        self, X: np.ndarray, Y: np.ndarray, n_permutations: int = 1000,
+    ) -> TwoSampleTestResult:
+        """Compute MMD statistic with permutation test for p-value."""
+        from scipy.spatial.distance import cdist
+
+        n_x, n_y = len(X), len(Y)
+
+        # Bandwidth via median heuristic
+        bandwidth = self.kernel_bandwidth
+        if bandwidth is None:
+            XY = np.vstack([X, Y])
+            pairwise = cdist(XY, XY, 'euclidean')
+            non_zero = pairwise[pairwise > 0]
+            bandwidth = np.median(non_zero) if len(non_zero) > 0 else 1.0
+
+        # RBF kernel
+        def rbf(A, B):
+            return np.exp(-cdist(A, B, 'sqeuclidean') / (2 * bandwidth ** 2))
+
+        K_xx = rbf(X, X)
+        K_yy = rbf(Y, Y)
+        K_xy = rbf(X, Y)
+
+        # Unbiased MMD^2 estimator
+        mmd2 = (
+            (K_xx.sum() - np.trace(K_xx)) / (n_x * (n_x - 1))
+            + (K_yy.sum() - np.trace(K_yy)) / (n_y * (n_y - 1))
+            - 2 * K_xy.mean()
+        )
+        mmd = np.sqrt(max(mmd2, 0))
+
+        # Permutation test
+        combined = np.vstack([X, Y])
+        null_mmds = []
+        for _ in range(n_permutations):
+            perm = np.random.permutation(n_x + n_y)
+            Xp, Yp = combined[perm[:n_x]], combined[perm[n_x:]]
+            Kxxp, Kyyp, Kxyp = rbf(Xp, Xp), rbf(Yp, Yp), rbf(Xp, Yp)
+            m2 = (
+                (Kxxp.sum() - np.trace(Kxxp)) / (n_x * (n_x - 1))
+                + (Kyyp.sum() - np.trace(Kyyp)) / (n_y * (n_y - 1))
+                - 2 * Kxyp.mean()
+            )
+            null_mmds.append(np.sqrt(max(m2, 0)))
+
+        pvalue = (np.sum(np.array(null_mmds) >= mmd) + 1) / (n_permutations + 1)
+        passed = pvalue > 0.05
+
+        return TwoSampleTestResult(
+            test_name="MMD", statistic=mmd, pvalue=pvalue,
+            passed=passed, threshold=0.05,
+            message=f"MMD={mmd:.4f}, p={pvalue:.4f}" + (" (PASS)" if passed else " (FAIL)"),
+        )
+
+
+class KmerJSDivergence:
+    """Jensen-Shannon divergence on k-mer spectra (k=4,5,6)."""
+
+    def __init__(self, k_values: List[int] = None):
+        self.k_values = k_values or [4, 5, 6]
+
+    def _get_kmer_spectrum(self, sequences: List[str], k: int) -> np.ndarray:
+        """Compute normalized k-mer frequency spectrum."""
+        from collections import Counter
+        all_kmers = Counter()
+        for seq in sequences:
+            seq = seq.upper()
+            for i in range(len(seq) - k + 1):
+                kmer = seq[i:i+k]
+                if 'N' not in kmer:
+                    all_kmers[kmer] += 1
+
+        # All possible k-mers
+        bases = ['A', 'C', 'G', 'T']
+        all_possible = []
+        def gen(prefix, remaining):
+            if remaining == 0:
+                all_possible.append(prefix)
+                return
+            for b in bases:
+                gen(prefix + b, remaining - 1)
+        gen('', k)
+
+        total = sum(all_kmers.values()) + 1e-10
+        return np.array([all_kmers.get(kmer, 0) / total for kmer in all_possible])
+
+    def compute(
+        self, designed_seqs: List[str], reference_seqs: List[str], threshold: float = 0.1,
+    ) -> TwoSampleTestResult:
+        """Compute JS divergence on k-mer spectra."""
+        js_values = []
+        for k in self.k_values:
+            p = self._get_kmer_spectrum(designed_seqs, k)
+            q = self._get_kmer_spectrum(reference_seqs, k)
+            p, q = p + 1e-10, q + 1e-10
+            p, q = p / p.sum(), q / q.sum()
+            m = 0.5 * (p + q)
+            js = 0.5 * np.sum(p * np.log2(p / m)) + 0.5 * np.sum(q * np.log2(q / m))
+            js_values.append(js)
+
+        mean_js = np.mean(js_values)
+        passed = mean_js < threshold
+
+        return TwoSampleTestResult(
+            test_name="k-mer JS Divergence", statistic=mean_js,
+            pvalue=1.0 - mean_js, passed=passed, threshold=threshold,
+            message=f"JS({self.k_values})={mean_js:.4f}" + (" (PASS)" if passed else " (FAIL)"),
+        )
+
+
+class BatchComparator:
+    """Compares batches of designed sequences against natural references."""
+
+    def __init__(self, mmd_bandwidth=None, kmer_k_values=None, n_permutations=500):
+        self.mmd_test = MMDTest(kernel_bandwidth=mmd_bandwidth)
+        self.kmer_test = KmerJSDivergence(k_values=kmer_k_values)
+        self.n_permutations = n_permutations
+
+    def compare_physics(
+        self, designed_features: np.ndarray, reference_features: np.ndarray,
+        feature_names: List[str] = None,
+    ):
+        """Compare physics feature distributions between designed and reference."""
+        # MMD on full physics features
+        mmd_result = self.mmd_test.compute(
+            designed_features, reference_features, self.n_permutations,
+        )
+
+        # Per-feature KS tests
+        ks_results = {}
+        if feature_names is not None:
+            for i, name in enumerate(feature_names):
+                stat, pval = stats.ks_2samp(
+                    designed_features[:, i], reference_features[:, i],
+                )
+                ks_results[name] = TwoSampleTestResult(
+                    test_name=f"KS ({name})", statistic=stat, pvalue=pval,
+                    passed=pval > 0.05, threshold=0.05,
+                    message=f"KS({name})={stat:.4f}, p={pval:.4f}",
+                )
+
+        return mmd_result, ks_results
+
+
+# === oracle_check/protocol.py ===
+# Main OracleCheckProtocol orchestrating the full validation pipeline
+
+class OracleCheckProtocol:
+    """
+    Main validation protocol for OracleCheck.
+
+    Validates sequences using:
+    - CADENCE activity predictions with PLACE uncertainty
+    - PhysInformer physics features (cell-type specific)
+    - TileFormer electrostatics (universal)
+    - Reference panels from natural high performers
+
+    Human cell types only: K562, HepG2, WTC11
+    """
+
+    HUMAN_CELL_TYPES = ["K562", "HepG2", "WTC11"]
+
+    def __init__(self, config=None, cadence_model_name="config2_multi_celltype_v1", device="cuda"):
+        self.config = config or OracleCheckConfig()
+        self.device = device
+        self.cadence_model_name = cadence_model_name
+
+        # Interfaces (lazy loaded)
+        self._cadence = None
+        self._physinformer = None
+        self._tileformer = None
+
+        # Reference panels and validators per cell type
+        self._reference_panels: Dict[str, Any] = {}
+        self._validators: Dict[str, OracleCheckValidator] = {}
+
+    def load_reference_panel(self, cell_type: str, rebuild: bool = False):
+        """Load or build reference panel for a cell type."""
+        if cell_type not in self.HUMAN_CELL_TYPES:
+            raise ValueError(f"Unsupported cell type: {cell_type}")
+
+        if cell_type in self._reference_panels and not rebuild:
+            return self._reference_panels[cell_type]
+
+        # Check saved panel on disk
+        panel_path = self.config.reference_panels_dir / cell_type
+        if panel_path.exists() and not rebuild:
+            panel = ReferencePanel.load(panel_path)
+            self._reference_panels[cell_type] = panel
+            return panel
+
+        # Build from lentiMPRA data (top 25% activity = high performers)
+        panel = self._build_reference_panel(cell_type)
+        panel.save(panel_path)
+        self._reference_panels[cell_type] = panel
+        return panel
+
+    def validate_sequence(self, sequence: str, cell_type: str, sequence_id=None):
+        """
+        Validate a single designed sequence.
+
+        1. Get CADENCE prediction with PLACE uncertainty
+        2. Get PhysInformer physics features
+        3. Run all validators (physics, composition, confidence)
+        4. Assign GREEN/YELLOW/RED verdict
+        """
+        # Get prediction
+        prediction = self._cadence.predict([sequence], cell_type=cell_type)[0]
+
+        # Get physics features
+        physics_features, physics_feature_names = None, None
+        try:
+            phys_result = self._physinformer.predict([sequence], cell_type)
+            physics_features = phys_result.features[0]
+            physics_feature_names = phys_result.feature_names
+        except Exception:
+            pass
+
+        # Run validation
+        validator = self._validators.get(cell_type)
+        if validator is None:
+            panel = self.load_reference_panel(cell_type)
+            validator = OracleCheckValidator(
+                config=self.config, reference_panel=panel,
+            )
+            self._validators[cell_type] = validator
+
+        verdict, results = validator.validate_sequence(
+            sequence=sequence,
+            physics_features=physics_features,
+            physics_feature_names=physics_feature_names,
+            prediction_mean=prediction.mean,
+            epistemic_std=prediction.epistemic_std,
+            conformal_width=(
+                prediction.conformal_upper - prediction.conformal_lower
+                if prediction.conformal_upper is not None else None
+            ),
+            ood_score=prediction.ood_score,
+        )
+
+        return verdict, results
+
+    def validate_batch(
+        self, sequences: List[str], cell_type: str,
+        sequence_ids=None, batch_size: int = 32,
+    ) -> BatchScorecard:
+        """Validate a batch of sequences, returning aggregate scorecard."""
+        if sequence_ids is None:
+            sequence_ids = [f"seq_{i}" for i in range(len(sequences))]
+
+        batch_scorecard = BatchScorecard(name=f"batch_{cell_type}")
+
+        for i in range(0, len(sequences), batch_size):
+            batch_seqs = sequences[i:i+batch_size]
+            batch_ids = sequence_ids[i:i+batch_size]
+
+            predictions = self._cadence.predict(batch_seqs, cell_type=cell_type)
+
+            physics_features, physics_feature_names = None, None
+            try:
+                phys_result = self._physinformer.predict(batch_seqs, cell_type)
+                physics_features = phys_result.features
+                physics_feature_names = phys_result.feature_names
+            except Exception:
+                pass
+
+            validator = self._validators.get(cell_type)
+            if validator is None:
+                panel = self.load_reference_panel(cell_type)
+                validator = OracleCheckValidator(
+                    config=self.config, reference_panel=panel,
+                )
+                self._validators[cell_type] = validator
+
+            for j, (seq, seq_id, pred) in enumerate(zip(batch_seqs, batch_ids, predictions)):
+                phys_feat = physics_features[j] if physics_features is not None else None
+
+                verdict, results = validator.validate_sequence(
+                    sequence=seq,
+                    physics_features=phys_feat,
+                    physics_feature_names=physics_feature_names,
+                    prediction_mean=pred.mean,
+                    epistemic_std=pred.epistemic_std,
+                    conformal_width=(
+                        pred.conformal_upper - pred.conformal_lower
+                        if pred.conformal_upper is not None else None
+                    ),
+                    ood_score=pred.ood_score,
+                )
+
+                scorecard = SequenceScorecard(
+                    sequence=seq, sequence_id=seq_id, verdict=verdict,
+                    activity_mean=pred.mean,
+                    epistemic_std=pred.epistemic_std,
+                    physics_max_z=results.get("physics", PhysicsValidationResult(
+                        True, 0, {}, {}, 0, 0, "")).max_z_score if "physics" in results else None,
+                    gc_content=results["composition"].gc_content,
+                    hard_failures=results.get("hard_fails", []),
+                    soft_failures=results.get("soft_fails", []),
+                )
+                batch_scorecard.scorecards.append(scorecard)
+
+        batch_scorecard.compute_statistics()
+        return batch_scorecard

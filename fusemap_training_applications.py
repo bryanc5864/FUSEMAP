@@ -123,6 +123,10 @@ class DatasetInfo:
     kfold_splits: int = 10                    # Number of folds for k-fold cross-validation
     holdout_chromosome: Optional[str] = None  # Chromosome held out for validation (e.g., "2R" for DeepSTARR)
 
+    # Activity statistics (filled during preprocessing)
+    activity_mean: Optional[List[float]] = None
+    activity_std: Optional[List[float]] = None
+
 
 # Dataset catalog - all supported datasets
 # This catalog defines the 8 datasets spanning 7 species and 3 kingdoms used in FUSEMAP.
@@ -147,6 +151,7 @@ DATASET_CATALOG: Dict[str, DatasetInfo] = {
         element_type="enhancer",
         train_size=164307,
         validation_scheme="kfold",
+        kfold_splits=10,
     ),
     "encode4_hepg2": DatasetInfo(
         name="encode4_hepg2",
@@ -160,6 +165,7 @@ DATASET_CATALOG: Dict[str, DatasetInfo] = {
         element_type="enhancer",
         train_size=243780,
         validation_scheme="kfold",
+        kfold_splits=10,
     ),
     # WTC11 = human iPSC (induced pluripotent stem cell) line
     "encode4_wtc11": DatasetInfo(
@@ -174,6 +180,20 @@ DATASET_CATALOG: Dict[str, DatasetInfo] = {
         element_type="enhancer",
         train_size=75542,
         validation_scheme="kfold",
+        kfold_splits=10,
+    ),
+    "encode4_joint": DatasetInfo(
+        name="encode4_joint",
+        path="data/processed/encode4/joint",
+        sequence_length=230,
+        num_outputs=3,  # K562, HepG2, WTC11
+        output_names=["K562", "HepG2", "WTC11"],
+        species="human",
+        kingdom="animal",
+        cell_type="joint",
+        element_type="enhancer",
+        train_size=60000,  # Approximate
+        validation_scheme="standard",
     ),
     # -------------------------------------------------------------------------
     # DeepSTARR Drosophila dataset (de Almeida et al., 2022)
@@ -286,11 +306,28 @@ class ModelConfig:
     # training where strand orientation is arbitrary.
     use_rc_stem: bool = True
 
+    # Optional: PWM-initialized multi-scale stem (alternative to RC stem)
+    use_pwm_stem: bool = False
+    pwm_stem_scales: List[int] = field(default_factory=lambda: [7, 11, 15])
+
+    # Optional: Species-specific stems (for cross-species transfer learning)
+    # Creates separate stem modules per species, shared backbone after
+    use_species_stem: bool = False
+
+    # Optional: Kingdom-specific stems (for cross-kingdom transfer learning)
+    # Creates separate stem modules per kingdom (animal vs plant), shared backbone after
+    use_kingdom_stem: bool = False
+
     # --- Optional modules (architecture ablations) ---
     use_cluster_space: bool = False     # Cluster-space projection for motif grouping
+    cluster_dilations: List[int] = field(default_factory=lambda: [1, 2, 4, 1])
     use_grammar: bool = False           # Motif grammar / syntax module (pairwise motif interactions)
+    grammar_hidden: int = 128
     use_micromotif: bool = False        # Fine-grained sub-motif resolution module
+    micromotif_windows: List[int] = field(default_factory=lambda: [5, 11, 21])
     use_motif_correlator: bool = False  # Cross-attention between detected motifs
+    correlator_factors: int = 32
+    correlator_rank: int = 8
 
     # --- Conditioning embeddings ---
     # These learned embeddings are concatenated to the pooled features before the head.
@@ -303,6 +340,9 @@ class ModelConfig:
     kingdom_embed_dim: int = 8            # Dimensionality of kingdom embedding vector
     use_length_embedding: bool = True     # Embed the original sequence length (before padding)
     length_embed_dim: int = 16            # Dimensionality of length embedding vector
+    # Element-type conditioning (promoter vs enhancer vs silencer)
+    use_element_type_embedding: bool = False
+    element_type_embed_dim: int = 8
 
     # --- Prediction head ---
     head_hidden: int = 256       # Hidden layer size in the per-dataset MLP head
@@ -338,6 +378,7 @@ class TrainingConfig:
     patience: int = 10               # Stop after this many epochs without improvement
     min_delta: float = 1e-4          # Minimum improvement to reset patience counter
     monitor: str = "val_pearson"     # Metric to monitor: average Pearson r across all datasets
+    mode: str = "max"  # max or min
 
     # --- Gradient management ---
     gradient_clip: float = 1.0                # Max gradient norm (prevents exploding gradients with NLL loss)
@@ -347,6 +388,10 @@ class TrainingConfig:
     # --- Multi-dataset sampling ---
     sampling_temperature: float = 0.5         # Temperature for TemperatureBalancedSampler (see p_i ~ n_i^tau)
     samples_per_epoch: Optional[int] = None   # If set, caps samples per epoch (useful for huge datasets like yeast)
+
+    # Checkpointing
+    save_top_k: int = 3
+    checkpoint_dir: str = "checkpoints"
 
     # --- Logging ---
     log_every_n_steps: int = 100     # Print training metrics every N optimizer steps
@@ -359,6 +404,10 @@ class TrainingConfig:
     use_extreme_weights: bool = True
     extreme_alpha: float = 1.0       # Scaling factor (higher = more emphasis on extremes)
     extreme_beta: float = 2.0        # Exponent (2.0 = quadratic growth with z-score distance)
+
+    # Extreme-aware sampling (oversample tail values) - DEPRECATED, use balanced instead
+    use_extreme_sampling: bool = False  # Use extreme-aware sampler
+    sampling_extreme_alpha: float = 0.5  # Sampling weight alpha (separate from loss alpha)
 
     # --- Balanced activity sampling (sampler-level) ---
     # When enabled, uses BalancedActivitySampler to equalize representation across
@@ -418,39 +467,78 @@ def get_config1_single_celltype(dataset_name: str, use_mse: bool = False) -> Exp
     """
     dataset_info = DATASET_CATALOG[dataset_name]
 
-    # Human MPRA datasets benefit from aggressive optimization (large batch + high LR)
+    # Check dataset type for appropriate hyperparameters
     is_human_mpra = dataset_name.startswith("encode4_")
+    is_deepstarr = dataset_name == "deepstarr"
+    is_plant = dataset_name.startswith("jores_")
 
     if is_human_mpra:
+        # LegNet-style training for human MPRA - match comparison_models exactly
         training_config = TrainingConfig(
             max_epochs=30,
             batch_size=1024,
             learning_rate=0.01,
-            weight_decay=0.1,
+            weight_decay=0.1,  # Match HumanLegNet
             scheduler="onecycle",
-            patience=30,
+            onecycle_pct_start=0.3,
+            onecycle_div_factor=25.0,  # Initial LR = 0.01/25 = 0.0004
+            patience=30,  # No early stopping
+            # DISABLED balanced sampling - just use random shuffle like HumanLegNet
             use_balanced_sampling=False,
+            # DISABLED extreme weighting
             use_extreme_weights=False,
+            extreme_alpha=0.0,
+            extreme_beta=2.0,
         )
-    else:
+    elif is_deepstarr:
+        # DeepSTARR (S2) - gentler training for stability with all modules
+        # Uses Config 3 style hyperparameters: lower LR, cosine scheduler
+        training_config = TrainingConfig(
+            max_epochs=100,
+            batch_size=256,
+            learning_rate=1e-3,  # 10x lower than before for stability
+            weight_decay=1e-5,
+            scheduler="cosine",  # Gentler than OneCycle
+            patience=15,
+            use_balanced_sampling=False,  # DeepSTARR has different distribution
+            use_extreme_weights=False,  # Avoid gradient instability
+        )
+    elif is_plant:
+        # Plant datasets - 50 epochs
         training_config = TrainingConfig(
             max_epochs=50,
-            batch_size=128,
+            batch_size=64,
+            learning_rate=0.01,
+            weight_decay=0.1,
+            scheduler="onecycle",
+            onecycle_pct_start=0.3,
+            onecycle_div_factor=25.0,
+            patience=10,
+        )
+    else:
+        # Default for other datasets (yeast, etc.)
+        training_config = TrainingConfig(
+            max_epochs=50,
+            batch_size=128 if dataset_info.train_size > 100000 else 64,
             learning_rate=1e-3,
         )
 
+    # For single-cell-type: use NATIVE sequence length (no padding)
+    # - No length embedding (all sequences same length)
+    # - No RC stem (use standard LocalBlock like HumanLegNet)
+    # - MSE loss for human MPRA (not Gaussian NLL)
     return ExperimentConfig(
         name=f"config1_{dataset_name}",
         config_type=ConfigurationType.SINGLE_CELLTYPE,
         description=f"Single cell type baseline for {dataset_name}",
         datasets=[dataset_name],
-        target_sequence_length=dataset_info.sequence_length,
+        target_sequence_length=dataset_info.sequence_length,  # Use native length, no padding
         model=ModelConfig(
             use_species_embedding=False,
             use_celltype_embedding=False,
-            use_length_embedding=False,
-            use_rc_stem=False,
-            use_uncertainty=False if is_human_mpra else not use_mse,
+            use_length_embedding=False,  # All same length, not needed
+            use_rc_stem=False,  # Standard LocalBlock like HumanLegNet
+            use_uncertainty=False if is_human_mpra else not use_mse,  # MSE for human MPRA
         ),
         training=training_config,
     )
@@ -506,10 +594,14 @@ def get_config3_cross_animal() -> ExperimentConfig:
         name="config3_cross_animal",
         config_type=ConfigurationType.CROSS_ANIMAL,
         description="Cross-animal transfer between human and Drosophila",
-        datasets=["encode4_k562", "encode4_hepg2", "encode4_wtc11", "deepstarr"],
+        datasets=[
+            "encode4_k562", "encode4_hepg2", "encode4_wtc11",
+            "deepstarr"
+        ],
         target_sequence_length=256,
         model=ModelConfig(
-            use_rc_stem=True,
+            use_rc_stem=True,  # RC-equivariant base
+            use_species_stem=True,  # Species-specific motif filter banks
             use_species_embedding=True,
             species_embed_dim=16,
             use_celltype_embedding=True,
@@ -522,6 +614,7 @@ def get_config3_cross_animal() -> ExperimentConfig:
             learning_rate=1e-3,
             sampling_temperature=0.5,
             patience=15,
+            # Cross-species: don't balance activity distributions (they're not comparable)
             use_balanced_sampling=False,
         ),
     )
@@ -541,12 +634,16 @@ def get_config4_cross_kingdom() -> ExperimentConfig:
         config_type=ConfigurationType.CROSS_KINGDOM,
         description="Cross-kingdom transfer between animals and plants",
         datasets=[
-            "encode4_k562", "encode4_hepg2", "encode4_wtc11", "deepstarr",
+            # Animals (~647k sequences)
+            "encode4_k562", "encode4_hepg2", "encode4_wtc11",
+            "deepstarr",
+            # Plants (~37k sequences)
             "jores_arabidopsis", "jores_maize",
         ],
         target_sequence_length=256,
         model=ModelConfig(
-            use_rc_stem=True,
+            use_rc_stem=True,  # RC-equivariant base
+            use_kingdom_stem=True,  # Kingdom-specific motif filter banks
             use_kingdom_embedding=True,
             kingdom_embed_dim=8,
             use_species_embedding=True,
@@ -559,9 +656,11 @@ def get_config4_cross_kingdom() -> ExperimentConfig:
             max_epochs=100,
             batch_size=256,
             learning_rate=1e-3,
+            weight_decay=1e-5,
             scheduler="cosine",
-            sampling_temperature=0.3,
+            sampling_temperature=0.3,  # More balanced sampling across kingdoms
             patience=15,
+            # Cross-kingdom: don't balance activity distributions
             use_balanced_sampling=False,
         ),
     )
@@ -587,41 +686,160 @@ def get_config5_universal() -> ExperimentConfig:
         config_type=ConfigurationType.UNIVERSAL,
         description="Universal foundation model across all species",
         datasets=[
-            "encode4_k562", "encode4_hepg2", "encode4_wtc11", "deepstarr",
+            # Animals (~647k sequences)
+            "encode4_k562", "encode4_hepg2", "encode4_wtc11",
+            "deepstarr",
+            # Plants (~54k sequences)
             "jores_arabidopsis", "jores_maize", "jores_sorghum",
+            # Yeast (~6.7M sequences, subsampled)
             "dream_yeast",
         ],
         target_sequence_length=256,
         model=ModelConfig(
-            use_rc_stem=True,
+            use_rc_stem=True,  # RC-equivariant base
+            use_kingdom_stem=True,  # Kingdom-specific motif banks
             use_kingdom_embedding=True,
             kingdom_embed_dim=8,
             use_species_embedding=True,
             species_embed_dim=16,
             use_celltype_embedding=True,
             celltype_embed_dim=32,
+            use_element_type_embedding=True,  # Promoter vs enhancer conditioning
+            element_type_embed_dim=8,
             use_length_embedding=True,
         ),
         training=TrainingConfig(
             max_epochs=150,
             batch_size=256,
             learning_rate=1e-3,
+            weight_decay=1e-5,
             scheduler="cosine",
-            sampling_temperature=0.3,
-            samples_per_epoch=500000,
+            sampling_temperature=0.3,  # Balance across kingdoms
+            samples_per_epoch=500000,  # Subsample yeast per epoch
+            patience=20,
+            # Universal: don't balance activity distributions across species
+            use_balanced_sampling=False,
+        ),
+        training_phases=[
+            {
+                "name": "phase1_pretrain",
+                "epochs": 50,
+                "freeze_heads": False,
+                "freeze_backbone": False,
+                "lr": 1e-3,
+                "description": "Pre-train universal physics encoder on all data",
+            },
+            {
+                "name": "phase2_head_training",
+                "epochs": 50,
+                "freeze_heads": False,
+                "freeze_backbone": True,
+                "lr": 1e-3,
+                "description": "Train species-specific heads with frozen physics encoder",
+            },
+            {
+                "name": "phase3_finetune",
+                "epochs": 50,
+                "freeze_heads": False,
+                "freeze_backbone": False,
+                "lr": 1e-4,  # Lower LR for fine-tuning
+                "description": "End-to-end fine-tuning with low learning rate",
+            },
+        ],
+    )
+
+
+def get_config5_universal_no_yeast() -> ExperimentConfig:
+    """
+    Configuration 5 variant: Universal Foundation Model WITHOUT Yeast.
+
+    Purpose: Cross-kingdom generalization (animals + plants only).
+    - All animal data: ENCODE4 Human (~295k) + DeepSTARR (~352k) = ~647k
+    - All plant data: Arabidopsis (~15k) + Maize (~22k) + Sorghum (~17k) = ~54k
+    - Total: ~701k sequences
+
+    Same architecture as config5 but trained only on animal + plant data.
+    """
+    return ExperimentConfig(
+        name="config5_universal_no_yeast",
+        config_type=ConfigurationType.UNIVERSAL,
+        description="Universal foundation model across animals and plants (no yeast)",
+        datasets=[
+            # Animals (~647k sequences)
+            "encode4_k562", "encode4_hepg2", "encode4_wtc11",
+            "deepstarr",
+            # Plants (~54k sequences)
+            "jores_arabidopsis", "jores_maize", "jores_sorghum",
+        ],
+        target_sequence_length=256,
+        model=ModelConfig(
+            use_rc_stem=True,  # RC-equivariant base
+            use_kingdom_stem=True,  # Kingdom-specific motif banks (animal, plant)
+            use_kingdom_embedding=True,
+            kingdom_embed_dim=8,
+            use_species_embedding=True,
+            species_embed_dim=16,
+            use_celltype_embedding=True,
+            celltype_embed_dim=32,
+            use_element_type_embedding=True,  # Promoter vs enhancer conditioning
+            element_type_embed_dim=8,
+            use_length_embedding=True,
+        ),
+        training=TrainingConfig(
+            max_epochs=150,
+            batch_size=256,
+            learning_rate=1e-3,
+            weight_decay=1e-5,
+            scheduler="cosine",
+            sampling_temperature=0.3,  # Balance across kingdoms
             patience=20,
             use_balanced_sampling=False,
         ),
-        # 3-phase universal training protocol:
-        # Phase 1: Pre-train the full model (backbone + heads) at standard LR
-        # Phase 2: Freeze backbone, train only the per-dataset heads (prevents catastrophic forgetting)
-        # Phase 3: Unfreeze all and fine-tune end-to-end at 10x lower LR for final refinement
         training_phases=[
-            {"name": "phase1_pretrain", "epochs": 50, "freeze_backbone": False, "lr": 1e-3},
-            {"name": "phase2_head_training", "epochs": 50, "freeze_backbone": True, "lr": 1e-3},
-            {"name": "phase3_finetune", "epochs": 50, "freeze_backbone": False, "lr": 1e-4},
+            {
+                "name": "phase1_pretrain",
+                "epochs": 50,
+                "freeze_heads": False,
+                "freeze_backbone": False,
+                "lr": 1e-3,
+                "description": "Pre-train universal physics encoder on all data",
+            },
+            {
+                "name": "phase2_head_training",
+                "epochs": 50,
+                "freeze_heads": False,
+                "freeze_backbone": True,
+                "lr": 1e-3,
+                "description": "Train species-specific heads with frozen physics encoder",
+            },
+            {
+                "name": "phase3_finetune",
+                "epochs": 50,
+                "freeze_heads": False,
+                "freeze_backbone": False,
+                "lr": 1e-4,  # Lower LR for fine-tuning
+                "description": "End-to-end fine-tuning with low learning rate",
+            },
         ],
     )
+
+
+def get_config(config_type: ConfigurationType, dataset_name: Optional[str] = None) -> ExperimentConfig:
+    """Get configuration by type."""
+    if config_type == ConfigurationType.SINGLE_CELLTYPE:
+        if dataset_name is None:
+            raise ValueError("dataset_name required for SINGLE_CELLTYPE config")
+        return get_config1_single_celltype(dataset_name)
+    elif config_type == ConfigurationType.MULTI_CELLTYPE_HUMAN:
+        return get_config2_multi_celltype_human()
+    elif config_type == ConfigurationType.CROSS_ANIMAL:
+        return get_config3_cross_animal()
+    elif config_type == ConfigurationType.CROSS_KINGDOM:
+        return get_config4_cross_kingdom()
+    elif config_type == ConfigurationType.UNIVERSAL:
+        return get_config5_universal()
+    else:
+        raise ValueError(f"Unknown config type: {config_type}")
 
 
 # =============================================================================
@@ -694,6 +912,74 @@ class NumpyEncoder(json.JSONEncoder):
         return super().default(obj)
 
 
+def compute_masked_loss(
+    outputs: Dict[str, Dict],
+    targets: torch.Tensor,
+    dataset_names: List[str],
+    dataset_to_heads: Dict[str, List[str]],
+    use_uncertainty: bool = False,
+    use_extreme_weights: bool = True,
+    extreme_alpha: float = 0.5,
+    extreme_beta: float = 2.0,
+) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    """Compute loss with masking and optional extreme value weighting."""
+    total_loss = 0.0
+    n_samples = 0
+    per_head_losses = {}
+
+    for head_name, pred in outputs.items():
+        if not pred['indices']:
+            continue
+
+        indices = pred['indices']
+        mean = pred['mean']
+        logvar = pred.get('logvar', None)
+
+        # Get targets
+        head_targets = []
+        for i, idx in enumerate(indices):
+            dataset = dataset_names[idx]
+            heads_for_dataset = dataset_to_heads.get(dataset, [])
+            if head_name in heads_for_dataset:
+                output_idx = heads_for_dataset.index(head_name)
+                head_targets.append(targets[idx, output_idx])
+
+        if not head_targets:
+            continue
+
+        target = torch.stack(head_targets)
+        valid_mask = ~torch.isnan(target)
+        if valid_mask.sum() == 0:
+            continue
+
+        mean = mean[valid_mask]
+        target = target[valid_mask]
+        if logvar is not None:
+            logvar = logvar[valid_mask]
+
+        # Compute loss
+        if use_uncertainty and logvar is not None:
+            variance = torch.exp(logvar).clamp(min=1e-6)
+            loss = 0.5 * (logvar + (target - mean) ** 2 / variance)
+        else:
+            loss = (target - mean) ** 2
+
+        # Apply extreme value weighting
+        if use_extreme_weights and len(target) > 1:
+            weights = compute_extreme_weights(target, extreme_alpha, extreme_beta)
+            loss = loss * weights
+
+        head_loss = loss.mean()
+        per_head_losses[head_name] = head_loss
+        total_loss += head_loss * len(target)
+        n_samples += len(target)
+
+    if n_samples > 0:
+        total_loss = total_loss / n_samples
+
+    return total_loss, per_head_losses
+
+
 class Trainer:
     """
     Main trainer class for FUSEMAP experiments.
@@ -725,6 +1011,7 @@ class Trainer:
         self._setup_logging()
 
         # Initialize components
+        self.normalizer = ActivityNormalizer()
         self.model = None
         self.optimizer = None
         self.scheduler = None
@@ -735,6 +1022,9 @@ class Trainer:
         self.global_step = 0
         self.best_val_metric = float('-inf')
         self.patience_counter = 0
+
+        # Metrics tracking
+        self.metrics_tracker = None
 
     def _setup_logging(self):
         """Setup logging to file and console."""
@@ -754,58 +1044,300 @@ class Trainer:
         self.logger.info(f"Output directory: {self.output_dir}")
 
     def setup_data(self):
-        """Setup datasets, samplers, and data loaders.
-
-        Creates MultiDataset for training, validation loaders per dataset,
-        and optional test/calibration loaders for held-out evaluation.
-        """
+        """Setup datasets and data loaders."""
         self.logger.info("Setting up datasets...")
-        # Full implementation: creates MultiDataset, samplers, loaders
-        # See training/datasets.py and training/data_loaders.py for:
-        #   - MultiDataset with activity normalization
-        #   - TemperatureBalancedSampler or BalancedActivitySampler
-        #   - Validation/test/calibration DataLoaders per dataset
+
+        # Create training dataset
+        self.train_dataset = MultiDataset(
+            dataset_names=self.config.datasets,
+            split="train",
+            target_length=self.config.target_sequence_length,
+            normalizer=self.normalizer,
+        )
+
+        # Get dataset sizes for balanced sampling
+        dataset_sizes = self.train_dataset.get_dataset_sizes()
+        self.logger.info(f"Dataset sizes: {dataset_sizes}")
+
+        # Create sampler - priority: balanced > extreme > global
+        use_balanced_sampling = getattr(self.config.training, 'use_balanced_sampling', False)
+        use_extreme_sampling = getattr(self.config.training, 'use_extreme_sampling', False)
+
+        # Collect activities for activity-aware samplers
+        # For multi-output datasets, average across outputs to get single activity value
+        all_activities = []
+        for ds_name, ds in self.train_dataset.datasets.items():
+            acts = ds.activities
+            if acts.ndim > 1:
+                # Multi-output: average across outputs for sampling purposes
+                acts = acts.mean(axis=1)
+            all_activities.append(acts)
+        all_activities = np.concatenate(all_activities, axis=0)
+
+        if use_balanced_sampling:
+            # Balanced sampling: equal samples from each activity bin
+            n_bins = getattr(self.config.training, 'balanced_sampling_bins', 10)
+            self.logger.info(f"Using balanced activity sampling with {n_bins} bins...")
+            self.sampler = BalancedActivitySampler(
+                activities=all_activities,
+                dataset_sizes=dataset_sizes,
+                n_bins=n_bins,
+                temperature=self.config.training.sampling_temperature,
+                samples_per_epoch=self.config.training.samples_per_epoch,
+                seed=self.config.seed,
+            )
+        elif use_extreme_sampling:
+            # Extreme-aware sampling (deprecated)
+            self.logger.info("Using extreme-aware sampling...")
+            sampling_alpha = getattr(self.config.training, 'sampling_extreme_alpha', 0.5)
+            self.sampler = ExtremeAwareSampler(
+                activities=all_activities,
+                dataset_sizes=dataset_sizes,
+                extreme_alpha=sampling_alpha,
+                extreme_beta=self.config.training.extreme_beta,
+                temperature=self.config.training.sampling_temperature,
+                samples_per_epoch=self.config.training.samples_per_epoch,
+                seed=self.config.seed,
+            )
+            weight_stats = self.sampler.get_weight_statistics()
+            for name, stats in weight_stats.items():
+                self.logger.info(f"  {name}: weights min={stats['min']:.2f}, max={stats['max']:.2f}, mean={stats['mean']:.2f}")
+        else:
+            self.logger.info("Using standard global index sampling...")
+            self.sampler = GlobalIndexSampler(
+                dataset_sizes=dataset_sizes,
+                temperature=self.config.training.sampling_temperature,
+                samples_per_epoch=self.config.training.samples_per_epoch,
+                seed=self.config.seed,
+            )
+
+        # Create train loader
+        self.train_loader = DataLoader(
+            self.train_dataset,
+            batch_size=self.config.training.batch_size,
+            sampler=self.sampler,
+            num_workers=4,
+            pin_memory=True,
+            collate_fn=collate_multi_dataset,
+        )
+
+        # Create validation loaders for each dataset
+        # Use index mappings from train_dataset for consistency
+        index_mappings = {
+            "species": self.train_dataset.species_to_idx,
+            "kingdom": self.train_dataset.kingdom_to_idx,
+            "celltype": self.train_dataset.celltype_to_idx,
+        }
+
+        self.val_loaders = {}
+        self.val_types = {}
+        self.train_eval_loaders = {}  # For evaluating on train set
+
+        for dataset_name in self.config.datasets:
+            try:
+                loader, val_type = get_validation_loader(
+                    dataset_name,
+                    target_length=self.config.target_sequence_length,
+                    batch_size=self.config.training.batch_size,
+                    normalizer=self.normalizer,
+                    index_mappings=index_mappings,
+                )
+                self.val_loaders[dataset_name] = loader
+                self.val_types[dataset_name] = val_type
+                self.logger.info(f"  {dataset_name}: {val_type} set loaded")
+            except Exception as e:
+                self.logger.warning(f"  {dataset_name}: Could not load validation data: {e}")
+
+        # Create train eval loaders (sequential, for evaluation only)
+        # We'll subsample to speed up evaluation
+        for dataset_name in self.config.datasets:
+            try:
+                info = DATASET_CATALOG[dataset_name]
+                train_eval_dataset = SingleDataset(
+                    info, "train",
+                    self.config.target_sequence_length,
+                    self.normalizer,
+                    index_mappings=index_mappings,
+                )
+                self.train_eval_loaders[dataset_name] = DataLoader(
+                    train_eval_dataset,
+                    batch_size=self.config.training.batch_size,
+                    shuffle=False,
+                    num_workers=2,
+                    pin_memory=True,
+                    collate_fn=collate_multi_dataset,
+                )
+            except Exception as e:
+                self.logger.warning(f"  {dataset_name}: Could not load train eval data: {e}")
+
+        # Create test and calibration loaders for datasets with held-out splits
+        self.test_loaders = {}
+        self.calibration_loaders = {}
+
+        # Datasets that support test/calibration splits
+        # - encode4_*: Human MPRA with test/calibration splits
+        # - dream_yeast: Yeast with special test set + 1% calibration from train
+        # - deepstarr: Drosophila with chromosome-based test split
+        # - jores_*: Plant with standard test splits
+        datasets_with_test = [
+            "encode4_k562", "encode4_hepg2", "encode4_wtc11",
+            "dream_yeast", "deepstarr",
+            "jores_arabidopsis", "jores_maize", "jores_sorghum"
+        ]
+        datasets_with_calibration = [
+            "encode4_k562", "encode4_hepg2", "encode4_wtc11",
+            "dream_yeast"
+        ]
+
+        for dataset_name in self.config.datasets:
+            # Skip datasets without test splits
+            if dataset_name not in datasets_with_test:
+                continue
+
+            info = DATASET_CATALOG[dataset_name]
+
+            # Test loader
+            try:
+                test_dataset = SingleDataset(
+                    info, "test",
+                    self.config.target_sequence_length,
+                    self.normalizer,
+                    index_mappings=index_mappings,
+                )
+                self.test_loaders[dataset_name] = DataLoader(
+                    test_dataset,
+                    batch_size=self.config.training.batch_size,
+                    shuffle=False,
+                    num_workers=2,
+                    pin_memory=True,
+                    collate_fn=collate_multi_dataset,
+                )
+                self.logger.info(f"  {dataset_name}: test set loaded ({len(test_dataset)} samples)")
+            except Exception as e:
+                self.logger.warning(f"  {dataset_name}: Could not load test data: {e}")
+
+            # Calibration loader (only for datasets that support it)
+            if dataset_name in datasets_with_calibration:
+                try:
+                    calib_dataset = SingleDataset(
+                        info, "calibration",
+                        self.config.target_sequence_length,
+                        self.normalizer,
+                        index_mappings=index_mappings,
+                    )
+                    self.calibration_loaders[dataset_name] = DataLoader(
+                        calib_dataset,
+                        batch_size=self.config.training.batch_size,
+                        shuffle=False,
+                        num_workers=2,
+                        pin_memory=True,
+                        collate_fn=collate_multi_dataset,
+                    )
+                    self.logger.info(f"  {dataset_name}: calibration set loaded ({len(calib_dataset)} samples)")
+                except Exception as e:
+                    self.logger.warning(f"  {dataset_name}: Could not load calibration data: {e}")
+
+        # Setup metrics tracker
+        output_names = {
+            name: DATASET_CATALOG[name].output_names
+            for name in self.config.datasets
+            if name in DATASET_CATALOG
+        }
+        self.metrics_tracker = MetricsTracker(
+            dataset_names=self.config.datasets,
+            output_names_per_dataset=output_names,
+        )
+
+        # Save normalizer
+        self.normalizer.save(str(self.output_dir / "normalizer.json"))
+        self.logger.info("Data setup complete")
 
     def setup_model(self):
-        """Setup model, optimizer, and scheduler.
-
-        Creates MultiSpeciesCADENCE with correct embedding sizes,
-        AdamW optimizer, and LR scheduler (cosine/onecycle/plateau).
-        """
+        """Setup model, optimizer, and scheduler."""
         self.logger.info("Setting up model...")
-        # Full implementation: creates MultiSpeciesCADENCE model
-        # See training/models.py for create_multi_species_model()
+
+        # Create model with correct embedding sizes from train_dataset
+        self.model = create_multi_species_model(
+            config=self.config.model,
+            dataset_names=self.config.datasets,
+            n_species=len(self.train_dataset.species_to_idx),
+            n_kingdoms=len(self.train_dataset.kingdom_to_idx),
+            n_celltypes=len(self.train_dataset.celltype_to_idx),
+        )
+        self.model = self.model.to(self.device)
+
+        # Count parameters
+        n_params = sum(p.numel() for p in self.model.parameters())
+        n_trainable = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+        self.logger.info(f"Model parameters: {n_params:,} ({n_trainable:,} trainable)")
+
+        # Setup optimizer
+        self.optimizer = torch.optim.AdamW(
+            self.model.parameters(),
+            lr=self.config.training.learning_rate,
+            weight_decay=self.config.training.weight_decay,
+        )
+
+        # Setup scheduler
+        if self.config.training.scheduler == "cosine":
+            self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
+                self.optimizer,
+                T_0=self.config.training.max_epochs,
+                eta_min=self.config.training.min_lr,
+            )
+        elif self.config.training.scheduler == "plateau":
+            self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+                self.optimizer,
+                mode='max',
+                factor=0.5,
+                patience=5,
+                min_lr=self.config.training.min_lr,
+            )
+        elif self.config.training.scheduler == "onecycle":
+            # OneCycleLR requires total_steps (train_loader already set up)
+            steps_per_epoch = len(self.train_loader)
+            total_steps = steps_per_epoch * self.config.training.max_epochs
+            div_factor = self.config.training.onecycle_div_factor
+            self.scheduler = torch.optim.lr_scheduler.OneCycleLR(
+                self.optimizer,
+                max_lr=self.config.training.learning_rate,
+                total_steps=total_steps,
+                pct_start=self.config.training.onecycle_pct_start,
+                div_factor=div_factor,  # initial_lr = max_lr / div_factor
+            )
+            initial_lr = self.config.training.learning_rate / div_factor
+            self.logger.info(f"OneCycleLR: {total_steps} total steps, "
+                           f"initial_lr={initial_lr:.6f}, max_lr={self.config.training.learning_rate}")
+        else:
+            self.scheduler = None
+
+        # Resume if specified
+        if self.resume_from:
+            self.load_checkpoint(self.resume_from)
+
+        self.logger.info("Model setup complete")
 
     def train_epoch(self) -> Dict[str, float]:
-        """
-        Train for one epoch with gradient accumulation and AMP.
-
-        Training loop flow:
-        1. For each mini-batch, run forward pass under AMP autocast (FP16 compute)
-        2. Compute the primary loss (Gaussian NLL or MSE, with optional extreme weighting)
-        3. Also compute unweighted MSE for monitoring (not used for backprop)
-        4. Scale loss by 1/accumulation_steps for gradient accumulation
-        5. Backward pass through GradScaler (scales loss to prevent FP16 underflow)
-        6. Every `accumulation_steps` mini-batches:
-           a. Unscale gradients back to FP32
-           b. Clip gradient norm to prevent explosions (especially with NLL loss)
-           c. Optimizer step (via GradScaler which skips if grads contain inf/nan)
-           d. Step OneCycleLR scheduler (it steps per batch, not per epoch)
-           e. Zero gradients for next accumulation window
-
-        Returns dict with train_loss (NLL), train_mse, train_grad_norm,
-        and per-head losses (train_loss_{head_name}).
-        """
+        """Train for one epoch."""
         self.model.train()
+        self.sampler.set_epoch(self.current_epoch)
 
-        epoch_losses = []
-        epoch_mse_losses = []
+        epoch_losses = []  # NLL loss (can be negative with uncertainty)
+        epoch_mse_losses = []  # MSE loss (always positive, for monitoring)
         epoch_grad_norms = []
+        per_head_losses = {name: [] for name in self.model.heads.keys()}
+
+        pbar = tqdm(
+            self.train_loader,
+            desc=f"Epoch {self.current_epoch}",
+            leave=False,
+        )
+
         accumulation_steps = self.config.training.gradient_accumulation_steps
         accumulated_loss = 0.0
 
-        for batch_idx, batch in enumerate(self.train_loader):
-            # Move all tensors to GPU; dataset_names stays as a list of strings
+        for batch_idx, batch in enumerate(pbar):
+            # Move to device
             sequence = batch['sequence'].to(self.device)
             activity = batch['activity'].to(self.device)
             species_idx = batch['species_idx'].to(self.device)
@@ -814,33 +1346,42 @@ class Trainer:
             original_length = batch['original_length'].to(self.device)
             dataset_names = batch['dataset_names']
 
-            # Forward pass under AMP autocast: convolutions run in FP16 for speed,
-            # while accumulations and loss computation stay in FP32 for precision
+            # Forward pass with optional AMP
             with autocast(enabled=self.config.training.use_amp):
                 outputs = self.model(
-                    sequence=sequence, species_idx=species_idx,
-                    kingdom_idx=kingdom_idx, celltype_idx=celltype_idx,
-                    original_length=original_length, dataset_names=dataset_names,
+                    sequence=sequence,
+                    species_idx=species_idx,
+                    kingdom_idx=kingdom_idx,
+                    celltype_idx=celltype_idx,
+                    original_length=original_length,
+                    dataset_names=dataset_names,
                 )
 
-                # Primary loss: Gaussian NLL (if uncertainty enabled) with extreme weighting
-                loss, head_losses = self._compute_masked_loss(
-                    outputs, activity, dataset_names,
+                # Compute loss (with extreme value weighting)
+                loss, head_losses = compute_masked_loss(
+                    outputs=outputs,
+                    targets=activity,
+                    dataset_names=dataset_names,
+                    dataset_to_heads=self.model.dataset_to_heads,
                     use_uncertainty=self.config.model.use_uncertainty,
                     use_extreme_weights=self.config.training.use_extreme_weights,
+                    extreme_alpha=self.config.training.extreme_alpha,
+                    extreme_beta=self.config.training.extreme_beta,
                 )
 
-                # Secondary MSE for monitoring only (no uncertainty, no weighting)
-                # This provides a comparable metric across loss function choices
-                mse_loss, _ = self._compute_masked_loss(
-                    outputs, activity, dataset_names,
-                    use_uncertainty=False, use_extreme_weights=False,
+                # Also compute MSE loss for monitoring (without weighting)
+                mse_loss, _ = compute_masked_loss(
+                    outputs=outputs,
+                    targets=activity,
+                    dataset_names=dataset_names,
+                    dataset_to_heads=self.model.dataset_to_heads,
+                    use_uncertainty=False,  # Pure MSE
+                    use_extreme_weights=False,  # No weighting for monitoring
                 )
-                # Scale loss for gradient accumulation: gradients from N mini-batches
-                # are averaged to simulate a larger effective batch size
+
                 loss = loss / accumulation_steps
 
-            # Backward pass: GradScaler scales the loss to prevent FP16 gradient underflow
+            # Backward pass
             if self.scaler:
                 self.scaler.scale(loss).backward()
             else:
@@ -848,28 +1389,25 @@ class Trainer:
 
             accumulated_loss += loss.item()
 
-            # Optimizer step: only after accumulating gradients from N mini-batches
+            # Gradient accumulation
             if (batch_idx + 1) % accumulation_steps == 0:
-                # Unscale gradients from FP16 back to FP32 before clipping
+                # Gradient clipping
                 if self.scaler:
                     self.scaler.unscale_(self.optimizer)
 
-                # Clip gradient norm to prevent explosive updates (especially important
-                # for Gaussian NLL loss where log_var gradients can be large)
                 grad_norm = torch.nn.utils.clip_grad_norm_(
-                    self.model.parameters(), self.config.training.gradient_clip,
+                    self.model.parameters(),
+                    self.config.training.gradient_clip,
                 )
 
-                # Step optimizer: GradScaler.step() skips the update if gradients
-                # contain inf/nan (which can happen with AMP), then updates the scale
+                # Optimizer step
                 if self.scaler:
                     self.scaler.step(self.optimizer)
                     self.scaler.update()
                 else:
                     self.optimizer.step()
 
-                # OneCycleLR steps per batch (not per epoch) -- this is different from
-                # cosine/plateau schedulers which step per epoch in the outer loop
+                # Step OneCycleLR scheduler after each batch (not epoch)
                 if self.scheduler and isinstance(
                     self.scheduler, torch.optim.lr_scheduler.OneCycleLR
                 ):
@@ -877,13 +1415,24 @@ class Trainer:
 
                 self.optimizer.zero_grad()
 
+                # Record metrics
                 epoch_losses.append(accumulated_loss)
-                epoch_mse_losses.append(mse_loss.item())
-                epoch_grad_norms.append(
-                    grad_norm.item() if isinstance(grad_norm, torch.Tensor) else grad_norm
-                )
+                mse_val = mse_loss.item() if isinstance(mse_loss, torch.Tensor) else mse_loss
+                epoch_mse_losses.append(mse_val)
+                epoch_grad_norms.append(grad_norm.item() if isinstance(grad_norm, torch.Tensor) else grad_norm)
+
+                for name, h_loss in head_losses.items():
+                    per_head_losses[name].append(h_loss.item())
+
                 accumulated_loss = 0.0
                 self.global_step += 1
+
+                # Update progress bar with both losses
+                pbar.set_postfix({
+                    'nll': f"{epoch_losses[-1]:.4f}",
+                    'mse': f"{epoch_mse_losses[-1]:.4f}",
+                    'grad': f"{epoch_grad_norms[-1]:.2f}",
+                })
 
                 # Log periodically
                 if self.global_step % self.config.training.log_every_n_steps == 0:
@@ -894,117 +1443,18 @@ class Trainer:
                         f"lr={self.optimizer.param_groups[0]['lr']:.2e}"
                     )
 
-        return {
+        # Epoch summary
+        metrics = {
             'train_loss': np.mean(epoch_losses) if epoch_losses else 0.0,
             'train_mse': np.mean(epoch_mse_losses) if epoch_mse_losses else 0.0,
             'train_grad_norm': np.mean(epoch_grad_norms) if epoch_grad_norms else 0.0,
         }
 
-    @staticmethod
-    def _compute_masked_loss(
-        outputs, targets, dataset_names,
-        use_uncertainty=True, use_extreme_weights=False,
-        extreme_alpha=1.0, extreme_beta=2.0,
-    ):
-        """
-        Compute masked multi-dataset loss with optional Gaussian NLL and extreme weighting.
+        for name, losses in per_head_losses.items():
+            if losses:
+                metrics[f'train_loss_{name}'] = np.mean(losses)
 
-        In a multi-dataset batch, different samples belong to different datasets and
-        only their corresponding prediction head should contribute to the loss. This
-        function handles that routing via dataset-name masking.
-
-        Loss computation per head:
-          1. Extract samples belonging to this dataset (mask by dataset_name)
-          2. Remove NaN targets (from NaN-padding in collate_multi_dataset)
-          3. Compute per-sample loss:
-             - If use_uncertainty: Gaussian NLL = 0.5 * (exp(-log_var) * (y - mu)^2 + log_var)
-               This lets the model learn heteroscedastic uncertainty: high log_var means
-               "I'm not confident about this prediction" and reduces the penalty.
-             - If not use_uncertainty: simple MSE = (y - mu)^2
-          4. If use_extreme_weights: multiply each sample's loss by
-             w_i = 1 + alpha * |z_i|^beta, where z_i is the within-batch z-score
-             of the target. This upweights rare extreme-activity samples (tails).
-          5. Sum losses across heads, normalize by total number of valid samples.
-
-        Args:
-            outputs: Dict of {head_name: {"mean": tensor, "log_var": tensor}} from model
-            targets: Tensor [B, max_outputs] with NaN for unused output slots
-            dataset_names: List[str] of length B identifying each sample's source dataset
-            use_uncertainty: If True, use Gaussian NLL; if False, use MSE
-            use_extreme_weights: If True, apply extreme value weighting to loss
-            extreme_alpha: Scaling factor for extreme weights (default 1.0)
-            extreme_beta: Exponent for extreme weights (default 2.0, quadratic)
-
-        Returns:
-            (total_loss, head_losses): Scalar loss and dict of per-head mean losses
-        """
-        total_loss = 0.0
-        head_losses = {}
-        n_total = 0
-
-        # Group samples by their source dataset
-        unique_datasets = set(dataset_names)
-
-        for ds_name in unique_datasets:
-            # Build mask: indices of samples in this batch that belong to ds_name
-            mask = [i for i, n in enumerate(dataset_names) if n == ds_name]
-            if not mask:
-                continue
-
-            mask_t = torch.tensor(mask, dtype=torch.long, device=targets.device)
-            ds_targets = targets[mask_t]
-
-            # Match this dataset's samples to the correct prediction head
-            for head_name, pred_data in outputs.items():
-                if not isinstance(pred_data, dict) or 'mean' not in pred_data:
-                    continue
-                # Each head is named after its dataset; skip heads for other datasets
-                if ds_name not in head_name:
-                    continue
-
-                pred_mean = pred_data['mean'][mask_t]
-                target = ds_targets[:, 0] if ds_targets.dim() > 1 else ds_targets
-
-                # Remove NaN targets (these come from NaN-padding in collate_multi_dataset
-                # when datasets have different numbers of outputs)
-                valid = ~torch.isnan(target)
-                if valid.sum() == 0:
-                    continue
-
-                pred_mean = pred_mean[valid]
-                target = target[valid]
-
-                # Compute per-sample loss
-                if use_uncertainty and 'log_var' in pred_data:
-                    # Gaussian NLL: -log p(y|mu, sigma^2) = 0.5 * (1/sigma^2 * (y-mu)^2 + log(sigma^2))
-                    # where log_var = log(sigma^2), so precision = 1/sigma^2 = exp(-log_var)
-                    log_var = pred_data['log_var'][mask_t][valid]
-                    precision = torch.exp(-log_var)
-                    loss = 0.5 * (precision * (target - pred_mean) ** 2 + log_var)
-                else:
-                    # Simple MSE loss
-                    loss = (target - pred_mean) ** 2
-
-                # Extreme value weighting: upweight samples at tails of the distribution
-                # w_i = 1 + alpha * |z_i|^beta, where z_i = (y_i - mean) / std
-                # With default alpha=1, beta=2: a sample at z=2 gets weight 1+4=5x,
-                # while a sample at z=0 (mean) gets weight 1x (no boost).
-                if use_extreme_weights:
-                    with torch.no_grad():
-                        z = (target - target.mean()) / (target.std() + 1e-8)
-                        weights = 1.0 + extreme_alpha * torch.abs(z) ** extreme_beta
-                    loss = loss * weights
-
-                head_loss = loss.sum()
-                total_loss = total_loss + head_loss
-                n_total += valid.sum().item()
-                head_losses[head_name] = head_loss / valid.sum()
-
-        # Normalize by total number of valid samples across all heads
-        if n_total > 0:
-            total_loss = total_loss / n_total
-
-        return total_loss, head_losses
+        return metrics
 
     def save_checkpoint(self, filepath: str, is_best: bool = False):
         """Save training checkpoint with full state."""
@@ -1038,92 +1488,429 @@ class Trainer:
         self.best_val_metric = checkpoint.get('best_val_metric', float('-inf'))
         self.logger.info(f"Resumed from epoch {self.current_epoch}")
 
-    def train(self):
-        """Main training loop with validation and early stopping.
-
-        Overall flow:
-        1. Setup data (MultiDataset + samplers + DataLoaders)
-        2. Setup model (CADENCE backbone + optimizer + scheduler)
-        3. For each epoch:
-           a. Run train_epoch() (one pass through the sampled training data)
-           b. Validate periodically (compute Pearson r per dataset per output)
-           c. Track best average Pearson r across all datasets
-           d. Save checkpoint (and separately save best model)
-           e. Early stopping if no improvement for `patience` epochs
-        4. Update LR scheduler:
-           - ReduceLROnPlateau: steps based on val metric
-           - CosineAnnealingLR: steps per epoch
-           - OneCycleLR: already stepped per batch in train_epoch()
-        5. Final evaluation on validation set, save results JSON
+    @torch.no_grad()
+    def evaluate_loader(
+        self,
+        loaders: Dict[str, DataLoader],
+        split_name: str = "val",
+        max_batches: Optional[int] = None,
+    ) -> Tuple[Dict[str, Dict], Dict[str, float]]:
         """
+        Evaluate on a set of data loaders.
+
+        Returns:
+            all_metrics: Per-dataset, per-output metrics (Pearson, Spearman, R2, etc.)
+            aggregate_metrics: Aggregate loss metrics (NLL, MSE) across all data
+        """
+        self.model.eval()
+
+        all_metrics = {}
+
+        # Track losses across all batches
+        total_nll = 0.0
+        total_mse = 0.0
+        total_samples = 0
+
+        for dataset_name, loader in loaders.items():
+            predictions = []
+            targets = []
+            log_vars = []  # For NLL computation
+            weights = []
+
+            for batch_idx, batch in enumerate(loader):
+                if max_batches and batch_idx >= max_batches:
+                    break
+
+                sequence = batch['sequence'].to(self.device)
+                activity = batch['activity'].to(self.device)
+                species_idx = batch['species_idx'].to(self.device)
+                kingdom_idx = batch['kingdom_idx'].to(self.device)
+                celltype_idx = batch['celltype_idx'].to(self.device)
+                original_length = batch['original_length'].to(self.device)
+                ds_names = batch['dataset_names']
+
+                # Forward pass
+                outputs = self.model(
+                    sequence=sequence,
+                    species_idx=species_idx,
+                    kingdom_idx=kingdom_idx,
+                    celltype_idx=celltype_idx,
+                    original_length=original_length,
+                    dataset_names=ds_names,
+                )
+
+                # Compute losses for this batch (no weighting for evaluation)
+                nll_loss, _ = compute_masked_loss(
+                    outputs=outputs,
+                    targets=activity,
+                    dataset_names=ds_names,
+                    dataset_to_heads=self.model.dataset_to_heads,
+                    use_uncertainty=self.config.model.use_uncertainty,
+                    use_extreme_weights=False,  # No weighting for evaluation
+                )
+                mse_loss, _ = compute_masked_loss(
+                    outputs=outputs,
+                    targets=activity,
+                    dataset_names=ds_names,
+                    dataset_to_heads=self.model.dataset_to_heads,
+                    use_uncertainty=False,
+                    use_extreme_weights=False,  # No weighting for evaluation
+                )
+
+                batch_size = sequence.shape[0]
+                total_nll += nll_loss.item() * batch_size
+                total_mse += mse_loss.item() * batch_size
+                total_samples += batch_size
+
+                # Extract predictions for this dataset's heads
+                heads = self.model.dataset_to_heads.get(dataset_name, [])
+                batch_preds = []
+                batch_logvars = []
+
+                for i, head_name in enumerate(heads):
+                    if head_name in outputs:
+                        pred_data = outputs[head_name]
+                        head_preds = pred_data['mean'].cpu()
+                        batch_preds.append(head_preds)
+                        if 'log_var' in pred_data:
+                            batch_logvars.append(pred_data['log_var'].cpu())
+
+                if batch_preds:
+                    batch_preds = torch.stack(batch_preds, dim=-1)
+                    predictions.append(batch_preds)
+                    targets.append(activity[:, :len(heads)].cpu())
+                    if batch_logvars:
+                        log_vars.append(torch.stack(batch_logvars, dim=-1))
+
+                if 'weight' in batch:
+                    weights.append(batch['weight'])
+
+            if not predictions:
+                continue
+
+            predictions = torch.cat(predictions, dim=0).numpy()
+            targets_np = torch.cat(targets, dim=0).numpy()
+
+            # Handle single output
+            if predictions.ndim == 1:
+                predictions = predictions.reshape(-1, 1)
+            if targets_np.ndim == 1:
+                targets_np = targets_np.reshape(-1, 1)
+
+            # Compute metrics per output
+            info = DATASET_CATALOG.get(dataset_name)
+            output_names = info.output_names if info else ["output"]
+
+            dataset_metrics = {}
+            for i, output_name in enumerate(output_names):
+                if i >= predictions.shape[1]:
+                    continue
+
+                # Inverse transform predictions for fair comparison
+                pred_orig = self.normalizer.inverse_transform(
+                    dataset_name,
+                    predictions[:, i],
+                )
+                target_orig = self.normalizer.inverse_transform(
+                    dataset_name,
+                    targets_np[:, i],
+                )
+
+                metrics = compute_all_metrics(target_orig, pred_orig)
+                dataset_metrics[output_name] = metrics.to_dict()
+
+            # Special handling for DREAM yeast
+            if dataset_name == "dream_yeast" and weights:
+                dream_metrics = DREAMYeastMetrics()
+                weights_arr = torch.cat(weights, dim=0).numpy()
+                dream_results = dream_metrics.compute_dream_score(
+                    targets_np[:, 0],
+                    predictions[:, 0],
+                    weights=weights_arr,
+                )
+                dataset_metrics["dream_score"] = dream_results
+
+            all_metrics[dataset_name] = dataset_metrics
+
+        # Compute aggregate metrics
+        aggregate_metrics = {
+            'nll': total_nll / total_samples if total_samples > 0 else 0.0,
+            'mse': total_mse / total_samples if total_samples > 0 else 0.0,
+        }
+
+        return all_metrics, aggregate_metrics
+
+    @torch.no_grad()
+    def validate(self) -> Dict[str, Dict]:
+        """Run validation on all datasets (backward compatible)."""
+        all_metrics, _ = self.evaluate_loader(self.val_loaders, "val")
+        return all_metrics
+
+    @torch.no_grad()
+    def _evaluate_held_out_sets(
+        self,
+        loaders: Dict[str, torch.utils.data.DataLoader],
+        split_name: str = "test"
+    ) -> Dict[str, Dict]:
+        """Evaluate on held-out test or calibration sets."""
+        self.model.eval()
+        all_metrics = {}
+
+        for dataset_name, loader in loaders.items():
+            self.logger.info(f"  Evaluating {dataset_name} ({split_name})...")
+
+            predictions = []
+            targets = []
+            log_vars = []
+
+            for batch in loader:
+                sequence = batch['sequence'].to(self.device)
+                activity = batch['activity'].to(self.device)
+                species_idx = batch['species_idx'].to(self.device)
+                kingdom_idx = batch['kingdom_idx'].to(self.device)
+                celltype_idx = batch['celltype_idx'].to(self.device)
+                original_length = batch['original_length'].to(self.device)
+                ds_names = batch['dataset_names']
+
+                # Forward pass
+                outputs = self.model(
+                    sequence=sequence,
+                    species_idx=species_idx,
+                    kingdom_idx=kingdom_idx,
+                    celltype_idx=celltype_idx,
+                    original_length=original_length,
+                    dataset_names=ds_names,
+                )
+
+                # Extract predictions for this dataset's heads
+                heads = self.model.dataset_to_heads.get(dataset_name, [])
+                batch_preds = []
+                batch_logvars = []
+
+                for head_name in heads:
+                    if head_name in outputs:
+                        pred_data = outputs[head_name]
+                        batch_preds.append(pred_data['mean'].cpu())
+                        if 'logvar' in pred_data:
+                            batch_logvars.append(pred_data['logvar'].cpu())
+
+                if batch_preds:
+                    batch_preds = torch.stack(batch_preds, dim=-1)
+                    predictions.append(batch_preds)
+                    targets.append(activity[:, :len(heads)].cpu())
+                    if batch_logvars:
+                        log_vars.append(torch.stack(batch_logvars, dim=-1))
+
+            if not predictions:
+                self.logger.warning(f"    No predictions for {dataset_name}")
+                continue
+
+            predictions = torch.cat(predictions, dim=0).numpy()
+            targets_np = torch.cat(targets, dim=0).numpy()
+
+            # Handle single output
+            if predictions.ndim == 1:
+                predictions = predictions.reshape(-1, 1)
+            if targets_np.ndim == 1:
+                targets_np = targets_np.reshape(-1, 1)
+
+            # Compute metrics per output
+            info = DATASET_CATALOG.get(dataset_name)
+            output_names = info.output_names if info else [f"output_{i}" for i in range(predictions.shape[1])]
+
+            dataset_metrics = {}
+            for i, output_name in enumerate(output_names):
+                if i >= predictions.shape[1]:
+                    break
+
+                preds = predictions[:, i]
+                targs = targets_np[:, i]
+
+                # Remove NaNs
+                valid_mask = ~np.isnan(targs) & ~np.isnan(preds)
+                if valid_mask.sum() < 2:
+                    continue
+
+                preds = preds[valid_mask]
+                targs = targs[valid_mask]
+
+                # Compute metrics
+                from scipy.stats import pearsonr, spearmanr
+                pearson_r, _ = pearsonr(preds, targs)
+                spearman_r, _ = spearmanr(preds, targs)
+                mse = np.mean((preds - targs) ** 2)
+                rmse = np.sqrt(mse)
+                mae = np.mean(np.abs(preds - targs))
+
+                # R2
+                ss_res = np.sum((targs - preds) ** 2)
+                ss_tot = np.sum((targs - np.mean(targs)) ** 2)
+                r2 = 1 - (ss_res / ss_tot) if ss_tot > 0 else 0
+
+                dataset_metrics[output_name] = {
+                    'pearson': pearson_r,
+                    'spearman': spearman_r,
+                    'r2': r2,
+                    'rmse': rmse,
+                    'mae': mae,
+                    'n_samples': len(preds),
+                }
+
+                self.logger.info(
+                    f"    {output_name}: r={pearson_r:.4f}, rho={spearman_r:.4f}, "
+                    f"R2={r2:.4f}, RMSE={rmse:.4f} (n={len(preds)})"
+                )
+
+            all_metrics[dataset_name] = dataset_metrics
+
+        return all_metrics
+
+    def train(self):
+        """Main training loop."""
         self.logger.info("Starting training...")
         self.logger.info(f"Config: {self.config.config_type.value}")
 
+        # Setup
         self.setup_data()
         self.setup_model()
 
-        # Save config for reproducibility
+        # Save config
         config_path = self.output_dir / "config.json"
         with open(config_path, 'w') as f:
             json.dump(asdict(self.config), f, indent=2, default=str)
 
+        # Training loop
         for epoch in range(self.current_epoch, self.config.training.max_epochs):
             self.current_epoch = epoch
             epoch_start = time.time()
 
+            # Train
             train_metrics = self.train_epoch()
 
+            # Validate on both train and val sets
             if epoch % self.config.training.val_every_n_epochs == 0:
-                val_metrics = self.validate()
+                # Evaluate on train set (limit batches for speed)
+                max_train_batches = 50  # Limit to ~50 batches for train eval
+                train_eval_metrics, train_agg = self.evaluate_loader(
+                    self.train_eval_loaders, "train", max_batches=max_train_batches
+                )
 
-                # Compute average Pearson r across ALL datasets and ALL outputs
-                # (e.g., for DeepSTARR this averages Dev and Hk correlations)
-                val_pearsons = []
-                for ds_metrics in val_metrics.values():
-                    for out_metrics in ds_metrics.values():
-                        if isinstance(out_metrics, dict) and 'pearson' in out_metrics:
-                            val_pearsons.append(out_metrics['pearson']['value'])
+                # Evaluate on val set (full evaluation)
+                val_metrics, val_agg = self.evaluate_loader(self.val_loaders, "val")
 
-                avg_val_pearson = np.mean(val_pearsons) if val_pearsons else 0.0
+                # Helper to extract aggregate metrics from per-dataset metrics
+                def extract_aggregate(metrics_dict):
+                    pearsons, spearmans, r2s, rmses, maes = [], [], [], [], []
+                    for ds_metrics in metrics_dict.values():
+                        for output_metrics in ds_metrics.values():
+                            if isinstance(output_metrics, dict) and 'pearson' in output_metrics:
+                                pearsons.append(output_metrics['pearson']['value'])
+                                spearmans.append(output_metrics['spearman']['value'])
+                                r2s.append(output_metrics['r2']['value'])
+                                rmses.append(output_metrics['rmse']['value'])
+                                maes.append(output_metrics['mae']['value'])
+                    return {
+                        'pearson': np.mean(pearsons) if pearsons else 0.0,
+                        'spearman': np.mean(spearmans) if spearmans else 0.0,
+                        'r2': np.mean(r2s) if r2s else 0.0,
+                        'rmse': np.mean(rmses) if rmses else 0.0,
+                        'mae': np.mean(maes) if maes else 0.0,
+                    }
 
-                # Early stopping logic: track best metric and count stagnant epochs
+                train_corr = extract_aggregate(train_eval_metrics)
+                val_corr = extract_aggregate(val_metrics)
+
+                avg_val_pearson = val_corr['pearson']
+
+                # Check if best
                 is_best = avg_val_pearson > self.best_val_metric
+
                 if is_best:
                     self.best_val_metric = avg_val_pearson
                     self.patience_counter = 0
                 else:
                     self.patience_counter += 1
 
+                # Log comprehensive epoch summary with SAME stats for train and val
+                self.logger.info("=" * 80)
+                self.logger.info(f"EPOCH {epoch} SUMMARY {'(BEST)' if is_best else ''}")
+                self.logger.info("=" * 80)
                 self.logger.info(
-                    f"Epoch {epoch}: loss={train_metrics['train_loss']:.4f}, "
-                    f"val_r={avg_val_pearson:.4f} {'(BEST)' if is_best else ''}"
+                    f"[TRAIN] NLL: {train_agg['nll']:.4f} | MSE: {train_agg['mse']:.4f} | "
+                    f"r: {train_corr['pearson']:.4f} | rho: {train_corr['spearman']:.4f} | "
+                    f"R2: {train_corr['r2']:.4f} | RMSE: {train_corr['rmse']:.4f}"
                 )
+                self.logger.info(
+                    f"[VAL]   NLL: {val_agg['nll']:.4f} | MSE: {val_agg['mse']:.4f} | "
+                    f"r: {val_corr['pearson']:.4f} | rho: {val_corr['spearman']:.4f} | "
+                    f"R2: {val_corr['r2']:.4f} | RMSE: {val_corr['rmse']:.4f}"
+                )
+                self.logger.info("-" * 80)
 
+                # Log per-dataset metrics for validation
+                for ds_name, ds_metrics in val_metrics.items():
+                    self.logger.info(f"  [VAL] {ds_name}:")
+                    for output_name, metrics in ds_metrics.items():
+                        if isinstance(metrics, dict) and 'pearson' in metrics:
+                            self.logger.info(
+                                f"    {output_name}: "
+                                f"r={metrics['pearson']['value']:.4f} | "
+                                f"rho={metrics['spearman']['value']:.4f} | "
+                                f"R2={metrics['r2']['value']:.4f} | "
+                                f"RMSE={metrics['rmse']['value']:.4f} | "
+                                f"MAE={metrics['mae']['value']:.4f}"
+                            )
+                self.logger.info("=" * 80)
+
+                # Save checkpoint
                 self.save_checkpoint(
-                    self.output_dir / f"checkpoint_epoch{epoch}.pt", is_best=is_best,
+                    self.output_dir / f"checkpoint_epoch{epoch}.pt",
+                    is_best=is_best,
                 )
 
+                # Early stopping check
                 if self.patience_counter >= self.config.training.patience:
-                    self.logger.info(f"Early stopping after {epoch} epochs")
+                    self.logger.info(
+                        f"Early stopping triggered after {epoch} epochs "
+                        f"(patience={self.config.training.patience})"
+                    )
                     break
 
-            # Update per-epoch LR schedulers (OneCycleLR is handled per-batch in train_epoch)
+            # Update scheduler (skip OneCycleLR - it's stepped per batch in train_epoch)
             if self.scheduler:
                 if isinstance(self.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
-                    self.scheduler.step(avg_val_pearson)  # Needs the metric value
+                    self.scheduler.step(avg_val_pearson)
                 elif not isinstance(self.scheduler, torch.optim.lr_scheduler.OneCycleLR):
-                    self.scheduler.step()  # CosineAnnealingLR etc.
+                    self.scheduler.step()
 
             epoch_time = time.time() - epoch_start
             self.logger.info(f"Epoch {epoch} completed in {epoch_time:.1f}s")
 
-        # Final evaluation on best model
+        # Final evaluation
         self.logger.info("Training complete. Running final evaluation...")
         final_metrics = self.validate()
 
+        # Evaluate on test and calibration sets (for human MPRA datasets)
+        if hasattr(self, 'test_loaders') and self.test_loaders:
+            self.logger.info("\n" + "="*60)
+            self.logger.info("Evaluating on TEST sets...")
+            self.logger.info("="*60)
+            test_metrics = self._evaluate_held_out_sets(self.test_loaders, "test")
+            final_metrics['test'] = test_metrics
+
+        if hasattr(self, 'calibration_loaders') and self.calibration_loaders:
+            self.logger.info("\n" + "="*60)
+            self.logger.info("Evaluating on CALIBRATION sets...")
+            self.logger.info("="*60)
+            calib_metrics = self._evaluate_held_out_sets(self.calibration_loaders, "calibration")
+            final_metrics['calibration'] = calib_metrics
+
+        # Save final results
         results_path = self.output_dir / "final_results.json"
         with open(results_path, 'w') as f:
             json.dump(final_metrics, f, indent=2, cls=NumpyEncoder)
+
+        self.logger.info(f"Results saved to {results_path}")
 
         return final_metrics
 
@@ -1153,16 +1940,20 @@ class MultiPhaseTrainer(Trainer):
     """
 
     def train(self):
-        """Multi-phase training loop. Falls back to single-phase if no phases defined."""
+        """Multi-phase training loop."""
         self.logger.info("Starting multi-phase training...")
+
         phases = self.config.training_phases or []
 
         if not phases:
+            # Fall back to single-phase training
             return super().train()
 
+        # Setup
         self.setup_data()
         self.setup_model()
 
+        # Save config
         config_path = self.output_dir / "config.json"
         with open(config_path, 'w') as f:
             json.dump(asdict(self.config), f, indent=2, default=str)
@@ -1175,35 +1966,53 @@ class MultiPhaseTrainer(Trainer):
 
             self.logger.info(f"\n{'='*60}")
             self.logger.info(f"PHASE {phase_idx + 1}: {phase_name}")
-            self.logger.info(f"  Epochs: {phase_epochs}, LR: {phase_lr}, "
-                           f"Freeze backbone: {freeze_backbone}")
+            self.logger.info(f"  Epochs: {phase_epochs}")
+            self.logger.info(f"  Freeze backbone: {freeze_backbone}")
+            self.logger.info(f"  Learning rate: {phase_lr}")
             self.logger.info(f"{'='*60}\n")
 
+            # Apply phase settings
             if freeze_backbone:
                 self.model.freeze_backbone()
             else:
                 self.model.unfreeze_backbone()
 
+            # Update learning rate
             for param_group in self.optimizer.param_groups:
                 param_group['lr'] = phase_lr
 
+            # Reset scheduler for this phase
+            if self.config.training.scheduler == "cosine":
+                self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
+                    self.optimizer,
+                    T_0=phase_epochs,
+                    eta_min=self.config.training.min_lr,
+                )
+
+            # Reset patience for this phase
             self.patience_counter = 0
             phase_start_epoch = self.current_epoch
 
+            # Train phase
             for epoch in range(phase_epochs):
                 self.current_epoch = phase_start_epoch + epoch
+                epoch_start = time.time()
+
                 train_metrics = self.train_epoch()
 
+                # Validate
                 val_metrics = self.validate()
+
+                # Compute average validation metric
                 val_pearsons = []
-                for ds_m in val_metrics.values():
-                    for out_m in ds_m.values():
-                        if isinstance(out_m, dict) and 'pearson' in out_m:
-                            val_pearsons.append(out_m['pearson']['value'])
+                for ds_metrics in val_metrics.values():
+                    for output_metrics in ds_metrics.values():
+                        if isinstance(output_metrics, dict) and 'pearson' in output_metrics:
+                            val_pearsons.append(output_metrics['pearson']['value'])
 
                 avg_val_pearson = np.mean(val_pearsons) if val_pearsons else 0.0
-                is_best = avg_val_pearson > self.best_val_metric
 
+                is_best = avg_val_pearson > self.best_val_metric
                 if is_best:
                     self.best_val_metric = avg_val_pearson
                     self.patience_counter = 0
@@ -1211,24 +2020,37 @@ class MultiPhaseTrainer(Trainer):
                     self.patience_counter += 1
 
                 self.logger.info(
-                    f"[{phase_name}] Epoch {epoch}: loss={train_metrics['train_loss']:.4f}, "
-                    f"val_r={avg_val_pearson:.4f} {'(BEST)' if is_best else ''}"
+                    f"[{phase_name}] Epoch {epoch}: "
+                    f"loss={train_metrics['train_loss']:.4f}, "
+                    f"val_r={avg_val_pearson:.4f} "
+                    f"{'(BEST)' if is_best else ''}"
                 )
 
+                # Save checkpoint
                 self.save_checkpoint(
                     self.output_dir / f"checkpoint_{phase_name}_epoch{epoch}.pt",
                     is_best=is_best,
                 )
 
+                # Early stopping within phase
                 if self.patience_counter >= self.config.training.patience // 2:
                     self.logger.info(f"Early stopping phase {phase_name}")
                     break
 
-        self.logger.info("Multi-phase training complete.")
+                if self.scheduler:
+                    self.scheduler.step()
+
+                epoch_time = time.time() - epoch_start
+                self.logger.info(f"Epoch completed in {epoch_time:.1f}s")
+
+        # Final evaluation
+        self.logger.info("Multi-phase training complete. Running final evaluation...")
         final_metrics = self.validate()
+
         results_path = self.output_dir / "final_results.json"
         with open(results_path, 'w') as f:
             json.dump(final_metrics, f, indent=2, cls=NumpyEncoder)
+
         return final_metrics
 
 
@@ -1283,6 +2105,9 @@ class EnhancerCandidate:
     # Filter results (Steps 4-5)
     oracle_verdict: str = 'UNKNOWN'                           # GREEN, YELLOW, or RED from OracleCheck
     motif_result: Optional[MotifConstraintResult] = None      # Required/forbidden motif check results
+
+    # Physics
+    physics_features: Optional[np.ndarray] = None
 
     passed_all_filters: bool = False  # True only if OracleCheck is GREEN/YELLOW AND motifs pass
 
@@ -1348,6 +2173,13 @@ class TherapeuticEnhancerPipeline:
     Paper results: 99% predicted specificity, 96.5% GREEN OracleCheck (HepG2 target).
     """
 
+    # PhysicsVAE checkpoints
+    VAE_CHECKPOINTS = {
+        'K562': Path('physics/PhysicsVAE/runs/K562_20260113_051653/best_model.pt'),
+        'HepG2': Path('physics/PhysicsVAE/runs/HepG2_20260113_052418/best_model.pt'),
+        'WTC11': Path('physics/PhysicsVAE/runs/WTC11_20260113_052743/best_model.pt'),
+    }
+
     def __init__(
         self,
         target_cell: str = 'HepG2',
@@ -1356,10 +2188,18 @@ class TherapeuticEnhancerPipeline:
         required_motifs: List[str] = None,
         forbidden_motifs: List[str] = None,
     ):
+        """
+        Initialize therapeutic enhancer design pipeline.
+
+        Args:
+            target_cell: Cell type to maximize activity in
+            background_cells: Cell types to minimize activity in
+            device: 'cuda' or 'cpu'
+            required_motifs: TF motifs that must be present
+            forbidden_motifs: TF motifs that must be absent
+        """
         self.target_cell = target_cell
-        self.background_cells = background_cells or [
-            c for c in ['K562', 'HepG2', 'WTC11'] if c != target_cell
-        ]
+        self.background_cells = background_cells or [c for c in ['K562', 'HepG2', 'WTC11'] if c != target_cell]
         self.all_cell_types = [target_cell] + self.background_cells
         self.device = device
 
@@ -1371,12 +2211,51 @@ class TherapeuticEnhancerPipeline:
         self.required_motifs = required_motifs or []
         self.forbidden_motifs = forbidden_motifs or []
 
+        # Initialize components
         print(f"Initializing Therapeutic Enhancer Pipeline")
         print(f"  Target: {target_cell}, Background: {self.background_cells}")
         print(f"  Required motifs: {self.required_motifs}")
         print(f"  Forbidden motifs: {self.forbidden_motifs}")
 
+        # Multi-cell ensemble
+        print("Loading multi-cell CADENCE ensemble...")
+        checkpoints = find_cadence_checkpoints()
+        self.ensemble = MultiCellEnsemble(
+            cell_types=self.all_cell_types,
+            checkpoints=checkpoints,
+            device=device
+        )
+
+        # Motif scanner
+        self.motif_scanner = None
+        if HAS_ORACLE_CHECK:
+            print("Loading motif scanner (879 JASPAR human motifs)...")
+            self.motif_scanner = MotifScanner(species='human')
+            print(f"  Loaded {len(self.motif_scanner.pwms)} motifs")
+
+        # PhysicsVAE
+        self.vae_model = None
+        if HAS_PHYSICS_VAE and target_cell in self.VAE_CHECKPOINTS:
+            vae_path = self.VAE_CHECKPOINTS[target_cell]
+            if vae_path.exists():
+                print(f"Loading PhysicsVAE for {target_cell}...")
+                self._load_physics_vae(target_cell)
+
+        # Composition validator for OracleCheck
+        self.composition_validator = None
+        if HAS_ORACLE_CHECK:
+            try:
+                from oracle_check.config import ValidationThresholds
+                thresholds = ValidationThresholds()
+                self.composition_validator = CompositionValidator(thresholds)
+            except Exception as e:
+                print(f"  Note: CompositionValidator not loaded: {e}")
+
+        # Storage
         self.candidates: List[EnhancerCandidate] = []
+        self.natural_physics_profiles: Optional[np.ndarray] = None
+        # Physics feature dimensions per cell type
+        self.n_physics_features = {'K562': 515, 'HepG2': 539, 'WTC11': 539}.get(target_cell, 515)
 
     def check_oracle(self, sequence: str) -> OracleCheckResult:
         """
@@ -1462,11 +2341,24 @@ class TherapeuticEnhancerPipeline:
     def run_full_pipeline(
         self,
         natural_sequences: List[str] = None,
+        fasta_path: str = None,
         n_vae_candidates: int = 500,
         n_select: int = 50,
         output_dir: str = None
-    ) -> List[EnhancerCandidate]:
-        """Run the complete 6-step therapeutic enhancer design pipeline."""
+    ) -> 'pd.DataFrame':
+        """
+        Run the complete 6-step therapeutic enhancer design pipeline.
+
+        Args:
+            natural_sequences: List of natural enhancer sequences
+            fasta_path: Path to FASTA file with natural enhancers
+            n_vae_candidates: Number of VAE-generated candidates
+            n_select: Final number of diverse candidates to select
+            output_dir: Directory to save results
+
+        Returns:
+            DataFrame with top diverse candidates
+        """
         print("\n" + "="*60)
         print("THERAPEUTIC ENHANCER DESIGN PIPELINE")
         print("="*60)
@@ -1474,16 +2366,57 @@ class TherapeuticEnhancerPipeline:
         print(f"Background cells: {self.background_cells}")
         print("="*60)
 
+        # Load natural sequences if needed
+        if natural_sequences is None and fasta_path:
+            natural_sequences = self.load_natural_enhancers(fasta_path)
+
+        all_candidates = []
+
+        # Check if we have any source of candidates
+        if not natural_sequences and (n_vae_candidates == 0 or self.vae_model is None):
+            print("Warning: No natural sequences provided and VAE not available.")
+            print("  Provide --fasta with natural enhancers or ensure PhysicsVAE is loaded.")
+            return pd.DataFrame()
+
         # Step 1: Extract physics profile from natural enhancers
+        if natural_sequences:
+            target_physics = self.extract_target_physics_profile(natural_sequences)
+
+            # Evaluate natural sequences
+            natural_candidates = self.evaluate_candidates(
+                natural_sequences, source='natural'
+            )
+            all_candidates.extend(natural_candidates)
+        else:
+            n_physics = getattr(self, 'n_physics_features', 515)
+            target_physics = np.zeros(n_physics)  # Default
+
         # Step 2: Generate VAE candidates
-        # Step 3: Predict activities
-        # Step 4: OracleCheck validation
-        # Step 5: Motif constraint filtering
+        if n_vae_candidates > 0 and self.vae_model is not None:
+            vae_sequences = self.generate_vae_candidates(
+                target_physics, n_candidates=n_vae_candidates
+            )
+
+            if vae_sequences:
+                vae_candidates = self.evaluate_candidates(
+                    vae_sequences, source='vae_generated'
+                )
+                all_candidates.extend(vae_candidates)
+
+        # Store all candidates
+        self.candidates = all_candidates
+
         # Step 6: Rank and diversify
+        result_df = self.rank_and_diversify(all_candidates, n_select=n_select)
 
-        # See full implementation in applications/therapeutic_enhancer_pipeline.py
+        # Save results
+        if output_dir and len(result_df) > 0:
+            self.save_results(result_df, output_dir)
 
-        return self.candidates
+        # Print summary
+        self._print_summary(result_df)
+
+        return result_df
 
 
 # =============================================================================
@@ -1492,27 +2425,121 @@ class TherapeuticEnhancerPipeline:
 # =============================================================================
 
 @dataclass
+class ActivityPrediction:
+    """Activity prediction with uncertainty."""
+    mean: float
+    std: float  # Total uncertainty
+    epistemic: float = 0.0  # Model uncertainty
+    aleatoric: float = 0.0  # Data uncertainty
+
+    @property
+    def confidence_interval_95(self) -> Tuple[float, float]:
+        return (self.mean - 1.96 * self.std, self.mean + 1.96 * self.std)
+
+
+@dataclass
+class PhysicsPrediction:
+    """Physics feature predictions."""
+    features: np.ndarray  # Shape: (n_features,)
+    feature_names: List[str]
+    uncertainties: Optional[np.ndarray] = None
+
+    def get_feature(self, name: str) -> float:
+        idx = self.feature_names.index(name)
+        return self.features[idx]
+
+    def to_dict(self) -> Dict[str, float]:
+        return {name: float(val) for name, val in zip(self.feature_names, self.features)}
+
+    def get_family_features(self, family: str) -> Dict[str, float]:
+        """Get features belonging to a physics family (thermo, stiff, bend, etc.)"""
+        return {
+            name: float(val)
+            for name, val in zip(self.feature_names, self.features)
+            if name.startswith(family)
+        }
+
+
+@dataclass
 class VariantEffect:
-    """Complete variant effect analysis for a single SNP/indel.
+    """Complete variant effect analysis."""
+    variant_id: str
+    ref_sequence: str
+    alt_sequence: str
 
-    Stores the reference and alternate sequences centered on the variant,
-    their predicted regulatory activities, and the computed effect metrics.
-    """
-    variant_id: str          # Variant identifier (e.g., "rs12345" or "chr1:1000:A>G")
-    ref_sequence: str        # Reference allele sequence with flanking context
-    alt_sequence: str        # Alternate allele sequence with flanking context
+    # Activity predictions
+    activity_ref: ActivityPrediction
+    activity_alt: ActivityPrediction
 
-    activity_ref: float              # CADENCE-predicted activity for reference allele
-    activity_alt: float              # CADENCE-predicted activity for alternate allele
-    delta_activity: float            # activity_alt - activity_ref (positive = gain of function)
-    delta_activity_zscore: float     # delta_activity normalized by dataset distribution std
+    # Physics predictions
+    physics_ref: PhysicsPrediction
+    physics_alt: PhysicsPrediction
 
-    effect_direction: str  # 'activating' (positive delta), 'repressing' (negative), or 'neutral'
-    effect_magnitude: str  # 'strong' (|z| > 2), 'moderate' (1 < |z| < 2), or 'weak' (|z| < 1)
+    # Derived metrics
+    delta_activity: float = field(init=False)
+    delta_activity_zscore: float = field(init=False)
+    effect_direction: str = field(init=False)
+    effect_magnitude: str = field(init=False)
 
-    # Per-physics-feature changes (from PhysInformer), e.g., {"electrostatic": -0.3, "shape": 0.1}
-    # These explain WHY the variant affects activity (biophysical mechanism)
-    delta_physics: Dict[str, float] = field(default_factory=dict)
+    def __post_init__(self):
+        self.delta_activity = self.activity_alt.mean - self.activity_ref.mean
+
+        # Z-score using combined uncertainty
+        combined_std = np.sqrt(self.activity_ref.std**2 + self.activity_alt.std**2)
+        self.delta_activity_zscore = self.delta_activity / combined_std if combined_std > 0 else 0
+
+        # Effect direction
+        if self.delta_activity > 0:
+            self.effect_direction = 'activating'
+        elif self.delta_activity < 0:
+            self.effect_direction = 'repressing'
+        else:
+            self.effect_direction = 'neutral'
+
+        # Effect magnitude
+        abs_z = abs(self.delta_activity_zscore)
+        if abs_z >= 3:
+            self.effect_magnitude = 'strong'
+        elif abs_z >= 2:
+            self.effect_magnitude = 'moderate'
+        elif abs_z >= 1:
+            self.effect_magnitude = 'weak'
+        else:
+            self.effect_magnitude = 'negligible'
+
+    @property
+    def delta_physics(self) -> Dict[str, float]:
+        """Compute physics feature changes."""
+        return {
+            name: float(self.physics_alt.features[i] - self.physics_ref.features[i])
+            for i, name in enumerate(self.physics_ref.feature_names)
+        }
+
+    @property
+    def top_changed_physics(self, n: int = 10) -> List[Tuple[str, float]]:
+        """Get top N most changed physics features."""
+        deltas = self.delta_physics
+        sorted_deltas = sorted(deltas.items(), key=lambda x: abs(x[1]), reverse=True)
+        return sorted_deltas[:n]
+
+    def get_physics_family_changes(self) -> Dict[str, Dict[str, float]]:
+        """Get physics changes grouped by family."""
+        families = ['thermo', 'stiff', 'bend', 'entropy', 'advanced', 'pwm']
+        result = {}
+
+        for family in families:
+            family_changes = {}
+            for name, delta in self.delta_physics.items():
+                if name.startswith(family):
+                    family_changes[name] = delta
+            if family_changes:
+                result[family] = {
+                    'features': family_changes,
+                    'mean_abs_change': np.mean(np.abs(list(family_changes.values()))),
+                    'max_abs_change': np.max(np.abs(list(family_changes.values()))) if family_changes else 0
+                }
+
+        return result
 
 
 class DiseaseVariantPipeline:
@@ -1550,64 +2577,189 @@ class DiseaseVariantPipeline:
         flank_size: int = 115,
         device: str = 'cuda'
     ):
+        """
+        Initialize the disease variant pipeline.
+
+        Args:
+            reference_genome: Path to reference genome FASTA
+            cadence_checkpoint: Path to CADENCE model checkpoint
+            physinformer_checkpoint: Path to PhysInformer checkpoint
+            cell_type: Cell type for predictions
+            flank_size: Flanking sequence size (total = 2*flank + variant)
+            device: 'cuda' or 'cpu'
+        """
         self.cell_type = cell_type
-        self.flank_size = flank_size    # bp of context on each side of variant (115 + 115 = 230bp total)
+        self.flank_size = flank_size
         self.device = device
 
-        self.variant_effects: List[VariantEffect] = []  # Accumulated results from analyze_variant()
-
-    def analyze_variant(
-        self,
-        ref_seq: str,
-        alt_seq: str,
-        variant_id: str = None
-    ) -> VariantEffect:
-        """Analyze a single variant."""
-        # In full implementation:
-        # 1. Predict activity for ref and alt
-        # 2. Compute physics features
-        # 3. Calculate effect size and direction
-        # See applications/disease_variant_pipeline.py
-
-        return VariantEffect(
-            variant_id=variant_id or "unknown",
-            ref_sequence=ref_seq,
-            alt_sequence=alt_seq,
-            activity_ref=0.0,
-            activity_alt=0.0,
-            delta_activity=0.0,
-            delta_activity_zscore=0.0,
-            effect_direction='neutral',
-            effect_magnitude='weak',
+        # Initialize components
+        self.extractor = VariantExtractor(
+            reference_genome=reference_genome,
+            flank_size=flank_size
         )
+
+        self.analyzer = DifferentialAnalyzer(
+            cadence_checkpoint=cadence_checkpoint,
+            physinformer_checkpoint=physinformer_checkpoint,
+            cell_type=cell_type,
+            device=device
+        )
+
+        # Results storage
+        self.variant_effects: List[VariantEffect] = []
+        self.summary_df: 'pd.DataFrame' = None
+
+    def load_variants_from_vcf(
+        self,
+        vcf_path: str,
+        max_variants: int = None,
+        filter_pass_only: bool = True
+    ) -> List['VariantSequences']:
+        """Load and extract sequences for variants from VCF."""
+        print(f"Loading variants from {vcf_path}...")
+        variant_sequences = self.extractor.extract_from_vcf(
+            vcf_path,
+            max_variants=max_variants,
+            filter_pass_only=filter_pass_only
+        )
+        print(f"Loaded {len(variant_sequences)} variants")
+        return variant_sequences
+
+    def load_variants_from_dataframe(
+        self,
+        df: 'pd.DataFrame',
+        chrom_col: str = 'chrom',
+        pos_col: str = 'pos',
+        ref_col: str = 'ref',
+        alt_col: str = 'alt',
+        id_col: str = None
+    ) -> List['VariantSequences']:
+        """Load and extract sequences for variants from DataFrame."""
+        print(f"Extracting sequences for {len(df)} variants...")
+        variant_sequences = self.extractor.extract_from_dataframe(
+            df,
+            chrom_col=chrom_col,
+            pos_col=pos_col,
+            ref_col=ref_col,
+            alt_col=alt_col,
+            id_col=id_col
+        )
+        print(f"Extracted {len(variant_sequences)} variant sequences")
+        return variant_sequences
+
+    def analyze_variants(
+        self,
+        variant_sequences: List['VariantSequences'],
+        progress: bool = True
+    ) -> List[VariantEffect]:
+        """
+        Perform differential analysis on all variants.
+
+        Args:
+            variant_sequences: List of extracted variant sequences
+            progress: Show progress bar
+
+        Returns:
+            List of VariantEffect objects with predictions
+        """
+        print(f"Analyzing {len(variant_sequences)} variants...")
+        self.variant_effects = self.analyzer.analyze_variants(
+            variant_sequences, progress=progress
+        )
+        print(f"Successfully analyzed {len(self.variant_effects)} variants")
+        return self.variant_effects
 
     def score_and_rank(
         self,
         min_zscore: float = None,
-    ) -> List[VariantEffect]:
-        """Score and rank variants by absolute effect magnitude (largest first).
+        effect_directions: List[str] = None,
+        effect_magnitudes: List[str] = None
+    ) -> 'pd.DataFrame':
+        """
+        Score and rank variants by predicted effect.
 
         Args:
-            min_zscore: If set, filter out variants with |delta_activity_zscore| below this
-                        threshold. Typical values: 1.0 (any effect), 2.0 (significant only).
+            min_zscore: Minimum absolute z-score to include
+            effect_directions: Filter by direction ['activating', 'repressing']
+            effect_magnitudes: Filter by magnitude ['strong', 'moderate', 'weak']
+
+        Returns:
+            DataFrame sorted by absolute z-score
         """
-        effects = sorted(
-            self.variant_effects,
-            key=lambda x: abs(x.delta_activity_zscore),
-            reverse=True
-        )
+        if not self.variant_effects:
+            raise ValueError("No variant effects. Run analyze_variants first.")
 
+        # Convert to DataFrame
+        self.summary_df = self.analyzer.to_dataframe(self.variant_effects)
+
+        # Apply filters
         if min_zscore is not None:
-            effects = [e for e in effects if abs(e.delta_activity_zscore) >= min_zscore]
+            self.summary_df = self.summary_df[
+                abs(self.summary_df['delta_activity_zscore']) >= min_zscore
+            ]
 
-        return effects
+        if effect_directions:
+            self.summary_df = self.summary_df[
+                self.summary_df['effect_direction'].isin(effect_directions)
+            ]
+
+        if effect_magnitudes:
+            self.summary_df = self.summary_df[
+                self.summary_df['effect_magnitude'].isin(effect_magnitudes)
+            ]
+
+        # Sort by absolute z-score
+        self.summary_df['abs_zscore'] = abs(self.summary_df['delta_activity_zscore'])
+        self.summary_df = self.summary_df.sort_values('abs_zscore', ascending=False)
+        self.summary_df = self.summary_df.drop(columns=['abs_zscore'])
+
+        return self.summary_df.reset_index(drop=True)
+
+    def get_top_variants(
+        self,
+        n: int = 10,
+        direction: str = None
+    ) -> 'pd.DataFrame':
+        """
+        Get top N most impactful variants.
+
+        Args:
+            n: Number of variants to return
+            direction: 'activating' or 'repressing' (optional)
+        """
+        if self.summary_df is None:
+            self.score_and_rank()
+
+        df = self.summary_df.copy()
+
+        if direction:
+            df = df[df['effect_direction'] == direction]
+
+        return df.head(n)
 
     def generate_report(
         self,
         output_path: str = None,
+        include_physics: bool = True,
         top_n: int = 50
     ) -> Dict:
-        """Generate comprehensive variant interpretation report."""
+        """
+        Generate comprehensive variant interpretation report.
+
+        Args:
+            output_path: Path to save JSON report
+            include_physics: Include physics feature analysis
+            top_n: Number of top variants to detail
+
+        Returns:
+            Report dictionary
+        """
+        if not self.variant_effects:
+            raise ValueError("No variant effects. Run analyze_variants first.")
+
+        if self.summary_df is None:
+            self.score_and_rank()
+
         report = {
             'pipeline_info': {
                 'cell_type': self.cell_type,
@@ -1615,22 +2767,48 @@ class DiseaseVariantPipeline:
                 'n_variants_analyzed': len(self.variant_effects),
             },
             'summary_statistics': {
-                'n_activating': sum(1 for e in self.variant_effects if e.effect_direction == 'activating'),
-                'n_repressing': sum(1 for e in self.variant_effects if e.effect_direction == 'repressing'),
-                'n_neutral': sum(1 for e in self.variant_effects if e.effect_direction == 'neutral'),
+                'n_activating': int((self.summary_df['effect_direction'] == 'activating').sum()),
+                'n_repressing': int((self.summary_df['effect_direction'] == 'repressing').sum()),
+                'n_neutral': int((self.summary_df['effect_direction'] == 'neutral').sum()),
+                'n_strong': int((self.summary_df['effect_magnitude'] == 'strong').sum()),
+                'n_moderate': int((self.summary_df['effect_magnitude'] == 'moderate').sum()),
+                'n_weak': int((self.summary_df['effect_magnitude'] == 'weak').sum()),
+                'mean_delta_activity': float(self.summary_df['delta_activity'].mean()),
+                'std_delta_activity': float(self.summary_df['delta_activity'].std()),
             },
             'top_variants': []
         }
 
-        sorted_effects = self.score_and_rank()
+        # Add details for top variants
+        sorted_effects = sorted(
+            self.variant_effects,
+            key=lambda x: abs(x.delta_activity_zscore),
+            reverse=True
+        )
+
         for effect in sorted_effects[:top_n]:
-            report['top_variants'].append({
+            variant_detail = {
                 'variant_id': effect.variant_id,
+                'activity_ref': effect.activity_ref.mean,
+                'activity_alt': effect.activity_alt.mean,
                 'delta_activity': effect.delta_activity,
                 'zscore': effect.delta_activity_zscore,
                 'direction': effect.effect_direction,
                 'magnitude': effect.effect_magnitude,
-            })
+            }
+
+            if include_physics:
+                # Add top physics changes
+                physics_changes = effect.get_physics_family_changes()
+                variant_detail['physics_summary'] = {
+                    family: {
+                        'mean_change': data['mean_abs_change'],
+                        'max_change': data['max_abs_change']
+                    }
+                    for family, data in physics_changes.items()
+                }
+
+            report['top_variants'].append(variant_detail)
 
         if output_path:
             with open(output_path, 'w') as f:
@@ -1638,6 +2816,99 @@ class DiseaseVariantPipeline:
             print(f"Report saved to {output_path}")
 
         return report
+
+    def save_results(
+        self,
+        output_dir: str,
+        prefix: str = 'variant_analysis'
+    ):
+        """
+        Save all results to files.
+
+        Args:
+            output_dir: Output directory
+            prefix: File name prefix
+        """
+        output_dir = Path(output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Save summary DataFrame
+        if self.summary_df is not None:
+            summary_path = output_dir / f'{prefix}_summary.csv'
+            self.summary_df.to_csv(summary_path, index=False)
+            print(f"Summary saved to {summary_path}")
+
+        # Save full results
+        results_path = output_dir / f'{prefix}_full_results.csv'
+        full_records = []
+        for effect in self.variant_effects:
+            record = {
+                'variant_id': effect.variant_id,
+                'ref_sequence': effect.ref_sequence,
+                'alt_sequence': effect.alt_sequence,
+                'activity_ref': effect.activity_ref.mean,
+                'activity_ref_std': effect.activity_ref.std,
+                'activity_alt': effect.activity_alt.mean,
+                'activity_alt_std': effect.activity_alt.std,
+                'delta_activity': effect.delta_activity,
+                'delta_activity_zscore': effect.delta_activity_zscore,
+                'effect_direction': effect.effect_direction,
+                'effect_magnitude': effect.effect_magnitude,
+            }
+
+            # Add physics deltas
+            for name, value in effect.delta_physics.items():
+                record[f'delta_{name}'] = value
+
+            full_records.append(record)
+
+        pd.DataFrame(full_records).to_csv(results_path, index=False)
+        print(f"Full results saved to {results_path}")
+
+        # Save report
+        report_path = output_dir / f'{prefix}_report.json'
+        self.generate_report(str(report_path))
+
+    def run_pipeline(
+        self,
+        vcf_path: str = None,
+        variants_df: 'pd.DataFrame' = None,
+        output_dir: str = None,
+        max_variants: int = None
+    ) -> 'pd.DataFrame':
+        """
+        Run complete pipeline end-to-end.
+
+        Args:
+            vcf_path: Path to VCF file (either this or variants_df required)
+            variants_df: DataFrame with variants
+            output_dir: Directory to save results
+            max_variants: Maximum variants to process
+
+        Returns:
+            Summary DataFrame with ranked variants
+        """
+        # Load variants
+        if vcf_path:
+            variant_sequences = self.load_variants_from_vcf(
+                vcf_path, max_variants=max_variants
+            )
+        elif variants_df is not None:
+            variant_sequences = self.load_variants_from_dataframe(variants_df)
+        else:
+            raise ValueError("Either vcf_path or variants_df required")
+
+        # Analyze
+        self.analyze_variants(variant_sequences)
+
+        # Score and rank
+        summary = self.score_and_rank()
+
+        # Save if output directory provided
+        if output_dir:
+            self.save_results(output_dir)
+
+        return summary
 
 
 # =============================================================================
@@ -2005,6 +3276,27 @@ class SingleDataset(torch.utils.data.Dataset):
         self.weights = None
         print(f"  Sequences shape: {self.sequences.shape}, Activities shape: {self.activities.shape}")
 
+    def _create_dummy_data(self):
+        """Create dummy data for testing (DEPRECATED - use _load_from_real_data)."""
+        print("WARNING: Creating dummy data - real data loaders not available!")
+        n_samples = 1000 if self.split == "train" else 200
+        seq_len = self.info.sequence_length
+        n_outputs = self.info.num_outputs
+
+        # Random one-hot sequences
+        self.sequences = np.zeros((n_samples, 4, seq_len), dtype=np.float32)
+        random_bases = np.random.randint(0, 4, (n_samples, seq_len))
+        for i in range(n_samples):
+            for j in range(seq_len):
+                self.sequences[i, random_bases[i, j], j] = 1.0
+
+        # Random activities
+        self.activities = np.random.randn(n_samples, n_outputs).astype(np.float32)
+        if n_outputs == 1:
+            self.activities = self.activities.squeeze(-1)
+
+        self.weights = None
+
     def __len__(self) -> int:
         base_len = len(self.sequences)
         # When double_data_with_rc is enabled, the dataset reports 2x its actual size.
@@ -2197,6 +3489,29 @@ class MultiDataset(torch.utils.data.Dataset):
         item["species_idx"] = torch.tensor(self.species_to_idx[item["species"]])
         item["kingdom_idx"] = torch.tensor(self.kingdom_to_idx[item["kingdom"]])
         item["celltype_idx"] = torch.tensor(self.celltype_to_idx[item["cell_type"]])
+
+        return item
+
+    def get_by_dataset(
+        self,
+        dataset_name: str,
+        idx: int,
+    ) -> Dict[str, torch.Tensor]:
+        """Get item by dataset name and local index."""
+        if dataset_name not in self.datasets:
+            raise ValueError(f"Dataset {dataset_name} not found")
+
+        item = self.datasets[dataset_name][idx]
+
+        item["species_idx"] = torch.tensor(
+            self.species_to_idx[item["species"]]
+        )
+        item["kingdom_idx"] = torch.tensor(
+            self.kingdom_to_idx[item["kingdom"]]
+        )
+        item["celltype_idx"] = torch.tensor(
+            self.celltype_to_idx[item["cell_type"]]
+        )
 
         return item
 

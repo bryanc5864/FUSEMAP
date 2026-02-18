@@ -35,7 +35,7 @@ MODULES INCLUDED:
    - LightweightGrammarLayer: Single BiGRU with FiLM modulation
 
 4. PLACE - Post-hoc Uncertainty Quantification
-   Source: models/place_uncertainty.py
+   Source: models/CADENCE/place_uncertainty.py
    - PLACEUncertainty: Last-layer Laplace + local adaptive conformal prediction
    - Calibrated 90% coverage intervals, k=200 neighbors
 
@@ -847,11 +847,24 @@ class CADENCE(nn.Module):
                 hidden=config.grammar_hidden,
             )
 
-        # Optional MicroMotif (not shown - see full code)
+        # Optional MicroMotif
         self.micromotif = None
+        if config.use_micromotif:
+            from .micro_motif import MicroMotifProcessor
+            self.micromotif = MicroMotifProcessor(
+                in_channels=final_ch,
+                window_sizes=config.micromotif_windows,
+            )
 
-        # Optional Motif Correlator (not shown - see full code)
+        # Optional Motif Correlator
         self.correlator = None
+        if config.use_motif_correlator:
+            from .motif_correlator import LowRankMotifCorrelator
+            self.correlator = LowRankMotifCorrelator(
+                in_channels=final_ch,
+                n_factors=config.correlator_factors,
+                rank=config.correlator_rank,
+            )
 
         # Mapper: EXACT LegNet
         self.mapper = MapperBlock(
@@ -1068,7 +1081,16 @@ class MultiHeadCADENCE(nn.Module):
             )
 
         self.micromotif = None
+        if config.use_micromotif:
+            from .micro_motif import MicroMotifProcessor
+            self.micromotif = MicroMotifProcessor(in_channels=final_ch, window_sizes=config.micromotif_windows)
+
         self.correlator = None
+        if config.use_motif_correlator:
+            from .motif_correlator import LowRankMotifCorrelator
+            self.correlator = LowRankMotifCorrelator(
+                in_channels=final_ch, n_factors=config.correlator_factors, rank=config.correlator_rank
+            )
 
         # Mapper
         self.mapper = MapperBlock(
@@ -1513,8 +1535,17 @@ class LightweightGrammarLayer(nn.Module):
 # Legacy aliases for backward compatibility with older config files and
 # checkpoint state_dicts that reference these class names. All three
 # names now point to the same LightweightGrammarLayer implementation.
-GrammarCrossGate = LightweightGrammarLayer
-GrammarCrossGateV2 = LightweightGrammarLayer
+class GrammarCrossGate(LightweightGrammarLayer):
+    """Legacy alias for LightweightGrammarLayer."""
+    pass
+
+
+class GrammarCrossGateV2(LightweightGrammarLayer):
+    """Legacy alias for LightweightGrammarLayer."""
+    pass
+
+
+# CADENCE naming alias
 GrammarLayer = LightweightGrammarLayer
 
 
@@ -1850,7 +1881,7 @@ class PLACEUncertainty:
         )
         self.knn_model.fit(self.calibration_features_norm.numpy())
 
-        print(f"Conformal calibration: {len(self.calibration_residuals)} residuals")
+        print(f"Conformal calibration: {len(self.calibration_residuals)} residuals, shape {self.calibration_residuals.shape}")
 
     def predict_uncertainty(
         self,
@@ -2027,6 +2058,10 @@ class PLACEUncertainty:
 
             # Get residuals for neighbors
             neighbor_residuals = calib_residuals_np[neighbor_indices]
+
+            # Ensure shapes match
+            assert len(neighbor_residuals) == len(weights), \
+                f"Shape mismatch: residuals {len(neighbor_residuals)}, weights {len(weights)}"
 
             # Compute weighted quantiles of neighbor residuals
             # q_high: the (1-alpha/2) quantile, used for conformal intervals
@@ -2294,14 +2329,11 @@ class RCEMotifStem(nn.Module):
     def __init__(
         self,
         num_filters: int = 48,
-        kernel_sizes: List[int] = None,
+        kernel_sizes: List[int] = [7, 11, 15],
         dropout: float = 0.05,
         num_groups: int = 8
     ):
         super().__init__()
-
-        if kernel_sizes is None:
-            kernel_sizes = [7, 11, 15]
 
         self.num_filters = num_filters
         self.kernel_sizes = kernel_sizes
@@ -2368,16 +2400,13 @@ class RCEMotifStemV2(nn.Module):
     def __init__(
         self,
         num_filters: int = 48,
-        kernel_sizes: List[int] = None,
+        kernel_sizes: List[int] = [7, 11, 15],
         dropout: float = 0.05,
         num_groups: int = 8,
         init_gain: float = 0.1,
         in_channels: int = 4
     ):
         super().__init__()
-
-        if kernel_sizes is None:
-            kernel_sizes = [7, 11, 15]
 
         self.num_filters = num_filters
         self.kernel_sizes = kernel_sizes

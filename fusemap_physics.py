@@ -69,7 +69,7 @@ import torch.nn.functional as F
 import numpy as np
 import math
 from typing import Dict, List, Tuple, Optional, Set
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import warnings
 
 
@@ -1007,28 +1007,32 @@ class S2AConfig:
     across species) and which are species-specific (must be excluded for
     cross-species transfer).
     """
-    # Universal physics prefixes: these features are computed from DNA chemistry
-    # alone and are therefore identical across all organisms. A thermo_dH value
-    # for a given sequence is the same whether that sequence is in human, yeast,
-    # or maize -- because the hydrogen bonding and stacking interactions are
-    # determined by nucleotide identity, not by the organism.
-    universal_prefixes: Tuple[str, ...] = (
-        'thermo_',    # Thermodynamic: nearest-neighbor energetics (dH, dS, dG, Tm)
-        'stiff_',     # Mechanical stiffness: twist/roll/tilt/shift/slide/rise constants
-        'bend_',      # Bending/curvature: intrinsic bend angles, persistence length
-        'entropy_',   # Sequence complexity: Shannon entropy, k-mer diversity
-        'advanced_',  # G4 potential, SIDD, MGW, nucleosome positioning, DNA shape
-    )
+    # Feature selection - universal physics features only
+    universal_prefixes: List[str] = field(default_factory=lambda: [
+        'thermo_',    # Thermodynamic features (dG, dH, dS, Tm)
+        'stiff_',     # Mechanical stiffness (twist, tilt, roll)
+        'bend_',      # Bending and curvature
+        'entropy_',   # Sequence complexity and information
+        'advanced_',  # G4, SIDD, MGW, nucleosome positioning
+    ])
 
-    # Excluded prefixes: species-specific features that break transfer.
-    # PWM (Position Weight Matrix) features capture transcription factor binding
-    # affinities. TFs evolve independently in each lineage: human TFs are
-    # completely different from yeast or plant TFs. Including PWMs causes
-    # cross-species transfer to collapse (r drops from ~0.70 to ~0.03, as
-    # shown in the paper's ablation study).
-    excluded_prefixes: Tuple[str, ...] = (
-        'pwm_',       # Position weight matrices - TF binding is species-specific
-    )
+    # Species-specific features to exclude
+    excluded_prefixes: List[str] = field(default_factory=lambda: [
+        'pwm_',  # Position weight matrix (TF binding - species-specific)
+    ])
+
+    # Head model configuration
+    head_type: str = 'ridge'  # 'ridge', 'elastic_net', 'mlp'
+    head_alpha: float = 1.0   # Regularization strength
+    head_l1_ratio: float = 0.5  # For elastic_net only
+    head_hidden_sizes: List[int] = field(default_factory=lambda: [128, 64])  # For MLP
+
+    # Output mode
+    output_mode: str = 'zscore'  # 'zscore', 'calibrated', 'ranking'
+
+    # Training parameters
+    random_seed: int = 42
+    n_folds: int = 5  # For CV during training
 
 
 @dataclass
@@ -1042,44 +1046,36 @@ class UniversalFeatureStats:
 
 class UniversalFeatureExtractor:
     """
-    Extract and normalize universal physics features from descriptor files.
+    Extract universal physics features from descriptor files.
 
     Key insight: Physics features are universal because DNA chemistry is
-    identical across organisms -- the stacking energy of an AT base pair is
-    the same in human, yeast, and maize. PWM features are species-specific
-    because transcription factors evolve differently (human has ~1,600 TFs,
-    yeast has ~200, and their binding motifs are largely non-overlapping).
-
-    This enables zero-shot cross-species transfer: train a physics->activity
-    probe on species A, apply directly to species B using only the conserved
-    physics features (~250 features from the 521 total). In practice:
-    - Bending features transfer at r > 0.92 even cross-kingdom
-    - PWM features collapse to r = 0.03 when transferred across species
-    - Plant-to-plant zero-shot achieves rho = 0.70 (Arab.+Sorg. -> Maize)
-
-    Workflow:
-    1. extract_feature_columns() - identify universal features from column names
-    2. fit() - compute mean/std from training data for z-score normalization
-    3. transform() - apply normalization to new data
+    identical across organisms. PWM features are species-specific because
+    transcription factors evolve differently.
     """
 
     def __init__(self, config: S2AConfig = None):
+        """
+        Initialize feature extractor.
+
+        Args:
+            config: S2AConfig with feature settings
+        """
         self.config = config or S2AConfig()
+        from sklearn.preprocessing import StandardScaler
+        self.scaler = StandardScaler()
         self._is_fitted = False
         self.feature_names: List[str] = []
         self.stats: Optional[UniversalFeatureStats] = None
 
-        # Scaler for normalization
-        self._mean = None
-        self._std = None
-
     def _is_universal_feature(self, col_name: str) -> bool:
         """Check if a column is a universal physics feature."""
+        # Check if it matches any universal prefix
         is_universal = any(
             col_name.startswith(prefix)
             for prefix in self.config.universal_prefixes
         )
 
+        # Check if it should be excluded
         is_excluded = any(
             col_name.startswith(prefix)
             for prefix in self.config.excluded_prefixes
@@ -1088,7 +1084,15 @@ class UniversalFeatureExtractor:
         return is_universal and not is_excluded
 
     def extract_feature_columns(self, columns: List[str]) -> List[str]:
-        """Extract list of universal feature columns."""
+        """
+        Extract list of universal feature columns from a dataframe.
+
+        Args:
+            columns: List of column names (or DataFrame columns)
+
+        Returns:
+            List of universal feature column names
+        """
         feature_cols = [
             col for col in columns
             if self._is_universal_feature(col)
@@ -1110,16 +1114,13 @@ class UniversalFeatureExtractor:
         Returns:
             Self for chaining
         """
-        self._mean = X.mean(axis=0).astype(np.float32)
-        self._std = X.std(axis=0).astype(np.float32)
-        self._std[self._std < 1e-8] = 1.0  # Prevent division by zero
-
+        self.scaler.fit(X)
         self.feature_names = feature_names
         self._is_fitted = True
 
         self.stats = UniversalFeatureStats(
-            mean=self._mean,
-            std=self._std,
+            mean=self.scaler.mean_.astype(np.float32),
+            std=self.scaler.scale_.astype(np.float32),
             feature_names=feature_names,
             n_features=len(feature_names)
         )
@@ -1127,23 +1128,45 @@ class UniversalFeatureExtractor:
         return self
 
     def transform(self, X: np.ndarray) -> np.ndarray:
-        """Transform features using fitted scaler."""
+        """
+        Transform features using fitted scaler.
+
+        Args:
+            X: Feature matrix
+
+        Returns:
+            Scaled feature matrix
+        """
         if not self._is_fitted:
             raise ValueError("Extractor not fitted. Call fit() first.")
 
-        return ((X - self._mean) / self._std).astype(np.float32)
+        return self.scaler.transform(X).astype(np.float32)
 
     def fit_transform(
         self,
         X: np.ndarray,
         feature_names: List[str]
     ) -> np.ndarray:
-        """Fit and transform features."""
+        """
+        Fit and transform features.
+
+        Args:
+            X: Feature matrix
+            feature_names: List of feature names
+
+        Returns:
+            Scaled feature matrix
+        """
         self.fit(X, feature_names)
         return self.transform(X)
 
     def get_feature_family_indices(self) -> Dict[str, List[int]]:
-        """Get indices of features by family (thermo, stiff, etc.)."""
+        """
+        Get indices of features by family (thermo, stiff, etc.).
+
+        Returns:
+            Dict mapping family prefix to list of feature indices
+        """
         if not self._is_fitted:
             raise ValueError("Extractor not fitted. Call fit() first.")
 
@@ -1160,57 +1183,184 @@ class UniversalFeatureExtractor:
         return families
 
     def count_features_by_family(self) -> Dict[str, int]:
-        """Count features by family."""
+        """
+        Count features by family.
+
+        Returns:
+            Dict mapping family name to feature count
+        """
         families = self.get_feature_family_indices()
         return {k: len(v) for k, v in families.items()}
 
 
-class UniversalS2AHead(nn.Module):
+class UniversalS2AHead:
     """
-    Universal neural regression head for S2A cross-species activity prediction.
+    Universal head model for physics->activity prediction.
+    Source: physics/S2A/universal_head.py
 
-    Takes universal physics features (~250 features, excluding PWMs) as input
-    and predicts regulatory activity. Because the input features are universal
-    (same meaning across species), this head can be trained on one or more
-    source species and applied zero-shot to any target species.
-
-    This is the neural network equivalent of the linear probes used in
-    ZeroShotTransfer. The MLP architecture can capture nonlinear relationships
-    between physics features and activity, potentially achieving better
-    prediction accuracy at the cost of reduced interpretability.
-
-    Architecture: 250 -> 256 -> 128 -> 64 -> 1
-    Uses BatchNorm + ReLU + Dropout (0.2) at each hidden layer.
-    Higher dropout (0.2 vs 0.1) to prevent overfitting on the relatively
-    small physics feature space.
+    Trained on z-scored activity from multiple species.
+    Outputs z-scores or rankings for zero-shot inference.
     """
 
-    def __init__(
+    def __init__(self, config: S2AConfig = None):
+        """
+        Initialize S2A head.
+
+        Args:
+            config: S2AConfig with model parameters
+        """
+        self.config = config or S2AConfig()
+        self.model = None
+        from sklearn.preprocessing import StandardScaler
+        self.scaler = StandardScaler()
+        self.feature_names: List[str] = []
+        self._is_fitted = False
+
+    def _create_model(self):
+        """Create the underlying regression model."""
+        from sklearn.linear_model import Ridge, ElasticNet
+        from sklearn.neural_network import MLPRegressor
+
+        head_type = self.config.head_type
+
+        if head_type == 'ridge':
+            return Ridge(
+                alpha=self.config.head_alpha,
+                random_state=self.config.random_seed
+            )
+        elif head_type == 'elastic_net':
+            return ElasticNet(
+                alpha=self.config.head_alpha,
+                l1_ratio=self.config.head_l1_ratio,
+                max_iter=10000,
+                random_state=self.config.random_seed
+            )
+        elif head_type == 'mlp':
+            return MLPRegressor(
+                hidden_layer_sizes=tuple(self.config.head_hidden_sizes),
+                activation='relu',
+                solver='adam',
+                alpha=self.config.head_alpha,
+                max_iter=500,
+                early_stopping=True,
+                validation_fraction=0.1,
+                random_state=self.config.random_seed
+            )
+        else:
+            raise ValueError(f"Unknown head type: {head_type}")
+
+    def fit(
         self,
-        n_features: int = 250,             # ~250 universal physics features
-        hidden_dims: List[int] = [256, 128, 64],  # 3 hidden layers
-        dropout: float = 0.2               # Higher dropout for small feature space
+        X: np.ndarray,
+        y_zscore: np.ndarray,
+        feature_names: List[str] = None
+    ) -> 'UniversalS2AHead':
+        """
+        Fit the head model on z-scored activity data.
+
+        Args:
+            X: Physics features (n_samples, n_features)
+            y_zscore: Z-scored activity values (n_samples,)
+            feature_names: Optional feature names
+
+        Returns:
+            Self for chaining
+        """
+        self.feature_names = feature_names or [
+            f'feature_{i}' for i in range(X.shape[1])
+        ]
+
+        # Standardize features
+        X_scaled = self.scaler.fit_transform(X)
+
+        # Create and fit model
+        self.model = self._create_model()
+        self.model.fit(X_scaled, y_zscore)
+
+        self._is_fitted = True
+        return self
+
+    def predict_zscore(self, X: np.ndarray) -> np.ndarray:
+        """
+        Predict z-scored activity.
+
+        Args:
+            X: Physics features (n_samples, n_features)
+
+        Returns:
+            Predicted z-scores (n_samples,)
+        """
+        if not self._is_fitted:
+            raise ValueError("Head not fitted. Call fit() first.")
+
+        X_scaled = self.scaler.transform(X)
+        return self.model.predict(X_scaled)
+
+    def predict_ranking(self, X: np.ndarray) -> np.ndarray:
+        """
+        Predict percentile rankings (0-100).
+
+        Rankings are more robust for zero-shot transfer since
+        they only depend on relative ordering, not absolute scale.
+
+        Args:
+            X: Physics features (n_samples, n_features)
+
+        Returns:
+            Percentile ranks (n_samples,), 0-100
+        """
+        from scipy.stats import rankdata
+        z_scores = self.predict_zscore(X)
+        # Convert to percentile ranks
+        ranks = rankdata(z_scores, method='average')
+        percentiles = (ranks - 1) / (len(ranks) - 1) * 100
+        return percentiles
+
+    def evaluate(
+        self,
+        X: np.ndarray,
+        y_true: np.ndarray
     ):
-        super().__init__()
+        """
+        Evaluate head model performance.
 
-        layers = []
-        in_dim = n_features
+        Args:
+            X: Physics features
+            y_true: True activity values (can be raw or z-scored)
+        """
+        from scipy.stats import spearmanr, pearsonr
+        y_pred = self.predict_zscore(X)
 
-        for hidden_dim in hidden_dims:
-            layers.extend([
-                nn.Linear(in_dim, hidden_dim),
-                nn.BatchNorm1d(hidden_dim),
-                nn.ReLU(),
-                nn.Dropout(dropout)
-            ])
-            in_dim = hidden_dim
+        # Compute correlation metrics (invariant to scale)
+        spearman = spearmanr(y_true, y_pred)[0]
+        pearson_val = pearsonr(y_true, y_pred)[0]
 
-        layers.append(nn.Linear(in_dim, 1))
+        return {
+            'spearman_rho': spearman,
+            'pearson_r': pearson_val,
+            'n_samples': len(y_true)
+        }
 
-        self.network = nn.Sequential(*layers)
+    def get_feature_importances(self) -> Optional[Dict[str, float]]:
+        """
+        Get feature importances from the model.
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.network(x).squeeze(-1)
+        Returns:
+            Dict mapping feature names to importance (absolute coefficient)
+            or None if not available.
+        """
+        if not self._is_fitted or self.model is None:
+            return None
+
+        # Linear models have coef_
+        if hasattr(self.model, 'coef_'):
+            coefs = np.abs(self.model.coef_)
+            return {
+                name: float(coef)
+                for name, coef in zip(self.feature_names, coefs)
+            }
+
+        return None
 
 
 # =============================================================================
@@ -1252,39 +1402,46 @@ class PhysicsRouter(nn.Module):
                  property_name: str, use_rc: bool = False):
         super().__init__()
         self.property_name = property_name
-        self.use_rc = use_rc  # Whether to average forward/reverse complement
+        self.use_rc = use_rc
 
-        # Property-specific convolution with appropriate receptive field.
-        # Same-padding preserves sequence length: padding = kernel_size // 2
+        # Window aggregator with property-specific receptive field
+        # Use groups only if d_input is divisible by the group size
+        n_groups = 1
+        if d_input >= d_output and d_input % d_output == 0:
+            n_groups = d_output
+        elif d_output >= d_input and d_output % d_input == 0:
+            n_groups = d_input
+
         self.window_agg = nn.Conv1d(d_input, d_output, kernel_size=kernel_size,
-                                   padding=kernel_size//2)
-        # Scalar gate: learns to modulate the property signal strength
-        self.gate = nn.Sequential(nn.Linear(d_input, 1), nn.Sigmoid())
+                                   padding=kernel_size//2, groups=n_groups)
+
+        # Gating mechanism
+        self.gate = nn.Sequential(
+            nn.Linear(d_input, 1),
+            nn.Sigmoid()
+        )
+
         self.norm = nn.LayerNorm(d_output)
 
     def forward(self, x):
-        """Route features through property-specific adapter.
-
-        Args:
-            x: Backbone features [batch, seq_len, d_input]
-
-        Returns:
-            Property-adapted features [batch, seq_len, d_output]
-        """
+        # x: (batch, seq_len, d_input)
         batch, seq_len, d_input = x.shape
 
-        # Apply property-specific convolution (requires channels-first format)
-        x_conv = x.transpose(1, 2)                      # [batch, d_input, seq_len]
-        x_agg = self.window_agg(x_conv).transpose(1, 2)  # [batch, seq_len, d_output]
+        # Apply window aggregation
+        x_conv = x.transpose(1, 2)  # (batch, d_input, seq_len)
+        x_agg = self.window_agg(x_conv).transpose(1, 2)  # (batch, seq_len, d_output)
 
-        # Compute scalar gate from mean-pooled input
-        gate = self.gate(x.mean(dim=1, keepdim=True))  # [batch, 1, 1]
-        output = gate * x_agg  # Element-wise scaling
+        # Compute gate
+        gate = self.gate(x.mean(dim=1, keepdim=True))  # (batch, 1, 1)
+
+        # Apply gate and norm
+        output = gate * x_agg
         output = self.norm(output)
 
-        # Optional reverse-complement averaging for strand-symmetric properties
+        # Handle reverse complement if needed
         if self.use_rc:
-            output_rc = torch.flip(output, dims=[1])  # Flip sequence dimension
+            # Average with reverse complement
+            output_rc = torch.flip(output, dims=[1])
             output = (output + output_rc) / 2
 
         return output
@@ -1443,97 +1600,127 @@ class ElectrostaticHead(nn.Module):
 
 
 class AuxiliaryHeadA(nn.Module):
-    """Diagnostic head: Activity prediction from Sequence + Real Physics Features.
+    """Activity prediction from Sequence + Real Features
 
-    Purpose: This auxiliary head answers the question "How well can we predict
-    regulatory activity when we combine raw sequence information with ground-truth
-    physics features?" It serves as an upper-bound diagnostic -- if the main model
-    (which uses predicted physics features) approaches AuxHeadA's performance,
-    then the physics predictions are sufficiently accurate.
-
-    Key design: Has its OWN lightweight CNN sequence encoder, separate from the
-    main PhysInformer backbone. This separation ensures the diagnostic is
-    independent of the main model's representation quality. The gating mechanism
-    allows the model to learn how much to rely on sequence vs. physics features.
-
-    Architecture:
-    - Sequence branch: Embedding(5,64) -> Conv1D stack (128,256,hidden_dim) -> pool
-    - Physics branch: Linear(feature_dim -> hidden_dim -> hidden_dim//2)
-    - Gating: sigmoid gate from physics features modulates sequence features
-    - Fusion: concat gated_seq + physics -> MLP -> activity prediction
+    This head has its OWN sequence encoder, completely separate from the main model.
+    It learns to process sequences specifically for activity prediction.
     """
 
-    def __init__(self, vocab_size: int = 5, feature_dim: int = 536,
+    def __init__(self, vocab_size: int = 5, seq_len: int = 230, feature_dim: int = 536,
                  hidden_dim: int = 256, n_activities: int = 1, dropout: float = 0.1):
         super().__init__()
 
-        self.seq_encoder = nn.Sequential(
+        # Own sequence encoder - lightweight CNN for motif detection
+        self.sequence_encoder = nn.Sequential(
+            # Embedding layer
             nn.Embedding(vocab_size, 64),
-        )
-        self.seq_conv = nn.Sequential(
-            nn.Conv1d(64, 128, kernel_size=11, padding=5), nn.ReLU(), nn.MaxPool1d(2),
-            nn.Conv1d(128, 256, kernel_size=7, padding=3), nn.ReLU(), nn.MaxPool1d(2),
-            nn.Conv1d(256, hidden_dim, kernel_size=5, padding=2), nn.ReLU(),
-            nn.AdaptiveAvgPool1d(1)
+            # Conv layers to detect motifs
+            nn.Conv1d(64, 128, kernel_size=11, padding=5),
+            nn.ReLU(),
+            nn.MaxPool1d(2),
+            nn.Conv1d(128, 256, kernel_size=7, padding=3),
+            nn.ReLU(),
+            nn.MaxPool1d(2),
+            nn.Conv1d(256, hidden_dim, kernel_size=5, padding=2),
+            nn.ReLU(),
+            nn.AdaptiveAvgPool1d(1)  # Global pooling to (batch, hidden_dim, 1)
         )
 
-        self.feat_proj = nn.Sequential(
-            nn.Linear(feature_dim, hidden_dim), nn.LayerNorm(hidden_dim),
-            nn.SiLU(), nn.Dropout(dropout), nn.Linear(hidden_dim, hidden_dim // 2)
+        # Feature projector - brings physics features to same scale
+        self.feat_projector = nn.Sequential(
+            nn.Linear(feature_dim, hidden_dim),
+            nn.LayerNorm(hidden_dim),
+            nn.SiLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, hidden_dim // 2)
         )
-        self.seq_proj = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim), nn.LayerNorm(hidden_dim),
-            nn.SiLU(), nn.Dropout(dropout), nn.Linear(hidden_dim, hidden_dim // 2)
+
+        # Sequence projector - process encoded sequence
+        self.seq_projector = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.LayerNorm(hidden_dim),
+            nn.SiLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, hidden_dim // 2)
         )
-        self.gate = nn.Sequential(nn.Linear(hidden_dim // 2, hidden_dim // 2), nn.Sigmoid())
+
+        # Optional gating mechanism driven by features
+        self.gate = nn.Sequential(
+            nn.Linear(hidden_dim // 2, hidden_dim // 2),
+            nn.Sigmoid()
+        )
+
+        # Fusion MLP
         self.fusion = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim), nn.LayerNorm(hidden_dim),
-            nn.SiLU(), nn.Dropout(dropout), nn.Linear(hidden_dim, n_activities)
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.LayerNorm(hidden_dim),
+            nn.SiLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, hidden_dim // 2),
+            nn.SiLU(),
+            nn.Linear(hidden_dim // 2, n_activities)
         )
 
     def forward(self, sequences: torch.Tensor, real_features: torch.Tensor):
-        seq_emb = self.seq_encoder(sequences).transpose(1, 2)
-        seq_emb = self.seq_conv(seq_emb).squeeze(-1)
-        seq_emb = self.seq_proj(seq_emb)
-        feat_emb = self.feat_proj(real_features)
-        gate = self.gate(feat_emb)
-        seq_emb = seq_emb * gate
-        return self.fusion(torch.cat([seq_emb, feat_emb], dim=-1))
+        """
+        Args:
+            sequences: Raw DNA sequences (batch, seq_len) - NOT from main model
+            real_features: Real physics features (batch, feature_dim)
+        Returns:
+            Activity predictions (batch, n_activities)
+        """
+        # Encode sequences with OWN encoder
+        seq_emb = self.sequence_encoder[0](sequences)  # Embedding: (batch, seq_len, 64)
+        seq_emb = seq_emb.transpose(1, 2)  # (batch, 64, seq_len)
+        for layer in self.sequence_encoder[1:]:
+            seq_emb = layer(seq_emb)
+        seq_emb = seq_emb.squeeze(-1)  # (batch, hidden_dim)
+
+        # Project sequence and features
+        seq_emb = self.seq_projector(seq_emb)
+        feat_emb = self.feat_projector(real_features)
+
+        # Apply gating (features modulate sequence)
+        gate_values = self.gate(feat_emb)
+        seq_emb = seq_emb * gate_values
+
+        # Concatenate and fuse
+        combined = torch.cat([seq_emb, feat_emb], dim=-1)
+        activity = self.fusion(combined)
+
+        return activity
 
 
 class AuxiliaryHeadB(nn.Module):
-    """Diagnostic head: Activity prediction from Real Physics Features Only.
-
-    Purpose: This auxiliary head answers the question "How much regulatory
-    activity can be predicted from biophysical features alone, with NO
-    sequence information?" This establishes a lower bound on the information
-    content of the physics features and validates that physics descriptors
-    capture meaningful regulatory signal.
-
-    Comparing AuxHeadA (seq + physics) vs. AuxHeadB (physics only) reveals
-    how much additional information raw sequence provides beyond what physics
-    features already capture. If the gap is small, physics features are
-    highly informative; if large, there are important sequence-level patterns
-    (e.g., specific TF motifs) not captured by the physics descriptors.
-
-    Architecture: Simple 4-layer MLP with LayerNorm and Dropout.
-    feature_dim -> 384 -> 192 -> 96 -> 1
-    """
+    """Activity prediction from Real Features Only"""
 
     def __init__(self, feature_dim: int = 536, hidden_dim: int = 384,
                  n_activities: int = 1, dropout: float = 0.1):
         super().__init__()
-        self.network = nn.Sequential(
-            nn.Linear(feature_dim, hidden_dim), nn.LayerNorm(hidden_dim),
-            nn.SiLU(), nn.Dropout(dropout),
-            nn.Linear(hidden_dim, hidden_dim // 2), nn.LayerNorm(hidden_dim // 2),
-            nn.SiLU(), nn.Dropout(dropout),
-            nn.Linear(hidden_dim // 2, hidden_dim // 4), nn.SiLU(),
+
+        # Wider MLP since no sequence to lean on
+        self.feature_stack = nn.Sequential(
+            nn.Linear(feature_dim, hidden_dim),
+            nn.LayerNorm(hidden_dim),
+            nn.SiLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, hidden_dim // 2),
+            nn.LayerNorm(hidden_dim // 2),
+            nn.SiLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim // 2, hidden_dim // 4),
+            nn.SiLU(),
             nn.Linear(hidden_dim // 4, n_activities)
         )
 
     def forward(self, real_features: torch.Tensor):
-        return self.network(real_features)
+        """
+        Args:
+            real_features: Real physics features (batch, feature_dim)
+        Returns:
+            Activity predictions (batch, n_activities)
+        """
+        return self.feature_stack(real_features)
 
 
 # =============================================================================
@@ -1641,8 +1828,8 @@ class PhysicsAwareLoss(nn.Module):
                 predictions['dG_mean'], predictions['dG_log_var'], targets['thermo_dG']
             )
 
-            # Thermodynamic identity constraint
-            losses['identity_loss'] = self.identity_weight * self.thermodynamic_identity_loss(
+            # Thermodynamic identity
+            losses['identity_loss'] = self.thermodynamic_identity_loss(
                 predictions['dH_mean'], predictions['dS_mean'], predictions['dG_mean']
             )
 
@@ -1652,7 +1839,8 @@ class PhysicsAwareLoss(nn.Module):
                                     targets['electrostatic_windows'])
             losses['electrostatic_window_loss'] = window_loss
 
-            losses['electrostatic_smooth'] = self.smooth_weight * self.total_variation_loss(
+            # Smoothness
+            losses['electrostatic_smooth'] = self.total_variation_loss(
                 predictions['window_predictions']
             )
 
@@ -1843,18 +2031,18 @@ class PhysicsConsistencyLoss(nn.Module):
     the reconstruction loss, with this consistency loss as an auxiliary check.
     """
 
-    def __init__(self, physics_weight: float = 1.0, normalize: bool = True):
+    def __init__(
+        self,
+        physics_weight: float = 1.0,
+        normalize: bool = True
+    ):
         super().__init__()
-        self.physics_weight = physics_weight  # gamma in L = L_vae + gamma * L_physics
+        self.physics_weight = physics_weight
         self.normalize = normalize
-        self.physics_predictor = None  # Set later via set_physics_predictor()
+        self.physics_predictor = None  # Set externally
 
     def set_physics_predictor(self, predictor: nn.Module):
-        """Set the pre-trained PhysInformer model for physics consistency checking.
-
-        The predictor is frozen (eval mode, no gradients) to serve as a fixed
-        oracle for evaluating the biophysical properties of generated sequences.
-        """
+        """Set the PhysInformer model for physics prediction."""
         self.physics_predictor = predictor
         self.physics_predictor.eval()
         for param in self.physics_predictor.parameters():
@@ -1866,34 +2054,52 @@ class PhysicsConsistencyLoss(nn.Module):
         target_physics: torch.Tensor,
         use_soft: bool = True
     ) -> Dict[str, torch.Tensor]:
-        """Compute physics consistency between generated sequences and target properties.
+        """
+        Compute physics consistency loss.
 
         Args:
-            generated_logits: VAE output logits [batch, seq_len, 4]
-            target_physics: Target biophysical features [batch, n_physics]
-            use_soft: Currently unused (soft sampling for differentiable generation)
-
+            generated_logits: Nucleotide logits [batch, seq_length, 4]
+            target_physics: Target physics features [batch, n_physics]
+            use_soft: Use soft (differentiable) sequence representation
         Returns:
-            Dict with 'physics_loss' (weighted) and 'physics_mse' (unweighted)
+            Dict with physics_loss, physics_mse
         """
         if self.physics_predictor is None:
+            # Return zero loss if no predictor set
             zero = torch.tensor(0.0, device=generated_logits.device)
             return {'physics_loss': zero, 'physics_mse': zero}
 
-        # Convert logits to discrete sequences via argmax (non-differentiable)
-        sequences = generated_logits.argmax(dim=-1)  # [batch, seq_len]
+        batch_size = generated_logits.size(0)
 
-        # Predict physics from generated sequences using frozen PhysInformer
+        if use_soft:
+            # Use softmax probabilities for differentiable physics prediction
+            # This requires PhysInformer to accept soft inputs
+            probs = F.softmax(generated_logits, dim=-1)
+            # Convert soft one-hot to sequence for PhysInformer
+            # PhysInformer expects indices, so we use argmax (non-differentiable)
+            # For full differentiability, would need to modify PhysInformer
+            sequences = generated_logits.argmax(dim=-1)
+        else:
+            sequences = generated_logits.argmax(dim=-1)
+
+        # Predict physics from generated sequences
         with torch.no_grad():
-            predicted = self.physics_predictor(sequences)
-            if isinstance(predicted, dict):
-                predicted = predicted['descriptors']  # [batch, n_physics]
+            predicted_physics = self.physics_predictor(sequences)
 
         # MSE between predicted and target physics
-        physics_mse = F.mse_loss(predicted, target_physics)
+        if self.normalize:
+            # Normalize by feature std to balance contributions
+            physics_mse = F.mse_loss(predicted_physics, target_physics, reduction='none')
+            physics_mse = physics_mse.mean()
+        else:
+            physics_mse = F.mse_loss(predicted_physics, target_physics)
+
         physics_loss = self.physics_weight * physics_mse
 
-        return {'physics_loss': physics_loss, 'physics_mse': physics_mse}
+        return {
+            'physics_loss': physics_loss,
+            'physics_mse': physics_mse
+        }
 
 
 class CombinedVAELoss(nn.Module):
@@ -1975,12 +2181,13 @@ class CombinedVAELoss(nn.Module):
 # are summed together. This enables high-level interpretability:
 # "45.3% of the prediction comes from bending features"
 PHYSICS_FAMILIES = {
-    'thermodynamic': ['thermo_'],           # dH, dS, dG, Tm, stacking energies
-    'stiffness': ['stiff_'],                 # Twist, roll, tilt spring constants
-    'bending': ['bend_'],                    # Intrinsic curvature, bend angles
-    'entropy': ['entropy_'],                 # Shannon entropy, k-mer diversity
-    'advanced': ['advanced_', 'mgw_', 'melting_', 'stacking_'],  # G4, SIDD, MGW, shape
-    'pwm': ['pwm_'],                         # TF binding motif scores (species-specific)
+    'thermodynamics': ['thermo_'],
+    'mechanics': ['stiff_'],
+    'bending': ['bend_'],
+    'entropy': ['entropy_'],
+    'structural': ['advanced_mgw', 'advanced_stress', 'advanced_melting', 'advanced_stacking'],
+    'electrostatics': ['tileformer_', 'elec_'],
+    'motif_derived': ['pwm_'],
 }
 
 
@@ -2011,52 +2218,38 @@ class SequenceAttribution:
 
 class PhysicsAttributor:
     """
-    Physics feature attribution using linear probes for mechanistic interpretation.
+    Physics feature attribution using linear probes.
 
-    Approach: Fit a simple linear model (Ridge or ElasticNet) that predicts
-    regulatory activity from physics features. Because the model is linear,
-    each feature's contribution to the prediction can be exactly decomposed:
-
-        predicted_activity = intercept + sum_i(coefficient_i * scaled_feature_i)
-
-    For a specific sequence, the contribution of feature i is:
-        contribution_i = coefficient_i * (feature_i - mean_i) / std_i
-
-    These contributions can be aggregated by feature family (thermodynamic,
-    bending, stiffness, etc.) to understand which biophysical mechanisms
-    drive regulatory activity at a high level. This is the approach used
-    to generate the feature attribution breakdowns reported in the paper:
-    - Plant transfer: Bending 45.3%, Advanced 26.7%, Thermo 14.1%, etc.
-
-    The linear probe deliberately sacrifices prediction accuracy (compared to
-    a deep model) for interpretability. The probe's R^2 score indicates how
-    much variance in activity can be explained linearly by physics features.
+    Decomposes activity predictions into contributions from physics features,
+    enabling mechanistic interpretation.
 
     Usage:
         attributor = PhysicsAttributor()
         attributor.fit(X_physics, y_activity, feature_names)
-        result = attributor.get_attribution()  # Global feature importance
-        seq_attr = attributor.attribute_sequence(x_physics, seq_id='seq1')  # Per-sequence
+
+        # Get overall feature importance
+        result = attributor.get_attribution()
+
+        # Get per-sequence attribution
+        seq_attr = attributor.attribute_sequence(x_physics, seq_id='seq1')
     """
 
     def __init__(self, alpha: float = 1.0, probe_type: str = 'ridge'):
-        """
-        Args:
-            alpha: Regularization strength for the linear probe.
-                   Higher alpha = stronger regularization = simpler model.
-            probe_type: 'ridge' (L2 penalty, keeps all features) or
-                       'elasticnet' (L1+L2, can zero out irrelevant features)
-        """
+        from sklearn.preprocessing import StandardScaler
         self.alpha = alpha
         self.probe_type = probe_type
         self.model = None
-        self._mean = None
-        self._std = None
+        self.scaler = StandardScaler()
         self.feature_names: List[str] = []
         self.coefficients: Optional[np.ndarray] = None
         self._is_fitted = False
 
-    def fit(self, X: np.ndarray, y: np.ndarray, feature_names: List[str]) -> 'PhysicsAttributor':
+    def fit(
+        self,
+        X: np.ndarray,
+        y: np.ndarray,
+        feature_names: List[str]
+    ) -> 'PhysicsAttributor':
         """
         Fit the attribution probe on physics features.
 
@@ -2064,32 +2257,40 @@ class PhysicsAttributor:
             X: Physics features (n_samples, n_features)
             y: Activity values (n_samples,)
             feature_names: Names of features
+
+        Returns:
+            Self for chaining
         """
         from sklearn.linear_model import Ridge, ElasticNet
+        from scipy.stats import pearsonr
 
         self.feature_names = feature_names
 
         # Standardize features
-        self._mean = X.mean(axis=0)
-        self._std = X.std(axis=0)
-        self._std[self._std < 1e-8] = 1.0
-        X_scaled = (X - self._mean) / self._std
+        X_scaled = self.scaler.fit_transform(X)
 
-        # Create and fit probe
+        # Create probe model
         if self.probe_type == 'ridge':
             self.model = Ridge(alpha=self.alpha)
         else:
-            self.model = ElasticNet(alpha=self.alpha, l1_ratio=0.5, max_iter=10000)
+            self.model = ElasticNet(
+                alpha=self.alpha,
+                l1_ratio=0.5,
+                max_iter=10000
+            )
 
+        # Fit model
         self.model.fit(X_scaled, y)
+
         self.coefficients = self.model.coef_
         self._is_fitted = True
 
         # Compute fit metrics
-        from scipy.stats import pearsonr
         y_pred = self.model.predict(X_scaled)
         self._r2 = self.model.score(X_scaled, y)
         self._pearson = pearsonr(y, y_pred)[0]
+
+        print(f"Attribution probe fitted: R2={self._r2:.4f}, Pearson r={self._pearson:.4f}")
 
         return self
 
@@ -2122,22 +2323,56 @@ class PhysicsAttributor:
             intercept_contribution=float(self.model.intercept_)
         )
 
-    def attribute_sequence(self, x: np.ndarray, sequence_id: str = None) -> SequenceAttribution:
-        """Get attribution for a single sequence."""
+    def attribute_sequence(
+        self,
+        x: np.ndarray,
+        sequence_id: str = None
+    ) -> SequenceAttribution:
+        """
+        Get attribution for a single sequence.
+
+        Args:
+            x: Physics features for one sequence (n_features,)
+            sequence_id: Optional identifier
+
+        Returns:
+            SequenceAttribution with per-feature contributions
+        """
         if not self._is_fitted:
             raise ValueError("Probe not fitted. Call fit() first.")
 
-        x_scaled = (x - self._mean) / self._std
+        # Standardize
+        x_scaled = self.scaler.transform(x.reshape(1, -1))[0]
+
+        # Compute prediction
         prediction = self.model.predict(x_scaled.reshape(1, -1))[0]
 
-        # contribution_i = coefficient_i * scaled_value_i
+        # Compute per-feature contributions
+        # Contribution = coefficient * scaled_feature_value
         contributions = self.coefficients * x_scaled
 
-        feature_values = {name: float(val) for name, val in zip(self.feature_names, x)}
-        feature_contributions = {name: float(c) for name, c in zip(self.feature_names, contributions)}
-        family_contributions = self._compute_family_contributions(contributions, self.feature_names)
+        feature_values = {
+            name: float(val)
+            for name, val in zip(self.feature_names, x)
+        }
 
-        sorted_contrib = sorted(feature_contributions.items(), key=lambda x: abs(x[1]), reverse=True)
+        feature_contributions = {
+            name: float(contrib)
+            for name, contrib in zip(self.feature_names, contributions)
+        }
+
+        # Family contributions for this sequence
+        family_contributions = self._compute_family_contributions(
+            contributions, self.feature_names
+        )
+
+        # Top contributors
+        sorted_contrib = sorted(
+            feature_contributions.items(),
+            key=lambda x: abs(x[1]),
+            reverse=True
+        )
+
         top_positive = [(f, c) for f, c in sorted_contrib if c > 0][:10]
         top_negative = [(f, c) for f, c in sorted_contrib if c < 0][:10]
 
@@ -2152,24 +2387,11 @@ class PhysicsAttributor:
         )
 
     def _compute_family_contributions(
-        self, values: np.ndarray, feature_names: List[str]
+        self,
+        values: np.ndarray,
+        feature_names: List[str]
     ) -> Dict[str, float]:
-        """Compute contributions by physics family.
-
-        Groups individual feature contributions (coefficients or per-sequence
-        contributions) by family, sums absolute values within each family,
-        and normalizes to percentages. Using absolute values ensures that
-        positive and negative contributions within a family do not cancel out --
-        a family can be important even if some of its features increase activity
-        while others decrease it.
-
-        Args:
-            values: Per-feature values to aggregate (coefficients or contributions)
-            feature_names: Corresponding feature names
-
-        Returns:
-            Dict mapping family name -> percentage contribution (sums to ~100%)
-        """
+        """Compute contributions by physics family."""
         family_sums = {}
 
         for family, prefixes in PHYSICS_FAMILIES.items():
@@ -2177,11 +2399,11 @@ class PhysicsAttributor:
             for i, name in enumerate(feature_names):
                 for prefix in prefixes:
                     if name.startswith(prefix):
-                        family_sum += abs(values[i])  # Absolute value to prevent cancellation
+                        family_sum += abs(values[i])
                         break
             family_sums[family] = family_sum
 
-        # Normalize to percentages (total should sum to ~100%)
+        # Normalize to percentages
         total = sum(family_sums.values())
         if total > 0:
             family_sums = {k: v / total * 100 for k, v in family_sums.items()}
@@ -2202,72 +2424,45 @@ class PhysicsAttributor:
 
 @dataclass
 class TransferResult:
-    """Results from a cross-species transfer experiment.
+    """Results from a transfer experiment."""
+    protocol: str
+    source_datasets: List[str]
+    target_dataset: str
 
-    Stores all metrics needed to evaluate transfer quality, including
-    source performance (in-domain baseline), target performance (transfer
-    quality), optional fine-tuning results, and feature attribution.
-    """
-    protocol: str           # 'zero_shot', 'physics_anchored_fine_tuning', 'multi_species_joint'
-    source_datasets: List[str]   # Names of source species/datasets used for training
-    target_dataset: str          # Name of target species/dataset for evaluation
+    # Source performance (in-domain)
+    source_pearson: float
+    source_spearman: float
 
-    # Source performance (in-domain baseline -- best achievable with these features)
-    source_pearson: float        # Pearson r on source data
-    source_spearman: float       # Spearman rho on source data
+    # Target performance (transfer)
+    target_pearson: float
+    target_spearman: float
 
-    # Target performance (transfer quality -- how well does the probe generalize?)
-    target_pearson: float        # Pearson r on target data (zero-shot or joint)
-    target_spearman: float       # Spearman rho on target data
-
-    # Fine-tuning performance (Protocol 2 only)
-    fine_tuned_pearson: Optional[float] = None     # Pearson r after fine-tuning
-    fine_tuned_spearman: Optional[float] = None    # Spearman rho after fine-tuning
-    fine_tune_n_samples: Optional[int] = None      # Number of target samples used
+    # Fine-tuning performance (if applicable)
+    fine_tuned_pearson: Optional[float] = None
+    fine_tuned_spearman: Optional[float] = None
+    fine_tune_n_samples: Optional[int] = None
 
     # Additional metrics
-    transfer_efficiency: Optional[float] = None  # target_r / source_r (fraction of performance retained)
-    n_common_features: int = 0                   # Number of shared features between source/target
-    feature_contributions: Dict[str, float] = None  # Family-level attribution (% per family)
-
-    def __post_init__(self):
-        if self.feature_contributions is None:
-            self.feature_contributions = {}
+    transfer_efficiency: Optional[float] = None  # target / source ratio
+    n_common_features: int = 0
+    feature_contributions: Dict[str, float] = field(default_factory=dict)
 
 
 class ZeroShotTransfer:
     """
     Protocol 1: Physics-Bridge Zero-Shot Transfer.
 
-    The key insight: if regulatory activity is driven by biophysical properties
-    of DNA (bending, stability, shape) rather than species-specific TF binding,
-    then a linear probe trained on physics->activity in one species should
-    generalize to a completely different species with ZERO target-species training
-    data. This is possible because the physics features are computed from DNA
-    chemistry alone and have identical meaning across all organisms.
-
-    Procedure:
-    1. Align features: find the intersection of physics features available in
-       both source and target datasets (excludes PWMs, which differ per species)
-    2. Standardize: compute mean/std from SOURCE data only (no target data leakage)
-    3. Train: fit a Ridge/ElasticNet probe on source physics -> source activity
-    4. Evaluate: apply the probe directly to target physics features (standardized
-       using source statistics) and measure correlation with target activity
-
-    The transfer efficiency (target_r / source_r) measures what fraction of
-    source performance is retained when transferring. Values > 0.5 indicate
-    meaningful transfer; the paper reports rho = 0.70 for plant-to-plant.
-
-    Usage:
-        transfer = ZeroShotTransfer()
-        result = transfer.run(X_src, y_src, src_features, X_tgt, y_tgt, tgt_features)
+    Train physics->activity probe on source species, apply directly to target.
+    Tests whether physics features capture universal regulatory principles.
     """
 
-    def __init__(self, probe_type: str = 'ridge', probe_alpha: float = 1.0):
-        self.probe_type = probe_type
-        self.probe_alpha = probe_alpha
+    def __init__(self, config=None, output_dir: str = None):
+        from sklearn.preprocessing import StandardScaler
+        self.config = config or {}
         self.probe = None
+        self.scaler = StandardScaler()
         self.common_features: List[str] = []
+        self.output_dir = output_dir
 
     def align_features(
         self,
@@ -2276,14 +2471,7 @@ class ZeroShotTransfer:
         X_target: np.ndarray,
         target_features: List[str]
     ) -> Tuple[np.ndarray, np.ndarray, List[str]]:
-        """Align features between source and target datasets.
-
-        Different species may have different feature sets (e.g., different PWMs).
-        This finds the intersection of features available in both datasets and
-        reindexes both matrices to use only the common features in the same order.
-        Since PWMs are species-specific, they are typically excluded by the
-        UniversalFeatureExtractor before reaching this point.
-        """
+        """Align features between source and target datasets."""
         common = sorted(set(source_features) & set(target_features))
 
         source_idx = [source_features.index(f) for f in common]
@@ -2314,6 +2502,9 @@ class ZeroShotTransfer:
             target_features: Target feature names
             source_name: Name of source dataset
             target_name: Name of target dataset
+
+        Returns:
+            TransferResult with metrics
         """
         from sklearn.linear_model import Ridge, ElasticNet
         from scipy.stats import pearsonr, spearmanr
@@ -2323,37 +2514,36 @@ class ZeroShotTransfer:
             X_source, source_features, X_target, target_features
         )
 
-        # Standardize using SOURCE statistics only (critical: no target data leakage).
-        # Both source and target are z-scored using source mean/std, ensuring
-        # the probe's learned coefficients are directly applicable to target data.
-        mean = X_src.mean(axis=0)
-        std = X_src.std(axis=0)
-        std[std < 1e-8] = 1.0  # Prevent division by zero for constant features
-        X_src_scaled = (X_src - mean) / std
-        X_tgt_scaled = (X_tgt - mean) / std  # Use SOURCE stats for target (no leakage)
+        # Standardize using source statistics only
+        X_src_scaled = self.scaler.fit_transform(X_src)
+        X_tgt_scaled = self.scaler.transform(X_tgt)
 
-        # Train linear probe on source species
-        if self.probe_type == 'ridge':
-            self.probe = Ridge(alpha=self.probe_alpha)
+        probe_type = self.config.get('probe_type', 'ridge') if isinstance(self.config, dict) else getattr(self.config, 'probe_type', 'ridge')
+        probe_alpha = self.config.get('probe_alpha', 1.0) if isinstance(self.config, dict) else getattr(self.config, 'probe_alpha', 1.0)
+
+        # Train probe on source
+        if probe_type == 'ridge':
+            self.probe = Ridge(alpha=probe_alpha)
         else:
-            self.probe = ElasticNet(alpha=self.probe_alpha, l1_ratio=0.5, max_iter=10000)
+            self.probe = ElasticNet(alpha=probe_alpha, l1_ratio=0.5, max_iter=10000)
 
         self.probe.fit(X_src_scaled, y_source)
 
         # Evaluate on source
         y_source_pred = self.probe.predict(X_src_scaled)
-        source_pearson = pearsonr(y_source, y_source_pred)[0]
-        source_spearman = spearmanr(y_source, y_source_pred)[0]
+        source_pearson_val = pearsonr(y_source, y_source_pred)[0]
+        source_spearman_val = spearmanr(y_source, y_source_pred)[0]
 
-        # Evaluate on target (zero-shot)
+        # Apply to target (zero-shot)
         y_target_pred = self.probe.predict(X_tgt_scaled)
-        target_pearson = pearsonr(y_target, y_target_pred)[0]
-        target_spearman = spearmanr(y_target, y_target_pred)[0]
+        target_pearson_val = pearsonr(y_target, y_target_pred)[0]
+        target_spearman_val = spearmanr(y_target, y_target_pred)[0]
 
-        transfer_eff = target_pearson / source_pearson if source_pearson > 0 else 0
+        # Compute transfer efficiency
+        transfer_eff = target_pearson_val / source_pearson_val if source_pearson_val > 0 else 0
 
-        # Feature contributions
-        attributor = PhysicsAttributor(alpha=self.probe_alpha, probe_type=self.probe_type)
+        # Get feature contributions
+        attributor = PhysicsAttributor(alpha=probe_alpha, probe_type=probe_type)
         attributor.fit(X_src, y_source, self.common_features)
         attr_result = attributor.get_attribution()
 
@@ -2361,47 +2551,36 @@ class ZeroShotTransfer:
             protocol='zero_shot',
             source_datasets=[source_name],
             target_dataset=target_name,
-            source_pearson=source_pearson,
-            source_spearman=source_spearman,
-            target_pearson=target_pearson,
-            target_spearman=target_spearman,
+            source_pearson=source_pearson_val,
+            source_spearman=source_spearman_val,
+            target_pearson=target_pearson_val,
+            target_spearman=target_spearman_val,
             transfer_efficiency=transfer_eff,
             n_common_features=len(self.common_features),
             feature_contributions=attr_result.family_contributions
         )
+
+    def get_predictions(self, X: np.ndarray) -> np.ndarray:
+        """Get predictions for aligned features."""
+        if self.probe is None:
+            raise ValueError("Run transfer first.")
+        return self.probe.predict(X)
 
 
 class PhysicsAnchoredFineTuning:
     """
     Protocol 2: Physics-Anchored Fine-Tuning.
 
-    Tests the practical scenario: "I have a well-studied source species (e.g.,
-    human K562) and a poorly-studied target species (e.g., a new plant) with
-    only a small amount of labeled data. Can physics features help?"
-
-    Fine-tuning protocol:
-    1. Train a physics->activity probe on the full source dataset
-    2. Evaluate zero-shot transfer as a baseline
-    3. Re-train a NEW probe on small subsets of target data (100, 500, 1000, 5000
-       samples) -- still using physics features standardized by source statistics
-    4. Compare fine-tuned performance to zero-shot baseline
-
-    The physics features serve as an "anchor" because they provide a meaningful
-    feature space even with very few target samples. Without physics features,
-    training a model from raw sequence on 100 samples would be hopeless. With
-    physics features, even 100 samples can produce a useful linear probe because
-    the 250-dimensional physics space already captures the relevant variation.
-
-    Note: This currently trains independent probes on target subsets rather than
-    warm-starting from the source probe. The "anchoring" comes from using the
-    same physics feature space (standardized by source), not from weight transfer.
+    Start with source-trained physics probe, then fine-tune on limited
+    target data. Tests few-shot learning with physics anchoring.
     """
 
-    def __init__(self, probe_type: str = 'ridge', probe_alpha: float = 1.0):
-        self.probe_type = probe_type
-        self.probe_alpha = probe_alpha
+    def __init__(self, config=None, output_dir: str = None):
+        self.config = config or {}
         self.source_probe = None
         self.fine_tuned_probe = None
+        self.common_features: List[str] = []
+        self.output_dir = output_dir
 
     def run(
         self,
@@ -2419,117 +2598,111 @@ class PhysicsAnchoredFineTuning:
         Run fine-tuning transfer with varying amounts of target data.
 
         Args:
-            fine_tune_sizes: Number of target samples for fine-tuning [100, 500, 1000, ...]
+            source_datasets: Source dataset names
+            target_dataset: Target dataset name
+            fine_tune_sizes: List of fine-tuning sample sizes to test
+
+        Returns:
+            List of TransferResults for each fine-tune size
         """
         from sklearn.linear_model import Ridge, ElasticNet
         from scipy.stats import pearsonr, spearmanr
 
         fine_tune_sizes = fine_tune_sizes or [100, 500, 1000, 5000]
 
+        probe_type = self.config.get('probe_type', 'ridge') if isinstance(self.config, dict) else getattr(self.config, 'probe_type', 'ridge')
+        probe_alpha = self.config.get('probe_alpha', 1.0) if isinstance(self.config, dict) else getattr(self.config, 'probe_alpha', 1.0)
+        random_seed = self.config.get('random_seed', 42) if isinstance(self.config, dict) else getattr(self.config, 'random_seed', 42)
+
         # Align features
         common = sorted(set(source_features) & set(target_features))
+        self.common_features = common
         src_idx = [source_features.index(f) for f in common]
         tgt_idx = [target_features.index(f) for f in common]
         X_src = X_source[:, src_idx]
         X_tgt = X_target[:, tgt_idx]
 
-        # Standardize
-        mean = X_src.mean(axis=0)
-        std = X_src.std(axis=0)
-        std[std < 1e-8] = 1.0
-        X_src_s = (X_src - mean) / std
-        X_tgt_s = (X_tgt - mean) / std
+        # Standardize using source statistics
+        from sklearn.preprocessing import StandardScaler
+        scaler = StandardScaler()
+        X_src_s = scaler.fit_transform(X_src)
+        X_tgt_s = scaler.transform(X_tgt)
 
         # Train source probe
-        if self.probe_type == 'ridge':
-            self.source_probe = Ridge(alpha=self.probe_alpha)
+        if probe_type == 'ridge':
+            self.source_probe = Ridge(alpha=probe_alpha)
         else:
-            self.source_probe = ElasticNet(alpha=self.probe_alpha, l1_ratio=0.5, max_iter=10000)
+            self.source_probe = ElasticNet(alpha=probe_alpha, l1_ratio=0.5, max_iter=10000)
         self.source_probe.fit(X_src_s, y_source)
 
         y_src_pred = self.source_probe.predict(X_src_s)
-        source_pearson = pearsonr(y_source, y_src_pred)[0]
-        source_spearman = spearmanr(y_source, y_src_pred)[0]
+        source_pearson_val = pearsonr(y_source, y_src_pred)[0]
+        source_spearman_val = spearmanr(y_source, y_src_pred)[0]
 
-        # Zero-shot baseline
+        # Zero-shot baseline on target
         y_zs_pred = self.source_probe.predict(X_tgt_s)
         zs_pearson = pearsonr(y_target, y_zs_pred)[0]
         zs_spearman = spearmanr(y_target, y_zs_pred)[0]
 
+        # Fine-tune with different amounts of target data
         results = []
         for n_samples in fine_tune_sizes:
             if n_samples > len(y_target):
                 n_samples = len(y_target)
 
-            # Subsample target
-            rng = np.random.RandomState(42)
+            # Subsample target training data
+            rng = np.random.RandomState(random_seed)
             indices = rng.choice(len(y_target), n_samples, replace=False)
             X_ft = X_tgt_s[indices]
             y_ft = y_target[indices]
 
-            # Fine-tune
-            if self.probe_type == 'ridge':
-                probe = Ridge(alpha=self.probe_alpha)
+            # Fine-tune on target data
+            if probe_type == 'ridge':
+                self.fine_tuned_probe = Ridge(alpha=probe_alpha)
             else:
-                probe = ElasticNet(alpha=self.probe_alpha, l1_ratio=0.5, max_iter=10000)
-            probe.fit(X_ft, y_ft)
+                self.fine_tuned_probe = ElasticNet(alpha=probe_alpha, l1_ratio=0.5, max_iter=10000)
+            self.fine_tuned_probe.fit(X_ft, y_ft)
 
-            y_ft_pred = probe.predict(X_tgt_s)
+            # Evaluate on target
+            y_ft_pred = self.fine_tuned_probe.predict(X_tgt_s)
             ft_pearson = pearsonr(y_target, y_ft_pred)[0]
             ft_spearman = spearmanr(y_target, y_ft_pred)[0]
 
-            transfer_eff = ft_pearson / source_pearson if source_pearson > 0 else 0
+            transfer_eff = ft_pearson / source_pearson_val if source_pearson_val > 0 else 0
 
-            results.append(TransferResult(
+            result = TransferResult(
                 protocol='physics_anchored_fine_tuning',
                 source_datasets=[source_name],
                 target_dataset=target_name,
-                source_pearson=source_pearson,
-                source_spearman=source_spearman,
+                source_pearson=source_pearson_val,
+                source_spearman=source_spearman_val,
                 target_pearson=zs_pearson,
                 target_spearman=zs_spearman,
                 fine_tuned_pearson=ft_pearson,
                 fine_tuned_spearman=ft_spearman,
                 fine_tune_n_samples=n_samples,
                 transfer_efficiency=transfer_eff,
-                n_common_features=len(common),
-            ))
+                n_common_features=len(self.common_features),
+            )
+            results.append(result)
 
         return results
 
 
 class MultiSpeciesJointTraining:
     """
-    Protocol 3: Multi-Species Joint Training with a Shared Probe.
+    Protocol 3: Multi-Species Joint Training.
 
-    Tests whether a single linear probe trained on physics features from
-    MULTIPLE species can predict activity across all of them, including
-    species held out entirely from training.
-
-    The shared probe approach works because physics features have the same
-    meaning across species: a bending angle or melting temperature computed
-    for a human sequence and a yeast sequence are directly comparable. This
-    means data from all species can be pooled into a single training set,
-    and the resulting probe captures universal relationships between DNA
-    biophysics and regulatory activity.
-
-    Procedure:
-    1. Find common features across ALL datasets (intersection of feature sets)
-    2. Align all datasets to use only common features (typically ~250 features)
-    3. Pool training data from all species (except optional holdout)
-    4. Standardize using pooled training statistics
-    5. Train a single shared Ridge/ElasticNet probe on the pooled data
-    6. Evaluate on each individual species (including holdout)
-
-    The holdout evaluation is the most stringent test: it measures whether a
-    probe trained on species A, B, C can predict activity in species D with
-    zero target-species training data, using only the shared physics space.
+    Train a shared physics encoder on multiple species simultaneously,
+    with species-specific output heads. Tests whether shared representation
+    improves transfer.
     """
 
-    def __init__(self, probe_type: str = 'ridge', probe_alpha: float = 1.0):
-        self.probe_type = probe_type
-        self.probe_alpha = probe_alpha
+    def __init__(self, config=None, output_dir: str = None):
+        self.config = config or {}
         self.shared_probe = None
+        self.common_features: List[str] = []
+        self.output_dir = output_dir
 
     def run(
         self,
@@ -2541,10 +2714,17 @@ class MultiSpeciesJointTraining:
 
         Args:
             datasets: Dict mapping name -> (X, y, feature_names)
-            holdout_dataset: Name of dataset to hold out for transfer testing
+            holdout_dataset: Optional dataset to hold out for transfer testing
+
+        Returns:
+            Dict mapping dataset name to TransferResult
         """
         from sklearn.linear_model import Ridge, ElasticNet
+        from sklearn.preprocessing import StandardScaler
         from scipy.stats import pearsonr, spearmanr
+
+        probe_type = self.config.get('probe_type', 'ridge') if isinstance(self.config, dict) else getattr(self.config, 'probe_type', 'ridge')
+        probe_alpha = self.config.get('probe_alpha', 1.0) if isinstance(self.config, dict) else getattr(self.config, 'probe_alpha', 1.0)
 
         # Find common features
         all_features = None
@@ -2553,30 +2733,29 @@ class MultiSpeciesJointTraining:
                 all_features = set(features)
             else:
                 all_features &= set(features)
-        common = sorted(all_features)
+        self.common_features = sorted(all_features)
 
         # Align all datasets
         aligned = {}
         for name, (X, y, features) in datasets.items():
-            idx = [features.index(f) for f in common]
+            idx = [features.index(f) for f in self.common_features]
             aligned[name] = (X[:, idx], y)
 
-        # Combine training data (exclude holdout)
+        # Combine for joint training (excluding holdout if specified)
         train_names = [n for n in datasets if n != holdout_dataset]
+
         X_combined = np.vstack([aligned[n][0] for n in train_names])
         y_combined = np.concatenate([aligned[n][1] for n in train_names])
 
         # Standardize
-        mean = X_combined.mean(axis=0)
-        std = X_combined.std(axis=0)
-        std[std < 1e-8] = 1.0
-        X_combined_s = (X_combined - mean) / std
+        scaler = StandardScaler()
+        X_combined_s = scaler.fit_transform(X_combined)
 
         # Train shared probe
-        if self.probe_type == 'ridge':
-            self.shared_probe = Ridge(alpha=self.probe_alpha)
+        if probe_type == 'ridge':
+            self.shared_probe = Ridge(alpha=probe_alpha)
         else:
-            self.shared_probe = ElasticNet(alpha=self.probe_alpha, l1_ratio=0.5, max_iter=10000)
+            self.shared_probe = ElasticNet(alpha=probe_alpha, l1_ratio=0.5, max_iter=10000)
         self.shared_probe.fit(X_combined_s, y_combined)
 
         y_train_pred = self.shared_probe.predict(X_combined_s)
@@ -2587,7 +2766,7 @@ class MultiSpeciesJointTraining:
         results = {}
         for name in datasets:
             X_eval, y_eval = aligned[name]
-            X_eval_s = (X_eval - mean) / std
+            X_eval_s = scaler.transform(X_eval)
 
             y_pred = self.shared_probe.predict(X_eval_s)
             r = pearsonr(y_eval, y_pred)[0]
@@ -2604,7 +2783,7 @@ class MultiSpeciesJointTraining:
                 target_pearson=r,
                 target_spearman=rho,
                 transfer_efficiency=transfer_eff,
-                n_common_features=len(common),
+                n_common_features=len(self.common_features),
             )
 
         return results

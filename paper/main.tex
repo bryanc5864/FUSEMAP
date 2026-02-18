@@ -249,6 +249,7 @@ This exceeds typical sequence lengths (110-249 bp), ensuring global context inte
 \item Gaussian noise injection to expression values ($\sigma=0.05$)
 \end{itemize}
 
+\FloatBarrier
 \subsection{Module 2: \physinformer{} --- Sequence-to-Physics Transformer}
 \label{sec:physinformer}
 
@@ -306,6 +307,7 @@ where position embeddings follow the standard transformer formulation with wavel
 \end{equation}
 where $Q, K, V$ are linear projections of nucleotide embeddings with $d_k = 64$. The final sequence representation is obtained via global average pooling.
 
+\FloatBarrier
 \subsection{Module 3: \tileformer{} --- Electrostatic Surrogate Model}
 \label{sec:tileformer}
 
@@ -361,6 +363,7 @@ This expensive pipeline ($\sim$30 seconds per sequence) is run once to generate 
 \end{equation}
 where weights $w_t$ are set inversely proportional to target variance.
 
+\FloatBarrier
 \subsection{Module 4: \stwoa{} --- Zero-Shot Cross-Species Transfer}
 \label{sec:s2a}
 
@@ -368,7 +371,7 @@ A key capability of \fusemap{} is predicting regulatory activity in species with
 
 \textbf{Key insight.} While DNA sequences diverge rapidly across species, the biophysical mechanisms of transcription are conserved. A sequence that creates optimal DNA shape for TF binding in Arabidopsis should function similarly in maize, even if the exact nucleotides differ.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[scale=0.9]
 % === S2A Prediction Scatter ===
@@ -444,6 +447,7 @@ More sophisticated domain adaptation (e.g., CORAL \citep{sun2016coral}, adversar
 \end{equation}
 This ensemble approach consistently outperforms single-source transfer by 5-10\%.
 
+\FloatBarrier
 \subsection{Module 5: \physicsvae{} --- Inverse Design}
 \label{sec:physicsvae}
 
@@ -497,6 +501,7 @@ with $\beta_{\text{max}} = 0.5$ and cycle length $T = 20$ epochs. This prevents 
 \end{equation}
 This loss encourages the decoder to produce sequences satisfying target properties.
 
+\FloatBarrier
 \subsection{Module 6: \place{} --- Uncertainty Quantification}
 \label{sec:place}
 
@@ -540,6 +545,7 @@ Epistemic uncertainty (model uncertainty) is high for out-of-distribution inputs
 \end{enumerate}
 This procedure guarantees marginal coverage regardless of the underlying uncertainty estimate quality.
 
+\FloatBarrier
 \subsection{Module 7: \oraclecheck{} --- Design Validation}
 \label{sec:oraclecheck}
 
@@ -582,7 +588,7 @@ Designed regulatory sequences may achieve high predicted activity yet violate bi
 
 We train and evaluate \fusemap{} on diverse regulatory sequence datasets spanning multiple species and assay types (Table~\ref{tab:datasets}).
 
-\begin{table}[htbp]
+\begin{table}[!ht]
 \centering
 \caption{\textbf{Dataset statistics.} Training data spans 7 species with diverse assay types. Total: 7.8M sequences.}
 \label{tab:datasets}
@@ -635,7 +641,7 @@ We compare against pure sequence-to-activity models:
 
 \subsection{\cadence{}: State-of-the-Art Activity Prediction}
 
-\begin{table}[htbp]
+\begin{table}[!ht]
 \centering
 \caption{\textbf{\cadence{} performance across cell types and species.} Best results in \textbf{bold}.}
 \label{tab:cadence_results}
@@ -682,9 +688,10 @@ Table~\ref{tab:cadence_results} summarizes \cadence{} performance. Key findings:
 \end{itemize}
 This concordance with known cell-type-specific regulatory programs (erythroid GATA/KLF, hepatocyte HNF/FOX, Drosophila ETS/GATA) validates that \cadence{} learns biologically meaningful features.
 
+\FloatBarrier
 \subsection{\physinformer{}: Biophysical Feature Prediction}
 
-\begin{table}[htbp]
+\begin{table}[!ht]
 \centering
 \caption{\textbf{\physinformer{} cross-species transfer.} Mean Pearson $r$ for biophysical features from K562-trained model. Feature counts vary as some biophysical features are undefined cross-kingdom.}
 \label{tab:physinformer_transfer}
@@ -718,7 +725,7 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 
 \textbf{Computational efficiency.} \physinformer{} predicts 521 biophysical features in 5ms per sequence (batch of 128), compared to $>$60 seconds for direct computation of all features using standard tools. This 12,000$\times$ speedup enables genome-scale biophysical profiling.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[scale=0.85]
 % Heatmap for feature transfer - REAL DATA from generate_figure8.py
@@ -770,9 +777,10 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 \label{fig:biophys_transfer}
 \end{figure}
 
+\FloatBarrier
 \subsection{\tileformer{}: Accelerated Electrostatics}
 
-\begin{table}[htbp]
+\begin{table}[!ht]
 \centering
 \caption{\textbf{\tileformer{} electrostatic prediction accuracy.} Comparison with APBS ground truth.}
 \label{tab:tileformer}
@@ -801,7 +809,7 @@ Overall & \textbf{0.960} & \textbf{0.982} & 0.008 \\
 
 \textbf{Speed.} 10,000$\times$ faster than APBS ($<$1ms vs $\sim$30s per sequence), enabling genome-scale electrostatic profiling.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -851,9 +859,10 @@ Overall & \textbf{0.960} & \textbf{0.982} & 0.008 \\
 \label{fig:tileformer_scatter}
 \end{figure}
 
+\FloatBarrier
 \subsection{\stwoa{}: Zero-Shot Cross-Species Transfer}
 
-\begin{table}[htbp]
+\begin{table}[!ht]
 \centering
 \caption{\textbf{\stwoa{} cross-species transfer.} Spearman $\rho$ for zero-shot prediction using physics-based features. Values from held-out test sets.}
 \label{tab:s2a}
@@ -885,7 +894,7 @@ Fly & Plants & -0.32 \\
 
 \textbf{Cross-kingdom limits.} Plant$\rightarrow$Fly transfer fails ($\rho=0.13$), and Fly$\rightarrow$Plant shows negative correlation ($\rho=-0.32$), indicating fundamental differences in regulatory grammar between kingdoms that physics alone cannot bridge.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[scale=0.75, transform shape,
     species/.style={circle, draw, minimum size=0.9cm, font=\scriptsize\bfseries, align=center},
@@ -921,7 +930,7 @@ Fly & Plants & -0.32 \\
 \label{fig:transfer_landscape}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[scale=0.75]
 \def\cellsize{0.9}
@@ -969,9 +978,10 @@ Fly & Plants & -0.32 \\
 \label{fig:transfer_matrix}
 \end{figure}
 
+\FloatBarrier
 \subsection{\place{}: Calibrated Uncertainty}
 
-\begin{table}[htbp]
+\begin{table}[!ht]
 \centering
 \caption{\textbf{\place{} k-NN calibration results.} All models use $k$=200 neighbors with $\alpha$=0.1 targeting 90\% coverage.}
 \label{tab:place}
@@ -997,7 +1007,7 @@ Yeast & 67,055 & 0.719 & 0.848 \\
 
 \textbf{Predictive impact.} Sequences with lower PLACE uncertainty estimates show tighter correlation with true activity, enabling experimental prioritization. The adaptive interval widths (proportional to local residual std in Table~\ref{tab:place}) allow researchers to identify high-confidence predictions for validation.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
@@ -1025,6 +1035,7 @@ Yeast & 67,055 & 0.719 & 0.848 \\
 \label{fig:place_calibration}
 \end{figure}
 
+\FloatBarrier
 \subsection{\physicsvae{}: Generative Model Evaluation}
 
 We evaluate \physicsvae{} on sequence reconstruction and generation quality.
@@ -1045,7 +1056,7 @@ We evaluate \physicsvae{} on sequence reconstruction and generation quality.
 
 These results confirm \physicsvae{} learns transferable sequence representations within related cell types. The 63.7\% multi-human accuracy (2.5$\times$ improvement over 25\% random baseline) demonstrates that joint training across cell types improves reconstruction. Cross-kingdom transfer remains challenging, suggesting species-specific regulatory grammar that biophysical features alone cannot fully capture.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[scale=1.0]
 % Real UMAP from K562 regime discovery: 158,377 sequences embedded in 521-D physics feature space
@@ -1140,6 +1151,7 @@ These results confirm \physicsvae{} learns transferable sequence representations
 \label{fig:vae_latent}
 \end{figure}
 
+\FloatBarrier
 \subsection{\oraclecheck{}: Design Validation Results}
 
 We evaluated \oraclecheck{} on therapeutically designed enhancer sequences generated by the \fusemap{} pipeline (Section~\ref{sec:applications}).
@@ -1156,9 +1168,10 @@ We evaluated \oraclecheck{} on therapeutically designed enhancer sequences gener
 
 \textbf{Comparison to random sequences.} As a negative control, we generated 200 random sequences with matched GC content. Only 12\% received GREEN verdicts, with 43\% RED due to physics z-score hard failures ($|z| > 4.0$) and OOD detection. This confirms that \oraclecheck{} effectively distinguishes naturalistic designs from arbitrary sequences.
 
+\FloatBarrier
 \subsection{Integrated Framework Performance}
 
-\begin{table}[htbp]
+\begin{table}[!ht]
 \centering
 \caption{\textbf{Comparison with baselines.} \fusemap{} matches LegNet on human MPRA, outperforms DeepSTARR-CNN on DeepSTARR, and uniquely enables cross-species transfer.}
 \label{tab:comparison}
@@ -1185,7 +1198,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 
 \textbf{Uncertainty quantification.} Only \fusemap{} provides calibrated confidence intervals.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -1217,7 +1230,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \end{figure}
 
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
@@ -1243,7 +1256,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \label{fig:s2a_features}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
 \begin{axis}[

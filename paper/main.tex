@@ -602,7 +602,7 @@ We compare against pure sequence-to-activity models:
 
 \begin{table}[htbp]
 \centering
-\caption{\textbf{\cadence{} performance across cell types and species.} Best results in \textbf{bold}. Values shown as mean $\pm$ std from 5 runs.}
+\caption{\textbf{\cadence{} performance across cell types and species.} Best results in \textbf{bold}.}
 \label{tab:cadence_results}
 \small
 \resizebox{\columnwidth}{!}{%
@@ -610,18 +610,18 @@ We compare against pure sequence-to-activity models:
 \toprule
 Dataset & Cell Type & Pearson $r$ & Spearman $\rho$ & $R^2$ \\
 \midrule
-ENCODE4 & K562 & \textbf{0.809}$\pm$0.008 & 0.759$\pm$0.011 & 0.652 \\
-ENCODE4 & HepG2 & \textbf{0.786}$\pm$0.010 & 0.770$\pm$0.009 & 0.613 \\
-ENCODE4 & WTC11 & \textbf{0.698}$\pm$0.015 & 0.591$\pm$0.018 & 0.472 \\
+ENCODE4 & K562 & \textbf{0.809} & 0.759 & 0.652 \\
+ENCODE4 & HepG2 & \textbf{0.786} & 0.770 & 0.613 \\
+ENCODE4 & WTC11 & \textbf{0.698} & 0.591 & 0.472 \\
 \midrule
-DeepSTARR & Dev. & \textbf{0.909}$\pm$0.004 & 0.889$\pm$0.005 & 0.822 \\
-DeepSTARR & Hk. & \textbf{0.920}$\pm$0.003 & 0.863$\pm$0.006 & 0.846 \\
+DeepSTARR & Dev. & \textbf{0.909} & 0.889 & 0.822 \\
+DeepSTARR & Hk. & \textbf{0.920} & 0.863 & 0.846 \\
 \midrule
-Plants & Arabid. & 0.618$\pm$0.018 & 0.591$\pm$0.015 & 0.382 \\
-Plants & Maize & \textbf{0.796}$\pm$0.012 & 0.799$\pm$0.010 & 0.634 \\
-Plants & Sorghum & \textbf{0.782}$\pm$0.021 & 0.777$\pm$0.019 & 0.612 \\
+Plants & Arabid. & 0.618 & 0.591 & 0.382 \\
+Plants & Maize & \textbf{0.796} & 0.799 & 0.634 \\
+Plants & Sorghum & \textbf{0.782} & 0.777 & 0.612 \\
 \midrule
-DREAM & Yeast & \textbf{0.958}$\pm$0.002 & 0.945$\pm$0.003 & 0.916 \\
+DREAM & Yeast & \textbf{0.958} & 0.945 & 0.916 \\
 \bottomrule
 \end{tabular}%
 }
@@ -1348,13 +1348,13 @@ We have introduced \fusemap{}, a framework that improves generalization and cros
 
 \textbf{Broader impact.} \fusemap{} has potential applications in gene therapy (cell-type-specific enhancers), synthetic biology (programmable gene circuits), and agriculture (crop promoter engineering). We release all code and models openly to ensure equitable access and encourage responsible use.
 
-\textbf{Code and data.} All code, trained models, and processed datasets are available at \url{https://github.com/bryanc5864/FUSEMAP}.
+\textbf{Code and data.} All code, trained models, and processed datasets are available under the MIT license at \url{https://github.com/bryanc5864/FUSEMAP}.
 
 %==============================================================================
 \section*{Reproducibility Statement}
 %==============================================================================
 
-All code, trained model weights, and processed datasets are publicly available at \url{https://github.com/bryanc5864/FUSEMAP}. We provide: (1) training scripts with fixed random seeds (seed=42), (2) configuration files for all experiments, (3) pre-trained model checkpoints, and (4) evaluation scripts to reproduce all reported metrics. Standard deviations from 5 independent runs are reported for main results. Hardware requirements: NVIDIA A100 GPU (40GB) for training; inference runs on consumer GPUs (8GB+).
+All code, trained model weights, and processed datasets are publicly available under the MIT license at \url{https://github.com/bryanc5864/FUSEMAP}. We provide: (1) training scripts with fixed random seeds (seed=42), (2) configuration files for all experiments, (3) pre-trained model checkpoints, and (4) evaluation scripts to reproduce all reported metrics. Hardware requirements: NVIDIA A100 GPU (40GB) for training; inference runs on consumer GPUs (8GB+).
 
 %==============================================================================
 % References
@@ -1720,7 +1720,7 @@ Full pipeline & 25.7M & 28 hrs & 26 ms/seq \\
 \item Hessian computation for \place{}: 24GB
 \end{itemize}
 
-\textbf{Reproducibility:} All random seeds fixed (42 for main experiments). Standard deviations from 5 independent runs typically $<$0.01 for Pearson $r$.
+\textbf{Reproducibility:} All random seeds fixed (seed=42 for all experiments) to ensure deterministic training and reproducibility.
 
 \subsection{Motif Analysis}
 

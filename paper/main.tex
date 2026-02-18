@@ -56,7 +56,7 @@ $^{1}$Cold Spring Harbor Laboratory\\
 \maketitle
 
 \begin{abstract}
-DNA shape and electrostatic properties form a conserved biophysical language that enables regulatory activity prediction across species boundaries. Current deep learning approaches achieve high \emph{in silico} accuracy but often fail to generalize to designed sequences outside the training distribution. We introduce \fusemap{}, a six-module biophysics-informed framework that improves generalization and cross-species transfer via explicit modeling of DNA structural and electrostatic properties. Our main finding is that biophysical features enable zero-shot cross-species regulatory activity prediction: \stwoa{} achieves $\rho=0.59$--$0.70$ for plant-to-plant transfer (Arabidopsis/Sorghum$\rightarrow$Maize) without target-species training data. Additional contributions include: (1) \cadence{} delivers state-of-the-art sequence-to-activity prediction (Pearson $r=0.92$ housekeeping, $r=0.91$ developmental on Drosophila; $r=0.81$ on human cell lines; $r=0.96$ on yeast); (2) \physinformer{} predicts 521 biophysical features with $r=0.92$ validation correlation; (3) \tileformer{} provides 10,000$\times$ acceleration for electrostatic summary statistic prediction (8 values per sequence) at $R^2>0.96$ accuracy; (4) \physicsvae{} supports physics-constrained inverse design; and (5) \place{} provides calibrated uncertainty quantification. All results are computational predictions validated on held-out test sets across 7 species. We release all code, trained models, and datasets.
+DNA shape and electrostatic properties form a conserved biophysical language that enables regulatory activity prediction across species boundaries. Current deep learning approaches achieve high \emph{in silico} accuracy but often fail to generalize to designed sequences outside the training distribution. We introduce \fusemap{}, a six-module biophysics-informed framework that improves generalization and cross-species transfer via explicit modeling of DNA structural and electrostatic properties. Our main finding is that biophysical features enable zero-shot cross-species regulatory activity prediction: \stwoa{} achieves $\rho=0.59$--$0.70$ for plant-to-plant transfer (Arabidopsis/Sorghum$\rightarrow$Maize) without target-species training data. Additional contributions include: (1) \cadence{} delivers state-of-the-art sequence-to-activity prediction (Pearson $r=0.92$ housekeeping, $r=0.91$ developmental on Drosophila; $r=0.81$ on human cell lines; $r=0.96$ on yeast); (2) \physinformer{} predicts 521 biophysical features with $r=0.92$ validation correlation; (3) \tileformer{} provides 10,000$\times$ acceleration for electrostatic summary statistic prediction (6 values per sequence) at $R^2>0.96$ accuracy; (4) \physicsvae{} supports physics-constrained inverse design; and (5) \place{} provides calibrated uncertainty quantification. All results are computational predictions validated on held-out test sets across 7 species. We release all code, trained models, and datasets.
 \end{abstract}
 
 %==============================================================================
@@ -71,7 +71,7 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 
 \textbf{Our hypothesis: biophysics improves generalization.} We propose that incorporating biophysical constraints---DNA shape, electrostatics, and flexibility---directly into the modeling pipeline improves generalization and enables cross-species transfer. Transcription factor binding depends not only on primary sequence but also on three-dimensional DNA shape \citep{rohs2009origins}, local electrostatic potential distributions \citep{baker2001electrostatics}, and nucleosome positioning dynamics \citep{schones2008dinucleosome}. Sequence-only models that ignore these constraints achieve high accuracy on test sets sharing training distribution statistics but fail on novel designs. Prior studies document this: yeast promoter models with $r>0.95$ showed reduced correlation on designed sequences \citep{vaishnav2022evolution}; cell-type-specific enhancers showed variable validation rates \citep{gosai2023machine}; plant promoters with known motifs showed unpredictable activity \citep{jores2021synthetic}.
 
-\textbf{Our contribution: Physics-informed cross-species transfer.} We present \fusemap{} (\textbf{F}oundational \textbf{U}nified \textbf{S}equence-to-\textbf{E}xpression \textbf{M}odeling with \textbf{A}ctive \textbf{P}hysics), a framework that improves generalization and enables cross-species transfer by explicitly incorporating biophysical constraints. Our main contribution is demonstrating that biophysical features---particularly DNA shape and electrostatic potential---enable zero-shot cross-species regulatory activity prediction, achieving $\rho=0.70$ for plant-to-plant transfer without target-species training data. \fusemap{} comprises six modules (Figure~\ref{fig:overview}):
+\textbf{Our contribution: Physics-informed cross-species transfer.} We present \fusemap{} (\textbf{F}oundational \textbf{U}niversal \textbf{S}equence to \textbf{E}xpression \textbf{M}odels \textbf{A}ugmented with \textbf{P}hysics-informed naturality prediction networks), a framework that improves generalization and enables cross-species transfer by explicitly incorporating biophysical constraints. Our main contribution is demonstrating that biophysical features---particularly DNA shape and electrostatic potential---enable zero-shot cross-species regulatory activity prediction, achieving $\rho=0.70$ for plant-to-plant transfer without target-species training data. \fusemap{} comprises six modules (Figure~\ref{fig:overview}):
 
 \begin{enumerate}[leftmargin=*,itemsep=0pt,topsep=2pt]
 \item \textbf{\cadence{}}: State-of-the-art sequence-to-activity prediction using an optimized LegNet architecture with reverse-complement equivariance
@@ -176,7 +176,7 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 \subsection{Module 1: \cadence{} --- Sequence-to-Activity Prediction}
 \label{sec:cadence}
 
-\cadence{} (\textbf{C}onvolutional \textbf{A}rchitecture for \textbf{D}NA \textbf{E}xpression with \textbf{N}eural \textbf{C}alibrated \textbf{E}stimation) provides competitive sequence-to-activity prediction using an optimized convolutional architecture based on LegNet.
+\cadence{} (\textbf{C}onvolutional \textbf{A}rchitecture for \textbf{D}NA \textbf{EN}hancer \textbf{C}haracterization and \textbf{E}xpression prediction) provides competitive sequence-to-activity prediction using an optimized convolutional architecture based on LegNet.
 
 \textbf{Architecture.} We adopt the LegNet architecture from \citet{de2022sequence} with the following modification: an RC-equivariant stem that ensures $f(x) = f(\text{RC}(x))$ for double-stranded DNA. The remaining architectural components---dilated convolutional blocks, squeeze-excitation attention, and multi-task heads---are standard LegNet:
 
@@ -255,9 +255,9 @@ This exceeds typical sequence lengths (110-249 bp), ensuring global context inte
 
 \textbf{Architecture.} \physinformer{} uses a transformer encoder with:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Convolutional tokenization: sequences split into overlapping 15-bp tiles
-\item 6-layer transformer with 8 attention heads, dimension 512
-\item Multi-task prediction heads for each feature category
+\item Nucleotide embedding with sinusoidal positional encoding
+\item 8-layer transformer with 8 attention heads, dimension 512, feed-forward dimension 2048
+\item Individual prediction heads for each biophysical feature (521 separate MLPs)
 \end{itemize}
 
 \begin{equation}
@@ -287,11 +287,11 @@ where $\sigma_c$ are learned task weights and $\mathcal{L}_c$ is the MSE for cat
 \end{equation}
 where position embeddings follow the standard transformer formulation with wavelengths ranging from $2\pi$ to $10000 \cdot 2\pi$.
 
-\textbf{Tile-based processing.} Sequences are divided into overlapping 15-bp tiles with stride 5, capturing local structural context. The transformer processes tile embeddings through self-attention:
+\textbf{Sequence processing.} The transformer processes nucleotide embeddings through self-attention layers:
 \begin{equation}
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 \end{equation}
-where $Q, K, V$ are linear projections of tile embeddings with $d_k = 64$.
+where $Q, K, V$ are linear projections of nucleotide embeddings with $d_k = 64$. The final sequence representation is obtained via global average pooling.
 
 \subsection{Module 3: \tileformer{} --- Electrostatic Surrogate Model}
 \label{sec:tileformer}
@@ -300,15 +300,15 @@ Electrostatic potential critically influences TF-DNA recognition \citep{rohs2009
 
 \textbf{Problem formulation.} Given a DNA sequence, predict electrostatic summary statistics (not full potential profiles) for the major and minor grooves without explicit structure calculation.
 
-\textbf{Architecture.} \tileformer{} processes sequences through:
+\textbf{Architecture.} \tileformer{} uses a transformer encoder:
 \begin{enumerate}[leftmargin=*,itemsep=0pt]
-\item Convolutional feature extraction (same as \cadence{} stem)
-\item Bidirectional LSTM for sequential dependencies
-\item Position-wise prediction heads for potential values
+\item Nucleotide embedding with sinusoidal positional encoding (dimension 256)
+\item 6-layer transformer with 8 attention heads, feed-forward dimension 1024
+\item Global average pooling followed by prediction head for 6 electrostatic statistics
 \end{enumerate}
 
 \begin{equation}
-\hat{\psi} = \text{MLP}(\text{BiLSTM}(\text{ConvStem}(\mathbf{x})))
+\hat{\psi} = \text{MLP}(\text{Pool}(\text{TransformerEnc}(\text{NucEmbed}(\mathbf{x}))))
 \end{equation}
 
 \textbf{Training data.} We generate training data by:
@@ -318,7 +318,7 @@ Electrostatic potential critically influences TF-DNA recognition \citep{rohs2009
 \item Extracting groove potential profiles
 \end{enumerate}
 
-This expensive pipeline ($\sim$30 seconds per sequence) is run once to generate 50,000 examples, split 80/10/10 into 40,000 training, 5,000 validation, and 5,000 test sequences. \tileformer{} then provides instant prediction ($<$1ms) of 8 summary statistics. Note: the 10,000$\times$ speedup compares full APBS calculation against predicting these 8 summary values, not full electrostatic potential profiles.
+This expensive pipeline ($\sim$30 seconds per sequence) is run once to generate 50,000 examples, split 80/10/10 into 40,000 training, 5,000 validation, and 5,000 test sequences. \tileformer{} then provides instant prediction ($<$1ms) of 6 summary statistics. Note: the 10,000$\times$ speedup compares full APBS calculation against predicting these 6 summary values, not full electrostatic potential profiles.
 
 \textbf{APBS calculation details.} For each training sequence, we:
 \begin{enumerate}[leftmargin=*,itemsep=0pt]
@@ -329,22 +329,22 @@ This expensive pipeline ($\sim$30 seconds per sequence) is run once to generate 
 \item Compute summary statistics: minimum, maximum, mean, and standard deviation per groove
 \end{enumerate}
 
-\textbf{Output targets.} \tileformer{} predicts 8 electrostatic summary statistics (not position-wise potential profiles):
+\textbf{Output targets.} \tileformer{} predicts 6 electrostatic summary statistics (not position-wise potential profiles):
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Minor groove: $\psi_{\text{min}}^{\text{minor}}$, $\psi_{\text{max}}^{\text{minor}}$, $\psi_{\text{mean}}^{\text{minor}}$, $\psi_{\text{std}}^{\text{minor}}$
-\item Major groove: $\psi_{\text{min}}^{\text{major}}$, $\psi_{\text{max}}^{\text{major}}$, $\psi_{\text{mean}}^{\text{major}}$, $\psi_{\text{std}}^{\text{major}}$
+\item Standard region: $\psi_{\text{min}}^{\text{std}}$, $\psi_{\text{max}}^{\text{std}}$, $\psi_{\text{mean}}^{\text{std}}$
+\item Enhanced region: $\psi_{\text{min}}^{\text{enh}}$, $\psi_{\text{max}}^{\text{enh}}$, $\psi_{\text{mean}}^{\text{enh}}$
 \end{itemize}
 
-\textbf{Architecture details.} The BiLSTM component uses:
+\textbf{Architecture details.} The transformer component uses:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item 2 layers with 256 hidden units per direction
-\item Dropout 0.2 between layers
-\item Layer normalization after final LSTM output
+\item 6 transformer blocks with GELU activation
+\item Dropout 0.1 between layers
+\item Layer normalization in each block
 \end{itemize}
 
 \textbf{Loss function.} Multi-target MSE with target-specific weighting:
 \begin{equation}
-\mathcal{L}_{\text{TileFormer}} = \sum_{t=1}^{8} w_t \cdot \text{MSE}(\hat{\psi}_t, \psi_t)
+\mathcal{L}_{\text{TileFormer}} = \sum_{t=1}^{6} w_t \cdot \text{MSE}(\hat{\psi}_t, \psi_t)
 \end{equation}
 where weights $w_t$ are set inversely proportional to target variance.
 
@@ -1622,15 +1622,15 @@ Feature importance from gradient-based attribution on plant transfer (Arab.+Sorg
 \item \textbf{Stiffness}: 7.5\%
 \item \textbf{Entropy}: 6.5\%
 \end{itemize}
-Final S2A model uses 127 features selected by RFECV from 521 total.
+Final S2A model uses $\sim$250 features selected by RFECV from 521 total.
 
 \subsubsection{\tileformer{} Architecture}
 
-\tileformer{} combines CNN feature extraction with BiLSTM for sequence modeling:
+\tileformer{} uses a transformer encoder architecture:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Conv stem: Same as \cadence{} for initial feature extraction
-\item BiLSTM: 2 layers, 256 hidden units per direction
-\item Output: 8 electrostatic summary statistics per sequence
+\item Nucleotide embedding: dimension 256 with sinusoidal positional encoding
+\item Transformer: 6 layers, 8 attention heads, feed-forward dimension 1024
+\item Output: 6 electrostatic summary statistics per sequence
 \item Speed: $<$1ms per sequence vs $\sim$30s for APBS
 \end{itemize}
 

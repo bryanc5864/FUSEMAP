@@ -1227,9 +1227,15 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 
 \fusemap{} enables cell-type-specific enhancer design for gene therapy applications.
 
-\textbf{Method.} Using \physicsvae{} conditioned on high target-cell and low off-target activity, candidate sequences can be generated and filtered by \place{} uncertainty estimates. The biophysical constraints from \physinformer{} ensure generated sequences have realistic DNA properties.
+\textbf{Method.} Using in-silico mutagenesis (ISM) optimization through \cadence{} conditioned on high target-cell and low off-target activity, candidate sequences are generated and filtered by \place{} uncertainty estimates. Specificity is computed as $S(\text{seq}) = \hat{y}_{\text{target}} - 0.5 \cdot \hat{y}_{\text{off1}} - 0.5 \cdot \hat{y}_{\text{off2}}$, where predictions come from cell-type-specific \cadence{} models. Cell-type-appropriate transcription factor motifs are enforced as constraints (e.g., HNF4A/FOXA1/FOXA2 for HepG2; GATA1/GATA2/TAL1 for K562).
 
-\textbf{Application.} For liver-specific delivery, one would condition on high HepG2 and low K562 activity. The multi-human VAE (63.7\% reconstruction accuracy) provides a foundation for such conditional generation, though experimental validation of designed sequences remains future work.
+\textbf{Results.} We generated 200 candidate sequences per cell type:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{HepG2 (liver-specific):} Mean specificity 4.39 log-units ($>$10,000-fold), 99.0\% pass rate, 96.5\% GREEN oracle verdicts
+\item \textbf{K562 (erythroid):} Mean specificity 1.95 log-units, 83.5\% pass rate
+\item \textbf{WTC11 (pluripotent):} Mean specificity 1.22 log-units, 86.0\% pass rate
+\end{itemize}
+HepG2 achieves highest specificity due to well-characterized liver-specific TF grammar. Experimental validation of designed sequences remains future work.
 
 \subsection{Cross-Species Promoter Ranking}
 
@@ -1251,9 +1257,14 @@ We applied \fusemap{} to predict effects of regulatory variants in ClinVar.
 \item Compare predictions with clinical significance annotations
 \end{enumerate}
 
-\textbf{Capability.} This pipeline enables systematic variant effect prediction with uncertainty quantification. Pathogenic variants are expected to show larger $|\Delta\text{activity}|$ than benign variants. High-confidence predictions (low \place{} uncertainty) should be prioritized for follow-up.
+\textbf{Results.} On 1,000 balanced ClinVar regulatory variants (500 pathogenic, 500 benign):
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item AUROC = 0.571, AUPRC = 0.542 for pathogenic/benign classification
+\item Effect magnitudes: 5 strong ($|z| > 3$), 2 moderate ($|z| > 2$), 9 weak effects detected
+\item Physics-based features (thermodynamics, DNA shape) contribute to variant effect interpretation
+\end{itemize}
 
-\textbf{Limitations.} This approach complements but does not replace dedicated variant effect predictors such as CADD \citep{rentzsch2019cadd} or LINSIGHT \citep{huang2017linsight}, which incorporate conservation, functional annotations, and other features beyond sequence-based activity prediction. Quantitative benchmarking against these methods remains future work.
+\textbf{Limitations.} This approach complements but does not replace dedicated variant effect predictors such as CADD \citep{rentzsch2019cadd} or LINSIGHT \citep{huang2017linsight}, which incorporate conservation, functional annotations, and other features beyond sequence-based activity prediction. The modest AUROC reflects that regulatory variant pathogenicity involves tissue context and dosage effects not captured by sequence-only models.
 
 \subsection{Gradient-Based Enhancer Optimization}
 
@@ -1802,6 +1813,36 @@ Key observations:
 \item Strong within-plant transfer ($\rho = 0.59$--$0.70$, Table~\ref{tab:s2a})
 \item Moderate within-human transfer ($\rho = 0.26$ for K562+HepG2$\to$WTC11)
 \item Cross-kingdom transfer fails (negative $\rho$ for Fly$\to$Plants)
+\end{itemize}
+
+\subsubsection{Cross-Species \cadence{} Fine-Tuning}
+
+We conducted 168 \cadence{} transfer experiments from human cell types to Drosophila and mouse, evaluating fine-tuning strategies across data fractions.
+
+\begin{table}[h]
+\centering
+\caption{\textbf{\cadence{} cross-species transfer via fine-tuning.} Best results with 25\% target data.}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Transfer Direction & Spearman $\rho$ & Pearson $r$ & AUROC \\
+\midrule
+K562 $\to$ Drosophila S2 & 0.556 & 0.579 & 0.804 \\
+HepG2 $\to$ Drosophila S2 & 0.524 & 0.543 & --- \\
+WTC11 $\to$ Drosophila S2 & 0.489 & 0.500 & --- \\
+\midrule
+WTC11 $\to$ Mouse ESC & 0.281 & 0.316 & 0.623 \\
+K562 $\to$ Mouse ESC & 0.216 & 0.250 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key findings:}
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Full fine-tuning outperforms frozen backbone (mean $\rho = 0.30$ vs $0.15$)
+\item Human$\to$Drosophila transfer succeeds ($\rho = 0.56$); human$\to$mouse is harder ($\rho = 0.28$)
+\item Performance scales with target data: 1\% ($\rho = 0.16$) $\to$ 25\% ($\rho = 0.28$)
+\item K562 transfers best to Drosophila; WTC11 transfers best to mouse
 \end{itemize}
 
 \subsection{Broader Impact Statement}

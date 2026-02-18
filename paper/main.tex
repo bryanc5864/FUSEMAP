@@ -360,13 +360,13 @@ A key capability of \fusemap{} is predicting regulatory activity in species with
 \begin{tikzpicture}[scale=0.9]
 % === S2A Prediction Scatter ===
 \begin{axis}[
-    width=0.95\columnwidth,
-    height=6cm,
-    xlabel={S2A Predicted Activity (Arab.+Sorg.$\to$Maize)},
+    width=0.9\columnwidth,
+    height=5.5cm,
+    xlabel={S2A Predicted Activity},
     ylabel={True Maize Activity},
-    xlabel style={font=\normalsize},
-    ylabel style={font=\normalsize},
-    tick label style={font=\small},
+    xlabel style={font=\small},
+    ylabel style={font=\small},
+    tick label style={font=\tiny},
     xmin=0, xmax=3,
     ymin=0, ymax=3,
     grid=major,
@@ -838,35 +838,35 @@ Fly & Plants & -0.32 \\
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[scale=1.0, transform shape,
-    species/.style={circle, draw, minimum size=1.1cm, font=\scriptsize\bfseries, align=center},
+\begin{tikzpicture}[scale=0.75, transform shape,
+    species/.style={circle, draw, minimum size=0.9cm, font=\scriptsize\bfseries, align=center},
     arrow/.style={-{Stealth[length=2mm]}, thick},
 ]
 % Plant cluster
-\node[species, fill=green!30] (arab) at (0,1.8) {Arab.};
-\node[species, fill=green!30] (maize) at (2.0,1.8) {Maize};
-\node[species, fill=green!30] (sorg) at (1.0,0.3) {Sorg.};
+\node[species, fill=green!30] (arab) at (0,1.6) {Arab.};
+\node[species, fill=green!30] (maize) at (1.8,1.6) {Maize};
+\node[species, fill=green!30] (sorg) at (0.9,0.2) {Sorg.};
 
 % Animal cluster
-\node[species, fill=blue!30] (k562) at (4.5,1.8) {K562};
-\node[species, fill=blue!30] (hepg2) at (6.5,1.8) {HepG2};
-\node[species, fill=blue!30] (fly) at (5.5,0.3) {Fly};
+\node[species, fill=blue!30] (k562) at (4.0,1.6) {K562};
+\node[species, fill=blue!30] (hepg2) at (5.8,1.6) {HepG2};
+\node[species, fill=blue!30] (fly) at (4.9,0.2) {Fly};
 
 % Plant arrows (strong) - ensemble values from Table 5
-\draw[arrow, green!60!black, line width=1.5pt] (arab) -- node[above, font=\scriptsize] {0.70*} (maize);
-\draw[arrow, green!60!black, line width=1.2pt] (sorg) -- node[left, font=\scriptsize] {0.65*} (arab);
-\draw[arrow, green!60!black, line width=1.3pt] (sorg) -- node[right, font=\scriptsize] {0.63} (maize);
+\draw[arrow, green!60!black, line width=1.5pt] (arab) -- node[above, font=\tiny] {.70} (maize);
+\draw[arrow, green!60!black, line width=1.2pt] (sorg) -- node[left, font=\tiny] {.65} (arab);
+\draw[arrow, green!60!black, line width=1.3pt] (sorg) -- node[right, font=\tiny] {.63} (maize);
 
 % Animal arrows (moderate)
-\draw[arrow, blue!60, line width=0.8pt] (k562) -- node[above, font=\scriptsize] {0.26} (hepg2);
-\draw[arrow, blue!60, line width=0.6pt] (fly) -- node[left, font=\scriptsize] {0.18} (k562);
+\draw[arrow, blue!60, line width=0.8pt] (k562) -- node[above, font=\tiny] {.26} (hepg2);
+\draw[arrow, blue!60, line width=0.6pt] (fly) -- node[left, font=\tiny] {.18} (k562);
 
 % Cross-kingdom (weak/negative)
-\draw[arrow, red!60, dashed, line width=0.5pt] (arab) to[bend left=15] node[above, font=\scriptsize, red] {-0.32} (fly);
+\draw[arrow, red!60, dashed, line width=0.5pt] (arab) to[bend left=15] node[above, font=\tiny, red] {-.32} (fly);
 
 % Labels
-\node[font=\scriptsize, green!50!black] at (1.0,-0.3) {Plants: Strong};
-\node[font=\scriptsize, blue!50!black] at (5.5,-0.3) {Animals: Moderate};
+\node[font=\scriptsize, green!50!black] at (0.9,-0.3) {Plants};
+\node[font=\scriptsize, blue!50!black] at (4.9,-0.3) {Animals};
 \end{tikzpicture}
 \caption{\textbf{Cross-species transfer landscape.} Arrow thickness indicates transfer correlation. \stwoa{} enables strong within-kingdom transfer (green: $\rho>0.6$) but cross-kingdom fails (red dashed).}
 \label{fig:transfer_landscape}
@@ -874,34 +874,34 @@ Fly & Plants & -0.32 \\
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[scale=0.95]
-\def\cellsize{1.1}
+\begin{tikzpicture}[scale=0.75]
+\def\cellsize{0.9}
 % Labels (target species)
-\node[font=\scriptsize, rotate=45, anchor=west] at (0.5*\cellsize, 4.3*\cellsize) {WTC11};
-\node[font=\scriptsize, rotate=45, anchor=west] at (1.5*\cellsize, 4.3*\cellsize) {S2};
-\node[font=\scriptsize, rotate=45, anchor=west] at (2.5*\cellsize, 4.3*\cellsize) {Arab.};
-\node[font=\scriptsize, rotate=45, anchor=west] at (3.5*\cellsize, 4.3*\cellsize) {Maize};
+\node[font=\tiny, rotate=45, anchor=west] at (0.5*\cellsize, 4.3*\cellsize) {WTC11};
+\node[font=\tiny, rotate=45, anchor=west] at (1.5*\cellsize, 4.3*\cellsize) {S2};
+\node[font=\tiny, rotate=45, anchor=west] at (2.5*\cellsize, 4.3*\cellsize) {Arab.};
+\node[font=\tiny, rotate=45, anchor=west] at (3.5*\cellsize, 4.3*\cellsize) {Maize};
 
 % Labels (source species)
-\node[font=\scriptsize, anchor=east] at (-0.1, 3.5*\cellsize) {K562+HepG2};
-\node[font=\scriptsize, anchor=east] at (-0.1, 2.5*\cellsize) {Plants};
-\node[font=\scriptsize, anchor=east] at (-0.1, 1.5*\cellsize) {Animals};
-\node[font=\scriptsize, anchor=east] at (-0.1, 0.5*\cellsize) {Arab.+Sorg.};
+\node[font=\tiny, anchor=east] at (-0.1, 3.5*\cellsize) {K562+HepG2};
+\node[font=\tiny, anchor=east] at (-0.1, 2.5*\cellsize) {Plants};
+\node[font=\tiny, anchor=east] at (-0.1, 1.5*\cellsize) {Animals};
+\node[font=\tiny, anchor=east] at (-0.1, 0.5*\cellsize) {Arab.+Sorg.};
 
 % Real values from FUSEMAP_results/s2a_transfer/
 % Row 1: K562+HepG2 sources
-\fill[teal!45] (0,3*\cellsize) rectangle (\cellsize,4*\cellsize); \node[font=\scriptsize\bfseries] at (0.5*\cellsize,3.5*\cellsize) {.26};  % → WTC11
-\fill[violet!15] (\cellsize,3*\cellsize) rectangle (2*\cellsize,4*\cellsize); \node[font=\scriptsize\bfseries] at (1.5*\cellsize,3.5*\cellsize) {-.09};  % → S2
+\fill[teal!45] (0,3*\cellsize) rectangle (\cellsize,4*\cellsize); \node[font=\tiny\bfseries] at (0.5*\cellsize,3.5*\cellsize) {.26};
+\fill[violet!15] (\cellsize,3*\cellsize) rectangle (2*\cellsize,4*\cellsize); \node[font=\tiny\bfseries] at (1.5*\cellsize,3.5*\cellsize) {-.09};
 
 % Row 2: Plants → targets
-\fill[violet!25] (0,2*\cellsize) rectangle (\cellsize,3*\cellsize); \node[font=\scriptsize\bfseries] at (0.5*\cellsize,2.5*\cellsize) {--};
-\fill[teal!30] (\cellsize,2*\cellsize) rectangle (2*\cellsize,3*\cellsize); \node[font=\scriptsize\bfseries] at (1.5*\cellsize,2.5*\cellsize) {.13};  % → S2
+\fill[violet!25] (0,2*\cellsize) rectangle (\cellsize,3*\cellsize); \node[font=\tiny\bfseries] at (0.5*\cellsize,2.5*\cellsize) {--};
+\fill[teal!30] (\cellsize,2*\cellsize) rectangle (2*\cellsize,3*\cellsize); \node[font=\tiny\bfseries] at (1.5*\cellsize,2.5*\cellsize) {.13};
 
 % Row 3: Animals → plants
-\fill[violet!10] (2*\cellsize,1*\cellsize) rectangle (3*\cellsize,2*\cellsize); \node[font=\scriptsize\bfseries] at (2.5*\cellsize,1.5*\cellsize) {-.32};  % → Arab
+\fill[violet!10] (2*\cellsize,1*\cellsize) rectangle (3*\cellsize,2*\cellsize); \node[font=\tiny\bfseries] at (2.5*\cellsize,1.5*\cellsize) {-.32};
 
 % Row 4: Within-plant (Arab+Sorg → Maize): STRONG
-\fill[yellow!85!orange] (3*\cellsize,0) rectangle (4*\cellsize,\cellsize); \node[font=\scriptsize\bfseries] at (3.5*\cellsize,0.5*\cellsize) {\textbf{.70}};
+\fill[yellow!85!orange] (3*\cellsize,0) rectangle (4*\cellsize,\cellsize); \node[font=\tiny\bfseries] at (3.5*\cellsize,0.5*\cellsize) {\textbf{.70}};
 
 % Grid
 \draw[gray!50] (0,0) grid[step=\cellsize] (4*\cellsize,4*\cellsize);
@@ -911,9 +911,9 @@ Fly & Plants & -0.32 \\
 \draw[thick, black] (-0.1,2*\cellsize) -- (4.1*\cellsize,2*\cellsize);
 
 % Clade labels
-\node[font=\scriptsize] at (0.5*\cellsize, -0.4*\cellsize) {Human};
-\node[font=\scriptsize] at (1.5*\cellsize, -0.4*\cellsize) {Fly};
-\node[font=\scriptsize] at (3*\cellsize, -0.4*\cellsize) {Plant};
+\node[font=\tiny] at (0.5*\cellsize, -0.4*\cellsize) {Human};
+\node[font=\tiny] at (1.5*\cellsize, -0.4*\cellsize) {Fly};
+\node[font=\tiny] at (3*\cellsize, -0.4*\cellsize) {Plant};
 
 \end{tikzpicture}
 \caption{\textbf{Physics features enable within-kingdom but not cross-kingdom transfer.} Heatmap of zero-shot Spearman $\rho$ for \stwoa{} transfer between species. \textit{Within-plant transfer succeeds}: training on Arabidopsis+Sorghum physics features predicts held-out Maize activity with $\rho=0.70$ (n=2,461). \textit{Within-human is moderate}: K562+HepG2$\rightarrow$WTC11 achieves $\rho=0.26$. \textit{Cross-kingdom fails}: animal$\rightarrow$plant ($\rho=-0.32$) and plant$\rightarrow$animal ($\rho=0.13$) transfers show that while DNA physical properties are conserved, regulatory grammar is kingdom-specific.}
@@ -953,17 +953,17 @@ Yeast & 67,055 & 0.719 & 0.848 \\
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
     ybar,
-    width=\columnwidth,
-    height=5.5cm,
-    ylabel={Residual Std / Noise Var},
-    ylabel style={font=\normalsize},
+    width=0.9\columnwidth,
+    height=5cm,
+    ylabel={Value},
+    ylabel style={font=\small},
     symbolic x coords={K562, HepG2, DeepSTARR, Maize, Yeast},
     xtick=data,
-    x tick label style={font=\small},
+    x tick label style={font=\tiny, rotate=30, anchor=east},
     ymin=0, ymax=1.2,
-    bar width=8pt,
-    legend style={at={(0.98,0.98)}, anchor=north east, font=\scriptsize},
-    enlarge x limits=0.12,
+    bar width=6pt,
+    legend style={at={(0.98,0.98)}, anchor=north east, font=\tiny},
+    enlarge x limits=0.15,
 ]
 % Real noise variance from calibration
 \addplot[fill=blue!60] coordinates {(K562,0.349) (HepG2,0.385) (DeepSTARR,0.641) (Maize,1.056) (Yeast,0.719)};
@@ -1083,8 +1083,8 @@ These results confirm \physicsvae{} learns transferable sequence representations
     (1.02,5.92) (0.71,5.12) (0.35,6.03) (0.90,5.40) (0.65,7.37) (0.26,5.71) (0.86,7.60) (0.48,6.79)
 };
 % Labels with biological interpretation
-\node[font=\small, blue!70, align=left] at (axis cs:8.5,3.0) {Regime 0 (50.1\%)\\high entropy\\low stacking};
-\node[font=\small, orange!80!red, align=left] at (axis cs:2.8,8.5) {Regime 1 (49.9\%)\\high $\Delta S$/$\Delta H$\\high stacking};
+\node[font=\tiny, blue!70, align=left] at (axis cs:8.8,2.5) {Regime 0\\(50.1\%)};
+\node[font=\tiny, orange!80!red, align=left] at (axis cs:2.5,8.8) {Regime 1\\(49.9\%)};
 \end{axis}
 \end{tikzpicture}
 \caption{\textbf{UMAP reveals distinct biophysical regimes with equivalent function.} We embedded 158,377 K562 regulatory sequences into a 521-dimensional space of biophysical features (thermodynamics, stacking energy, bending, entropy) and applied UMAP for visualization. HDBSCAN clustering identifies two regimes: Regime~0 (blue, 79,363 sequences) has higher sequence entropy and lower base-stacking energy; Regime~1 (orange, 79,002 sequences) has higher thermodynamic stability ($\Delta S$, $\Delta H$) and stacking. \textit{Key finding}: Both regimes have nearly identical activity distributions (mean$=-0.15\pm0.53$), demonstrating that sequences can achieve equivalent regulatory function through distinct biophysical strategies---a form of ``biophysical degeneracy'' in gene regulation.}
@@ -1125,20 +1125,20 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \begin{tikzpicture}
 \begin{axis}[
     ybar,
-    width=\columnwidth,
-    height=5.5cm,
+    width=0.9\columnwidth,
+    height=5cm,
     ylabel={Pearson $r$},
     symbolic x coords={K562, DeepSTARR},
     xtick=data,
-    x tick label style={font=\normalsize},
-    ylabel style={font=\normalsize},
+    x tick label style={font=\small},
+    ylabel style={font=\small},
     ymin=0.6, ymax=1.0,
-    bar width=15pt,
-    legend style={at={(0.98,0.98)}, anchor=north east, font=\small},
+    bar width=12pt,
+    legend style={at={(0.98,0.98)}, anchor=north east, font=\tiny},
     legend cell align=left,
-    enlarge x limits=0.3,
+    enlarge x limits=0.35,
     nodes near coords,
-    nodes near coords style={font=\small},
+    nodes near coords style={font=\tiny},
 ]
 
 \addplot[fill=gray!60] coordinates {(K562,0.811) (DeepSTARR,0.779)};

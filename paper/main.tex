@@ -659,7 +659,7 @@ Table~\ref{tab:cadence_results} summarizes \cadence{} performance. Key findings:
 \end{itemize}
 This concordance with known cell-type-specific regulatory programs (erythroid GATA/KLF, hepatocyte HNF/FOX, Drosophila ETS/GATA) validates that \cadence{} learns biologically meaningful features.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -728,7 +728,7 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 
 \textbf{Computational efficiency.} \physinformer{} predicts 521 biophysical features in 5ms per sequence (batch of 128), compared to $>$60 seconds for direct computation of all features using standard tools. This 12,000$\times$ speedup enables genome-scale biophysical profiling.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}[scale=0.85]
 % Heatmap for feature transfer - REAL DATA from generate_figure8.py
@@ -812,7 +812,7 @@ Overall & \textbf{0.960} & \textbf{0.982} & 0.008 \\
 
 \textbf{Speed.} 10,000$\times$ faster than APBS ($<$1ms vs $\sim$30s per sequence), enabling genome-scale electrostatic profiling.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -893,7 +893,7 @@ Fly & Plants & -0.32 \\
 
 \textbf{Plant-to-plant transfer.} Training on Arabidopsis and Sorghum, \stwoa{} achieves $\rho=0.59$--$0.70$ across plant transfer scenarios (best: $\rho=0.70$ for Arabidopsis+Sorghum$\rightarrow$Maize, n=2,461 test sequences). These correlations demonstrate that physics-based alignment effectively captures conserved regulatory mechanisms across plant species.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}[scale=0.9]
 % === S2A Prediction Scatter ===
@@ -929,7 +929,7 @@ Fly & Plants & -0.32 \\
 
 \textbf{Cross-kingdom limits.} Plant$\rightarrow$Fly transfer fails ($\rho=0.13$), and Fly$\rightarrow$Plant shows negative correlation ($\rho=-0.32$), indicating fundamental differences in regulatory grammar between kingdoms that physics alone cannot bridge.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}[scale=0.75, transform shape,
     species/.style={circle, draw, minimum size=0.9cm, font=\scriptsize\bfseries, align=center},
@@ -965,7 +965,7 @@ Fly & Plants & -0.32 \\
 \label{fig:transfer_landscape}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}[scale=0.75]
 \def\cellsize{0.9}
@@ -1013,7 +1013,7 @@ Fly & Plants & -0.32 \\
 \label{fig:transfer_matrix}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
@@ -1068,7 +1068,7 @@ Yeast & 67,055 & 0.719 & 0.848 \\
 
 \textbf{Predictive impact.} Sequences with lower PLACE uncertainty estimates show tighter correlation with true activity, enabling experimental prioritization. The adaptive interval widths (proportional to local residual std in Table~\ref{tab:place}) allow researchers to identify high-confidence predictions for validation.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
@@ -1117,7 +1117,7 @@ We evaluate \physicsvae{} on sequence reconstruction and generation quality.
 
 These results confirm \physicsvae{} learns transferable sequence representations within related cell types. The 63.7\% multi-human accuracy (2.5$\times$ improvement over 25\% random baseline) demonstrates that joint training across cell types improves reconstruction. Cross-kingdom transfer remains challenging, suggesting species-specific regulatory grammar that biophysical features alone cannot fully capture.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}[scale=1.0]
 % Real UMAP from K562 regime discovery: 158,377 sequences embedded in 521-D physics feature space
@@ -1259,7 +1259,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 
 \textbf{Uncertainty quantification.} Only \fusemap{} provides calibrated confidence intervals.
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \begin{tikzpicture}
 \begin{axis}[

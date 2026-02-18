@@ -32,6 +32,7 @@
 \usepackage{tabularx}
 \usepackage{adjustbox}
 \usepackage{placeins}
+\usepackage{float}
 
 % Float placement parameters - reduce floating
 \renewcommand{\topfraction}{0.85}
@@ -371,38 +372,6 @@ A key capability of \fusemap{} is predicting regulatory activity in species with
 
 \textbf{Key insight.} While DNA sequences diverge rapidly across species, the biophysical mechanisms of transcription are conserved. A sequence that creates optimal DNA shape for TF binding in Arabidopsis should function similarly in maize, even if the exact nucleotides differ.
 
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}[scale=0.9]
-% === S2A Prediction Scatter ===
-\begin{axis}[
-    width=0.9\columnwidth,
-    height=5.5cm,
-    xlabel={S2A Predicted Activity},
-    ylabel={True Maize Activity},
-    xlabel style={font=\small},
-    ylabel style={font=\small},
-    tick label style={font=\tiny},
-    xmin=0, xmax=3,
-    ymin=0, ymax=3,
-    grid=major,
-    grid style={gray!30},
-]
-% Scatter points - REAL data sampled from maize test set (r=0.70)
-\addplot[only marks, mark=*, mark size=1.5pt, blue!70, opacity=0.6] coordinates {
-    (0.68,0.00) (0.81,0.59) (1.25,0.71) (1.70,0.80) (0.96,0.87) (1.01,0.94) (1.87,1.00) (1.55,1.07) (1.03,1.13) (1.54,1.19) (1.12,1.25) (1.17,1.32) (1.53,1.38) (0.59,1.43) (0.72,1.49) (1.29,1.55) (1.12,1.61) (1.77,1.67) (1.25,1.73) (1.07,1.78) (2.41,1.85) (1.69,1.91) (1.87,1.97) (1.24,2.03) (1.68,2.11) (2.04,2.18) (1.52,2.27) (2.28,2.36) (1.93,2.50) (2.42,3.00)
-};
-% Perfect correlation line
-\addplot[red, very thick, dashed, domain=0:3] {x};
-% Annotation
-\node[font=\normalsize\bfseries] at (axis cs:0.8,2.6) {$\rho = 0.70$};
-\node[font=\small] at (axis cs:0.8,2.25) {$n = 2{,}461$};
-\end{axis}
-\end{tikzpicture}
-\caption{\textbf{S2A zero-shot cross-species transfer.} Predicted vs.\ actual Maize promoter activity using \stwoa{} trained only on Arabidopsis and Sorghum data (n=2,461 test sequences). Strong correlation ($\rho$=0.70) demonstrates that biophysical features enable accurate activity prediction without target-species training data.}
-\label{fig:s2a_scatter}
-\end{figure}
-
 \textbf{Method.} \stwoa{} operates in three stages:
 \begin{enumerate}[leftmargin=*,itemsep=0pt]
 \item \textbf{Physics encoding}: Apply \physinformer{} to extract biophysical features $\phi(x)$
@@ -594,6 +563,7 @@ We train and evaluate \fusemap{} on diverse regulatory sequence datasets spannin
 \label{tab:datasets}
 \small
 \setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}llrrr@{}}
 \toprule
 Dataset & Species & Seqs & Len & Assay \\
@@ -603,7 +573,8 @@ DeepSTARR \citep{de2022sequence} & Drosophila & 485K & 249bp & STARR-seq \\
 Jores et al.\ \citep{jores2021synthetic} & Plants & 58K & 170bp & STARR-seq \\
 DREAM \citep{schaffer2022dream} & Yeast & 6.7M & 110bp & FACS-seq \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 \textbf{ENCODE4 lentiMPRA.} Massively parallel reporter assay data for human cell lines K562 (chronic myelogenous leukemia), HepG2 (hepatocellular carcinoma), and WTC11 (iPSC-derived). 230-bp sequences with expression measurements.
@@ -688,6 +659,38 @@ Table~\ref{tab:cadence_results} summarizes \cadence{} performance. Key findings:
 \end{itemize}
 This concordance with known cell-type-specific regulatory programs (erythroid GATA/KLF, hepatocyte HNF/FOX, Drosophila ETS/GATA) validates that \cadence{} learns biologically meaningful features.
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\columnwidth,
+    height=6cm,
+    xlabel={Epoch},
+    ylabel={Validation Spearman $\rho$},
+    xlabel style={font=\normalsize},
+    ylabel style={font=\normalsize},
+    xmin=0, xmax=100,
+    ymin=0.5, ymax=0.95,
+    legend style={at={(0.98,0.02)}, anchor=south east, font=\small},
+    grid=major,
+    grid style={gray!20},
+    tick label style={font=\small},
+]
+
+% Real DeepSTARR training data from cadence_deepstarr_v2/training.log
+\addplot[red, thick, mark=none] coordinates {
+    (1,0.570) (5,0.643) (10,0.685) (15,0.719) (20,0.769) (25,0.778) (30,0.799)
+    (35,0.820) (40,0.831) (45,0.842) (50,0.850) (55,0.858) (60,0.863) (65,0.869)
+    (70,0.871) (75,0.874) (80,0.875) (85,0.875) (90,0.876) (95,0.877) (100,0.874)
+};
+
+\legend{DeepSTARR ($\rho$=0.885)}
+\end{axis}
+\end{tikzpicture}
+\caption{\textbf{\cadence{} learns efficiently from large-scale data.} Validation Spearman $\rho$ vs.\ training epoch on DeepSTARR (352K training sequences). The model reaches $\rho>0.80$ by epoch 30, with continued improvement plateauing around epoch 70. Final test performance ($\rho=0.885$) represents state-of-the-art on this benchmark. Data extracted from actual training logs; each point is a real validation checkpoint.}
+\label{fig:training_curves}
+\end{figure}
+
 \FloatBarrier
 \subsection{\physinformer{}: Biophysical Feature Prediction}
 
@@ -725,7 +728,7 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 
 \textbf{Computational efficiency.} \physinformer{} predicts 521 biophysical features in 5ms per sequence (batch of 128), compared to $>$60 seconds for direct computation of all features using standard tools. This 12,000$\times$ speedup enables genome-scale biophysical profiling.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=0.85]
 % Heatmap for feature transfer - REAL DATA from generate_figure8.py
@@ -809,7 +812,7 @@ Overall & \textbf{0.960} & \textbf{0.982} & 0.008 \\
 
 \textbf{Speed.} 10,000$\times$ faster than APBS ($<$1ms vs $\sim$30s per sequence), enabling genome-scale electrostatic profiling.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -890,11 +893,43 @@ Fly & Plants & -0.32 \\
 
 \textbf{Plant-to-plant transfer.} Training on Arabidopsis and Sorghum, \stwoa{} achieves $\rho=0.59$--$0.70$ across plant transfer scenarios (best: $\rho=0.70$ for Arabidopsis+Sorghum$\rightarrow$Maize, n=2,461 test sequences). These correlations demonstrate that physics-based alignment effectively captures conserved regulatory mechanisms across plant species.
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9]
+% === S2A Prediction Scatter ===
+\begin{axis}[
+    width=0.9\columnwidth,
+    height=5.5cm,
+    xlabel={S2A Predicted Activity},
+    ylabel={True Maize Activity},
+    xlabel style={font=\small},
+    ylabel style={font=\small},
+    tick label style={font=\tiny},
+    xmin=0, xmax=3,
+    ymin=0, ymax=3,
+    grid=major,
+    grid style={gray!30},
+]
+% Scatter points - REAL data sampled from maize test set (r=0.70)
+\addplot[only marks, mark=*, mark size=1.5pt, blue!70, opacity=0.6] coordinates {
+    (0.68,0.00) (0.81,0.59) (1.25,0.71) (1.70,0.80) (0.96,0.87) (1.01,0.94) (1.87,1.00) (1.55,1.07) (1.03,1.13) (1.54,1.19) (1.12,1.25) (1.17,1.32) (1.53,1.38) (0.59,1.43) (0.72,1.49) (1.29,1.55) (1.12,1.61) (1.77,1.67) (1.25,1.73) (1.07,1.78) (2.41,1.85) (1.69,1.91) (1.87,1.97) (1.24,2.03) (1.68,2.11) (2.04,2.18) (1.52,2.27) (2.28,2.36) (1.93,2.50) (2.42,3.00)
+};
+% Perfect correlation line
+\addplot[red, very thick, dashed, domain=0:3] {x};
+% Annotation
+\node[font=\normalsize\bfseries] at (axis cs:0.8,2.6) {$\rho = 0.70$};
+\node[font=\small] at (axis cs:0.8,2.25) {$n = 2{,}461$};
+\end{axis}
+\end{tikzpicture}
+\caption{\textbf{S2A zero-shot cross-species transfer.} Predicted vs.\ actual Maize promoter activity using \stwoa{} trained only on Arabidopsis and Sorghum data (n=2,461 test sequences). Strong correlation ($\rho$=0.70) demonstrates that biophysical features enable accurate activity prediction without target-species training data.}
+\label{fig:s2a_scatter}
+\end{figure}
+
 \textbf{Within-human transfer.} More modest gains within human cell types ($\rho=0.26$ vs 0.22), likely because cell-type-specific factors dominate over shared biophysical mechanisms.
 
 \textbf{Cross-kingdom limits.} Plant$\rightarrow$Fly transfer fails ($\rho=0.13$), and Fly$\rightarrow$Plant shows negative correlation ($\rho=-0.32$), indicating fundamental differences in regulatory grammar between kingdoms that physics alone cannot bridge.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=0.75, transform shape,
     species/.style={circle, draw, minimum size=0.9cm, font=\scriptsize\bfseries, align=center},
@@ -930,7 +965,7 @@ Fly & Plants & -0.32 \\
 \label{fig:transfer_landscape}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=0.75]
 \def\cellsize{0.9}
@@ -978,6 +1013,32 @@ Fly & Plants & -0.32 \\
 \label{fig:transfer_matrix}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1.0]
+\begin{axis}[
+    xbar,
+    width=0.95\columnwidth,
+    height=6cm,
+    xlabel={Feature Contribution (\%)},
+    xlabel style={font=\small},
+    symbolic y coords={Entropy, Stiffness, Thermo, Advanced, Bending},
+    ytick=data,
+    y tick label style={font=\small},
+    xmin=0, xmax=50,
+    bar width=12pt,
+    enlarge y limits=0.2,
+    nodes near coords,
+    nodes near coords align={horizontal},
+    every node near coord/.append style={font=\small},
+]
+\addplot[fill=teal!70] coordinates {(45.3,Bending) (26.7,Advanced) (14.1,Thermo) (7.5,Stiffness) (6.5,Entropy)};
+\end{axis}
+\end{tikzpicture}
+\caption{\textbf{DNA bending drives cross-species prediction.} Feature attribution for plant transfer. Bending features (curvature, flexibility) contribute 45.3\%, consistent with DNA shape's role in TF binding. Advanced structural (MGW, melting) adds 26.7\%. Thermodynamics contributes 14.1\%.}
+\label{fig:s2a_features}
+\end{figure}
+
 \FloatBarrier
 \subsection{\place{}: Calibrated Uncertainty}
 
@@ -1007,7 +1068,7 @@ Yeast & 67,055 & 0.719 & 0.848 \\
 
 \textbf{Predictive impact.} Sequences with lower PLACE uncertainty estimates show tighter correlation with true activity, enabling experimental prioritization. The adaptive interval widths (proportional to local residual std in Table~\ref{tab:place}) allow researchers to identify high-confidence predictions for validation.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=1.0]
 \begin{axis}[
@@ -1056,7 +1117,7 @@ We evaluate \physicsvae{} on sequence reconstruction and generation quality.
 
 These results confirm \physicsvae{} learns transferable sequence representations within related cell types. The 63.7\% multi-human accuracy (2.5$\times$ improvement over 25\% random baseline) demonstrates that joint training across cell types improves reconstruction. Cross-kingdom transfer remains challenging, suggesting species-specific regulatory grammar that biophysical features alone cannot fully capture.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=1.0]
 % Real UMAP from K562 regime discovery: 158,377 sequences embedded in 521-D physics feature space
@@ -1198,7 +1259,7 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 
 \textbf{Uncertainty quantification.} Only \fusemap{} provides calibrated confidence intervals.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -1229,64 +1290,6 @@ The full \fusemap{} framework performs competitively or better than baselines (T
 \label{fig:sota_comparison}
 \end{figure}
 
-
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}[scale=1.0]
-\begin{axis}[
-    xbar,
-    width=0.95\columnwidth,
-    height=6cm,
-    xlabel={Feature Contribution (\%)},
-    xlabel style={font=\small},
-    symbolic y coords={Entropy, Stiffness, Thermo, Advanced, Bending},
-    ytick=data,
-    y tick label style={font=\small},
-    xmin=0, xmax=50,
-    bar width=12pt,
-    enlarge y limits=0.2,
-    nodes near coords,
-    nodes near coords align={horizontal},
-    every node near coord/.append style={font=\small},
-]
-\addplot[fill=teal!70] coordinates {(45.3,Bending) (26.7,Advanced) (14.1,Thermo) (7.5,Stiffness) (6.5,Entropy)};
-\end{axis}
-\end{tikzpicture}
-\caption{\textbf{DNA bending drives cross-species prediction.} Feature attribution for plant transfer. Bending features (curvature, flexibility) contribute 45.3\%, consistent with DNA shape's role in TF binding. Advanced structural (MGW, melting) adds 26.7\%. Thermodynamics contributes 14.1\%.}
-\label{fig:s2a_features}
-\end{figure}
-
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=\columnwidth,
-    height=6cm,
-    xlabel={Epoch},
-    ylabel={Validation Spearman $\rho$},
-    xlabel style={font=\normalsize},
-    ylabel style={font=\normalsize},
-    xmin=0, xmax=100,
-    ymin=0.5, ymax=0.95,
-    legend style={at={(0.98,0.02)}, anchor=south east, font=\small},
-    grid=major,
-    grid style={gray!20},
-    tick label style={font=\small},
-]
-
-% Real DeepSTARR training data from cadence_deepstarr_v2/training.log
-\addplot[red, thick, mark=none] coordinates {
-    (1,0.570) (5,0.643) (10,0.685) (15,0.719) (20,0.769) (25,0.778) (30,0.799)
-    (35,0.820) (40,0.831) (45,0.842) (50,0.850) (55,0.858) (60,0.863) (65,0.869)
-    (70,0.871) (75,0.874) (80,0.875) (85,0.875) (90,0.876) (95,0.877) (100,0.874)
-};
-
-\legend{DeepSTARR ($\rho$=0.885)}
-\end{axis}
-\end{tikzpicture}
-\caption{\textbf{\cadence{} learns efficiently from large-scale data.} Validation Spearman $\rho$ vs.\ training epoch on DeepSTARR (352K training sequences). The model reaches $\rho>0.80$ by epoch 30, with continued improvement plateauing around epoch 70. Final test performance ($\rho=0.885$) represents state-of-the-art on this benchmark. Data extracted from actual training logs; each point is a real validation checkpoint.}
-\label{fig:training_curves}
-\end{figure}
 
 \FloatBarrier
 %==============================================================================

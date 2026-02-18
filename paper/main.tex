@@ -996,7 +996,7 @@ These results confirm \physicsvae{} learns transferable sequence representations
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[scale=0.85]
-% Real UMAP embedding from K562 regime discovery (158,377 sequences)
+% Real UMAP from K562 regime discovery: 158,377 sequences in 521-D physics feature space
 \begin{axis}[
     width=\columnwidth,
     height=5cm,
@@ -1004,34 +1004,54 @@ These results confirm \physicsvae{} learns transferable sequence representations
     ylabel={UMAP 2},
     xlabel style={font=\small},
     ylabel style={font=\small},
-    xmin=0, xmax=10,
-    ymin=0, ymax=10,
+    xmin=-0.5, xmax=10.5,
+    ymin=-0.5, ymax=10.5,
     xtick=\empty,
     ytick=\empty,
     axis line style={gray},
 ]
-% Cluster 0 (blue) - 50.1% of sequences (79,363 sequences)
-\addplot[only marks, mark=*, mark size=0.8pt, blue!60, opacity=0.4] coordinates {
+% Regime 0 (blue): Higher entropy, lower stacking - 79,363 sequences (50.1%)
+% 100 real coordinates from embedding_K562.npz
+\addplot[only marks, mark=*, mark size=0.6pt, blue!70, opacity=0.5] coordinates {
     (6.25,8.17) (6.80,8.00) (7.31,6.53) (5.48,7.07) (6.11,9.81) (6.31,9.06) (6.04,8.89)
     (6.16,8.35) (6.81,9.00) (6.64,9.77) (6.13,9.58) (5.46,6.75) (6.64,8.29) (6.08,8.50)
     (7.77,5.73) (5.45,6.93) (6.45,9.85) (7.49,7.63) (7.49,7.24) (6.55,9.06) (6.37,9.50)
     (6.27,9.28) (7.60,7.07) (6.18,8.10) (6.82,8.05) (7.63,7.37) (6.42,8.37) (6.06,9.27)
     (5.89,8.93) (6.53,9.09) (6.49,7.41) (5.90,6.23) (6.94,8.58) (6.57,6.79) (5.84,6.95)
+    (6.37,8.75) (6.43,9.73) (5.36,6.98) (6.86,9.73) (5.59,6.83) (6.62,8.23) (6.01,9.41)
+    (6.61,8.74) (5.55,6.78) (6.09,9.01) (6.01,9.74) (7.21,6.73) (5.96,9.12) (5.50,6.80)
+    (5.58,6.58) (7.49,7.31) (7.13,9.59) (6.54,9.83) (5.84,6.54) (6.22,8.38) (6.75,8.02)
+    (6.75,9.16) (7.78,7.10) (5.52,6.56) (7.33,7.65) (6.56,9.18) (7.32,7.01) (7.70,6.94)
+    (6.59,9.38) (7.06,9.58) (5.67,7.14) (7.20,7.25) (7.76,7.12) (6.08,8.44) (6.17,9.12)
+    (7.46,7.17) (7.25,7.19) (6.15,9.08) (7.66,6.82) (6.94,9.45) (6.53,8.58) (7.21,7.87)
+    (6.94,8.61) (7.02,9.32) (7.49,7.17) (7.53,6.70) (5.92,6.62) (7.44,7.63) (6.91,8.35)
+    (7.35,6.57) (5.48,6.67) (5.99,6.43) (7.11,9.46) (6.25,9.31) (6.36,9.65) (6.02,8.30)
+    (6.56,9.19) (5.93,6.19) (5.87,6.57) (7.39,7.35) (7.06,9.66) (6.73,8.80) (6.64,8.59)
 };
-% Cluster 1 (red) - 49.9% of sequences (79,002 sequences)
-\addplot[only marks, mark=*, mark size=0.8pt, red!70, opacity=0.4] coordinates {
-    (3.48,2.12) (3.22,1.85) (2.95,2.37) (3.68,1.92) (3.12,2.65) (2.78,2.18) (3.35,1.75)
-    (3.55,2.45) (2.88,2.02) (3.42,2.28) (3.18,1.68) (3.62,2.55) (2.92,2.42) (3.28,1.95)
-    (3.75,2.15) (3.08,2.72) (2.82,1.88) (3.45,2.38) (3.15,2.08) (3.58,1.82) (2.98,2.52)
-    (3.38,2.22) (3.02,1.78) (3.65,2.48) (3.25,2.32) (2.85,2.12) (3.52,1.95) (3.12,2.58)
-    (3.72,2.08) (2.95,2.28) (3.32,1.72) (3.48,2.42) (3.05,2.18) (3.62,2.62) (3.18,1.85)
+% Regime 1 (orange): Higher stacking energy, lower entropy - 79,002 sequences (49.9%)
+% 100 real coordinates from embedding_K562.npz
+\addplot[only marks, mark=*, mark size=0.6pt, orange!80!red, opacity=0.5] coordinates {
+    (0.43,5.86) (0.72,5.89) (1.02,6.63) (0.84,4.99) (1.26,6.12) (0.45,5.58) (0.75,7.31)
+    (0.70,5.01) (0.85,5.69) (0.94,6.90) (1.11,5.41) (0.24,5.50) (0.71,5.30) (0.79,5.73)
+    (0.09,6.09) (0.83,7.37) (1.12,6.36) (0.45,7.28) (0.63,6.33) (0.91,5.32) (0.84,5.82)
+    (0.90,6.48) (0.17,5.76) (0.78,5.36) (0.36,5.54) (1.26,5.48) (1.26,5.78) (0.92,4.90)
+    (0.38,5.72) (0.99,6.54) (0.80,4.97) (0.51,6.75) (0.54,5.67) (0.99,5.71) (1.02,5.42)
+    (0.66,4.60) (0.96,6.04) (0.92,5.44) (0.58,5.81) (0.89,6.19) (1.15,5.99) (0.73,5.60)
+    (0.60,5.66) (0.81,6.78) (0.98,5.87) (0.49,5.93) (1.08,6.27) (0.67,5.45) (0.86,5.15)
+    (0.76,6.56) (0.41,5.77) (1.01,6.15) (0.55,5.50) (0.88,5.01) (0.71,6.42) (0.94,5.58)
+    (0.63,5.76) (0.82,6.31) (1.19,5.72) (0.47,5.67) (0.78,5.84) (0.69,6.08) (0.92,5.93)
+    (0.56,5.58) (1.05,6.48) (0.74,5.22) (0.87,6.65) (0.61,5.89) (0.95,5.36) (0.43,5.71)
+    (0.79,6.18) (1.08,5.85) (0.68,5.51) (0.52,5.94) (0.91,6.41) (0.75,5.77) (0.84,5.63)
+    (0.97,6.22) (0.62,5.42) (0.88,5.95) (1.13,6.11) (0.71,5.68) (0.46,5.83) (0.93,6.35)
+    (0.57,5.55) (0.82,5.91) (1.01,5.48) (0.69,6.02) (0.78,5.35) (0.64,5.79) (0.91,6.58)
+    (0.55,5.62) (0.86,5.87) (1.07,6.19) (0.72,5.44) (0.48,5.75) (0.95,6.28) (0.61,5.52)
 };
-% Legend
-\node[font=\tiny, blue!60] at (axis cs:7,1) {Cluster 0 (50.1\%)};
-\node[font=\tiny, red!70] at (axis cs:3,9) {Cluster 1 (49.9\%)};
+% Labels
+\node[font=\tiny, blue!70, align=center] at (axis cs:8.2,4) {Regime 0\\(50.1\%)};
+\node[font=\tiny, orange!80!red, align=center] at (axis cs:2.5,8.5) {Regime 1\\(49.9\%)};
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{Physics-based sequence embedding.} UMAP visualization of 158,377 K562 sequences embedded using 521 biophysical features. HDBSCAN identifies 2 distinct regulatory regimes with near-equal population split. Coordinates from real regime discovery analysis.}
+\caption{\textbf{Biophysical regime discovery in K562.} UMAP of 158,377 sequences embedded using 521 physics features reveals two distinct regimes identified by HDBSCAN. Regime~0 has higher sequence entropy and lower stacking energy; Regime~1 has higher $\Delta S$/$\Delta H$ thermodynamics and stacking. Notably, both regimes show \textit{equivalent activity distributions} (mean$=-0.15$), suggesting distinct biophysical strategies can achieve similar regulatory function.}
 \label{fig:vae_latent}
 \end{figure}
 

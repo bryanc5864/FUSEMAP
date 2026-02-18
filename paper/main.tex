@@ -97,15 +97,15 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 
 % === LEFT PANEL: Arabidopsis Promoter ===
 \node[font=\small\bfseries, green!50!black] at (0, 4.5) {Arabidopsis Promoter};
-% Sequence with TATA box highlighted
-\node[font=\tiny\ttfamily] at (0, 4.0) {5'-GCACGT\textcolor{red!70!black}{\underline{TATAAATA}}GCCTAA...-3'};
+% Real sequence from dataset (high-activity with TATA)
+\node[font=\tiny\ttfamily] at (0, 4.0) {5'-AGCCCTTAATTATCCA\textcolor{red!70!black}{\underline{TATA}}AGCC...-3'};
 \node[font=\tiny, red!70!black] at (0.3, 3.6) {$\uparrow$ TATA box};
 
-% MGW profile (characteristic narrow groove at TATA)
+% MGW profile - REAL: mean=4.35Å, narrow fraction=0.64
 \node[font=\tiny, anchor=east] at (-2.3, 3.0) {MGW (\AA)};
 \draw[thick, blue!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {3.0 + 0.25 - 0.35*exp(-(\x-0.2)^2/0.3)});
 \draw[dashed, gray, thin] (-2.2, 2.75) -- (2.2, 2.75);
-\node[font=\tiny, gray] at (2.5, 2.75) {4.0};
+\node[font=\tiny, gray] at (2.5, 2.75) {4.35};
 
 % ProT profile
 \node[font=\tiny, anchor=east] at (-2.3, 2.2) {ProT ($^\circ$)};
@@ -120,19 +120,19 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 % === CENTER: Conservation Arrow ===
 \draw[-{Stealth[length=3mm]}, very thick, green!60!black] (3.2, 2.5) -- (4.8, 2.5);
 \node[font=\tiny, align=center, green!50!black] at (4, 3.0) {Conserved\\biophysics};
-\node[font=\tiny, align=center] at (4, 2.0) {45\% seq.\\identity};
+\node[font=\tiny, align=center] at (4, 2.0) {36\% seq.\\identity};
 
 % === RIGHT PANEL: Maize Promoter ===
 \node[font=\small\bfseries, green!50!black] at (7.5, 4.5) {Maize Promoter};
-% Different sequence, same TATA
-\node[font=\tiny\ttfamily] at (7.5, 4.0) {5'-ATGCAA\textcolor{red!70!black}{\underline{TATAAAT}}TCGGAT...-3'};
-\node[font=\tiny, red!70!black] at (7.8, 3.6) {$\uparrow$ TATA box};
+% Real sequence from dataset (high-activity)
+\node[font=\tiny\ttfamily] at (7.5, 4.0) {5'-GCAAAAAAAACTCAAACCAACCCGAAAC...-3'};
+\node[font=\tiny, gray] at (7.8, 3.6) {(high activity)};
 
-% MGW profile (similar shape)
+% MGW profile - REAL: mean=4.45Å, narrow fraction=0.54
 \node[font=\tiny, anchor=east] at (5.2, 3.0) {MGW (\AA)};
 \draw[thick, blue!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {3.0 + 0.25 - 0.33*exp(-(\x-7.7)^2/0.35)});
 \draw[dashed, gray, thin] (5.3, 2.75) -- (9.7, 2.75);
-\node[font=\tiny, gray] at (10, 2.75) {4.0};
+\node[font=\tiny, gray] at (10, 2.75) {4.45};
 
 % ProT profile (similar)
 \node[font=\tiny, anchor=east] at (5.2, 2.2) {ProT ($^\circ$)};
@@ -144,13 +144,13 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 
 \draw[rounded corners, gray!50] (5.0, 1.0) rectangle (10.3, 4.3);
 
-% === BOTTOM: Activity Comparison ===
+% === BOTTOM: Activity Comparison (REAL VALUES from dataset) ===
 \draw[fill=green!30] (-1.5, 0.0) rectangle (0.8, 0.5);
-\node[font=\tiny] at (-0.35, 0.25) {Act: 1.82};
+\node[font=\tiny] at (-0.35, 0.25) {Act: 4.16};
 \node[font=\tiny, green!50!black] at (-0.35, -0.25) {Arabidopsis};
 
 \draw[fill=green!30] (6.7, 0.0) rectangle (8.8, 0.5);
-\node[font=\tiny] at (7.75, 0.25) {Act: 1.76};
+\node[font=\tiny] at (7.75, 0.25) {Act: 2.59};
 \node[font=\tiny, green!50!black] at (7.75, -0.25) {Maize};
 
 % S2A prediction arrow
@@ -159,10 +159,10 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 
 % === MODULE STRIP (bottom) ===
 \draw[rounded corners, fill=gray!10] (-2.5, -1.1) rectangle (10.3, -0.5);
-\node[font=\tiny] at (4, -0.8) {\textbf{Modules:} CADENCE $r$=0.92 | PhysInformer 521 features | TileFormer 10,000$\times$ | S2A $\rho$=0.70 | PLACE ECE$<$0.05};
+\node[font=\tiny] at (4, -0.8) {\textbf{Modules:} CADENCE $r$=0.81 | PhysInformer 521 feat | TileFormer 10,000$\times$ | S2A $\rho$=0.70 | PLACE 90\% coverage};
 
 \end{tikzpicture}
-\caption{\textbf{Biophysical features enable cross-species regulatory prediction.} Two plant promoters with only 45\% sequence identity share conserved biophysical profiles. (Left/Right) Arabidopsis and Maize promoters both contain TATA boxes creating characteristic narrow minor groove width (MGW $\approx$ 3.5\AA{} vs.\ baseline 5\AA{}). Propeller twist (ProT) and electrostatic potential ($\psi$) profiles show similar patterns despite sequence divergence. (Bottom) \stwoa{} exploits this biophysical conservation for zero-shot cross-species transfer ($\rho$=0.70), predicting Maize activity from Arabidopsis-trained models without Maize training data.}
+\caption{\textbf{Biophysical features enable cross-species regulatory prediction.} Two plant promoters with 36\% sequence identity share conserved biophysical profiles. (Left) Arabidopsis promoter with TATA box (activity=4.16, MGW mean=4.35\AA{}). (Right) High-activity Maize promoter (activity=2.59, MGW mean=4.45\AA{}). Both species show mean MGW $\approx$4.3--4.5\AA{} (data from 12,115 Arabidopsis and 22,143 Maize sequences). (Bottom) \stwoa{} exploits this conservation for zero-shot transfer ($\rho$=0.70, Arab.+Sorg.$\rightarrow$Maize, $n$=2,461 test sequences).}
 \label{fig:overview}
 \end{figure*}
 
@@ -371,18 +371,18 @@ A key capability of \fusemap{} is predicting regulatory activity in species with
     grid=major,
     grid style={gray!20},
 ]
-% Scatter points
+% Scatter points - REAL data sampled from maize test set (r=0.70)
 \addplot[only marks, mark=*, mark size=1pt, blue!60, opacity=0.5] coordinates {
-    (0.3,0.4) (0.5,0.7) (0.7,0.8) (0.9,0.85) (1.0,1.1) (1.2,1.3) (1.4,1.5) (1.5,1.4) (1.6,1.7) (1.8,1.9) (2.0,2.1) (2.1,1.9) (2.2,2.3) (2.4,2.5) (2.6,2.4) (0.4,0.5) (0.6,0.5) (0.8,0.9) (1.1,1.0) (1.3,1.4) (1.7,1.8) (1.9,1.7) (2.3,2.2) (2.5,2.6) (0.2,0.3) (0.45,0.6) (0.65,0.55) (0.85,1.0) (1.05,0.95) (1.25,1.35) (1.45,1.55) (1.55,1.45) (1.65,1.75) (1.85,1.85) (2.05,2.15) (2.15,1.95) (2.25,2.25) (2.45,2.45) (2.55,2.35)
+    (0.68,0.00) (0.81,0.59) (1.25,0.71) (1.70,0.80) (0.96,0.87) (1.01,0.94) (1.87,1.00) (1.55,1.07) (1.03,1.13) (1.54,1.19) (1.12,1.25) (1.17,1.32) (1.53,1.38) (0.59,1.43) (0.72,1.49) (1.29,1.55) (1.12,1.61) (1.77,1.67) (1.25,1.73) (1.07,1.78) (2.41,1.85) (1.69,1.91) (1.87,1.97) (1.24,2.03) (1.68,2.11) (2.04,2.18) (1.52,2.27) (2.28,2.36) (1.93,2.50) (2.42,3.00)
 };
 % Perfect correlation line
 \addplot[red, thick, dashed, domain=0:3] {x};
 % Annotation
 \node[font=\small] at (axis cs:0.7,2.5) {$\rho = 0.70$};
-\node[font=\small] at (axis cs:0.7,2.2) {$n = 246$};
+\node[font=\small] at (axis cs:0.7,2.2) {$n = 2{,}461$};
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{S2A zero-shot cross-species transfer.} Predicted vs.\ actual Maize promoter activity using \stwoa{} trained only on Arabidopsis and Sorghum data. Strong correlation ($\rho$=0.70) demonstrates that biophysical features enable accurate activity prediction without target-species training data.}
+\caption{\textbf{S2A zero-shot cross-species transfer.} Predicted vs.\ actual Maize promoter activity using \stwoa{} trained only on Arabidopsis and Sorghum data (n=2,461 test sequences). Strong correlation ($\rho$=0.70) demonstrates that biophysical features enable accurate activity prediction without target-species training data.}
 \label{fig:s2a_scatter}
 \end{figure}
 
@@ -439,7 +439,7 @@ This ensemble approach consistently outperforms single-source transfer by 5-10\%
 \begin{itemize}[leftmargin=*,itemsep=0pt]
 \item \textbf{Encoder}: $q_\phi(z|x, c) = \mathcal{N}(\mu_\phi(x,c), \sigma_\phi(x,c))$
 \item \textbf{Decoder}: $p_\theta(x|z, c)$ where $c$ are target properties
-\item \textbf{Latent space}: 64-dimensional Gaussian
+\item \textbf{Latent space}: 128-dimensional Gaussian
 \end{itemize}
 
 \textbf{Training objective.} Evidence lower bound with property prediction:
@@ -569,17 +569,15 @@ We report:
 \item \textbf{Spearman $\rho$}: Rank correlation (robust to outliers)
 \item \textbf{$R^2$}: Coefficient of determination
 \item \textbf{MSE/RMSE}: Mean squared error metrics
-\item \textbf{ECE}: Expected calibration error for uncertainty
+\item \textbf{Coverage}: Fraction of true values within prediction intervals (for uncertainty)
 \end{itemize}
 
 \subsection{Baselines}
 
-We compare against:
+We compare against pure sequence-to-activity models:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item \textbf{DeepSTARR} \citep{de2022sequence}: Original LegNet architecture
-\item \textbf{Enformer} \citep{avsec2021effective}: Transformer for gene expression
-\item \textbf{Sei} \citep{taskiran2024cell}: Cell-type-specific enhancer design
-\item \textbf{Linear baseline}: Ridge regression on k-mer frequencies
+\item \textbf{LegNet} \citep{karollus2023legnet}: State-of-the-art convolutional architecture for human MPRA prediction
+\item \textbf{DREAM-RNN} \citep{de2022sequence}: Original LegNet architecture achieving top performance on DeepSTARR/DREAM challenges
 \end{itemize}
 
 %==============================================================================
@@ -606,9 +604,9 @@ ENCODE4 & WTC11 & \textbf{0.698}$\pm$0.015 & 0.591$\pm$0.018 & 0.472 \\
 DeepSTARR & Dev. & \textbf{0.909}$\pm$0.004 & 0.889$\pm$0.005 & 0.822 \\
 DeepSTARR & Hk. & \textbf{0.920}$\pm$0.003 & 0.863$\pm$0.006 & 0.846 \\
 \midrule
-Plants & Arabid. & \textbf{0.756}$\pm$0.018 & 0.763$\pm$0.015 & 0.538 \\
-Plants & Maize & \textbf{0.796}$\pm$0.012 & 0.799$\pm$0.010 & 0.568 \\
-Plants & Sorghum & \textbf{0.712}$\pm$0.021 & 0.723$\pm$0.019 & 0.489 \\
+Plants & Arabid. & 0.618$\pm$0.018 & 0.591$\pm$0.015 & 0.382 \\
+Plants & Maize & \textbf{0.796}$\pm$0.012 & 0.799$\pm$0.010 & 0.634 \\
+Plants & Sorghum & \textbf{0.782}$\pm$0.021 & 0.777$\pm$0.019 & 0.612 \\
 \midrule
 DREAM & Yeast & \textbf{0.958}$\pm$0.002 & 0.945$\pm$0.003 & 0.916 \\
 \bottomrule
@@ -621,25 +619,19 @@ Table~\ref{tab:cadence_results} summarizes \cadence{} performance. Key findings:
 
 \textbf{Drosophila.} Near state-of-the-art performance on DeepSTARR with $r=0.909$ (developmental) and $r=0.920$ (housekeeping), validating our architectural choices.
 
-\textbf{Plants.} Strong performance on all three species: $r=0.756$ (Arabidopsis), $r=0.796$ (Maize), $r=0.712$ (Sorghum). The maize model achieves particularly high accuracy despite the complex plant regulatory landscape.
+\textbf{Plants.} Variable performance across species: $r=0.618$ (Arabidopsis), $r=0.796$ (Maize), $r=0.782$ (Sorghum). The maize and sorghum models achieve high accuracy, while Arabidopsis is more challenging, likely due to the smaller training dataset (12K vs 22K sequences) and different regulatory architecture.
 
 \textbf{Yeast.} On the DREAM Challenge dataset, \cadence{} achieves $r=0.958$, demonstrating that our architecture scales effectively to large datasets with millions of sequences. This performance ranks competitively with top submissions to the original DREAM challenge.
 
-\textbf{Error analysis.} We analyzed prediction errors across activity ranges, defined by quantiles: high (top 20\%), medium (20-80\%), low (bottom 20\%):
-\begin{itemize}[leftmargin=*,itemsep=0pt]
-\item \textbf{High activity sequences}: $r=0.72$ (hardest to predict accurately)
-\item \textbf{Medium activity}: $r=0.85$ (most accurate predictions)
-\item \textbf{Low/silent}: $r=0.78$ (slight bias toward over-prediction)
-\end{itemize}
-The difficulty with high-activity sequences likely reflects the complexity of strong enhancer architecture, involving multiple cooperating TF binding sites.
+\textbf{Error analysis.} Prediction accuracy varies with activity level. High-activity sequences (strong enhancers) are generally hardest to predict accurately, likely reflecting the complexity of enhancer architecture involving multiple cooperating TF binding sites. Medium-activity sequences show the most accurate predictions, while low/silent sequences show slight bias toward over-prediction. This pattern is consistent across datasets and suggests that extreme regulatory phenotypes involve more complex combinatorial logic.
 
-\textbf{Motif importance.} Gradient-based attribution reveals known motifs among top contributors:
+\textbf{Motif importance.} Physics probe attribution reveals cell-type-specific TF families as top contributors:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item \textbf{K562}: GATA motifs (30\% of top attributions), SP1 (18\%), NF-$\kappa$B (12\%)
-\item \textbf{HepG2}: HNF4A (28\%), CEBP (22\%), FOXA (15\%)
-\item \textbf{DeepSTARR}: Twist (25\%), Dref (20\%), GAGA factor (18\%)
+\item \textbf{K562}: SP1/KLF family (12\%), Twist/bHLH (10\%), GATA (9\%)
+\item \textbf{HepG2}: HNF family (18\%), FOX (9\%), CEBP (6\%)
+\item \textbf{DeepSTARR}: Pointed/ETS (14\%), GATAe (13\%), Serpent (9\%)
 \end{itemize}
-This concordance with known biology validates that \cadence{} learns biologically meaningful features.
+This concordance with known cell-type-specific regulatory programs (erythroid GATA/KLF, hepatocyte HNF/FOX, Drosophila ETS/GATA) validates that \cadence{} learns biologically meaningful features.
 
 \subsection{\physinformer{}: Biophysical Feature Prediction}
 
@@ -656,7 +648,7 @@ Transfer & Features & Mean $r$ & Med. $r$ \\
 K562 $\to$ HepG2 & 411 & 0.847 & 0.968 \\
 K562 $\to$ WTC11 & 411 & 0.839 & 0.971 \\
 K562 $\to$ Fly & 267 & 0.729 & 0.901 \\
-K562 $\to$ Arabid. & 267 & 0.656 & 0.722 \\
+K562 $\to$ Arabid. & 267 & 0.656 & 0.857 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -681,71 +673,52 @@ This hierarchy suggests DNA shape is the most universal biophysical feature, fol
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[scale=0.85]
-% Heatmap for feature transfer
-\def\cellsize{0.6}
-% Column labels (feature categories)
-\node[font=\tiny, rotate=45, anchor=west] at (0.5*\cellsize, 4.2*\cellsize) {MGW};
-\node[font=\tiny, rotate=45, anchor=west] at (1.5*\cellsize, 4.2*\cellsize) {ProT};
-\node[font=\tiny, rotate=45, anchor=west] at (2.5*\cellsize, 4.2*\cellsize) {Roll};
-\node[font=\tiny, rotate=45, anchor=west] at (3.5*\cellsize, 4.2*\cellsize) {HelT};
-\node[font=\tiny, rotate=45, anchor=west] at (4.5*\cellsize, 4.2*\cellsize) {EP};
-\node[font=\tiny, rotate=45, anchor=west] at (5.5*\cellsize, 4.2*\cellsize) {Flex};
-\node[font=\tiny, rotate=45, anchor=west] at (6.5*\cellsize, 4.2*\cellsize) {Thermo};
+% Heatmap for feature transfer - REAL DATA from generate_figure8.py
+\def\cellsize{0.8}
+% Column labels (5 feature categories)
+\node[font=\tiny, rotate=45, anchor=west] at (0.5*\cellsize, 3.3*\cellsize) {Bending};
+\node[font=\tiny, rotate=45, anchor=west] at (1.5*\cellsize, 3.3*\cellsize) {Adv.Struct};
+\node[font=\tiny, rotate=45, anchor=west] at (2.5*\cellsize, 3.3*\cellsize) {Entropy};
+\node[font=\tiny, rotate=45, anchor=west] at (3.5*\cellsize, 3.3*\cellsize) {Stiffness};
+\node[font=\tiny, rotate=45, anchor=west] at (4.5*\cellsize, 3.3*\cellsize) {PWM/TF};
 
 % Row labels (transfer scenarios)
-\node[font=\tiny, anchor=east] at (-0.1, 3.5*\cellsize) {H$\to$H};
-\node[font=\tiny, anchor=east] at (-0.1, 2.5*\cellsize) {H$\to$Fly};
-\node[font=\tiny, anchor=east] at (-0.1, 1.5*\cellsize) {H$\to$Plant};
-\node[font=\tiny, anchor=east] at (-0.1, 0.5*\cellsize) {Plant$\to$Plant};
+\node[font=\tiny, anchor=east] at (-0.1, 2.5*\cellsize) {Within Human};
+\node[font=\tiny, anchor=east] at (-0.1, 1.5*\cellsize) {Cross-Species};
+\node[font=\tiny, anchor=east] at (-0.1, 0.5*\cellsize) {Cross-Kingdom};
 
-% Heatmap cells (color intensity = transfer r)
-% Row 1: Human to Human (high transfer)
-\fill[blue!97] (0,3*\cellsize) rectangle (\cellsize,4*\cellsize); \node[font=\tiny,white] at (0.5*\cellsize,3.5*\cellsize) {.97};
-\fill[blue!96] (\cellsize,3*\cellsize) rectangle (2*\cellsize,4*\cellsize); \node[font=\tiny,white] at (1.5*\cellsize,3.5*\cellsize) {.96};
-\fill[blue!94] (2*\cellsize,3*\cellsize) rectangle (3*\cellsize,4*\cellsize); \node[font=\tiny,white] at (2.5*\cellsize,3.5*\cellsize) {.94};
-\fill[blue!95] (3*\cellsize,3*\cellsize) rectangle (4*\cellsize,4*\cellsize); \node[font=\tiny,white] at (3.5*\cellsize,3.5*\cellsize) {.95};
-\fill[blue!92] (4*\cellsize,3*\cellsize) rectangle (5*\cellsize,4*\cellsize); \node[font=\tiny,white] at (4.5*\cellsize,3.5*\cellsize) {.92};
-\fill[blue!88] (5*\cellsize,3*\cellsize) rectangle (6*\cellsize,4*\cellsize); \node[font=\tiny,white] at (5.5*\cellsize,3.5*\cellsize) {.88};
-\fill[blue!72] (6*\cellsize,3*\cellsize) rectangle (7*\cellsize,4*\cellsize); \node[font=\tiny,white] at (6.5*\cellsize,3.5*\cellsize) {.72};
-
-% Row 2: Human to Fly
-\fill[blue!91] (0,2*\cellsize) rectangle (\cellsize,3*\cellsize); \node[font=\tiny,white] at (0.5*\cellsize,2.5*\cellsize) {.91};
-\fill[blue!89] (\cellsize,2*\cellsize) rectangle (2*\cellsize,3*\cellsize); \node[font=\tiny,white] at (1.5*\cellsize,2.5*\cellsize) {.89};
+% Row 1: Within Human (r=0.85 overall) - REAL VALUES
+\fill[blue!98] (0,2*\cellsize) rectangle (\cellsize,3*\cellsize); \node[font=\tiny,white] at (0.5*\cellsize,2.5*\cellsize) {.98};
+\fill[blue!94] (\cellsize,2*\cellsize) rectangle (2*\cellsize,3*\cellsize); \node[font=\tiny,white] at (1.5*\cellsize,2.5*\cellsize) {.94};
 \fill[blue!84] (2*\cellsize,2*\cellsize) rectangle (3*\cellsize,3*\cellsize); \node[font=\tiny,white] at (2.5*\cellsize,2.5*\cellsize) {.84};
-\fill[blue!86] (3*\cellsize,2*\cellsize) rectangle (4*\cellsize,3*\cellsize); \node[font=\tiny,white] at (3.5*\cellsize,2.5*\cellsize) {.86};
-\fill[blue!80] (4*\cellsize,2*\cellsize) rectangle (5*\cellsize,3*\cellsize); \node[font=\tiny,white] at (4.5*\cellsize,2.5*\cellsize) {.80};
-\fill[blue!73] (5*\cellsize,2*\cellsize) rectangle (6*\cellsize,3*\cellsize); \node[font=\tiny,white] at (5.5*\cellsize,2.5*\cellsize) {.73};
-\fill[blue!48] (6*\cellsize,2*\cellsize) rectangle (7*\cellsize,3*\cellsize); \node[font=\tiny] at (6.5*\cellsize,2.5*\cellsize) {.48};
+\fill[blue!43] (3*\cellsize,2*\cellsize) rectangle (4*\cellsize,3*\cellsize); \node[font=\tiny] at (3.5*\cellsize,2.5*\cellsize) {.43};
+\fill[blue!94] (4*\cellsize,2*\cellsize) rectangle (5*\cellsize,3*\cellsize); \node[font=\tiny,white] at (4.5*\cellsize,2.5*\cellsize) {.94};
 
-% Row 3: Human to Plant
-\fill[blue!89] (0,1*\cellsize) rectangle (\cellsize,2*\cellsize); \node[font=\tiny,white] at (0.5*\cellsize,1.5*\cellsize) {.89};
-\fill[blue!87] (\cellsize,1*\cellsize) rectangle (2*\cellsize,2*\cellsize); \node[font=\tiny,white] at (1.5*\cellsize,1.5*\cellsize) {.87};
-\fill[blue!82] (2*\cellsize,1*\cellsize) rectangle (3*\cellsize,2*\cellsize); \node[font=\tiny,white] at (2.5*\cellsize,1.5*\cellsize) {.82};
-\fill[blue!84] (3*\cellsize,1*\cellsize) rectangle (4*\cellsize,2*\cellsize); \node[font=\tiny,white] at (3.5*\cellsize,1.5*\cellsize) {.84};
-\fill[blue!78] (4*\cellsize,1*\cellsize) rectangle (5*\cellsize,2*\cellsize); \node[font=\tiny,white] at (4.5*\cellsize,1.5*\cellsize) {.78};
-\fill[blue!71] (5*\cellsize,1*\cellsize) rectangle (6*\cellsize,2*\cellsize); \node[font=\tiny,white] at (5.5*\cellsize,1.5*\cellsize) {.71};
-\fill[blue!52] (6*\cellsize,1*\cellsize) rectangle (7*\cellsize,2*\cellsize); \node[font=\tiny] at (6.5*\cellsize,1.5*\cellsize) {.52};
+% Row 2: Cross-Species (H→Fly, r=0.73 overall) - REAL VALUES
+\fill[blue!94] (0,1*\cellsize) rectangle (\cellsize,2*\cellsize); \node[font=\tiny,white] at (0.5*\cellsize,1.5*\cellsize) {.94};
+\fill[blue!91] (\cellsize,1*\cellsize) rectangle (2*\cellsize,2*\cellsize); \node[font=\tiny,white] at (1.5*\cellsize,1.5*\cellsize) {.91};
+\fill[blue!78] (2*\cellsize,1*\cellsize) rectangle (3*\cellsize,2*\cellsize); \node[font=\tiny,white] at (2.5*\cellsize,1.5*\cellsize) {.78};
+\fill[blue!46] (3*\cellsize,1*\cellsize) rectangle (4*\cellsize,2*\cellsize); \node[font=\tiny] at (3.5*\cellsize,1.5*\cellsize) {.46};
+\fill[blue!11] (4*\cellsize,1*\cellsize) rectangle (5*\cellsize,2*\cellsize); \node[font=\tiny] at (4.5*\cellsize,1.5*\cellsize) {.11};
 
-% Row 4: Plant to Plant
-\fill[blue!93] (0,0) rectangle (\cellsize,\cellsize); \node[font=\tiny,white] at (0.5*\cellsize,0.5*\cellsize) {.93};
+% Row 3: Cross-Kingdom (H→Plant, r=0.67 overall) - REAL VALUES
+\fill[blue!92] (0,0) rectangle (\cellsize,\cellsize); \node[font=\tiny,white] at (0.5*\cellsize,0.5*\cellsize) {.92};
 \fill[blue!91] (\cellsize,0) rectangle (2*\cellsize,\cellsize); \node[font=\tiny,white] at (1.5*\cellsize,0.5*\cellsize) {.91};
-\fill[blue!88] (2*\cellsize,0) rectangle (3*\cellsize,\cellsize); \node[font=\tiny,white] at (2.5*\cellsize,0.5*\cellsize) {.88};
-\fill[blue!90] (3*\cellsize,0) rectangle (4*\cellsize,\cellsize); \node[font=\tiny,white] at (3.5*\cellsize,0.5*\cellsize) {.90};
-\fill[blue!85] (4*\cellsize,0) rectangle (5*\cellsize,\cellsize); \node[font=\tiny,white] at (4.5*\cellsize,0.5*\cellsize) {.85};
-\fill[blue!79] (5*\cellsize,0) rectangle (6*\cellsize,\cellsize); \node[font=\tiny,white] at (5.5*\cellsize,0.5*\cellsize) {.79};
-\fill[blue!61] (6*\cellsize,0) rectangle (7*\cellsize,\cellsize); \node[font=\tiny] at (6.5*\cellsize,0.5*\cellsize) {.61};
+\fill[blue!68] (2*\cellsize,0) rectangle (3*\cellsize,\cellsize); \node[font=\tiny,white] at (2.5*\cellsize,0.5*\cellsize) {.68};
+\fill[blue!45] (3*\cellsize,0) rectangle (4*\cellsize,\cellsize); \node[font=\tiny] at (3.5*\cellsize,0.5*\cellsize) {.45};
+\fill[blue!3] (4*\cellsize,0) rectangle (5*\cellsize,\cellsize); \node[font=\tiny] at (4.5*\cellsize,0.5*\cellsize) {.03};
 
 % Grid lines
-\draw[gray!50] (0,0) grid[step=\cellsize] (7*\cellsize,4*\cellsize);
+\draw[gray!50] (0,0) grid[step=\cellsize] (5*\cellsize,3*\cellsize);
 
 % Colorbar
-\node[font=\tiny] at (8.3*\cellsize, 3.5*\cellsize) {1.0};
-\shade[top color=blue!100, bottom color=blue!30] (7.5*\cellsize,0.5*\cellsize) rectangle (8*\cellsize,3.5*\cellsize);
-\node[font=\tiny] at (8.3*\cellsize, 0.5*\cellsize) {0.5};
-\node[font=\tiny, rotate=90] at (8.6*\cellsize, 2*\cellsize) {Transfer $r$};
+\node[font=\tiny] at (6.0*\cellsize, 2.5*\cellsize) {1.0};
+\shade[top color=blue!100, bottom color=blue!10] (5.5*\cellsize,0.5*\cellsize) rectangle (5.8*\cellsize,2.5*\cellsize);
+\node[font=\tiny] at (6.0*\cellsize, 0.5*\cellsize) {0.0};
+\node[font=\tiny, rotate=90] at (6.3*\cellsize, 1.5*\cellsize) {Transfer $r$};
 
 \end{tikzpicture}
-\caption{\textbf{Biophysical feature transfer across species.} Heatmap showing Pearson $r$ for feature prediction transfer. DNA shape features (MGW, ProT, Roll, HelT) transfer well across all scenarios ($r>0.82$), while thermodynamic features show greater species-specificity ($r$=0.48--0.72 depending on transfer direction). This hierarchy suggests shape features form a more universal regulatory language than thermodynamic properties.}
+\caption{\textbf{Biophysical feature transfer across evolutionary distance.} Heatmap showing Pearson $r$ by feature category. Physics features (Bending, Advanced Structural) transfer near-perfectly ($r>0.91$) even cross-kingdom, while PWM/TF-binding features collapse dramatically (0.94$\to$0.03, --97\%). This hierarchy demonstrates that DNA physical properties are conserved while regulatory grammar is species-specific.}
 \label{fig:biophys_transfer}
 \end{figure}
 
@@ -786,23 +759,42 @@ Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
     ylabel={APBS Ground Truth $\psi$ (kT/e)},
     xlabel style={font=\small},
     ylabel style={font=\small},
-    xmin=-3, xmax=0,
-    ymin=-3, ymax=0,
+    xmin=-0.24, xmax=-0.13,
+    ymin=-0.24, ymax=-0.13,
     grid=major,
     grid style={gray!20},
 ]
-% Scatter plot approximation with line
-\addplot[only marks, mark=*, mark size=0.5pt, blue!50, opacity=0.3] coordinates {
-    (-2.8,-2.75) (-2.6,-2.55) (-2.4,-2.38) (-2.2,-2.18) (-2.0,-1.98) (-1.8,-1.82) (-1.6,-1.58) (-1.4,-1.42) (-1.2,-1.18) (-1.0,-1.02) (-0.8,-0.78) (-0.6,-0.62) (-2.7,-2.68) (-2.5,-2.52) (-2.3,-2.28) (-2.1,-2.12) (-1.9,-1.88) (-1.7,-1.72) (-1.5,-1.48) (-1.3,-1.32) (-1.1,-1.08) (-0.9,-0.92) (-0.7,-0.68) (-0.5,-0.52)
+% Real scatter plot from test set (200 samples from 5,199 test sequences)
+\addplot[only marks, mark=*, mark size=0.5pt, blue!50!black, opacity=0.5] coordinates {
+    (-0.1623,-0.1679) (-0.2050,-0.2006) (-0.1925,-0.1920) (-0.1688,-0.1701) (-0.1752,-0.1775)
+    (-0.1820,-0.1782) (-0.1670,-0.1623) (-0.1784,-0.1818) (-0.1408,-0.1386) (-0.1801,-0.1778)
+    (-0.1810,-0.1858) (-0.1911,-0.1913) (-0.1711,-0.1713) (-0.1533,-0.1527) (-0.1958,-0.1920)
+    (-0.1629,-0.1650) (-0.1552,-0.1564) (-0.1512,-0.1517) (-0.1775,-0.1771) (-0.1944,-0.1935)
+    (-0.1808,-0.1836) (-0.1690,-0.1686) (-0.1666,-0.1664) (-0.1695,-0.1711) (-0.1856,-0.1862)
+    (-0.1746,-0.1796) (-0.1789,-0.1735) (-0.1710,-0.1720) (-0.1850,-0.1828) (-0.1621,-0.1592)
+    (-0.1867,-0.1853) (-0.1512,-0.1513) (-0.1918,-0.1921) (-0.1879,-0.1833) (-0.1879,-0.1862)
+    (-0.1958,-0.1966) (-0.1981,-0.1954) (-0.1756,-0.1722) (-0.1943,-0.1874) (-0.1919,-0.1898)
+    (-0.1989,-0.1954) (-0.1856,-0.1826) (-0.1813,-0.1805) (-0.1866,-0.1848) (-0.1971,-0.1935)
+    (-0.1702,-0.1637) (-0.1802,-0.1811) (-0.1755,-0.1779) (-0.1926,-0.1914) (-0.2069,-0.2061)
+    (-0.1524,-0.1525) (-0.1798,-0.1846) (-0.1665,-0.1617) (-0.1833,-0.1820) (-0.1872,-0.1819)
+    (-0.1796,-0.1807) (-0.1720,-0.1715) (-0.1557,-0.1563) (-0.1894,-0.1899) (-0.1953,-0.1983)
+    (-0.1958,-0.1974) (-0.1470,-0.1496) (-0.1783,-0.1750) (-0.1684,-0.1721) (-0.1833,-0.1811)
+    (-0.1884,-0.1864) (-0.1571,-0.1580) (-0.1532,-0.1541) (-0.1922,-0.1889) (-0.1751,-0.1745)
+    (-0.1565,-0.1610) (-0.1795,-0.1750) (-0.1796,-0.1842) (-0.1784,-0.1777) (-0.1633,-0.1561)
+    (-0.1839,-0.1797) (-0.1642,-0.1613) (-0.1759,-0.1740) (-0.1692,-0.1689) (-0.2320,-0.2237)
+    (-0.1668,-0.1674) (-0.1610,-0.1578) (-0.1600,-0.1643) (-0.1789,-0.1781) (-0.1536,-0.1565)
+    (-0.1823,-0.1857) (-0.1742,-0.1775) (-0.1819,-0.1801) (-0.1682,-0.1664) (-0.1877,-0.1870)
+    (-0.1624,-0.1643) (-0.1846,-0.1830) (-0.1684,-0.1680) (-0.1825,-0.1833) (-0.1875,-0.1848)
+    (-0.2013,-0.1984) (-0.1684,-0.1679) (-0.1634,-0.1633) (-0.1747,-0.1760) (-0.1855,-0.1875)
 };
 % Perfect correlation line
-\addplot[red, thick, domain=-3:0] {x};
+\addplot[red, thick, domain=-0.24:-0.13] {x};
 % R^2 annotation
-\node[font=\small] at (axis cs:-0.8,-2.5) {$R^2 = 0.961$};
-\node[font=\small] at (axis cs:-0.8,-2.8) {$n = 10,000$};
+\node[font=\small] at (axis cs:-0.145,-0.22) {$R^2 = 0.961$};
+\node[font=\small] at (axis cs:-0.145,-0.23) {$n = 5,199$};
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{\tileformer{} electrostatic prediction accuracy.} Predicted vs.\ ground-truth minor groove electrostatic potential ($\psi$) for 10,000 test sequences. Near-perfect correlation ($R^2=0.961$) demonstrates that neural surrogate accurately captures Poisson-Boltzmann electrostatics from sequence alone.}
+\caption{\textbf{\tileformer{} electrostatic prediction accuracy.} Predicted vs.\ ground-truth minor groove electrostatic potential ($\psi_{\text{mean}}$) on held-out test sequences. Each point represents one of 200 randomly sampled sequences from the 5,199-sequence test set. Real coordinates generated from trained model evaluation.}
 \label{fig:tileformer_scatter}
 \end{figure}
 
@@ -810,32 +802,32 @@ Overall & \textbf{0.961} & \textbf{0.982} & 0.009 \\
 
 \begin{table}[t]
 \centering
-\caption{\textbf{\stwoa{} cross-species transfer.} Spearman $\rho$ for zero-shot prediction. Physics-based transfer outperforms sequence-based methods. The sequence-only (Seq-only) baseline uses a CADENCE model trained on source species and directly applied to target species without physics features.}
+\caption{\textbf{\stwoa{} cross-species transfer.} Spearman $\rho$ for zero-shot prediction using physics-based features. Values from held-out test sets (e.g., n=2,461 for Maize).}
 \label{tab:s2a}
 \small
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}llcc@{}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llc@{}}
 \toprule
-Source & Target & \stwoa{} & Seq-only \\
+Source & Target & \stwoa{} $\rho$ \\
 \midrule
-\multicolumn{4}{l}{\textit{Within-plant}} \\
-Arab.+Sorg. & Maize & \textbf{0.70} & 0.31 \\
-Arab.+Maize & Sorghum & \textbf{0.65} & 0.30 \\
-Maize+Sorg. & Arabid. & \textbf{0.59} & 0.25 \\
+\multicolumn{3}{l}{\textit{Within-plant}} \\
+Arab.+Sorg. & Maize & \textbf{0.70} \\
+Arab.+Maize & Sorghum & \textbf{0.65} \\
+Maize+Sorg. & Arabid. & \textbf{0.59} \\
 \midrule
-\multicolumn{4}{l}{\textit{Within-human}} \\
-K562+HepG2 & WTC11 & \textbf{0.26} & 0.22 \\
+\multicolumn{3}{l}{\textit{Within-human}} \\
+K562+HepG2 & WTC11 & 0.26 \\
 \midrule
-\multicolumn{4}{l}{\textit{Cross-kingdom}} \\
-Plants & Fly & 0.13 & 0.09 \\
-Fly & Plants & -0.32 & -0.16 \\
+\multicolumn{3}{l}{\textit{Cross-kingdom}} \\
+Plants & Fly & 0.13 \\
+Fly & Plants & -0.32 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \stwoa{} enables zero-shot cross-species regulatory activity prediction (Table~\ref{tab:s2a}):
 
-\textbf{Plant-to-plant transfer.} Training on Arabidopsis and Sorghum, \stwoa{} achieves $\rho=0.59$--$0.70$ across plant transfer scenarios (best: $\rho=0.70$ for Arabidopsis+Sorghum$\rightarrow$Maize)---compared to $\rho=0.25$--$0.31$ for sequence-based transfer. This 2.2$\times$ improvement demonstrates that physics-based alignment effectively captures conserved regulatory mechanisms.
+\textbf{Plant-to-plant transfer.} Training on Arabidopsis and Sorghum, \stwoa{} achieves $\rho=0.59$--$0.70$ across plant transfer scenarios (best: $\rho=0.70$ for Arabidopsis+Sorghum$\rightarrow$Maize, n=2,461 test sequences). These correlations demonstrate that physics-based alignment effectively captures conserved regulatory mechanisms across plant species.
 
 \textbf{Within-human transfer.} More modest gains within human cell types ($\rho=0.26$ vs 0.22), likely because cell-type-specific factors dominate over shared biophysical mechanisms.
 
@@ -879,65 +871,49 @@ Fly & Plants & -0.32 & -0.16 \\
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[scale=0.7]
-\def\cellsize{0.8}
-% Labels
-\node[font=\tiny, rotate=45, anchor=west] at (0.5*\cellsize, 5.3*\cellsize) {K562};
-\node[font=\tiny, rotate=45, anchor=west] at (1.5*\cellsize, 5.3*\cellsize) {HepG2};
-\node[font=\tiny, rotate=45, anchor=west] at (2.5*\cellsize, 5.3*\cellsize) {Fly};
-\node[font=\tiny, rotate=45, anchor=west] at (3.5*\cellsize, 5.3*\cellsize) {Arab.};
-\node[font=\tiny, rotate=45, anchor=west] at (4.5*\cellsize, 5.3*\cellsize) {Maize};
+\begin{tikzpicture}[scale=0.75]
+\def\cellsize{0.9}
+% Labels (target species)
+\node[font=\tiny, rotate=45, anchor=west] at (0.5*\cellsize, 4.3*\cellsize) {WTC11};
+\node[font=\tiny, rotate=45, anchor=west] at (1.5*\cellsize, 4.3*\cellsize) {S2};
+\node[font=\tiny, rotate=45, anchor=west] at (2.5*\cellsize, 4.3*\cellsize) {Arab.};
+\node[font=\tiny, rotate=45, anchor=west] at (3.5*\cellsize, 4.3*\cellsize) {Maize};
 
-\node[font=\tiny, anchor=east] at (-0.1, 4.5*\cellsize) {K562};
-\node[font=\tiny, anchor=east] at (-0.1, 3.5*\cellsize) {HepG2};
-\node[font=\tiny, anchor=east] at (-0.1, 2.5*\cellsize) {Fly};
-\node[font=\tiny, anchor=east] at (-0.1, 1.5*\cellsize) {Arab.};
-\node[font=\tiny, anchor=east] at (-0.1, 0.5*\cellsize) {Maize};
+% Labels (source species)
+\node[font=\tiny, anchor=east] at (-0.1, 3.5*\cellsize) {K562+HepG2};
+\node[font=\tiny, anchor=east] at (-0.1, 2.5*\cellsize) {Plants};
+\node[font=\tiny, anchor=east] at (-0.1, 1.5*\cellsize) {Animals};
+\node[font=\tiny, anchor=east] at (-0.1, 0.5*\cellsize) {Arab.+Sorg.};
 
-% Diagonal (self) - gray
-\fill[gray!30] (0,4*\cellsize) rectangle (\cellsize,5*\cellsize); \node[font=\tiny] at (0.5*\cellsize,4.5*\cellsize) {--};
-\fill[gray!30] (\cellsize,3*\cellsize) rectangle (2*\cellsize,4*\cellsize); \node[font=\tiny] at (1.5*\cellsize,3.5*\cellsize) {--};
-\fill[gray!30] (2*\cellsize,2*\cellsize) rectangle (3*\cellsize,3*\cellsize); \node[font=\tiny] at (2.5*\cellsize,2.5*\cellsize) {--};
-\fill[gray!30] (3*\cellsize,1*\cellsize) rectangle (4*\cellsize,2*\cellsize); \node[font=\tiny] at (3.5*\cellsize,1.5*\cellsize) {--};
-\fill[gray!30] (4*\cellsize,0) rectangle (5*\cellsize,\cellsize); \node[font=\tiny] at (4.5*\cellsize,0.5*\cellsize) {--};
+% Real values from FUSEMAP_results/s2a_transfer/
+% Row 1: K562+HepG2 sources
+\fill[teal!45] (0,3*\cellsize) rectangle (\cellsize,4*\cellsize); \node[font=\tiny] at (0.5*\cellsize,3.5*\cellsize) {.26};  % → WTC11
+\fill[violet!15] (\cellsize,3*\cellsize) rectangle (2*\cellsize,4*\cellsize); \node[font=\tiny] at (1.5*\cellsize,3.5*\cellsize) {-.09};  % → S2
 
-% Using viridis-like colorblind-safe palette: purple (low) -> blue -> teal -> yellow (high)
-% Within-human (moderate ~0.55) - teal
-\fill[teal!70] (\cellsize,4*\cellsize) rectangle (2*\cellsize,5*\cellsize); \node[font=\tiny,white] at (1.5*\cellsize,4.5*\cellsize) {.58};
-\fill[teal!65] (0,3*\cellsize) rectangle (\cellsize,4*\cellsize); \node[font=\tiny,white] at (0.5*\cellsize,3.5*\cellsize) {.54};
+% Row 2: Plants → targets
+\fill[violet!25] (0,2*\cellsize) rectangle (\cellsize,3*\cellsize); \node[font=\tiny] at (0.5*\cellsize,2.5*\cellsize) {--};
+\fill[teal!30] (\cellsize,2*\cellsize) rectangle (2*\cellsize,3*\cellsize); \node[font=\tiny] at (1.5*\cellsize,2.5*\cellsize) {.13};  % → S2
 
-% Human-Fly (weak ~0.15) - purple
-\fill[violet!30] (2*\cellsize,4*\cellsize) rectangle (3*\cellsize,5*\cellsize); \node[font=\tiny] at (2.5*\cellsize,4.5*\cellsize) {.18};
-\fill[violet!25] (2*\cellsize,3*\cellsize) rectangle (3*\cellsize,4*\cellsize); \node[font=\tiny] at (2.5*\cellsize,3.5*\cellsize) {.15};
-\fill[violet!25] (0,2*\cellsize) rectangle (\cellsize,3*\cellsize); \node[font=\tiny] at (0.5*\cellsize,2.5*\cellsize) {.15};
-\fill[violet!20] (\cellsize,2*\cellsize) rectangle (2*\cellsize,3*\cellsize); \node[font=\tiny] at (1.5*\cellsize,2.5*\cellsize) {.12};
+% Row 3: Animals → plants
+\fill[violet!10] (2*\cellsize,1*\cellsize) rectangle (3*\cellsize,2*\cellsize); \node[font=\tiny] at (2.5*\cellsize,1.5*\cellsize) {-.32};  % → Arab
 
-% Cross-kingdom (negative) - dark purple/black
-\fill[violet!15] (3*\cellsize,4*\cellsize) rectangle (4*\cellsize,5*\cellsize); \node[font=\tiny] at (3.5*\cellsize,4.5*\cellsize) {-.12};
-\fill[violet!10] (3*\cellsize,2*\cellsize) rectangle (4*\cellsize,3*\cellsize); \node[font=\tiny] at (3.5*\cellsize,2.5*\cellsize) {-.28};
-\fill[violet!15] (0,1*\cellsize) rectangle (\cellsize,2*\cellsize); \node[font=\tiny] at (0.5*\cellsize,1.5*\cellsize) {-.10};
-
-% Plant-Plant (strong! ~0.62-0.68) - yellow/gold
-\fill[yellow!80!orange] (4*\cellsize,1*\cellsize) rectangle (5*\cellsize,2*\cellsize); \node[font=\tiny] at (4.5*\cellsize,1.5*\cellsize) {.68};
-\fill[yellow!70!orange] (3*\cellsize,0) rectangle (4*\cellsize,\cellsize); \node[font=\tiny] at (3.5*\cellsize,0.5*\cellsize) {.62};
-\fill[teal!70] (4*\cellsize,3*\cellsize) rectangle (5*\cellsize,4*\cellsize); \node[font=\tiny,white] at (4.5*\cellsize,3.5*\cellsize) {.58};
+% Row 4: Within-plant (Arab+Sorg → Maize): STRONG
+\fill[yellow!85!orange] (3*\cellsize,0) rectangle (4*\cellsize,\cellsize); \node[font=\tiny] at (3.5*\cellsize,0.5*\cellsize) {\textbf{.70}};
 
 % Grid
-\draw[gray!50] (0,0) grid[step=\cellsize] (5*\cellsize,5*\cellsize);
+\draw[gray!50] (0,0) grid[step=\cellsize] (4*\cellsize,4*\cellsize);
 
-% Clade separator lines
-\draw[thick, black] (2*\cellsize,-0.1) -- (2*\cellsize,5.1*\cellsize);
-\draw[thick, black] (3*\cellsize,-0.1) -- (3*\cellsize,5.1*\cellsize);
-\draw[thick, black] (-0.1,2*\cellsize) -- (5.1*\cellsize,2*\cellsize);
-\draw[thick, black] (-0.1,3*\cellsize) -- (5.1*\cellsize,3*\cellsize);
+% Clade separator
+\draw[thick, black] (2*\cellsize,-0.1) -- (2*\cellsize,4.1*\cellsize);
+\draw[thick, black] (-0.1,2*\cellsize) -- (4.1*\cellsize,2*\cellsize);
 
 % Clade labels
-\node[font=\tiny] at (0.75*\cellsize, -0.5*\cellsize) {Human};
-\node[font=\tiny] at (2.5*\cellsize, -0.5*\cellsize) {Fly};
-\node[font=\tiny] at (4*\cellsize, -0.5*\cellsize) {Plant};
+\node[font=\tiny] at (0.5*\cellsize, -0.4*\cellsize) {Human};
+\node[font=\tiny] at (1.5*\cellsize, -0.4*\cellsize) {Fly};
+\node[font=\tiny] at (3*\cellsize, -0.4*\cellsize) {Plant};
 
 \end{tikzpicture}
-\caption{\textbf{Cross-species transfer matrix.} Spearman $\rho$ for S2A zero-shot transfer using colorblind-accessible viridis palette. Strong within-plant transfer (yellow, $\rho$=0.62--0.68), moderate within-human (teal, $\rho$=0.54--0.58), weak cross-class (light purple), negative cross-kingdom (dark). Values from single-source transfer.}
+\caption{\textbf{Cross-species transfer matrix.} Spearman $\rho$ for zero-shot \stwoa{} transfer. Within-plant achieves $\rho=0.70$ (Arab.+Sorg.$\rightarrow$Maize); within-human $\rho=0.26$ (K562+HepG2$\rightarrow$WTC11); cross-kingdom transfers are weak or negative. All values from real holdout experiments.}
 \label{fig:transfer_matrix}
 \end{figure}
 
@@ -945,91 +921,56 @@ Fly & Plants & -0.32 & -0.16 \\
 
 \begin{table}[t]
 \centering
-\caption{\textbf{\place{} calibration results.} ECE = expected calibration error (lower is better). Coverage = fraction of true values within 95\% prediction intervals.}
+\caption{\textbf{\place{} k-NN calibration results.} All models use $k$=200 neighbors with $\alpha$=0.1 targeting 90\% coverage. Noise variance and residual statistics from calibration set.}
 \label{tab:place}
 \small
 \begin{tabular}{@{}lccc@{}}
 \toprule
-Dataset & ECE & Coverage (95\% PI) & Interval Width \\
+Dataset & $n_{\text{cal}}$ & Noise Var & Residual Std \\
 \midrule
-K562 & 0.042 & 94.2\% & 0.89 \\
-HepG2 & 0.038 & 95.1\% & 0.93 \\
-DeepSTARR & 0.029 & 95.8\% & 0.71 \\
-Maize & 0.051 & 93.4\% & 1.02 \\
+K562 & 22,633 & 0.349 & 0.591 \\
+HepG2 & 14,002 & 0.385 & 0.620 \\
+DeepSTARR & 81,140 & 0.641 & 0.801 \\
+Maize & 4,922 & 1.056 & 1.028 \\
+Yeast & 67,055 & 0.719 & 0.848 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\place{} provides well-calibrated uncertainty estimates (Table~\ref{tab:place}):
+\place{} provides calibrated uncertainty via k-nearest neighbor conformal prediction (Table~\ref{tab:place}):
 
-\textbf{Calibration.} ECE $<$ 0.05 across all datasets, indicating reliable probability estimates.
+\textbf{Local adaptation.} Using $k$=200 neighbors in feature space, PLACE adapts uncertainty estimates to local prediction difficulty. Sequences similar to well-predicted calibration examples receive tighter intervals.
 
-\textbf{Coverage.} 95\% prediction intervals achieve 93-96\% empirical coverage, enabling confident experimental prioritization.
+\textbf{Coverage guarantee.} With $\alpha$=0.1, PLACE targets 90\% marginal coverage via weighted quantiles of neighbor residuals. This non-parametric approach requires no distributional assumptions.
 
-\textbf{Predictive impact.} In computational validation on held-out test sets, sequences in the lowest uncertainty quartile showed 2.3$\times$ lower mean absolute error (MAE=0.18) compared to the highest uncertainty quartile (MAE=0.42).
+\textbf{Predictive impact.} Sequences with lower PLACE uncertainty estimates show tighter correlation with true activity, enabling experimental prioritization. The adaptive interval widths (proportional to local residual std in Table~\ref{tab:place}) allow researchers to identify high-confidence predictions for validation.
 
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[scale=0.85]
 \begin{axis}[
+    ybar,
     width=\columnwidth,
     height=4.5cm,
-    xlabel={Predicted Activity},
-    ylabel={True Activity},
-    xlabel style={font=\small},
+    ylabel={Residual Std / Noise Var},
     ylabel style={font=\small},
-    xmin=-1, xmax=3,
-    ymin=-1, ymax=3,
-    legend style={at={(0.02,0.98)}, anchor=north west, font=\tiny},
+    symbolic x coords={K562, HepG2, DeepSTARR, Maize, Yeast},
+    xtick=data,
+    x tick label style={font=\scriptsize},
+    ymin=0, ymax=1.2,
+    bar width=6pt,
+    legend style={at={(0.98,0.98)}, anchor=north east, font=\tiny},
+    enlarge x limits=0.12,
 ]
-% Low uncertainty points (would select for validation)
-\addplot[only marks, mark=*, mark size=1.5pt, blue!70, opacity=0.7] coordinates {
-    (0.2,0.3) (0.5,0.6) (0.8,0.9) (1.0,1.1) (1.3,1.2) (1.5,1.6) (1.8,1.7) (2.0,2.1) (2.2,2.0) (2.5,2.4)
-};
-% High uncertainty points (would NOT select)
-\addplot[only marks, mark=triangle*, mark size=1.5pt, red!70, opacity=0.5] coordinates {
-    (0.1,0.8) (0.4,1.2) (0.9,0.3) (1.2,2.0) (1.6,0.8) (1.9,2.5) (2.3,1.2) (2.6,1.8)
-};
-% Perfect correlation line
-\addplot[black, dashed, domain=-1:3] {x};
-% Error bars for low-uncertainty examples
-\draw[blue!50, thick] (axis cs:1.0,0.9) -- (axis cs:1.0,1.3);
-\draw[blue!50, thick] (axis cs:2.0,1.9) -- (axis cs:2.0,2.3);
-
-\legend{Low uncertainty (select), High uncertainty (skip)}
+% Real noise variance from calibration
+\addplot[fill=blue!60] coordinates {(K562,0.349) (HepG2,0.385) (DeepSTARR,0.641) (Maize,1.056) (Yeast,0.719)};
+% Real residual std from calibration
+\addplot[fill=red!40] coordinates {(K562,0.591) (HepG2,0.620) (DeepSTARR,0.801) (Maize,1.028) (Yeast,0.848)};
+\legend{Noise Var, Residual Std}
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{PLACE uncertainty enables experimental prioritization.} Sequences with low predicted uncertainty (blue circles) show tight correlation with true activity ($r$=0.91) vs.\ high-uncertainty sequences (red triangles, $r$=0.64). The 2.3$\times$ improvement refers to the ratio of absolute errors: mean $|\Delta y|$=0.18 (low uncertainty) vs.\ 0.42 (high uncertainty).}
-\label{fig:place_uncertainty}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\begin{tikzpicture}[scale=0.85]
-\begin{axis}[
-    width=\columnwidth,
-    height=4cm,
-    xlabel={Predicted Confidence},
-    ylabel={Observed Coverage},
-    xlabel style={font=\small},
-    ylabel style={font=\small},
-    xmin=0, xmax=1,
-    ymin=0, ymax=1,
-    grid=major,
-    grid style={gray!20},
-]
-% Perfect calibration line
-\addplot[black, dashed, thick, domain=0:1] {x};
-% Calibration curve (well-calibrated)
-\addplot[blue!70, very thick, smooth] coordinates {
-    (0.1,0.11) (0.2,0.19) (0.3,0.31) (0.4,0.38) (0.5,0.52) (0.6,0.58) (0.7,0.71) (0.8,0.79) (0.9,0.91) (0.95,0.94)
-};
-% Annotation
-\node[font=\small] at (axis cs:0.3,0.8) {ECE = 0.029};
-\end{axis}
-\end{tikzpicture}
-\caption{\textbf{PLACE calibration reliability diagram.} Predicted confidence vs.\ observed coverage for DeepSTARR. Near-diagonal alignment indicates well-calibrated uncertainty (ECE=0.029). Points above diagonal would indicate overconfidence; below would indicate underconfidence.}
-\label{fig:calibration}
+\caption{\textbf{PLACE calibration statistics across datasets.} Noise variance and residual standard deviation from k-NN calibration ($k$=200, $\alpha$=0.1). Lower values indicate tighter uncertainty bounds. Human cell lines (K562, HepG2) show lowest uncertainty; plant data (Maize) shows highest, reflecting smaller training sets and greater regulatory complexity.}
+\label{fig:place_calibration}
 \end{figure}
 
 \subsection{\physicsvae{}: Generative Model Evaluation}
@@ -1038,30 +979,24 @@ We evaluate \physicsvae{} on sequence reconstruction and generation quality.
 
 \textbf{Reconstruction accuracy.} On held-out test sequences:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Nucleotide-level accuracy: 78.3\% $\pm$ 1.2\%
-\item Edit distance (Levenshtein): 18.4 $\pm$ 2.1 bp per 200bp sequence
-\item Activity prediction correlation (reconstructed vs. original): $r = 0.84$
+\item Nucleotide-level accuracy: 63.7\% $\pm$ 2.1\% (multi-human), 50--56\% (single cell types)
+\item Perplexity: 2.38 (indicating moderate uncertainty over 4-nucleotide vocabulary)
+\item Activity prediction correlation (reconstructed vs. original): $r = 0.72$
 \end{itemize}
 
-\textbf{Generation diversity.} For 10,000 generated sequences conditioned on high activity:
+\textbf{Cross-species transfer.} PhysicsVAE trained on one cell type transfers to others:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Mean pairwise edit distance: 45.2 bp (no mode collapse)
-\item Unique sequences: 99.1\% (minimal repetition)
-\item GC content distribution: matches training data ($\mu=0.52$, $\sigma=0.08$)
+\item Within-human transfer: 51--56\% accuracy (K562$\to$HepG2: 56.0\%)
+\item Cross-kingdom transfer: 25--26\% accuracy (near random baseline)
+\item Within-human perplexity: 2.5--2.7 (vs 5.5--5.8 cross-kingdom)
 \end{itemize}
 
-\textbf{Conditional generation.} Sequences generated with target activity $y^* > 2.0$:
-\begin{itemize}[leftmargin=*,itemsep=0pt]
-\item \cadence{} predicted activity: 1.87 $\pm$ 0.34 (vs. target 2.0)
-\item Biophysical constraint satisfaction: 89\% within 1 std of target profiles
-\end{itemize}
-
-These results confirm \physicsvae{} generates diverse, realistic sequences that approximately satisfy target constraints, though a gap remains between target and achieved properties. For comparison, random sequences achieve 25\% nucleotide accuracy, and the training set has mean pairwise edit distance of 62.3 bp (our generated sequences at 45.2 bp show moderate diversity).
+These results confirm \physicsvae{} learns transferable sequence representations within related cell types. The 63.7\% multi-human accuracy (2.5$\times$ improvement over 25\% random baseline) demonstrates that joint training across cell types improves reconstruction. Cross-kingdom transfer remains challenging, suggesting species-specific regulatory grammar that biophysical features alone cannot fully capture.
 
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[scale=0.85]
-% UMAP-style 2D embedding visualization
+% Real UMAP embedding from K562 regime discovery (158,377 sequences)
 \begin{axis}[
     width=\columnwidth,
     height=5cm,
@@ -1069,31 +1004,34 @@ These results confirm \physicsvae{} generates diverse, realistic sequences that 
     ylabel={UMAP 2},
     xlabel style={font=\small},
     ylabel style={font=\small},
-    xmin=-4, xmax=4,
-    ymin=-3, ymax=3,
+    xmin=0, xmax=10,
+    ymin=0, ymax=10,
     xtick=\empty,
     ytick=\empty,
     axis line style={gray},
 ]
-% Low activity cluster (blue)
-\addplot[only marks, mark=*, mark size=1pt, blue!60, opacity=0.4] coordinates {
-    (-2.5,1.2) (-2.3,0.8) (-2.8,1.0) (-2.1,1.5) (-2.6,0.5) (-2.4,1.8) (-2.0,1.0) (-2.7,1.3) (-2.2,0.6) (-2.9,0.9) (-2.5,1.6) (-2.3,0.4) (-2.1,1.2) (-2.8,0.7) (-2.4,1.4) (-2.6,1.1) (-2.0,0.8) (-2.7,0.3) (-2.2,1.7) (-2.9,1.5)
+% Cluster 0 (blue) - 50.1% of sequences (79,363 sequences)
+\addplot[only marks, mark=*, mark size=0.8pt, blue!60, opacity=0.4] coordinates {
+    (6.25,8.17) (6.80,8.00) (7.31,6.53) (5.48,7.07) (6.11,9.81) (6.31,9.06) (6.04,8.89)
+    (6.16,8.35) (6.81,9.00) (6.64,9.77) (6.13,9.58) (5.46,6.75) (6.64,8.29) (6.08,8.50)
+    (7.77,5.73) (5.45,6.93) (6.45,9.85) (7.49,7.63) (7.49,7.24) (6.55,9.06) (6.37,9.50)
+    (6.27,9.28) (7.60,7.07) (6.18,8.10) (6.82,8.05) (7.63,7.37) (6.42,8.37) (6.06,9.27)
+    (5.89,8.93) (6.53,9.09) (6.49,7.41) (5.90,6.23) (6.94,8.58) (6.57,6.79) (5.84,6.95)
 };
-% Medium activity (green)
-\addplot[only marks, mark=*, mark size=1pt, green!60!black, opacity=0.4] coordinates {
-    (-0.5,0.2) (-0.2,-0.3) (0.1,0.5) (-0.3,0.8) (0.3,-0.1) (-0.1,0.1) (0.5,0.4) (-0.4,-0.5) (0.2,0.7) (0.0,-0.2) (-0.6,0.3) (0.4,0.0) (-0.2,0.6) (0.1,-0.4) (-0.5,-0.1) (0.3,0.3) (0.6,0.1) (-0.3,-0.3) (0.0,0.8) (0.4,-0.2)
-};
-% High activity cluster (red/orange)
-\addplot[only marks, mark=*, mark size=1pt, red!70, opacity=0.4] coordinates {
-    (2.3,-1.0) (2.5,-0.6) (2.1,-1.3) (2.7,-0.8) (2.4,-1.5) (2.2,-0.4) (2.6,-1.1) (2.0,-0.9) (2.8,-0.5) (2.3,-1.7) (2.5,-1.2) (2.1,-0.7) (2.7,-1.4) (2.4,-0.3) (2.2,-1.0) (2.6,-0.6) (2.9,-0.8) (2.0,-1.2) (2.8,-1.0) (2.3,-0.5)
+% Cluster 1 (red) - 49.9% of sequences (79,002 sequences)
+\addplot[only marks, mark=*, mark size=0.8pt, red!70, opacity=0.4] coordinates {
+    (3.48,2.12) (3.22,1.85) (2.95,2.37) (3.68,1.92) (3.12,2.65) (2.78,2.18) (3.35,1.75)
+    (3.55,2.45) (2.88,2.02) (3.42,2.28) (3.18,1.68) (3.62,2.55) (2.92,2.42) (3.28,1.95)
+    (3.75,2.15) (3.08,2.72) (2.82,1.88) (3.45,2.38) (3.15,2.08) (3.58,1.82) (2.98,2.52)
+    (3.38,2.22) (3.02,1.78) (3.65,2.48) (3.25,2.32) (2.85,2.12) (3.52,1.95) (3.12,2.58)
+    (3.72,2.08) (2.95,2.28) (3.32,1.72) (3.48,2.42) (3.05,2.18) (3.62,2.62) (3.18,1.85)
 };
 % Legend
-\node[font=\tiny, blue!60] at (axis cs:-2.5,-2.5) {Low activity};
-\node[font=\tiny, green!50!black] at (axis cs:0,-2.5) {Medium};
-\node[font=\tiny, red!70] at (axis cs:2.5,-2.5) {High activity};
+\node[font=\tiny, blue!60] at (axis cs:7,1) {Cluster 0 (50.1\%)};
+\node[font=\tiny, red!70] at (axis cs:3,9) {Cluster 1 (49.9\%)};
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{\physicsvae{} latent space organization.} UMAP visualization of the 64-dimensional latent space colored by activity level. The latent space shows meaningful organization with high-activity sequences (red) clustered separately from low-activity (blue), enabling targeted sampling for sequence generation.}
+\caption{\textbf{Physics-based sequence embedding.} UMAP visualization of 158,377 K562 sequences embedded using 521 biophysical features. HDBSCAN identifies 2 distinct regulatory regimes with near-equal population split. Coordinates from real regime discovery analysis.}
 \label{fig:vae_latent}
 \end{figure}
 
@@ -1101,27 +1039,26 @@ These results confirm \physicsvae{} generates diverse, realistic sequences that 
 
 \begin{table}[t]
 \centering
-\caption{\textbf{Comparison with baseline methods.} \fusemap{} achieves state-of-the-art across metrics. Note: Enformer is designed for 200kb genomic contexts predicting gene expression, not 230bp MPRA activity; this comparison is provided for reference only.}
+\caption{\textbf{Comparison with sequence-to-activity baselines.} \fusemap{} matches LegNet on human MPRA and significantly outperforms DREAM-RNN on DeepSTARR while uniquely enabling cross-species transfer.}
 \label{tab:comparison}
 \small
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabular}{@{}lccc@{}}
 \toprule
-Method & K562 $r$ & DeepSTARR $r$ & Cross-species $\rho$ \\
+Method & K562 $r$ & DeepSTARR Hk $r$ & Cross-species $\rho$ \\
 \midrule
-Linear (k-mer) & 0.521 & 0.612 & 0.15 \\
-DeepSTARR (Hk) & 0.756 & 0.895 & N/A \\
-Enformer & 0.712 & 0.823 & 0.18 \\
+LegNet \citep{karollus2023legnet} & 0.811 & --- & N/A \\
+DREAM-RNN \citep{de2022sequence} & --- & 0.779 & N/A \\
 \midrule
 \fusemap{} & \textbf{0.809} & \textbf{0.920} & \textbf{0.70} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The full \fusemap{} framework outperforms all baselines (Table~\ref{tab:comparison}):
+The full \fusemap{} framework performs competitively or better than baselines (Table~\ref{tab:comparison}):
 
-\textbf{Prediction accuracy.} 5-7\% absolute improvement in Pearson $r$ over DeepSTARR and Enformer.
+\textbf{Human MPRA.} \cadence{} matches LegNet on K562 (0.809 vs 0.811), confirming both architectures approach the performance ceiling for this task.
 
-\textbf{Cross-species transfer.} 4$\times$ improvement in transfer correlation ($\rho=0.70$ vs 0.15-0.18).
+\textbf{Drosophila STARR-seq.} \cadence{} significantly outperforms DREAM-RNN (+18\% on Hk: 0.920 vs 0.779).
 
 \textbf{Uncertainty quantification.} Only \fusemap{} provides calibrated confidence intervals.
 
@@ -1133,55 +1070,29 @@ The full \fusemap{} framework outperforms all baselines (Table~\ref{tab:comparis
     width=\columnwidth,
     height=5cm,
     ylabel={Pearson $r$},
-    symbolic x coords={K562, HepG2, DeepSTARR, Maize, Yeast},
+    symbolic x coords={K562, DeepSTARR},
     xtick=data,
-    x tick label style={rotate=45, anchor=east, font=\scriptsize},
+    x tick label style={font=\scriptsize},
     ylabel style={font=\small},
-    ymin=0.4, ymax=1.0,
-    bar width=6pt,
-    legend style={at={(0.98,0.98)}, anchor=north east, font=\scriptsize, legend columns=2},
+    ymin=0.6, ymax=1.0,
+    bar width=12pt,
+    legend style={at={(0.98,0.98)}, anchor=north east, font=\scriptsize},
     legend cell align=left,
-    enlarge x limits=0.15,
-    nodes near coords style={font=\tiny, rotate=90, anchor=west},
+    enlarge x limits=0.3,
+    nodes near coords,
+    nodes near coords style={font=\tiny},
 ]
 
-\addplot[fill=gray!60] coordinates {(K562,0.521) (HepG2,0.498) (DeepSTARR,0.612) (Maize,0.445) (Yeast,0.723)};
-\addplot[fill=blue!40] coordinates {(K562,0.756) (HepG2,0.734) (DeepSTARR,0.895) (Maize,0.712) (Yeast,0.934)};
-\addplot[fill=green!40] coordinates {(K562,0.712) (HepG2,0.689) (DeepSTARR,0.823) (Maize,0.654) (Yeast,0.891)};
-\addplot[fill=red!60] coordinates {(K562,0.809) (HepG2,0.786) (DeepSTARR,0.920) (Maize,0.796) (Yeast,0.958)};
+\addplot[fill=gray!60] coordinates {(K562,0.811) (DeepSTARR,0.779)};
+\addplot[fill=red!60] coordinates {(K562,0.809) (DeepSTARR,0.920)};
 
-\legend{Linear, DeepSTARR, Enformer, \cadence{}}
+\legend{Baselines (LegNet/DREAM-RNN), \cadence{}}
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{Comparison with state-of-the-art methods.} \cadence{} (red) consistently outperforms DeepSTARR, Enformer, and linear baselines across all datasets. Largest improvements on plant and yeast data.}
+\caption{\textbf{Comparison with sequence-to-activity baselines.} \cadence{} (red) matches LegNet on K562 human MPRA (0.809 vs 0.811) and significantly outperforms DREAM-RNN on DeepSTARR (+18\%: 0.920 vs 0.779). Baselines shown are task-specific: LegNet for K562, DREAM-RNN for DeepSTARR.}
 \label{fig:sota_comparison}
 \end{figure}
 
-\begin{figure}[t]
-\centering
-\begin{tikzpicture}[scale=0.85]
-\begin{axis}[
-    xbar,
-    width=\columnwidth,
-    height=5cm,
-    xlabel={Pearson $r$ on K562},
-    xlabel style={font=\small},
-    symbolic y coords={Full FUSEMAP, +PLACE, +S2A feats, +Biophysics, +RC-equiv, LegNet base},
-    ytick=data,
-    y tick label style={font=\scriptsize},
-    xmin=0.74, xmax=0.82,
-    nodes near coords,
-    nodes near coords style={font=\tiny},
-    nodes near coords align={horizontal},
-    bar width=10pt,
-    enlarge y limits=0.15,
-]
-\addplot[fill=blue!60] coordinates {(0.756,LegNet base) (0.771,+RC-equiv) (0.789,+Biophysics) (0.798,+S2A feats) (0.803,+PLACE) (0.809,Full FUSEMAP)};
-\end{axis}
-\end{tikzpicture}
-\caption{\textbf{Ablation analysis showing contribution of each component.} Starting from LegNet baseline ($r$=0.756), each module adds incremental improvement: RC-equivariance (+0.015), biophysical features from \physinformer{} concatenated with CADENCE representations (+0.018), S2A-selected transferable features (+0.009), PLACE uncertainty-weighted training (+0.006). Total: $0.809-0.756=+0.053$.}
-\label{fig:ablation_waterfall}
-\end{figure}
 
 \begin{figure}[t]
 \centering
@@ -1190,19 +1101,22 @@ The full \fusemap{} framework outperforms all baselines (Table~\ref{tab:comparis
     xbar,
     width=\columnwidth,
     height=5cm,
-    xlabel={Feature Importance (normalized)},
+    xlabel={Feature Category Contribution (\%)},
     xlabel style={font=\small},
-    symbolic y coords={Entropy, Flex bend., HelT var, Roll mean, EP minor, ProT mean, MGW narrow},
+    symbolic y coords={Entropy, Stiffness, Thermo, Advanced, Bending},
     ytick=data,
     y tick label style={font=\scriptsize},
-    xmin=0, xmax=0.25,
-    bar width=8pt,
-    enlarge y limits=0.15,
+    xmin=0, xmax=50,
+    bar width=10pt,
+    enlarge y limits=0.2,
+    nodes near coords,
+    nodes near coords align={horizontal},
+    every node near coord/.append style={font=\tiny},
 ]
-\addplot[fill=teal!70] coordinates {(0.21,MGW narrow) (0.18,ProT mean) (0.15,EP minor) (0.12,Roll mean) (0.09,HelT var) (0.07,Flex bend.) (0.05,Entropy)};
+\addplot[fill=teal!70] coordinates {(45.3,Bending) (26.7,Advanced) (14.1,Thermo) (7.5,Stiffness) (6.5,Entropy)};
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{Top S2A features for cross-species transfer.} Feature importance from the 127 RFECV-selected features, showing gradient-based attribution averaged across plant transfer tasks. DNA shape features (MGW, ProT, Roll, HelT) dominate, with narrow minor groove width (MGW) contributing 21\% of transfer signal.}
+\caption{\textbf{Feature category contributions to S2A cross-species transfer.} Computed from gradient-based attribution for Arab.+Sorg.$\rightarrow$Maize zero-shot transfer. DNA bending features (curvature, flexibility) dominate at 45.3\%, followed by advanced shape features (MGW, melting) at 26.7\%. Thermodynamic stability (14.1\%), stiffness (7.5\%), and entropy (6.5\%) provide smaller contributions.}
 \label{fig:s2a_features}
 \end{figure}
 
@@ -1213,45 +1127,27 @@ The full \fusemap{} framework outperforms all baselines (Table~\ref{tab:comparis
     width=\columnwidth,
     height=5.5cm,
     xlabel={Epoch},
-    ylabel={Validation Pearson $r$},
+    ylabel={Validation Spearman $\rho$},
     xlabel style={font=\small},
     ylabel style={font=\small},
     xmin=0, xmax=100,
-    ymin=0.3, ymax=1.0,
-    legend style={at={(0.02,0.98)}, anchor=north west, font=\tiny, legend columns=2},
+    ymin=0.5, ymax=0.95,
+    legend style={at={(0.98,0.02)}, anchor=south east, font=\tiny},
     grid=major,
     grid style={gray!20},
 ]
 
-% DeepSTARR (highest)
-\addplot[red, very thick, smooth, mark=*, mark size=1pt, mark repeat=20] coordinates {
-    (0,0.35) (10,0.72) (20,0.82) (30,0.87) (40,0.89) (50,0.90) (60,0.91) (70,0.915) (80,0.918) (90,0.919) (100,0.920)
-};
-% Yeast DREAM
-\addplot[orange, very thick, smooth, mark=square*, mark size=1pt, mark repeat=20] coordinates {
-    (0,0.40) (10,0.78) (20,0.88) (30,0.92) (40,0.94) (50,0.95) (60,0.955) (70,0.956) (80,0.957) (90,0.958) (100,0.958)
-};
-% K562
-\addplot[blue, very thick, smooth, mark=triangle*, mark size=1pt, mark repeat=20] coordinates {
-    (0,0.32) (10,0.58) (20,0.68) (30,0.74) (40,0.77) (50,0.79) (60,0.80) (70,0.805) (80,0.807) (90,0.808) (100,0.809)
-};
-% Maize
-\addplot[green!60!black, very thick, smooth, mark=diamond*, mark size=1pt, mark repeat=20] coordinates {
-    (0,0.30) (10,0.52) (20,0.64) (30,0.71) (40,0.75) (50,0.77) (60,0.785) (70,0.79) (80,0.794) (90,0.795) (100,0.796)
-};
-% HepG2
-\addplot[purple, thick, smooth, mark=o, mark size=1pt, mark repeat=20] coordinates {
-    (0,0.31) (10,0.55) (20,0.66) (30,0.72) (40,0.75) (50,0.77) (60,0.78) (70,0.782) (80,0.784) (90,0.785) (100,0.786)
-};
-% WTC11
-\addplot[cyan!70!black, thick, smooth, mark=+, mark size=1.5pt, mark repeat=20] coordinates {
-    (0,0.28) (10,0.45) (20,0.55) (30,0.61) (40,0.65) (50,0.67) (60,0.685) (70,0.692) (80,0.695) (90,0.697) (100,0.698)
+% Real DeepSTARR training data from cadence_deepstarr_v2/training.log
+\addplot[red, thick, mark=none] coordinates {
+    (1,0.570) (5,0.643) (10,0.685) (15,0.719) (20,0.769) (25,0.778) (30,0.799)
+    (35,0.820) (40,0.831) (45,0.842) (50,0.850) (55,0.858) (60,0.863) (65,0.869)
+    (70,0.871) (75,0.874) (80,0.875) (85,0.875) (90,0.876) (95,0.877) (100,0.874)
 };
 
-\legend{DeepSTARR, Yeast, K562, Maize, HepG2, WTC11}
+\legend{DeepSTARR ($\rho$=0.885)}
 \end{axis}
 \end{tikzpicture}
-\caption{\textbf{\cadence{} training convergence across all datasets.} Validation Pearson $r$ vs.\ epoch showing smooth convergence without overfitting. Yeast achieves highest correlation ($r=0.958$) due to large dataset size (6.7M sequences). All models converge within 100 epochs with early stopping.}
+\caption{\textbf{\cadence{} training convergence on DeepSTARR.} Real validation Spearman $\rho$ over 100 epochs from \texttt{training.log}. Training exhibits smooth convergence with diminishing returns after epoch 70. Final test performance: $\rho=0.885$, $r=0.906$ (352K training sequences).}
 \label{fig:training_curves}
 \end{figure}
 
@@ -1262,16 +1158,11 @@ The full \fusemap{} framework outperforms all baselines (Table~\ref{tab:comparis
 
 \subsection{Cell-Type-Specific Therapeutic Enhancer Design}
 
-We applied \fusemap{} to design enhancers for liver-specific gene therapy, targeting HepG2 activity while minimizing K562 activity.
+\fusemap{} enables cell-type-specific enhancer design for gene therapy applications.
 
-\textbf{Method.} Using \physicsvae{} conditioned on high HepG2 and low K562 activity, we generated 10,000 candidate sequences. \place{} filtered for low-uncertainty predictions.
+\textbf{Method.} Using \physicsvae{} conditioned on high target-cell and low off-target activity, candidate sequences can be generated and filtered by \place{} uncertainty estimates. The biophysical constraints from \physinformer{} ensure generated sequences have realistic DNA properties.
 
-\textbf{Results.} The top 100 designs showed:
-\begin{itemize}[leftmargin=*,itemsep=0pt]
-\item 99\% predicted specificity (HepG2/K562 ratio $>$ 10)
-\item Mean HepG2 activity in top 5\% of natural enhancers
-\item Biophysical profiles consistent with known hepatic enhancers
-\end{itemize}
+\textbf{Application.} For liver-specific delivery, one would condition on high HepG2 and low K562 activity. The multi-human VAE (63.7\% reconstruction accuracy) provides a foundation for such conditional generation, though experimental validation of designed sequences remains future work.
 
 \subsection{Cross-Species Promoter Ranking}
 
@@ -1279,7 +1170,7 @@ To assess practical utility, we evaluated whether \stwoa{} can rank held-out mai
 
 \textbf{Method.} Train activity predictor on Arabidopsis/Sorghum physics features using \stwoa{}, rank held-out maize sequences by predicted activity score.
 
-\textbf{Results.} Top-decile sequences (ranked by \stwoa{} score) had mean measured activity of 1.92 vs.\ 0.91 for randomly selected sequences (2.1$\times$ enrichment). This enrichment demonstrates that \stwoa{} effectively identifies high-activity sequences in the target species without target-species training data. Note: this is evaluation on held-out test data, not experimental validation of designed sequences.
+\textbf{Results.} With $\rho=0.70$ correlation on held-out maize test data (n=2,461), \stwoa{} enables effective ranking of sequences by predicted activity without target-species training data. High-ranked sequences are enriched for true high-activity promoters, demonstrating practical utility for prioritizing candidates in species lacking training data.
 
 \subsection{Variant Effect Prediction}
 
@@ -1293,14 +1184,9 @@ We applied \fusemap{} to predict effects of regulatory variants in ClinVar.
 \item Compare predictions with clinical significance annotations
 \end{enumerate}
 
-\textbf{Results.} On 2,847 regulatory variants with clinical annotations:
-\begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Pathogenic variants: Mean $|\Delta\text{activity}| = 0.82$ (high effect)
-\item Benign variants: Mean $|\Delta\text{activity}| = 0.18$ (low effect)
-\item ROC AUC for pathogenic classification: 0.78
-\item High-confidence predictions ($<$0.5 uncertainty) achieve AUC 0.86
-\end{itemize}
-\textbf{Limitations.} This AUC of 0.78 should be interpreted cautiously: we did not benchmark against dedicated variant effect predictors such as CADD \citep{rentzsch2019cadd} or LINSIGHT \citep{huang2017linsight}, which incorporate conservation, functional annotations, and other features beyond sequence-based activity prediction. Our approach is complementary, providing activity-change predictions with uncertainty estimates.
+\textbf{Capability.} This pipeline enables systematic variant effect prediction with uncertainty quantification. Pathogenic variants are expected to show larger $|\Delta\text{activity}|$ than benign variants. High-confidence predictions (low \place{} uncertainty) should be prioritized for follow-up.
+
+\textbf{Limitations.} This approach complements but does not replace dedicated variant effect predictors such as CADD \citep{rentzsch2019cadd} or LINSIGHT \citep{huang2017linsight}, which incorporate conservation, functional annotations, and other features beyond sequence-based activity prediction. Quantitative benchmarking against these methods remains future work.
 
 \subsection{Gradient-Based Enhancer Optimization}
 
@@ -1315,12 +1201,7 @@ We demonstrate iterative sequence optimization using gradient ascent through \ca
 \item Iterate until convergence or constraint violation
 \end{enumerate}
 
-\textbf{Results.} Starting from median-activity enhancers:
-\begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Predicted activity increased by 2.3$\times$ on average
-\item 78\% of optimized sequences remained within natural sequence distribution (measured by language model perplexity)
-\item Biophysical constraints (DNA shape, flexibility) maintained within 1 std of natural enhancers
-\end{itemize}
+\textbf{Capability.} This gradient-based optimization can iteratively improve predicted activity while \physinformer{} constraints ensure optimized sequences maintain realistic biophysical properties (DNA shape, flexibility within natural enhancer ranges). Experimental validation of gradient-optimized sequences remains future work.
 
 %==============================================================================
 \section{Related Work}
@@ -1489,42 +1370,20 @@ Training converges smoothly across all modules, with validation loss tracking tr
 
 To assess data efficiency, we trained \cadence{} on subsets of the training data:
 
-\begin{table}[h]
-\centering
-\caption{\textbf{Learning curves showing performance vs. training set size.}}
-\small
-\begin{tabular}{@{}lcccc@{}}
-\toprule
-Training \% & K562 $r$ & DeepSTARR $r$ & Maize $r$ \\
-\midrule
-10\% & 0.62 & 0.78 & 0.58 \\
-25\% & 0.71 & 0.85 & 0.68 \\
-50\% & 0.77 & 0.89 & 0.74 \\
-75\% & 0.79 & 0.91 & 0.78 \\
-100\% & 0.81 & 0.92 & 0.80 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\textbf{Data efficiency.} Performance scales with training set size, with diminishing returns at larger dataset sizes. Plant datasets (Maize: $\sim$5K sequences, Arabidopsis: $\sim$3K) operate in a more data-limited regime compared to DeepSTARR (485K) and DREAM Yeast (6.7M), which likely explains their lower absolute performance despite similar model architectures.
 
-Plant datasets (Maize: ~2K sequences) show steeper learning curves, indicating the data-limited regime. Human and fly datasets show diminishing returns beyond 50\% of data.
+\subsubsection{Architecture Design Rationale}
 
-\subsubsection{Ablation Studies}
-
-\textbf{Architecture ablations for CADENCE:}
+\textbf{CADENCE architecture choices:}
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Without SE attention: $r$ drops 0.02-0.03
-\item Without dilated convolutions: $r$ drops 0.05-0.08
-\item Without RC-equivariance: $r$ drops 0.01-0.02
+\item SE attention: Enables channel-wise feature weighting, standard in LegNet
+\item Dilated convolutions: Capture multi-scale patterns without pooling
+\item RC-equivariance: Ensures consistent predictions for both DNA strands
 \end{itemize}
 
-\textbf{Feature ablations for S2A:}
-\begin{itemize}[leftmargin=*,itemsep=0pt]
-\item DNA shape only: $\rho = 0.55$
-\item Flexibility only: $\rho = 0.42$
-\item All features: $\rho = 0.70$
-\end{itemize}
+\textbf{S2A feature categories:} Based on gradient attribution (Figure~\ref{fig:s2a_features}), DNA bending (45.3\%) and advanced structural features (26.7\%) contribute most to cross-species transfer, while thermodynamics (14.1\%), stiffness (7.5\%), and entropy (6.5\%) provide smaller contributions.
 
-\textbf{Negative results.} We explored sophisticated domain adaptation methods including CORAL alignment ($\rho = 0.68$, no improvement over simple standardization) and adversarial domain adaptation ($\rho = 0.65$, slight degradation). These results suggest that standardized biophysical features are already well-aligned across species, and complex adaptation methods introduce unnecessary noise. Batch normalization statistics from source species are used directly for target species inference.
+\textbf{Domain adaptation.} Simple standardization of biophysical features proved sufficient for cross-species transfer. This suggests that DNA shape and flexibility are naturally well-aligned across species when expressed in their physical units, without requiring complex domain adaptation methods.
 
 \subsubsection{Computational Cost Comparison}
 
@@ -1681,111 +1540,63 @@ Total parameters & 8.7M \\
 
 \textbf{Entropy ($\Delta S$):} The entropic contribution to duplex stability, reflecting conformational flexibility.
 
-\subsection{Extended Ablation Studies}
+\subsection{Architecture Design Details}
 
-\subsubsection{\cadence{} Architecture Ablations}
+\subsubsection{\cadence{} Architecture Components}
 
-\begin{table}[h]
-\centering
-\caption{\textbf{Architecture ablation on K562 dataset.}}
-\small
-\begin{tabular}{@{}lcc@{}}
-\toprule
-Configuration & Pearson $r$ & $\Delta r$ \\
-\midrule
-Full \cadence{} & 0.809 & --- \\
-\midrule
-Without SE attention & 0.782 & -0.027 \\
-Without RC-equivariance & 0.793 & -0.016 \\
-Without dilated convolutions & 0.731 & -0.078 \\
-Without batch normalization & 0.756 & -0.053 \\
-Half channels (128) & 0.784 & -0.025 \\
-Half blocks (4) & 0.768 & -0.041 \\
-\midrule
-Transformer encoder & 0.791 & -0.018 \\
-LSTM baseline & 0.702 & -0.107 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Key findings from ablations:
+The \cadence{} architecture follows LegNet with our RC-equivariance modification:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Dilated convolutions provide the largest contribution, likely due to multi-scale pattern capture
-\item SE attention provides consistent but smaller improvements across all datasets
-\item RC-equivariance is most important for datasets with bidirectional regulatory logic
-\item Transformers achieve comparable but slightly lower performance, with higher computational cost
+\item \textbf{Dilated convolutions}: Exponentially increasing dilation (1, 2, 4, ..., 128) captures multi-scale regulatory patterns without pooling
+\item \textbf{SE attention}: Squeeze-excitation modules enable channel-wise feature weighting
+\item \textbf{RC-equivariance}: Our modification ensures consistent predictions for both DNA strands
+\item \textbf{8 residual blocks}: Sufficient depth for 1531bp receptive field
 \end{itemize}
 
-\subsubsection{\stwoa{} Feature Ablations}
+\subsubsection{\stwoa{} Feature Importance}
 
-\begin{table}[h]
-\centering
-\caption{\textbf{\stwoa{} feature ablation for plant-to-plant transfer.}}
-\small
-\begin{tabular}{@{}lcc@{}}
-\toprule
-Feature Set & Spearman $\rho$ & Num. Features \\
-\midrule
-All features & 0.700 & 521 \\
-\midrule
-DNA shape only & 0.552 & 52 \\
-Electrostatics only & 0.489 & 32 \\
-Flexibility only & 0.423 & 20 \\
-Thermodynamics only & 0.312 & 15 \\
-Dinucleotide only & 0.398 & 256 \\
-\midrule
-Shape + Electrostatics & 0.634 & 84 \\
-Top 50 by importance & 0.678 & 50 \\
-Selected by RFECV & 0.695 & 127 (from 521) \\
-\bottomrule
-\end{tabular}
-\end{table}
+Feature importance from gradient-based attribution on plant transfer (Arab.+Sorg.$\to$Maize):
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item \textbf{Bending features}: 45.3\% contribution (curvature, flexibility)
+\item \textbf{Advanced structural}: 26.7\% (MGW, melting, shape)
+\item \textbf{Thermodynamics}: 14.1\% (stability metrics)
+\item \textbf{Stiffness}: 7.5\%
+\item \textbf{Entropy}: 6.5\%
+\end{itemize}
+Final S2A model uses 127 features selected by RFECV from 521 total.
 
-\subsubsection{\tileformer{} Ablations}
+\subsubsection{\tileformer{} Architecture}
 
-\begin{table}[h]
-\centering
-\caption{\textbf{\tileformer{} architecture ablation.}}
-\small
-\begin{tabular}{@{}lcc@{}}
-\toprule
-Configuration & $R^2$ & Time/seq \\
-\midrule
-Full \tileformer{} & 0.961 & 0.8 ms \\
-\midrule
-Without BiLSTM (CNN only) & 0.912 & 0.5 ms \\
-Without conv stem (LSTM only) & 0.934 & 1.2 ms \\
-Smaller LSTM (128 hidden) & 0.948 & 0.6 ms \\
-Transformer instead of LSTM & 0.958 & 1.5 ms \\
-\bottomrule
-\end{tabular}
-\end{table}
+\tileformer{} combines CNN feature extraction with BiLSTM for sequence modeling:
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+\item Conv stem: Same as \cadence{} for initial feature extraction
+\item BiLSTM: 2 layers, 256 hidden units per direction
+\item Output: 8 electrostatic summary statistics per sequence
+\item Speed: $<$1ms per sequence vs $\sim$30s for APBS
+\end{itemize}
 
 \subsection{Calibration Analysis}
 
-\subsubsection{Reliability Diagrams}
+\subsubsection{k-NN Calibration Details}
 
-We analyze \place{} calibration using reliability diagrams that compare predicted probabilities with observed frequencies.
+\place{} uses k-nearest neighbor conformal prediction for calibration.
 
-\textbf{Method:} Predictions are binned by predicted uncertainty, and the empirical coverage rate is computed for each bin.
+\textbf{Method:} For each test sequence, the $k$=200 nearest neighbors in feature space are identified from the calibration set. Prediction intervals are computed from the weighted quantiles of neighbor residuals using $\alpha$=0.1 for 90\% target coverage.
 
-\textbf{Results:} Across all datasets:
+\textbf{Results:} Calibration statistics from Table~\ref{tab:place} show:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Pre-calibration ECE: 0.12-0.18 (moderate miscalibration)
-\item Post-calibration ECE: 0.03-0.05 (well-calibrated)
-\item 95\% PI coverage: 93-96\% (near-nominal)
+\item Noise variance ranges from 0.35 (K562) to 1.06 (Maize)
+\item Residual std ranges from 0.59 (K562) to 1.03 (Maize)
+\item Larger calibration sets (DeepSTARR: 81K, Yeast: 67K) yield more reliable estimates
 \end{itemize}
 
-\subsubsection{Uncertainty vs. Error Correlation}
+\subsubsection{Uncertainty Interpretation}
 
-We validate that uncertainty estimates correlate with actual prediction errors:
+\place{} uncertainty estimates reflect local prediction difficulty:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item K562: $r = 0.72$ between $\hat{\sigma}$ and $|y - \hat{y}|$
-\item DeepSTARR: $r = 0.78$
-\item Maize: $r = 0.65$
+\item Low uncertainty: Test sequence similar to well-predicted calibration examples
+\item High uncertainty: Test sequence dissimilar to calibration set or in high-variance region
+\item The k-NN approach adapts intervals to local data density without distributional assumptions
 \end{itemize}
-
-Higher uncertainty sequences have higher average errors, confirming that \place{} identifies difficult predictions.
 
 \subsection{Computational Requirements}
 
@@ -1916,10 +1727,9 @@ Sorg. & -.08 & -.06 & -.04 & -.22 & .58 & .63 & --- \\
 
 Key observations:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
-\item Strong within-plant transfer (all $\rho > 0.58$)
-\item Moderate within-human transfer ($\rho = 0.22-0.58$)
-\item Weak cross-kingdom transfer (mostly negative $\rho$)
-\item Asymmetric transfer: K562 $\rightarrow$ HepG2 (0.58) vs HepG2 $\rightarrow$ K562 (0.54)
+\item Strong within-plant transfer ($\rho = 0.59$--$0.70$, Table~\ref{tab:s2a})
+\item Moderate within-human transfer ($\rho = 0.26$ for K562+HepG2$\to$WTC11)
+\item Cross-kingdom transfer fails (negative $\rho$ for Fly$\to$Plants)
 \end{itemize}
 
 \subsection{Broader Impact Statement}

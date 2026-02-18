@@ -93,76 +93,70 @@ Cis-regulatory elements (CREs)---enhancers, promoters, and silencers---orchestra
 
 \begin{figure*}[t]
 \centering
-\begin{tikzpicture}[scale=1.0, transform shape]
+\begin{tikzpicture}[scale=0.95, transform shape]
 
 % === LEFT PANEL: Arabidopsis Promoter ===
-\node[font=\normalsize\bfseries, green!50!black] at (0, 4.5) {Arabidopsis Promoter};
-% Real sequence from dataset (high-activity with TATA)
-\node[font=\scriptsize\ttfamily] at (0, 3.9) {5'-AGCCCTTAATTATCCA\textcolor{red!70!black}{\underline{TATA}}AGCC...-3'};
-\node[font=\scriptsize, red!70!black] at (0.3, 3.4) {$\uparrow$ TATA box};
+\node[font=\normalsize\bfseries, green!50!black] at (0, 5.0) {Arabidopsis Promoter};
+\node[font=\scriptsize\ttfamily] at (0, 4.4) {5'-AGCCCTTAATTATCCA\textcolor{red!70!black}{\underline{TATA}}AGCC...-3'};
+\node[font=\scriptsize, red!70!black] at (0.8, 3.95) {TATA box};
 
-% MGW profile - REAL: mean=4.35Å, narrow fraction=0.64
-\node[font=\scriptsize, anchor=east] at (-2.3, 2.8) {MGW (\AA)};
-\draw[very thick, blue!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {2.8 + 0.25 - 0.35*exp(-(\x-0.2)^2/0.3)});
-\draw[dashed, gray] (-2.2, 2.55) -- (2.2, 2.55);
-\node[font=\scriptsize, gray] at (2.6, 2.55) {4.35};
+% MGW profile
+\node[font=\scriptsize, anchor=east] at (-2.4, 3.2) {MGW (\AA)};
+\draw[very thick, blue!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {3.2 + 0.25 - 0.35*exp(-(\x-0.2)^2/0.3)});
+\node[font=\tiny, gray, anchor=west] at (2.3, 3.0) {4.35};
 
 % ProT profile
-\node[font=\scriptsize, anchor=east] at (-2.3, 2.0) {ProT ($^\circ$)};
-\draw[very thick, purple!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {2.0 + 0.15*sin(\x*150) + 0.1*cos(\x*80)});
+\node[font=\scriptsize, anchor=east] at (-2.4, 2.4) {ProT ($^\circ$)};
+\draw[very thick, purple!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {2.4 + 0.15*sin(\x*150) + 0.1*cos(\x*80)});
 
 % Electrostatic profile
-\node[font=\scriptsize, anchor=east] at (-2.3, 1.2) {$\psi$ (kT/e)};
-\draw[very thick, red!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {1.2 - 0.2 + 0.25*exp(-(\x-0.2)^2/0.4)});
+\node[font=\scriptsize, anchor=east] at (-2.4, 1.6) {$\psi$ (kT/e)};
+\draw[very thick, red!70] plot[smooth, samples=30, domain=-2.2:2.2] (\x, {1.6 - 0.2 + 0.25*exp(-(\x-0.2)^2/0.4)});
 
-\draw[rounded corners, gray!50, thick] (-2.5, 0.8) rectangle (2.8, 4.2);
+% Activity box
+\node[draw, fill=green!20, rounded corners, font=\scriptsize\bfseries, minimum width=1.8cm] at (0, 0.9) {Activity: 4.16};
+
+\draw[rounded corners, gray!60, thick] (-2.6, 0.4) rectangle (2.6, 5.3);
 
 % === CENTER: Conservation Arrow ===
-\draw[-{Stealth[length=4mm]}, ultra thick, green!60!black] (3.2, 2.3) -- (4.8, 2.3);
-\node[font=\scriptsize, align=center, green!50!black] at (4, 2.9) {Conserved\\biophysics};
-\node[font=\scriptsize, align=center] at (4, 1.7) {36\% seq.\\identity};
+\draw[-{Stealth[length=4mm]}, ultra thick, green!60!black] (3.0, 2.8) -- (4.6, 2.8);
+\node[font=\scriptsize, align=center, green!50!black] at (3.8, 3.5) {Conserved\\biophysics};
+\node[font=\scriptsize, align=center, gray] at (3.8, 2.1) {36\% seq.\\identity};
 
 % === RIGHT PANEL: Maize Promoter ===
-\node[font=\normalsize\bfseries, green!50!black] at (7.5, 4.5) {Maize Promoter};
-% Real sequence from dataset (high-activity)
-\node[font=\scriptsize\ttfamily] at (7.5, 3.9) {5'-GCAAAAAAAACTCAAACCAACCCGAAAC...-3'};
-\node[font=\scriptsize, gray] at (7.8, 3.4) {(high activity)};
+\node[font=\normalsize\bfseries, green!50!black] at (7.5, 5.0) {Maize Promoter};
+\node[font=\scriptsize\ttfamily] at (7.5, 4.4) {5'-GCAAAAAAAACTCAAACCAACCCGAA...-3'};
+\node[font=\scriptsize, gray] at (7.5, 3.95) {(high activity)};
 
-% MGW profile - REAL: mean=4.45Å, narrow fraction=0.54
-\node[font=\scriptsize, anchor=east] at (5.2, 2.8) {MGW (\AA)};
-\draw[very thick, blue!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {2.8 + 0.25 - 0.33*exp(-(\x-7.7)^2/0.35)});
-\draw[dashed, gray] (5.3, 2.55) -- (9.7, 2.55);
-\node[font=\scriptsize, gray] at (10.1, 2.55) {4.45};
+% MGW profile
+\node[font=\scriptsize, anchor=east] at (5.1, 3.2) {MGW (\AA)};
+\draw[very thick, blue!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {3.2 + 0.25 - 0.33*exp(-(\x-7.5)^2/0.35)});
+\node[font=\tiny, gray, anchor=west] at (9.8, 3.0) {4.45};
 
-% ProT profile (similar)
-\node[font=\scriptsize, anchor=east] at (5.2, 2.0) {ProT ($^\circ$)};
-\draw[very thick, purple!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {2.0 + 0.15*sin((\x-5.3)*150) + 0.1*cos((\x-5.3)*80)});
+% ProT profile
+\node[font=\scriptsize, anchor=east] at (5.1, 2.4) {ProT ($^\circ$)};
+\draw[very thick, purple!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {2.4 + 0.15*sin((\x-5.3)*150) + 0.1*cos((\x-5.3)*80)});
 
-% Electrostatic profile (similar)
-\node[font=\scriptsize, anchor=east] at (5.2, 1.2) {$\psi$ (kT/e)};
-\draw[very thick, red!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {1.2 - 0.2 + 0.23*exp(-(\x-7.7)^2/0.45)});
+% Electrostatic profile
+\node[font=\scriptsize, anchor=east] at (5.1, 1.6) {$\psi$ (kT/e)};
+\draw[very thick, red!70] plot[smooth, samples=30, domain=5.3:9.7] (\x, {1.6 - 0.2 + 0.23*exp(-(\x-7.5)^2/0.45)});
 
-\draw[rounded corners, gray!50, thick] (5.0, 0.8) rectangle (10.3, 4.2);
+% Activity box
+\node[draw, fill=green!20, rounded corners, font=\scriptsize\bfseries, minimum width=1.8cm] at (7.5, 0.9) {Activity: 2.59};
 
-% === BOTTOM: Activity Comparison (REAL VALUES from dataset) ===
-\draw[fill=green!30, thick] (-1.5, -0.2) rectangle (0.8, 0.4);
-\node[font=\scriptsize\bfseries] at (-0.35, 0.1) {Act: 4.16};
-\node[font=\scriptsize, green!50!black] at (-0.35, -0.5) {Arabidopsis};
+\draw[rounded corners, gray!60, thick] (4.9, 0.4) rectangle (10.1, 5.3);
 
-\draw[fill=green!30, thick] (6.7, -0.2) rectangle (8.8, 0.4);
-\node[font=\scriptsize\bfseries] at (7.75, 0.1) {Act: 2.59};
-\node[font=\scriptsize, green!50!black] at (7.75, -0.5) {Maize};
+% === S2A Transfer Arrow ===
+\draw[-{Stealth[length=3mm]}, very thick, blue!60] (0, 0.3) -- (0, -0.3) -- (7.5, -0.3) -- (7.5, 0.3);
+\node[font=\small\bfseries, blue!60, fill=white, inner sep=2pt] at (3.75, -0.3) {S2A Transfer: $\rho$=0.70};
 
-% S2A prediction arrow
-\draw[-{Stealth}, very thick, blue!60] (1.0, 0.1) -- (6.5, 0.1);
-\node[font=\small, blue!60, align=center] at (3.75, 0.5) {\textbf{S2A: $\rho$=0.70}};
-
-% === MODULE STRIP (bottom) ===
-\draw[rounded corners, fill=gray!10, thick] (-2.5, -1.3) rectangle (10.3, -0.7);
-\node[font=\scriptsize] at (4, -1.0) {\textbf{Modules:} CADENCE $r$=0.81 | PhysInformer 521 feat | TileFormer 10,000$\times$ | S2A $\rho$=0.70 | PLACE 90\% cov.};
+% === MODULE STRIP ===
+\node[draw, rounded corners, fill=gray!8, font=\scriptsize, minimum width=12cm, minimum height=0.6cm] at (3.75, -1.1) {
+\textbf{FUSEMAP:} CADENCE ($r$=0.81) \quad PhysInformer (521 features) \quad TileFormer (10,000$\times$) \quad S2A ($\rho$=0.70) \quad PLACE (90\% cov.)
+};
 
 \end{tikzpicture}
-\caption{\textbf{Biophysical features enable cross-species regulatory prediction.} Two plant promoters with 36\% sequence identity share conserved biophysical profiles. (Left) Arabidopsis promoter with TATA box (activity=4.16, MGW mean=4.35\AA{}). (Right) High-activity Maize promoter (activity=2.59, MGW mean=4.45\AA{}). Both species show mean MGW $\approx$4.3--4.5\AA{} (data from 12,115 Arabidopsis and 22,143 Maize sequences). (Bottom) \stwoa{} exploits this conservation for zero-shot transfer ($\rho$=0.70, Arab.+Sorg.$\rightarrow$Maize, $n$=2,461 test sequences).}
+\caption{\textbf{Biophysical features enable cross-species regulatory prediction.} Two plant promoters with only 36\% sequence identity share conserved biophysical profiles (MGW, ProT, $\psi$). \stwoa{} exploits this conservation for zero-shot cross-species transfer, achieving $\rho$=0.70 when predicting Maize activity using models trained only on Arabidopsis and Sorghum ($n$=2,461 test sequences).}
 \label{fig:overview}
 \end{figure*}
 

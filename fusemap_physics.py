@@ -12,10 +12,10 @@ under the MIT license at:
 This file contains the physics-based modules for FUSEMAP:
 
 MODULES INCLUDED:
-1. PhysInformer - Transformer for predicting 521 biophysical descriptors
+1. PhysInformer - Transformer for predicting biophysical descriptors
    Source: physics/PhysInformer/model.py
-   Architecture: 8-layer transformer, 512 dim, 8 heads, 12.3M params
-   521 output features (thermo, stiffness, bending, entropy, advanced)
+   Architecture: 8-layer transformer, 512 dim, 8 heads
+   Default: 500 output features (thermo, stiffness, bending, entropy, advanced)
 
 2. TileFormer - Neural surrogate for APBS electrostatic calculations
    Source: physics/TileFormer/models/tileformer_architecture.py
@@ -1083,18 +1083,18 @@ class UniversalFeatureExtractor:
 
         return is_universal and not is_excluded
 
-    def extract_feature_columns(self, columns: List[str]) -> List[str]:
+    def extract_feature_columns(self, df: 'pd.DataFrame') -> List[str]:
         """
         Extract list of universal feature columns from a dataframe.
 
         Args:
-            columns: List of column names (or DataFrame columns)
+            df: DataFrame with physics features
 
         Returns:
             List of universal feature column names
         """
         feature_cols = [
-            col for col in columns
+            col for col in df.columns
             if self._is_universal_feature(col)
         ]
         return sorted(feature_cols)
@@ -2084,7 +2084,7 @@ class PhysicsConsistencyLoss(nn.Module):
 
         # Predict physics from generated sequences
         with torch.no_grad():
-            predicted_physics = self.physics_predictor(sequences)
+            predicted_physics = self.physics_predictor(sequences)['descriptors']
 
         # MSE between predicted and target physics
         if self.normalize:
@@ -2224,7 +2224,7 @@ class PhysicsAttributor:
     enabling mechanistic interpretation.
 
     Usage:
-        attributor = PhysicsAttributor()
+        attributor = PhysicsAttributor(config)
         attributor.fit(X_physics, y_activity, feature_names)
 
         # Get overall feature importance
@@ -2234,10 +2234,11 @@ class PhysicsAttributor:
         seq_attr = attributor.attribute_sequence(x_physics, seq_id='seq1')
     """
 
-    def __init__(self, alpha: float = 1.0, probe_type: str = 'ridge'):
+    def __init__(self, config=None):
         from sklearn.preprocessing import StandardScaler
-        self.alpha = alpha
-        self.probe_type = probe_type
+        self.config = config
+        self.alpha = config.attribution_alpha if config else 1.0
+        self.probe_type = config.attribution_probe_type if config else 'ridge'
         self.model = None
         self.scaler = StandardScaler()
         self.feature_names: List[str] = []

@@ -15,13 +15,13 @@ This file contains the core model architectures for FUSEMAP:
 MODULES INCLUDED:
 1. CADENCE - Core Activity Prediction Model (LegNet-based)
    Source: models/CADENCE/cadence.py
-   - SELayer: Squeeze-and-Excitation for channel attention (reduction=16)
+   - SELayer: Squeeze-and-Excitation for channel attention (reduction=4)
    - EffBlock: EfficientNet-style inverted residual blocks (expand_ratio=4)
    - LocalBlock: Local convolution blocks
    - ResidualConcat: Skip connections with concatenation
    - MapperBlock: Channel mapping layers
    - LegNet: Base architecture (literal copy from HumanMPRALegNet)
-   - RCEquivariantStem: Reverse-complement equivariant stem (k=15, c=256)
+   - RCEquivariantStem: Reverse-complement equivariant stem (k=11, c=64)
    - CADENCE: Full model with optional modules (1.45M params)
    - MultiHeadCADENCE: Multi-output variant for multi-dataset training
 
@@ -42,13 +42,13 @@ MODULES INCLUDED:
 5. LegatoV2 - Compact High-Performance Model
    Source: models/legatoV2/legato_v2.py
    - RCEMotifStem: RC-equivariant motif extraction
-   - GDCStack: Grouped dilated separable convolutions
+   - GDCStack: GLU-Gated dilated separable convolutions
    - LegatoV2: Full architecture
 
 KEY RESULTS (from paper, Table 3):
 - K562: Pearson r = 0.809, Spearman rho = 0.759
-- HepG2: Pearson r = 0.786, Spearman rho = 0.770
-- WTC11: Pearson r = 0.698, Spearman rho = 0.591
+- HepG2: Pearson r = 0.808, Spearman rho = 0.773
+- WTC11: Pearson r = 0.700, Spearman rho = 0.558
 - DeepSTARR Dev: Pearson r = 0.909, Hk: Pearson r = 0.920
 - Maize: Pearson r = 0.796, Sorghum: r = 0.782
 - Yeast: Pearson r = 0.958
@@ -206,8 +206,8 @@ class EffBlock(nn.Module):
         ks: int,
         resize_factor: int,
         activation,
-        out_ch: int = None,
-        se_reduction: int = None
+        out_ch: Optional[int] = None,
+        se_reduction: Optional[int] = None
     ):
         super().__init__()
         self.in_ch = in_ch
@@ -293,7 +293,7 @@ class LocalBlock(nn.Module):
         in_ch: int,
         ks: int,
         activation,
-        out_ch: int = None
+        out_ch: Optional[int] = None
     ):
         super().__init__()
         self.in_ch = in_ch
@@ -532,7 +532,7 @@ class LegNet(nn.Module):
 
 
 # Default LegNet hyperparameters (from HumanMPRALegNet, de Almeida et al.)
-# These achieve r=0.81 on K562, r=0.79 on HepG2, r=0.77 on WTC11
+# These achieve r=0.809 on K562, r=0.808 on HepG2, r=0.700 on WTC11
 # Total parameters: ~1.45M (compact enough for MPRA-scale datasets ~100K sequences)
 LEGNET_DEFAULTS = {
     'in_ch': 4,           # DNA one-hot encoding (A=0, C=1, G=2, T=3)
@@ -1314,8 +1314,8 @@ class ClusterSpace(nn.Module):
 
     Default configuration:
     - Block 1: dilation=1 (local, 7bp receptive field)
-    - Block 2: dilation=2 (medium, 14bp receptive field)
-    - Block 3: dilation=4 (long-range, 28bp receptive field)
+    - Block 2: dilation=2 (medium, 13bp receptive field)
+    - Block 3: dilation=4 (long-range, 25bp receptive field)
     - Block 4: dilation=1 (consolidation)
 
     Args:
@@ -1835,7 +1835,7 @@ class PLACEUncertainty:
         try:
             L = torch.linalg.cholesky(gram_reg)
             self.posterior_cov = torch.cholesky_inverse(L)
-        except:
+        except Exception:
             # Fallback to pseudo-inverse if numerical issues prevent
             # Cholesky (e.g., near-singular due to collinear features)
             print("Warning: Using pseudo-inverse for posterior covariance")

@@ -71,10 +71,11 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 from dataclasses import dataclass, field, asdict
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from enum import Enum
 
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
@@ -643,7 +644,7 @@ def get_config4_cross_kingdom() -> ExperimentConfig:
         config_type=ConfigurationType.CROSS_KINGDOM,
         description="Cross-kingdom transfer between animals and plants",
         datasets=[
-            # Animals (~647k sequences)
+            # Animals (~968k sequences: K562 164k + HepG2 244k + WTC11 76k + DeepSTARR 484k)
             "encode4_k562", "encode4_hepg2", "encode4_wtc11",
             "deepstarr",
             # Plants (~37k sequences)
@@ -695,7 +696,7 @@ def get_config5_universal() -> ExperimentConfig:
         config_type=ConfigurationType.UNIVERSAL,
         description="Universal foundation model across all species",
         datasets=[
-            # Animals (~647k sequences)
+            # Animals (~968k sequences: K562 164k + HepG2 244k + WTC11 76k + DeepSTARR 484k)
             "encode4_k562", "encode4_hepg2", "encode4_wtc11",
             "deepstarr",
             # Plants (~54k sequences)
@@ -774,7 +775,7 @@ def get_config5_universal_no_yeast() -> ExperimentConfig:
         config_type=ConfigurationType.UNIVERSAL,
         description="Universal foundation model across animals and plants (no yeast)",
         datasets=[
-            # Animals (~647k sequences)
+            # Animals (~968k sequences: K562 164k + HepG2 244k + WTC11 76k + DeepSTARR 484k)
             "encode4_k562", "encode4_hepg2", "encode4_wtc11",
             "deepstarr",
             # Plants (~54k sequences)
@@ -1789,6 +1790,7 @@ class Trainer:
             json.dump(asdict(self.config), f, indent=2, default=str)
 
         # Training loop
+        avg_val_pearson = 0.0
         for epoch in range(self.current_epoch, self.config.training.max_epochs):
             self.current_epoch = epoch
             epoch_start = time.time()
@@ -2256,7 +2258,7 @@ class TherapeuticEnhancerPipeline:
             try:
                 from oracle_check.config import ValidationThresholds
                 thresholds = ValidationThresholds()
-                self.composition_validator = CompositionValidator(thresholds)
+                self.composition_validator = CompositionValidator(None, thresholds)
             except Exception as e:
                 print(f"  Note: CompositionValidator not loaded: {e}")
 
@@ -2524,7 +2526,6 @@ class VariantEffect:
             for i, name in enumerate(self.physics_ref.feature_names)
         }
 
-    @property
     def top_changed_physics(self, n: int = 10) -> List[Tuple[str, float]]:
         """Get top N most changed physics features."""
         deltas = self.delta_physics
@@ -4209,6 +4210,9 @@ class OracleCheckConfig:
     )
 
     # Reference panel settings
+    reference_panels_dir: Path = field(
+        default_factory=lambda: Path("oracle_check/reference_panels")
+    )
     natural_high_performer_quantile: float = 0.75  # Top 25% for high performers
     background_sample_size: int = 10000  # Number of background samples
     knn_n_neighbors: int = 200  # For OOD detection
@@ -4903,6 +4907,8 @@ class BatchComparator:
         feature_names: List[str] = None,
     ):
         """Compare physics feature distributions between designed and reference."""
+        from scipy import stats as scipy_stats
+
         # MMD on full physics features
         mmd_result = self.mmd_test.compute(
             designed_features, reference_features, self.n_permutations,
@@ -4912,7 +4918,7 @@ class BatchComparator:
         ks_results = {}
         if feature_names is not None:
             for i, name in enumerate(feature_names):
-                stat, pval = stats.ks_2samp(
+                stat, pval = scipy_stats.ks_2samp(
                     designed_features[:, i], reference_features[:, i],
                 )
                 ks_results[name] = TwoSampleTestResult(

@@ -417,7 +417,7 @@ f_\theta(\phi) = \text{Linear}(\text{ReLU}(\text{BN}(\text{Linear}(\phi))))
 \item Select feature subset maximizing cross-validation performance on held-out source species folds
 \end{enumerate}
 
-The final \stwoa{} model uses 127 selected biophysical features (from 521 total), primarily DNA shape (MGW, ProT, Roll) and thermodynamic stability metrics. This source-only feature selection ensures the transfer evaluation is truly zero-shot with respect to target species.
+The final \stwoa{} model uses $\sim$250 selected biophysical features (from 521 total), primarily DNA shape (MGW, ProT, Roll) and thermodynamic stability metrics. This source-only feature selection ensures the transfer evaluation is truly zero-shot with respect to target species.
 
 \textbf{Domain adaptation.} To account for species-specific feature distributions, we apply simple standardization:
 \begin{equation}

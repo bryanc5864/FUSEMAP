@@ -60,3 +60,10 @@ comparison_models/random-promoter-dream-challenge-2022/
 presentation_figures/
 stair poster.pdf
 comparison_models/
+paper/
+excerptfrompres.pdf
+fusemap_models.py
+fusemap_physics.py
+fusemap_training_applications.py
+hepg2_predictions.png
+hepg2_sample_20.txt

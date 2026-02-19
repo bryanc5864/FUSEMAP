@@ -19,7 +19,7 @@ FUSEMAP comprises six synergistic modules:
 | Module | Description | Key Metric |
 |--------|-------------|------------|
 | **CADENCE** | Sequence-to-activity prediction (LegNet-based CNN) | r=0.81 (K562), r=0.92 (DeepSTARR) |
-| **PhysInformer** | Sequence-to-physics transformer (500+ biophysical features) | r=0.92 validation |
+| **PhysInformer** | Sequence-to-physics transformer (521 biophysical features) | r=0.94 validation |
 | **TileFormer** | Electrostatic potential surrogate model | R²=0.96, 10,000× speedup |
 | **S2A** | Zero-shot cross-species activity transfer | ρ=0.70 (plant-to-plant) |
 | **PhysicsVAE** | Inverse design with targeted biophysical profiles | 64% reconstruction |
@@ -87,7 +87,7 @@ trainer.train()
 from physics.PhysInformer.model import PhysInformer
 
 model = PhysInformer.load_pretrained("K562")
-features = model.predict(sequences)  # Returns 500+ features
+features = model.predict(sequences)  # Returns 521 features
 ```
 
 ### Zero-Shot Cross-Species Transfer with S2A

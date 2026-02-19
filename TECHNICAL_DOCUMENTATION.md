@@ -31,7 +31,7 @@
 
 | Component | Purpose | Input | Output |
 |-----------|---------|-------|--------|
-| **PhysInformer** | Predict physics from sequence | DNA sequence | 500+ physics features |
+| **PhysInformer** | Predict physics from sequence | DNA sequence | 521 physics features |
 | **TileFormer** | Predict electrostatics | DNA sequence | Electrostatic potentials (PSI) |
 | **PhysicsVAE** | Generate sequences from physics | Physics features | DNA sequences |
 | **PhysicsTransfer** | Cross-species transfer | Source model + target data | Transferred model |

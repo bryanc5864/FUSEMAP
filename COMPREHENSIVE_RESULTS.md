@@ -25,7 +25,7 @@ Complete experimental results and metrics from all validation experiments.
 | Plant Models | 6 | Pearson r | 0.80 (Maize leaf) |
 | DREAM Yeast | 8 | Pearson r | **0.958** |
 | LegNet Comparison | 3 | Pearson r | CADENCE matches/exceeds |
-| **Total Experiments** | **340+** | | |
+| **Total Experiments** | **840+** | | |
 
 ### Key Findings Summary
 
@@ -1033,8 +1033,8 @@ Direct comparison of our CADENCE architecture against LegNet (published benchmar
 | Cell Type | CADENCE Test r | LegNet Test r | Difference |
 |-----------|----------------|---------------|------------|
 | **K562** | 0.809 | 0.811 | -0.002 |
-| **HepG2** | 0.808 | 0.783 | +0.025 |
-| **WTC11** | 0.700 | 0.698 | +0.002 |
+| **HepG2** | 0.786 | 0.783 | +0.003 |
+| **WTC11** | 0.698 | 0.698 | 0.000 |
 
 ### LegNet Detailed Results
 
@@ -1048,8 +1048,8 @@ Direct comparison of our CADENCE architecture against LegNet (published benchmar
 
 **CADENCE matches or exceeds LegNet** on all three human cell types:
 - K562: Near-identical (0.809 vs 0.811, within margin of error)
-- HepG2: CADENCE outperforms by 2.5 points (0.808 vs 0.783)
-- WTC11: Near-identical (0.700 vs 0.698)
+- HepG2: CADENCE slightly better (0.786 vs 0.783)
+- WTC11: Identical (0.698 vs 0.698)
 
 **Conclusion**: CADENCE achieves competitive or superior performance to the published LegNet architecture while additionally supporting physics-guided interpretability and cross-species transfer.
 

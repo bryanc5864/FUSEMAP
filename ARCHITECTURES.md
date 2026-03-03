@@ -218,96 +218,15 @@ Speedup: **10,000x** compared to APBS computation.
 
 ## 3. PhysInformer
 
-**Purpose:** Sequence-to-physics transformer — predicts hundreds of biophysical descriptors from DNA sequence for downstream transfer learning.
+**Purpose:** Sequence-to-physics model — predicts hundreds of biophysical descriptors from DNA sequence for downstream transfer learning.
 
-**Source:** `physics/PhysInformer/model.py` (base), `physics/PhysInformer/physics_aware_model.py` (extended)
+**Source:** `physics/PhysInformer/physics_aware_model.py` (trained model), `physics/PhysInformer/model.py` (earlier prototype, unused)
 
-### 3A. Base PhysInformer
+### Overview
 
-The base PhysInformer is an 8-layer transformer encoder with independent prediction heads for each biophysical descriptor.
+PhysInformer uses a hybrid CNN+SSM (state space model) backbone with physics-informed routing. Rather than a generic shared encoder, it routes features through 7 property-specific adapters with kernel sizes tailored to the spatial scale of each biophysical property. All prediction heads output both mean and log-variance, enabling heteroscedastic uncertainty estimation.
 
-### Architecture
-
-```
-Input: [batch, seq_len]  (integer token indices, seq_len <= 240)
-
-EMBEDDING:
-  Embedding(vocab_size=5, d_model=512)
-  Scale by sqrt(512)
-
-POSITIONAL ENCODING:
-  Sinusoidal positional encoding (max_len=240)
-
-TRANSFORMER ENCODER (x8 layers):
-  Each layer:
-    MultiheadAttention(d_model=512, n_heads=8, dropout=0.1)
-    LayerNorm + residual
-    FeedForward:
-      Linear(512 -> 2048) -> GELU -> Dropout(0.1) -> Linear(2048 -> 512)
-    LayerNorm + residual
-
-GLOBAL POOLING:
-  Mean pooling over sequence dimension
-  Linear(512 -> 512) -> GELU -> Dropout(0.1)
-
-FEATURE HEADS (one per descriptor, up to 537):
-  Each head:
-    Linear(512 -> 256) -> GELU -> Dropout(0.1)
-    Linear(256 -> 128) -> GELU -> Dropout(0.1)
-    Linear(128 -> 1)
-
-Output: {'descriptors': [batch, n_descriptors]}
-```
-
-### Hyperparameters
-
-| Parameter | Value |
-|-----------|-------|
-| Vocabulary size | 5 |
-| d_model | 512 |
-| Attention heads | 8 |
-| d_ff (feedforward) | 2048 |
-| Transformer layers | 8 |
-| Max sequence length | 240 |
-| Dropout | 0.1 |
-| Activation | GELU |
-| Parameters | ~90M |
-
-### Number of Descriptor Outputs by Cell Type
-
-| Cell Type | Total Descriptors | Active (non-zero-variance) |
-|-----------|------------------|---------------------------|
-| HepG2 | 545 | 537 |
-| K562 | 504 | 498 |
-| WTC11 | 528 | 522 |
-
-### Within-Cell-Type Performance (Validation)
-
-| Cell Type | Overall Pearson r | Descriptor Mean r | Descriptor Median r |
-|-----------|------------------|-------------------|---------------------|
-| K562 | 0.918 | 0.896 | 0.987 |
-| HepG2 | 0.915 | 0.892 | 0.983 |
-| WTC11 | 0.906 | 0.877 | 0.974 |
-| S2 (Drosophila) | 0.919 | 0.894 | 0.988 |
-| Maize | 0.896 | 0.870 | 0.949 |
-| Arabidopsis | 0.838 | 0.799 | 0.930 |
-| Sorghum | 0.849 | 0.813 | 0.942 |
-
-### Shape Trace (seq_len=230)
-
-| Stage | Shape |
-|-------|-------|
-| Input | [B, 230] |
-| Embedding | [B, 230, 512] |
-| + Positional encoding | [B, 230, 512] |
-| Transformer (x8) | [B, 230, 512] |
-| Mean pool | [B, 512] |
-| Pool projection | [B, 512] |
-| Feature heads | [B, 537] |
-
-### 3B. PhysicsAwareModel (Extended Architecture)
-
-The extended PhysicsAwareModel replaces the standard transformer backbone with a hybrid CNN+SSM architecture and adds physics-informed routing with property-specific prediction heads.
+> **Note:** The codebase contains two model files. `model.py` defines an earlier prototype — a standard 8-layer transformer (512d, 8 heads, ~90M params) with independent prediction heads. This was superseded by the `PhysicsAwareModel` in `physics_aware_model.py`, which is the architecture actually used in all training runs (`train.py` imports only `PhysicsAwareModel`). All reported results use the PhysicsAwareModel described below.
 
 ### Architecture
 
@@ -387,7 +306,28 @@ Each router uses a different kernel size tailored to the spatial scale of its ta
 - **Total variation loss:** smoothness regularization on window predictions
 - **Auxiliary loss:** Huber or MSE for activity prediction heads
 
-### Parameters: ~50M
+### Hyperparameters
+
+| Parameter | Value |
+|-----------|-------|
+| Vocabulary size | 5 (A, T, G, C, N) |
+| Embedding dim | 128 |
+| Backbone dim (d_model) | 256 |
+| Feature pyramid dim | 384 |
+| SSM layers | 2 (d_state=16) |
+| Conv stem kernels | [11, 9, 7] |
+| Dropout | 0.1 |
+| Temperature | 310K (thermodynamic constraint) |
+| Activation | SiLU |
+| Parameters | ~50M |
+
+### Number of Descriptor Outputs by Cell Type
+
+| Cell Type | Total Descriptors | Active (non-zero-variance) |
+|-----------|------------------|---------------------------|
+| HepG2 | 545 | 537 |
+| K562 | 504 | 498 |
+| WTC11 | 528 | 522 |
 
 ### Within-Cell-Type Performance (Validation)
 
@@ -418,7 +358,6 @@ Each router uses a different kernel size tailored to the spatial scale of its ta
 |-------|------|--------|-------|--------|-------------|
 | **CADENCE** | CNN (EfficientNet) | ~2.1M | [B, 4, L] | [B] | Activity prediction |
 | **TileFormer** | Transformer (6L) | ~17M | [B, L] | [B, 6] | Electrostatic surrogacy |
-| **PhysInformer** | Transformer (8L) | ~90M | [B, L] | [B, 537] | Biophysical descriptors |
-| **PhysicsAwareModel** | CNN+SSM hybrid | ~50M | [B, L] | Dict | Multi-property prediction |
+| **PhysInformer** | CNN+SSM hybrid | ~50M | [B, L] | Dict | Biophysical descriptors |
 
-All models process DNA sequences and share a common vocabulary (A, T, G, C, N). CADENCE takes one-hot encoded input while the transformer-based models take integer token indices.
+All models process DNA sequences and share a common vocabulary (A, T, G, C, N). CADENCE takes one-hot encoded input while TileFormer and PhysInformer take integer token indices.

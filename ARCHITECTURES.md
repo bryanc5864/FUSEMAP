@@ -113,25 +113,28 @@ Applies a function block and concatenates its output with the input, doubling ch
 
 ## 2. TileFormer
 
-**Purpose:** Electrostatic potential surrogate model — predicts APBS-computed electrostatic properties from DNA sequence at 10,000x speedup.
+**Purpose:** Electrostatic potential surrogate model — predicts APBS-computed electrostatic properties from 20bp DNA tiles at 10,000x speedup.
 
-**Source:** `physics/TileFormer/models/tileformer_architecture.py`
+**Source:** `physics/TileFormer/models/tileformer_architecture.py` (model definition), `physics/TileFormer/train_orchestrator.py` (training script)
 
 ### Overview
 
-TileFormer is a 6-layer transformer encoder that maps tokenized DNA sequences to 6 electrostatic potential summary statistics. It replaces expensive APBS (Adaptive Poisson-Boltzmann Solver) computations with a learned surrogate, enabling rapid electrostatic screening of candidate sequences.
+TileFormer is a 6-layer transformer encoder that maps 20bp DNA sequence tiles to 6 electrostatic potential summary statistics. It replaces expensive APBS (Adaptive Poisson-Boltzmann Solver) computations with a learned surrogate. Trained on ~52K 20bp sequences with APBS-computed ground truth, it enables rapid electrostatic screening at the tile level. For full-length sequences (e.g., 230bp), TileFormer is applied in a sliding window fashion (20bp windows, stride 10) to produce spatially-resolved electrostatic profiles.
 
 ### Architecture
 
+The trained model uses `TileFormerWithMetadata`, which extends the base transformer with a metadata processing branch:
+
 ```
-Input: [batch, seq_len]  (integer token indices, seq_len <= 200)
+Input: [batch, 20]  (integer token indices, 20bp DNA tiles)
+Metadata: [batch, 3]  (gc_content, cpg_density, minor_groove_score)
 
 EMBEDDING:
   Embedding(vocab_size=5, d_model=256)  # A=0, T=1, G=2, C=3, N=4
   Scale by sqrt(256)
 
 POSITIONAL ENCODING:
-  Sinusoidal positional encoding (max_len=200)
+  Sinusoidal positional encoding (max_len=200, only first 20 positions used)
   x = embedding + positional_encoding
 
 TRANSFORMER ENCODER (x6 layers):
@@ -146,10 +149,16 @@ GLOBAL POOLING:
   Mean pooling over sequence dimension
   Linear(256 -> 256) -> GELU -> Dropout(0.1)
 
+METADATA PROCESSING:
+  Linear(3 -> 64) -> GELU -> Linear(64 -> 256)
+
+FEATURE FUSION:
+  Concatenate(sequence_features, metadata_features) -> Linear(512 -> 256)
+
 PSI HEAD:
   Linear(256 -> 128) -> GELU -> Dropout(0.1) -> Linear(128 -> 6)
 
-UNCERTAINTY HEAD (optional):
+UNCERTAINTY HEAD:
   Linear(256 -> 128) -> GELU -> Dropout(0.1) -> Linear(128 -> 6) -> Softplus
 
 Output: {'psi': [batch, 6], 'uncertainty': [batch, 6]}
@@ -157,16 +166,27 @@ Output: {'psi': [batch, 6], 'uncertainty': [batch, 6]}
 
 ### Output Targets (6 values)
 
-The 6 output dimensions correspond to electrostatic potential statistics for two regulatory element types:
+The 6 output dimensions correspond to electrostatic potential statistics computed via APBS under two ionic configurations:
 
 | Index | Target | Description |
 |-------|--------|-------------|
-| 0 | STD_PSI_MIN | Standard promoter - minimum potential |
-| 1 | STD_PSI_MAX | Standard promoter - maximum potential |
-| 2 | STD_PSI_MEAN | Standard promoter - mean potential |
-| 3 | ENH_PSI_MIN | Enhancer - minimum potential |
-| 4 | ENH_PSI_MAX | Enhancer - maximum potential |
-| 5 | ENH_PSI_MEAN | Enhancer - mean potential |
+| 0 | STD_PSI_MIN | Standard ionic config - minimum potential |
+| 1 | STD_PSI_MAX | Standard ionic config - maximum potential |
+| 2 | STD_PSI_MEAN | Standard ionic config - mean potential |
+| 3 | ENH_PSI_MIN | Enhanced ionic config - minimum potential |
+| 4 | ENH_PSI_MAX | Enhanced ionic config - maximum potential |
+| 5 | ENH_PSI_MEAN | Enhanced ionic config - mean potential |
+
+### Training Data
+
+| Split | Sequences | Sequence Length |
+|-------|-----------|-----------------|
+| Train | 41,582 | 20 bp |
+| Val | 5,197 | 20 bp |
+| Test | 5,199 | 20 bp |
+| **Total** | **51,978** | **20 bp** |
+
+Ground truth: APBS electrostatic simulations via tLEaP (NAB → PDB2PQR → APBS pipeline).
 
 ### Hyperparameters
 
@@ -177,42 +197,49 @@ The 6 output dimensions correspond to electrostatic potential statistics for two
 | Attention heads | 8 |
 | d_ff (feedforward) | 1024 |
 | Transformer layers | 6 |
-| Max sequence length | 200 |
+| Sequence length | 20 bp |
+| Metadata features | 3 (GC%, CpG density, minor groove) |
 | Dropout | 0.1 |
-| Output dimension | 6 |
+| Output dimension | 6 + 6 (psi + uncertainty) |
 | Activation | GELU |
-| Parameters | ~17M |
+| Learning rate | 1e-4 |
+| Batch size | 32 |
+| Epochs | 25 |
 
-### Shape Trace (seq_len=170)
+### Shape Trace
 
 | Stage | Shape |
 |-------|-------|
-| Input | [B, 170] |
-| Embedding | [B, 170, 256] |
-| + Positional encoding | [B, 170, 256] |
-| Transformer (x6) | [B, 170, 256] |
+| Input | [B, 20] |
+| Embedding | [B, 20, 256] |
+| + Positional encoding | [B, 20, 256] |
+| Transformer (x6) | [B, 20, 256] |
 | Mean pool | [B, 256] |
-| Pool projection | [B, 256] |
+| Metadata | [B, 3] -> [B, 256] |
+| Fused | [B, 512] -> [B, 256] |
 | PSI head | [B, 6] |
+| Uncertainty head | [B, 6] |
 
-### Variant: TileFormerWithMetadata
+### Performance (Epoch 25, Test Set)
 
-Extends the base model with a metadata processing branch for additional sequence-level features:
-```
-Metadata input: [batch, 3]  (gc_content, cpg_density, minor_groove_score)
-Metadata processor: Linear(3 -> 64) -> GELU -> Linear(64 -> 256)
-Fusion: Concatenate(sequence_features, metadata_features) -> Linear(512 -> 256)
-```
-
-### Performance
-
-| Target | R^2 | Pearson r | RMSE |
-|--------|-----|-----------|------|
-| STD_PSI_MIN | 0.960 | 0.981 | 0.005 |
-| ENH_PSI_MIN | 0.966 | 0.984 | 0.012 |
-| Overall | 0.961 | 0.982 | 0.009 |
+| Target | R^2 | Pearson r | Spearman r | RMSE |
+|--------|-----|-----------|------------|------|
+| STD_PSI_MIN | 0.962 | 0.982 | 0.981 | 0.005 |
+| STD_PSI_MAX | 0.955 | 0.981 | 0.980 | 0.002 |
+| STD_PSI_MEAN | 0.961 | 0.984 | 0.983 | 0.003 |
+| ENH_PSI_MIN | 0.966 | 0.984 | 0.984 | 0.013 |
+| ENH_PSI_MAX | 0.960 | 0.981 | 0.981 | 0.012 |
+| ENH_PSI_MEAN | 0.961 | 0.982 | 0.981 | 0.012 |
+| **Overall** | **0.961** | **0.982** | **0.981** | **0.009** |
 
 Speedup: **10,000x** compared to APBS computation.
+
+### Downstream Use in PhysInformer
+
+TileFormer predictions are applied in a sliding window fashion over full-length sequences (e.g., 230bp) to produce spatially-resolved electrostatic profiles:
+- 22 windows of 20bp with stride 10
+- 6 values per window = 132 electrostatic features per sequence
+- These pre-computed predictions are stored as NPZ files and used as training targets for PhysInformer's electrostatic head
 
 ---
 

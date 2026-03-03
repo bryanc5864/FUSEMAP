@@ -205,6 +205,7 @@ Ground truth: APBS electrostatic simulations via tLEaP (NAB → PDB2PQR → APBS
 | Learning rate | 1e-4 |
 | Batch size | 32 |
 | Epochs | 25 |
+| Parameters | ~5.1M |
 
 ### Shape Trace
 
@@ -253,18 +254,18 @@ TileFormer predictions are applied in a sliding window fashion over full-length 
 
 PhysInformer uses a hybrid CNN+SSM (state space model) backbone with physics-informed routing. Rather than a generic shared encoder, it routes features through 7 property-specific adapters with kernel sizes tailored to the spatial scale of each biophysical property. All prediction heads output both mean and log-variance, enabling heteroscedastic uncertainty estimation.
 
-> **Note:** The codebase contains two model files. `model.py` defines an earlier prototype — a standard 8-layer transformer (512d, 8 heads, ~90M params) with independent prediction heads. This was superseded by the `PhysicsAwareModel` in `physics_aware_model.py`, which is the architecture actually used in all training runs (`train.py` imports only `PhysicsAwareModel`). All reported results use the PhysicsAwareModel described below.
+> **Note:** The codebase contains two model files. `model.py` defines an earlier prototype — a standard 8-layer transformer (512d, 8 heads) with independent prediction heads. This was superseded by the `PhysicsAwareModel` in `physics_aware_model.py`, which is the architecture actually used in all training runs (`train.py` imports only `PhysicsAwareModel`). All reported results use the PhysicsAwareModel (~11.4M params) described below.
 
 ### Architecture
 
 ```
 Input: [batch, seq_len]  (seq_len=230)
 
-PWM STEM (Convolutional):
+CONV STEM:
   Embedding(5 -> 128)
-  Conv1d(128 -> 192, ks=11) -> SiLU -> Dropout(0.1)
-  Conv1d(192 -> 256, ks=9)  -> SiLU -> Dropout(0.1)
-  Conv1d(256 -> 256, ks=7)  -> SiLU -> Dropout(0.1)
+  Conv1d(128 -> 128, ks=11) -> SiLU -> Dropout(0.1)
+  Conv1d(128 -> 192, ks=9)  -> SiLU -> Dropout(0.1)  + residual projection (128 -> 192)
+  Conv1d(192 -> 256, ks=7)  -> SiLU -> Dropout(0.1)  + residual projection (192 -> 256)
 
 SSM LAYERS (x2):
   Each SimplifiedSSMLayer:
@@ -282,13 +283,14 @@ DUAL-PATH FEATURE PYRAMID:
   Concatenate: [batch, seq_len, 384]
 
 PHYSICS ROUTERS (7 property-specific adapters):
-  thermo:        Conv1d(384 -> 128, ks=3)
-  electrostatic: Conv1d(384 -> 128, ks=15)
-  bend:          Conv1d(384 -> 128, ks=11)
-  stiff:         Conv1d(384 -> 128, ks=7)
-  pwm:           Conv1d(384 -> 256, ks=15)
-  entropy:       Conv1d(384 -> 128, ks=21)
-  advanced:      Conv1d(384 -> 128, ks=13)
+  Each router: Conv1d(384 -> 128, ks=K) -> SiLU -> gated window aggregation
+  thermo:        ks=3
+  electrostatic: ks=15
+  bend:          ks=11
+  stiff:         ks=7
+  pwm:           ks=15, output_dim=256
+  entropy:       ks=21
+  advanced:      ks=13
 
 PROPERTY-SPECIFIC HEADS:
 
@@ -305,7 +307,7 @@ PROPERTY-SPECIFIC HEADS:
     Global head:
       Linear(128 -> 128) -> SiLU -> Linear(128 -> 2)
 
-  Scalar Property Heads (536 total, via appropriate router):
+  Scalar Property Heads (varies by cell type, via appropriate router):
     Each: Linear(router_dim -> 64) -> SiLU -> Dropout -> Linear(64 -> 2)
     Output: (mean, log_var) per property
 
@@ -346,15 +348,15 @@ Each router uses a different kernel size tailored to the spatial scale of its ta
 | Dropout | 0.1 |
 | Temperature | 310K (thermodynamic constraint) |
 | Activation | SiLU |
-| Parameters | ~50M |
+| Parameters | ~11.4M (K562 config) |
 
 ### Number of Descriptor Outputs by Cell Type
 
-| Cell Type | Total Descriptors | Active (non-zero-variance) |
-|-----------|------------------|---------------------------|
-| HepG2 | 545 | 537 |
-| K562 | 504 | 498 |
-| WTC11 | 528 | 522 |
+| Cell Type | Property Heads | Active (non-zero-variance) |
+|-----------|---------------|---------------------------|
+| K562 | 515 | ~498 |
+| HepG2 | 545 | ~537 |
+| WTC11 | 528 | ~522 |
 
 ### Within-Cell-Type Performance (Validation)
 
@@ -383,8 +385,8 @@ Each router uses a different kernel size tailored to the spatial scale of its ta
 
 | Model | Type | Params | Input | Output | Primary Use |
 |-------|------|--------|-------|--------|-------------|
-| **CADENCE** | CNN (EfficientNet) | ~2.1M | [B, 4, L] | [B] | Activity prediction |
-| **TileFormer** | Transformer (6L) | ~17M | [B, L] | [B, 6] | Electrostatic surrogacy |
-| **PhysInformer** | CNN+SSM hybrid | ~50M | [B, L] | Dict | Biophysical descriptors |
+| **CADENCE** | CNN (EfficientNet) | ~2.1M | [B, 4, 230] one-hot | [B] scalar | Activity prediction |
+| **TileFormer** | Transformer (6L) | ~5.1M | [B, 20] tokens + [B, 3] metadata | [B, 6] + [B, 6] uncertainty | Electrostatic surrogacy |
+| **PhysInformer** | CNN+SSM hybrid | ~11.4M | [B, 230] tokens | Dict (means + log-variances) | Biophysical descriptors |
 
 All models process DNA sequences and share a common vocabulary (A, T, G, C, N). CADENCE takes one-hot encoded input while TileFormer and PhysInformer take integer token indices.

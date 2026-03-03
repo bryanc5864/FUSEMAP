@@ -281,6 +281,18 @@ Output: {'descriptors': [batch, n_descriptors]}
 | K562 | 504 | 498 |
 | WTC11 | 528 | 522 |
 
+### Within-Cell-Type Performance (Validation)
+
+| Cell Type | Overall Pearson r | Descriptor Mean r | Descriptor Median r |
+|-----------|------------------|-------------------|---------------------|
+| K562 | 0.918 | 0.896 | 0.987 |
+| HepG2 | 0.915 | 0.892 | 0.983 |
+| WTC11 | 0.906 | 0.877 | 0.974 |
+| S2 (Drosophila) | 0.919 | 0.894 | 0.988 |
+| Maize | 0.896 | 0.870 | 0.949 |
+| Arabidopsis | 0.838 | 0.799 | 0.930 |
+| Sorghum | 0.849 | 0.813 | 0.942 |
+
 ### Shape Trace (seq_len=230)
 
 | Stage | Shape |
@@ -377,7 +389,19 @@ Each router uses a different kernel size tailored to the spatial scale of its ta
 
 ### Parameters: ~50M
 
-### Transfer Performance (Mean Pearson r)
+### Within-Cell-Type Performance (Validation)
+
+| Cell Type | Overall Pearson r | Descriptor Mean r | Descriptor Median r |
+|-----------|------------------|-------------------|---------------------|
+| K562 | 0.918 | 0.896 | 0.987 |
+| HepG2 | 0.915 | 0.892 | 0.983 |
+| WTC11 | 0.906 | 0.877 | 0.974 |
+| S2 (Drosophila) | 0.919 | 0.894 | 0.988 |
+| Maize | 0.896 | 0.870 | 0.949 |
+| Arabidopsis | 0.838 | 0.799 | 0.930 |
+| Sorghum | 0.849 | 0.813 | 0.942 |
+
+### Cross-Species Transfer Performance (Mean Pearson r)
 
 | Source -> Target | Overlap Features | Mean r | Median r |
 |-----------------|-----------------|--------|----------|

@@ -390,3 +390,262 @@ Each router uses a different kernel size tailored to the spatial scale of its ta
 | **PhysInformer** | CNN+SSM hybrid | ~11.4M | [B, 230] tokens | Dict (means + log-variances) | Biophysical descriptors |
 
 All models process DNA sequences and share a common vocabulary (A, T, G, C, N). CADENCE takes one-hot encoded input while TileFormer and PhysInformer take integer token indices.
+
+---
+
+## 4. APBS Electrostatics Pipeline
+
+**Purpose:** Generate ground-truth electrostatic potential features for TileFormer training via numerical solution of the Poisson-Boltzmann equation.
+
+**Source:** `electrostatics/` (modular scripts), `physics/TileFormer/electrostatics/tleap_abps_processor.py` (production pipeline)
+
+### Pipeline Overview
+
+```
+DNA Sequence (20 bp)
+       │
+       ▼
+┌──────────────┐
+│   1. tLEaP   │  Build canonical B-DNA duplex (BSC1 force field)
+│              │  source leaprc.DNA.bsc1
+└──────┬───────┘
+       │  PDB
+       ▼
+┌──────────────┐
+│ 2. Fix Chains│  Assign chain IDs (A/B), renumber residues, add TER records
+└──────┬───────┘
+       │  PDB (standardized)
+       ▼
+┌──────────────┐
+│  3. PDB2PQR  │  Add atomic charges and radii (AMBER force field, pH 7.0)
+│              │  --ff=AMBER --with-ph=7.0 --titration-state-method=propka
+└──────┬───────┘
+       │  PQR
+       ▼
+┌──────────────┐
+│   4. APBS    │  Solve linear Poisson-Boltzmann equation on focused grid
+│              │  Two ionic configurations (standard + enhanced)
+└──────┬───────┘
+       │  DX (3D potential grid)
+       ▼
+┌──────────────┐
+│ 5. Shell     │  Extract mean/min/max potential from solvent shell
+│  Extraction  │  using cKDTree nearest-neighbor distance queries
+└──────┬───────┘
+       │
+       ▼
+6 ψ values (min/max/mean × standard/enhanced)
+```
+
+### APBS Parameters
+
+| Parameter | Standard Config | Enhanced Config |
+|-----------|----------------|-----------------|
+| **Grid dimensions** | 193 × 193 × 193 | 257 × 257 × 257 |
+| **Grid spacing** | ~0.21 Å | ~0.16 Å |
+| **Coarse grid (cglen)** | 200 × 200 × 200 Å | 200 × 200 × 200 Å |
+| **Focused grid (fglen)** | 40 × 40 × 40 Å | 35 × 35 × 35 Å |
+| **Ion concentration** | 150 mM (physiological) | 10 mM (reduced screening) |
+| **Ion radii (+/-)** | 2.0 Å / 2.0 Å | 2.0 Å / 2.0 Å |
+| **Solute dielectric (pdie)** | 2.0 | 2.0 |
+| **Solvent dielectric (sdie)** | 78.5 (water, 298 K) | 78.5 |
+| **Temperature** | 298.15 K | 298.15 K |
+| **Shell inner** | 2.0 Å | 0.5 Å |
+| **Shell outer** | 6.0 Å | 2.0 Å |
+| **Energy minimization** | Disabled | Enabled (2000 steps, ncyc=500) |
+| **Solver** | LPBE | LPBE |
+| **Boundary conditions** | Multiple Debye-Hückel (mdh) | Multiple Debye-Hückel (mdh) |
+| **Charge discretization** | Cubic B-spline (spl2) | Cubic B-spline (spl2) |
+| **Surface** | Molecular surface (smol), srad=1.4 Å | Molecular surface (smol), srad=1.4 Å |
+
+### Standard vs Enhanced Configuration
+
+The **standard** configuration uses physiological ionic strength (150 mM NaCl) and a broad solvent shell (2–6 Å), providing a baseline electrostatic characterization.
+
+The **enhanced** configuration amplifies sequence-dependent signal by 2–3× through three modifications:
+1. **Tighter shell** (0.5–2.0 Å): Samples closer to the molecular surface where 1/r field amplification is strongest
+2. **Lower ionic strength** (10 mM): Reduces Debye screening, producing ~3× larger potentials
+3. **Finer grid** (257³ at 0.16 Å): Better resolves groove-level electrostatic features
+
+The enhanced configuration also enables sander energy minimization (2000 steps) to capture sequence-dependent structural relaxation beyond ideal B-DNA geometry.
+
+### Output: 6 ψ Values
+
+| Index | Target | Description |
+|-------|--------|-------------|
+| 0 | STD_PSI_MIN | Standard config — minimum potential in shell |
+| 1 | STD_PSI_MAX | Standard config — maximum potential in shell |
+| 2 | STD_PSI_MEAN | Standard config — mean potential in shell |
+| 3 | ENH_PSI_MIN | Enhanced config — minimum potential in shell |
+| 4 | ENH_PSI_MAX | Enhanced config — maximum potential in shell |
+| 5 | ENH_PSI_MEAN | Enhanced config — mean potential in shell |
+
+All ψ values are in **kT/e** (thermal energy units at 298.15 K). Shell extraction uses `scipy.spatial.cKDTree` for efficient distance queries with artifact filtering (|ψ| ≤ 60 kT/e).
+
+### Key Software Dependencies
+
+- **AmberTools (tLEaP/sander):** BSC1 force field for B-DNA construction and optional minimization
+- **PDB2PQR 3.0:** Charge/radius assignment with PROPKA titration at pH 7.0
+- **APBS 3.x:** Adaptive Poisson-Boltzmann Solver for electrostatic potential grids
+- **gridDataFormats:** OpenDX file parsing for 3D potential grids
+
+---
+
+## 5. Biophysical Descriptors
+
+**Purpose:** Compute sequence-derived biophysical features that serve as ground-truth targets for PhysInformer training.
+
+**Source:** `physics/process_descriptors.py` (3,304 lines — main computation), reference data in `physics/data/`
+
+### Overview
+
+The descriptor pipeline computes ~673 biophysical features per DNA sequence, organized into categories that map to PhysInformer's 7 physics routers. Each category captures a different physical or informational property of DNA at the appropriate spatial scale.
+
+### Feature Categories
+
+| # | Category | Features | Router | Data Source | Key Descriptors |
+|---|----------|----------|--------|-------------|-----------------|
+| 1 | Thermodynamic | 45 | thermo | SantaLucia NN (1998) | ΔH, ΔS, ΔG, Tm, percentiles, local energy dynamics |
+| 2 | Stiffness | ~62 | stiff | Olson et al. (1998) + DNAProperties | Deformation energy (twist/tilt/roll/shift/slide/rise), PCA, z-scores |
+| 3 | Bending | 44 | bend | DNAProperties (row 4) | Bending energy, RMS curvature profiles, spectral signatures, hotspots |
+| 4 | Entropy & Complexity | 62 | entropy | Computed (Shannon, k-mer, LZ) | Shannon entropy, k-mer entropy (k=1–6), compressibility, Rényi, MI profiles |
+| 5 | TF Binding (PWM) | ~405 | pwm | JASPAR 2024 (~50 TFs) | Per-motif: max score, ΔG, occupancy, entropy; aggregate diversity |
+| 6 | Advanced | 55 | advanced | SantaLucia NN, DNAProperties, sequence patterns | Melting (14), MGW (5), stacking (15), G4 potential (4), torsional stress (13), fractal (4) |
+| 7 | Electrostatic | 132 | electrostatic | APBS pipeline (Section 4) | 22 windows × 6 ψ values (TileFormer sliding-window predictions) |
+
+**Total: ~673 scalar features + 132 electrostatic window features**
+
+### Reference Databases
+
+**SantaLucia Nearest-Neighbor Parameters** (`physics/data/SantaLuciaNN.tsv`):
+- 10 unique dinucleotide steps with ΔH (kcal/mol) and ΔS (cal/mol·K)
+- Used for: thermodynamic profiles (ΔG = ΔH − TΔS), melting temperature estimation, breathing analysis
+
+**Olson Structural Parameters** (`physics/data/OlsonMatrix.tsv`):
+- 10 dinucleotide steps × 6 structural modes (twist, tilt, roll, shift, slide, rise)
+- Each mode has mean and standard deviation from crystallographic data
+- Used for: deformation energy calculation, stiffness analysis, PCA of structural variation
+
+**DNA Properties Database** (`physics/data/DNAProperties.txt`):
+- 125 properties × 16 dinucleotides (all permutations including strand asymmetry)
+- Includes: bend parameters (row 4), stacking energies (row 60), minor groove width (empirical pentamer model), stiffness coefficients (rows 67–71)
+
+**JASPAR 2024 PWMs:**
+- Top ~50 transcription factor position weight matrices
+- 8 features computed per motif: max score, binding ΔG (kcal/mol), mean score, variance, total occupancy weight, high-affinity site count, binding entropy, top-k mean
+- 5 aggregate features: max-of-max score, min ΔG, TF diversity, sum top-5 ΔG, best TF index
+
+### Category Details
+
+**Thermodynamic (45 features):** Global sums (ΔH, ΔS, ΔG, Tm), per-dinucleotide statistics (mean, variance, IQR), 7 percentiles each for ΔH/ΔS/ΔG (5th–95th), local energy dynamics over 10 bp windows (min/max/range of extremes), and energy run analysis (consecutive low/high-energy regions at 10th/90th percentile thresholds).
+
+**Stiffness (~62 features):** Total/mean/variance/max/min deformation energy from Olson parameters, per-mode energies (6 modes × 3 stats), PCA projections (PC1/PC2 mean and variance), cross-term interactions, z-score normalized deviations (6 modes × 3 stats), high-energy region counts at 3 thresholds (2.0/5.0/10.0 kcal/mol), energy distribution entropy, nucleotide composition (AT/GC skew, purine ratio, GC content), and composition-stiffness correlations.
+
+**Bending (44 features):** Global bending energy (total, mean, max, variance), RMS curvature at 4 window sizes (5/7/9/11 bp × 2 stats), curvature variance profiles (4 windows × 2 stats), curvature gradient (mean, max), windowed max bend analysis (4 windows × 3 stats), hotspot detection (z-score ≥ 2.0, count + density), spectral signatures at 3 periodicities (1/5, 1/7, 1/10 × 2 stats), and attention bias statistics (mean, min).
+
+**Entropy & Complexity (62 features):** Global Shannon entropy (raw, normalized, GC-binary), k-mer entropies (k=1–6), complexity metrics (gzip compressibility, Lempel-Ziv, conditional entropy, complexity index), Rényi entropies (α=0, 2), sliding window Shannon entropy (3 windows × 4 stats), sliding window GC entropy (3 windows × 4 stats), k-mer entropy profiles (k=2,3 × 2 windows × 3 stats), mutual information at 10 distances, and entropy rate estimate.
+
+**TF Binding (~405 features):** Log-odds scoring against ~50 JASPAR PWMs with Boltzmann-weighted occupancy. Per-motif features: max score, binding free energy, mean/variance of scores, total occupancy weight (capped at exp(10)), high-affinity site count (≥2 bits), binding entropy, top-3 mean score. Aggregate features capture cross-TF binding landscape.
+
+**Advanced (55 features):** Groups six sub-analyses under a single router: melting stability (14 features: ΔG distribution with mean/std/min/max, 7 percentiles, IQR, unstable fraction, soft-min breathing), minor groove width (5 features: mean/std/min/max, narrow groove fraction < 4.5 Å), base stacking energy (15 features: basic stats, percentiles/IQR, entropy, concentration, transition variance, GC/AT-rich patterns), G-quadruplex potential (4 features: G4Hunter-style max/mean score, hotspot count, peak distance), torsional stress (13 features: mean/max/sum stress, opening stretch, opening rate, 7 percentiles, IQR), and fractal dimension (4 features: k-mer self-similarity exponent across k=1–6).
+
+---
+
+## 6. Sequence Datasets
+
+**Purpose:** Training and evaluation data for CADENCE activity prediction models across species and regulatory element types.
+
+**Source:** `training/config.py` (dataset catalog), `training/data_loaders.py` (loading and preprocessing)
+
+### Dataset Summary
+
+| Dataset | Species | Element | Sequences | Seq Length | Outputs | Validation |
+|---------|---------|---------|-----------|------------|---------|------------|
+| ENCODE4 K562 | Human | Enhancer | 196,664 | 230 bp | 1 (activity) | 10-fold CV |
+| ENCODE4 HepG2 | Human | Enhancer | 122,926 | 230 bp | 1 (activity) | 10-fold CV |
+| ENCODE4 WTC11 | Human | Enhancer | 46,128 | 230 bp | 1 (activity) | 10-fold CV |
+| DeepSTARR | Drosophila | Enhancer | 484,052 | 249 bp | 2 (Dev, Hk) | Chr holdout |
+| DREAM Yeast | Yeast | Promoter | ~6.8M | 110 bp | 1 (expression) | Standard |
+| Jores Arabidopsis | Arabidopsis | Promoter | 13,462 | 170 bp | 2 (leaf, proto) | Train/Test |
+| Jores Maize | Maize | Promoter | 24,604 | 170 bp | 2 (leaf, proto) | Train/Test |
+| Jores Sorghum | Sorghum | Promoter | 19,673 | 170 bp | 2 (leaf, proto) | Train/Test |
+
+### ENCODE4 lentiMPRA (Human)
+
+**Source:** ENCODE Project Consortium lentiMPRA data (Nature, 2021)
+
+Three cell types from massively parallel reporter assays measuring enhancer activity as log2(RNA/DNA) ratios:
+
+| Cell Type | Description | Sequences | Folds |
+|-----------|-------------|-----------|-------|
+| K562 | Chronic myelogenous leukemia | 196,664 | 10 |
+| HepG2 | Hepatocellular carcinoma | 122,926 | 10 |
+| WTC11 | iPSC-derived fibroblasts | 46,128 | 10 |
+
+- **Sequence length:** 230 bp (native)
+- **Output:** 1 scalar — observed log2(RNA/DNA) activity ratio
+- **Validation:** 10-fold cross-validation with pre-computed fold splits
+- **Data path:** `data/lentiMPRA_data/{K562,HepG2,WTC11}/`
+- **Note:** Each fold includes both forward and reverse complement sequences with identical activity labels
+
+A joint multi-cell-type configuration (`encode4_joint`) trains on ~60,000 shared sequences with 3 outputs (one per cell type) using standard train/val/test splits.
+
+### DeepSTARR (Drosophila)
+
+**Source:** DeepSTARR (de Almeida et al.) — *Drosophila melanogaster* S2 embryonic cells
+
+| Split | Sequences |
+|-------|-----------|
+| Train | 352,009 |
+| Val | 40,570 |
+| Test | 41,186 |
+| Calibration | 50,287 |
+| **Total** | **484,052** |
+
+- **Sequence length:** 249 bp (native)
+- **Outputs:** 2 — Dev (developmental enhancer activity) and Hk (housekeeping enhancer activity), both as log2 enrichment
+- **Validation:** Chromosome holdout (test: chr2R, val: chr2L)
+- **Data path:** `data/S2_data/splits/`
+
+### DREAM Yeast
+
+**Source:** DREAM Challenge 2022 — *Saccharomyces cerevisiae* promoter expression prediction
+
+| Split | Sequences |
+|-------|-----------|
+| Train | 6,638,507 |
+| Val | 33,696 |
+| Test | 71,103 |
+| Calibration | 67,055 |
+| **Total** | **~6.8M** |
+
+- **Sequence length:** 110 bp (native)
+- **Output:** 1 scalar — MAUDE expression level
+- **Validation:** Standard train/val/test splits with weighted metrics for class imbalance
+- **Data path:** `data/yeast_data/`
+- **Note:** In universal (cross-kingdom) training configurations, subsampled to 500K per epoch for class balance
+
+### Jores Plant Promoters
+
+**Source:** Jores et al. (2021) — synthetic promoter designs from comprehensive plant core promoter analysis
+
+| Species | Train | Test | Total |
+|---------|-------|------|-------|
+| Arabidopsis (*A. thaliana*) | 12,115 | 1,347 | 13,462 |
+| Maize (*Zea mays*) | 22,143 | 2,461 | 24,604 |
+| Sorghum (*S. bicolor*) | 17,705 | 1,968 | 19,673 |
+
+- **Sequence length:** 170 bp (native)
+- **Outputs:** 2 — leaf (tobacco leaf transient expression) and proto (maize protoplast expression), both as log2 enrichment
+- **Validation:** 90/10 train/test split
+- **Data path:** `data/plant_data/jores2021/processed/{arabidopsis,maize,sorghum}/`
+
+### Preprocessing Pipeline
+
+All datasets share a common preprocessing pipeline implemented in `training/data_loaders.py`:
+
+1. **One-hot encoding:** DNA → [4, L] array (A→0, C→1, G→2, T→3, N→0); unknown characters get uniform 0.25
+2. **Z-score normalization:** Per-output, per-dataset: `(value − μ) / (σ + 1e-8)`, statistics computed per split
+3. **Reverse complement augmentation** (training only): 50% probability of flipping to reverse complement
+4. **Shift augmentation** (ENCODE4 human datasets only): Random ±21 bp shift with N-padding on the opposite end
+5. **Padding/cropping:** Center pad to target length with uniform 0.25 (N); center crop if longer. Native lengths used for single-dataset training; 256 bp for multi-dataset configurations

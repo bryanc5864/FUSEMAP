@@ -82,7 +82,7 @@ Applies a function block and concatenates its output with the input, doubling ch
 | Mapper output | 256 |
 | Head hidden | 256 |
 | Activation | SiLU |
-| Parameters | ~2.1M |
+| Parameters | ~1.3M |
 
 ### Shape Trace (seq_len=230)
 
@@ -385,7 +385,7 @@ Each router uses a different kernel size tailored to the spatial scale of its ta
 
 | Model | Type | Params | Input | Output | Primary Use |
 |-------|------|--------|-------|--------|-------------|
-| **CADENCE** | CNN (EfficientNet) | ~2.1M | [B, 4, 230] one-hot | [B] scalar | Activity prediction |
+| **CADENCE** | CNN (EfficientNet) | ~1.3M | [B, 4, 230] one-hot | [B] scalar | Activity prediction |
 | **TileFormer** | Transformer (6L) | ~5.1M | [B, 20] tokens + [B, 3] metadata | [B, 6] + [B, 6] uncertainty | Electrostatic surrogacy |
 | **PhysInformer** | CNN+SSM hybrid | ~11.4M | [B, 230] tokens | Dict (means + log-variances) | Biophysical descriptors |
 

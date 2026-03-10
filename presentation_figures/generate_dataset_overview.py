@@ -1,6 +1,6 @@
 """
 Figure 1: FUSEMAP Training Corpus — Dataset overview infographic.
-Compact card-row layout with proportional bars, assay badges, and kingdom grouping.
+Clean table layout using Cantarell font, inches-based coordinate system.
 """
 import matplotlib
 matplotlib.use("Agg")
@@ -11,176 +11,162 @@ import os
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 
-# ─── Style ────────────────────────────────────────────────────────────────────
+# ─── Font & style ─────────────────────────────────────────────────────────────
+FONT = "Cantarell"
 plt.rcParams.update({
-    "font.family": "sans-serif",
-    "font.sans-serif": ["Inter", "Liberation Sans", "DejaVu Sans", "Arial"],
-    "text.color": "#222222",
+    "font.family": FONT,
+    "text.color": "#1a1a2e",
     "figure.dpi": 300,
     "savefig.dpi": 300,
     "savefig.bbox": "tight",
-    "savefig.pad_inches": 0.15,
+    "savefig.pad_inches": 0.12,
 })
 
-# ─── Dataset specs (verified from actual data) ───────────────────────────────
+# ─── Dataset specs ────────────────────────────────────────────────────────────
 datasets = [
-    # (label, species_italic, cell_type, color, assay, assay_color, n_seqs, seq_len, n_out, out_labels, kingdom)
-    ("K562",        "Homo sapiens",              "K562",   "#C0392B", "lentiMPRA",  "#0077B6", 196_664,   230, 1, ["activity"],     "Mammalia"),
-    ("HepG2",       "Homo sapiens",              "HepG2",  "#7B241C", "lentiMPRA",  "#0077B6", 122_926,   230, 1, ["activity"],     "Mammalia"),
-    ("WTC11",       "Homo sapiens",              "WTC11",  "#1ABC9C", "lentiMPRA",  "#0077B6",  46_128,   230, 1, ["activity"],     "Mammalia"),
-    ("S2",          "Drosophila melanogaster",   "S2",     "#E67E22", "STARR-seq",  "#E67E22", 484_052,   249, 2, ["Dev", "Hk"],    "Arthropoda"),
-    ("Arabidopsis", "Arabidopsis thaliana",      "Leaf",   "#27AE60", "STARR-seq",  "#27AE60",  13_462,   170, 2, ["leaf", "proto"],"Plantae"),
-    ("Maize",       "Zea mays",                  "Leaf",   "#1E8449", "STARR-seq",  "#27AE60",  24_604,   170, 2, ["leaf", "proto"],"Plantae"),
-    ("Sorghum",     "Sorghum bicolor",           "Leaf",   "#6C8C3C", "STARR-seq",  "#27AE60",  19_673,   170, 2, ["leaf", "proto"],"Plantae"),
-    ("Yeast",       "Saccharomyces cerevisiae",  "",       "#D4AC0D", "FACS-seq",   "#D4AC0D", 6_810_361, 110, 1, ["expression"],   "Fungi"),
+    # (display_name, color, assay, n_seqs, seq_len, n_out, out_labels)
+    ("Homo sapiens  \u2014  K562",              "#C0392B", "lentiMPRA",  196_664,   230, 1, ""),
+    ("Homo sapiens  \u2014  HepG2",             "#922B21", "lentiMPRA",  122_926,   230, 1, ""),
+    ("Homo sapiens  \u2014  WTC11",             "#17A589", "lentiMPRA",   46_128,   230, 1, ""),
+    ("Drosophila melanogaster  \u2014  S2",     "#E67E22", "STARR-seq",  484_052,   249, 2, "Dev, Hk"),
+    ("Arabidopsis thaliana  \u2014  Leaf",      "#27AE60", "STARR-seq",   13_462,   170, 2, "leaf, proto"),
+    ("Zea mays  \u2014  Leaf",                  "#1E8449", "STARR-seq",   24_604,   170, 2, "leaf, proto"),
+    ("Sorghum bicolor  \u2014  Leaf",           "#6C8C3C", "STARR-seq",   19_673,   170, 2, "leaf, proto"),
+    ("Saccharomyces cerevisiae",                "#C5A028", "FACS-seq",  6_810_361,  110, 1, ""),
 ]
 
-total_seqs = sum(d[6] for d in datasets)
-max_seqs = max(d[6] for d in datasets)
+total_seqs = sum(d[3] for d in datasets)
+max_seqs = max(d[3] for d in datasets)
 
-# ─── Figure (compact) ────────────────────────────────────────────────────────
-fig, ax = plt.subplots(figsize=(14, 6.5))
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
+# ─── Figure ───────────────────────────────────────────────────────────────────
+W, H = 18, 11.5
+fig, ax = plt.subplots(figsize=(W, H))
+ax.set_xlim(0, W)
+ax.set_ylim(0, H)
 ax.axis("off")
+ax.set_aspect("equal")
 
 n_rows = len(datasets)
-row_h = 0.065
-top_start = 0.79
-gap = 0.003
-
-# Column positions
-col_species_x = 0.02
-col_assay_x = 0.32
-col_bar_x = 0.44
-col_bar_end = 0.78
-col_len_x = 0.84
-col_out_x = 0.92
+row_h = 0.78
+row_gap = 0.12
+table_top = 8.6
 
 # ─── Title ────────────────────────────────────────────────────────────────────
-ax.text(0.5, 0.96, "FUSEMAP Training Corpus", fontsize=24, fontweight="bold",
-        ha="center", va="center", color="#1B3A5C")
-ax.text(0.5, 0.92, f"{total_seqs:,} CRE\u2013Activity Pairs Across 4 Kingdoms",
-        fontsize=14, ha="center", va="center", color="#555555")
+ax.text(W / 2, 10.8, "FUSEMAP Training Corpus",
+        fontsize=34, fontweight="bold", ha="center", va="center", color="#0f2744")
+ax.text(W / 2, 10.15,
+        f"{total_seqs:,} CRE\u2013activity pairs  \u00b7  7 species  \u00b7  4 kingdoms",
+        fontsize=18, ha="center", va="center", color="#5a6a7a")
 
 # ─── Column headers ──────────────────────────────────────────────────────────
-header_y = top_start + 0.038
-ax.text(col_species_x, header_y, "Species / Cell Type", fontsize=11,
-        fontweight="bold", color="#666666", va="center")
-ax.text(col_assay_x + 0.04, header_y, "Assay", fontsize=11,
-        fontweight="bold", color="#666666", va="center", ha="center")
-ax.text((col_bar_x + col_bar_end) / 2, header_y, "Sequences", fontsize=11,
-        fontweight="bold", color="#666666", va="center", ha="center")
-ax.text(col_len_x + 0.02, header_y, "Length", fontsize=11,
-        fontweight="bold", color="#666666", va="center", ha="center")
-ax.text(col_out_x + 0.02, header_y, "Outputs", fontsize=11,
-        fontweight="bold", color="#666666", va="center", ha="center")
+hy = table_top + 0.50
+hdr_kw = dict(fontsize=16, fontweight="bold", color="#5a6a7a", va="center")
+ax.text(0.7, hy, "Species / Cell Type", **hdr_kw)
+ax.text(6.3, hy, "Assay", ha="center", **hdr_kw)
+ax.text(9.8, hy, "Sequences", ha="center", **hdr_kw)
+ax.text(14.0, hy, "Length", ha="center", **hdr_kw)
+ax.text(16.2, hy, "Outputs", ha="center", **hdr_kw)
 
-# Separator line below headers
-ax.plot([0.01, 0.97], [header_y - 0.015, header_y - 0.015],
-        color="#DDDDDD", linewidth=0.6)
+# Header underline
+ax.plot([0.3, W - 0.8], [table_top + 0.22, table_top + 0.22],
+        color="#d0d8e0", linewidth=1.0, solid_capstyle="round")
 
 # ─── Draw rows ────────────────────────────────────────────────────────────────
-for i, (label, species, cell, color, assay, assay_col, n_seq, seq_len, n_out, out_labels, kingdom) in enumerate(datasets):
-    y = top_start - i * (row_h + gap)
+assay_colors = {"lentiMPRA": "#0077B6", "STARR-seq": "#E67E22", "FACS-seq": "#C5A028"}
+bar_start = 7.8
+bar_end = 12.0
 
-    # Alternating row background
+for i, (name, color, assay, n_seq, seq_len, n_out, out_labels) in enumerate(datasets):
+    yc = table_top - i * (row_h + row_gap)
+
+    # Alternating background
     if i % 2 == 0:
-        bg = FancyBboxPatch((0.01, y - row_h / 2 + 0.003), 0.96, row_h - 0.006,
-                            boxstyle="round,pad=0.004", facecolor="#F5F8FB",
+        bg = FancyBboxPatch((0.25, yc - row_h / 2 + 0.02),
+                            W - 1.0, row_h - 0.04,
+                            boxstyle="round,pad=0.06", facecolor="#f4f7fa",
                             edgecolor="none", zorder=0)
         ax.add_patch(bg)
 
-    # Col 1: Species dot + name
-    ax.plot(col_species_x + 0.008, y, "o", color=color, markersize=9, zorder=3)
-    if cell:
-        species_text = f"$\\it{{{species.replace(' ', '~')}}}$ \u2014 {cell}"
-    else:
-        species_text = f"$\\it{{{species.replace(' ', '~')}}}$"
-    ax.text(col_species_x + 0.028, y, species_text, fontsize=12,
-            va="center", color="#222222")
+    # Color dot
+    ax.plot(0.5, yc, "o", color=color, markersize=14, zorder=3)
 
-    # Col 2: Assay badge
-    badge_w = 0.08
-    badge_h = 0.032
-    badge = FancyBboxPatch((col_assay_x, y - badge_h / 2), badge_w, badge_h,
-                           boxstyle="round,pad=0.005", facecolor=assay_col,
-                           edgecolor="none", alpha=0.15, zorder=1)
+    # Species + cell type (plain text, no LaTeX)
+    ax.text(0.9, yc, name, fontsize=17, va="center", color="#1a1a2e",
+            fontstyle="italic")
+
+    # Assay badge
+    ac = assay_colors.get(assay, color)
+    bw, bh = 1.6, 0.48
+    badge = FancyBboxPatch((6.3 - bw / 2, yc - bh / 2), bw, bh,
+                           boxstyle="round,pad=0.06", facecolor=ac,
+                           edgecolor="none", alpha=0.12, zorder=1)
     ax.add_patch(badge)
-    ax.text(col_assay_x + badge_w / 2, y, assay, fontsize=10, fontweight="bold",
-            ha="center", va="center", color=assay_col)
+    ax.text(6.3, yc, assay, fontsize=15, fontweight="bold",
+            ha="center", va="center", color=ac)
 
-    # Col 3: Proportional bar
-    bar_max_w = col_bar_end - col_bar_x
-    log_max = np.log10(max_seqs)
-    log_val = np.log10(max(n_seq, 1))
-    bar_w = (log_val / log_max) * bar_max_w * 0.82
-    bar_rect = FancyBboxPatch((col_bar_x, y - 0.015), bar_w, 0.030,
-                               boxstyle="round,pad=0.004", facecolor=color,
-                               edgecolor="none", alpha=0.75, zorder=2)
+    # Proportional bar (log scale)
+    bar_max_w = bar_end - bar_start
+    log_frac = np.log10(max(n_seq, 1)) / np.log10(max_seqs)
+    bar_w = log_frac * bar_max_w * 0.75
+    bar_rect = FancyBboxPatch((bar_start, yc - 0.20), bar_w, 0.40,
+                               boxstyle="round,pad=0.05", facecolor=color,
+                               edgecolor="none", alpha=0.70, zorder=2)
     ax.add_patch(bar_rect)
-    count_str = f"{n_seq:,}"
-    ax.text(col_bar_x + bar_w + 0.008, y, count_str, fontsize=11,
-            fontweight="bold", va="center", color="#333333")
 
-    # Col 4: Sequence length
-    ax.text(col_len_x + 0.02, y, f"{seq_len} bp", fontsize=11, va="center",
-            ha="center", color="#444444", fontweight="medium")
+    # Count label (right-aligned to fixed position)
+    ax.text(12.8, yc, f"{n_seq:,}",
+            fontsize=16, fontweight="bold", va="center", ha="right",
+            color="#2a3a4a")
 
-    # Col 5: Output dimensionality
+    # Length
+    ax.text(14.0, yc, f"{seq_len} bp",
+            fontsize=16, va="center", ha="center", color="#3a4a5a")
+
+    # Outputs
     if n_out == 1:
-        ax.text(col_out_x + 0.02, y, "1", fontsize=12, va="center", ha="center",
-                color="#444444", fontweight="bold")
+        ax.text(16.2, yc, "1", fontsize=17, fontweight="bold",
+                va="center", ha="center", color="#3a4a5a")
     else:
-        out_str = f"{n_out}  " + ", ".join(out_labels)
-        ax.text(col_out_x + 0.02, y, out_str, fontsize=10, va="center",
-                ha="center", color="#444444")
+        ax.text(16.2, yc, f"{n_out}  ({out_labels})",
+                fontsize=14, va="center", ha="center", color="#3a4a5a")
 
-# ─── Kingdom brackets (right side) ───────────────────────────────────────────
-bracket_x = 0.98
+# ─── Kingdom brackets ────────────────────────────────────────────────────────
+bx = W - 0.4
 
-def draw_bracket(ax, y_top, y_bot, label, x=bracket_x):
+def draw_bracket(y_top, y_bot, label):
     mid = (y_top + y_bot) / 2
-    ax.plot([x, x], [y_top, y_bot], color="#999999", linewidth=0.8, clip_on=False)
-    ax.plot([x - 0.006, x], [y_top, y_top], color="#999999", linewidth=0.8, clip_on=False)
-    ax.plot([x - 0.006, x], [y_bot, y_bot], color="#999999", linewidth=0.8, clip_on=False)
-    ax.text(x + 0.006, mid, label, fontsize=9, va="center", color="#777777",
+    ax.plot([bx, bx], [y_top, y_bot], color="#8a9aaa", linewidth=1.2, clip_on=False)
+    ax.plot([bx - 0.15, bx], [y_top, y_top], color="#8a9aaa", linewidth=1.2, clip_on=False)
+    ax.plot([bx - 0.15, bx], [y_bot, y_bot], color="#8a9aaa", linewidth=1.2, clip_on=False)
+    ax.text(bx + 0.18, mid, label, fontsize=13, va="center", color="#7a8a9a",
             fontstyle="italic", rotation=-90, clip_on=False)
 
-y0 = lambda i: top_start - i * (row_h + gap)
-draw_bracket(ax, y0(0) + 0.02, y0(2) - 0.02, "Mammalia")
-draw_bracket(ax, y0(3) + 0.02, y0(3) - 0.02, "Arthropoda")
-draw_bracket(ax, y0(4) + 0.02, y0(6) - 0.02, "Plantae")
-draw_bracket(ax, y0(7) + 0.02, y0(7) - 0.02, "Fungi")
-
-# Outer kingdom bracket
-outer_x = 0.995
-draw_bracket(ax, y0(0) + 0.025, y0(3) - 0.025, "Animalia", x=outer_x)
+y_of = lambda i: table_top - i * (row_h + row_gap)
+draw_bracket(y_of(0) + 0.28, y_of(2) - 0.28, "Mammalia")
+draw_bracket(y_of(3) + 0.28, y_of(3) - 0.28, "Arthropoda")
+draw_bracket(y_of(4) + 0.28, y_of(6) - 0.28, "Plantae")
+draw_bracket(y_of(7) + 0.28, y_of(7) - 0.28, "Fungi")
 
 # ─── Summary stats strip ─────────────────────────────────────────────────────
-strip_y = 0.065
-stats = [
-    ("7", "species"),
-    ("8", "datasets"),
-    (f"{total_seqs / 1e6:.1f}M", "sequences"),
-    ("110\u2013249", "bp range"),
-]
-stat_xs = np.linspace(0.15, 0.85, len(stats))
-for x_pos, (val, desc) in zip(stat_xs, stats):
-    ax.text(x_pos, strip_y + 0.025, val, fontsize=26, fontweight="bold",
-            ha="center", va="center", color="#1B3A5C")
-    ax.text(x_pos, strip_y - 0.015, desc, fontsize=12, ha="center",
-            va="center", color="#777777")
+strip_y = 1.0
+stats = [("7", "species"), ("8", "datasets"),
+         (f"{total_seqs / 1e6:.1f}M", "sequences"), ("110\u2013249", "bp range")]
+stat_xs = np.linspace(3.0, W - 3.0, len(stats))
 
-# Thin separator line above stats
-ax.plot([0.05, 0.95], [strip_y + 0.060, strip_y + 0.060],
-        color="#DDDDDD", linewidth=0.8)
+ax.plot([0.5, W - 0.5], [strip_y + 0.70, strip_y + 0.70],
+        color="#d0d8e0", linewidth=0.8)
+
+for x_pos, (val, desc) in zip(stat_xs, stats):
+    ax.text(x_pos, strip_y + 0.30, val, fontsize=34, fontweight="bold",
+            ha="center", va="center", color="#0f2744")
+    ax.text(x_pos, strip_y - 0.25, desc, fontsize=16, ha="center",
+            va="center", color="#7a8a9a")
 
 # ─── Sources ──────────────────────────────────────────────────────────────────
-ax.text(0.5, 0.005,
+ax.text(W / 2, 0.15,
         "Sources: ENCODE lentiMPRA (Tewhey et al.), DeepSTARR (de Almeida et al., 2022), "
         "Plant STARR-seq (Jores et al., 2021), DREAM Challenge (Schreiber et al., 2022)",
-        fontsize=8, ha="center", va="center", color="#AAAAAA")
+        fontsize=11, ha="center", va="center", color="#a0aab4")
 
 fig.savefig(os.path.join(OUT, "figure_dataset_overview.png"), facecolor="white")
 fig.savefig(os.path.join(OUT, "figure_dataset_overview.pdf"), facecolor="white")

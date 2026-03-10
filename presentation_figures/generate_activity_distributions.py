@@ -1,13 +1,14 @@
 """
 Figure 2: CRE Activity Distributions — Ridgeline plot from real FUSEMAP data.
-Loads actual datasets and plots activity distributions as overlapping density ridges.
+Uses seaborn theming + matplotlib ridgeline with Cantarell font.
 """
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
+import matplotlib.gridspec as gridspec
 import numpy as np
 import pandas as pd
+import seaborn as sns
 from scipy.stats import gaussian_kde
 import os, warnings
 warnings.filterwarnings("ignore")
@@ -16,12 +17,13 @@ OUT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(os.path.dirname(OUT), "data")
 
 # ─── Style ────────────────────────────────────────────────────────────────────
+FONT = "Cantarell"
+sns.set_theme(style="white", font=FONT, font_scale=1.3)
 plt.rcParams.update({
-    "font.family": "sans-serif",
-    "font.sans-serif": ["Inter", "Liberation Sans", "DejaVu Sans", "Arial"],
-    "font.size": 12,
-    "axes.labelsize": 14,
-    "axes.titlesize": 18,
+    "font.family": FONT,
+    "font.size": 14,
+    "axes.labelsize": 16,
+    "axes.titlesize": 20,
     "figure.dpi": 300,
     "savefig.dpi": 300,
     "savefig.bbox": "tight",
@@ -29,15 +31,14 @@ plt.rcParams.update({
     "axes.spines.top": False,
     "axes.spines.right": False,
     "axes.spines.left": False,
-    "axes.linewidth": 0.6,
-    "text.color": "#222222",
+    "axes.linewidth": 0.5,
+    "text.color": "#1a1a2e",
 })
 
 # ─── Load datasets ────────────────────────────────────────────────────────────
 print("Loading datasets...")
 
 def load_tsv(path, col, sep="\t", subsample=None):
-    """Load a single column from a TSV, optionally subsampling."""
     df = pd.read_csv(path, sep=sep, usecols=[col])
     vals = df[col].dropna().values.astype(float)
     if subsample and len(vals) > subsample:
@@ -45,7 +46,6 @@ def load_tsv(path, col, sep="\t", subsample=None):
         vals = rng.choice(vals, subsample, replace=False)
     return vals
 
-# Human lentiMPRA
 k562   = load_tsv(f"{DATA}/lentiMPRA_data/K562/fold_splits_with_seq/all_folds.tsv",
                   "Observed log2(RNA/DNA)")
 hepg2  = load_tsv(f"{DATA}/lentiMPRA_data/HepG2/fold_splits_with_seq/all_folds.tsv",
@@ -53,12 +53,10 @@ hepg2  = load_tsv(f"{DATA}/lentiMPRA_data/HepG2/fold_splits_with_seq/all_folds.t
 wtc11  = load_tsv(f"{DATA}/lentiMPRA_data/WTC11/fold_splits_with_seq/all_folds.tsv",
                   "Observed log2(RNA/DNA)")
 
-# Drosophila S2 — combine train+val+test
 s2_files = [f"{DATA}/S2_data/splits/{s}.tsv" for s in ["train", "val", "test"]]
 s2_dev = np.concatenate([load_tsv(f, "Dev_log2_enrichment") for f in s2_files])
 s2_hk  = np.concatenate([load_tsv(f, "Hk_log2_enrichment")  for f in s2_files])
 
-# Plant data
 arab = load_tsv(f"{DATA}/plant_data/jores2021/processed/arabidopsis/arabidopsis_train.tsv",
                 "enrichment_leaf")
 maize = load_tsv(f"{DATA}/plant_data/jores2021/processed/maize/maize_train.tsv",
@@ -66,26 +64,25 @@ maize = load_tsv(f"{DATA}/plant_data/jores2021/processed/maize/maize_train.tsv",
 sorghum = load_tsv(f"{DATA}/plant_data/jores2021/processed/sorghum/sorghum_train.tsv",
                    "enrichment_leaf")
 
-# Yeast (subsample for speed)
 yeast = load_tsv(f"{DATA}/yeast_data/yeast_train.txt", "label", subsample=500_000)
 
 print("All datasets loaded.")
 
-# ─── Dataset metadata ─────────────────────────────────────────────────────────
+# ─── Ridge data ───────────────────────────────────────────────────────────────
 ridge_data = [
-    ("K562 (Human)",            k562,    "#C0392B", len(k562)),
-    ("HepG2 (Human)",           hepg2,   "#7B241C", len(hepg2)),
-    ("WTC11 (Human)",           wtc11,   "#1ABC9C", len(wtc11)),
-    ("S2 Dev (Drosophila)",     s2_dev,  "#E67E22", len(s2_dev)),
-    ("S2 Hk (Drosophila)",      s2_hk,   "#F0A04B", len(s2_hk)),
-    ("Arabidopsis (Plant)",     arab,    "#27AE60", len(arab)),
-    ("Maize (Plant)",           maize,   "#1E8449", len(maize)),
-    ("Sorghum (Plant)",         sorghum, "#6C8C3C", len(sorghum)),
-    ("Yeast (Fungi)",           yeast,   "#D4AC0D", 6_705_562),  # full count
+    ("K562\n(Human)",        k562,    "#C0392B", len(k562)),
+    ("HepG2\n(Human)",       hepg2,   "#922B21", len(hepg2)),
+    ("WTC11\n(Human)",       wtc11,   "#17A589", len(wtc11)),
+    ("S2 Dev\n(Drosophila)", s2_dev,  "#E67E22", len(s2_dev)),
+    ("S2 Hk\n(Drosophila)",  s2_hk,   "#D4880F", len(s2_hk)),
+    ("Arabidopsis\n(Plant)", arab,    "#27AE60", len(arab)),
+    ("Maize\n(Plant)",       maize,   "#1E8449", len(maize)),
+    ("Sorghum\n(Plant)",     sorghum, "#6C8C3C", len(sorghum)),
+    ("Yeast\n(Fungi)",       yeast,   "#C5A028", 6_705_562),
 ]
 
 # ─── Compute KDEs ─────────────────────────────────────────────────────────────
-x_min, x_max = -6, 10
+x_min, x_max = -6, 11
 x_grid = np.linspace(x_min, x_max, 600)
 
 densities = []
@@ -100,87 +97,88 @@ for label, vals, color, n in ridge_data:
 
 global_max = max(d.max() for d in densities if d.max() > 0)
 
-# ─── Figure: Ridgeline plot ──────────────────────────────────────────────────
+# ─── Figure layout ────────────────────────────────────────────────────────────
 n_ridges = len(ridge_data)
 ridge_spacing = 1.0
 
-fig, (ax_main, ax_bottom) = plt.subplots(
-    2, 1, figsize=(13, 10.5),
-    gridspec_kw={"height_ratios": [n_ridges, 2.5], "hspace": 0.18}
-)
+fig = plt.figure(figsize=(14, 12))
+gs = gridspec.GridSpec(2, 1, height_ratios=[n_ridges, 3.0], hspace=0.22,
+                       figure=fig, top=0.92, bottom=0.06, left=0.14, right=0.88)
 
-# Main ridgeline panel
+ax_main = fig.add_subplot(gs[0])
+gs_bottom = gs[1].subgridspec(1, 3, wspace=0.30)
+
+# ─── Title (figure-level) ────────────────────────────────────────────────────
+fig.text(0.51, 0.97,
+         "Regulatory Activity Distributions Across the FUSEMAP Training Corpus",
+         fontsize=22, fontweight="bold", ha="center", va="center",
+         color="#0f2744")
+fig.text(0.51, 0.94,
+         "Activity measured as log\u2082(RNA/DNA) from MPRA / STARR-seq / FACS-seq",
+         fontsize=14, ha="center", va="center", color="#7a8a9a")
+
+# ─── Main ridgeline panel ────────────────────────────────────────────────────
 for i, ((label, vals, color, n), density) in enumerate(zip(ridge_data, densities)):
     y_offset = (n_ridges - 1 - i) * ridge_spacing
-    scaled = density / global_max * ridge_spacing * 0.85
+    scaled = density / global_max * ridge_spacing * 0.88
 
     ax_main.fill_between(x_grid, y_offset, y_offset + scaled,
-                         color=color, alpha=0.65, zorder=n_ridges - i + 1)
-    ax_main.plot(x_grid, y_offset + scaled, color=color, linewidth=0.9,
-                 alpha=0.9, zorder=n_ridges - i + 2)
+                         color=color, alpha=0.6, zorder=n_ridges - i + 1)
+    ax_main.plot(x_grid, y_offset + scaled, color=color, linewidth=1.0,
+                 alpha=0.85, zorder=n_ridges - i + 2)
 
     # Baseline
     ax_main.plot([x_min, x_max], [y_offset, y_offset],
-                 color="#DDDDDD", linewidth=0.3, zorder=0)
+                 color="#e0e4e8", linewidth=0.4, zorder=0)
 
-    # Label (left side)
+    # Left label: name + count
     if n >= 1_000_000:
-        n_str = f"n={n/1e6:.1f}M"
+        n_str = f"n = {n/1e6:.1f}M"
     elif n >= 1000:
-        n_str = f"n={n/1e3:.0f}K"
+        n_str = f"n = {n/1e3:.0f}K"
     else:
-        n_str = f"n={n}"
-    ax_main.text(x_min - 0.3, y_offset + ridge_spacing * 0.25,
-                 label, fontsize=12, fontweight="bold",
+        n_str = f"n = {n}"
+    ax_main.text(x_min - 0.4, y_offset + ridge_spacing * 0.30,
+                 label.split("\n")[0], fontsize=15, fontweight="bold",
                  ha="right", va="center", color=color)
-    ax_main.text(x_min - 0.3, y_offset + ridge_spacing * 0.01,
-                 n_str, fontsize=10, ha="right", va="center", color="#888888")
+    ax_main.text(x_min - 0.4, y_offset + ridge_spacing * 0.08,
+                 label.split("\n")[1] if "\n" in label else "",
+                 fontsize=12, ha="right", va="center", color="#7a8a9a")
+    ax_main.text(x_min - 0.4, y_offset - ridge_spacing * 0.10,
+                 n_str, fontsize=11, ha="right", va="center", color="#9aaaba")
 
-    # Stats annotation (right side)
+    # Right side: stats
     clipped_vals = vals[(vals > x_min) & (vals < x_max)]
     median = np.median(clipped_vals)
     mean = np.mean(clipped_vals)
     std = np.std(clipped_vals)
 
-    # Median tick on the ridge
+    # Median tick
     med_idx = np.argmin(np.abs(x_grid - median))
     med_height = y_offset + scaled[med_idx]
     ax_main.plot([median, median], [y_offset, med_height],
-                 color="black", linewidth=0.8, zorder=n_ridges + 5, alpha=0.6)
+                 color="#2a2a3e", linewidth=0.9, zorder=n_ridges + 5, alpha=0.5)
 
-    ax_main.text(x_max + 0.3, y_offset + ridge_spacing * 0.15,
-                 f"\u03bc={mean:.2f} \u00b1 {std:.2f}",
-                 fontsize=10, va="center", color="#666666")
+    ax_main.text(x_max + 0.4, y_offset + ridge_spacing * 0.15,
+                 f"\u03bc = {mean:.2f}  \u00b1  {std:.2f}",
+                 fontsize=12, va="center", color="#5a6a7a")
 
 # Zero line
-ax_main.axvline(0, color="#BBBBBB", linewidth=0.8, linestyle="--", zorder=0, alpha=0.6)
+ax_main.axvline(0, color="#b0b8c0", linewidth=0.9, linestyle="--", zorder=0, alpha=0.5)
 
-# Gridlines
-for xv in range(-6, 11, 2):
-    ax_main.axvline(xv, color="#EEEEEE", linewidth=0.4, zorder=0)
+# Light gridlines
+for xv in range(-6, 12, 2):
+    ax_main.axvline(xv, color="#eef0f2", linewidth=0.4, zorder=0)
 
 ax_main.set_xlim(x_min - 0.2, x_max + 0.2)
-ax_main.set_ylim(-0.15, n_ridges * ridge_spacing + 0.1)
+ax_main.set_ylim(-0.2, n_ridges * ridge_spacing + 0.15)
 ax_main.set_yticks([])
-ax_main.tick_params(axis="x", labelsize=12)
-ax_main.set_title("Regulatory Activity Distributions Across the FUSEMAP Training Corpus",
-                   fontsize=18, fontweight="bold", color="#1B3A5C", pad=22)
-# Subtitle — positioned with enough clearance below the title
-ax_main.text(0.5, 1.015,
-             "Activity measured as log\u2082(RNA/DNA) from MPRA/STARR-seq/FACS-seq",
-             transform=ax_main.transAxes, fontsize=11, ha="center",
-             color="#777777")
+ax_main.tick_params(axis="x", labelsize=14)
+ax_main.set_xlabel("Regulatory Activity  (log\u2082 RNA/DNA)", fontsize=16, labelpad=8)
+ax_main.spines["bottom"].set_color("#c0c8d0")
+ax_main.spines["bottom"].set_linewidth(0.6)
 
-# X-axis label
-ax_main.set_xlabel("Regulatory Activity (log\u2082 RNA/DNA)", fontsize=14, labelpad=6)
-
-# ─── Bottom comparison panel ──────────────────────────────────────────────────
-ax_bottom.set_xlim(x_min, x_max)
-ax_bottom.set_ylim(0, 1.1)
-ax_bottom.set_yticks([])
-ax_bottom.axis("off")
-
-# Three subpanels side by side
+# ─── Bottom comparison panels ─────────────────────────────────────────────────
 panel_specs = [
     {
         "title": "Within-kingdom similarity",
@@ -197,28 +195,25 @@ panel_specs = [
         "subtitle": "Human cell types differ in tails\n\u2192 cell-type TF usage dominates",
         "datasets": [
             ("K562", k562, "#C0392B"),
-            ("HepG2", hepg2, "#7B241C"),
-            ("WTC11", wtc11, "#1ABC9C"),
+            ("HepG2", hepg2, "#922B21"),
+            ("WTC11", wtc11, "#17A589"),
         ],
         "x_range": (-5, 8),
     },
     {
         "title": "Cross-kingdom gap",
-        "subtitle": "Different assays & promoter architecture\n\u2192 cross-kingdom transfer is challenging",
+        "subtitle": "Different assays & promoter architecture\n\u2192 cross-kingdom transfer challenging",
         "datasets": [
             ("K562 (Human)", k562, "#C0392B"),
             ("Maize (Plant)", maize, "#1E8449"),
-            ("Yeast (Fungi)", yeast, "#D4AC0D"),
+            ("Yeast (Fungi)", yeast, "#C5A028"),
         ],
         "x_range": (-5, 8),
     },
 ]
 
-# Create inset axes for each comparison — taller and better spaced
-inset_width = 0.27
 for j, spec in enumerate(panel_specs):
-    inset_x = 0.06 + j * 0.33
-    ax_in = fig.add_axes([inset_x, 0.03, inset_width, 0.19])
+    ax_in = fig.add_subplot(gs_bottom[0, j])
 
     xr = spec["x_range"]
     x_sub = np.linspace(xr[0], xr[1], 300)
@@ -231,28 +226,26 @@ for j, spec in enumerate(panel_specs):
             d = d / d.max()
         except Exception:
             d = np.zeros_like(x_sub)
-        ax_in.fill_between(x_sub, d, alpha=0.35, color=col, label=name)
-        ax_in.plot(x_sub, d, color=col, linewidth=1.0, alpha=0.8)
+        ax_in.fill_between(x_sub, d, alpha=0.30, color=col, label=name)
+        ax_in.plot(x_sub, d, color=col, linewidth=1.2, alpha=0.8)
 
     ax_in.set_xlim(*xr)
-    ax_in.set_ylim(0, 1.15)
+    ax_in.set_ylim(0, 1.18)
     ax_in.set_yticks([])
     ax_in.spines["top"].set_visible(False)
     ax_in.spines["right"].set_visible(False)
     ax_in.spines["left"].set_visible(False)
-    ax_in.tick_params(axis="x", labelsize=9)
-    ax_in.set_xlabel("log\u2082(RNA/DNA)", fontsize=9, labelpad=2)
+    ax_in.spines["bottom"].set_color("#c0c8d0")
+    ax_in.tick_params(axis="x", labelsize=11)
+    ax_in.set_xlabel("log\u2082(RNA/DNA)", fontsize=12, labelpad=3)
 
-    # Title above inset
-    ax_in.set_title(spec["title"], fontsize=11, fontweight="bold",
-                    color="#333333", pad=5)
-    # Subtitle below chart
-    ax_in.text(0.5, -0.38, spec["subtitle"], transform=ax_in.transAxes,
-               fontsize=8.5, ha="center", color="#888888", linespacing=1.3)
+    ax_in.set_title(spec["title"], fontsize=14, fontweight="bold",
+                    color="#1a2a3e", pad=8)
+    ax_in.text(0.5, -0.42, spec["subtitle"], transform=ax_in.transAxes,
+               fontsize=10, ha="center", color="#7a8a9a", linespacing=1.3)
 
-    # Legend
-    leg = ax_in.legend(fontsize=8, frameon=False, loc="upper right",
-                       handlelength=1, handletextpad=0.4)
+    leg = ax_in.legend(fontsize=10, frameon=False, loc="upper right",
+                       handlelength=1.0, handletextpad=0.4)
 
 fig.savefig(os.path.join(OUT, "figure_activity_distributions.png"), facecolor="white")
 fig.savefig(os.path.join(OUT, "figure_activity_distributions.pdf"), facecolor="white")

@@ -122,9 +122,9 @@ gs_top = gridspec.GridSpec(1, 1, figure=fig,
                            top=0.90, bottom=0.33, left=0.34, right=0.66)
 ax_main = fig.add_subplot(gs_top[0])
 
-# Bottom comparison panels — full width so 3 subplots don't overlap
-gs_bottom = gridspec.GridSpec(1, 3, figure=fig, wspace=0.35,
-                              top=0.19, bottom=0.02, left=0.06, right=0.96)
+# Bottom comparison panels — full width, compact spacing
+gs_bottom = gridspec.GridSpec(1, 3, figure=fig, wspace=0.20,
+                              top=0.22, bottom=0.07, left=0.06, right=0.96)
 
 # ─── Title ────────────────────────────────────────────────────────────────────
 fig.text(0.50, 0.97,
@@ -138,7 +138,7 @@ fig.text(0.50, 0.925,
 # ─── Main ridgeline panel ────────────────────────────────────────────────────
 for i, ((name, group, vals, color, n, bp, assay), density) in enumerate(zip(ridge_data, densities)):
     y_offset = (n_ridges - 1 - i) * ridge_spacing
-    scaled = density / global_max * 1.0
+    scaled = density / density.max() * ridge_spacing * 0.85 if density.max() > 0 else density
 
     ax_main.fill_between(x_grid, y_offset, y_offset + scaled,
                          color=color, alpha=0.55, zorder=n_ridges - i + 1)
@@ -180,12 +180,12 @@ for i, ((name, group, vals, color, n, bp, assay), density) in enumerate(zip(ridg
                  color="#222222", linewidth=1.0, zorder=n_ridges + 5, alpha=0.5)
 
     # Right line 1: μ = ...   σ = ...
-    ax_main.text(x_max + 0.5, y_offset + ridge_spacing * 0.28,
+    ax_main.text(x_max + 1.5, y_offset + ridge_spacing * 0.28,
                  f"\u03bc = {mean:.2f}   \u03c3 = {std:.2f}",
                  fontsize=64, fontweight="bold",
                  va="center", color="#111111")
     # Right line 2: n = 226K sequences
-    ax_main.text(x_max + 0.5, y_offset - ridge_spacing * 0.22,
+    ax_main.text(x_max + 1.5, y_offset - ridge_spacing * 0.22,
                  f"{n_str} sequences",
                  fontsize=56, fontweight="bold",
                  va="center", color="#555555")
@@ -198,8 +198,9 @@ for xv in range(-6, 15, 2):
     ax_main.axvline(xv, color="#eee", linewidth=0.4, zorder=0)
 
 ax_main.set_xlim(x_min, x_max)
-ax_main.set_ylim(-0.15, (n_ridges - 1) * ridge_spacing + 1.3)
+ax_main.set_ylim(-0.15, (n_ridges - 1) * ridge_spacing + ridge_spacing * 0.95)
 ax_main.set_yticks([])
+ax_main.set_xticks(range(-6, 15, 4))
 ax_main.tick_params(axis="x", labelsize=64, colors="#111111")
 ax_main.set_xlabel(r"Regulatory Activity  ($\log_2$ RNA/DNA)", fontsize=72,
                    labelpad=18, color="#111111")
@@ -263,15 +264,14 @@ for j, spec in enumerate(panel_specs):
     ax_in.spines["right"].set_visible(False)
     ax_in.spines["left"].set_visible(False)
     ax_in.spines["bottom"].set_color("#888888")
-    ax_in.tick_params(axis="x", labelsize=32, colors="#111111")
-    ax_in.set_xlabel(r"$\log_2$(RNA/DNA)", fontsize=34, labelpad=8, color="#111111")
+    ax_in.tick_params(axis="x", labelsize=44, colors="#111111")
 
-    ax_in.set_title(spec["title"], fontsize=38, fontweight="bold",
+    ax_in.set_title(spec["title"], fontsize=50, fontweight="bold",
                     color="#111111", pad=14)
-    ax_in.text(0.5, -0.42, spec["subtitle"], transform=ax_in.transAxes,
-               fontsize=30, ha="center", color="#333333", linespacing=1.3)
+    ax_in.text(0.5, -0.55, spec["subtitle"], transform=ax_in.transAxes,
+               fontsize=42, ha="center", color="#333333", linespacing=1.3)
 
-    leg = ax_in.legend(fontsize=30, frameon=False, loc="upper right",
+    leg = ax_in.legend(fontsize=42, frameon=False, loc="upper right",
                        handlelength=1.0, handletextpad=0.4)
     for t in leg.get_texts():
         t.set_color("#111111")

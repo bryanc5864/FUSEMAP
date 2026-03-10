@@ -1,6 +1,7 @@
 """
 Figure 2: CRE Activity Distributions — Overlapping ridgeline plot from real FUSEMAP data.
 Uses raw (unnormalized) activity values. Nimbus Sans font (Helvetica equivalent).
+Large text for presentation readability.
 """
 import matplotlib
 matplotlib.use("Agg")
@@ -18,16 +19,16 @@ DATA = os.path.join(os.path.dirname(OUT), "data")
 
 # ─── Style ────────────────────────────────────────────────────────────────────
 FONT = "Nimbus Sans"
-sns.set_theme(style="white", font=FONT, font_scale=1.4)
+sns.set_theme(style="white", font=FONT, font_scale=1.8)
 plt.rcParams.update({
     "font.family": FONT,
-    "font.size": 14,
-    "axes.labelsize": 18,
-    "axes.titlesize": 22,
+    "font.size": 24,
+    "axes.labelsize": 32,
+    "axes.titlesize": 38,
     "figure.dpi": 300,
     "savefig.dpi": 300,
     "savefig.bbox": "tight",
-    "savefig.pad_inches": 0.15,
+    "savefig.pad_inches": 0.20,
     "axes.spines.top": False,
     "axes.spines.right": False,
     "axes.spines.left": False,
@@ -111,28 +112,28 @@ global_max = max(d.max() for d in densities if d.max() > 0)
 
 # ─── Figure layout ────────────────────────────────────────────────────────────
 n_ridges = len(ridge_data)
-ridge_spacing = 0.45  # Tight overlap — peaks bleed into adjacent rows
+ridge_spacing = 0.45
 
-fig = plt.figure(figsize=(15, 13))
-gs = gridspec.GridSpec(2, 1, height_ratios=[n_ridges, 3.0], hspace=0.20,
-                       figure=fig, top=0.93, bottom=0.05, left=0.15, right=0.87)
+fig = plt.figure(figsize=(26, 20))
+gs = gridspec.GridSpec(2, 1, height_ratios=[n_ridges, 3.2], hspace=0.28,
+                       figure=fig, top=0.93, bottom=0.05, left=0.20, right=0.83)
 
 ax_main = fig.add_subplot(gs[0])
-gs_bottom = gs[1].subgridspec(1, 3, wspace=0.28)
+gs_bottom = gs[1].subgridspec(1, 3, wspace=0.45)
 
 # ─── Title ────────────────────────────────────────────────────────────────────
-fig.text(0.51, 0.97,
+fig.text(0.52, 0.97,
          "Regulatory Activity Distributions Across the FUSEMAP Training Corpus",
-         fontsize=24, fontweight="bold", ha="center", va="center",
+         fontsize=38, fontweight="bold", ha="center", va="center",
          color="#111111")
-fig.text(0.51, 0.945,
+fig.text(0.52, 0.943,
          r"Activity measured as $\log_2$(RNA/DNA) from MPRA / STARR-seq / FACS-seq",
-         fontsize=15, ha="center", va="center", color="#444444")
+         fontsize=26, ha="center", va="center", color="#333333")
 
 # ─── Main ridgeline panel ────────────────────────────────────────────────────
 for i, ((name, group, vals, color, n), density) in enumerate(zip(ridge_data, densities)):
     y_offset = (n_ridges - 1 - i) * ridge_spacing
-    scaled = density / global_max * 1.0  # Taller than spacing → visible overlap
+    scaled = density / global_max * 1.0
 
     ax_main.fill_between(x_grid, y_offset, y_offset + scaled,
                          color=color, alpha=0.55, zorder=n_ridges - i + 1)
@@ -143,7 +144,7 @@ for i, ((name, group, vals, color, n), density) in enumerate(zip(ridge_data, den
     ax_main.plot([x_min, x_max], [y_offset, y_offset],
                  color="#ddd", linewidth=0.3, zorder=0)
 
-    # Left label
+    # Left label: name (group) on one line, n= on second
     if n >= 1_000_000:
         n_str = f"n = {n/1e6:.1f}M"
     elif n >= 1000:
@@ -151,13 +152,11 @@ for i, ((name, group, vals, color, n), density) in enumerate(zip(ridge_data, den
     else:
         n_str = f"n = {n}"
 
-    ax_main.text(x_min - 0.5, y_offset + ridge_spacing * 0.45,
-                 name, fontsize=16, fontweight="bold",
+    ax_main.text(x_min - 0.5, y_offset + ridge_spacing * 0.35,
+                 f"{name} ({group})", fontsize=26, fontweight="bold",
                  ha="right", va="center", color=color)
-    ax_main.text(x_min - 0.5, y_offset + ridge_spacing * 0.10,
-                 f"({group})", fontsize=12, ha="right", va="center", color="#333333")
-    ax_main.text(x_min - 0.5, y_offset - ridge_spacing * 0.18,
-                 n_str, fontsize=11, ha="right", va="center", color="#555555")
+    ax_main.text(x_min - 0.5, y_offset - ridge_spacing * 0.15,
+                 n_str, fontsize=22, ha="right", va="center", color="#333333")
 
     # Right side: stats
     clipped_vals = vals[(vals > x_min) & (vals < x_max)]
@@ -172,11 +171,11 @@ for i, ((name, group, vals, color, n), density) in enumerate(zip(ridge_data, den
                  color="#222222", linewidth=1.0, zorder=n_ridges + 5, alpha=0.5)
 
     ax_main.text(x_max + 0.5, y_offset + ridge_spacing * 0.20,
-                 f"\u03bc = {mean:.2f}", fontsize=13, fontweight="bold",
+                 f"\u03bc = {mean:.2f}", fontsize=24, fontweight="bold",
+                 va="center", color="#111111")
+    ax_main.text(x_max + 0.5, y_offset - ridge_spacing * 0.20,
+                 f"\u03c3 = {std:.2f}", fontsize=22,
                  va="center", color="#222222")
-    ax_main.text(x_max + 0.5, y_offset - ridge_spacing * 0.12,
-                 f"\u03c3 = {std:.2f}", fontsize=12,
-                 va="center", color="#333333")
 
 # Zero line
 ax_main.axvline(0, color="#999999", linewidth=0.9, linestyle="--", zorder=0, alpha=0.5)
@@ -188,9 +187,9 @@ for xv in range(-6, 15, 2):
 ax_main.set_xlim(x_min, x_max)
 ax_main.set_ylim(-0.1, (n_ridges - 1) * ridge_spacing + 1.15)
 ax_main.set_yticks([])
-ax_main.tick_params(axis="x", labelsize=14, colors="#222222")
-ax_main.set_xlabel(r"Regulatory Activity  ($\log_2$ RNA/DNA)", fontsize=18,
-                   labelpad=8, color="#111111")
+ax_main.tick_params(axis="x", labelsize=26, colors="#111111")
+ax_main.set_xlabel(r"Regulatory Activity  ($\log_2$ RNA/DNA)", fontsize=30,
+                   labelpad=10, color="#111111")
 ax_main.spines["bottom"].set_color("#888888")
 
 # ─── Bottom comparison panels ─────────────────────────────────────────────────
@@ -217,7 +216,7 @@ panel_specs = [
     },
     {
         "title": "Cross-kingdom gap",
-        "subtitle": "Different assays & promoter architecture\n\u2192 cross-kingdom transfer challenging",
+        "subtitle": "Different assays & architecture\n\u2192 cross-kingdom transfer challenging",
         "datasets": [
             ("K562 (Human)", k562, "#C0392B"),
             ("Maize (Plant)", maize, "#1E8449"),
@@ -242,7 +241,7 @@ for j, spec in enumerate(panel_specs):
         except Exception:
             d = np.zeros_like(x_sub)
         ax_in.fill_between(x_sub, d, alpha=0.30, color=col, label=lname)
-        ax_in.plot(x_sub, d, color=col, linewidth=1.3, alpha=0.85)
+        ax_in.plot(x_sub, d, color=col, linewidth=1.5, alpha=0.85)
 
     ax_in.set_xlim(*xr)
     ax_in.set_ylim(0, 1.18)
@@ -251,18 +250,18 @@ for j, spec in enumerate(panel_specs):
     ax_in.spines["right"].set_visible(False)
     ax_in.spines["left"].set_visible(False)
     ax_in.spines["bottom"].set_color("#888888")
-    ax_in.tick_params(axis="x", labelsize=12, colors="#222222")
-    ax_in.set_xlabel(r"$\log_2$(RNA/DNA)", fontsize=13, labelpad=3, color="#222222")
+    ax_in.tick_params(axis="x", labelsize=22, colors="#111111")
+    ax_in.set_xlabel(r"$\log_2$(RNA/DNA)", fontsize=24, labelpad=5, color="#111111")
 
-    ax_in.set_title(spec["title"], fontsize=15, fontweight="bold",
-                    color="#111111", pad=8)
-    ax_in.text(0.5, -0.38, spec["subtitle"], transform=ax_in.transAxes,
-               fontsize=11, ha="center", color="#444444", linespacing=1.3)
+    ax_in.set_title(spec["title"], fontsize=26, fontweight="bold",
+                    color="#111111", pad=10)
+    ax_in.text(0.5, -0.42, spec["subtitle"], transform=ax_in.transAxes,
+               fontsize=20, ha="center", color="#333333", linespacing=1.3)
 
-    leg = ax_in.legend(fontsize=11, frameon=False, loc="upper right",
+    leg = ax_in.legend(fontsize=20, frameon=False, loc="upper right",
                        handlelength=1.0, handletextpad=0.4)
     for t in leg.get_texts():
-        t.set_color("#222222")
+        t.set_color("#111111")
 
 fig.savefig(os.path.join(OUT, "figure_activity_distributions.png"), facecolor="white")
 fig.savefig(os.path.join(OUT, "figure_activity_distributions.pdf"), facecolor="white")

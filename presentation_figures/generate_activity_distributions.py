@@ -123,8 +123,8 @@ gs_top = gridspec.GridSpec(1, 1, figure=fig,
 ax_main = fig.add_subplot(gs_top[0])
 
 # Bottom comparison panels — centered, compact
-gs_bottom = gridspec.GridSpec(1, 3, figure=fig, wspace=0.15,
-                              top=0.22, bottom=0.07, left=0.12, right=0.90)
+gs_bottom = gridspec.GridSpec(1, 3, figure=fig, wspace=0.12,
+                              top=0.22, bottom=0.07, left=0.16, right=0.86)
 
 # ─── Title ────────────────────────────────────────────────────────────────────
 fig.text(0.50, 0.97,
@@ -209,7 +209,7 @@ ax_main.spines["bottom"].set_color("#888888")
 # ─── Bottom comparison panels ─────────────────────────────────────────────────
 panel_specs = [
     {
-        "title": "Within-kingdom similarity",
+        "title": "Within-kingdom",
         "subtitle": "Plant distributions overlap\n\u2192 physics transfer works",
         "datasets": [
             ("Arabidopsis", arab, "#27AE60"),
@@ -219,7 +219,7 @@ panel_specs = [
         "x_range": (-4, 5),
     },
     {
-        "title": "Within-species, across cell types",
+        "title": "Within-species",
         "subtitle": "Human cell types differ in spread\n\u2192 cell-type TF usage dominates",
         "datasets": [
             ("K562", k562, "#C0392B"),
@@ -229,7 +229,7 @@ panel_specs = [
         "x_range": (-3, 3),
     },
     {
-        "title": "Cross-kingdom gap",
+        "title": "Cross-kingdom",
         "subtitle": "Different assays & architecture\n\u2192 cross-kingdom transfer challenging",
         "datasets": [
             ("K562 (Human)", k562, "#C0392B"),

@@ -82,16 +82,17 @@ yeast = load_tsv(f"{DATA}/yeast_data/yeast_train.txt", "label", subsample=500_00
 print("All datasets loaded.")
 
 # ─── Ridge data ───────────────────────────────────────────────────────────────
+#            name          group        vals   color      n              bp   assay
 ridge_data = [
-    ("K562",        "Human",      k562,    "#C0392B", len(k562)),
-    ("HepG2",       "Human",      hepg2,   "#922B21", len(hepg2)),
-    ("WTC11",       "Human",      wtc11,   "#17A589", len(wtc11)),
-    ("S2 Dev",      "Drosophila", s2_dev,  "#E67E22", len(s2_dev)),
-    ("S2 Hk",       "Drosophila", s2_hk,   "#D4880F", len(s2_hk)),
-    ("Arabidopsis", "Plant",      arab,    "#27AE60", len(arab)),
-    ("Maize",       "Plant",      maize,   "#1E8449", len(maize)),
-    ("Sorghum",     "Plant",      sorghum, "#6C8C3C", len(sorghum)),
-    ("Yeast",       "Fungi",      yeast,   "#C5A028", 6_705_562),
+    ("K562",        "Human",      k562,    "#C0392B", len(k562),    230, "lentiMPRA"),
+    ("HepG2",       "Human",      hepg2,   "#922B21", len(hepg2),   230, "lentiMPRA"),
+    ("WTC11",       "Human",      wtc11,   "#17A589", len(wtc11),   230, "lentiMPRA"),
+    ("S2 Dev",      "Drosophila", s2_dev,  "#E67E22", len(s2_dev),  249, "STARR-seq"),
+    ("S2 Hk",       "Drosophila", s2_hk,   "#D4880F", len(s2_hk),   249, "STARR-seq"),
+    ("Arabidopsis", "Plant",      arab,    "#27AE60", len(arab),    170, "STARR-seq"),
+    ("Maize",       "Plant",      maize,   "#1E8449", len(maize),   170, "STARR-seq"),
+    ("Sorghum",     "Plant",      sorghum, "#6C8C3C", len(sorghum), 170, "STARR-seq"),
+    ("Yeast",       "Fungi",      yeast,   "#C5A028", 6_705_562,    110, "FACS-seq"),
 ]
 
 # ─── Compute KDEs ─────────────────────────────────────────────────────────────
@@ -99,7 +100,7 @@ x_min, x_max = -7, 14
 x_grid = np.linspace(x_min, x_max, 800)
 
 densities = []
-for name, group, vals, color, n in ridge_data:
+for name, group, vals, color, n, bp, assay in ridge_data:
     clipped = vals[(vals > x_min) & (vals < x_max)]
     try:
         kde = gaussian_kde(clipped, bw_method=0.15)
@@ -112,11 +113,11 @@ global_max = max(d.max() for d in densities if d.max() > 0)
 
 # ─── Figure layout ────────────────────────────────────────────────────────────
 n_ridges = len(ridge_data)
-ridge_spacing = 0.45
+ridge_spacing = 0.58
 
-fig = plt.figure(figsize=(26, 20))
-gs = gridspec.GridSpec(2, 1, height_ratios=[n_ridges, 3.2], hspace=0.28,
-                       figure=fig, top=0.93, bottom=0.05, left=0.20, right=0.83)
+fig = plt.figure(figsize=(28, 24))
+gs = gridspec.GridSpec(2, 1, height_ratios=[n_ridges, 3.0], hspace=0.28,
+                       figure=fig, top=0.94, bottom=0.05, left=0.24, right=0.83)
 
 ax_main = fig.add_subplot(gs[0])
 gs_bottom = gs[1].subgridspec(1, 3, wspace=0.45)
@@ -131,7 +132,7 @@ fig.text(0.52, 0.943,
          fontsize=26, ha="center", va="center", color="#333333")
 
 # ─── Main ridgeline panel ────────────────────────────────────────────────────
-for i, ((name, group, vals, color, n), density) in enumerate(zip(ridge_data, densities)):
+for i, ((name, group, vals, color, n, bp, assay), density) in enumerate(zip(ridge_data, densities)):
     y_offset = (n_ridges - 1 - i) * ridge_spacing
     scaled = density / global_max * 1.0
 
@@ -144,19 +145,23 @@ for i, ((name, group, vals, color, n), density) in enumerate(zip(ridge_data, den
     ax_main.plot([x_min, x_max], [y_offset, y_offset],
                  color="#ddd", linewidth=0.3, zorder=0)
 
-    # Left label: name (group) on one line, n= on second
+    # Left labels
     if n >= 1_000_000:
-        n_str = f"n = {n/1e6:.1f}M"
+        n_str = f"{n/1e6:.1f}M"
     elif n >= 1000:
-        n_str = f"n = {n/1e3:.0f}K"
+        n_str = f"{n/1e3:.0f}K"
     else:
-        n_str = f"n = {n}"
+        n_str = f"{n:,}"
 
-    ax_main.text(x_min - 0.5, y_offset + ridge_spacing * 0.35,
+    # Line 1: Name (Group)
+    ax_main.text(x_min - 0.5, y_offset + ridge_spacing * 0.32,
                  f"{name} ({group})", fontsize=26, fontweight="bold",
                  ha="right", va="center", color=color)
-    ax_main.text(x_min - 0.5, y_offset - ridge_spacing * 0.15,
-                 n_str, fontsize=22, ha="right", va="center", color="#333333")
+    # Line 2: Sequences: XXK  ·  230 bp  ·  lentiMPRA
+    ax_main.text(x_min - 0.5, y_offset - ridge_spacing * 0.12,
+                 f"Sequences: {n_str}  \u00b7  {bp} bp  \u00b7  {assay}",
+                 fontsize=26, fontweight="bold",
+                 ha="right", va="center", color="#333333")
 
     # Right side: stats
     clipped_vals = vals[(vals > x_min) & (vals < x_max)]
@@ -185,7 +190,7 @@ for xv in range(-6, 15, 2):
     ax_main.axvline(xv, color="#eee", linewidth=0.4, zorder=0)
 
 ax_main.set_xlim(x_min, x_max)
-ax_main.set_ylim(-0.1, (n_ridges - 1) * ridge_spacing + 1.15)
+ax_main.set_ylim(-0.15, (n_ridges - 1) * ridge_spacing + 1.2)
 ax_main.set_yticks([])
 ax_main.tick_params(axis="x", labelsize=26, colors="#111111")
 ax_main.set_xlabel(r"Regulatory Activity  ($\log_2$ RNA/DNA)", fontsize=30,

@@ -19,14 +19,14 @@ DATA = os.path.join(os.path.dirname(OUT), "data")
 
 # ─── Style ────────────────────────────────────────────────────────────────────
 FONT = "Nimbus Sans"
-sns.set_theme(style="white", font=FONT, font_scale=1.8)
+sns.set_theme(style="white", font=FONT, font_scale=3.6)
 plt.rcParams.update({
     "font.family": FONT,
-    "font.size": 24,
-    "axes.labelsize": 32,
-    "axes.titlesize": 38,
-    "figure.dpi": 300,
-    "savefig.dpi": 300,
+    "font.size": 48,
+    "axes.labelsize": 64,
+    "axes.titlesize": 76,
+    "figure.dpi": 200,
+    "savefig.dpi": 200,
     "savefig.bbox": "tight",
     "savefig.pad_inches": 0.20,
     "axes.spines.top": False,
@@ -113,23 +113,27 @@ global_max = max(d.max() for d in densities if d.max() > 0)
 
 # ─── Figure layout ────────────────────────────────────────────────────────────
 n_ridges = len(ridge_data)
-ridge_spacing = 0.62
+ridge_spacing = 1.3
 
 fig = plt.figure(figsize=(36, 28))
-gs = gridspec.GridSpec(2, 1, height_ratios=[n_ridges, 3.0], hspace=0.28,
-                       figure=fig, top=0.94, bottom=0.05, left=0.28, right=0.72)
 
-ax_main = fig.add_subplot(gs[0])
-gs_bottom = gs[1].subgridspec(1, 3, wspace=0.45)
+# Top ridge panel — narrow x-extent (labels drawn outside axes)
+gs_top = gridspec.GridSpec(1, 1, figure=fig,
+                           top=0.90, bottom=0.33, left=0.34, right=0.66)
+ax_main = fig.add_subplot(gs_top[0])
+
+# Bottom comparison panels — full width so 3 subplots don't overlap
+gs_bottom = gridspec.GridSpec(1, 3, figure=fig, wspace=0.35,
+                              top=0.19, bottom=0.02, left=0.06, right=0.96)
 
 # ─── Title ────────────────────────────────────────────────────────────────────
 fig.text(0.50, 0.97,
          "Regulatory Activity Distributions Across the FUSEMAP Training Corpus",
-         fontsize=44, fontweight="bold", ha="center", va="center",
+         fontsize=88, fontweight="bold", ha="center", va="center",
          color="#111111")
-fig.text(0.50, 0.940,
+fig.text(0.50, 0.925,
          r"Activity measured as $\log_2$(RNA/DNA) from MPRA / STARR-seq / FACS-seq",
-         fontsize=30, ha="center", va="center", color="#333333")
+         fontsize=60, ha="center", va="center", color="#333333")
 
 # ─── Main ridgeline panel ────────────────────────────────────────────────────
 for i, ((name, group, vals, color, n, bp, assay), density) in enumerate(zip(ridge_data, densities)):
@@ -154,13 +158,13 @@ for i, ((name, group, vals, color, n, bp, assay), density) in enumerate(zip(ridg
         n_str = f"{n:,}"
 
     # Left line 1: Name (Group)
-    ax_main.text(x_min - 0.5, y_offset + ridge_spacing * 0.30,
-                 f"{name} ({group})", fontsize=32, fontweight="bold",
+    ax_main.text(x_min - 0.5, y_offset + ridge_spacing * 0.35,
+                 f"{name} ({group})", fontsize=64, fontweight="bold",
                  ha="right", va="center", color=color)
     # Left line 2: 230 bp · lentiMPRA
-    ax_main.text(x_min - 0.5, y_offset - ridge_spacing * 0.14,
+    ax_main.text(x_min - 0.5, y_offset - ridge_spacing * 0.18,
                  f"{bp} bp  \u00b7  {assay}",
-                 fontsize=30, fontweight="bold",
+                 fontsize=60, fontweight="bold",
                  ha="right", va="center", color="#444444")
 
     # Right side: stats
@@ -176,14 +180,14 @@ for i, ((name, group, vals, color, n, bp, assay), density) in enumerate(zip(ridg
                  color="#222222", linewidth=1.0, zorder=n_ridges + 5, alpha=0.5)
 
     # Right line 1: μ = ...   σ = ...
-    ax_main.text(x_max + 0.5, y_offset + ridge_spacing * 0.22,
+    ax_main.text(x_max + 0.5, y_offset + ridge_spacing * 0.28,
                  f"\u03bc = {mean:.2f}   \u03c3 = {std:.2f}",
-                 fontsize=32, fontweight="bold",
+                 fontsize=64, fontweight="bold",
                  va="center", color="#111111")
     # Right line 2: n = 226K sequences
-    ax_main.text(x_max + 0.5, y_offset - ridge_spacing * 0.18,
+    ax_main.text(x_max + 0.5, y_offset - ridge_spacing * 0.22,
                  f"{n_str} sequences",
-                 fontsize=28, fontweight="bold",
+                 fontsize=56, fontweight="bold",
                  va="center", color="#555555")
 
 # Zero line
@@ -196,9 +200,9 @@ for xv in range(-6, 15, 2):
 ax_main.set_xlim(x_min, x_max)
 ax_main.set_ylim(-0.15, (n_ridges - 1) * ridge_spacing + 1.3)
 ax_main.set_yticks([])
-ax_main.tick_params(axis="x", labelsize=32, colors="#111111")
-ax_main.set_xlabel(r"Regulatory Activity  ($\log_2$ RNA/DNA)", fontsize=36,
-                   labelpad=12, color="#111111")
+ax_main.tick_params(axis="x", labelsize=64, colors="#111111")
+ax_main.set_xlabel(r"Regulatory Activity  ($\log_2$ RNA/DNA)", fontsize=72,
+                   labelpad=18, color="#111111")
 ax_main.spines["bottom"].set_color("#888888")
 
 # ─── Bottom comparison panels ─────────────────────────────────────────────────
@@ -259,15 +263,15 @@ for j, spec in enumerate(panel_specs):
     ax_in.spines["right"].set_visible(False)
     ax_in.spines["left"].set_visible(False)
     ax_in.spines["bottom"].set_color("#888888")
-    ax_in.tick_params(axis="x", labelsize=28, colors="#111111")
-    ax_in.set_xlabel(r"$\log_2$(RNA/DNA)", fontsize=30, labelpad=6, color="#111111")
+    ax_in.tick_params(axis="x", labelsize=32, colors="#111111")
+    ax_in.set_xlabel(r"$\log_2$(RNA/DNA)", fontsize=34, labelpad=8, color="#111111")
 
-    ax_in.set_title(spec["title"], fontsize=30, fontweight="bold",
-                    color="#111111", pad=12)
-    ax_in.text(0.5, -0.45, spec["subtitle"], transform=ax_in.transAxes,
-               fontsize=26, ha="center", color="#333333", linespacing=1.3)
+    ax_in.set_title(spec["title"], fontsize=38, fontweight="bold",
+                    color="#111111", pad=14)
+    ax_in.text(0.5, -0.42, spec["subtitle"], transform=ax_in.transAxes,
+               fontsize=30, ha="center", color="#333333", linespacing=1.3)
 
-    leg = ax_in.legend(fontsize=26, frameon=False, loc="upper right",
+    leg = ax_in.legend(fontsize=30, frameon=False, loc="upper right",
                        handlelength=1.0, handletextpad=0.4)
     for t in leg.get_texts():
         t.set_color("#111111")

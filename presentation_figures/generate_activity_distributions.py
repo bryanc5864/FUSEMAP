@@ -122,9 +122,9 @@ gs_top = gridspec.GridSpec(1, 1, figure=fig,
                            top=0.90, bottom=0.33, left=0.34, right=0.66)
 ax_main = fig.add_subplot(gs_top[0])
 
-# Bottom comparison panels — full width, compact spacing
-gs_bottom = gridspec.GridSpec(1, 3, figure=fig, wspace=0.20,
-                              top=0.22, bottom=0.07, left=0.06, right=0.96)
+# Bottom comparison panels — centered, compact
+gs_bottom = gridspec.GridSpec(1, 3, figure=fig, wspace=0.15,
+                              top=0.22, bottom=0.07, left=0.12, right=0.90)
 
 # ─── Title ────────────────────────────────────────────────────────────────────
 fig.text(0.50, 0.97,
@@ -216,7 +216,7 @@ panel_specs = [
             ("Maize", maize, "#1E8449"),
             ("Sorghum", sorghum, "#6C8C3C"),
         ],
-        "x_range": (-5, 6),
+        "x_range": (-4, 5),
     },
     {
         "title": "Within-species, across cell types",
@@ -226,7 +226,7 @@ panel_specs = [
             ("HepG2", hepg2, "#922B21"),
             ("WTC11", wtc11, "#17A589"),
         ],
-        "x_range": (-4, 4),
+        "x_range": (-3, 3),
     },
     {
         "title": "Cross-kingdom gap",
@@ -236,7 +236,7 @@ panel_specs = [
             ("Maize (Plant)", maize, "#1E8449"),
             ("Yeast (Fungi)", yeast, "#C5A028"),
         ],
-        "x_range": (-5, 14),
+        "x_range": (-4, 13),
     },
 ]
 

@@ -111,7 +111,7 @@ global_max = max(d.max() for d in densities if d.max() > 0)
 
 # ─── Figure layout ────────────────────────────────────────────────────────────
 n_ridges = len(ridge_data)
-ridge_spacing = 0.7  # Overlap: less than 1.0 means ridges overlap
+ridge_spacing = 0.45  # Tight overlap — peaks bleed into adjacent rows
 
 fig = plt.figure(figsize=(15, 13))
 gs = gridspec.GridSpec(2, 1, height_ratios=[n_ridges, 3.0], hspace=0.20,
@@ -126,13 +126,13 @@ fig.text(0.51, 0.97,
          fontsize=24, fontweight="bold", ha="center", va="center",
          color="#111111")
 fig.text(0.51, 0.945,
-         "Activity measured as log\u2082(RNA/DNA) from MPRA / STARR-seq / FACS-seq",
+         r"Activity measured as $\log_2$(RNA/DNA) from MPRA / STARR-seq / FACS-seq",
          fontsize=15, ha="center", va="center", color="#444444")
 
 # ─── Main ridgeline panel ────────────────────────────────────────────────────
 for i, ((name, group, vals, color, n), density) in enumerate(zip(ridge_data, densities)):
     y_offset = (n_ridges - 1 - i) * ridge_spacing
-    scaled = density / global_max * 1.1  # Scale taller than spacing for overlap
+    scaled = density / global_max * 1.0  # Taller than spacing → visible overlap
 
     ax_main.fill_between(x_grid, y_offset, y_offset + scaled,
                          color=color, alpha=0.55, zorder=n_ridges - i + 1)
@@ -186,10 +186,10 @@ for xv in range(-6, 15, 2):
     ax_main.axvline(xv, color="#eee", linewidth=0.4, zorder=0)
 
 ax_main.set_xlim(x_min, x_max)
-ax_main.set_ylim(-0.15, (n_ridges - 1) * ridge_spacing + 1.3)
+ax_main.set_ylim(-0.1, (n_ridges - 1) * ridge_spacing + 1.15)
 ax_main.set_yticks([])
 ax_main.tick_params(axis="x", labelsize=14, colors="#222222")
-ax_main.set_xlabel("Regulatory Activity  (log\u2082 RNA/DNA)", fontsize=18,
+ax_main.set_xlabel(r"Regulatory Activity  ($\log_2$ RNA/DNA)", fontsize=18,
                    labelpad=8, color="#111111")
 ax_main.spines["bottom"].set_color("#888888")
 
@@ -252,7 +252,7 @@ for j, spec in enumerate(panel_specs):
     ax_in.spines["left"].set_visible(False)
     ax_in.spines["bottom"].set_color("#888888")
     ax_in.tick_params(axis="x", labelsize=12, colors="#222222")
-    ax_in.set_xlabel("log\u2082(RNA/DNA)", fontsize=13, labelpad=3, color="#222222")
+    ax_in.set_xlabel(r"$\log_2$(RNA/DNA)", fontsize=13, labelpad=3, color="#222222")
 
     ax_in.set_title(spec["title"], fontsize=15, fontweight="bold",
                     color="#111111", pad=8)

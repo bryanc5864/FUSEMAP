@@ -18,14 +18,14 @@ DATA = os.path.join(os.path.dirname(OUT), "data")
 # ─── Style ────────────────────────────────────────────────────────────────────
 plt.rcParams.update({
     "font.family": "sans-serif",
-    "font.sans-serif": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
-    "font.size": 10,
-    "axes.labelsize": 13,
-    "axes.titlesize": 16,
+    "font.sans-serif": ["Inter", "Liberation Sans", "DejaVu Sans", "Arial"],
+    "font.size": 12,
+    "axes.labelsize": 14,
+    "axes.titlesize": 18,
     "figure.dpi": 300,
     "savefig.dpi": 300,
     "savefig.bbox": "tight",
-    "savefig.pad_inches": 0.2,
+    "savefig.pad_inches": 0.15,
     "axes.spines.top": False,
     "axes.spines.right": False,
     "axes.spines.left": False,
@@ -90,7 +90,6 @@ x_grid = np.linspace(x_min, x_max, 600)
 
 densities = []
 for label, vals, color, n in ridge_data:
-    # Clip extreme outliers for KDE stability
     clipped = vals[(vals > x_min) & (vals < x_max)]
     try:
         kde = gaussian_kde(clipped, bw_method=0.15)
@@ -99,17 +98,15 @@ for label, vals, color, n in ridge_data:
         density = np.zeros_like(x_grid)
     densities.append(density)
 
-# Normalize all densities to same max height for visual consistency
 global_max = max(d.max() for d in densities if d.max() > 0)
 
 # ─── Figure: Ridgeline plot ──────────────────────────────────────────────────
 n_ridges = len(ridge_data)
 ridge_spacing = 1.0
-fig_h = 2.0 + n_ridges * 0.85 + 3.5  # extra space for bottom panel
 
 fig, (ax_main, ax_bottom) = plt.subplots(
-    2, 1, figsize=(14, fig_h),
-    gridspec_kw={"height_ratios": [n_ridges, 2.8], "hspace": 0.25}
+    2, 1, figsize=(13, 10.5),
+    gridspec_kw={"height_ratios": [n_ridges, 2.5], "hspace": 0.18}
 )
 
 # Main ridgeline panel
@@ -119,7 +116,7 @@ for i, ((label, vals, color, n), density) in enumerate(zip(ridge_data, densities
 
     ax_main.fill_between(x_grid, y_offset, y_offset + scaled,
                          color=color, alpha=0.65, zorder=n_ridges - i + 1)
-    ax_main.plot(x_grid, y_offset + scaled, color=color, linewidth=0.8,
+    ax_main.plot(x_grid, y_offset + scaled, color=color, linewidth=0.9,
                  alpha=0.9, zorder=n_ridges - i + 2)
 
     # Baseline
@@ -134,15 +131,16 @@ for i, ((label, vals, color, n), density) in enumerate(zip(ridge_data, densities
     else:
         n_str = f"n={n}"
     ax_main.text(x_min - 0.3, y_offset + ridge_spacing * 0.25,
-                 label, fontsize=10, fontweight="bold",
+                 label, fontsize=12, fontweight="bold",
                  ha="right", va="center", color=color)
-    ax_main.text(x_min - 0.3, y_offset + ridge_spacing * 0.02,
-                 n_str, fontsize=8, ha="right", va="center", color="#888888")
+    ax_main.text(x_min - 0.3, y_offset + ridge_spacing * 0.01,
+                 n_str, fontsize=10, ha="right", va="center", color="#888888")
 
     # Stats annotation (right side)
-    median = np.median(vals[(vals > x_min) & (vals < x_max)])
-    mean = np.mean(vals[(vals > x_min) & (vals < x_max)])
-    std = np.std(vals[(vals > x_min) & (vals < x_max)])
+    clipped_vals = vals[(vals > x_min) & (vals < x_max)]
+    median = np.median(clipped_vals)
+    mean = np.mean(clipped_vals)
+    std = np.std(clipped_vals)
 
     # Median tick on the ridge
     med_idx = np.argmin(np.abs(x_grid - median))
@@ -152,7 +150,7 @@ for i, ((label, vals, color, n), density) in enumerate(zip(ridge_data, densities
 
     ax_main.text(x_max + 0.3, y_offset + ridge_spacing * 0.15,
                  f"\u03bc={mean:.2f} \u00b1 {std:.2f}",
-                 fontsize=7.5, va="center", color="#666666")
+                 fontsize=10, va="center", color="#666666")
 
 # Zero line
 ax_main.axvline(0, color="#BBBBBB", linewidth=0.8, linestyle="--", zorder=0, alpha=0.6)
@@ -164,18 +162,17 @@ for xv in range(-6, 11, 2):
 ax_main.set_xlim(x_min - 0.2, x_max + 0.2)
 ax_main.set_ylim(-0.15, n_ridges * ridge_spacing + 0.1)
 ax_main.set_yticks([])
-ax_main.set_xlabel("")
-ax_main.tick_params(axis="x", labelsize=10)
+ax_main.tick_params(axis="x", labelsize=12)
 ax_main.set_title("Regulatory Activity Distributions Across the FUSEMAP Training Corpus",
-                   fontsize=16, fontweight="bold", color="#1B3A5C", pad=12)
-# Subtitle
-ax_main.text(0.5, 1.02,
-             "Activity measured as log\u2082(RNA/DNA) from MPRA/STARR-seq",
-             transform=ax_main.transAxes, fontsize=10, ha="center",
+                   fontsize=18, fontweight="bold", color="#1B3A5C", pad=22)
+# Subtitle — positioned with enough clearance below the title
+ax_main.text(0.5, 1.015,
+             "Activity measured as log\u2082(RNA/DNA) from MPRA/STARR-seq/FACS-seq",
+             transform=ax_main.transAxes, fontsize=11, ha="center",
              color="#777777")
 
-# X-axis label on main
-ax_main.set_xlabel("Regulatory Activity (log\u2082 RNA/DNA)", fontsize=12, labelpad=8)
+# X-axis label
+ax_main.set_xlabel("Regulatory Activity (log\u2082 RNA/DNA)", fontsize=14, labelpad=6)
 
 # ─── Bottom comparison panel ──────────────────────────────────────────────────
 ax_bottom.set_xlim(x_min, x_max)
@@ -217,13 +214,11 @@ panel_specs = [
     },
 ]
 
-# Create inset axes for each comparison
+# Create inset axes for each comparison — taller and better spaced
 inset_width = 0.27
-inset_height = 0.7
-inset_y = 0.15
 for j, spec in enumerate(panel_specs):
     inset_x = 0.06 + j * 0.33
-    ax_in = fig.add_axes([inset_x, 0.02, inset_width, 0.16])
+    ax_in = fig.add_axes([inset_x, 0.03, inset_width, 0.19])
 
     xr = spec["x_range"]
     x_sub = np.linspace(xr[0], xr[1], 300)
@@ -237,7 +232,7 @@ for j, spec in enumerate(panel_specs):
         except Exception:
             d = np.zeros_like(x_sub)
         ax_in.fill_between(x_sub, d, alpha=0.35, color=col, label=name)
-        ax_in.plot(x_sub, d, color=col, linewidth=0.8, alpha=0.8)
+        ax_in.plot(x_sub, d, color=col, linewidth=1.0, alpha=0.8)
 
     ax_in.set_xlim(*xr)
     ax_in.set_ylim(0, 1.15)
@@ -245,18 +240,18 @@ for j, spec in enumerate(panel_specs):
     ax_in.spines["top"].set_visible(False)
     ax_in.spines["right"].set_visible(False)
     ax_in.spines["left"].set_visible(False)
-    ax_in.tick_params(axis="x", labelsize=7)
-    ax_in.set_xlabel("log\u2082(RNA/DNA)", fontsize=7, labelpad=2)
+    ax_in.tick_params(axis="x", labelsize=9)
+    ax_in.set_xlabel("log\u2082(RNA/DNA)", fontsize=9, labelpad=2)
 
     # Title above inset
-    ax_in.set_title(spec["title"], fontsize=9, fontweight="bold",
-                    color="#333333", pad=4)
-    # Subtitle below title
-    ax_in.text(0.5, -0.45, spec["subtitle"], transform=ax_in.transAxes,
-               fontsize=7, ha="center", color="#888888", linespacing=1.3)
+    ax_in.set_title(spec["title"], fontsize=11, fontweight="bold",
+                    color="#333333", pad=5)
+    # Subtitle below chart
+    ax_in.text(0.5, -0.38, spec["subtitle"], transform=ax_in.transAxes,
+               fontsize=8.5, ha="center", color="#888888", linespacing=1.3)
 
-    # Small legend
-    leg = ax_in.legend(fontsize=6.5, frameon=False, loc="upper right",
+    # Legend
+    leg = ax_in.legend(fontsize=8, frameon=False, loc="upper right",
                        handlelength=1, handletextpad=0.4)
 
 fig.savefig(os.path.join(OUT, "figure_activity_distributions.png"), facecolor="white")

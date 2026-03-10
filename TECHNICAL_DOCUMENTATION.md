@@ -35,8 +35,7 @@
 | **TileFormer** | Predict electrostatics | DNA sequence | Electrostatic potentials (PSI) |
 | **PhysicsVAE** | Generate sequences from physics | Physics features | DNA sequences |
 | **PhysicsTransfer** | Cross-species transfer | Source model + target data | Transferred model |
-| **CADENCE** | Predict activity from sequence | DNA sequence | Activity score |
-| **CADENCE Pro** | Large-scale activity prediction | DNA sequence | Activity + uncertainty |
+| **CADENCE** | Predict activity from sequence | DNA sequence | Activity score + uncertainty (via PLACE) |
 | **S2A** | Zero-shot universal activity | Physics features | Z-score / calibrated activity |
 | **OracleCheck** | Validate designed sequences | Sequence | GREEN/YELLOW/RED verdict |
 | **PhysicsInterpreter** | Attribution analysis | Predictions | Physics-mediated explanations |
@@ -54,7 +53,6 @@ FUSEMAP/
 │   └── data/             # Physics datasets
 ├── models/
 │   ├── CADENCE/          # Activity prediction model
-│   └── cadence_pro/      # Large-scale transformer (CADENCE Pro)
 ├── training/             # Multi-species training
 ├── data/                 # Dataset storage
 ├── electrostatics/       # APBS integration
@@ -111,9 +109,7 @@ PhysInformer ──────► Physics Features ──────► Physic
 
 TileFormer ──────► Electrostatic Features ──────► Integrated into Physics
 
-CADENCE ──────► Direct Sequence → Activity (baseline)
-
-CADENCE Pro ──────► Sequence → Activity + Uncertainty (DREAM challenge)
+CADENCE ──────► Direct Sequence → Activity (+ PLACE uncertainty)
 
 S2A ──────► Physics → Universal Activity (zero-shot cross-species)
 ```
@@ -1204,58 +1200,73 @@ Step 5: Report with mechanistic hypothesis and clinical relevance
 Validation: ClinVar (~5K variants), GTEx eQTL (~50K), GWAS (~10K SNPs)
 ```
 
-### 10.2 Therapeutic Enhancer Design
+### 10.2 Synthetic CRE Design Pipeline
+
+The end-to-end design pipeline integrates all FUSEMAP components in two stages: **PINCSD optimization** followed by **OracleCheck validation**.
 
 ```
-Example: Liver-targeted AAV gene therapy enhancers
-
-Requirements:
-- High HepG2 activity, low K562/WTC11
-- <250bp for AAV packaging
-- No immunogenic sequences
-- Stable across integration sites
-
-Protocol:
-1. Identify top 100 natural liver-specific enhancers
-2. Constrained optimization (physics envelope, required HNF4A/FOXA)
-3. Generate candidates via optimization + PhysicsVAE
-4. Filter through OracleCheck (GREEN/YELLOW only)
-5. Rank by specificity with diversity filter
+Seed Sequences (natural enhancers or PhysicsVAE samples)
+        │
+        ▼
+┌─ PINCSD Optimization Loop ──────────────────────────────┐
+│                                                          │
+│  For each candidate mutation:                            │
+│    CADENCE      → activity score (maximize)              │
+│    PLACE        → uncertainty penalty (minimize)         │
+│    PhysInformer → physics conformity (521 features)      │
+│    TileFormer   → electrostatics conformity (6 PSI)     │
+│                                                          │
+│  Weighted objective:                                     │
+│    W = λ_act * activity - λ_unc * uncertainty            │
+│        - λ_phys * physics_violation                      │
+│                                                          │
+│  Select best mutation, repeat until convergence          │
+└──────────────────────┬───────────────────────────────────┘
+                       ▼
+┌─ OracleCheck Validation ─────────────────────────────────┐
+│                                                          │
+│  Physics z-scores vs natural reference panels            │
+│  Composition: GC%, homopolymers, repeats, CpG           │
+│  Motif scan: JASPAR PWMs (required/forbidden TFs)        │
+│  OOD detection: kNN + Mahalanobis distance               │
+│  RC consistency: fwd vs reverse-complement               │
+│  Confidence: epistemic σ + conformal width               │
+│                                                          │
+│  → GREEN / YELLOW / RED                                  │
+└──────────────────────┬───────────────────────────────────┘
+                       ▼
+            Synthesis-ready enhancers
 ```
 
-### 10.3 Therapeutic Optimization Methods
+**PINCSD** (Physics-Informed Naturality-Constrained Sequence Design) is the core optimizer. Unlike unconstrained ISM which greedily maximizes activity and can produce biophysically implausible sequences, PINCSD balances four objectives per mutation:
 
-Five optimization methods are implemented for cell-type-specific enhancer design:
+1. **CADENCE** activity prediction (primary objective)
+2. **PLACE** uncertainty penalty (avoid high-epistemic regions)
+3. **PhysInformer** conformity (stay within natural physics envelope)
+4. **TileFormer** electrostatics conformity (plausible electrostatic potential)
+
+**OracleCheck** is the comprehensive validation gate. It checks:
+
+- **Physics conformity**: Per-family z-scores vs natural high-activity reference panels
+- **Composition hygiene**: GC content (35-65%), homopolymer runs (≤8bp), repeat fraction (<0.3), CpG O/E
+- **Motif/syntax validation**: JASPAR PWM scanning with species-specific databases; checks required TFs present and forbidden TFs absent
+- **Confidence & OOD**: CADENCE uncertainty thresholds, kNN/Mahalanobis distance vs training set
+- **RC consistency**: Activity agreement between forward and reverse-complement strands
+- **Verdict**: GREEN (all pass), YELLOW (≤1 soft failure), RED (any hard failure)
+
+### 10.3 Alternative Optimization Methods
+
+Five optimization methods are implemented (PINCSD is the primary physics-constrained method):
 
 | Method | Type | Description |
 |--------|------|-------------|
+| **PINCSD** | Physics-guided | Physics-informed neural combinatorial design (recommended) |
 | **ISM_target** | Gradient-free | In-silico mutagenesis with cell-type targeting |
-| **EMOO** | Evolutionary | Evolutionary multi-objective optimization |
+| **EMOO** | Evolutionary | Evolutionary multi-objective optimization (NSGA-II) |
 | **HMCPP** | MCMC | Hamiltonian Monte Carlo proxy prediction |
-| **PINCSD** | Physics-guided | Physics-informed neural combinatorial design |
 | **PVGG** | Generative | Proxy-guided variational generation |
 
-```python
-# ISM_target Pipeline (Best Performance)
-class ISMTargetOptimizer:
-    def __init__(self, cadence_models: Dict[str, CADENCEModel]):
-        self.models = cadence_models  # K562, HepG2, WTC11
-
-    def optimize(self, seed_sequence: str, target_cell: str) -> OptimizedSequence:
-        # 1. Compute ISM scores for each position
-        ism_scores = self._compute_ism(seed_sequence)
-
-        # 2. Apply mutations that increase target activity
-        mutated = self._apply_beneficial_mutations(seed_sequence, ism_scores)
-
-        # 3. Verify specificity constraint
-        predictions = {cell: model(mutated) for cell, model in self.models.items()}
-        specificity = predictions[target_cell] - max(predictions[other] for other in predictions if other != target_cell)
-
-        return OptimizedSequence(sequence=mutated, specificity=specificity)
-```
-
-**Location:** `applications/therapeutic_enhancer_pipeline.py`
+**Location:** `applications/therapeutic_enhancer_pipeline.py`, `applications/therapeutic_enhancer_comparison.py`
 
 ---
 
@@ -1493,16 +1504,32 @@ class ConfigurationType(Enum):
 python train.py --cell_type K562 --epochs 100 --batch_size 64
 ```
 
-#### Multi-Phase Curriculum Learning
+#### Multi-Phase Curriculum Learning (Universal Model)
 ```python
-class MultiPhaseTrainer:
-    """Progressive training across datasets"""
-
-    Phases:
-        1. Train on largest dataset (K562)
-        2. Add second dataset (HepG2) with balanced sampling
-        3. Add third dataset (WTC11)
-        4. Fine-tune on target dataset
+# Used in config5_universal_no_yeast (7 datasets across 5 species)
+training_phases = [
+    {
+        "name": "phase1_pretrain",
+        "epochs": 50,
+        "freeze_backbone": False,
+        "lr": 1e-3,
+        "description": "Pre-train shared backbone on all data"
+    },
+    {
+        "name": "phase2_head_training",
+        "epochs": 50,
+        "freeze_backbone": True,   # Backbone frozen
+        "lr": 1e-3,
+        "description": "Train dataset-specific heads with frozen backbone"
+    },
+    {
+        "name": "phase3_finetune",
+        "epochs": 50,
+        "freeze_backbone": False,
+        "lr": 1e-4,               # 10× lower LR
+        "description": "End-to-end fine-tuning with conservative learning rate"
+    }
+]
 ```
 
 #### Cross-Kingdom Training

@@ -58,7 +58,7 @@ GlobalAvgPool → Linear(256→256) → Linear(256→1)
 Output: Scalar activity prediction
 ```
 
-**Parameters:** ~330,000 (base LegNet)
+**Parameters:** ~1,322,000 (base LegNet)
 
 **Optional Modules:**
 - RC-Equivariant Stem (strand symmetry)
@@ -73,29 +73,34 @@ Output: Scalar activity prediction
 
 ---
 
-### 2. PhysInformer (Transformer)
+### 2. PhysInformer (Convolutional + SSM)
 
-Predicts 500+ biophysical features from sequence.
+Predicts 521 biophysical features from sequence.
 
 **Architecture:**
 ```
 Input: DNA sequence (230-249bp)
     ↓
-Nucleotide Embedding (vocab=5, d_model=512)
+PWMConvStem:
+  Embedding(5→128) → Conv1d(128→192, k=11) → Conv1d(192→256, k=9)
+  → Conv1d(256→256, k=7) with residual connections
     ↓
-Sinusoidal Positional Encoding
+DualPathFeaturePyramid:
+  Local Path: Conv1d(256→192, k=9) → Conv1d(192→192, k=5)
+  Global Path: SimplifiedSSMLayer → Linear(256→192)
+  Output: Concatenate [local, global] → 384 channels
     ↓
-8× Transformer Encoder Layers
-  - 8 attention heads
-  - FFN: 512→2048→512
-  - Dropout: 0.1
+PhysicsRouters (property-specific adapters):
+  Thermodynamic Router (k=15, RC-aware)
+  Structural Router (k=11)
+  Electrostatic Router (k=21)
     ↓
-Global Average Pooling
+Property-Specific Heads:
+  ThermoHead: ΔH, ΔS, ΔG with uncertainty
+  ElectrostaticHead: Per-window PSI (22 windows × 6 values)
+  ScalarPropertyHeads: Individual physics features
     ↓
-Per-Feature Heads (498-537 separate MLPs)
-  - Linear(512→256→64→1) per feature
-    ↓
-Output: Physics feature predictions
+Output: 521 physics feature predictions
 ```
 
 **Auxiliary Heads:**
